@@ -1,0 +1,3 @@
+..\SynHighlighterWeb.pas
+..\SynHighlighterWebData.pas
+..\SynHighlighterWebMisc.pas
