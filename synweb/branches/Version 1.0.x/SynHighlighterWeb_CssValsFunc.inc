@@ -1,9 +1,9 @@
-function TSynWebSyn.CSS_ValUndef: TtkTokenKind;
+function TSynWebEngine.CSS_ValUndef: TtkTokenKind;
 begin
   Result:=tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc26: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc26: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(59) then
     Result := tkCssVal
@@ -11,7 +11,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc27: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc27: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(28) or
       CSS_ValKeyComp(125) or
@@ -21,7 +21,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc29: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc29: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(12) or
       CSS_ValKeyComp(43) then
@@ -30,7 +30,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc31: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc31: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(91) then
     Result := tkCssVal
@@ -38,7 +38,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc32: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc32: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(60) then
     Result := tkCssVal
@@ -46,7 +46,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc33: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc33: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(16) then
     Result := tkCssVal
@@ -54,7 +54,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc35: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc35: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(40) then
     Result := tkCssVal
@@ -62,7 +62,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc36: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc36: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(25) then
     Result := tkCssVal
@@ -70,7 +70,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc37: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc37: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(112) or
       CSS_ValKeyComp(189) then
@@ -79,7 +79,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc38: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc38: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(170) then
     Result := tkCssVal
@@ -87,7 +87,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc39: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc39: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(79) or
       CSS_ValKeyComp(119) then
@@ -96,7 +96,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc40: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc40: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(3) or
       CSS_ValKeyComp(15) or
@@ -106,7 +106,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc41: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc41: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(35) or
       CSS_ValKeyComp(57) or
@@ -116,7 +116,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc42: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc42: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(9) or
       CSS_ValKeyComp(50) or
@@ -126,7 +126,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc43: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc43: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(14) or
       CSS_ValKeyComp(72) or
@@ -137,7 +137,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc44: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc44: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(58) then
     Result := tkCssVal
@@ -145,7 +145,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc45: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc45: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(0) or
       CSS_ValKeyComp(18) then
@@ -154,7 +154,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc46: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc46: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(48) or
       CSS_ValKeyComp(97) or
@@ -164,7 +164,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc47: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc47: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(36) or
       CSS_ValKeyComp(96) then
@@ -173,7 +173,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc48: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc48: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(13) or
       CSS_ValKeyComp(51) or
@@ -184,7 +184,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc49: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc49: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(46) or
       CSS_ValKeyComp(55) then
@@ -193,7 +193,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc50: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc50: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(26) or
       CSS_ValKeyComp(83) or
@@ -204,7 +204,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc51: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc51: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(7) or
       CSS_ValKeyComp(54) or
@@ -218,7 +218,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc52: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc52: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(82) then
     Result := tkCssVal
@@ -226,7 +226,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc53: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc53: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(94) or
       CSS_ValKeyComp(163) or
@@ -236,7 +236,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc54: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc54: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(70) then
     Result := tkCssVal
@@ -244,7 +244,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc55: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc55: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(61) or
       CSS_ValKeyComp(99) or
@@ -254,7 +254,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc56: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc56: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(17) or
       CSS_ValKeyComp(77) then
@@ -263,7 +263,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc57: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc57: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(6) or
       CSS_ValKeyComp(10) or
@@ -276,7 +276,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc59: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc59: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(5) or
       CSS_ValKeyComp(42) or
@@ -286,7 +286,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc60: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc60: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(68) or
       CSS_ValKeyComp(114) or
@@ -297,7 +297,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc61: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc61: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(73) or
       CSS_ValKeyComp(75) then
@@ -306,7 +306,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc62: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc62: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(100) or
       CSS_ValKeyComp(132) or
@@ -316,7 +316,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc63: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc63: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(64) or
       CSS_ValKeyComp(111) then
@@ -325,7 +325,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc65: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc65: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(22) or
       CSS_ValKeyComp(93) or
@@ -338,7 +338,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc67: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc67: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(8) or
       CSS_ValKeyComp(52) or
@@ -348,7 +348,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc68: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc68: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(39) or
       CSS_ValKeyComp(41) or
@@ -359,7 +359,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc69: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc69: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(38) or
       CSS_ValKeyComp(49) or
@@ -370,7 +370,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc70: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc70: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(128) then
     Result := tkCssVal
@@ -378,7 +378,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc71: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc71: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(129) then
     Result := tkCssVal
@@ -386,7 +386,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc72: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc72: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(156) or
       CSS_ValKeyComp(196) then
@@ -395,7 +395,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc73: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc73: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(84) or
       CSS_ValKeyComp(106) then
@@ -404,7 +404,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc74: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc74: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(193) then
     Result := tkCssVal
@@ -412,7 +412,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc75: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc75: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(4) or
       CSS_ValKeyComp(105) then
@@ -421,7 +421,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc76: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc76: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(53) or
       CSS_ValKeyComp(92) then
@@ -430,7 +430,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc77: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc77: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(108) or
       CSS_ValKeyComp(148) or
@@ -440,7 +440,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc78: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc78: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(21) or
       CSS_ValKeyComp(121) or
@@ -450,7 +450,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc79: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc79: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(78) or
       CSS_ValKeyComp(138) or
@@ -461,7 +461,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc80: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc80: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(133) or
       CSS_ValKeyComp(150) then
@@ -470,7 +470,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc81: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc81: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(2) or
       CSS_ValKeyComp(110) or
@@ -480,7 +480,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc82: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc82: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(56) or
       CSS_ValKeyComp(101) or
@@ -490,7 +490,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc83: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc83: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(29) or
       CSS_ValKeyComp(63) then
@@ -499,7 +499,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc84: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc84: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(66) then
     Result := tkCssVal
@@ -507,7 +507,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc85: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc85: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(19) or
       CSS_ValKeyComp(139) or
@@ -517,7 +517,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc86: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc86: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(45) or
       CSS_ValKeyComp(187) or
@@ -527,7 +527,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc87: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc87: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(65) or
       CSS_ValKeyComp(107) or
@@ -537,7 +537,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc88: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc88: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(69) or
       CSS_ValKeyComp(81) or
@@ -547,7 +547,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc89: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc89: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(23) then
     Result := tkCssVal
@@ -555,7 +555,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc91: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc91: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(95) or
       CSS_ValKeyComp(137) then
@@ -564,7 +564,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc92: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc92: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(85) or
       CSS_ValKeyComp(126) or
@@ -575,7 +575,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc93: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc93: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(116) then
     Result := tkCssVal
@@ -583,7 +583,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc95: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc95: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(1) or
       CSS_ValKeyComp(179) then
@@ -592,7 +592,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc96: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc96: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(31) then
     Result := tkCssVal
@@ -600,7 +600,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc97: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc97: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(34) or
       CSS_ValKeyComp(118) then
@@ -609,7 +609,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc99: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc99: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(162) or
       CSS_ValKeyComp(164) then
@@ -618,7 +618,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc100: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc100: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(87) or
       CSS_ValKeyComp(109) or
@@ -629,7 +629,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc101: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc101: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(11) or
       CSS_ValKeyComp(86) or
@@ -641,7 +641,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc102: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc102: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(20) or
       CSS_ValKeyComp(157) or
@@ -651,7 +651,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc104: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc104: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(180) then
     Result := tkCssVal
@@ -659,7 +659,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc105: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc105: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(160) then
     Result := tkCssVal
@@ -667,7 +667,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc108: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc108: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(24) or
       CSS_ValKeyComp(76) then
@@ -676,7 +676,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc109: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc109: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(113) then
     Result := tkCssVal
@@ -684,7 +684,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc110: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc110: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(33) or
       CSS_ValKeyComp(71) or
@@ -694,7 +694,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc113: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc113: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(27) or
       CSS_ValKeyComp(181) then
@@ -703,7 +703,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc115: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc115: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(32) or
       CSS_ValKeyComp(89) then
@@ -712,7 +712,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc116: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc116: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(149) then
     Result := tkCssVal
@@ -720,7 +720,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc117: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc117: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(122) then
     Result := tkCssVal
@@ -728,7 +728,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc118: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc118: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(80) or
       CSS_ValKeyComp(182) then
@@ -737,7 +737,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc119: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc119: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(104) then
     Result := tkCssVal
@@ -745,7 +745,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc120: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc120: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(167) then
     Result := tkCssVal
@@ -753,7 +753,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc123: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc123: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(102) then
     Result := tkCssVal
@@ -761,7 +761,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc125: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc125: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(37) then
     Result := tkCssVal
@@ -769,7 +769,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc127: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc127: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(134) then
     Result := tkCssVal
@@ -777,7 +777,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc135: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc135: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(169) or
       CSS_ValKeyComp(172) then
@@ -786,7 +786,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc146: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc146: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(177) then
     Result := tkCssVal
@@ -794,7 +794,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc151: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc151: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(30) then
     Result := tkCssVal
@@ -802,7 +802,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc157: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc157: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(165) then
     Result := tkCssVal
@@ -810,7 +810,7 @@ begin
     Result := tkCssValUndef;
 end;
 
-function TSynWebSyn.CSS_ValFunc158: TtkTokenKind;
+function TSynWebEngine.CSS_ValFunc158: TtkTokenKind;
 begin
   if  CSS_ValKeyComp(166) then
     Result := tkCssVal

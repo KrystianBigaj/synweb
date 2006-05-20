@@ -903,7 +903,7 @@ begin
 
   I := 0;
   nf:=TStringList.Create;
-  nf.add('function TSynWebSyn.Php_KeywordIdent: TtkTokenKind;');
+  nf.add('function TSynWebEngine.Php_KeywordIdent: TtkTokenKind;');
   nf.add('begin');
   nf.add('  Result := tkPhpIdentifier;');
   nf.add('end;');
@@ -911,7 +911,7 @@ begin
     mx:=0;
   while I < KeyList.Count do
   begin
-    nf.add(Format('function TSynWebSyn.PhP_KeywordFunc%d: TtkTokenKind;',[TLexKeys(KeyList[I]).Key]));
+    nf.add(Format('function TSynWebEngine.PhP_KeywordFunc%d: TtkTokenKind;',[TLexKeys(KeyList[I]).Key]));
     nf.add('begin');
     tab:='  ';
     mm:=0;

@@ -1,9 +1,9 @@
-function TSynWebSyn.HTML_SpecialUndef: Boolean;
+function TSynWebEngine.HTML_SpecialUndef: Boolean;
 begin
   Result:=False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc12: Boolean;
+function TSynWebEngine.HTML_SpecialFunc12: Boolean;
 begin
   if  HTML_SpecialKeyComp(79) then
     Result := True
@@ -11,7 +11,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc16: Boolean;
+function TSynWebEngine.HTML_SpecialFunc16: Boolean;
 begin
   if  HTML_SpecialKeyComp(46) then
     Result := True
@@ -19,7 +19,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc17: Boolean;
+function TSynWebEngine.HTML_SpecialFunc17: Boolean;
 begin
   if  HTML_SpecialKeyComp(111) then
     Result := True
@@ -27,7 +27,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc19: Boolean;
+function TSynWebEngine.HTML_SpecialFunc19: Boolean;
 begin
   if  HTML_SpecialKeyComp(13) or
       HTML_SpecialKeyComp(129) then
@@ -36,7 +36,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc20: Boolean;
+function TSynWebEngine.HTML_SpecialFunc20: Boolean;
 begin
   if  HTML_SpecialKeyComp(28) or
       HTML_SpecialKeyComp(33) or
@@ -46,7 +46,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc22: Boolean;
+function TSynWebEngine.HTML_SpecialFunc22: Boolean;
 begin
   if  HTML_SpecialKeyComp(14) then
     Result := True
@@ -54,7 +54,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc23: Boolean;
+function TSynWebEngine.HTML_SpecialFunc23: Boolean;
 begin
   if  HTML_SpecialKeyComp(130) then
     Result := True
@@ -62,7 +62,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc25: Boolean;
+function TSynWebEngine.HTML_SpecialFunc25: Boolean;
 begin
   if  HTML_SpecialKeyComp(168) or
       HTML_SpecialKeyComp(169) then
@@ -71,7 +71,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc26: Boolean;
+function TSynWebEngine.HTML_SpecialFunc26: Boolean;
 begin
   if  HTML_SpecialKeyComp(63) or
       HTML_SpecialKeyComp(64) then
@@ -80,7 +80,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc27: Boolean;
+function TSynWebEngine.HTML_SpecialFunc27: Boolean;
 begin
   if  HTML_SpecialKeyComp(80) then
     Result := True
@@ -88,7 +88,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc28: Boolean;
+function TSynWebEngine.HTML_SpecialFunc28: Boolean;
 begin
   if  HTML_SpecialKeyComp(24) or
       HTML_SpecialKeyComp(25) or
@@ -100,7 +100,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc30: Boolean;
+function TSynWebEngine.HTML_SpecialFunc30: Boolean;
 begin
   if  HTML_SpecialKeyComp(12) or
       HTML_SpecialKeyComp(126) or
@@ -110,7 +110,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc32: Boolean;
+function TSynWebEngine.HTML_SpecialFunc32: Boolean;
 begin
   if  HTML_SpecialKeyComp(118) then
     Result := True
@@ -118,7 +118,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc33: Boolean;
+function TSynWebEngine.HTML_SpecialFunc33: Boolean;
 begin
   if  HTML_SpecialKeyComp(31) or
       HTML_SpecialKeyComp(35) or
@@ -136,7 +136,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc34: Boolean;
+function TSynWebEngine.HTML_SpecialFunc34: Boolean;
 begin
   if  HTML_SpecialKeyComp(2) or
       HTML_SpecialKeyComp(3) or
@@ -150,7 +150,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc35: Boolean;
+function TSynWebEngine.HTML_SpecialFunc35: Boolean;
 begin
   if  HTML_SpecialKeyComp(77) or
       HTML_SpecialKeyComp(78) or
@@ -164,7 +164,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc36: Boolean;
+function TSynWebEngine.HTML_SpecialFunc36: Boolean;
 begin
   if  HTML_SpecialKeyComp(29) or
       HTML_SpecialKeyComp(30) or
@@ -175,7 +175,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc38: Boolean;
+function TSynWebEngine.HTML_SpecialFunc38: Boolean;
 begin
   if  HTML_SpecialKeyComp(10) or
       HTML_SpecialKeyComp(11) or
@@ -186,7 +186,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc39: Boolean;
+function TSynWebEngine.HTML_SpecialFunc39: Boolean;
 begin
   if  HTML_SpecialKeyComp(37) then
     Result := True
@@ -194,7 +194,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc40: Boolean;
+function TSynWebEngine.HTML_SpecialFunc40: Boolean;
 begin
   if  HTML_SpecialKeyComp(40) or
       HTML_SpecialKeyComp(181) then
@@ -203,7 +203,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc41: Boolean;
+function TSynWebEngine.HTML_SpecialFunc41: Boolean;
 begin
   if  HTML_SpecialKeyComp(44) or
       HTML_SpecialKeyComp(45) or
@@ -219,7 +219,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc42: Boolean;
+function TSynWebEngine.HTML_SpecialFunc42: Boolean;
 begin
   if  HTML_SpecialKeyComp(32) or
       HTML_SpecialKeyComp(42) or
@@ -236,7 +236,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc43: Boolean;
+function TSynWebEngine.HTML_SpecialFunc43: Boolean;
 begin
   if  HTML_SpecialKeyComp(94) or
       HTML_SpecialKeyComp(115) or
@@ -247,7 +247,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc44: Boolean;
+function TSynWebEngine.HTML_SpecialFunc44: Boolean;
 begin
   if  HTML_SpecialKeyComp(177) or
       HTML_SpecialKeyComp(178) or
@@ -257,7 +257,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc45: Boolean;
+function TSynWebEngine.HTML_SpecialFunc45: Boolean;
 begin
   if  HTML_SpecialKeyComp(81) or
       HTML_SpecialKeyComp(82) or
@@ -271,7 +271,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc46: Boolean;
+function TSynWebEngine.HTML_SpecialFunc46: Boolean;
 begin
   if  HTML_SpecialKeyComp(49) or
       HTML_SpecialKeyComp(128) or
@@ -281,7 +281,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc47: Boolean;
+function TSynWebEngine.HTML_SpecialFunc47: Boolean;
 begin
   if  HTML_SpecialKeyComp(21) or
       HTML_SpecialKeyComp(22) or
@@ -295,7 +295,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc48: Boolean;
+function TSynWebEngine.HTML_SpecialFunc48: Boolean;
 begin
   if  HTML_SpecialKeyComp(140) or
       HTML_SpecialKeyComp(141) or
@@ -307,7 +307,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc49: Boolean;
+function TSynWebEngine.HTML_SpecialFunc49: Boolean;
 begin
   if  HTML_SpecialKeyComp(16) or
       HTML_SpecialKeyComp(17) or
@@ -321,7 +321,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc50: Boolean;
+function TSynWebEngine.HTML_SpecialFunc50: Boolean;
 begin
   if  HTML_SpecialKeyComp(4) or
       HTML_SpecialKeyComp(154) or
@@ -331,7 +331,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc51: Boolean;
+function TSynWebEngine.HTML_SpecialFunc51: Boolean;
 begin
   if  HTML_SpecialKeyComp(0) or
       HTML_SpecialKeyComp(1) or
@@ -347,7 +347,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc52: Boolean;
+function TSynWebEngine.HTML_SpecialFunc52: Boolean;
 begin
   if  HTML_SpecialKeyComp(93) or
       HTML_SpecialKeyComp(200) or
@@ -358,7 +358,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc53: Boolean;
+function TSynWebEngine.HTML_SpecialFunc53: Boolean;
 begin
   if  HTML_SpecialKeyComp(50) or
       HTML_SpecialKeyComp(58) or
@@ -371,7 +371,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc54: Boolean;
+function TSynWebEngine.HTML_SpecialFunc54: Boolean;
 begin
   if  HTML_SpecialKeyComp(7) or
       HTML_SpecialKeyComp(8) or
@@ -385,7 +385,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc55: Boolean;
+function TSynWebEngine.HTML_SpecialFunc55: Boolean;
 begin
   if  HTML_SpecialKeyComp(51) or
       HTML_SpecialKeyComp(52) or
@@ -402,7 +402,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc56: Boolean;
+function TSynWebEngine.HTML_SpecialFunc56: Boolean;
 begin
   if  HTML_SpecialKeyComp(76) or
       HTML_SpecialKeyComp(133) or
@@ -416,7 +416,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc57: Boolean;
+function TSynWebEngine.HTML_SpecialFunc57: Boolean;
 begin
   if  HTML_SpecialKeyComp(36) then
     Result := True
@@ -424,7 +424,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc58: Boolean;
+function TSynWebEngine.HTML_SpecialFunc58: Boolean;
 begin
   if  HTML_SpecialKeyComp(39) or
       HTML_SpecialKeyComp(55) or
@@ -438,7 +438,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc59: Boolean;
+function TSynWebEngine.HTML_SpecialFunc59: Boolean;
 begin
   if  HTML_SpecialKeyComp(23) or
       HTML_SpecialKeyComp(38) or
@@ -451,7 +451,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc61: Boolean;
+function TSynWebEngine.HTML_SpecialFunc61: Boolean;
 begin
   if  HTML_SpecialKeyComp(160) or
       HTML_SpecialKeyComp(161) or
@@ -463,7 +463,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc62: Boolean;
+function TSynWebEngine.HTML_SpecialFunc62: Boolean;
 begin
   if  HTML_SpecialKeyComp(84) or
       HTML_SpecialKeyComp(90) or
@@ -473,7 +473,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc63: Boolean;
+function TSynWebEngine.HTML_SpecialFunc63: Boolean;
 begin
   if  HTML_SpecialKeyComp(26) then
     Result := True
@@ -481,7 +481,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc64: Boolean;
+function TSynWebEngine.HTML_SpecialFunc64: Boolean;
 begin
   if  HTML_SpecialKeyComp(72) or
       HTML_SpecialKeyComp(134) or
@@ -492,7 +492,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc65: Boolean;
+function TSynWebEngine.HTML_SpecialFunc65: Boolean;
 begin
   if  HTML_SpecialKeyComp(122) or
       HTML_SpecialKeyComp(138) or
@@ -505,7 +505,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc66: Boolean;
+function TSynWebEngine.HTML_SpecialFunc66: Boolean;
 begin
   if  HTML_SpecialKeyComp(106) or
       HTML_SpecialKeyComp(225) then
@@ -514,7 +514,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc67: Boolean;
+function TSynWebEngine.HTML_SpecialFunc67: Boolean;
 begin
   if  HTML_SpecialKeyComp(239) or
       HTML_SpecialKeyComp(240) then
@@ -523,7 +523,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc68: Boolean;
+function TSynWebEngine.HTML_SpecialFunc68: Boolean;
 begin
   if  HTML_SpecialKeyComp(144) or
       HTML_SpecialKeyComp(145) then
@@ -532,7 +532,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc69: Boolean;
+function TSynWebEngine.HTML_SpecialFunc69: Boolean;
 begin
   if  HTML_SpecialKeyComp(110) then
     Result := True
@@ -540,7 +540,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc70: Boolean;
+function TSynWebEngine.HTML_SpecialFunc70: Boolean;
 begin
   if  HTML_SpecialKeyComp(172) or
       HTML_SpecialKeyComp(196) or
@@ -550,7 +550,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc71: Boolean;
+function TSynWebEngine.HTML_SpecialFunc71: Boolean;
 begin
   if  HTML_SpecialKeyComp(83) or
       HTML_SpecialKeyComp(227) or
@@ -562,7 +562,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc72: Boolean;
+function TSynWebEngine.HTML_SpecialFunc72: Boolean;
 begin
   if  HTML_SpecialKeyComp(132) or
       HTML_SpecialKeyComp(182) then
@@ -571,7 +571,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc73: Boolean;
+function TSynWebEngine.HTML_SpecialFunc73: Boolean;
 begin
   if  HTML_SpecialKeyComp(164) or
       HTML_SpecialKeyComp(179) or
@@ -583,7 +583,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc74: Boolean;
+function TSynWebEngine.HTML_SpecialFunc74: Boolean;
 begin
   if  HTML_SpecialKeyComp(18) or
       HTML_SpecialKeyComp(62) or
@@ -597,7 +597,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc75: Boolean;
+function TSynWebEngine.HTML_SpecialFunc75: Boolean;
 begin
   if  HTML_SpecialKeyComp(186) or
       HTML_SpecialKeyComp(222) or
@@ -609,7 +609,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc76: Boolean;
+function TSynWebEngine.HTML_SpecialFunc76: Boolean;
 begin
   if  HTML_SpecialKeyComp(123) or
       HTML_SpecialKeyComp(241) then
@@ -618,7 +618,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc77: Boolean;
+function TSynWebEngine.HTML_SpecialFunc77: Boolean;
 begin
   if  HTML_SpecialKeyComp(70) then
     Result := True
@@ -626,7 +626,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc78: Boolean;
+function TSynWebEngine.HTML_SpecialFunc78: Boolean;
 begin
   if  HTML_SpecialKeyComp(112) then
     Result := True
@@ -634,7 +634,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc79: Boolean;
+function TSynWebEngine.HTML_SpecialFunc79: Boolean;
 begin
   if  HTML_SpecialKeyComp(41) or
       HTML_SpecialKeyComp(57) then
@@ -643,7 +643,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc81: Boolean;
+function TSynWebEngine.HTML_SpecialFunc81: Boolean;
 begin
   if  HTML_SpecialKeyComp(9) or
       HTML_SpecialKeyComp(159) then
@@ -652,7 +652,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc83: Boolean;
+function TSynWebEngine.HTML_SpecialFunc83: Boolean;
 begin
   if  HTML_SpecialKeyComp(151) then
     Result := True
@@ -660,7 +660,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc84: Boolean;
+function TSynWebEngine.HTML_SpecialFunc84: Boolean;
 begin
   if  HTML_SpecialKeyComp(117) or
       HTML_SpecialKeyComp(189) then
@@ -669,7 +669,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc85: Boolean;
+function TSynWebEngine.HTML_SpecialFunc85: Boolean;
 begin
   if  HTML_SpecialKeyComp(116) then
     Result := True
@@ -677,7 +677,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc86: Boolean;
+function TSynWebEngine.HTML_SpecialFunc86: Boolean;
 begin
   if  HTML_SpecialKeyComp(221) then
     Result := True
@@ -685,7 +685,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc87: Boolean;
+function TSynWebEngine.HTML_SpecialFunc87: Boolean;
 begin
   if  HTML_SpecialKeyComp(149) or
       HTML_SpecialKeyComp(150) then
@@ -694,7 +694,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc90: Boolean;
+function TSynWebEngine.HTML_SpecialFunc90: Boolean;
 begin
   if  HTML_SpecialKeyComp(60) or
       HTML_SpecialKeyComp(61) or
@@ -705,7 +705,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc91: Boolean;
+function TSynWebEngine.HTML_SpecialFunc91: Boolean;
 begin
   if  HTML_SpecialKeyComp(97) or
       HTML_SpecialKeyComp(193) then
@@ -714,7 +714,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc95: Boolean;
+function TSynWebEngine.HTML_SpecialFunc95: Boolean;
 begin
   if  HTML_SpecialKeyComp(171) then
     Result := True
@@ -722,7 +722,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc106: Boolean;
+function TSynWebEngine.HTML_SpecialFunc106: Boolean;
 begin
   if  HTML_SpecialKeyComp(237) or
       HTML_SpecialKeyComp(238) then
@@ -731,7 +731,7 @@ begin
     Result := False;
 end;
 
-function TSynWebSyn.HTML_SpecialFunc111: Boolean;
+function TSynWebEngine.HTML_SpecialFunc111: Boolean;
 begin
   if  HTML_SpecialKeyComp(220) then
     Result := True

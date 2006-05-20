@@ -640,7 +640,7 @@ begin
 
   I := 0;
   nf:=TStringList.Create;
-  nf.add('function TSynWebSyn.ES_KeywordIdent: TtkTokenKind;');
+  nf.add('function TSynWebEngine.ES_KeywordIdent: TtkTokenKind;');
   nf.add('begin');
   nf.add('  Result := tkESIdentifier;');
   nf.add('end;');
@@ -648,7 +648,7 @@ begin
     mx:=0;
   while I < KeyList.Count do
   begin
-    nf.add(Format('function TSynWebSyn.ES_KeywordFunc%d: TtkTokenKind;',[TLexKeys(KeyList[I]).Key]));
+    nf.add(Format('function TSynWebEngine.ES_KeywordFunc%d: TtkTokenKind;',[TLexKeys(KeyList[I]).Key]));
     nf.add('begin');
     tab:='  ';
     mm:=0;

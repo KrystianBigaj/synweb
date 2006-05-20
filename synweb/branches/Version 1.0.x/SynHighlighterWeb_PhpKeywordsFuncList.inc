@@ -283,7 +283,6 @@
     function PhP_KeywordFunc298: TtkTokenKind;
     function PhP_KeywordFunc299: TtkTokenKind;
     function PhP_KeywordFunc300: TtkTokenKind;
-    function PhP_KeywordFunc301: TtkTokenKind;
     function PhP_KeywordFunc302: TtkTokenKind;
     function PhP_KeywordFunc303: TtkTokenKind;
     function PhP_KeywordFunc304: TtkTokenKind;
@@ -334,7 +333,6 @@
     function PhP_KeywordFunc352: TtkTokenKind;
     function PhP_KeywordFunc353: TtkTokenKind;
     function PhP_KeywordFunc354: TtkTokenKind;
-    function PhP_KeywordFunc356: TtkTokenKind;
     function PhP_KeywordFunc357: TtkTokenKind;
     function PhP_KeywordFunc358: TtkTokenKind;
     function PhP_KeywordFunc359: TtkTokenKind;
@@ -359,6 +357,7 @@
     function PhP_KeywordFunc433: TtkTokenKind;
     function PhP_KeywordFunc439: TtkTokenKind;
     function PhP_KeywordFunc442: TtkTokenKind;
+    function PhP_KeywordFunc443: TtkTokenKind;
     function PhP_KeywordFunc445: TtkTokenKind;
     function PhP_KeywordFunc450: TtkTokenKind;
     function PhP_KeywordFunc465: TtkTokenKind;

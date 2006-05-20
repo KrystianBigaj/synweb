@@ -474,14 +474,14 @@ begin
 
   I := 0;
   nf:=TStringList.Create;
-  nf.add(Format('function TSynWebSyn.%s: %s;',[AFuncUndef, AResType]));
+  nf.add(Format('function TSynWebEngine.%s: %s;',[AFuncUndef, AResType]));
   nf.add('begin');
   nf.add(Format('  Result:=%s;',[AResFalse]));
   nf.add('end;');
   nf.add('');
   while I < KeyList.Count do
   begin
-    nf.add(Format('function TSynWebSyn.%s%d: %s;',[AFunc,TLexKeys(KeyList[I]).Key,AResType]));
+    nf.add(Format('function TSynWebEngine.%s%d: %s;',[AFunc,TLexKeys(KeyList[I]).Key,AResType]));
     nf.add('begin');
     //nf.add('  if');
     ia:=nf.Count;

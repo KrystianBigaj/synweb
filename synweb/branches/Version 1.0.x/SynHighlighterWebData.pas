@@ -22,7 +22,7 @@ type
   TSynHighlighterMode=(
     shmHtml, shmCss, shmES, shmPhp, shmPhpCgi
     );
-                           
+
   TtkTokenKind=(
     // HTML
     tkHtmlSpace, tkHtmlText, tkHtmlEscape, tkHtmlComment, tkHtmlSymbol,

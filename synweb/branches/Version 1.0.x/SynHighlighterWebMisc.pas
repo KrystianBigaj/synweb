@@ -17,9 +17,9 @@ uses
   SynHighlighterWebData;
 {$ENDIF}
 
-function SynWeb_UpdateActiveHighlighter(ASynEdit: TSynEdit; ASynWeb: TSynWebSyn):TSynHighlighterTypes;
+function SynWeb_UpdateActiveHighlighter(ASynEdit: TSynEdit; ASynWeb: TSynWebBase):TSynHighlighterTypes;
 
-function SynWeb_FindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebSyn;
+function SynWeb_FindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
   const AOpenTokens, ACloseTokens:array of String; const ATokenIDs:array of TtkTokenKind;
   AStartPoint: TBufferCoord; var AMatchtPoint: TBufferCoord; var ATokenIndex:Integer):Integer;
 
@@ -44,7 +44,7 @@ var
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 
-function SynWeb_FindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebSyn;
+function SynWeb_FindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
   const AOpenTokens, ACloseTokens:array of String; const ATokenIDs:array of TtkTokenKind;
   AStartPoint: TBufferCoord; var AMatchtPoint: TBufferCoord; var ATokenIndex:Integer):Integer;
 var
@@ -209,15 +209,15 @@ end;
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 
-function SynWeb_UpdateActiveHighlighter(ASynEdit: TSynEdit; ASynWeb: TSynWebSyn):TSynHighlighterTypes;
-begin
-  with ASynEdit,ASynWeb do
+function SynWeb_UpdateActiveHighlighter(ASynEdit: TSynEdit; ASynWeb: TSynWebBase):TSynHighlighterTypes;
+begin           //todo: reorganize
+ { with ASynEdit,ASynWeb do
   begin
     if UpdateActiveHighlighter(TSynEditStringList(Lines).Ranges[CaretY-2],
        Lines[CaretY-1], CaretX, CaretY) then
       Repaint;
     Result:=ASynWeb.GetCurrentActiveHighlighters;
-  end;
+  end;  }
 end;
 
 initialization
