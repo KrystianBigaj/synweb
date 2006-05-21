@@ -7,26 +7,27 @@ uses
   QSynEditHighlighter;
 {$ELSE}
   SynEditHighlighter;
+
 {$ENDIF}
 
 // Global ----------------------------------------------------------------------
 type
-  THashTable=array[#0..#255] of Longword;
+  THashTable = array[#0..#255] of longword;
 
-  TSynHighlighterType=(
+  TSynHighlighterType = (
     shtHtml, shtCss, shtES, shtPHP_inHtml, shtPHP_inCss, shtPHP_inES
     );
 
-  TSynHighlighterTypes=set of TSynHighlighterType;
+  TSynHighlighterTypes = set of TSynHighlighterType;
 
-  TSynHighlighterMode=(
-    shmHtml, shmCss, shmES, shmPhp, shmPhpCgi
+  TSynHighlighterMode = (
+    shmHtml, shmCss, shmES, shmPhp
     );
 
-  TtkTokenKind=(
+  TtkTokenKind = (
     // HTML
     tkHtmlSpace, tkHtmlText, tkHtmlEscape, tkHtmlComment, tkHtmlSymbol,
-    tkHtmlTag, tkHtmlTagName,tkHtmlTagNameUndef, tkHtmlTagKey,
+    tkHtmlTag, tkHtmlTagName, tkHtmlTagNameUndef, tkHtmlTagKey,
     tkHtmlTagKeyUndef, tkHtmlTagKeyValue, tkHtmlTagKeyValueQuoted, tkHtmlError,
     // CSS
     tkCssSpace, tkCssSelector, tkCssSelectorUndef, tkCssSelectorClass,
@@ -49,24 +50,24 @@ type
   TIdentFuncTableFunc = function: TtkTokenKind of object;
 
   PIdent2FuncTableFunc = ^TIdent2FuncTableFunc;
-  TIdent2FuncTableFunc = function: Boolean of object;
+  TIdent2FuncTableFunc = function: boolean of object;
 
-  PTokenAttributeTable=^TTokenAttributeTable;
-  TTokenAttributeTable=array[Low(TtkTokenKind)..High(TtkTokenKind)] of
+  PTokenAttributeTable = ^TTokenAttributeTable;
+  TTokenAttributeTable = array[Low(TtkTokenKind)..High(TtkTokenKind)] of
     TSynHighlighterAttributes;
 
 // HTML ------------------------------------------------------------------------
 type
-  THtmlVersion=(hvHtml401Strict, hvHtml401Transitional, hvHtml401Frameset,
+  THtmlVersion = (hvHtml401Strict, hvHtml401Transitional, hvHtml401Frameset,
     hvXHtml10Strict, hvXHtml10Transitional, hvXHtml10Frameset);
 
-  THtmlRangeState=(rsHtmlText, rsHtmlComment, rsHtmlCommentClose, rsHtmlTag,
+  THtmlRangeState = (rsHtmlText, rsHtmlComment, rsHtmlCommentClose, rsHtmlTag,
     rsHtmlTagClose, rsHtmlTagDOCTYPE, rsHtmlTagCDATA, rsHtmlTagKey,
     rsHtmlTagKeyEq, rsHtmlTagKeyValue, rsHtmlTagKeyValueQuoted1,
     rsHtmlTagKeyValueQuoted2);
 
 const
-  THtmlVersionStr:array[Low(THtmlVersion)..High(THtmlVersion)] of String=(
+  THtmlVersionStr: array[Low(THtmlVersion)..High(THtmlVersion)] of string = (
     'HTML 4.01 Strict',
     'HTML 4.01 Transitional',
     'HTML 4.01 Frameset',
@@ -77,21 +78,21 @@ const
 
 // CSS -------------------------------------------------------------------------
 type
-  TCssVersion=(
+  TCssVersion = (
     cvCss1, cvCss21
     );
 
-  TCssRangeState=(rsCssRuleset, rsCssSelectorAttrib, rsCssSelectorPseudo,
+  TCssRangeState = (rsCssRuleset, rsCssSelectorAttrib, rsCssSelectorPseudo,
     rsCssAtKeyword, rsCssProp, rsCssPropVal, rsCssPropValStr, rsCssPropValRgb,
     rsCssPropValFunc, rsCssPropValSpecial, rsCssPropValImportant,
     rsCssPropValUrl, rsCssPropValRect,
     rsCssComment);
 
 const
-  TCssRangeState_RulesetBegin=rsCssProp;
-  TCssRangeState_RulesetEnd=rsCssPropValRect;
+  TCssRangeState_RulesetBegin = rsCssProp;
+  TCssRangeState_RulesetEnd = rsCssPropValRect;
 
-  TCssVersionStr:array[Low(TCssVersion)..High(TCssVersion)] of String=(
+  TCssVersionStr: array[Low(TCssVersion)..High(TCssVersion)] of string = (
     'CSS 1',
     'CSS 2.1'
     );
@@ -101,25 +102,25 @@ const
 
 // ECMAScript ------------------------------------------------------------------
 type
-  TESRangeState=(rsESDefault, rsESComment, rsESCommentMulti, rsESString34,
+  TESRangeState = (rsESDefault, rsESComment, rsESCommentMulti, rsESString34,
     rsESString39);
 
 // PHP -------------------------------------------------------------------------
 type
-  TPhpVersion=(
+  TPhpVersion = (
     pvPhp4, pvPhp5
     );
 
-  TPhpRangeState=(
+  TPhpRangeState = (
     rsPhpSubProc, rsPhpDefault, rsPhpComment, rsPhpString34, rsPhpString39,
     rsPhpStringShell, rsPhpHeredoc
     );
 
-  TPhpOpenTag=(potPhp, potPhpShort, potHTML, potASP);
-  TPhpOpenTags=set of TPhpOpenTag;
+  TPhpOpenTag = (potPhp, potPhpShort, potHTML, potASP);
+  TPhpOpenTags = set of TPhpOpenTag;
 
 const
-  TPhpVersionStr:array[Low(TPhpVersion)..High(TPhpVersion)] of String=(
+  TPhpVersionStr: array[Low(TPhpVersion)..High(TPhpVersion)] of string = (
 {$I SynHighlighterWeb_PhpVersion.inc}
     );
 
@@ -151,7 +152,7 @@ const
 const
 {$I SynHighlighterWeb_Tables.inc}
 
-  TCrc8_Table:array[$00..$FF] of Byte=(
+  TCrc8_Table: array[$00..$FF] of byte = (
     $00, $07, $0e, $09, $1c, $1b, $12, $15,
     $38, $3f, $36, $31, $24, $23, $2a, $2d,
     $70, $77, $7e, $79, $6c, $6b, $62, $65,
@@ -189,3 +190,4 @@ const
 implementation
 
 end.
+
