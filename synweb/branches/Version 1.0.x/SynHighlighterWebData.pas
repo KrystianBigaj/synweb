@@ -21,7 +21,7 @@ type
   TSynHighlighterTypes = set of TSynHighlighterType;
 
   TSynHighlighterMode = (
-    shmHtml, shmCss, shmES, shmPhp
+    shmHtml, shmCss, shmES, shmPhpCli
     );
 
   TtkTokenKind = (

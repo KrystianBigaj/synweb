@@ -15,7 +15,6 @@ uses
   SynEditHighlighter,
   SynHighlighterWeb,
   SynHighlighterWebData;
-
 {$ENDIF}
 
 function SynWeb_UpdateActiveHighlighter(ASynEdit: TSynEdit;

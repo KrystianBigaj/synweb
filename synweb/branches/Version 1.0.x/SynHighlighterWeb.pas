@@ -197,7 +197,7 @@ type
     property EsEmbeded;
   end;
 
-  TSynWebPHPSyn = class(TSynWebBase)
+  TSynWebPHPCliSyn = class(TSynWebBase)
   private
     procedure SetupActiveHighlighter; override;
   public
@@ -245,7 +245,7 @@ type
   private
     // Global ------------------------------------------------------------------
     FNotifyList: TList;
-    fConfig: PSynWebConfig;
+    FConfig: PSynWebConfig;
     fAttributes: TStringList;
     fInactiveAttri: TSynHighlighterAttributes;
     fTokenAttributeTable: TTokenAttributeTable;
@@ -539,10 +539,10 @@ type
     procedure SetRange_Int(ALen, APos, AVal: longword);
 
     procedure NullProc;
-    procedure NextSetHighligterType;
-    procedure SetHighligterType(const AHighlighterType: TSynHighlighterType;
+    procedure NextSetHighlighterType;
+    procedure SetHighlighterType(const AHighlighterType: TSynHighlighterType;
       AClearBits: boolean; ASetAtNextToken: boolean; AUseNextAH: boolean);
-    procedure SetupHighligterType(AClearBits: boolean = False);
+    procedure SetupHighlighterType(AClearBits: boolean = False);
     procedure SetLine(NewValue: string; LineNumber: integer);
     procedure Next;
     function GetToken: string;
@@ -868,12 +868,9 @@ destructor TSynWebEngine.Destroy;
 var
   i: integer;
 begin
-  if fAttributes <> nil then
-  begin
-    for i := fAttributes.Count - 1 downto 0 do
-      TSynHighlighterAttributes(fAttributes.Objects[i]).Free;
-    fAttributes.Clear;
-  end;
+  for i := fAttributes.Count - 1 downto 0 do
+    TSynHighlighterAttributes(fAttributes.Objects[i]).Free;
+  fAttributes.Clear;
   for i:=0 to FNotifyList.Count-1 do
     TSynWebBase(FNotifyList[i]).Engine := nil;
   FNotifyList.Free;
@@ -963,15 +960,15 @@ begin
   FConfig^.FTokenID := tkNull;
 end;
 
-procedure TSynWebEngine.NextSetHighligterType;
+procedure TSynWebEngine.NextSetHighlighterType;
 begin
-  SetHighligterType(FConfig^.FNextHighlighterType, FConfig^.FNextClearBits,
+  SetHighlighterType(FConfig^.FNextHighlighterType, FConfig^.FNextClearBits,
     False, FConfig^.FNextUseNextAH);
   Next;
   FConfig^.FHighlighterSW := True;
 end;
 
-procedure TSynWebEngine.SetHighligterType(const AHighlighterType: TSynHighlighterType;
+procedure TSynWebEngine.SetHighlighterType(const AHighlighterType: TSynHighlighterType;
   AClearBits: boolean; ASetAtNextToken: boolean; AUseNextAH: boolean);
 begin
   if ASetAtNextToken then
@@ -979,7 +976,7 @@ begin
     FConfig^.FNextUseNextAH := AUseNextAH;
     FConfig^.FNextHighlighterType := AHighlighterType;
     FConfig^.FNextClearBits := AClearBits;
-    FConfig^.FNextProcTable := NextSetHighligterType;
+    FConfig^.FNextProcTable := NextSetHighlighterType;
   end
   else
   begin
@@ -988,11 +985,11 @@ begin
     FConfig^.FPrevHighlighterType := FConfig^.FHighlighterType;
     FConfig^.FHighlighterType := AHighlighterType;
     SetRange_Int(3, 29, Longword(AHighlighterType));
-    SetupHighligterType(AClearBits);
+    SetupHighlighterType(AClearBits);
   end;
 end;
 
-procedure TSynWebEngine.SetupHighligterType(AClearBits: boolean);
+procedure TSynWebEngine.SetupHighlighterType(AClearBits: boolean);
 begin
   case FConfig^.FHighlighterType of
     shtHtml:
@@ -1050,7 +1047,7 @@ begin
   FConfig^.FHighlighterType := TSynHighlighterType(GetRange_Int(3, 29));
   FConfig^.FPrevHighlighterType := FConfig^.FHighlighterType;
   FConfig^.FHighlighterSW := False;
-  SetupHighligterType;
+  SetupHighlighterType;
   FConfig^.FNextProcTable;
 end;
 
@@ -1673,23 +1670,24 @@ begin
       else
       if not GetRange_Bit(12) and ((FConfig^.FRun = 0) or
         (FConfig^.FLine[FConfig^.FRun - 2] <> '/')) then
-        if (ID = Html_TagID_Style) then
+        if (ID = Html_TagID_Style) and FConfig^.FCssEmbeded then
         begin
-          SetHighligterType(shtCss, True, True, True);
+          SetHighlighterType(shtCss, True, True, True);
           Exit;
         end
         else
         if (ID = Html_TagID_Script) then
-          if GetRange_Bit(18) and (FConfig^.FHighlighterMode = shmPhp) then
+          if GetRange_Bit(18) and FConfig^.FPhpEmbeded then
           begin
             Php_Begin(potHTML);
             Exit;
           end
           else
-          begin
-            SetHighligterType(shtES, True, True, True);
-            Exit;
-          end;
+            if FConfig^.FEsEmbeded then
+            begin
+              SetHighlighterType(shtES, True, True, True);
+              Exit;
+            end;
       Html_SetRange(rsHtmlText);
     end;
     else
@@ -1794,23 +1792,24 @@ begin
           (FConfig^.FLine[FConfig^.FRun - 2] <> '/')) then
         begin
           ID := Html_GetTag - 1;
-          if (ID = Html_TagID_Style) then
+          if (ID = Html_TagID_Style) and FConfig^.FCssEmbeded then
           begin
-            SetHighligterType(shtCss, True, True, True);
+            SetHighlighterType(shtCss, True, True, True);
             Exit;
           end
           else
           if (ID = Html_TagID_Script) then
-            if GetRange_Bit(18) and (FConfig^.FHighlighterMode = shmPhp) then
+            if GetRange_Bit(18) and FConfig^.FPhpEmbeded then
             begin
               Php_Begin(potHTML);
               Exit;
             end
             else
-            begin
-              SetHighligterType(shtES, True, True, True);
-              Exit;
-            end;
+              if FConfig^.FEsEmbeded then
+              begin
+                SetHighlighterType(shtES, True, True, True);
+                Exit;
+              end;
         end;
         Html_SetRange(rsHtmlText);
       end
@@ -2278,13 +2277,13 @@ begin
         FConfig^.FHashTable['e']) and
         (fIdentTable2[FConfig^.FLine[FConfig^.FRun + 7]] and (1 shl 0) <> 0) and
         // (FConfig^.FLine[FConfig^.FRun+7] in [#0..#32, '>']) and
-        (FConfig^.FHighlighterMode in [shmHtml, shmPhp]) then
+        (FConfig^.FHighlighterMode=shmHtml) then
       begin
         Result := True;
         if ADo then
         begin
           FConfig^.FTokenID := tkHtmlTag;
-          SetHighligterType(shtHtml, True, False, False);
+          SetHighlighterType(shtHtml, True, False, False);
         end;
       end
       else
@@ -4278,13 +4277,13 @@ begin
         FConfig^.FHashTable['t']) and
         (fIdentTable2[FConfig^.FLine[FConfig^.FRun + 8]] and (1 shl 0) <> 0) and
         // (FConfig^.FLine[FConfig^.FRun+8] in [#0..#32, '>']) and
-        (FConfig^.FHighlighterMode in [shmHtml, shmPhp]) then
+        (FConfig^.FHighlighterMode=shmHtml) then
       begin
         Result := True;
         if ADo then
         begin
           FConfig^.FTokenID := tkHtmlTag;
-          SetHighligterType(shtHtml, True, False, False);
+          SetHighlighterType(shtHtml, True, False, False);
         end;
       end
       else
@@ -4852,7 +4851,7 @@ end;
 function TSynWebEngine.Php_CheckBegin(ABegin: boolean): boolean;
 begin
   Result := False;
-  if (FConfig^.FLine[FConfig^.FRun] = '<') and (FConfig^.FHighlighterMode = shmPhp) then
+  if (FConfig^.FLine[FConfig^.FRun] = '<') and FConfig^.FPhpEmbeded then
     case FConfig^.FLine[FConfig^.FRun + 1] of
       '?':
         if (UpCase(FConfig^.FLine[FConfig^.FRun + 2]) = 'P') and
@@ -4890,7 +4889,7 @@ end;
 
 procedure TSynWebEngine.Php_Begin(ATagKind: TPhpOpenTag);
 begin
-  SetHighligterType(
+  SetHighlighterType(
     TSynHighlighterType(Longword(FConfig^.FHighlighterType) + Longword(shtPHP_inHtml)),
     False,
     True,
@@ -4913,7 +4912,7 @@ begin
     SetRange_Int(3, 29, Longword(FConfig^.FHighlighterType) - Longword(shtPHP_inHtml))
   else
   begin
-    SetHighligterType(
+    SetHighlighterType(
       TSynHighlighterType(Longword(FConfig^.FHighlighterType) - Longword(shtPHP_inHtml)),
       t = potHTML,
       True,
@@ -4934,7 +4933,7 @@ end;
 procedure TSynWebEngine.Php_QuestionProc;
 begin
   Inc(FConfig^.FRun);
-  if (FConfig^.FLine[FConfig^.FRun] = '>') and (FConfig^.FHighlighterMode = shmPhp) then
+  if (FConfig^.FLine[FConfig^.FRun] = '>') and FConfig^.FPhpEmbeded then
   begin
     Inc(FConfig^.FRun);
     if Php_GetOpenTag in [potPhp, potPhpShort] then
@@ -5189,7 +5188,7 @@ end;
 procedure TSynWebEngine.Php_PercentProc;
 begin
   if (FConfig^.FLine[FConfig^.FRun + 1] = '>') and
-    (FConfig^.FHighlighterMode = shmPhp) then
+    FConfig^.FPhpEmbeded then
   begin
     Inc(FConfig^.FRun, 2);
     if Php_GetOpenTag = potASP then
@@ -5218,11 +5217,11 @@ begin
       '?':
         if (FConfig^.FLine[FConfig^.FRun + 1] = '>') and
           (Php_GetOpenTag in [potPhp, potPhpShort]) and
-          (FConfig^.FHighlighterMode = shmPhp) then
+          FConfig^.FPhpEmbeded then
           Exit;
       '%':
         if (FConfig^.FLine[FConfig^.FRun + 1] = '>') and
-          (Php_GetOpenTag = potASP) and (FConfig^.FHighlighterMode = shmPhp) then
+          (Php_GetOpenTag = potASP) and FConfig^.FPhpEmbeded then
           Exit;
       else
         Exit;
@@ -5934,9 +5933,7 @@ begin
   else
     FActiveHighlighters := [shtHtml, shtCss, shtES, shtPHP_inHtml,
       shtPHP_inCss, shtPHP_inES];
-
-  //todo: ?? finally hl-active updated only after UpdateActiveHighlighter1 - rethink
-  // DefHighlightChange(Self);
+  DefHighlightChange(Self);
 end;
 
 procedure TSynWebBase.SetCssVersion(const Value: TCssVersion);
@@ -5992,7 +5989,7 @@ var
   lHinghlighter, ActiveHL: TSynHighlighterType;
 begin
   Result := True;
-  if not FActiveHighlighter or not (FConfig.FHighlighterMode in [shmHtml, shmPhp]) then
+  if not FActiveHighlighter or not (FConfig.FPhpEmbeded or FConfig.FCssEmbeded or FConfig.FEsEmbeded) then
     Exit;
   FEngine.fConfig := @FConfig;
   f := FActiveHighlighters;
@@ -6083,9 +6080,11 @@ end;
 
 procedure TSynWebESSyn.ResetRange;
 begin
-  FConfig.FRange := $00000000;
-  FEngine.FConfig := @FConfig;
-  FEngine.SetRange_Int(3, 29, Longword(shtES));
+  with FConfig do
+  begin
+    FRange := $00000000;
+    FRange := FRange or (Longword(shtES) shl 29);
+  end;
 end;
 
 { TSynWebSynCSS }
@@ -6106,9 +6105,11 @@ end;
 
 procedure TSynWebCSSSyn.ResetRange;
 begin
-  FConfig.FRange := $00000000;
-  FEngine.FConfig := @FConfig;
-  FEngine.SetRange_Int(3, 29, Longword(shtCss));
+  with FConfig do
+  begin
+    FRange := $00000000;
+    FRange := FRange or (Longword(shtCss) shl 29);
+  end;
 end;
 
 { TSynWebSynHtml }
@@ -6134,31 +6135,34 @@ end;
 
 { TSynWebSynPHP }
 
-constructor TSynWebPHPSyn.Create(AOwner: TComponent);
+constructor TSynWebPHPCliSyn.Create(AOwner: TComponent);
 begin
-  FConfig.FHighlighterMode := shmPhp;
+  FConfig.FHighlighterMode := shmPhpCli;
   inherited Create(AOwner);
   PhpEmbeded := False;
   CssEmbeded := False;
   EsEmbeded := False;
 end;
 
-function TSynWebPHPSyn.GetSampleSource: string;
+function TSynWebPHPCliSyn.GetSampleSource: string;
 begin
 
 end;
 
-procedure TSynWebPHPSyn.ResetRange;
+procedure TSynWebPHPCliSyn.ResetRange;
 begin
-  FConfig.FRange := $00000000;
-  FEngine.FConfig := @FConfig;
-  FEngine.SetRange_Int(3, 29, Longword(shtPHP_inHtml));
-  FEngine.Php_SetRange(rsPhpDefault);
+  with FConfig do
+  begin
+    FRange := $00000000;
+    FRange := FRange or (Longword(shtPHP_inHtml) shl 29);
+    FRange := FRange or (Longword(rsPhpDefault) shl 23);
+  end;
 end;
 
 constructor TSynWebBase.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
+  FEngine := nil;
   FDefaultFilter := '';
   FActiveHighlighter := False;
   FActiveHighlighters := [shtHtml, shtCss, shtES, shtPHP_inHtml,
@@ -6194,7 +6198,7 @@ begin
   FActiveHighlighters := [shtCSS];
 end;
 
-procedure TSynWebPHPSyn.SetupActiveHighlighter;
+procedure TSynWebPHPCliSyn.SetupActiveHighlighter;
 begin
   FActiveHighlighters := [shtPHP_inHtml, shtPHP_inCss, shtPHP_inES];
 end;
@@ -6233,8 +6237,6 @@ begin
 end;
 
 procedure TSynWebBase.SetEngine(const Value: TSynWebEngine);
-var
-  i:Integer;
 begin
   if FEngine<>nil then
     FEngine.RemoveFromNotifyList(Self);
@@ -6250,7 +6252,10 @@ end;
 
 initialization
 {$IFNDEF SYN_CPPB_1}
-  //todo: RegisterPlaceableHighlighter(TSynWebEngine);
+  RegisterPlaceableHighlighter(TSynWebHtmlSyn);
+  RegisterPlaceableHighlighter(TSynWebPHPCliSyn);
+  RegisterPlaceableHighlighter(TSynWebCssSyn);
+  RegisterPlaceableHighlighter(TSynWebEsSyn);
 {$ENDIF}
 end.
 
