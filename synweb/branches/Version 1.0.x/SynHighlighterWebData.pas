@@ -131,7 +131,6 @@ const
   {$I SynHighlighterWeb_Attrs.inc}
 
   {$I SynHighlighterWeb_Special.inc}
-
 // CSS -------------------------------------------------------------------------
 const
   {$I SynHighlighterWeb_CssProps.inc}
