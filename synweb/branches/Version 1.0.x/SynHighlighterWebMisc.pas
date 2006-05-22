@@ -15,6 +15,7 @@ uses
   SynEditHighlighter,
   SynHighlighterWeb,
   SynHighlighterWebData;
+
 {$ENDIF}
 
 function SynWeb_UpdateActiveHighlighter(ASynEdit: TSynEdit;
@@ -65,8 +66,8 @@ var
         if Token = CloseToken then
           Dec(Level)
         else
-        if Token = OpenToken then
-          Inc(Level);
+          if Token = OpenToken then
+            Inc(Level);
       end;
     if Level = 0 then
     begin
@@ -74,8 +75,7 @@ var
       AMatchtPoint.Line := AStartPoint.Line + 1;
       AMatchtPoint.char := ASynWeb.GetTokenPos + 1;
       Result := True;
-    end
-    else
+    end else
       Result := False;
   end;
 
@@ -90,17 +90,16 @@ var
           Dec(Level);
           if fMatchStackID >= 0 then
             Dec(fMatchStackID);
-        end
-        else
-        if Token = OpenToken then
-        begin
-          Inc(Level);
-          Inc(fMatchStackID);
-          if fMatchStackID >= Length(fMatchStack) then
-            SetLength(fMatchStack, Length(fMatchStack) + 32);
-          fMatchStack[fMatchStackID].Line := AStartPoint.Line + 1;
-          fMatchStack[fMatchStackID].char := ASynWeb.GetTokenPos + 1;
-        end;
+        end else
+          if Token = OpenToken then
+          begin
+            Inc(Level);
+            Inc(fMatchStackID);
+            if fMatchStackID >= Length(fMatchStack) then
+              SetLength(fMatchStack, Length(fMatchStack) + 32);
+            fMatchStack[fMatchStackID].Line := AStartPoint.Line + 1;
+            fMatchStack[fMatchStackID].char := ASynWeb.GetTokenPos + 1;
+          end;
       end;
     ASynWeb.Next;
   end;
@@ -130,13 +129,12 @@ begin
         begin
           Result := 1;
           Break;
-        end
-        else
-        if Token = ACloseTokens[I] then
-        begin
-          Result := -1;
-          Break;
-        end;
+        end else
+          if Token = ACloseTokens[I] then
+          begin
+            Result := -1;
+            Break;
+          end;
       end;
     if Result = 0 then
       Exit;
@@ -170,8 +168,7 @@ begin
         end;
         Inc(AStartPoint.Line);
       end;
-    end
-    else
+    end else
     begin
       if Length(fMatchStack) < 32 then
         SetLength(fMatchStack, 32);
@@ -189,8 +186,7 @@ begin
       begin
         Result := -2;
         AMatchtPoint := fMatchStack[fMatchStackID];
-      end
-      else
+      end else
         while AStartPoint.Line > 0 do
         begin
           Dec(AStartPoint.Line);
