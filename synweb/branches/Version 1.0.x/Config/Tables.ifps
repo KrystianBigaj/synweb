@@ -153,7 +153,7 @@ begin
       else
         fSensitiveHashTable[I]:=0;  
   end;
-  s:='  fIdentTable: array[#$00..#$FF] of Longword=('#13#10'    ';
+  s:='  TSynWebIdentTable: array[#$00..#$FF] of Longword=('#13#10'    ';
   i:=0;
   while i<=255 do 
   begin
@@ -164,7 +164,7 @@ begin
   end;
   s:=trimRight(s)+#13#10#13#10;
   
-  s:=s+'  fIdentTable2: array[#$00..#$FF] of Longword=('#13#10'    ';
+  s:=s+'  TSynWebIdentTable2: array[#$00..#$FF] of Longword=('#13#10'    ';
   i:=0;
   while i<=255 do 
   begin
@@ -175,7 +175,7 @@ begin
   end;
   s:=trimRight(s)+#13#10#13#10;
   
-  s:=s+'  fInsensitiveHashTable: THashTable=('#13#10'    ';
+  s:=s+'  TSynWebInsensitiveHashTable: TSynWebHashTable=('#13#10'    ';
   i:=0;
   while i<=255 do 
   begin
@@ -186,7 +186,7 @@ begin
   end;
   s:=trimRight(s)+#13#10#13#10;
   
-  s:=s+'  fSensitiveHashTable: THashTable=('#13#10'    ';
+  s:=s+'  TSynWebSensitiveHashTable: TSynWebHashTable=('#13#10'    ';
   i:=0;
   while i<=255 do 
   begin

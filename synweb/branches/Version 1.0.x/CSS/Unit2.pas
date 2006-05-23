@@ -247,7 +247,7 @@ begin
       appdir+'..\SynHighlighterWeb_CssSpecialFuncList.inc',
       appdir+'..\SynHighlighterWeb_CssSpecialFuncTable.inc')
   else                                                     
-    GenerateInc(s,'TtkTokenKind', 'tkCssProp', 'tkCssPropUndef',
+    GenerateInc(s,'TSynWebTokenKind', 'stkCssProp', 'stkCssPropUndef',
       'CSS_PropFunc', 'Css_PropUndef',
       'fCSS_PropIdentFuncTable', 'CSS_PropKeyComp',
       appdir+'..\SynHighlighterWeb_CssPropsFunc.inc',
@@ -382,7 +382,7 @@ begin
   s1.AddStrings(s2);
   s1.SaveToFile(appdir+'..\SynHighlighterWeb_CssVals.inc');
     
-  GenerateInc(sl,'TtkTokenKind', 'tkCssVal', 'tkCssValUndef',
+  GenerateInc(sl,'TSynWebTokenKind', 'stkCssVal', 'stkCssValUndef',
     'CSS_ValFunc', 'CSS_ValUndef',
     'fCSS_ValIdentFuncTable', 'CSS_ValKeyComp',
     appdir+'..\SynHighlighterWeb_CssValsFunc.inc',

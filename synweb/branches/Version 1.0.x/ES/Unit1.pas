@@ -565,11 +565,11 @@ var
         nf.add(tab+Format('%s  ES_KeywordComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
         al:=true;
         if islast then
-          nf.Add(tab+'  Result := tkESKeyword')
+          nf.Add(tab+'  Result := stkESKeyword')
         else
           if islastgp then
           begin
-            nf.Add(tab+'  Result := tkESKeyword');
+            nf.Add(tab+'  Result := stkESKeyword');
             nf.Add(tab+'else');
             tab:=tab+'  ';
             al:=false;
@@ -578,18 +578,18 @@ var
   {  $02:
       begin
         nf.add(tab+Format('if PHP_ConstComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
-        nf.Add(tab+'  Result := tkPhpConst');
+        nf.Add(tab+'  Result := stkPhpConst');
       end;
     $04:
       begin
         nf.add(tab+Format('if PHP_VariableComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
-        nf.Add(tab+'  Result := tkPhpVariable');
+        nf.Add(tab+'  Result := stkPhpVariable');
       end;    }
    { $08:
       begin
         nf.add(tab+Format('%s  ES_FunctionComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
         if islast then
-          nf.Add(tab+'  Result := tkESFunction');
+          nf.Add(tab+'  Result := stkESFunction');
         al:=true;
       end; }
     else
@@ -614,11 +614,11 @@ begin
   KeyList.Sort(CompareKeys);
 
   nf:=TStringList.Create;
-  nf.add('    function ES_KeywordIdent: TtkTokenKind;');
-  nf.add(Format('    function ES_KeywordFunc%d: TtkTokenKind;',[TLexKeys(KeyList[0]).Key]));
+  nf.add('    function ES_KeywordIdent: TSynWebTokenKind;');
+  nf.add(Format('    function ES_KeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[0]).Key]));
   for i:=1 to KeyList.Count-1 do
     if (TLexKeys(KeyList[i-1]).Key <> TLexKeys(KeyList[i]).Key) then
-        nf.add(Format('    function ES_KeywordFunc%d: TtkTokenKind;',[TLexKeys(KeyList[i]).Key]));
+        nf.add(Format('    function ES_KeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[i]).Key]));
   nf.SaveToFile(AFileFuncList);
   nf.Free;
 
@@ -640,15 +640,15 @@ begin
 
   I := 0;
   nf:=TStringList.Create;
-  nf.add('function TSynWebEngine.ES_KeywordIdent: TtkTokenKind;');
+  nf.add('function TSynWebEngine.ES_KeywordIdent: TSynWebTokenKind;');
   nf.add('begin');
-  nf.add('  Result := tkESIdentifier;');
+  nf.add('  Result := stkESIdentifier;');
   nf.add('end;');
   nf.add('');     
     mx:=0;
   while I < KeyList.Count do
   begin
-    nf.add(Format('function TSynWebEngine.ES_KeywordFunc%d: TtkTokenKind;',[TLexKeys(KeyList[I]).Key]));
+    nf.add(Format('function TSynWebEngine.ES_KeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[I]).Key]));
     nf.add('begin');
     tab:='  ';
     mm:=0;
@@ -669,7 +669,7 @@ begin
     nf.add(Format('      %s(%d) then',[ACompFunc, TLexKeys(KeyList[I]).KeyIndex]));
     nf.add(Format('    Result := %s',[AResTrue]));}
     nf.add(tab+'else');
-    nf.add(tab+'  Result := tkESIdentifier;');
+    nf.add(tab+'  Result := stkESIdentifier;');
     nf.add('end;');
     inc(I);
     if I < KeyList.Count then

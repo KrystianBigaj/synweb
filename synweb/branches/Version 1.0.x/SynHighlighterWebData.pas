@@ -12,7 +12,7 @@ uses
 
 // Global ----------------------------------------------------------------------
 type
-  THashTable = array[#0..#255] of longword;
+  TSynWebHashTable = array[#0..#255] of longword;
 
   TSynHighlighterType = (
     shtHtml, shtCss, shtES, shtPHP_inHtml, shtPHP_inCss, shtPHP_inES
@@ -24,50 +24,50 @@ type
     shmHtml, shmCss, shmES, shmPhpCli
     );
 
-  TtkTokenKind = (
+  TSynWebTokenKind = (
     // HTML
-    tkHtmlSpace, tkHtmlText, tkHtmlEscape, tkHtmlComment, tkHtmlSymbol,
-    tkHtmlTag, tkHtmlTagName, tkHtmlTagNameUndef, tkHtmlTagKey,
-    tkHtmlTagKeyUndef, tkHtmlTagKeyValue, tkHtmlTagKeyValueQuoted, tkHtmlError,
+    stkHtmlSpace, stkHtmlText, stkHtmlEscape, stkHtmlComment, stkHtmlSymbol,
+    stkHtmlTag, stkHtmlTagName, stkHtmlTagNameUndef, stkHtmlTagKey,
+    stkHtmlTagKeyUndef, stkHtmlTagKeyValue, stkHtmlTagKeyValueQuoted, stkHtmlError,
     // CSS
-    tkCssSpace, tkCssSelector, tkCssSelectorUndef, tkCssSelectorClass,
-    tkCssSelectorId, tkCssSpecial, tkCssComment, tkCssProp, tkCssPropUndef,
-    tkCssVal, tkCssValUndef, tkCssValString, tkCssValNumber, tkCssSymbol,
-    tkCssError,
+    stkCssSpace, stkCssSelector, stkCssSelectorUndef, stkCssSelectorClass,
+    stkCssSelectorId, stkCssSpecial, stkCssComment, stkCssProp, stkCssPropUndef,
+    stkCssVal, stkCssValUndef, stkCssValString, stkCssValNumber, stkCssSymbol,
+    stkCssError,
     // ECMAScript
-    tkESSpace, tkESIdentifier, tkESKeyword, tkESString, tkESComment, tkESSymbol,
-    tkESNumber, tkESError,
+    stkESSpace, stkESIdentifier, stkESKeyword, stkESString, stkESComment, stkESSymbol,
+    stkESNumber, stkESError,
     // PHP
-    tkPhpSpace, tkPhpIdentifier, tkPhpKeyword, tkPhpFunction, tkPhpVariable,
-    tkPhpConst, tkPhpString, tkPhpStringSpecial, tkPhpComment, tkPhpSymbol,
-    tkPhpNumber, tkPhpError,
+    stkPhpSpace, stkPhpIdentifier, stkPhpKeyword, stkPhpFunction, stkPhpVariable,
+    stkPhpConst, stkPhpString, stkPhpStringSpecial, stkPhpComment, stkPhpSymbol,
+    stkPhpNumber, stkPhpError,
     // Other
-    tkNull);
+    stkNull);
 
-  TProcTableProc = procedure of object;
+  TSynWebProcTableProc = procedure of object;
 
-  PIdentFuncTableFunc = ^TIdentFuncTableFunc;
-  TIdentFuncTableFunc = function: TtkTokenKind of object;
+  PSynWebIdentFuncTableFunc = ^TSynWebIdentFuncTableFunc;
+  TSynWebIdentFuncTableFunc = function: TSynWebTokenKind of object;
 
-  PIdent2FuncTableFunc = ^TIdent2FuncTableFunc;
-  TIdent2FuncTableFunc = function: boolean of object;
+  PSynWebIdent2FuncTableFunc = ^TSynWebIdent2FuncTableFunc;
+  TSynWebIdent2FuncTableFunc = function: boolean of object;
 
-  PTokenAttributeTable = ^TTokenAttributeTable;
-  TTokenAttributeTable = array[Low(TtkTokenKind)..High(TtkTokenKind)] of
+  PSynWebTokenAttributeTable = ^TSynWebTokenAttributeTable;
+  TSynWebTokenAttributeTable = array[Low(TSynWebTokenKind)..High(TSynWebTokenKind)] of
     TSynHighlighterAttributes;
 
 // HTML ------------------------------------------------------------------------
 type
-  THtmlVersion = (hvHtml401Strict, hvHtml401Transitional, hvHtml401Frameset,
+  TSynWebHtmlVersion = (hvHtml401Strict, hvHtml401Transitional, hvHtml401Frameset,
     hvXHtml10Strict, hvXHtml10Transitional, hvXHtml10Frameset);
 
-  THtmlRangeState = (rsHtmlText, rsHtmlComment, rsHtmlCommentClose, rsHtmlTag,
-    rsHtmlTagClose, rsHtmlTagDOCTYPE, rsHtmlTagCDATA, rsHtmlTagKey,
-    rsHtmlTagKeyEq, rsHtmlTagKeyValue, rsHtmlTagKeyValueQuoted1,
-    rsHtmlTagKeyValueQuoted2);
+  TSynWebHtmlRangeState = (srsHtmlText, srsHtmlComment, srsHtmlCommentClose, srsHtmlTag,
+    srsHtmlTagClose, srsHtmlTagDOCTYPE, srsHtmlTagCDATA, srsHtmlTagKey,
+    srsHtmlTagKeyEq, srsHtmlTagKeyValue, srsHtmlTagKeyValueQuoted1,
+    srsHtmlTagKeyValueQuoted2);
 
 const
-  THtmlVersionStr: array[Low(THtmlVersion)..High(THtmlVersion)] of string = (
+  TSynWebHtmlVersionStr: array[Low(TSynWebHtmlVersion)..High(TSynWebHtmlVersion)] of string = (
     'HTML 4.01 Strict',
     'HTML 4.01 Transitional',
     'HTML 4.01 Frameset',
@@ -78,49 +78,49 @@ const
 
 // CSS -------------------------------------------------------------------------
 type
-  TCssVersion = (
+  TSynWebCssVersion = (
     cvCss1, cvCss21
     );
 
-  TCssRangeState = (rsCssRuleset, rsCssSelectorAttrib, rsCssSelectorPseudo,
-    rsCssAtKeyword, rsCssProp, rsCssPropVal, rsCssPropValStr, rsCssPropValRgb,
-    rsCssPropValFunc, rsCssPropValSpecial, rsCssPropValImportant,
-    rsCssPropValUrl, rsCssPropValRect,
-    rsCssComment);
+  TSynWebCssRangeState = (srsCssRuleset, srsCssSelectorAttrib, srsCssSelectorPseudo,
+    srsCssAtKeyword, srsCssProp, srsCssPropVal, srsCssPropValStr, srsCssPropValRgb,
+    srsCssPropValFunc, srsCssPropValSpecial, srsCssPropValImportant,
+    srsCssPropValUrl, srsCssPropValRect,
+    srsCssComment);
 
 const
-  TCssRangeState_RulesetBegin = rsCssProp;
-  TCssRangeState_RulesetEnd = rsCssPropValRect;
+  TSynWebCssRangeState_RulesetBegin = srsCssProp;
+  TSynWebCssRangeState_RulesetEnd = srsCssPropValRect;
 
-  TCssVersionStr: array[Low(TCssVersion)..High(TCssVersion)] of string = (
+  TSynWebCssVersionStr: array[Low(TSynWebCssVersion)..High(TSynWebCssVersion)] of string = (
     'CSS 1',
     'CSS 2.1'
     );
 
-  TCssString39 = 4;
-  TCssString34 = 5;
+  TSynWebCssString39 = 4;
+  TSynWebCssString34 = 5;
 
 // ECMAScript ------------------------------------------------------------------
 type
-  TESRangeState = (rsESDefault, rsESComment, rsESCommentMulti, rsESString34,
-    rsESString39);
+  TSynWebESRangeState = (srsESDefault, srsESComment, srsESCommentMulti, srsESString34,
+    srsESString39);
 
 // PHP -------------------------------------------------------------------------
 type
-  TPhpVersion = (
+  TSynWebPhpVersion = (
     pvPhp4, pvPhp5
     );
 
-  TPhpRangeState = (
-    rsPhpSubProc, rsPhpDefault, rsPhpComment, rsPhpString34, rsPhpString39,
-    rsPhpStringShell, rsPhpHeredoc
+  TSynWebPhpRangeState = (
+    srsPhpSubProc, srsPhpDefault, srsPhpComment, srsPhpString34, srsPhpString39,
+    srsPhpStringShell, srsPhpHeredoc
     );
 
-  TPhpOpenTag = (potPhp, potPhpShort, potHTML, potASP);
-  TPhpOpenTags = set of TPhpOpenTag;
+  TSynWebPhpOpenTag = (spotPhp, spotPhpShort, spotHTML, spotASP);
+  TSynWebPhpOpenTags = set of TSynWebPhpOpenTag;
 
 const
-  TPhpVersionStr: array[Low(TPhpVersion)..High(TPhpVersion)] of string = (
+  TSynWebPhpVersionStr: array[Low(TSynWebPhpVersion)..High(TSynWebPhpVersion)] of string = (
 {$I SynHighlighterWeb_PhpVersion.inc}
     );
 

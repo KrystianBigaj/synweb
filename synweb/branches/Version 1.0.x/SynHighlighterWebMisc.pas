@@ -23,7 +23,7 @@ function SynWeb_UpdateActiveHighlighter(ASynEdit: TSynEdit;
 
 function SynWeb_FindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
   const AOpenTokens, ACloseTokens: array of string;
-  const ATokenIDs: array of TtkTokenKind; AStartPoint: TBufferCoord;
+  const ATokenIDs: array of TSynWebTokenKind; AStartPoint: TBufferCoord;
   var AMatchtPoint: TBufferCoord; var ATokenIndex: integer): integer;
 
 {
@@ -49,11 +49,11 @@ var
 
 function SynWeb_FindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
   const AOpenTokens, ACloseTokens: array of string;
-  const ATokenIDs: array of TtkTokenKind; AStartPoint: TBufferCoord;
+  const ATokenIDs: array of TSynWebTokenKind; AStartPoint: TBufferCoord;
   var AMatchtPoint: TBufferCoord; var ATokenIndex: integer): integer;
 var
   OpenToken, CloseToken, Token: string;
-  TokenID: TtkTokenKind;
+  TokenID: TSynWebTokenKind;
   Level: integer;
   I: integer;
 

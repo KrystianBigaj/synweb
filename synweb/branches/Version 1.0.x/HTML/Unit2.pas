@@ -269,7 +269,7 @@ begin
       appdir+'..\SynHighlighterWeb_SpecialFuncList.inc',
       appdir+'..\SynHighlighterWeb_SpecialFuncTable.inc')
   else
-    GenerateInc(s,'TtkTokenKind', 'tkHTMLTagName', 'tkHTMLTagNameUndef',
+    GenerateInc(s,'TSynWebTokenKind', 'stkHTMLTagName', 'stkHTMLTagNameUndef',
       'HTML_TagFunc', 'HTML_TagUndef',
       'fHTML_TagIdentFuncTable', 'HTML_TagKeyComp',
       appdir+'..\SynHighlighterWeb_TagsFunc.inc',
@@ -399,7 +399,7 @@ begin
 
   SetLength(p,0);
 
-  GenerateInc(sl,'TtkTokenKind', 'tkHTMLTagKey', 'tkHTMLTagKeyUndef',
+  GenerateInc(sl,'TSynWebTokenKind', 'stkHTMLTagKey', 'stkHTMLTagKeyUndef',
     'HTML_AttrFunc', 'HTML_AttrUndef',
     'fHTML_AttrIdentFuncTable', 'HTML_AttrKeyComp',
     appdir+'..\SynHighlighterWeb_AttrsFunc.inc',

@@ -1,189 +1,189 @@
-function TSynWebEngine.Php_KeywordIdent: TtkTokenKind;
+function TSynWebEngine.Php_KeywordIdent: TSynWebTokenKind;
 begin
-  Result := tkPhpIdentifier;
+  Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc14: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc14: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(272) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc15: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc15: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(41) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc16: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc16: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(795) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc17: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc17: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1057) or
       PHP_FunctionComp(2520) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc18: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc18: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(18) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc19: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc19: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(6) or
       PHP_KeywordComp(19) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc20: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc20: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(8) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc22: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc22: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(93) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc23: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc23: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1090) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc24: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc24: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(486) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc25: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc25: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(3639) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc28: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc28: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(10) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(4079) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc29: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc29: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(346) or
       PHP_FunctionComp(355) or
       PHP_FunctionComp(2088) or
       PHP_FunctionComp(2192) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc30: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc30: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(547) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc31: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc31: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(20) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(791) or
         PHP_FunctionComp(3348) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc32: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc32: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(1) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(1234) or
         PHP_FunctionComp(1240) or
         PHP_FunctionComp(2238) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc33: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc33: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(54) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(2255) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc34: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc34: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1276) or
       PHP_FunctionComp(2203) or
       PHP_FunctionComp(2204) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc35: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc35: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(11) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(1091) or
         PHP_FunctionComp(2214) or
         PHP_FunctionComp(2293) or
         PHP_FunctionComp(4755) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc36: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc36: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(255) or
       PHP_FunctionComp(256) or
@@ -191,15 +191,15 @@ begin
       PHP_FunctionComp(1508) or
       PHP_FunctionComp(2287) or
       PHP_FunctionComp(2564) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc37: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc37: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(9) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(275) or
         PHP_FunctionComp(297) or
@@ -208,119 +208,119 @@ begin
         PHP_FunctionComp(1111) or
         PHP_FunctionComp(3322) or
         PHP_FunctionComp(3899) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc38: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc38: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(27) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(94) or
         PHP_FunctionComp(1270) or
         PHP_FunctionComp(2308) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc39: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc39: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(37) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(779) or
         PHP_FunctionComp(1790) or
         PHP_FunctionComp(3873) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc40: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc40: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(3) or
       PHP_KeywordComp(30) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(274) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc41: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc41: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(21) or
       PHP_KeywordComp(71) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(97) or
         PHP_FunctionComp(1236) or
         PHP_FunctionComp(1518) or
         PHP_FunctionComp(2143) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc42: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc42: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(35) or
       PHP_KeywordComp(50) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(349) or
         PHP_FunctionComp(2152) or
         PHP_FunctionComp(4111) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc43: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc43: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(34) or
       PHP_KeywordComp(46) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(250) or
         PHP_FunctionComp(353) or
         PHP_FunctionComp(638) or
         PHP_FunctionComp(776) or
         PHP_FunctionComp(4756) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc44: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc44: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(257) or
       PHP_FunctionComp(1093) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc45: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc45: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(70) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(292) or
         PHP_FunctionComp(407) or
         PHP_FunctionComp(1124) or
         PHP_FunctionComp(1438) or
         PHP_FunctionComp(3900) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc46: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc46: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(95) or
       PHP_FunctionComp(1341) or
@@ -329,39 +329,39 @@ begin
       PHP_FunctionComp(2199) or
       PHP_FunctionComp(2237) or
       PHP_FunctionComp(3006) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc47: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc47: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(294) or
       PHP_FunctionComp(778) or
       PHP_FunctionComp(1267) or
       PHP_FunctionComp(4793) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc48: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc48: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(17) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(2125) or
         PHP_FunctionComp(3384) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc49: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc49: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(14) or
       PHP_KeywordComp(40) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(676) or
         PHP_FunctionComp(773) or
@@ -369,12 +369,12 @@ begin
         PHP_FunctionComp(1525) or
         PHP_FunctionComp(2521) or
         PHP_FunctionComp(2557) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc50: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc50: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(347) or
       PHP_FunctionComp(774) or
@@ -387,23 +387,23 @@ begin
       PHP_FunctionComp(3198) or
       PHP_FunctionComp(3242) or
       PHP_FunctionComp(4112) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc51: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc51: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(251) or
       PHP_FunctionComp(276) or
       PHP_FunctionComp(412) or
       PHP_FunctionComp(780) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc52: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc52: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(200) or
       PHP_FunctionComp(273) or
@@ -411,69 +411,69 @@ begin
       PHP_FunctionComp(1345) or
       PHP_FunctionComp(2137) or
       PHP_FunctionComp(3063) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc53: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc53: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(3307) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc54: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc54: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(0) or
       PHP_KeywordComp(13) or
       PHP_KeywordComp(36) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(369) or
         PHP_FunctionComp(3687) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc55: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc55: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(52) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(1344) or
         PHP_FunctionComp(1385) or
         PHP_FunctionComp(1439) or
         PHP_FunctionComp(2570) or
         PHP_FunctionComp(4281) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc56: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc56: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(22) or
       PHP_KeywordComp(38) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(334) or
         PHP_FunctionComp(785) or
         PHP_FunctionComp(1272) or
         PHP_FunctionComp(3936) or
         PHP_FunctionComp(4338) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc57: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc57: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(72) or
       PHP_KeywordComp(73) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(683) or
         PHP_FunctionComp(761) or
@@ -484,29 +484,29 @@ begin
         PHP_FunctionComp(2100) or
         PHP_FunctionComp(3743) or
         PHP_FunctionComp(4113) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc58: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc58: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(32) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(674) or
         PHP_FunctionComp(1126) or
         PHP_FunctionComp(1437) or
         PHP_FunctionComp(1801) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc59: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc59: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(51) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(101) or
         PHP_FunctionComp(290) or
@@ -516,15 +516,15 @@ begin
         PHP_FunctionComp(2418) or
         PHP_FunctionComp(3057) or
         PHP_FunctionComp(3907) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc60: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc60: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(49) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(271) or
         PHP_FunctionComp(337) or
@@ -539,12 +539,12 @@ begin
         PHP_FunctionComp(4080) or
         PHP_FunctionComp(4370) or
         PHP_FunctionComp(4803) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc61: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc61: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(673) or
       PHP_FunctionComp(704) or
@@ -553,15 +553,15 @@ begin
       PHP_FunctionComp(2239) or
       PHP_FunctionComp(3211) or
       PHP_FunctionComp(3695) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc62: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc62: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(25) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(194) or
         PHP_FunctionComp(295) or
@@ -575,17 +575,17 @@ begin
         PHP_FunctionComp(3949) or
         PHP_FunctionComp(4339) or
         PHP_FunctionComp(4817) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc63: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc63: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(7) or
       PHP_KeywordComp(59) or
       PHP_KeywordComp(68) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(269) or
         PHP_FunctionComp(354) or
@@ -597,29 +597,29 @@ begin
         PHP_FunctionComp(3003) or
         PHP_FunctionComp(3299) or
         PHP_FunctionComp(4293) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc64: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc64: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(67) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(557) or
         PHP_FunctionComp(792) or
         PHP_FunctionComp(2042) or
         PHP_FunctionComp(4520) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc65: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc65: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(4) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(338) or
         PHP_FunctionComp(672) or
@@ -633,12 +633,12 @@ begin
         PHP_FunctionComp(4121) or
         PHP_FunctionComp(4838) or
         PHP_FunctionComp(5144) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc66: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc66: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(482) or
       PHP_FunctionComp(700) or
@@ -654,27 +654,27 @@ begin
       PHP_FunctionComp(3652) or
       PHP_FunctionComp(4842) or
       PHP_FunctionComp(5143) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc67: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc67: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(681) or
       PHP_FunctionComp(686) or
       PHP_FunctionComp(1442) or
       PHP_FunctionComp(3942) or
       PHP_FunctionComp(4799) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc68: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc68: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(43) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(423) or
         PHP_FunctionComp(687) or
@@ -686,12 +686,12 @@ begin
         PHP_FunctionComp(3464) or
         PHP_FunctionComp(3910) or
         PHP_FunctionComp(4000) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc69: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc69: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(382) or
       PHP_FunctionComp(415) or
@@ -707,12 +707,12 @@ begin
       PHP_FunctionComp(3603) or
       PHP_FunctionComp(4022) or
       PHP_FunctionComp(5056) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc70: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc70: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(702) or
       PHP_FunctionComp(1136) or
@@ -721,16 +721,16 @@ begin
       PHP_FunctionComp(2682) or
       PHP_FunctionComp(3359) or
       PHP_FunctionComp(3620) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc71: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc71: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(15) or
       PHP_KeywordComp(24) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(150) or
         PHP_FunctionComp(193) or
@@ -741,16 +741,16 @@ begin
         PHP_FunctionComp(3744) or
         PHP_FunctionComp(4820) or
         PHP_FunctionComp(4998) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc72: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc72: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(48) or
       PHP_KeywordComp(63) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(577) or
         PHP_FunctionComp(1235) or
@@ -763,12 +763,12 @@ begin
         PHP_FunctionComp(3950) or
         PHP_FunctionComp(4282) or
         PHP_FunctionComp(4866) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc73: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc73: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(252) or
       PHP_FunctionComp(270) or
@@ -787,12 +787,12 @@ begin
       PHP_FunctionComp(3484) or
       PHP_FunctionComp(3946) or
       PHP_FunctionComp(3947) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc74: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc74: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(100) or
       PHP_FunctionComp(1131) or
@@ -812,12 +812,12 @@ begin
       PHP_FunctionComp(4829) or
       PHP_FunctionComp(4839) or
       PHP_FunctionComp(4931) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc75: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc75: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(436) or
       PHP_FunctionComp(552) or
@@ -829,12 +829,12 @@ begin
       PHP_FunctionComp(3065) or
       PHP_FunctionComp(3750) or
       PHP_FunctionComp(3786) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc76: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc76: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(442) or
       PHP_FunctionComp(1239) or
@@ -851,15 +851,15 @@ begin
       PHP_FunctionComp(3465) or
       PHP_FunctionComp(4291) or
       PHP_FunctionComp(5127) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc77: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc77: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(56) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(339) or
         PHP_FunctionComp(340) or
@@ -871,12 +871,12 @@ begin
         PHP_FunctionComp(3549) or
         PHP_FunctionComp(3775) or
         PHP_FunctionComp(4105) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc78: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc78: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(333) or
       PHP_FunctionComp(603) or
@@ -895,17 +895,17 @@ begin
       PHP_FunctionComp(4856) or
       PHP_FunctionComp(4860) or
       PHP_FunctionComp(5057) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc79: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc79: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(23) or
       PHP_KeywordComp(26) or
       PHP_KeywordComp(69) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(191) or
         PHP_FunctionComp(293) or
@@ -921,15 +921,15 @@ begin
         PHP_FunctionComp(1943) or
         PHP_FunctionComp(2476) or
         PHP_FunctionComp(5168) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc80: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc80: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(29) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(636) or
         PHP_FunctionComp(664) or
@@ -940,15 +940,15 @@ begin
         PHP_FunctionComp(1354) or
         PHP_FunctionComp(3398) or
         PHP_FunctionComp(4524) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc81: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc81: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(47) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(697) or
         PHP_FunctionComp(1125) or
@@ -962,15 +962,15 @@ begin
         PHP_FunctionComp(4083) or
         PHP_FunctionComp(4796) or
         PHP_FunctionComp(4841) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc82: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc82: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(65) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(253) or
         PHP_FunctionComp(336) or
@@ -992,12 +992,12 @@ begin
         PHP_FunctionComp(3853) or
         PHP_FunctionComp(3925) or
         PHP_FunctionComp(4760) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc83: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc83: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(158) or
       PHP_FunctionComp(416) or
@@ -1021,16 +1021,16 @@ begin
       PHP_FunctionComp(3731) or
       PHP_FunctionComp(4345) or
       PHP_FunctionComp(4858) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc84: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc84: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(5) or
       PHP_KeywordComp(66) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(190) or
         PHP_FunctionComp(226) or
@@ -1048,12 +1048,12 @@ begin
         PHP_FunctionComp(3532) or
         PHP_FunctionComp(3579) or
         PHP_FunctionComp(3637) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc85: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc85: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(370) or
       PHP_FunctionComp(659) or
@@ -1071,12 +1071,12 @@ begin
       PHP_FunctionComp(3581) or
       PHP_FunctionComp(3749) or
       PHP_FunctionComp(4292) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc86: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc86: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1204) or
       PHP_FunctionComp(1347) or
@@ -1094,15 +1094,15 @@ begin
       PHP_FunctionComp(3941) or
       PHP_FunctionComp(4450) or
       PHP_FunctionComp(5150) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc87: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc87: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(64) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(1885) or
         PHP_FunctionComp(1971) or
@@ -1116,12 +1116,12 @@ begin
         PHP_FunctionComp(3984) or
         PHP_FunctionComp(4119) or
         PHP_FunctionComp(4845) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc88: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc88: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(164) or
       PHP_FunctionComp(207) or
@@ -1149,12 +1149,12 @@ begin
       PHP_FunctionComp(4602) or
       PHP_FunctionComp(4762) or
       PHP_FunctionComp(4861) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc89: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc89: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(639) or
       PHP_FunctionComp(1060) or
@@ -1177,12 +1177,12 @@ begin
       PHP_FunctionComp(4117) or
       PHP_FunctionComp(4451) or
       PHP_FunctionComp(5135) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc90: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc90: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(581) or
       PHP_FunctionComp(647) or
@@ -1204,16 +1204,16 @@ begin
       PHP_FunctionComp(3593) or
       PHP_FunctionComp(3625) or
       PHP_FunctionComp(3956) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc91: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc91: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(33) or
       PHP_KeywordComp(57) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(249) or
         PHP_FunctionComp(291) or
@@ -1236,12 +1236,12 @@ begin
         PHP_FunctionComp(3844) or
         PHP_FunctionComp(3901) or
         PHP_FunctionComp(4114) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc92: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc92: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(99) or
       PHP_FunctionComp(558) or
@@ -1267,15 +1267,15 @@ begin
       PHP_FunctionComp(4118) or
       PHP_FunctionComp(4371) or
       PHP_FunctionComp(4515) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc93: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc93: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(60) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(222) or
         PHP_FunctionComp(642) or
@@ -1299,12 +1299,12 @@ begin
         PHP_FunctionComp(4123) or
         PHP_FunctionComp(4857) or
         PHP_FunctionComp(4859) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc94: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc94: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(476) or
       PHP_FunctionComp(1546) or
@@ -1319,12 +1319,12 @@ begin
       PHP_FunctionComp(4240) or
       PHP_FunctionComp(4804) or
       PHP_FunctionComp(4875) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc95: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc95: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(96) or
       PHP_FunctionComp(1092) or
@@ -1344,15 +1344,15 @@ begin
       PHP_FunctionComp(4205) or
       PHP_FunctionComp(4514) or
       PHP_FunctionComp(4872) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc96: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc96: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(62) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(395) or
         PHP_FunctionComp(658) or
@@ -1369,12 +1369,12 @@ begin
         PHP_FunctionComp(3937) or
         PHP_FunctionComp(4122) or
         PHP_FunctionComp(4805) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc97: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc97: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(196) or
       PHP_FunctionComp(197) or
@@ -1399,12 +1399,12 @@ begin
       PHP_FunctionComp(4763) or
       PHP_FunctionComp(4846) or
       PHP_FunctionComp(5133) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc98: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc98: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(318) or
       PHP_FunctionComp(330) or
@@ -1426,12 +1426,12 @@ begin
       PHP_FunctionComp(3840) or
       PHP_FunctionComp(4379) or
       PHP_FunctionComp(4798) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc99: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc99: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(134) or
       PHP_FunctionComp(517) or
@@ -1451,12 +1451,12 @@ begin
       PHP_FunctionComp(4125) or
       PHP_FunctionComp(4452) or
       PHP_FunctionComp(4516) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc100: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc100: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(230) or
       PHP_FunctionComp(1101) or
@@ -1472,15 +1472,15 @@ begin
       PHP_FunctionComp(3808) or
       PHP_FunctionComp(3812) or
       PHP_FunctionComp(4767) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc101: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc101: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(16) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(553) or
         PHP_FunctionComp(663) or
@@ -1508,16 +1508,16 @@ begin
         PHP_FunctionComp(5137) or
         PHP_FunctionComp(5152) or
         PHP_FunctionComp(5167) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc102: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc102: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(2) or
       PHP_KeywordComp(39) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(212) or
         PHP_FunctionComp(331) or
@@ -1544,12 +1544,12 @@ begin
         PHP_FunctionComp(4368) or
         PHP_FunctionComp(4505) or
         PHP_FunctionComp(4867) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc103: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc103: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(351) or
       PHP_FunctionComp(632) or
@@ -1587,12 +1587,12 @@ begin
       PHP_FunctionComp(4806) or
       PHP_FunctionComp(4902) or
       PHP_FunctionComp(4999) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc104: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc104: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(429) or
       PHP_FunctionComp(582) or
@@ -1627,17 +1627,17 @@ begin
       PHP_FunctionComp(4876) or
       PHP_FunctionComp(4953) or
       PHP_FunctionComp(5151) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc105: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc105: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(12) or
       PHP_KeywordComp(28) or
       PHP_KeywordComp(44) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(464) or
         PHP_FunctionComp(641) or
@@ -1667,16 +1667,16 @@ begin
         PHP_FunctionComp(5123) or
         PHP_FunctionComp(5142) or
         PHP_FunctionComp(5159) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc106: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc106: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(45) or
       PHP_KeywordComp(58) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(214) or
         PHP_FunctionComp(403) or
@@ -1701,12 +1701,12 @@ begin
         PHP_FunctionComp(4960) or
         PHP_FunctionComp(5121) or
         PHP_FunctionComp(5138) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc107: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc107: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(162) or
       PHP_FunctionComp(386) or
@@ -1742,12 +1742,12 @@ begin
       PHP_FunctionComp(4812) or
       PHP_FunctionComp(4863) or
       PHP_FunctionComp(4874) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc108: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc108: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(440) or
       PHP_FunctionComp(500) or
@@ -1773,12 +1773,12 @@ begin
       PHP_FunctionComp(5058) or
       PHP_FunctionComp(5119) or
       PHP_FunctionComp(5130) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc109: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc109: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(238) or
       PHP_FunctionComp(656) or
@@ -1809,12 +1809,12 @@ begin
       PHP_FunctionComp(4922) or
       PHP_FunctionComp(5084) or
       PHP_FunctionComp(5107) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc110: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc110: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(227) or
       PHP_FunctionComp(247) or
@@ -1843,15 +1843,15 @@ begin
       PHP_FunctionComp(4061) or
       PHP_FunctionComp(4445) or
       PHP_FunctionComp(4490) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc111: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc111: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(31) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(126) or
         PHP_FunctionComp(223) or
@@ -1880,12 +1880,12 @@ begin
         PHP_FunctionComp(4901) or
         PHP_FunctionComp(4923) or
         PHP_FunctionComp(5146) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc112: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc112: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(388) or
       PHP_FunctionComp(465) or
@@ -1902,12 +1902,12 @@ begin
       PHP_FunctionComp(4128) or
       PHP_FunctionComp(4387) or
       PHP_FunctionComp(4819) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc113: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc113: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(319) or
       PHP_FunctionComp(497) or
@@ -1931,12 +1931,12 @@ begin
       PHP_FunctionComp(4084) or
       PHP_FunctionComp(4130) or
       PHP_FunctionComp(5147) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc114: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc114: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(314) or
       PHP_FunctionComp(524) or
@@ -1965,12 +1965,12 @@ begin
       PHP_FunctionComp(4225) or
       PHP_FunctionComp(4509) or
       PHP_FunctionComp(4823) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc115: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc115: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(142) or
       PHP_FunctionComp(530) or
@@ -1996,12 +1996,12 @@ begin
       PHP_FunctionComp(4270) or
       PHP_FunctionComp(4955) or
       PHP_FunctionComp(5134) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc116: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc116: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(141) or
       PHP_FunctionComp(237) or
@@ -2033,12 +2033,12 @@ begin
       PHP_FunctionComp(4372) or
       PHP_FunctionComp(4493) or
       PHP_FunctionComp(5080) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc117: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc117: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(75) or
       PHP_FunctionComp(108) or
@@ -2075,12 +2075,12 @@ begin
       PHP_FunctionComp(4879) or
       PHP_FunctionComp(4889) or
       PHP_FunctionComp(5149) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc118: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc118: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(492) or
       PHP_FunctionComp(725) or
@@ -2110,12 +2110,12 @@ begin
       PHP_FunctionComp(4893) or
       PHP_FunctionComp(4952) or
       PHP_FunctionComp(5090) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc119: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc119: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(189) or
       PHP_FunctionComp(231) or
@@ -2145,12 +2145,12 @@ begin
       PHP_FunctionComp(4309) or
       PHP_FunctionComp(4605) or
       PHP_FunctionComp(4821) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc120: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc120: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(204) or
       PHP_FunctionComp(604) or
@@ -2182,12 +2182,12 @@ begin
       PHP_FunctionComp(4882) or
       PHP_FunctionComp(5060) or
       PHP_FunctionComp(5081) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc121: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc121: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(130) or
       PHP_FunctionComp(280) or
@@ -2219,12 +2219,12 @@ begin
       PHP_FunctionComp(4669) or
       PHP_FunctionComp(4868) or
       PHP_FunctionComp(5086) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc122: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc122: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(199) or
       PHP_FunctionComp(409) or
@@ -2271,12 +2271,12 @@ begin
       PHP_FunctionComp(5000) or
       PHP_FunctionComp(5076) or
       PHP_FunctionComp(5125) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc123: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc123: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(221) or
       PHP_FunctionComp(594) or
@@ -2312,12 +2312,12 @@ begin
       PHP_FunctionComp(4585) or
       PHP_FunctionComp(4887) or
       PHP_FunctionComp(5068) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc124: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc124: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(205) or
       PHP_FunctionComp(268) or
@@ -2354,12 +2354,12 @@ begin
       PHP_FunctionComp(4921) or
       PHP_FunctionComp(4925) or
       PHP_FunctionComp(5140) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc125: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc125: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(140) or
       PHP_FunctionComp(234) or
@@ -2395,15 +2395,15 @@ begin
       PHP_FunctionComp(4728) or
       PHP_FunctionComp(4761) or
       PHP_FunctionComp(4970) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc126: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc126: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(42) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(131) or
         PHP_FunctionComp(260) or
@@ -2439,12 +2439,12 @@ begin
         PHP_FunctionComp(5122) or
         PHP_FunctionComp(5124) or
         PHP_FunctionComp(5126) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc127: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc127: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(148) or
       PHP_FunctionComp(229) or
@@ -2472,12 +2472,12 @@ begin
       PHP_FunctionComp(4898) or
       PHP_FunctionComp(4958) or
       PHP_FunctionComp(5104) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc128: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc128: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(112) or
       PHP_FunctionComp(202) or
@@ -2506,12 +2506,12 @@ begin
       PHP_FunctionComp(4808) or
       PHP_FunctionComp(4877) or
       PHP_FunctionComp(4888) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc129: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc129: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(209) or
       PHP_FunctionComp(437) or
@@ -2537,15 +2537,15 @@ begin
       PHP_FunctionComp(4962) or
       PHP_FunctionComp(4963) or
       PHP_FunctionComp(5120) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc130: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc130: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(61) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(303) or
         PHP_FunctionComp(489) or
@@ -2582,12 +2582,12 @@ begin
         PHP_FunctionComp(4336) or
         PHP_FunctionComp(4591) or
         PHP_FunctionComp(5072) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc131: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc131: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(118) or
       PHP_FunctionComp(312) or
@@ -2622,12 +2622,12 @@ begin
       PHP_FunctionComp(4571) or
       PHP_FunctionComp(4865) or
       PHP_FunctionComp(4890) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc132: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc132: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(76) or
       PHP_FunctionComp(198) or
@@ -2664,15 +2664,15 @@ begin
       PHP_FunctionComp(4773) or
       PHP_FunctionComp(5002) or
       PHP_FunctionComp(5066) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc133: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc133: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(53) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(213) or
         PHP_FunctionComp(357) or
@@ -2695,12 +2695,12 @@ begin
         PHP_FunctionComp(3883) or
         PHP_FunctionComp(4035) or
         PHP_FunctionComp(4447) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc134: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc134: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(411) or
       PHP_FunctionComp(695) or
@@ -2728,12 +2728,12 @@ begin
       PHP_FunctionComp(4927) or
       PHP_FunctionComp(4972) or
       PHP_FunctionComp(5074) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc135: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc135: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(80) or
       PHP_FunctionComp(146) or
@@ -2763,12 +2763,12 @@ begin
       PHP_FunctionComp(3849) or
       PHP_FunctionComp(3933) or
       PHP_FunctionComp(4604) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc136: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc136: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(117) or
       PHP_FunctionComp(328) or
@@ -2803,12 +2803,12 @@ begin
       PHP_FunctionComp(4302) or
       PHP_FunctionComp(4775) or
       PHP_FunctionComp(5073) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc137: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc137: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(439) or
       PHP_FunctionComp(539) or
@@ -2841,12 +2841,12 @@ begin
       PHP_FunctionComp(4954) or
       PHP_FunctionComp(4973) or
       PHP_FunctionComp(5061) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc138: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc138: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1025) or
       PHP_FunctionComp(1575) or
@@ -2865,12 +2865,12 @@ begin
       PHP_FunctionComp(3868) or
       PHP_FunctionComp(4085) or
       PHP_FunctionComp(4155) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc139: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc139: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(461) or
       PHP_FunctionComp(481) or
@@ -2910,12 +2910,12 @@ begin
       PHP_FunctionComp(4894) or
       PHP_FunctionComp(5079) or
       PHP_FunctionComp(5153) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc140: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc140: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(78) or
       PHP_FunctionComp(426) or
@@ -2949,12 +2949,12 @@ begin
       PHP_FunctionComp(4537) or
       PHP_FunctionComp(4595) or
       PHP_FunctionComp(4869) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc141: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc141: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(147) or
       PHP_FunctionComp(519) or
@@ -2989,12 +2989,12 @@ begin
       PHP_FunctionComp(4538) or
       PHP_FunctionComp(4749) or
       PHP_FunctionComp(4786) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc142: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc142: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(119) or
       PHP_FunctionComp(128) or
@@ -3031,12 +3031,12 @@ begin
       PHP_FunctionComp(4813) or
       PHP_FunctionComp(4864) or
       PHP_FunctionComp(4899) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc143: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc143: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(132) or
       PHP_FunctionComp(246) or
@@ -3071,12 +3071,12 @@ begin
       PHP_FunctionComp(4779) or
       PHP_FunctionComp(4956) or
       PHP_FunctionComp(5067) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc144: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc144: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(120) or
       PHP_FunctionComp(587) or
@@ -3104,12 +3104,12 @@ begin
       PHP_FunctionComp(4696) or
       PHP_FunctionComp(4776) or
       PHP_FunctionComp(4934) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc145: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc145: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(208) or
       PHP_FunctionComp(329) or
@@ -3147,12 +3147,12 @@ begin
       PHP_FunctionComp(4682) or
       PHP_FunctionComp(4729) or
       PHP_FunctionComp(5105) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc146: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc146: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(113) or
       PHP_FunctionComp(133) or
@@ -3189,12 +3189,12 @@ begin
       PHP_FunctionComp(4570) or
       PHP_FunctionComp(5075) or
       PHP_FunctionComp(5110) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc147: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc147: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(127) or
       PHP_FunctionComp(300) or
@@ -3230,12 +3230,12 @@ begin
       PHP_FunctionComp(4737) or
       PHP_FunctionComp(4849) or
       PHP_FunctionComp(5077) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc148: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc148: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(98) or
       PHP_FunctionComp(157) or
@@ -3272,12 +3272,12 @@ begin
       PHP_FunctionComp(4854) or
       PHP_FunctionComp(4994) or
       PHP_FunctionComp(5102) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc149: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc149: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(377) or
       PHP_FunctionComp(515) or
@@ -3312,12 +3312,12 @@ begin
       PHP_FunctionComp(4974) or
       PHP_FunctionComp(5106) or
       PHP_FunctionComp(5132) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc150: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc150: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(211) or
       PHP_FunctionComp(244) or
@@ -3355,12 +3355,12 @@ begin
       PHP_FunctionComp(4097) or
       PHP_FunctionComp(4107) or
       PHP_FunctionComp(4272) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc151: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc151: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(143) or
       PHP_FunctionComp(1173) or
@@ -3379,12 +3379,12 @@ begin
       PHP_FunctionComp(3902) or
       PHP_FunctionComp(4316) or
       PHP_FunctionComp(5154) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc152: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc152: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(129) or
       PHP_FunctionComp(380) or
@@ -3424,12 +3424,12 @@ begin
       PHP_FunctionComp(4569) or
       PHP_FunctionComp(4576) or
       PHP_FunctionComp(5065) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc153: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc153: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(123) or
       PHP_FunctionComp(124) or
@@ -3461,12 +3461,12 @@ begin
       PHP_FunctionComp(4376) or
       PHP_FunctionComp(4548) or
       PHP_FunctionComp(5113) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc154: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc154: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(90) or
       PHP_FunctionComp(121) or
@@ -3504,12 +3504,12 @@ begin
       PHP_FunctionComp(3845) or
       PHP_FunctionComp(4057) or
       PHP_FunctionComp(4271) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc155: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc155: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(151) or
       PHP_FunctionComp(160) or
@@ -3545,12 +3545,12 @@ begin
       PHP_FunctionComp(4783) or
       PHP_FunctionComp(4908) or
       PHP_FunctionComp(5141) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc156: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc156: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(258) or
       PHP_FunctionComp(343) or
@@ -3583,12 +3583,12 @@ begin
       PHP_FunctionComp(4615) or
       PHP_FunctionComp(4836) or
       PHP_FunctionComp(4935) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc157: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc157: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(501) or
       PHP_FunctionComp(523) or
@@ -3623,12 +3623,12 @@ begin
       PHP_FunctionComp(4790) or
       PHP_FunctionComp(4895) or
       PHP_FunctionComp(5083) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc158: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc158: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(135) or
       PHP_FunctionComp(335) or
@@ -3662,12 +3662,12 @@ begin
       PHP_FunctionComp(4784) or
       PHP_FunctionComp(4802) or
       PHP_FunctionComp(5108) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc159: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc159: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(77) or
       PHP_FunctionComp(278) or
@@ -3703,12 +3703,12 @@ begin
       PHP_FunctionComp(4831) or
       PHP_FunctionComp(5101) or
       PHP_FunctionComp(5131) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc160: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc160: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(228) or
       PHP_FunctionComp(245) or
@@ -3751,12 +3751,12 @@ begin
       PHP_FunctionComp(4771) or
       PHP_FunctionComp(4932) or
       PHP_FunctionComp(4985) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc161: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc161: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(84) or
       PHP_FunctionComp(107) or
@@ -3794,12 +3794,12 @@ begin
       PHP_FunctionComp(4957) or
       PHP_FunctionComp(4965) or
       PHP_FunctionComp(5166) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc162: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc162: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(89) or
       PHP_FunctionComp(305) or
@@ -3835,12 +3835,12 @@ begin
       PHP_FunctionComp(4656) or
       PHP_FunctionComp(4800) or
       PHP_FunctionComp(5062) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc163: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc163: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(91) or
       PHP_FunctionComp(316) or
@@ -3867,12 +3867,12 @@ begin
       PHP_FunctionComp(4610) or
       PHP_FunctionComp(4781) or
       PHP_FunctionComp(4787) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc164: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc164: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(435) or
       PHP_FunctionComp(520) or
@@ -3898,12 +3898,12 @@ begin
       PHP_FunctionComp(4670) or
       PHP_FunctionComp(4807) or
       PHP_FunctionComp(4852) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc165: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc165: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(635) or
       PHP_FunctionComp(1319) or
@@ -3926,12 +3926,12 @@ begin
       PHP_FunctionComp(4683) or
       PHP_FunctionComp(4825) or
       PHP_FunctionComp(4848) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc166: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc166: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(210) or
       PHP_FunctionComp(239) or
@@ -3971,12 +3971,12 @@ begin
       PHP_FunctionComp(4748) or
       PHP_FunctionComp(4810) or
       PHP_FunctionComp(5164) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc167: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc167: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(114) or
       PHP_FunctionComp(302) or
@@ -4001,12 +4001,12 @@ begin
       PHP_FunctionComp(4365) or
       PHP_FunctionComp(4375) or
       PHP_FunctionComp(4909) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc168: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc168: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(87) or
       PHP_FunctionComp(161) or
@@ -4044,12 +4044,12 @@ begin
       PHP_FunctionComp(4735) or
       PHP_FunctionComp(4926) or
       PHP_FunctionComp(5059) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc169: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc169: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(104) or
       PHP_FunctionComp(1110) or
@@ -4078,12 +4078,12 @@ begin
       PHP_FunctionComp(4905) or
       PHP_FunctionComp(5078) or
       PHP_FunctionComp(5145) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc170: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc170: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(81) or
       PHP_FunctionComp(139) or
@@ -4120,12 +4120,12 @@ begin
       PHP_FunctionComp(4733) or
       PHP_FunctionComp(5109) or
       PHP_FunctionComp(5117) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc171: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc171: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(570) or
       PHP_FunctionComp(744) or
@@ -4167,12 +4167,12 @@ begin
       PHP_FunctionComp(4971) or
       PHP_FunctionComp(5082) or
       PHP_FunctionComp(5128) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc172: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc172: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(163) or
       PHP_FunctionComp(446) or
@@ -4200,15 +4200,15 @@ begin
       PHP_FunctionComp(4518) or
       PHP_FunctionComp(4613) or
       PHP_FunctionComp(4940) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc173: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc173: TSynWebTokenKind;
 begin
   if  PHP_KeywordComp(55) then
-    Result := tkPhpKeyword
+    Result := stkPhpKeyword
   else
     if  PHP_FunctionComp(324) or
         PHP_FunctionComp(742) or
@@ -4240,12 +4240,12 @@ begin
         PHP_FunctionComp(4816) or
         PHP_FunctionComp(4900) or
         PHP_FunctionComp(5129) then
-      Result := tkPhpFunction
+      Result := stkPhpFunction
     else
-      Result := tkPhpIdentifier;
+      Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc174: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc174: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(109) or
       PHP_FunctionComp(745) or
@@ -4272,12 +4272,12 @@ begin
       PHP_FunctionComp(5005) or
       PHP_FunctionComp(5064) or
       PHP_FunctionComp(5114) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc175: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc175: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(159) or
       PHP_FunctionComp(741) or
@@ -4297,12 +4297,12 @@ begin
       PHP_FunctionComp(4587) or
       PHP_FunctionComp(4618) or
       PHP_FunctionComp(4961) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc176: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc176: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(215) or
       PHP_FunctionComp(540) or
@@ -4334,12 +4334,12 @@ begin
       PHP_FunctionComp(4622) or
       PHP_FunctionComp(4732) or
       PHP_FunctionComp(4907) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc177: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc177: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(79) or
       PHP_FunctionComp(195) or
@@ -4375,12 +4375,12 @@ begin
       PHP_FunctionComp(4654) or
       PHP_FunctionComp(4827) or
       PHP_FunctionComp(4871) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc178: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc178: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(385) or
       PHP_FunctionComp(739) or
@@ -4416,12 +4416,12 @@ begin
       PHP_FunctionComp(4917) or
       PHP_FunctionComp(4938) or
       PHP_FunctionComp(4983) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc179: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc179: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(116) or
       PHP_FunctionComp(265) or
@@ -4451,12 +4451,12 @@ begin
       PHP_FunctionComp(4359) or
       PHP_FunctionComp(4583) or
       PHP_FunctionComp(4937) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc180: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc180: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(359) or
       PHP_FunctionComp(478) or
@@ -4489,12 +4489,12 @@ begin
       PHP_FunctionComp(4590) or
       PHP_FunctionComp(4597) or
       PHP_FunctionComp(4795) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc181: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc181: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(105) or
       PHP_FunctionComp(149) or
@@ -4524,12 +4524,12 @@ begin
       PHP_FunctionComp(4695) or
       PHP_FunctionComp(4770) or
       PHP_FunctionComp(4914) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc182: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc182: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(74) or
       PHP_FunctionComp(122) or
@@ -4558,12 +4558,12 @@ begin
       PHP_FunctionComp(4393) or
       PHP_FunctionComp(4850) or
       PHP_FunctionComp(4980) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc183: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc183: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(125) or
       PHP_FunctionComp(508) or
@@ -4599,12 +4599,12 @@ begin
       PHP_FunctionComp(4885) or
       PHP_FunctionComp(5069) or
       PHP_FunctionComp(5165) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc184: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc184: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(872) or
       PHP_FunctionComp(894) or
@@ -4634,12 +4634,12 @@ begin
       PHP_FunctionComp(5004) or
       PHP_FunctionComp(5136) or
       PHP_FunctionComp(5155) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc185: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc185: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(82) or
       PHP_FunctionComp(92) or
@@ -4674,12 +4674,12 @@ begin
       PHP_FunctionComp(4772) or
       PHP_FunctionComp(4936) or
       PHP_FunctionComp(5139) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc186: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc186: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(445) or
       PHP_FunctionComp(722) or
@@ -4711,12 +4711,12 @@ begin
       PHP_FunctionComp(4581) or
       PHP_FunctionComp(4594) or
       PHP_FunctionComp(4918) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc187: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc187: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(240) or
       PHP_FunctionComp(645) or
@@ -4746,12 +4746,12 @@ begin
       PHP_FunctionComp(4692) or
       PHP_FunctionComp(4697) or
       PHP_FunctionComp(5160) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc188: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc188: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(192) or
       PHP_FunctionComp(309) or
@@ -4783,12 +4783,12 @@ begin
       PHP_FunctionComp(4780) or
       PHP_FunctionComp(4916) or
       PHP_FunctionComp(4933) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc189: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc189: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(88) or
       PHP_FunctionComp(264) or
@@ -4811,12 +4811,12 @@ begin
       PHP_FunctionComp(3646) or
       PHP_FunctionComp(4851) or
       PHP_FunctionComp(4928) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc190: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc190: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(254) or
       PHP_FunctionComp(315) or
@@ -4844,12 +4844,12 @@ begin
       PHP_FunctionComp(4785) or
       PHP_FunctionComp(5023) or
       PHP_FunctionComp(5111) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc191: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc191: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(611) or
       PHP_FunctionComp(670) or
@@ -4872,12 +4872,12 @@ begin
       PHP_FunctionComp(4009) or
       PHP_FunctionComp(4766) or
       PHP_FunctionComp(4809) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc192: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc192: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(177) or
       PHP_FunctionComp(458) or
@@ -4902,12 +4902,12 @@ begin
       PHP_FunctionComp(4044) or
       PHP_FunctionComp(4152) or
       PHP_FunctionComp(4629) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc193: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc193: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(453) or
       PHP_FunctionComp(460) or
@@ -4938,12 +4938,12 @@ begin
       PHP_FunctionComp(4684) or
       PHP_FunctionComp(4941) or
       PHP_FunctionComp(5018) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc194: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc194: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(144) or
       PHP_FunctionComp(954) or
@@ -4973,12 +4973,12 @@ begin
       PHP_FunctionComp(4946) or
       PHP_FunctionComp(5015) or
       PHP_FunctionComp(5063) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc195: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc195: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(574) or
       PHP_FunctionComp(932) or
@@ -4997,12 +4997,12 @@ begin
       PHP_FunctionComp(4611) or
       PHP_FunctionComp(4824) or
       PHP_FunctionComp(4897) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc196: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc196: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(963) or
       PHP_FunctionComp(980) or
@@ -5028,12 +5028,12 @@ begin
       PHP_FunctionComp(4727) or
       PHP_FunctionComp(4855) or
       PHP_FunctionComp(5013) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc197: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc197: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(241) or
       PHP_FunctionComp(326) or
@@ -5061,12 +5061,12 @@ begin
       PHP_FunctionComp(4599) or
       PHP_FunctionComp(4659) or
       PHP_FunctionComp(4951) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc198: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc198: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(342) or
       PHP_FunctionComp(455) or
@@ -5097,12 +5097,12 @@ begin
       PHP_FunctionComp(4906) or
       PHP_FunctionComp(4964) or
       PHP_FunctionComp(5148) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc199: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc199: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(170) or
       PHP_FunctionComp(420) or
@@ -5129,12 +5129,12 @@ begin
       PHP_FunctionComp(4666) or
       PHP_FunctionComp(4667) or
       PHP_FunctionComp(5169) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc200: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc200: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(220) or
       PHP_FunctionComp(284) or
@@ -5159,12 +5159,12 @@ begin
       PHP_FunctionComp(4425) or
       PHP_FunctionComp(4679) or
       PHP_FunctionComp(4738) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc201: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc201: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(102) or
       PHP_FunctionComp(136) or
@@ -5191,12 +5191,12 @@ begin
       PHP_FunctionComp(4607) or
       PHP_FunctionComp(4655) or
       PHP_FunctionComp(4705) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc202: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc202: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(463) or
       PHP_FunctionComp(474) or
@@ -5220,12 +5220,12 @@ begin
       PHP_FunctionComp(3828) or
       PHP_FunctionComp(4353) or
       PHP_FunctionComp(4464) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc203: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc203: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(259) or
       PHP_FunctionComp(896) or
@@ -5250,12 +5250,12 @@ begin
       PHP_FunctionComp(4912) or
       PHP_FunctionComp(5088) or
       PHP_FunctionComp(5158) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc204: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc204: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(187) or
       PHP_FunctionComp(560) or
@@ -5281,12 +5281,12 @@ begin
       PHP_FunctionComp(4277) or
       PHP_FunctionComp(4657) or
       PHP_FunctionComp(4789) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc205: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc205: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(188) or
       PHP_FunctionComp(956) or
@@ -5314,12 +5314,12 @@ begin
       PHP_FunctionComp(4774) or
       PHP_FunctionComp(4949) or
       PHP_FunctionComp(4975) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc206: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc206: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(83) or
       PHP_FunctionComp(263) or
@@ -5340,12 +5340,12 @@ begin
       PHP_FunctionComp(4275) or
       PHP_FunctionComp(4542) or
       PHP_FunctionComp(4545) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc207: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc207: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(751) or
       PHP_FunctionComp(967) or
@@ -5367,12 +5367,12 @@ begin
       PHP_FunctionComp(4617) or
       PHP_FunctionComp(4708) or
       PHP_FunctionComp(4835) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc208: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc208: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(661) or
       PHP_FunctionComp(826) or
@@ -5392,12 +5392,12 @@ begin
       PHP_FunctionComp(4319) or
       PHP_FunctionComp(4343) or
       PHP_FunctionComp(5024) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc209: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc209: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(288) or
       PHP_FunctionComp(521) or
@@ -5416,12 +5416,12 @@ begin
       PHP_FunctionComp(3516) or
       PHP_FunctionComp(3780) or
       PHP_FunctionComp(4221) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc210: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc210: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(225) or
       PHP_FunctionComp(1257) or
@@ -5440,12 +5440,12 @@ begin
       PHP_FunctionComp(4698) or
       PHP_FunctionComp(4915) or
       PHP_FunctionComp(4976) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc211: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc211: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(374) or
       PHP_FunctionComp(957) or
@@ -5472,12 +5472,12 @@ begin
       PHP_FunctionComp(4903) or
       PHP_FunctionComp(4984) or
       PHP_FunctionComp(5043) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc212: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc212: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(154) or
       PHP_FunctionComp(402) or
@@ -5499,12 +5499,12 @@ begin
       PHP_FunctionComp(4870) or
       PHP_FunctionComp(4939) or
       PHP_FunctionComp(5087) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc213: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc213: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(145) or
       PHP_FunctionComp(529) or
@@ -5524,12 +5524,12 @@ begin
       PHP_FunctionComp(4702) or
       PHP_FunctionComp(4706) or
       PHP_FunctionComp(4815) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc214: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc214: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(317) or
       PHP_FunctionComp(452) or
@@ -5550,12 +5550,12 @@ begin
       PHP_FunctionComp(4482) or
       PHP_FunctionComp(4553) or
       PHP_FunctionComp(4561) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc215: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc215: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(367) or
       PHP_FunctionComp(607) or
@@ -5575,12 +5575,12 @@ begin
       PHP_FunctionComp(4187) or
       PHP_FunctionComp(4399) or
       PHP_FunctionComp(4423) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc216: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc216: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(180) or
       PHP_FunctionComp(206) or
@@ -5607,12 +5607,12 @@ begin
       PHP_FunctionComp(4457) or
       PHP_FunctionComp(4559) or
       PHP_FunctionComp(4710) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc217: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc217: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(217) or
       PHP_FunctionComp(399) or
@@ -5636,12 +5636,12 @@ begin
       PHP_FunctionComp(4913) or
       PHP_FunctionComp(4959) or
       PHP_FunctionComp(5103) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc218: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc218: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(362) or
       PHP_FunctionComp(364) or
@@ -5661,12 +5661,12 @@ begin
       PHP_FunctionComp(4678) or
       PHP_FunctionComp(4690) or
       PHP_FunctionComp(4711) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc219: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc219: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(344) or
       PHP_FunctionComp(838) or
@@ -5688,12 +5688,12 @@ begin
       PHP_FunctionComp(4540) or
       PHP_FunctionComp(4704) or
       PHP_FunctionComp(4930) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc220: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc220: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(103) or
       PHP_FunctionComp(137) or
@@ -5714,12 +5714,12 @@ begin
       PHP_FunctionComp(3699) or
       PHP_FunctionComp(4147) or
       PHP_FunctionComp(4929) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc221: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc221: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(806) or
       PHP_FunctionComp(808) or
@@ -5739,12 +5739,12 @@ begin
       PHP_FunctionComp(4635) or
       PHP_FunctionComp(4643) or
       PHP_FunctionComp(5091) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc222: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc222: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(165) or
       PHP_FunctionComp(171) or
@@ -5762,12 +5762,12 @@ begin
       PHP_FunctionComp(4534) or
       PHP_FunctionComp(4693) or
       PHP_FunctionComp(4777) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc223: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc223: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(267) or
       PHP_FunctionComp(299) or
@@ -5780,12 +5780,12 @@ begin
       PHP_FunctionComp(4477) or
       PHP_FunctionComp(4694) or
       PHP_FunctionComp(4910) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc224: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc224: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(266) or
       PHP_FunctionComp(615) or
@@ -5814,12 +5814,12 @@ begin
       PHP_FunctionComp(4739) or
       PHP_FunctionComp(4989) or
       PHP_FunctionComp(5163) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc225: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc225: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(296) or
       PHP_FunctionComp(365) or
@@ -5832,12 +5832,12 @@ begin
       PHP_FunctionComp(4562) or
       PHP_FunctionComp(4673) or
       PHP_FunctionComp(5009) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc226: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc226: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(138) or
       PHP_FunctionComp(320) or
@@ -5852,12 +5852,12 @@ begin
       PHP_FunctionComp(4415) or
       PHP_FunctionComp(4485) or
       PHP_FunctionComp(4675) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc227: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc227: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(457) or
       PHP_FunctionComp(832) or
@@ -5873,12 +5873,12 @@ begin
       PHP_FunctionComp(3995) or
       PHP_FunctionComp(4378) or
       PHP_FunctionComp(5001) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc228: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc228: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1559) or
       PHP_FunctionComp(1696) or
@@ -5886,12 +5886,12 @@ begin
       PHP_FunctionComp(3610) or
       PHP_FunctionComp(4334) or
       PHP_FunctionComp(4355) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc229: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc229: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(777) or
       PHP_FunctionComp(918) or
@@ -5915,12 +5915,12 @@ begin
       PHP_FunctionComp(4138) or
       PHP_FunctionComp(4458) or
       PHP_FunctionComp(4990) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc230: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc230: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(248) or
       PHP_FunctionComp(404) or
@@ -5933,12 +5933,12 @@ begin
       PHP_FunctionComp(4712) or
       PHP_FunctionComp(4724) or
       PHP_FunctionComp(4966) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc231: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc231: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(224) or
       PHP_FunctionComp(378) or
@@ -5951,12 +5951,12 @@ begin
       PHP_FunctionComp(4299) or
       PHP_FunctionComp(4402) or
       PHP_FunctionComp(4726) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc232: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc232: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(568) or
       PHP_FunctionComp(890) or
@@ -5973,12 +5973,12 @@ begin
       PHP_FunctionComp(3833) or
       PHP_FunctionComp(4223) or
       PHP_FunctionComp(4530) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc233: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc233: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(216) or
       PHP_FunctionComp(884) or
@@ -5992,12 +5992,12 @@ begin
       PHP_FunctionComp(3504) or
       PHP_FunctionComp(3724) or
       PHP_FunctionComp(5071) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc234: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc234: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(85) or
       PHP_FunctionComp(567) or
@@ -6017,12 +6017,12 @@ begin
       PHP_FunctionComp(3891) or
       PHP_FunctionComp(3959) or
       PHP_FunctionComp(4332) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc235: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc235: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(620) or
       PHP_FunctionComp(906) or
@@ -6033,12 +6033,12 @@ begin
       PHP_FunctionComp(3553) or
       PHP_FunctionComp(4018) or
       PHP_FunctionComp(4070) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc236: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc236: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(459) or
       PHP_FunctionComp(1119) or
@@ -6058,12 +6058,12 @@ begin
       PHP_FunctionComp(4305) or
       PHP_FunctionComp(4486) or
       PHP_FunctionComp(4638) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc237: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc237: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(366) or
       PHP_FunctionComp(397) or
@@ -6075,12 +6075,12 @@ begin
       PHP_FunctionComp(4288) or
       PHP_FunctionComp(4608) or
       PHP_FunctionComp(5003) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc238: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc238: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(219) or
       PHP_FunctionComp(555) or
@@ -6098,12 +6098,12 @@ begin
       PHP_FunctionComp(4039) or
       PHP_FunctionComp(4150) or
       PHP_FunctionComp(4181) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc239: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc239: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(609) or
       PHP_FunctionComp(1305) or
@@ -6118,12 +6118,12 @@ begin
       PHP_FunctionComp(3364) or
       PHP_FunctionComp(4038) or
       PHP_FunctionComp(5022) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc240: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc240: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(965) or
       PHP_FunctionComp(981) or
@@ -6138,12 +6138,12 @@ begin
       PHP_FunctionComp(4632) or
       PHP_FunctionComp(4904) or
       PHP_FunctionComp(5027) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc241: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc241: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(86) or
       PHP_FunctionComp(930) or
@@ -6162,12 +6162,12 @@ begin
       PHP_FunctionComp(3886) or
       PHP_FunctionComp(4699) or
       PHP_FunctionComp(4701) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc242: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc242: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(111) or
       PHP_FunctionComp(152) or
@@ -6179,12 +6179,12 @@ begin
       PHP_FunctionComp(4161) or
       PHP_FunctionComp(4178) or
       PHP_FunctionComp(5054) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc243: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc243: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1534) or
       PHP_FunctionComp(2546) or
@@ -6199,12 +6199,12 @@ begin
       PHP_FunctionComp(4609) or
       PHP_FunctionComp(4681) or
       PHP_FunctionComp(4943) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc244: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc244: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(400) or
       PHP_FunctionComp(590) or
@@ -6219,12 +6219,12 @@ begin
       PHP_FunctionComp(4413) or
       PHP_FunctionComp(4634) or
       PHP_FunctionComp(5115) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc245: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc245: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(909) or
       PHP_FunctionComp(936) or
@@ -6237,12 +6237,12 @@ begin
       PHP_FunctionComp(4765) or
       PHP_FunctionComp(5042) or
       PHP_FunctionComp(5048) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc246: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc246: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(178) or
       PHP_FunctionComp(589) or
@@ -6261,12 +6261,12 @@ begin
       PHP_FunctionComp(4631) or
       PHP_FunctionComp(4750) or
       PHP_FunctionComp(5046) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc247: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc247: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(110) or
       PHP_FunctionComp(174) or
@@ -6283,23 +6283,23 @@ begin
       PHP_FunctionComp(4466) or
       PHP_FunctionComp(4687) or
       PHP_FunctionComp(4986) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc248: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc248: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(2441) or
       PHP_FunctionComp(3525) or
       PHP_FunctionComp(5016) or
       PHP_FunctionComp(5036) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc249: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc249: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(361) or
       PHP_FunctionComp(566) or
@@ -6314,12 +6314,12 @@ begin
       PHP_FunctionComp(4713) or
       PHP_FunctionComp(5033) or
       PHP_FunctionComp(5070) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc250: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc250: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(308) or
       PHP_FunctionComp(556) or
@@ -6333,12 +6333,12 @@ begin
       PHP_FunctionComp(3636) or
       PHP_FunctionComp(3893) or
       PHP_FunctionComp(4383) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc251: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc251: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(475) or
       PHP_FunctionComp(513) or
@@ -6353,12 +6353,12 @@ begin
       PHP_FunctionComp(4040) or
       PHP_FunctionComp(4148) or
       PHP_FunctionComp(4546) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc252: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc252: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(510) or
       PHP_FunctionComp(1085) or
@@ -6374,12 +6374,12 @@ begin
       PHP_FunctionComp(4676) or
       PHP_FunctionComp(4718) or
       PHP_FunctionComp(5029) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc253: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc253: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(450) or
       PHP_FunctionComp(814) or
@@ -6397,12 +6397,12 @@ begin
       PHP_FunctionComp(4969) or
       PHP_FunctionComp(5085) or
       PHP_FunctionComp(5116) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc254: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc254: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(106) or
       PHP_FunctionComp(218) or
@@ -6420,12 +6420,12 @@ begin
       PHP_FunctionComp(4036) or
       PHP_FunctionComp(4175) or
       PHP_FunctionComp(4719) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc255: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc255: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(166) or
       PHP_FunctionComp(172) or
@@ -6440,12 +6440,12 @@ begin
       PHP_FunctionComp(2987) or
       PHP_FunctionComp(3278) or
       PHP_FunctionComp(5112) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc256: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc256: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(822) or
       PHP_FunctionComp(1713) or
@@ -6455,12 +6455,12 @@ begin
       PHP_FunctionComp(4395) or
       PHP_FunctionComp(4543) or
       PHP_FunctionComp(4644) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc257: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc257: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(153) or
       PHP_FunctionComp(1614) or
@@ -6469,12 +6469,12 @@ begin
       PHP_FunctionComp(3621) or
       PHP_FunctionComp(3922) or
       PHP_FunctionComp(4287) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc258: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc258: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(850) or
       PHP_FunctionComp(1016) or
@@ -6492,12 +6492,12 @@ begin
       PHP_FunctionComp(4647) or
       PHP_FunctionComp(4677) or
       PHP_FunctionComp(4988) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc259: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc259: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(833) or
       PHP_FunctionComp(998) or
@@ -6513,12 +6513,12 @@ begin
       PHP_FunctionComp(4987) or
       PHP_FunctionComp(5055) or
       PHP_FunctionComp(5157) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc260: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc260: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(946) or
       PHP_FunctionComp(1045) or
@@ -6527,12 +6527,12 @@ begin
       PHP_FunctionComp(4717) or
       PHP_FunctionComp(5017) or
       PHP_FunctionComp(5089) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc261: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc261: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(375) or
       PHP_FunctionComp(588) or
@@ -6546,12 +6546,12 @@ begin
       PHP_FunctionComp(3323) or
       PHP_FunctionComp(3754) or
       PHP_FunctionComp(3965) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc262: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc262: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(167) or
       PHP_FunctionComp(812) or
@@ -6562,12 +6562,12 @@ begin
       PHP_FunctionComp(3197) or
       PHP_FunctionComp(3252) or
       PHP_FunctionComp(3912) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc263: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc263: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1071) or
       PHP_FunctionComp(1573) or
@@ -6578,12 +6578,12 @@ begin
       PHP_FunctionComp(4404) or
       PHP_FunctionComp(4455) or
       PHP_FunctionComp(4649) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc264: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc264: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(527) or
       PHP_FunctionComp(943) or
@@ -6594,12 +6594,12 @@ begin
       PHP_FunctionComp(4421) or
       PHP_FunctionComp(4651) or
       PHP_FunctionComp(4944) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc265: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc265: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(875) or
       PHP_FunctionComp(986) or
@@ -6610,12 +6610,12 @@ begin
       PHP_FunctionComp(2819) or
       PHP_FunctionComp(3961) or
       PHP_FunctionComp(4224) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc266: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc266: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(186) or
       PHP_FunctionComp(376) or
@@ -6625,12 +6625,12 @@ begin
       PHP_FunctionComp(3892) or
       PHP_FunctionComp(4881) or
       PHP_FunctionComp(5008) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc267: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc267: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1172) or
       PHP_FunctionComp(1569) or
@@ -6639,23 +6639,23 @@ begin
       PHP_FunctionComp(4172) or
       PHP_FunctionComp(4982) or
       PHP_FunctionComp(5020) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc268: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc268: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1079) or
       PHP_FunctionComp(1399) or
       PHP_FunctionComp(4472) or
       PHP_FunctionComp(4945) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc269: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc269: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(462) or
       PHP_FunctionComp(915) or
@@ -6664,12 +6664,12 @@ begin
       PHP_FunctionComp(4432) or
       PHP_FunctionComp(4434) or
       PHP_FunctionComp(4439) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc270: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc270: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(286) or
       PHP_FunctionComp(624) or
@@ -6680,12 +6680,12 @@ begin
       PHP_FunctionComp(4335) or
       PHP_FunctionComp(4426) or
       PHP_FunctionComp(4833) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc271: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc271: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(914) or
       PHP_FunctionComp(2321) or
@@ -6696,12 +6696,12 @@ begin
       PHP_FunctionComp(4041) or
       PHP_FunctionComp(4639) or
       PHP_FunctionComp(4948) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc272: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc272: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(623) or
       PHP_FunctionComp(924) or
@@ -6709,12 +6709,12 @@ begin
       PHP_FunctionComp(1315) or
       PHP_FunctionComp(4289) or
       PHP_FunctionComp(4716) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc273: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc273: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(819) or
       PHP_FunctionComp(1032) or
@@ -6725,12 +6725,12 @@ begin
       PHP_FunctionComp(3966) or
       PHP_FunctionComp(4373) or
       PHP_FunctionComp(4488) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc274: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc274: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(282) or
       PHP_FunctionComp(746) or
@@ -6740,12 +6740,12 @@ begin
       PHP_FunctionComp(4054) or
       PHP_FunctionComp(4474) or
       PHP_FunctionComp(4487) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc275: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc275: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(243) or
       PHP_FunctionComp(1077) or
@@ -6753,12 +6753,12 @@ begin
       PHP_FunctionComp(2996) or
       PHP_FunctionComp(3996) or
       PHP_FunctionComp(4436) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc276: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc276: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(571) or
       PHP_FunctionComp(621) or
@@ -6768,12 +6768,12 @@ begin
       PHP_FunctionComp(2391) or
       PHP_FunctionComp(2816) or
       PHP_FunctionComp(3619) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc277: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc277: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(176) or
       PHP_FunctionComp(2508) or
@@ -6782,12 +6782,12 @@ begin
       PHP_FunctionComp(4037) or
       PHP_FunctionComp(4229) or
       PHP_FunctionComp(4411) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc278: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc278: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1039) or
       PHP_FunctionComp(1041) or
@@ -6797,24 +6797,24 @@ begin
       PHP_FunctionComp(4459) or
       PHP_FunctionComp(4645) or
       PHP_FunctionComp(4723) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc279: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc279: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(866) or
       PHP_FunctionComp(2296) or
       PHP_FunctionComp(4400) or
       PHP_FunctionComp(4991) or
       PHP_FunctionComp(5010) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc280: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc280: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(622) or
       PHP_FunctionComp(2825) or
@@ -6822,12 +6822,12 @@ begin
       PHP_FunctionComp(3999) or
       PHP_FunctionComp(4286) or
       PHP_FunctionComp(4947) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc281: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc281: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(173) or
       PHP_FunctionComp(283) or
@@ -6835,45 +6835,45 @@ begin
       PHP_FunctionComp(4843) or
       PHP_FunctionComp(5014) or
       PHP_FunctionComp(5026) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc282: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc282: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(836) or
       PHP_FunctionComp(878) or
       PHP_FunctionComp(964) or
       PHP_FunctionComp(3284) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc283: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc283: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(858) or
       PHP_FunctionComp(937) or
       PHP_FunctionComp(1048) or
       PHP_FunctionComp(4801) or
       PHP_FunctionComp(4880) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc284: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc284: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1617) or
       PHP_FunctionComp(4157) or
       PHP_FunctionComp(4550) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc285: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc285: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(201) or
       PHP_FunctionComp(891) or
@@ -6884,12 +6884,12 @@ begin
       PHP_FunctionComp(4481) or
       PHP_FunctionComp(4731) or
       PHP_FunctionComp(4919) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc286: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc286: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(815) or
       PHP_FunctionComp(818) or
@@ -6897,12 +6897,12 @@ begin
       PHP_FunctionComp(3291) or
       PHP_FunctionComp(4168) or
       PHP_FunctionComp(5021) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc287: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc287: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(854) or
       PHP_FunctionComp(1708) or
@@ -6910,12 +6910,12 @@ begin
       PHP_FunctionComp(4204) or
       PHP_FunctionComp(4313) or
       PHP_FunctionComp(4993) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc288: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc288: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(593) or
       PHP_FunctionComp(2069) or
@@ -6925,24 +6925,24 @@ begin
       PHP_FunctionComp(4320) or
       PHP_FunctionComp(4648) or
       PHP_FunctionComp(4977) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc289: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc289: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(972) or
       PHP_FunctionComp(1070) or
       PHP_FunctionComp(2821) or
       PHP_FunctionComp(3294) or
       PHP_FunctionComp(4462) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc290: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc290: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(526) or
       PHP_FunctionComp(807) or
@@ -6951,23 +6951,23 @@ begin
       PHP_FunctionComp(2820) or
       PHP_FunctionComp(2955) or
       PHP_FunctionComp(5025) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc291: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc291: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1300) or
       PHP_FunctionComp(2495) or
       PHP_FunctionComp(2809) or
       PHP_FunctionComp(5052) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc292: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc292: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(852) or
       PHP_FunctionComp(1293) or
@@ -6975,12 +6975,12 @@ begin
       PHP_FunctionComp(2805) or
       PHP_FunctionComp(3285) or
       PHP_FunctionComp(3916) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc293: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc293: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(811) or
       PHP_FunctionComp(901) or
@@ -6988,24 +6988,24 @@ begin
       PHP_FunctionComp(2794) or
       PHP_FunctionComp(4740) or
       PHP_FunctionComp(4979) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc294: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc294: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1013) or
       PHP_FunctionComp(3894) or
       PHP_FunctionComp(4227) or
       PHP_FunctionComp(5019) or
       PHP_FunctionComp(5040) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc295: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc295: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(179) or
       PHP_FunctionComp(809) or
@@ -7013,31 +7013,31 @@ begin
       PHP_FunctionComp(899) or
       PHP_FunctionComp(2971) or
       PHP_FunctionComp(4642) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc296: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc296: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(169) or
       PHP_FunctionComp(935) or
       PHP_FunctionComp(2817) or
       PHP_FunctionComp(4435) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc297: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc297: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(4005) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc298: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc298: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(398) or
       PHP_FunctionComp(876) or
@@ -7045,12 +7045,12 @@ begin
       PHP_FunctionComp(1537) or
       PHP_FunctionComp(2218) or
       PHP_FunctionComp(4650) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc299: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc299: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(155) or
       PHP_FunctionComp(427) or
@@ -7064,91 +7064,91 @@ begin
       PHP_FunctionComp(4158) or
       PHP_FunctionComp(4652) or
       PHP_FunctionComp(4742) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc300: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc300: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(181) or
       PHP_FunctionComp(859) or
       PHP_FunctionComp(1620) or
       PHP_FunctionComp(5047) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc302: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc302: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(944) or
       PHP_FunctionComp(2749) or
       PHP_FunctionComp(4721) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc303: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc303: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(987) or
       PHP_FunctionComp(2198) or
       PHP_FunctionComp(5034) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc304: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc304: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(863) or
       PHP_FunctionComp(2489) or
       PHP_FunctionComp(4164) or
       PHP_FunctionComp(4741) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc305: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc305: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(289) or
       PHP_FunctionComp(1714) or
       PHP_FunctionComp(3269) or
       PHP_FunctionComp(4173) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc306: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc306: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(2799) or
       PHP_FunctionComp(4722) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc307: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc307: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1304) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc308: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc308: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(2672) or
       PHP_FunctionComp(3997) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc309: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc309: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1711) or
       PHP_FunctionComp(2750) or
@@ -7157,12 +7157,12 @@ begin
       PHP_FunctionComp(4416) or
       PHP_FunctionComp(4489) or
       PHP_FunctionComp(5161) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc310: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc310: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(947) or
       PHP_FunctionComp(1002) or
@@ -7170,224 +7170,224 @@ begin
       PHP_FunctionComp(4461) or
       PHP_FunctionComp(4640) or
       PHP_FunctionComp(4646) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc311: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc311: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(2297) or
       PHP_FunctionComp(4160) or
       PHP_FunctionComp(4163) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc312: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc312: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(868) or
       PHP_FunctionComp(2197) or
       PHP_FunctionComp(2470) or
       PHP_FunctionComp(2553) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc313: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc313: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(2671) or
       PHP_FunctionComp(4942) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc314: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc314: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(156) or
       PHP_FunctionComp(828) or
       PHP_FunctionComp(949) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc315: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc315: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5035) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc316: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc316: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(927) or
       PHP_FunctionComp(975) or
       PHP_FunctionComp(1014) or
       PHP_FunctionComp(2772) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc317: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc317: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(867) or
       PHP_FunctionComp(3058) or
       PHP_FunctionComp(4460) or
       PHP_FunctionComp(4743) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc318: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc318: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(842) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc319: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc319: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(855) or
       PHP_FunctionComp(5050) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc321: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc321: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1040) or
       PHP_FunctionComp(4725) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc322: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc322: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(2745) or
       PHP_FunctionComp(3279) or
       PHP_FunctionComp(4720) or
       PHP_FunctionComp(5038) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc323: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc323: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(175) or
       PHP_FunctionComp(1550) or
       PHP_FunctionComp(1662) or
       PHP_FunctionComp(4165) or
       PHP_FunctionComp(4403) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc324: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc324: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5053) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc325: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc325: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(853) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc326: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc326: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1015) or
       PHP_FunctionComp(1078) or
       PHP_FunctionComp(1616) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc327: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc327: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(920) or
       PHP_FunctionComp(2824) or
       PHP_FunctionComp(3934) or
       PHP_FunctionComp(5041) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc328: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc328: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(810) or
       PHP_FunctionComp(2496) or
       PHP_FunctionComp(2839) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc329: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc329: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(945) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc330: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc330: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(996) or
       PHP_FunctionComp(1568) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc331: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc331: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(829) or
       PHP_FunctionComp(1001) or
       PHP_FunctionComp(4978) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc332: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc332: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(874) or
       PHP_FunctionComp(2512) or
       PHP_FunctionComp(3895) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc333: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc333: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(861) or
       PHP_FunctionComp(5044) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc334: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc334: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(185) or
       PHP_FunctionComp(846) or
@@ -7395,41 +7395,41 @@ begin
       PHP_FunctionComp(2511) or
       PHP_FunctionComp(4170) or
       PHP_FunctionComp(4996) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc335: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc335: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(827) or
       PHP_FunctionComp(1570) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc336: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc336: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1012) or
       PHP_FunctionComp(5031) or
       PHP_FunctionComp(5156) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc337: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc337: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(847) or
       PHP_FunctionComp(864) or
       PHP_FunctionComp(1011) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc338: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc338: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(182) or
       PHP_FunctionComp(845) or
@@ -7437,12 +7437,12 @@ begin
       PHP_FunctionComp(3324) or
       PHP_FunctionComp(4166) or
       PHP_FunctionComp(5051) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc339: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc339: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(917) or
       PHP_FunctionComp(2514) or
@@ -7450,404 +7450,404 @@ begin
       PHP_FunctionComp(4420) or
       PHP_FunctionComp(5012) or
       PHP_FunctionComp(5030) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc340: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc340: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(820) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc341: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc341: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(938) or
       PHP_FunctionComp(4169) or
       PHP_FunctionComp(5039) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc343: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc343: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(183) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc344: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc344: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5028) or
       PHP_FunctionComp(5162) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc345: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc345: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(840) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc346: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc346: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1572) or
       PHP_FunctionComp(5049) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc347: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc347: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(3977) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc348: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc348: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(168) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc349: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc349: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5037) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc351: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc351: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(816) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc352: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc352: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(856) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc353: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc353: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(881) or
       PHP_FunctionComp(4171) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc354: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc354: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(2462) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc357: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc357: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(841) or
       PHP_FunctionComp(2294) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc358: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc358: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(813) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc359: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc359: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(184) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc360: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc360: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(4549) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc361: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc361: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(4191) or
       PHP_FunctionComp(4950) or
       PHP_FunctionComp(5006) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc364: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc364: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(2463) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc366: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc366: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5045) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc369: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc369: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5032) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc370: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc370: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1571) or
       PHP_FunctionComp(4997) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc373: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc373: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(287) or
       PHP_FunctionComp(821) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc374: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc374: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(2298) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc375: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc375: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(839) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc376: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc376: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(2515) or
       PHP_FunctionComp(4992) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc377: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc377: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(843) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc385: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc385: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5007) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc387: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc387: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5092) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc393: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc393: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(4167) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc399: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc399: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5097) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc402: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc402: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(2494) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc407: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc407: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(1006) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc426: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc426: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(900) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc433: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc433: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5096) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc439: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc439: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5098) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc442: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc442: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(921) or
       PHP_FunctionComp(4995) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc443: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc443: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(844) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc445: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc445: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(999) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc450: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc450: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(2513) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc465: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc465: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5099) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc466: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc466: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(817) or
       PHP_FunctionComp(5100) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc487: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc487: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5094) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc491: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc491: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5093) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc496: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc496: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5011) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc520: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc520: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(5095) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc541: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc541: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(848) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc560: TtkTokenKind;
+function TSynWebEngine.PhP_KeywordFunc560: TSynWebTokenKind;
 begin
   if  PHP_FunctionComp(849) then
-    Result := tkPhpFunction
+    Result := stkPhpFunction
   else
-    Result := tkPhpIdentifier;
+    Result := stkPhpIdentifier;
 end;
