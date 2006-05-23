@@ -5046,7 +5046,7 @@ begin
       Php_SetRange(srsPhpComment);
       if FConfig^.FLine[FConfig^.FRun]='*' then
       begin           
-        Inc(FConfig^.Run);
+        Inc(FConfig^.FRun);
         SetRange_Bit(26, True);
       end else
         SetRange_Bit(26, False);
