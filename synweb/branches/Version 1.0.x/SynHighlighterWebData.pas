@@ -39,8 +39,8 @@ type
     stkESNumber, stkESError,
     // PHP
     stkPhpSpace, stkPhpIdentifier, stkPhpKeyword, stkPhpFunction, stkPhpVariable,
-    stkPhpConst, stkPhpString, stkPhpStringSpecial, stkPhpComment, stkPhpSymbol,
-    stkPhpNumber, stkPhpError,
+    stkPhpConst, stkPhpString, stkPhpStringSpecial, stkPhpComment, stkPhpDocComment,
+    stkPhpSymbol, stkPhpNumber, stkPhpError,
     // Other
     stkNull);
 

@@ -329,6 +329,7 @@ type
     fPhp_StringAttri: TSynHighlighterAttributes;
     fPhp_StringSpecialAttri: TSynHighlighterAttributes;
     fPhp_CommentAttri: TSynHighlighterAttributes;
+    fPhp_DocCommentAttri: TSynHighlighterAttributes;
     fPhp_SymbolAttri: TSynHighlighterAttributes;
     fPhp_NumberAttri: TSynHighlighterAttributes;
     fPhp_ErrorAttri: TSynHighlighterAttributes;
@@ -653,6 +654,8 @@ type
       read fPhp_StringSpecialAttri write fPhp_StringSpecialAttri;
     property PhpCommentAttri: TSynHighlighterAttributes
       read fPhp_CommentAttri write fPhp_CommentAttri;
+    property PhpDocCommentAttri: TSynHighlighterAttributes
+      read fPhp_DocCommentAttri write fPhp_DocCommentAttri;
     property PhpSymbolAttri: TSynHighlighterAttributes
       read fPhp_SymbolAttri write fPhp_SymbolAttri;
     property PhpNumberAttri: TSynHighlighterAttributes
@@ -853,6 +856,8 @@ begin
   AddAttribute(fPhp_StringSpecialAttri);
   fPhp_CommentAttri := TSynHighlighterAttributes.Create('Php: Comment');
   AddAttribute(fPhp_CommentAttri);
+  fPhp_DocCommentAttri := TSynHighlighterAttributes.Create('Php: DocComment');
+  AddAttribute(fPhp_DocCommentAttri);
   fPhp_SymbolAttri := TSynHighlighterAttributes.Create('Php: Symbol');
   AddAttribute(fPhp_SymbolAttri);
   fPhp_NumberAttri := TSynHighlighterAttributes.Create('Php: Number');
@@ -869,6 +874,7 @@ begin
   fTokenAttributeTable[stkPhpString] := fPhp_StringAttri;
   fTokenAttributeTable[stkPhpStringSpecial] := fPhp_StringSpecialAttri;
   fTokenAttributeTable[stkPhpComment] := fPhp_CommentAttri;
+  fTokenAttributeTable[stkPhpDocComment] := fPhp_DocCommentAttri;
   fTokenAttributeTable[stkPhpSymbol] := fPhp_SymbolAttri;
   fTokenAttributeTable[stkPhpNumber] := fPhp_NumberAttri;
   fTokenAttributeTable[stkPhpError] := fPhp_ErrorAttri;
@@ -5038,10 +5044,19 @@ begin
     begin
       Inc(FConfig^.FRun, 2);
       Php_SetRange(srsPhpComment);
-      if FConfig^.FLine[FConfig^.FRun] = #0 then
-        FConfig^.FTokenID := stkPhpComment
+      if FConfig^.FLine[FConfig^.FRun]='*' then
+      begin           
+        Inc(FConfig^.Run);
+        SetRange_Bit(26, True);
+      end else
+        SetRange_Bit(26, False);
+      if FConfig^.FLine[FConfig^.FRun] <> #0 then    
+        Php_RangeCommentProc
       else
-        Php_RangeCommentProc;
+        if GetRange_Bit(26) then
+          FConfig^.FTokenID := stkPhpDocComment
+        else
+          FConfig^.FTokenID := stkPhpComment;
     end;
     else Php_MulDivModXorProc;
   end;
@@ -5473,7 +5488,10 @@ begin
     end;
     Inc(FConfig^.FRun);
   until FConfig^.FLine[FConfig^.FRun] = #0;
-  FConfig^.FTokenID := stkPhpComment;
+  if GetRange_Bit(26) then
+    FConfig^.FTokenID := stkPhpDocComment
+  else
+    FConfig^.FTokenID := stkPhpComment;
 end;
 
 procedure TSynWebEngine.Php_RangeString34Proc;
