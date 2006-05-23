@@ -2350,7 +2350,7 @@ end;
 
 procedure TSynWebEngine.Css_ChildAnySelectorProc;
 begin
-  if FConfig^.FCssVersion = cvCss21 then
+  if FConfig^.FCssVersion = scvCss21 then
     Css_SymbolProc
   else
     Css_ErrorProc;
@@ -2358,7 +2358,7 @@ end;
 
 procedure TSynWebEngine.Css_AttribProc;
 begin
-  if FConfig^.FCssVersion = cvCss1 then
+  if FConfig^.FCssVersion = scvCss1 then
     Css_ErrorProc
   else
   begin
@@ -2516,7 +2516,7 @@ begin
     end else
       FConfig^.FTokenID := stkCssError;
   end else
-    if FConfig^.FCssVersion = cvCss21 then
+    if FConfig^.FCssVersion = scvCss21 then
       Css_SymbolProc
     else
       Css_ErrorProc;
@@ -2606,7 +2606,7 @@ begin
           SetRange_Bit(8, True);
         FConfig^.FRun := OldRun;
       end else
-        if FConfig^.FCssVersion = cvCss1 then
+        if FConfig^.FCssVersion = scvCss1 then
         begin
           FConfig^.FRun := OldRun;
           CheckOther;
@@ -2700,7 +2700,7 @@ begin
         Inc(FConfig^.FRun);
         if FConfig^.FLine[FConfig^.FRun] = #0 then
         begin
-          if FConfig^.FCssVersion = cvCss1 then
+          if FConfig^.FCssVersion = scvCss1 then
           begin
             FConfig^.FTokenID := stkCssError;
             Exit;
@@ -3242,7 +3242,7 @@ begin
           FConfig^.FTokenID := stkCssSpecial;
         end;
         Css_SpecialID_Media:
-          if FConfig^.FCssVersion = cvCss1 then
+          if FConfig^.FCssVersion = scvCss1 then
           begin
             FConfig^.FTokenID := stkCssError;
             Css_SetRange(srsCssRuleset);
@@ -3252,7 +3252,7 @@ begin
             FConfig^.FTokenID := stkCssSpecial;
           end;
         Css_SpecialID_Page:
-          if FConfig^.FCssVersion = cvCss1 then
+          if FConfig^.FCssVersion = scvCss1 then
           begin
             FConfig^.FTokenID := stkCssError;
             Css_SetRange(srsCssRuleset);
@@ -3262,7 +3262,7 @@ begin
             FConfig^.FTokenID := stkCssSpecial;
           end;
         Css_SpecialID_Charset:
-          if FConfig^.FCssVersion = cvCss1 then
+          if FConfig^.FCssVersion = scvCss1 then
           begin
             FConfig^.FTokenID := stkCssError;
             Css_SetRange(srsCssRuleset);
@@ -3742,7 +3742,7 @@ procedure TSynWebEngine.Css_RangePropValRectProc;
         else
           FConfig^.FTokenID := stkCssValNumber;
       end else
-        if FConfig^.FCssVersion = cvCss1 then
+        if FConfig^.FCssVersion = scvCss1 then
         begin
           FConfig^.FRun := OldRun;
           CheckOther;
@@ -6045,8 +6045,8 @@ begin
     shtPHP_inCss, shtPHP_inES];
 
   HtmlVersion := hvXHtml10Transitional;
-  CssVersion := cvCss21;
-  PhpVersion := pvPhp5;
+  CssVersion := scvCss21;
+  PhpVersion := spvPhp5;
   PhpShortOpenTag := True;
   PhpAspTags := False;
 

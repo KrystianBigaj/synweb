@@ -79,7 +79,7 @@ const
 // CSS -------------------------------------------------------------------------
 type
   TSynWebCssVersion = (
-    cvCss1, cvCss21
+    scvCss1, scvCss21
     );
 
   TSynWebCssRangeState = (srsCssRuleset, srsCssSelectorAttrib, srsCssSelectorPseudo,
@@ -108,7 +108,7 @@ type
 // PHP -------------------------------------------------------------------------
 type
   TSynWebPhpVersion = (
-    pvPhp4, pvPhp5
+    spvPhp4, spvPhp5
     );
 
   TSynWebPhpRangeState = (
