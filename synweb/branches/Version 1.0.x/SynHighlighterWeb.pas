@@ -477,8 +477,6 @@ type
     procedure Php_Next;
     function Php_GetRange: TSynWebPhpRangeState;
     procedure Php_SetRange(const ARange: TSynWebPhpRangeState);
-    function Php_GetOpenTag: TSynWebPhpOpenTag;
-    procedure Php_SetOpenTag(APhpOpenTag: TSynWebPhpOpenTag);
 
     function Php_CheckBegin(ABegin: boolean = True): boolean;
     procedure Php_Begin(ATagKind: TSynWebPhpOpenTag);
@@ -1683,7 +1681,7 @@ begin
             Exit;
           end else
             if (ID = Html_TagID_Script) then
-              if GetRange_Bit(18) and FConfig^.FPhpEmbeded then
+              if GetRange_Bit(28) and FConfig^.FPhpEmbeded then
               begin
                 Php_Begin(spotHTML);
                 Exit;
@@ -1710,7 +1708,7 @@ begin
         begin
           FConfig^.FTokenID := Html_AttrCheck;
           if ID = Html_TagID_Script then
-            SetRange_Bit(17, FConfig^.FToken_LastID = Html_AttrID_Language);
+            SetRange_Bit(27, FConfig^.FToken_LastID = Html_AttrID_Language);
         end;
       end;
       Html_SetRange(srsHtmlTagKeyEq);
@@ -1798,7 +1796,7 @@ begin
             Exit;
           end else
             if (ID = Html_TagID_Script) then
-              if GetRange_Bit(18) and FConfig^.FPhpEmbeded then
+              if GetRange_Bit(28) and FConfig^.FPhpEmbeded then
               begin
                 Php_Begin(spotHTML);
                 Exit;
@@ -1834,8 +1832,8 @@ begin
           FConfig^.FTokenID := stkHtmlError
         else
           FConfig^.FTokenID := stkHtmlTagKeyValue;
-        if GetRange_Bit(17) then
-          SetRange_Bit(18, UpperCase(GetToken) = 'PHP');
+        if GetRange_Bit(27) then
+          SetRange_Bit(28, UpperCase(GetToken) = 'PHP');
         Html_SetRange(srsHtmlTagKey);
       end;
   end;
@@ -1868,8 +1866,8 @@ begin
           begin
             Inc(FConfig^.FRun);
             FConfig^.FTokenID := stkHtmlTagKeyValueQuoted;
-            if GetRange_Bit(17) then
-              SetRange_Bit(18, UpperCase(GetToken) = #39'PHP'#39);
+            if GetRange_Bit(27) then
+              SetRange_Bit(28, UpperCase(GetToken) = #39'PHP'#39);
             Break;
           end;
         end;
@@ -1904,8 +1902,8 @@ begin
           begin
             Inc(FConfig^.FRun);
             FConfig^.FTokenID := stkHtmlTagKeyValueQuoted;
-            if GetRange_Bit(17) then
-              SetRange_Bit(18, UpperCase(GetToken) = '"PHP"');
+            if GetRange_Bit(27) then
+              SetRange_Bit(28, UpperCase(GetToken) = '"PHP"');
             Break;
           end;
         end;
@@ -4716,16 +4714,6 @@ begin
   end;
 end;
 
-function TSynWebEngine.Php_GetOpenTag: TSynWebPhpOpenTag;
-begin
-  Result := TSynWebPhpOpenTag(GetRange_Int(2, 27));
-end;
-
-procedure TSynWebEngine.Php_SetOpenTag(APhpOpenTag: TSynWebPhpOpenTag);
-begin
-  SetRange_Int(2, 27, Longword(APhpOpenTag));
-end;
-
 function TSynWebEngine.Php_CheckBegin(ABegin: boolean): boolean;
 begin
   Result := False;
@@ -4767,29 +4755,32 @@ begin
     True,
     ATagKind = spotHtml);
   SetRange_Int(12, 17, 0);
-  Php_SetOpenTag(ATagKind);
   if ATagKind = spotHTML then
     Php_SetRange(srsPhpDefault)
   else
+  begin
+    if ATagKind = spotPhp then
+      SetRange_Bit(19, True);
     Next;
+  end;
 end;
 
 procedure TSynWebEngine.Php_End;
 var
-  t: TSynWebPhpOpenTag;
+  t: Boolean;
 begin
-  t := Php_GetOpenTag;
   SetRange_Int(12, 17, 0);
   if FConfig^.FLine[FConfig^.FRun] = #0 then
     SetRange_Int(3, 29, Longword(FConfig^.FHighlighterType) - Longword(shtPHP_inHtml))
   else
   begin
+    t := FConfig^.FLine[FConfig^.FRun] = '<'; // Check if php end tag is </script>
     SetHighlighterType(
       TSynHighlighterType(Longword(FConfig^.FHighlighterType) - Longword(shtPHP_inHtml)),
-      t = spotHTML,
+      t,
       True,
-      t <> spotHTML);
-    if t = spotHTML then
+      not t);
+    if t then
       Next;
   end;
 end;
@@ -4808,12 +4799,8 @@ begin
   if (FConfig^.FLine[FConfig^.FRun] = '>') and FConfig^.FPhpEmbeded then
   begin
     Inc(FConfig^.FRun);
-    if Php_GetOpenTag in [spotPhp, spotPhpShort] then
-    begin
-      FConfig^.FTokenID := stkHtmlTag;
-      Php_End;
-    end else
-      FConfig^.FTokenID := stkPhpError;
+    FConfig^.FTokenID := stkHtmlTag;
+    Php_End;
   end else
     FConfig^.FTokenID := stkPhpSymbol;
 end;
@@ -4959,8 +4946,7 @@ begin
   Inc(FConfig^.FRun);
   case FConfig^.FLine[FConfig^.FRun] of
     '/':
-      if (Php_GetOpenTag = spotHTML) and
-        (FConfig^.FHashTable[FConfig^.FLine[FConfig^.FRun + 1]] =
+      if (FConfig^.FHashTable[FConfig^.FLine[FConfig^.FRun + 1]] =
         FConfig^.FHashTable['s']) and
         (FConfig^.FHashTable[FConfig^.FLine[FConfig^.FRun + 2]] =
         FConfig^.FHashTable['c']) and
@@ -5033,6 +5019,8 @@ begin
 end;
 
 procedure TSynWebEngine.Php_SlashProc;
+var
+  b: Boolean;
 begin
   case FConfig^.FLine[FConfig^.FRun + 1] of
     '/':
@@ -5044,16 +5032,14 @@ begin
     begin
       Inc(FConfig^.FRun, 2);
       Php_SetRange(srsPhpComment);
-      if FConfig^.FLine[FConfig^.FRun]='*' then
-      begin           
+      b := (FConfig^.FLine[FConfig^.FRun]='*') and (FConfig^.FLine[FConfig^.FRun+1]<=#32);
+      if b then
         Inc(FConfig^.FRun);
-        SetRange_Bit(26, True);
-      end else
-        SetRange_Bit(26, False);
-      if FConfig^.FLine[FConfig^.FRun] <> #0 then    
+      SetRange_Bit(19, b);
+      if FConfig^.FLine[FConfig^.FRun] <> #0 then
         Php_RangeCommentProc
       else
-        if GetRange_Bit(26) then
+        if b then
           FConfig^.FTokenID := stkPhpDocComment
         else
           FConfig^.FTokenID := stkPhpComment;
@@ -5067,7 +5053,7 @@ begin
   if (FConfig^.FLine[FConfig^.FRun + 1] = '>') and FConfig^.FPhpEmbeded then
   begin
     Inc(FConfig^.FRun, 2);
-    if Php_GetOpenTag = spotASP then
+    if FConfig^.FPhpAspTags then
     begin
       FConfig^.FTokenID := stkHtmlTag;
       Php_End;
@@ -5090,12 +5076,11 @@ begin
         Exit;
       '?':
         if (FConfig^.FLine[FConfig^.FRun + 1] = '>') and
-          (Php_GetOpenTag in [spotPhp, spotPhpShort]) and
           FConfig^.FPhpEmbeded then
           Exit;
       '%':
         if (FConfig^.FLine[FConfig^.FRun + 1] = '>') and
-          (Php_GetOpenTag = spotASP) and FConfig^.FPhpEmbeded then
+          FConfig^.FPhpAspTags and FConfig^.FPhpEmbeded then
           Exit;
       else Exit;
     end;
@@ -5414,20 +5399,21 @@ var
 begin
   case GetRange_Int(3, 20) of
     0:
-    begin
-      Inc(FConfig^.FRun, 2);
-      FConfig^.FTokenID := stkHtmlTag;
-      SetRange_Int(3, 20, 1);
-    end;
+      begin
+        Inc(FConfig^.FRun, 2);
+        FConfig^.FTokenID := stkHtmlTag;
+        SetRange_Int(3, 20, 1);
+      end;
     1:
     begin
       DoDefault;
-      if Php_GetOpenTag = spotPhp then
+      if GetRange_Bit(19) then
       begin
+        SetRange_Bit(19, False);
         Inc(FConfig^.FRun, 3);
         FConfig^.FTokenID := stkPhpKeyword;
-      end else // spotPhpShort, spotASP
-        if FConfig^.FLine[FConfig^.FRun] = '=' then
+      end else
+        if (FConfig^.FLine[FConfig^.FRun] = '=') and (FConfig^.FPhpShortOpenTag) then
         begin
           Inc(FConfig^.FRun);
           FConfig^.FTokenID := stkPhpKeyword;
@@ -5488,7 +5474,7 @@ begin
     end;
     Inc(FConfig^.FRun);
   until FConfig^.FLine[FConfig^.FRun] = #0;
-  if GetRange_Bit(26) then
+  if GetRange_Bit(19) then
     FConfig^.FTokenID := stkPhpDocComment
   else
     FConfig^.FTokenID := stkPhpComment;

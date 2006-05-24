@@ -94,5 +94,5 @@ XX XX                               - PHP OPEN-TAG
       XX                            - HEREDOC RANGE
          XX                         - HEREDOC IDENT CRC OR TSTRINGLIST
             XX XX XX XX XX XX XX XX - HERERDOC CRC
-                                 XX - HTML SCRIPT OPEN TAG IS PHP
-                              XX    - HTML LAST TAG WAS SCRIPT
+   XX                               - HTML PREV ATTRIB WAS 'LANGUAGE' ?
+XX                                  - HTML LANGUAGE=php?
