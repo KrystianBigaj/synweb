@@ -215,14 +215,14 @@ end;
 
 function SynWeb_UpdateActiveHighlighter(ASynEdit: TSynEdit;
   ASynWeb: TSynWebBase): TSynHighlighterTypes;
-begin           //todo: reorganize
- { with ASynEdit,ASynWeb do
+begin
+  with ASynEdit,ASynWeb do
   begin
     if UpdateActiveHighlighter(TSynEditStringList(Lines).Ranges[CaretY-2],
        Lines[CaretY-1], CaretX, CaretY) then
       Repaint;
-    Result:=ASynWeb.GetCurrentActiveHighlighters;
-  end;  }
+    Result:=ASynWeb.ActiveHighlighters;
+  end;  
 end;
 
 initialization

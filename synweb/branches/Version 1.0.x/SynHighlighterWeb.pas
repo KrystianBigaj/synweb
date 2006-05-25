@@ -145,9 +145,6 @@ type
 
     property ActiveSwitchHighlighter: boolean
       read FActiveHighlighter write SetActiveHighlighter;
-    property ActiveHighlighters: TSynHighlighterTypes read GetActiveHighlighters;
-    function UpdateActiveHighlighter(ARange: Pointer; ALine: string;
-      ACaretX, ACaretY: integer): boolean;
 
     property HtmlVersion: TSynWebHtmlVersion read GetHtmlVersion write SetHtmlVersion;
     property CssVersion: TSynWebCssVersion read GetCssVersion write SetCssVersion;
@@ -174,6 +171,10 @@ type
     procedure SetRange(Value: Pointer); override;
     procedure SetLine(NewValue: string; LineNumber: integer); override;
     procedure Next; override;
+    
+    function UpdateActiveHighlighter(ARange: Pointer; ALine: string;
+      ACaretX, ACaretY: integer): boolean;
+    property ActiveHighlighters: TSynHighlighterTypes read GetActiveHighlighters;
   published
     property Engine: TSynWebEngine read FEngine write SetEngine;
   end;
@@ -507,7 +508,7 @@ type
     procedure Php_VarProc;
     procedure Php_IdentProc;
     procedure Php_ErrorProc;
-    function Php_DoStringDouble(AIsHeredoc: boolean = False): boolean;
+    function Php_DoStringDouble(AIsHeredoc: boolean = False; ARangeChar: Boolean = True): boolean;
 
     procedure Php_SubProcProc;
     procedure Php_RangeDefaultProc;
@@ -5146,7 +5147,9 @@ begin
   FConfig^.FTokenID := stkPhpError;
 end;
 
-function TSynWebEngine.Php_DoStringDouble(AIsHeredoc: boolean): boolean;
+function TSynWebEngine.Php_DoStringDouble(AIsHeredoc: Boolean; ARangeChar: Boolean): boolean;
+var
+  StringChar:Char;
 
   procedure TryDoSpace;
   begin
@@ -5248,7 +5251,7 @@ function TSynWebEngine.Php_DoStringDouble(AIsHeredoc: boolean): boolean;
           '"':
           begin
             Inc(FConfig^.FRun);
-            while not Php_DoStringDouble and (FConfig^.FLine[FConfig^.FRun] <> #0) and
+            while not Php_DoStringDouble(False, False) and (FConfig^.FLine[FConfig^.FRun] <> #0) and
               (FConfig^.FTokenID <> stkPhpError) do
             ;
             if (FConfig^.FLine[FConfig^.FRun] = '"') and
@@ -5277,6 +5280,10 @@ function TSynWebEngine.Php_DoStringDouble(AIsHeredoc: boolean): boolean;
   end;
 
 begin
+  if not ARangeChar or (Php_GetRange = srsPhpString34) then
+    StringChar := #34
+  else
+    StringChar := '`';
   Result := False;
   FConfig^.FTokenID := stkPhpStringSpecial;
   case FConfig^.FLine[FConfig^.FRun] of
@@ -5371,10 +5378,17 @@ begin
   end;
   FConfig^.FTokenID := stkPhpString;
   repeat
-    while TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 25) = 0 do
-      // while not(FConfig^.FLine[FConfig^.FRun] in [#0, #34, '\', '{', '$'] do
-      Inc(FConfig^.FRun);
-    if FConfig^.FLine[FConfig^.FRun] = #34 then
+    if StringChar = #34 then
+    begin
+      while TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 25) = 0 do
+        // while not(FConfig^.FLine[FConfig^.FRun] in [#0, #34, '\', '{', '$'] do
+        Inc(FConfig^.FRun);
+    end
+    else               
+      while TSynWebIdentTable2[FConfig^.FLine[FConfig^.FRun]] and (1 shl 5) = 0 do
+        // while not(FConfig^.FLine[FConfig^.FRun] in [#0, '`', '\', '{', '$'] do
+        Inc(FConfig^.FRun);
+    if FConfig^.FLine[FConfig^.FRun] = StringChar then
       if AIsHeredoc then
       begin
         Inc(FConfig^.FRun);
@@ -5491,9 +5505,6 @@ end;
 
 procedure TSynWebEngine.Php_RangeString39Proc;
 begin
-  if ES_CheckNull then
-    Exit;
-
   if FConfig^.FLine[FConfig^.FRun] = '\' then
   begin
     Inc(FConfig^.FRun);
@@ -5523,6 +5534,12 @@ end;
 
 procedure TSynWebEngine.Php_RangeStringShellProc;
 begin
+  if Php_DoStringDouble then
+  begin
+    Inc(FConfig^.FRun);
+    Php_SetRange(srsPhpDefault);
+  end;
+{
   if FConfig^.FLine[FConfig^.FRun] = '\' then
   begin
     Inc(FConfig^.FRun);
@@ -5553,7 +5570,7 @@ begin
         else
           Inc(FConfig^.FRun);
     end;
-  until False;
+  until False;     }
 end;
 
 procedure TSynWebEngine.Php_RangeHeredocProc;

@@ -136,7 +136,10 @@ begin
                                     
     if check(j, '0 39 [<] [\]') then 
       fIdentTable2[I]:=fIdentTable2[I] or (1 shl 4);
-                                     
+
+    if check(j, '0 [`] [\] [{] [$]') then 
+      fIdentTable2[I]:=fIdentTable2[I] or (1 shl 5);
+                                      
 // -----------------------------------------------------------------------------
 
     J:=UpCase(chr(ord(I)));
