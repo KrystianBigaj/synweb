@@ -239,26 +239,6 @@ object Form1: TForm1
     ShowHint = True
     TabOrder = 3
   end
-  object SynEdit2: TSynEdit
-    Left = 152
-    Top = 84
-    Width = 125
-    Height = 93
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Courier New'
-    Font.Style = []
-    TabOrder = 4
-    Gutter.Font.Charset = DEFAULT_CHARSET
-    Gutter.Font.Color = clWindowText
-    Gutter.Font.Height = -11
-    Gutter.Font.Name = 'Courier New'
-    Gutter.Font.Style = []
-    Highlighter = SynWebHtmlSyn1
-    Lines.Strings = (
-      'SynEdit2')
-  end
   object SynWebEngine1: TSynWebEngine
     InactiveAttri.Foreground = clInactiveCaptionText
     HtmlCommentAttri.Foreground = clMedGray
@@ -327,9 +307,9 @@ object Form1: TForm1
     Top = 228
   end
   object SynWebHtmlSyn1: TSynWebHtmlSyn
-    Engine = SynWebEngine1
     ActiveSwitchHighlighter = False
-    HtmlVersion = hvXHtml10Transitional
+    Engine = SynWebEngine1
+    HtmlVersion = shvXHtml10Transitional
     CssVersion = scvCss21
     PhpVersion = spvPhp5
     PhpShortOpenTag = True
@@ -341,8 +321,9 @@ object Form1: TForm1
     Top = 260
   end
   object SynWebCSSSyn1: TSynWebCSSSyn
-    Engine = SynWebEngine1
     ActiveSwitchHighlighter = False
+    Engine = SynWebEngine1
+    HtmlVersion = shvXHtml10Transitional
     CssVersion = scvCss21
     PhpVersion = spvPhp5
     PhpShortOpenTag = True
@@ -352,8 +333,8 @@ object Form1: TForm1
     Top = 260
   end
   object SynWebESSyn1: TSynWebESSyn
-    Engine = SynWebEngine1
     ActiveSwitchHighlighter = False
+    Engine = SynWebEngine1
     PhpVersion = spvPhp5
     PhpShortOpenTag = True
     PhpAspTags = False
@@ -362,10 +343,12 @@ object Form1: TForm1
     Top = 260
   end
   object SynWebPHPCliSyn1: TSynWebPHPCliSyn
+    ActiveSwitchHighlighter = False
     Engine = SynWebEngine1
     PhpVersion = spvPhp5
     PhpShortOpenTag = True
     PhpAspTags = False
+    PhpEmbeded = True
     Left = 80
     Top = 260
   end

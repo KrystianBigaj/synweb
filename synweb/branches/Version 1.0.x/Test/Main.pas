@@ -37,7 +37,6 @@ type
     Panel3: TPanel;
     SynExporterHTML1: TSynExporterHTML;
     SynEditOptionsDialog1: TSynEditOptionsDialog;
-    SynEdit2: TSynEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure SynEdit1DropFiles(Sender: TObject; X, Y: Integer;

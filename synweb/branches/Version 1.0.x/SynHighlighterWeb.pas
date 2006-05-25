@@ -117,9 +117,9 @@ type
     FActiveHighlighters: TSynHighlighterTypes;
 
     function GetHtmlVersion: TSynWebHtmlVersion;
-    procedure SetCssVersion(const Value: TSynWebCssVersion);
-    function GetCssVersion: TSynWebCssVersion;
     procedure SetHtmlVersion(const Value: TSynWebHtmlVersion);
+    function GetCssVersion: TSynWebCssVersion;
+    procedure SetCssVersion(const Value: TSynWebCssVersion);
     function GetPhpVersion: TSynWebPhpVersion;
     procedure SetPhpVersion(const Value: TSynWebPhpVersion);
     function GetPhpAspTags: boolean;
@@ -147,7 +147,7 @@ type
     property CssVersion: TSynWebCssVersion read GetCssVersion write SetCssVersion;
     property PhpVersion: TSynWebPhpVersion read GetPhpVersion write SetPhpVersion;
     property PhpShortOpenTag: boolean read GetPhpShortOpenTag write SetPhpShortOpenTag;
-    property PhpAspTags: boolean read GetPhpAspTags write SetPhpAspTags;
+    property PhpAspTags: boolean read GetPhpAspTags write SetPhpAspTags; 
 
     property CssEmbeded: boolean read GetCssEmbeded write SetCssEmbeded;
     property PhpEmbeded: boolean read GetPhpEmbeded write SetPhpEmbeded;
@@ -5789,9 +5789,13 @@ begin
   Result := FConfig.FHtmlVersion;
 end;
 
-procedure TSynWebBase.SetCssVersion(const Value: TSynWebCssVersion);
+procedure TSynWebBase.SetHtmlVersion(const Value: TSynWebHtmlVersion);
 begin
-  FConfig.FCssVersion := Value;
+  FConfig.FHtmlVersion := Value;
+  if FConfig.FHtmlVersion >= shvXHtml10Strict then
+    FConfig.FHashTable := TSynWebSensitiveHashTable
+  else
+    FConfig.FHashTable := TSynWebInsensitiveHashTable;
   DefHighlightChange(Self);
 end;
 
@@ -5800,13 +5804,9 @@ begin
   Result := FConfig.FCssVersion;
 end;
 
-procedure TSynWebBase.SetHtmlVersion(const Value: TSynWebHtmlVersion);
+procedure TSynWebBase.SetCssVersion(const Value: TSynWebCssVersion);
 begin
-  FConfig.FHtmlVersion := Value;
-  if FConfig.FHtmlVersion >= shvXHtml10Strict then
-    FConfig.FHashTable := TSynWebSensitiveHashTable
-  else
-    FConfig.FHashTable := TSynWebInsensitiveHashTable;
+  FConfig.FCssVersion := Value;
   DefHighlightChange(Self);
 end;
 
@@ -5882,8 +5882,7 @@ begin
   if Value then
     SetupActiveHighlighter
   else
-    FActiveHighlighters := [shtHtml, shtCss, shtES, shtPHP_inHtml,
-      shtPHP_inCss, shtPHP_inES];
+    FActiveHighlighters := [Low(TSynHighlighterType)..High(TSynHighlighterType)];
   DefHighlightChange(Self);
 end;
 
@@ -5953,45 +5952,46 @@ end;
 
 function TSynWebBase.GetDefaultAttribute(Index: integer): TSynHighlighterAttributes;
 begin
-  case Index of
-    // SYN_ATTR_IDENTIFIER: ??
-    // SYN_ATTR_KEYWORD: ??
-    // SYN_ATTR_SYMBOL: ??
-    SYN_ATTR_WHITESPACE:
-    begin
-      Result := FConfig.fSYN_ATTR_WHITESPACE;
-      if not Enabled then
-        case FConfig.FHighlighterMode of
-          shmHtml:
-            Result := fEngine.fHtml_WhitespaceAttri;
-          shmCss:
-            Result := fEngine.fCss_WhitespaceAttri;
-          shmES:
-            Result := fEngine.fES_WhitespaceAttri;
-          shmPhpCli:
-            Result := fEngine.fPhp_InlineTextAttri;
-        end;
+  if FEngine = nil then
+    Result := nil
+  else
+    case Index of
+      // SYN_ATTR_IDENTIFIER: ??
+      // SYN_ATTR_KEYWORD: ??
+      // SYN_ATTR_SYMBOL: ??
+      SYN_ATTR_WHITESPACE:
+      begin
+        Result := FConfig.fSYN_ATTR_WHITESPACE;
+        if not Enabled then
+          case FConfig.FHighlighterMode of
+            shmHtml:
+              Result := fEngine.fHtml_WhitespaceAttri;
+            shmCss:
+              Result := fEngine.fCss_WhitespaceAttri;
+            shmES:
+              Result := fEngine.fES_WhitespaceAttri;
+            shmPhpCli:
+              Result := fEngine.fPhp_InlineTextAttri;
+          end;
+      end;
+      SYN_ATTR_COMMENT:
+        Result := FConfig.fSYN_ATTR_COMMENT;
+      SYN_ATTR_STRING:
+        Result := FConfig.fSYN_ATTR_STRING;
+      else
+        Result := nil;
     end;
-    SYN_ATTR_COMMENT:
-      Result := FConfig.fSYN_ATTR_COMMENT;
-    SYN_ATTR_STRING:
-      Result := FConfig.fSYN_ATTR_STRING;
-    else
-      Result := nil;
-  end;
 end;
 
 function TSynWebBase.GetTokenAttribute: TSynHighlighterAttributes;
 begin
   if FEngine = nil then
-  begin
-    Result := nil;
-    Exit;
-  end;
-  if (FConfig.FHighlighterType in FActiveHighlighters) then
-    Result := FEngine.fTokenAttributeTable[FConfig.FTokenID]
+    Result := nil
   else
-    Result := FEngine.fInactiveAttri;
+    if (FConfig.FHighlighterType in FActiveHighlighters) then
+      Result := FEngine.fTokenAttributeTable[FConfig.FTokenID]
+    else
+      Result := FEngine.fInactiveAttri;
 end;
 
 function TSynWebBase.GetToken: string;
@@ -6067,11 +6067,10 @@ begin
   if not FActiveHighlighter or not (FConfig.FPhpEmbeded or FConfig.FCssEmbeded or
     FConfig.FEsEmbeded) then
     Exit;
-  FEngine.FConfig := @FConfig;
   f := FActiveHighlighters;
   Dec(ACaretX);
   SetRange(ARange);
-  lHinghlighter := TSynHighlighterType(FEngine.GetRange_Int(3, 29));
+  lHinghlighter := TSynHighlighterType((FConfig.FRange shr 29) and not ($FFFFFFFF shl 3));
   SetLine(ALine, ACaretY);
   lPos := GetTokenPos;
   lLen := GetTokenLen;
