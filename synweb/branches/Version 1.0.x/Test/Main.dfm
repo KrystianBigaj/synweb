@@ -239,6 +239,26 @@ object Form1: TForm1
     ShowHint = True
     TabOrder = 3
   end
+  object SynEdit2: TSynEdit
+    Left = 152
+    Top = 84
+    Width = 125
+    Height = 93
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Courier New'
+    Font.Style = []
+    TabOrder = 4
+    Gutter.Font.Charset = DEFAULT_CHARSET
+    Gutter.Font.Color = clWindowText
+    Gutter.Font.Height = -11
+    Gutter.Font.Name = 'Courier New'
+    Gutter.Font.Style = []
+    Highlighter = SynWebHtmlSyn1
+    Lines.Strings = (
+      'SynEdit2')
+  end
   object SynWebEngine1: TSynWebEngine
     InactiveAttri.Foreground = clInactiveCaptionText
     HtmlCommentAttri.Foreground = clMedGray

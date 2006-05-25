@@ -37,6 +37,7 @@ type
     Panel3: TPanel;
     SynExporterHTML1: TSynExporterHTML;
     SynEditOptionsDialog1: TSynEditOptionsDialog;
+    SynEdit2: TSynEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
@@ -113,6 +114,7 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
+  SynExporterHTML1.Highlighter:=SynEdit1.Highlighter;
   SynExporterHTML1.ExportAsText := TRUE;
   SynExporterHTML1.ExportAll(SynEdit1.Lines);
   SynExporterHTML1.SaveToFile('C:\demo.html');

@@ -196,20 +196,6 @@ type
     property EsEmbeded;
   end;
 
-  TSynWebPHPCliSyn = class(TSynWebBase)
-  private
-    procedure SetupActiveHighlighter; override;
-  public
-    constructor Create(AOwner: TComponent); override;
-    procedure ResetRange; override;
-    function GetSampleSource: string; override;
-  published
-    property PhpVersion;
-    property PhpShortOpenTag;
-    property PhpAspTags;
-    property PhpEmbeded;
-  end;
-
   TSynWebCSSSyn = class(TSynWebBase)
   private
     procedure SetupActiveHighlighter; override;
@@ -218,6 +204,7 @@ type
     procedure ResetRange; override;
     function GetSampleSource: string; override;
   published
+    property HtmlVersion;
     property CssVersion;
     property PhpVersion;
     property PhpShortOpenTag;
@@ -226,6 +213,20 @@ type
   end;
 
   TSynWebESSyn = class(TSynWebBase)
+  private
+    procedure SetupActiveHighlighter; override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    procedure ResetRange; override;
+    function GetSampleSource: string; override;
+  published
+    property PhpVersion;
+    property PhpShortOpenTag;
+    property PhpAspTags;
+    property PhpEmbeded;
+  end;
+
+  TSynWebPHPCliSyn = class(TSynWebBase)
   private
     procedure SetupActiveHighlighter; override;
   public
@@ -254,7 +255,8 @@ type
     fHtml_AttrIdentFuncTable: array[0..Html_AttrMaxKeyHash] of TSynWebIdentFuncTableFunc;
     fHtml_SpecialIdentFuncTable: array[0..Html_SpecialMaxKeyHash] of
     TSynWebIdent2FuncTableFunc;
-    fHtml_RangeProcTable: array[Low(TSynWebHtmlRangeState)..High(TSynWebHtmlRangeState)] of
+    fHtml_RangeProcTable: array[Low(TSynWebHtmlRangeState)..High(
+      TSynWebHtmlRangeState)] of
     TSynWebProcTableProc;
 
     fHtml_WhitespaceAttri: TSynHighlighterAttributes;
@@ -480,7 +482,7 @@ type
 
     function Php_CheckBegin(ABegin: boolean = True): boolean;
     procedure Php_Begin(ATagKind: TSynWebPhpOpenTag);
-    procedure Php_End(AHtmlTag:Boolean);
+    procedure Php_End(AHtmlTag: boolean);
 
     procedure Php_SpaceProc;
     procedure Php_QuestionProc;
@@ -507,7 +509,8 @@ type
     procedure Php_VarProc;
     procedure Php_IdentProc;
     procedure Php_ErrorProc;
-    function Php_DoStringDouble(AIsHeredoc: boolean = False; ARangeChar: Boolean = True): boolean;
+    function Php_DoStringDouble(AIsHeredoc: boolean = False;
+      ARangeChar: boolean = True): boolean;
 
     procedure Php_SubProcProc;
     procedure Php_RangeDefaultProc;
@@ -839,7 +842,7 @@ begin
   Php_MakeMethodTables;
 
   fPhp_WhitespaceAttri := TSynHighlighterAttributes.Create('Php: Whitespace');
-  AddAttribute(fPhp_WhitespaceAttri);            
+  AddAttribute(fPhp_WhitespaceAttri);
   fPhp_InlineTextAttri := TSynHighlighterAttributes.Create('PhpCli: Inline text');
   AddAttribute(fPhp_InlineTextAttri);
   fPhp_IdentifierAttri := TSynHighlighterAttributes.Create('Php: Identifier');
@@ -882,7 +885,6 @@ begin
   fTokenAttributeTable[stkPhpError] := fPhp_ErrorAttri;
 
   // PHPCli
-
   fTokenAttributeTable[stkPhpInlineText] := fPhp_InlineTextAttri;
 
   // Global
@@ -958,7 +960,7 @@ var
 begin
   Result := Length(AString);
   for i := 1 to Length(AString) do
-    Result := TCrc8_Table[Result xor byte(AString[i])];
+    Result := TCrc8_Table[Result xor Byte(AString[i])];
 end;
 
 function TSynWebEngine.GetRange_Bit(ABit: longword): boolean;
@@ -1008,7 +1010,7 @@ end;
 procedure TSynWebEngine.SetHighlighterType(const AHighlighterType: TSynHighlighterType;
   AClearBits: boolean; ASetAtNextToken: boolean; AUseNextAH: boolean);
 begin
-   if ASetAtNextToken then
+  if ASetAtNextToken then
   begin
     FConfig^.FNextUseNextAH := AUseNextAH;
     FConfig^.FNextHighlighterType := AHighlighterType;
@@ -1029,23 +1031,23 @@ procedure TSynWebEngine.SetupHighlighterType(AClearBits: boolean);
 begin
   case FConfig^.FHighlighterType of
     shtHtml:
-    if FConfig^.FHighlighterMode = shmPhpCli then
-    begin
-      if AClearBits then
-        SetRange_Int(17, 0, 0);
-      FConfig^.FSYN_ATTR_COMMENT := fPhp_InlineTextAttri;
-      FConfig^.FSYN_ATTR_STRING := fPhp_InlineTextAttri;
-      FConfig^.FSYN_ATTR_WHITESPACE := fPhp_InlineTextAttri;
-      FConfig^.FNextProcTable := PhpCli_Next;
-    end else
-    begin
-      if AClearBits then
-        SetRange_Int(17, 0, 0);
-      FConfig^.FSYN_ATTR_COMMENT := fHtml_CommentAttri;
-      FConfig^.FSYN_ATTR_STRING := fHtml_TagKeyValueQuotedAttri;
-      FConfig^.FSYN_ATTR_WHITESPACE := fHtml_WhitespaceAttri;
-      FConfig^.FNextProcTable := Html_Next;
-    end;
+      if FConfig^.FHighlighterMode = shmPhpCli then
+      begin
+        if AClearBits then
+          SetRange_Int(17, 0, 0);
+        FConfig^.FSYN_ATTR_COMMENT := fPhp_InlineTextAttri;
+        FConfig^.FSYN_ATTR_STRING := fPhp_InlineTextAttri;
+        FConfig^.FSYN_ATTR_WHITESPACE := fPhp_InlineTextAttri;
+        FConfig^.FNextProcTable := PhpCli_Next;
+      end else
+      begin
+        if AClearBits then
+          SetRange_Int(17, 0, 0);
+        FConfig^.FSYN_ATTR_COMMENT := fHtml_CommentAttri;
+        FConfig^.FSYN_ATTR_STRING := fHtml_TagKeyValueQuotedAttri;
+        FConfig^.FSYN_ATTR_WHITESPACE := fHtml_WhitespaceAttri;
+        FConfig^.FNextProcTable := Html_Next;
+      end;
     shtCss:
     begin
       if AClearBits then
@@ -1064,7 +1066,7 @@ begin
       FConfig^.FSYN_ATTR_WHITESPACE := fES_WhitespaceAttri;
       FConfig^.FNextProcTable := ES_Next;
     end;
-    else // PHP
+    else
       if AClearBits then
         SetRange_Int(12, 17, 0);
       FConfig^.FSYN_ATTR_COMMENT := fPhp_CommentAttri;
@@ -1211,14 +1213,14 @@ begin
     if FConfig^.FHashTable[FConfig^.FLine[FConfig^.FRun]] = FConfig^.FHashTable['x'] then
     begin
       Inc(FConfig^.FRun);
+      // if not (FConfig^.FLine[FConfig^.FRun] in ['a'..'f', 'A'..'F', '0'..'9']) then
       if TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 10) = 0 then
-        // if not (FConfig^.FLine[FConfig^.FRun] in ['a'..'f', 'A'..'F', '0'..'9']) then
         FConfig^.FTokenID := stkHtmlError
       else
         repeat
           Inc(FConfig^.FRun)
+          // until not (FConfig^.FLine[FConfig^.FRun] in ['a'..'f', 'A'..'F', '0'..'9']);
         until TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 10) = 0;
-      // until not (FConfig^.FLine[FConfig^.FRun] in ['a'..'f', 'A'..'F', '0'..'9']);
     end else
       if not (FConfig^.FLine[FConfig^.FRun] in ['0'..'9']) then
         FConfig^.FTokenID := stkHtmlError
@@ -1227,15 +1229,15 @@ begin
           Inc(FConfig^.FRun)
         until not (FConfig^.FLine[FConfig^.FRun] in ['0'..'9']);
   end else
+  // if not (FConfig^.FLine[FConfig^.FRun] in ['a'..'z', 'A'..'Z'] then
     if TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 0) = 0 then
-      // if not (FConfig^.FLine[FConfig^.FRun] in ['a'..'z', 'A'..'Z'] then
       FConfig^.FTokenID := stkHtmlError
     else
     begin
       repeat
         Inc(FConfig^.FRun)
+        // until not (FConfig^.FLine[FConfig^.FRun] in ['a'..'z', 'A'..'Z'];
       until TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 0) = 0;
-      // until not (FConfig^.FLine[FConfig^.FRun] in ['a'..'z', 'A'..'Z'];
       if Html_SpecialCheck(FConfig^.FTokenPos + 1, FConfig^.FRun -
         FConfig^.FTokenPos - 1) = -1 then
         FConfig^.FTokenID := stkHtmlError;
@@ -1303,8 +1305,8 @@ begin
             FConfig^.FHashTable['P']) and
             (FConfig^.FHashTable[FConfig^.FLine[FConfig^.FRun + 6]] =
             FConfig^.FHashTable['E']) and
-            (TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun + 7]] and (1 shl 0) = 0) then
             // (not (FConfig^.FLine[FConfig^.FRun] in ['a'..'z', 'A'..'Z'])) then
+            (TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun + 7]] and (1 shl 0) = 0) then
           begin
             FConfig^.FTokenID := stkHtmlTag;
             SetRange_Int(2, 7, 0);
@@ -1313,10 +1315,11 @@ begin
             FConfig^.FTokenID := stkHtmlError;
       Exit;
     end;
-    else SetRange_Bit(12, False);
+    else
+      SetRange_Bit(12, False);
   end;
+  // if FConfig^.FLine[FConfig^.FRun] in ['a'..'z', 'A'..'Z'] then
   if TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 0) <> 0 then
-    // if FConfig^.FLine[FConfig^.FRun] in ['a'..'z', 'A'..'Z'] then
   begin
     FConfig^.FTokenID := stkHtmlTag;
     Html_SetRange(srsHtmlTag);
@@ -1343,10 +1346,11 @@ begin
       Html_ErrorProc;
     '&':
       Html_AmpersandProc;
-    else repeat
+    else
+      repeat
         Inc(FConfig^.FRun);
+        // until FConfig^.FLine[FConfig^.FRun] In [#0..#32, '<', '>', '&'];
       until TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 6) <> 0;
-      // until FConfig^.FLine[FConfig^.FRun] In [#0..#32, '<', '>', '&'];
       FConfig^.FTokenID := stkHtmlText;
   end;
 end;
@@ -1356,8 +1360,8 @@ begin
   if Html_CheckNull or Php_CheckBegin then
     Exit;
   repeat
+    // while not (FConfig^.FLine[FConfig^.FRun) in [#0, '-', '<']) do
     while TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 19) = 0 do
-      // while not (FConfig^.FLine[FConfig^.FRun) in [#0, '-', '<']) do
       Inc(FConfig^.FRun);
     case FConfig^.FLine[FConfig^.FRun] of
       #0:
@@ -1399,8 +1403,8 @@ begin
   if Html_CheckNull or Php_CheckBegin then
     Exit;
   repeat
+    // while not (FConfig^.FLine[FConfig^.FRun) in [#0, '<', '>']) do
     while TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 20) = 0 do
-      // while not (FConfig^.FLine[FConfig^.FRun) in [#0, '<', '>']) do
       Inc(FConfig^.FRun);
     case FConfig^.FLine[FConfig^.FRun] of
       #0:
@@ -1474,8 +1478,8 @@ begin
                 Html_RangeTagDOCTYPEProc;
             end;
           end;
-          else if TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and
-              (1 shl 0) = 0 then
+          else
+            if TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 0) = 0 then
               // if not (FConfig^.FLine[FConfig^.FRun] in ['a'..'z', 'A'..'Z']) then
             begin
               Inc(FConfig^.FRun);
@@ -1629,7 +1633,8 @@ begin
       FConfig^.FTokenID := stkHtmlTag;
       Html_SetRange(srsHtmlText);
     end;
-    else FConfig^.FTokenID := stkHtmlError;
+    else
+      FConfig^.FTokenID := stkHtmlError;
       repeat
         repeat
           Inc(FConfig^.FRun);
@@ -1711,7 +1716,8 @@ begin
                 end;
       Html_SetRange(srsHtmlText);
     end;
-    else if TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 0) = 0 then
+    else
+      if TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 0) = 0 then
         // if not (FConfig^.FLine[FConfig^.FRun] in ['a'..'z', 'A'..'Z']) then
         Html_ErrorProc
       else
@@ -1746,7 +1752,8 @@ begin
       FConfig^.FTokenID := stkHtmlSymbol;
       Html_SetRange(srsHtmlTagKeyValue);
     end;
-    else Html_SetRange(srsHtmlTagKey);
+    else
+      Html_SetRange(srsHtmlTagKey);
       Html_RangeTagKeyProc;
       if FConfig^.FHtmlVersion >= shvXHtml10Strict then
         FConfig^.FTokenID := stkHtmlError;
@@ -1794,7 +1801,8 @@ begin
           Html_RangeTagKeyValueQuoted2Proc;
       end;
     end;
-    else if (FConfig^.FLine[FConfig^.FRun] = '>') or
+    else
+      if (FConfig^.FLine[FConfig^.FRun] = '>') or
         ((FConfig^.FHtmlVersion >= shvXHtml10Strict) and
         (FConfig^.FLine[FConfig^.FRun] = '/') and
         (FConfig^.FLine[FConfig^.FRun + 1] = '>')) then
@@ -1844,7 +1852,8 @@ begin
                 Break
               else
                 Inc(FConfig^.FRun);
-            else Break;
+            else
+              Break;
           end;
         until False;
         if FConfig^.FHtmlVersion >= shvXHtml10Strict then
@@ -2154,7 +2163,8 @@ begin
         fCss_ProcTable[c] := Css_NumberProc;
       'a'..'z', 'A'..'Z', '\':
         fCss_ProcTable[c] := Css_IdentProc;
-      else fCss_ProcTable[c] := Css_ErrorProc;
+      else
+        fCss_ProcTable[c] := Css_ErrorProc;
     end;
 
   fCss_RangeProcTable[srsCssRuleset] := Css_RangeRulesetProc;
@@ -2234,7 +2244,8 @@ begin
     SetRange_Bit(12, True)
   else
   begin
-    if not (ARange in [TSynWebCssRangeState_RulesetBegin..TSynWebCssRangeState_RulesetEnd]) and
+    if not (ARange in [TSynWebCssRangeState_RulesetBegin..
+      TSynWebCssRangeState_RulesetEnd]) and
       (TSynWebCssRangeState(GetRange_Int(4, 13)) in
       [TSynWebCssRangeState_RulesetBegin..TSynWebCssRangeState_RulesetEnd]) then
     begin
@@ -2293,7 +2304,8 @@ begin
         end;
       end else
         Result := False;
-    else Result := False;
+    else
+      Result := False;
   end;
 end;
 
@@ -2737,7 +2749,8 @@ begin
           if not Css_CheckNull(False) and not Php_CheckBegin(False) then
             Inc(FConfig^.FRun);
       end;
-      else if Css_CheckNull(False) then
+      else
+        if Css_CheckNull(False) then
         begin
           FConfig^.FTokenID := stkCssError;
           Exit;
@@ -2839,7 +2852,8 @@ begin
           end;
           ']':
             DoEndAttrib;
-          else DoError;
+          else
+            DoError;
         end;
     2:
       if Css_NotWhitespace then
@@ -2860,7 +2874,8 @@ begin
             else
               SetRange_Int(3, 8, 4);
           end;
-          else if Css_IdentStartProc then
+          else
+            if Css_IdentStartProc then
             begin
               FConfig^.FTokenID := stkCssValString;
               SetRange_Int(3, 8, 5);
@@ -2936,7 +2951,8 @@ begin
               Css_ErrorProc;
             Css_SetRange(srsCssRuleset);
           end;
-          else if Css_IdentStartProc then
+          else
+            if Css_IdentStartProc then
               if GetRange_Bit(8) then
                 FConfig^.FTokenID := stkCssError
               else
@@ -3007,7 +3023,8 @@ var
               else
                 SetRange_Int(4, 4, 2);
             end;
-            else if not Css_IdentStartProc then
+            else
+              if not Css_IdentStartProc then
                 DoError
               else
                 if (Css_SpecialCheck(FConfig^.FTokenPos, FConfig^.FRun -
@@ -3053,7 +3070,8 @@ var
           end;
           #0..#32:
             Css_SpaceProc;
-          else if (FConfig^.FLine[FConfig^.FRun] = '/') and
+          else
+            if (FConfig^.FLine[FConfig^.FRun] = '/') and
               (FConfig^.FLine[FConfig^.FRun + 1] = '*') then
               Css_SlashProc
             else
@@ -3061,7 +3079,8 @@ var
               if Css_CheckNull or Php_CheckBegin then
                 Exit;
               repeat
-                while TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 14) = 0 do
+                while TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and
+                  (1 shl 14) = 0 do
                   // while not (FConfig^.FLine[FConfig^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
                   Inc(FConfig^.FRun);
                 case FConfig^.FLine[FConfig^.FRun] of
@@ -3078,7 +3097,8 @@ var
                       Break
                     else
                       Inc(FConfig^.FRun);
-                  else Break;
+                  else
+                    Break;
                 end;
               until False;
               FConfig^.FTokenID := stkCssValString;
@@ -3114,7 +3134,8 @@ var
               Css_SymbolProc;
               SetRange_Int(4, 4, 10);
             end;
-            else DoError;
+            else
+              DoError;
           end;
       10:
         AtImport_Medium(True);
@@ -3138,7 +3159,8 @@ var
             SetRange_Bit(11, True);
             Css_SetRange(srsCssRuleset);
           end;
-          else DoError;
+          else
+            DoError;
         end;
       end else
         if Css_IdentStartProc then
@@ -3173,7 +3195,8 @@ var
             '{':
               AtPage_Declaration;
             ':':
-              if (TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun + 1]] and (1 shl 8) = 0) or
+              if (TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun + 1]] and
+                (1 shl 8) = 0) or
                 // if not (FConfig^.FLine[FConfig^.FRun] in ['a'..'z', 'A'..'Z', '\']) or
                 ((FConfig^.FLine[FConfig^.FRun + 1] = '\') and
                 (FConfig^.FLine[FConfig^.FRun + 2] in [#0..#31])) then
@@ -3183,7 +3206,8 @@ var
                 SetRange_Int(2, 6, 1);
                 Css_SymbolProc;
               end;
-            else DoError;
+            else
+              DoError;
           end;
       1:
       begin
@@ -3226,7 +3250,8 @@ var
               else
                 SetRange_Bit(7, True);
             end;
-            else DoError;
+            else
+              DoError;
           end;
       1:
         if Css_CustomStringProc(TSynWebCssString39) then
@@ -3294,7 +3319,8 @@ begin
             SetRange_Int(2, 8, 3);
             FConfig^.FTokenID := stkCssSpecial;
           end;
-        else FConfig^.FTokenID := stkCssError;
+        else
+          FConfig^.FTokenID := stkCssError;
           Css_SetRange(srsCssRuleset);
       end;
   end else
@@ -3327,7 +3353,8 @@ begin
           Css_SetRange(srsCssPropVal);
           SetRange_Bit(8, False);
         end;
-        else Css_ErrorProc;
+        else
+          Css_ErrorProc;
       end;
   end else
     if Css_NotWhitespace then
@@ -3340,11 +3367,11 @@ begin
         Css_SetProp(0);
         case FConfig^.FLine[FConfig^.FRun] of
           '}':
-            begin
-              Css_SetRange(srsCssRuleset);
-              Css_SymbolProc;
-              Exit;
-            end;
+          begin
+            Css_SetRange(srsCssRuleset);
+            Css_SymbolProc;
+            Exit;
+          end;
           ':':
             Css_SetRange(srsCssPropVal);
         end;
@@ -3373,7 +3400,8 @@ begin
               Css_SetRange(srsCssPropValUrl);
             Css_ValID_Rect:
               Css_SetRange(srsCssPropValRect);
-            else Css_SetRange(srsCssPropValFunc);
+            else
+              Css_SetRange(srsCssPropValFunc);
           end;
         end else
           FConfig^.FTokenID := stkCssValUndef;
@@ -3480,7 +3508,8 @@ begin
           Css_SetRange(srsCssPropVal);
           SetRange_Int(3, 8, 0);
         end;
-        else Css_SetRange(srsCssPropVal);
+        else
+          Css_SetRange(srsCssPropVal);
           SetRange_Int(3, 8, 0);
           Css_RangePropValProc;
           FConfig^.FTokenID := stkCssError;
@@ -3530,7 +3559,8 @@ begin
               Css_SetRange(srsCssPropVal);
               SetRange_Int(3, 8, 0);
             end;
-            else if Css_IdentStartProc then
+            else
+              if Css_IdentStartProc then
                 FConfig^.FTokenID := stkCssVal
               else
                 Css_ErrorProc;
@@ -3603,7 +3633,8 @@ begin
         DoSymbol;
         Css_SetRange(srsCssRuleset);
       end;
-      else if Css_IdentStartProc then
+      else
+        if Css_IdentStartProc then
         begin
           if GetRange_Bit(8) then
             FConfig^.FTokenID := stkCssError
@@ -3662,7 +3693,8 @@ begin
             Css_SetRange(srsCssPropVal);
             SetRange_Int(3, 8, 0);
           end;
-          else if (FConfig^.FLine[FConfig^.FRun] = '/') and
+          else
+            if (FConfig^.FLine[FConfig^.FRun] = '/') and
               (FConfig^.FLine[FConfig^.FRun + 1] = '*') then
               Css_SlashProc
             else
@@ -3670,7 +3702,8 @@ begin
               if Css_CheckNull or Php_CheckBegin then
                 Exit;
               repeat
-                while TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 14) = 0 do
+                while TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and
+                  (1 shl 14) = 0 do
                   // while not (FConfig^.FLine[FConfig^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
                   Inc(FConfig^.FRun);
                 case FConfig^.FLine[FConfig^.FRun] of
@@ -3687,7 +3720,8 @@ begin
                       Break
                     else
                       Inc(FConfig^.FRun);
-                  else Break;
+                  else
+                    Break;
                 end;
               until False;
               FConfig^.FTokenID := stkCssValString;
@@ -3830,7 +3864,8 @@ begin
             Css_SetRange(srsCssRuleset);
             SetRange_Int(3, 8, 0);
           end;
-          else if not Css_IdentStartProc then
+          else
+            if not Css_IdentStartProc then
               Css_ErrorProc
             else
             begin
@@ -3891,7 +3926,8 @@ begin
     if FConfig^.FStringLenClean = FConfig^.FStringLen then
       for i := 1 to FConfig^.FStringLen do
       begin
-        if TSynWebInsensitiveHashTable[Temp^] <> TSynWebInsensitiveHashTable[aKey[i]] then
+        if TSynWebInsensitiveHashTable[Temp^] <>
+          TSynWebInsensitiveHashTable[aKey[i]] then
         begin
           Result := False;
           Exit;
@@ -3902,7 +3938,8 @@ begin
       begin
         if Temp^ = '\' then
           Inc(Temp);
-        if TSynWebInsensitiveHashTable[Temp^] <> TSynWebInsensitiveHashTable[aKey[i]] then
+        if TSynWebInsensitiveHashTable[Temp^] <>
+          TSynWebInsensitiveHashTable[aKey[i]] then
         begin
           Result := False;
           Exit;
@@ -3963,7 +4000,8 @@ begin
     if FConfig^.FStringLenClean = FConfig^.FStringLen then
       for i := 1 to FConfig^.FStringLen do
       begin
-        if TSynWebInsensitiveHashTable[Temp^] <> TSynWebInsensitiveHashTable[aKey[i]] then
+        if TSynWebInsensitiveHashTable[Temp^] <>
+          TSynWebInsensitiveHashTable[aKey[i]] then
         begin
           Result := False;
           Exit;
@@ -3974,7 +4012,8 @@ begin
       begin
         if Temp^ = '\' then
           Inc(Temp);
-        if TSynWebInsensitiveHashTable[Temp^] <> TSynWebInsensitiveHashTable[aKey[i]] then
+        if TSynWebInsensitiveHashTable[Temp^] <>
+          TSynWebInsensitiveHashTable[aKey[i]] then
         begin
           Result := False;
           Exit;
@@ -4126,7 +4165,8 @@ begin
           ES_SymbolProc;
       '$', 'a'..'z', 'A'..'Z', '_':
         fES_ProcTable[c] := ES_IdentProc;
-      else fES_ProcTable[c] := ES_ErrorProc;
+      else
+        fES_ProcTable[c] := ES_ErrorProc;
     end;
 
   fES_RangeProcTable[srsESDefault] := ES_RangeDefaultProc;
@@ -4195,7 +4235,8 @@ begin
         end;
       end else
         Result := False;
-    else Result := False;
+    else
+      Result := False;
   end;
 end;
 
@@ -4342,8 +4383,9 @@ begin
       // if FConfig^.FLine[FConfig^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
       repeat
         Inc(FConfig^.FRun);
-      until TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 10) =
-        0 // until not (FConfig^.FLine[FConfig^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'])
+      until TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and
+        (1 shl 10) = 0
+    // until not (FConfig^.FLine[FConfig^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'])
     else
       Exit;
   end else
@@ -4689,7 +4731,8 @@ begin
         fPhp_ProcTable[c] := Php_VarProc;
       'a'..'z', 'A'..'Z', '_', #$7F..#$FF:
         fPhp_ProcTable[c] := Php_IdentProc;
-      else fPhp_ProcTable[c] := Php_ErrorProc;
+      else
+        fPhp_ProcTable[c] := Php_ErrorProc;
     end;
 
   fPhp_RangeProcTable[srsPhpSubProc] := Php_SubProcProc;
@@ -4728,13 +4771,13 @@ begin
     while not (FConfig^.FLine[FConfig^.FRun] in [#0, '<']) do
       Inc(FConfig^.FRun);
     case FConfig^.FLine[FConfig^.FRun] of
-    #0:
-      Break;
-    '<':
-      if Php_CheckBegin(False) then
-        Break
-      else
-        Inc(FConfig^.FRun);
+      #0:
+        Break;
+      '<':
+        if Php_CheckBegin(False) then
+          Break
+        else
+          Inc(FConfig^.FRun);
     end;
   until False;
 end;
@@ -4785,7 +4828,8 @@ begin
             Php_Begin(spotASP);
         end else
           Exit;
-      else Exit;
+      else
+        Exit;
     end else
     Exit;
   Result := True;
@@ -4809,7 +4853,7 @@ begin
   end;
 end;
 
-procedure TSynWebEngine.Php_End(AHtmlTag:Boolean);
+procedure TSynWebEngine.Php_End(AHtmlTag: boolean);
 begin
   SetRange_Int(12, 17, 0);
   if FConfig^.FLine[FConfig^.FRun] = #0 then
@@ -4819,8 +4863,7 @@ begin
     SetHighlighterType(
       TSynHighlighterType(Longword(FConfig^.FHighlighterType) - Longword(shtPHP_inHtml)),
       AHtmlTag,
-      True,
-      not AHtmlTag);
+      True, not AHtmlTag);
     if AHtmlTag then
       Next;
   end;
@@ -4865,8 +4908,8 @@ begin
       // if FConfig^.FLine[FConfig^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
       repeat
         Inc(FConfig^.FRun);
-      until TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 10) =
-        0 // until not (FConfig^.FLine[FConfig^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'])
+      until TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 10) = 0
+    // until not (FConfig^.FLine[FConfig^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'])
     else
       Exit;
   end else
@@ -5061,7 +5104,7 @@ end;
 
 procedure TSynWebEngine.Php_SlashProc;
 var
-  b: Boolean;
+  b: boolean;
 begin
   case FConfig^.FLine[FConfig^.FRun + 1] of
     '/':
@@ -5073,7 +5116,8 @@ begin
     begin
       Inc(FConfig^.FRun, 2);
       Php_SetRange(srsPhpComment);
-      b := (FConfig^.FLine[FConfig^.FRun]='*') and (FConfig^.FLine[FConfig^.FRun+1]<=#32);
+      b := (FConfig^.FLine[FConfig^.FRun] = '*') and
+        (FConfig^.FLine[FConfig^.FRun + 1] <= #32);
       if b then
         Inc(FConfig^.FRun);
       SetRange_Bit(19, b);
@@ -5085,7 +5129,8 @@ begin
         else
           FConfig^.FTokenID := stkPhpComment;
     end;
-    else Php_MulDivModXorProc;
+    else
+      Php_MulDivModXorProc;
   end;
 end;
 
@@ -5123,7 +5168,8 @@ begin
         if (FConfig^.FLine[FConfig^.FRun + 1] = '>') and
           FConfig^.FPhpAspTags and FConfig^.FPhpEmbeded then
           Exit;
-      else Exit;
+      else
+        Exit;
     end;
   until False;
 end;
@@ -5187,9 +5233,10 @@ begin
   FConfig^.FTokenID := stkPhpError;
 end;
 
-function TSynWebEngine.Php_DoStringDouble(AIsHeredoc: Boolean; ARangeChar: Boolean): boolean;
+function TSynWebEngine.Php_DoStringDouble(AIsHeredoc: boolean;
+  ARangeChar: boolean): boolean;
 var
-  StringChar:Char;
+  StringChar: char;
 
   procedure TryDoSpace;
   begin
@@ -5291,8 +5338,9 @@ var
           '"':
           begin
             Inc(FConfig^.FRun);
-            while not Php_DoStringDouble(False, False) and (FConfig^.FLine[FConfig^.FRun] <> #0) and
-              (FConfig^.FTokenID <> stkPhpError) do
+            while not Php_DoStringDouble(False, False) and
+              (FConfig^.FLine[FConfig^.FRun] <> #0) and (FConfig^.FTokenID <>
+                stkPhpError) do
             ;
             if (FConfig^.FLine[FConfig^.FRun] = '"') and
               (FConfig^.FTokenID <> stkPhpError) then
@@ -5302,7 +5350,8 @@ var
             end else
               Result := False;
           end;
-          else if not TryDoIdent then
+          else
+            if not TryDoIdent then
               Result := False;
         end;
         TryDoSpace;
@@ -5347,7 +5396,8 @@ begin
               '0'..'9', '.':
                 if not Php_CheckNumberProc then
                   FConfig^.FTokenID := stkPhpError;
-              else if not TryDoIdent then
+              else
+                if not TryDoIdent then
                   FConfig^.FTokenID := stkPhpError;
             end;
             if FConfig^.FLine[FConfig^.FRun] = ']' then
@@ -5406,12 +5456,14 @@ begin
               // if FConfig^.FLine[FConfig^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
             begin
               Inc(FConfig^.FRun);
-              if TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 10) <> 0 then
+              if TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and
+                (1 shl 10) <> 0 then
                 // if FConfig^.FLine[FConfig^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
                 Inc(FConfig^.FRun);
               Exit;
             end;
-          else Exit;
+          else
+            Exit;
         end;
       end;
     end;
@@ -5419,12 +5471,10 @@ begin
   FConfig^.FTokenID := stkPhpString;
   repeat
     if StringChar = #34 then
-    begin
       while TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 25) = 0 do
         // while not(FConfig^.FLine[FConfig^.FRun] in [#0, #34, '\', '{', '$'] do
-        Inc(FConfig^.FRun);
-    end
-    else               
+        Inc(FConfig^.FRun)
+    else
       while TSynWebIdentTable2[FConfig^.FLine[FConfig^.FRun]] and (1 shl 5) = 0 do
         // while not(FConfig^.FLine[FConfig^.FRun] in [#0, '`', '\', '{', '$'] do
         Inc(FConfig^.FRun);
@@ -5453,11 +5503,11 @@ var
 begin
   case GetRange_Int(3, 20) of
     0:
-      begin
-        Inc(FConfig^.FRun, 2);
-        FConfig^.FTokenID := stkHtmlTag;
-        SetRange_Int(3, 20, 1);
-      end;
+    begin
+      Inc(FConfig^.FRun, 2);
+      FConfig^.FTokenID := stkHtmlTag;
+      SetRange_Int(3, 20, 1);
+    end;
     1:
     begin
       DoDefault;
@@ -5579,38 +5629,6 @@ begin
     Inc(FConfig^.FRun);
     Php_SetRange(srsPhpDefault);
   end;
-{
-  if FConfig^.FLine[FConfig^.FRun] = '\' then
-  begin
-    Inc(FConfig^.FRun);
-    if FConfig^.FLine[FConfig^.FRun] in ['`', '\'] then
-    begin
-      Inc(FConfig^.FRun);
-      FConfig^.FTokenID := stkPhpStringSpecial;
-      Exit;
-    end;
-  end;
-  FConfig^.FTokenID := stkPhpString;
-  repeat
-    while TSynWebIdentTable[FConfig^.FLine[FConfig^.FRun]] and (1 shl 27) = 0 do
-      // while not(FConfig^.FLine[FConfig^.FRun] in [#0, '`', '\'] do
-      Inc(FConfig^.FRun);
-    case FConfig^.FLine[FConfig^.FRun] of
-      #0:
-        Exit;
-      '`':
-      begin
-        Inc(FConfig^.FRun);
-        Php_SetRange(srsPhpDefault);
-        Exit;
-      end;
-      '\':
-        if FConfig^.FLine[FConfig^.FRun + 1] in ['`', '\'] then
-          Exit
-        else
-          Inc(FConfig^.FRun);
-    end;
-  until False;     }
 end;
 
 procedure TSynWebEngine.Php_RangeHeredocProc;
@@ -5766,103 +5784,96 @@ end;
 
 { TSynWebBase }
 
-function TSynWebBase.GetActiveHighlighters: TSynHighlighterTypes;
+function TSynWebBase.GetHtmlVersion: TSynWebHtmlVersion;
 begin
-  Result := FActiveHighlighters;
+  Result := FConfig.FHtmlVersion;
 end;
 
-function TSynWebBase.GetDefaultAttribute(Index: integer): TSynHighlighterAttributes;
+procedure TSynWebBase.SetCssVersion(const Value: TSynWebCssVersion);
 begin
- {?? if not (FConfig^.FHighlighterType in FConfig^.FActiveHighlighters) then
-    Result:=fInactiveAttri
-  else    }
-  case Index of
-    // SYN_ATTR_IDENTIFIER: ??
-    // SYN_ATTR_KEYWORD: ??
-    // SYN_ATTR_SYMBOL: ??
-    SYN_ATTR_WHITESPACE:
-      if Enabled then
-        Result := FConfig.fSYN_ATTR_WHITESPACE
-      else
-        case FConfig.FHighlighterMode of
-        shmHtml:
-          Result := fEngine.fHtml_WhitespaceAttri;
-        shmCss:
-          Result := fEngine.fCss_WhitespaceAttri;
-        shmES:
-          Result := fEngine.fES_WhitespaceAttri;
-        shmPhpCli:
-          Result := fEngine.fPhp_InlineTextAttri;
-        end;
-    SYN_ATTR_COMMENT:
-      Result := FConfig.fSYN_ATTR_COMMENT;
-    SYN_ATTR_STRING:
-      Result := FConfig.fSYN_ATTR_STRING;
-    else Result := nil;
-  end;
+  FConfig.FCssVersion := Value;
+  DefHighlightChange(Self);
 end;
 
-function TSynWebBase.GetIdentChars: TSynIdentChars;
+function TSynWebBase.GetCssVersion: TSynWebCssVersion;
 begin
-  Result := TSynValidStringChars;
+  Result := FConfig.FCssVersion;
 end;
 
-function TSynWebBase.GetRange: Pointer;
+procedure TSynWebBase.SetHtmlVersion(const Value: TSynWebHtmlVersion);
 begin
-  Result := Pointer(FConfig.FRange);
-end;
-
-function TSynWebBase.GetToken: string;
-var
-  Len: longint;
-begin
-  Len := FConfig.FRun - FConfig.FTokenPos;
-  SetString(Result, (FConfig.FLine + FConfig.FTokenPos), Len);
-end;
-
-function TSynWebBase.GetTokenAttribute: TSynHighlighterAttributes;
-begin
-  if FEngine = nil then
-  begin
-    Result := nil;
-    Exit;
-  end;
-  if (FConfig.FHighlighterType in FActiveHighlighters) {or
-    (FConfig^.FTokenID in [stkHtmlSpace, stkCssSpace, stkESSpace, stkPhpSpace])} then
-    Result := FEngine.fTokenAttributeTable[FConfig.FTokenID]
+  FConfig.FHtmlVersion := Value;
+  if FConfig.FHtmlVersion >= shvXHtml10Strict then
+    FConfig.FHashTable := TSynWebSensitiveHashTable
   else
-    Result := FEngine.fInactiveAttri;
+    FConfig.FHashTable := TSynWebInsensitiveHashTable;
+  DefHighlightChange(Self);
 end;
 
-function TSynWebBase.GetTokenID: TSynWebTokenKind;
+function TSynWebBase.GetPhpVersion: TSynWebPhpVersion;
 begin
-  Result := FConfig.FTokenID;
+  Result := FConfig.FPhpVersion;
 end;
 
-function TSynWebBase.GetTokenKind: integer;
+procedure TSynWebBase.SetPhpVersion(const Value: TSynWebPhpVersion);
 begin
-  Result := Ord(FConfig.FTokenID);
+  FConfig.FPhpVersion := Value;
+  DefHighlightChange(Self);
 end;
 
-function TSynWebBase.GetTokenLen: integer;
+function TSynWebBase.GetPhpAspTags: boolean;
 begin
-  Result := FConfig.FRun - FConfig.FTokenPos;
+  Result := FConfig.FPhpAspTags;
 end;
 
-function TSynWebBase.GetTokenPos: integer;
+procedure TSynWebBase.SetPhpAspTags(const Value: boolean);
 begin
-  Result := FConfig.FTokenPos;
+  FConfig.FPhpAspTags := Value;
+  DefHighlightChange(Self);
 end;
 
-procedure TSynWebBase.Next;
+function TSynWebBase.GetPhpShortOpenTag: boolean;
 begin
-  if FEngine = nil then
-    FConfig.FTokenID := stkNull
-  else
-  begin
-    FEngine.FConfig := @FConfig;
-    FEngine.Next;
-  end;
+  Result := FConfig.FPhpShortOpenTag;
+end;
+
+procedure TSynWebBase.SetPhpShortOpenTag(const Value: boolean);
+begin
+  FConfig.FPhpShortOpenTag := Value;
+  DefHighlightChange(Self);
+end;
+
+function TSynWebBase.GetCssEmbeded: boolean;
+begin
+  Result := FConfig.FCssEmbeded;
+end;
+
+procedure TSynWebBase.SetCssEmbeded(const Value: boolean);
+begin
+  FConfig.FCssEmbeded := Value;
+  DefHighlightChange(Self);
+end;
+
+function TSynWebBase.GetEsEmbeded: boolean;
+begin
+  Result := FConfig.FEsEmbeded;
+end;
+
+procedure TSynWebBase.SetEsEmbeded(const Value: boolean);
+begin
+  FConfig.FEsEmbeded := Value;
+  DefHighlightChange(Self);
+end;
+
+function TSynWebBase.GetPhpEmbeded: boolean;
+begin
+  Result := FConfig.FPhpEmbeded;
+end;
+
+procedure TSynWebBase.SetPhpEmbeded(const Value: boolean);
+begin
+  FConfig.FPhpEmbeded := Value;
+  DefHighlightChange(Self);
 end;
 
 procedure TSynWebBase.SetActiveHighlighter(const Value: boolean);
@@ -5876,20 +5887,154 @@ begin
   DefHighlightChange(Self);
 end;
 
-procedure TSynWebBase.SetCssVersion(const Value: TSynWebCssVersion);
+function TSynWebBase.GetActiveHighlighters: TSynHighlighterTypes;
 begin
-  FConfig.FCssVersion := Value;
+  Result := FActiveHighlighters;
+end;
+
+procedure TSynWebBase.SetEngine(const Value: TSynWebEngine);
+begin
+  if FEngine <> nil then
+    FEngine.RemoveFromNotifyList(Self);
+  FEngine := Value;
+  if FEngine <> nil then
+    FEngine.AddToNotifyList(Self);
+end;
+
+procedure TSynWebBase.DoDefHighlightChange;
+begin
   DefHighlightChange(Self);
 end;
 
-procedure TSynWebBase.SetHtmlVersion(const Value: TSynWebHtmlVersion);
+function TSynWebBase.GetAttribCount: integer;
 begin
-  FConfig.FHtmlVersion := Value;
-  if FConfig.FHtmlVersion >= shvXHtml10Strict then
-    FConfig.FHashTable := TSynWebSensitiveHashTable
+  if FEngine = nil then
+    Result := 0
   else
-    FConfig.FHashTable := TSynWebInsensitiveHashTable;
-  DefHighlightChange(Self);
+    Result := FEngine.fAttributes.Count;
+end;
+
+function TSynWebBase.GetAttribute(idx: integer): TSynHighlighterAttributes;
+begin
+  Result := nil;
+  if (FEngine <> nil) and (idx >= 0) and (idx < FEngine.fAttributes.Count) then
+    Result := TSynHighlighterAttributes(FEngine.fAttributes.Objects[idx]);
+end;
+
+function TSynWebBase.GetIdentChars: TSynIdentChars;
+begin
+  Result := TSynValidStringChars;
+end;
+
+constructor TSynWebBase.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  FEngine := nil;
+  FDefaultFilter := '';
+  FActiveHighlighter := False;
+  FActiveHighlighters := [shtHtml, shtCss, shtES, shtPHP_inHtml,
+    shtPHP_inCss, shtPHP_inES];
+
+  HtmlVersion := shvXHtml10Transitional;
+  CssVersion := scvCss21;
+  PhpVersion := spvPhp5;
+  PhpShortOpenTag := True;
+  PhpAspTags := False;
+
+  SetAttributesOnChange(DefHighlightChange);
+  ResetRange;
+end;
+
+destructor TSynWebBase.Destroy;
+begin
+  Engine := nil;
+  inherited Destroy;
+end;
+
+function TSynWebBase.GetDefaultAttribute(Index: integer): TSynHighlighterAttributes;
+begin
+  case Index of
+    // SYN_ATTR_IDENTIFIER: ??
+    // SYN_ATTR_KEYWORD: ??
+    // SYN_ATTR_SYMBOL: ??
+    SYN_ATTR_WHITESPACE:
+    begin
+      Result := FConfig.fSYN_ATTR_WHITESPACE;
+      if not Enabled then
+        case FConfig.FHighlighterMode of
+          shmHtml:
+            Result := fEngine.fHtml_WhitespaceAttri;
+          shmCss:
+            Result := fEngine.fCss_WhitespaceAttri;
+          shmES:
+            Result := fEngine.fES_WhitespaceAttri;
+          shmPhpCli:
+            Result := fEngine.fPhp_InlineTextAttri;
+        end;
+    end;
+    SYN_ATTR_COMMENT:
+      Result := FConfig.fSYN_ATTR_COMMENT;
+    SYN_ATTR_STRING:
+      Result := FConfig.fSYN_ATTR_STRING;
+    else
+      Result := nil;
+  end;
+end;
+
+function TSynWebBase.GetTokenAttribute: TSynHighlighterAttributes;
+begin
+  if FEngine = nil then
+  begin
+    Result := nil;
+    Exit;
+  end;
+  if (FConfig.FHighlighterType in FActiveHighlighters) then
+    Result := FEngine.fTokenAttributeTable[FConfig.FTokenID]
+  else
+    Result := FEngine.fInactiveAttri;
+end;
+
+function TSynWebBase.GetToken: string;
+var
+  Len: longint;
+begin
+  Len := FConfig.FRun - FConfig.FTokenPos;
+  SetString(Result, (FConfig.FLine + FConfig.FTokenPos), Len);
+end;
+
+function TSynWebBase.GetTokenLen: integer;
+begin
+  Result := FConfig.FRun - FConfig.FTokenPos;
+end;
+
+function TSynWebBase.GetTokenPos: integer;
+begin
+  Result := FConfig.FTokenPos;
+end;
+
+function TSynWebBase.GetTokenID: TSynWebTokenKind;
+begin
+  Result := FConfig.FTokenID;
+end;
+
+function TSynWebBase.GetTokenKind: integer;
+begin
+  Result := Ord(FConfig.FTokenID);
+end;
+
+function TSynWebBase.GetRange: Pointer;
+begin
+  Result := Pointer(FConfig.FRange);
+end;
+
+function TSynWebBase.GetEol: boolean;
+begin
+  Result := FConfig.FTokenID = stkNull;
+end;
+
+procedure TSynWebBase.SetRange(Value: Pointer);
+begin
+  FConfig.FRange := Longword(Value);
 end;
 
 procedure TSynWebBase.SetLine(NewValue: string; LineNumber: integer);
@@ -5900,27 +6045,15 @@ begin
   FEngine.SetLine(NewValue, LineNumber);
 end;
 
-procedure TSynWebBase.SetPhpVersion(const Value: TSynWebPhpVersion);
+procedure TSynWebBase.Next;
 begin
-  FConfig.FPhpVersion := Value;
-  DefHighlightChange(Self);
-end;
-
-procedure TSynWebBase.SetPhpAspTags(const Value: boolean);
-begin
-  FConfig.FPhpAspTags := Value;
-  DefHighlightChange(Self);
-end;
-
-procedure TSynWebBase.SetPhpShortOpenTag(const Value: boolean);
-begin
-  FConfig.FPhpShortOpenTag := Value;
-  DefHighlightChange(Self);
-end;
-
-procedure TSynWebBase.SetRange(Value: Pointer);
-begin
-  FConfig.FRange := Longword(Value);
+  if FEngine = nil then
+    FConfig.FTokenID := stkNull
+  else
+  begin
+    FEngine.FConfig := @FConfig;
+    FEngine.Next;
+  end;
 end;
 
 function TSynWebBase.UpdateActiveHighlighter(ARange: Pointer;
@@ -5963,77 +6096,38 @@ begin
   Result := f <> FActiveHighlighters;
 end;
 
-function TSynWebBase.GetAttribCount: integer;
+{ TSynWebHtmlSyn }
+
+procedure TSynWebHtmlSyn.SetupActiveHighlighter;
 begin
-  if FEngine = nil then
-    Result := 0
-  else
-    Result := FEngine.fAttributes.Count;
+  FActiveHighlighters := [shtHtml];
 end;
 
-function TSynWebBase.GetAttribute(idx: integer): TSynHighlighterAttributes;
+constructor TSynWebHtmlSyn.Create(AOwner: TComponent);
 begin
-  Result := nil;
-  if (FEngine <> nil) and (idx >= 0) and (idx < FEngine.fAttributes.Count) then
-    Result := TSynHighlighterAttributes(FEngine.fAttributes.Objects[idx]);
-end;
-
-function TSynWebBase.GetCssVersion: TSynWebCssVersion;
-begin
-  Result := FConfig.FCssVersion;
-end;
-
-function TSynWebBase.GetHtmlVersion: TSynWebHtmlVersion;
-begin
-  Result := FConfig.FHtmlVersion;
-end;
-
-function TSynWebBase.GetPhpAspTags: boolean;
-begin
-  Result := FConfig.FPhpAspTags;
-end;
-
-function TSynWebBase.GetPhpShortOpenTag: boolean;
-begin
-  Result := FConfig.FPhpShortOpenTag;
-end;
-
-function TSynWebBase.GetPhpVersion: TSynWebPhpVersion;
-begin
-  Result := FConfig.FPhpVersion;
-end;
-
-function TSynWebBase.GetEol: boolean;
-begin
-  Result := FConfig.FTokenID = stkNull;
-end;
-
-{ TSynWebSynES }
-
-constructor TSynWebESSyn.Create(AOwner: TComponent);
-begin
-  FConfig.FHighlighterMode := shmES;
+  FConfig.FHighlighterMode := shmHtml;
   inherited Create(AOwner);
-  PhpEmbeded := False;
-  CssEmbeded := False;
-  EsEmbeded := False;
+  PhpEmbeded := True;
+  CssEmbeded := True;
+  EsEmbeded := True;
 end;
 
-function TSynWebESSyn.GetSampleSource: string;
+procedure TSynWebHtmlSyn.ResetRange;
+begin
+  FConfig.FRange := $00000000;
+end;
+
+function TSynWebHtmlSyn.GetSampleSource: string;
 begin
 
 end;
+          
+{ TSynWebCSSSyn }
 
-procedure TSynWebESSyn.ResetRange;
+procedure TSynWebCSSSyn.SetupActiveHighlighter;
 begin
-  with FConfig do
-  begin
-    FRange := $00000000;
-    FRange := FRange or (Longword(shtES) shl 29);
-  end;
+  FActiveHighlighters := [shtCSS];
 end;
-
-{ TSynWebSynCSS }
 
 constructor TSynWebCSSSyn.Create(AOwner: TComponent);
 begin
@@ -6042,11 +6136,6 @@ begin
   PhpEmbeded := False;
   CssEmbeded := False;
   EsEmbeded := False;
-end;
-
-function TSynWebCSSSyn.GetSampleSource: string;
-begin
-
 end;
 
 procedure TSynWebCSSSyn.ResetRange;
@@ -6058,28 +6147,47 @@ begin
   end;
 end;
 
-{ TSynWebSynHtml }
-
-constructor TSynWebHtmlSyn.Create(AOwner: TComponent);
+function TSynWebCSSSyn.GetSampleSource: string;
 begin
-  FConfig.FHighlighterMode := shmHtml;
+
+end;
+
+{ TSynWebSynES }
+
+procedure TSynWebESSyn.SetupActiveHighlighter;
+begin
+  FActiveHighlighters := [shtES];
+end;
+
+constructor TSynWebESSyn.Create(AOwner: TComponent);
+begin
+  FConfig.FHighlighterMode := shmES;
   inherited Create(AOwner);
-  PhpEmbeded := True;
-  CssEmbeded := True;
-  EsEmbeded := True;
+  PhpEmbeded := False;
+  CssEmbeded := False;
+  EsEmbeded := False;
 end;
 
-function TSynWebHtmlSyn.GetSampleSource: string;
+procedure TSynWebESSyn.ResetRange;
 begin
-
+  with FConfig do
+  begin
+    FRange := $00000000;
+    FRange := FRange or (Longword(shtES) shl 29);
+  end;
 end;
 
-procedure TSynWebHtmlSyn.ResetRange;
+function TSynWebESSyn.GetSampleSource: string;
 begin
-  FConfig.FRange := $00000000;
+
 end;
 
 { TSynWebSynPHP }
+
+procedure TSynWebPHPCliSyn.SetupActiveHighlighter;
+begin
+  FActiveHighlighters := [shtHtml];
+end;
 
 constructor TSynWebPHPCliSyn.Create(AOwner: TComponent);
 begin
@@ -6090,106 +6198,14 @@ begin
   EsEmbeded := False;
 end;
 
-function TSynWebPHPCliSyn.GetSampleSource: string;
-begin
-
-end;
-
 procedure TSynWebPHPCliSyn.ResetRange;
 begin
   FConfig.FRange := $00000000;
 end;
 
-constructor TSynWebBase.Create(AOwner: TComponent);
+function TSynWebPHPCliSyn.GetSampleSource: string;
 begin
-  inherited Create(AOwner);
-  FEngine := nil;
-  FDefaultFilter := '';
-  FActiveHighlighter := False;
-  FActiveHighlighters := [shtHtml, shtCss, shtES, shtPHP_inHtml,
-    shtPHP_inCss, shtPHP_inES];
 
-  HtmlVersion := shvXHtml10Transitional;
-  CssVersion := scvCss21;
-  PhpVersion := spvPhp5;
-  PhpShortOpenTag := True;
-  PhpAspTags := False;
-
-  SetAttributesOnChange(DefHighlightChange);
-  ResetRange;
-end;
-
-destructor TSynWebBase.Destroy;
-begin
-  Engine := nil;
-  inherited Destroy;
-end;
-
-procedure TSynWebHtmlSyn.SetupActiveHighlighter;
-begin
-  FActiveHighlighters := [shtHtml];
-end;
-
-procedure TSynWebESSyn.SetupActiveHighlighter;
-begin
-  FActiveHighlighters := [shtES];
-end;
-
-procedure TSynWebCSSSyn.SetupActiveHighlighter;
-begin
-  FActiveHighlighters := [shtCSS];
-end;
-
-procedure TSynWebPHPCliSyn.SetupActiveHighlighter;
-begin
-  FActiveHighlighters := [shtHtml];
-end;
-
-function TSynWebBase.GetCssEmbeded: boolean;
-begin
-  Result := FConfig.FCssEmbeded;
-end;
-
-function TSynWebBase.GetEsEmbeded: boolean;
-begin
-  Result := FConfig.FEsEmbeded;
-end;
-
-function TSynWebBase.GetPhpEmbeded: boolean;
-begin
-  Result := FConfig.FPhpEmbeded;
-end;
-
-procedure TSynWebBase.SetCssEmbeded(const Value: boolean);
-begin
-  FConfig.FCssEmbeded := Value;
-  DefHighlightChange(Self);
-end;
-
-procedure TSynWebBase.SetEsEmbeded(const Value: boolean);
-begin
-  FConfig.FEsEmbeded := Value;
-  DefHighlightChange(Self);
-end;
-
-procedure TSynWebBase.SetPhpEmbeded(const Value: boolean);
-begin
-  FConfig.FPhpEmbeded := Value;
-  DefHighlightChange(Self);
-end;
-
-procedure TSynWebBase.SetEngine(const Value: TSynWebEngine);
-begin
-  if FEngine <> nil then
-    FEngine.RemoveFromNotifyList(Self);
-  FEngine := Value;
-  if FEngine <> nil then
-    FEngine.AddToNotifyList(Self);
-end;
-
-procedure TSynWebBase.DoDefHighlightChange;
-begin
-  DefHighlightChange(Self);
 end;
 
 initialization
