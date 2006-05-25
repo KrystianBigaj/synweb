@@ -1259,7 +1259,7 @@ begin
     end;
     '?':
     begin
-      if FConfig^.FHtmlVersion >= hvXHtml10Strict then
+      if FConfig^.FHtmlVersion >= shvXHtml10Strict then
         Inc(FConfig^.FRun);
       SetRange_Bit(12, False);
     end;
@@ -1276,7 +1276,7 @@ begin
         else
           Html_RangeCommentProc;
       end else
-        if (FConfig^.FHtmlVersion >= hvXHtml10Strict) and
+        if (FConfig^.FHtmlVersion >= shvXHtml10Strict) and
           (FConfig^.FLine[FConfig^.FRun] = '[') and
           (FConfig^.FLine[FConfig^.FRun + 1] = 'C') and
           (FConfig^.FLine[FConfig^.FRun + 2] = 'D') and
@@ -1671,7 +1671,7 @@ begin
       Html_SpaceProc;
     '/':
       if not GetRange_Bit(12) and (FConfig^.FLine[FConfig^.FRun + 1] = '>') and
-        (FConfig^.FHtmlVersion >= hvXHtml10Strict) and
+        (FConfig^.FHtmlVersion >= shvXHtml10Strict) and
         (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) then
       begin
         Inc(FConfig^.FRun, 2);
@@ -1687,7 +1687,7 @@ begin
       Inc(FConfig^.FRun);
       FConfig^.FTokenID := stkHtmlTag;
       if (ID <> -1) and (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) and
-        (FConfig^.FHtmlVersion >= hvXHtml10Strict) then
+        (FConfig^.FHtmlVersion >= shvXHtml10Strict) then
         FConfig^.FTokenID := stkHtmlError
       else
         if not GetRange_Bit(12) and ((FConfig^.FRun = 0) or
@@ -1748,7 +1748,7 @@ begin
     end;
     else Html_SetRange(srsHtmlTagKey);
       Html_RangeTagKeyProc;
-      if FConfig^.FHtmlVersion >= hvXHtml10Strict then
+      if FConfig^.FHtmlVersion >= shvXHtml10Strict then
         FConfig^.FTokenID := stkHtmlError;
   end;
 end;
@@ -1795,7 +1795,7 @@ begin
       end;
     end;
     else if (FConfig^.FLine[FConfig^.FRun] = '>') or
-        ((FConfig^.FHtmlVersion >= hvXHtml10Strict) and
+        ((FConfig^.FHtmlVersion >= shvXHtml10Strict) and
         (FConfig^.FLine[FConfig^.FRun] = '/') and
         (FConfig^.FLine[FConfig^.FRun + 1] = '>')) then
       begin
@@ -1837,7 +1837,7 @@ begin
           case FConfig^.FLine[FConfig^.FRun] of
             '/':
               if (FConfig^.FLine[FConfig^.FRun + 1] = '>') and
-                (FConfig^.FHtmlVersion >= hvXHtml10Strict) then
+                (FConfig^.FHtmlVersion >= shvXHtml10Strict) then
                 Break;
             '<':
               if Php_CheckBegin(False) then
@@ -1847,7 +1847,7 @@ begin
             else Break;
           end;
         until False;
-        if FConfig^.FHtmlVersion >= hvXHtml10Strict then
+        if FConfig^.FHtmlVersion >= shvXHtml10Strict then
           FConfig^.FTokenID := stkHtmlError
         else
           FConfig^.FTokenID := stkHtmlTagKeyValue;
@@ -5876,7 +5876,7 @@ end;
 procedure TSynWebBase.SetHtmlVersion(const Value: TSynWebHtmlVersion);
 begin
   FConfig.FHtmlVersion := Value;
-  if FConfig.FHtmlVersion >= hvXHtml10Strict then
+  if FConfig.FHtmlVersion >= shvXHtml10Strict then
     FConfig.FHashTable := TSynWebSensitiveHashTable
   else
     FConfig.FHashTable := TSynWebInsensitiveHashTable;
@@ -6100,7 +6100,7 @@ begin
   FActiveHighlighters := [shtHtml, shtCss, shtES, shtPHP_inHtml,
     shtPHP_inCss, shtPHP_inES];
 
-  HtmlVersion := hvXHtml10Transitional;
+  HtmlVersion := shvXHtml10Transitional;
   CssVersion := scvCss21;
   PhpVersion := spvPhp5;
   PhpShortOpenTag := True;

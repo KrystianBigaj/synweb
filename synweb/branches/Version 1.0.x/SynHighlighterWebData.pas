@@ -58,8 +58,8 @@ type
 
 // HTML ------------------------------------------------------------------------
 type
-  TSynWebHtmlVersion = (hvHtml401Strict, hvHtml401Transitional, hvHtml401Frameset,
-    hvXHtml10Strict, hvXHtml10Transitional, hvXHtml10Frameset);
+  TSynWebHtmlVersion = (shvHtml401Strict, shvHtml401Transitional, shvHtml401Frameset,
+    shvXHtml10Strict, shvXHtml10Transitional, shvXHtml10Frameset);
 
   TSynWebHtmlRangeState = (srsHtmlText, srsHtmlComment, srsHtmlCommentClose, srsHtmlTag,
     srsHtmlTagClose, srsHtmlTagDOCTYPE, srsHtmlTagCDATA, srsHtmlTagKey,
