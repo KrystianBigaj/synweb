@@ -143,8 +143,6 @@ type
     function GetAttribute(idx: integer): TSynHighlighterAttributes; override;
     function GetIdentChars: TSynIdentChars; override;
 
-    property ActiveSwitchHighlighter: boolean
-      read FActiveHighlighter write SetActiveHighlighter;
 
     property HtmlVersion: TSynWebHtmlVersion read GetHtmlVersion write SetHtmlVersion;
     property CssVersion: TSynWebCssVersion read GetCssVersion write SetCssVersion;
@@ -171,11 +169,13 @@ type
     procedure SetRange(Value: Pointer); override;
     procedure SetLine(NewValue: string; LineNumber: integer); override;
     procedure Next; override;
-    
+
     function UpdateActiveHighlighter(ARange: Pointer; ALine: string;
       ACaretX, ACaretY: integer): boolean;
     property ActiveHighlighters: TSynHighlighterTypes read GetActiveHighlighters;
   published
+    property ActiveSwitchHighlighter: boolean
+      read FActiveHighlighter write SetActiveHighlighter;
     property Engine: TSynWebEngine read FEngine write SetEngine;
   end;
 
@@ -187,7 +187,6 @@ type
     procedure ResetRange; override;
     function GetSampleSource: string; override;
   published
-    property ActiveSwitchHighlighter;
     property HtmlVersion;
     property CssVersion;
     property PhpVersion;
@@ -219,7 +218,6 @@ type
     procedure ResetRange; override;
     function GetSampleSource: string; override;
   published
-    property ActiveSwitchHighlighter;
     property CssVersion;
     property PhpVersion;
     property PhpShortOpenTag;
@@ -235,7 +233,6 @@ type
     procedure ResetRange; override;
     function GetSampleSource: string; override;
   published
-    property ActiveSwitchHighlighter;
     property PhpVersion;
     property PhpShortOpenTag;
     property PhpAspTags;
@@ -334,6 +331,7 @@ type
     fPhp_SymbolAttri: TSynHighlighterAttributes;
     fPhp_NumberAttri: TSynHighlighterAttributes;
     fPhp_ErrorAttri: TSynHighlighterAttributes;
+    fPhp_InlineTextAttri: TSynHighlighterAttributes;
 
     // HTML --------------------------------------------------------------------
     procedure Html_MakeMethodTables;
@@ -661,6 +659,8 @@ type
       read fPhp_NumberAttri write fPhp_NumberAttri;
     property PhpErrorAttri: TSynHighlighterAttributes
       read fPhp_ErrorAttri write fPhp_ErrorAttri;
+    property PhpInlineTextAttri: TSynHighlighterAttributes
+      read fPhp_InlineTextAttri write fPhp_InlineTextAttri;
     property PhpHereDocList: TStringList read FPhpHereDocList;
   end;
 
@@ -863,6 +863,8 @@ begin
   AddAttribute(fPhp_NumberAttri);
   fPhp_ErrorAttri := TSynHighlighterAttributes.Create('Php: Error');
   AddAttribute(fPhp_ErrorAttri);
+  fPhp_InlineTextAttri := TSynHighlighterAttributes.Create('Php: Inline text');
+  AddAttribute(fPhp_InlineTextAttri);
 
   fTokenAttributeTable[stkPhpSpace] := fHtml_WhitespaceAttri;
   fTokenAttributeTable[stkPhpIdentifier] := fPhp_IdentifierAttri;
@@ -877,6 +879,7 @@ begin
   fTokenAttributeTable[stkPhpSymbol] := fPhp_SymbolAttri;
   fTokenAttributeTable[stkPhpNumber] := fPhp_NumberAttri;
   fTokenAttributeTable[stkPhpError] := fPhp_ErrorAttri;
+  fTokenAttributeTable[stkPhpInlineText] := fPhp_InlineTextAttri;
 
   // Global
   fInactiveAttri := TSynHighlighterAttributes.Create('Global: Inactive');
@@ -3322,7 +3325,11 @@ begin
         Css_SetProp(0);
         case FConfig^.FLine[FConfig^.FRun] of
           '}':
-            Css_SetRange(srsCssRuleset);
+            begin
+              Css_SetRange(srsCssRuleset);
+              Css_SymbolProc;
+              Exit;
+            end;
           ':':
             Css_SetRange(srsCssPropVal);
         end;

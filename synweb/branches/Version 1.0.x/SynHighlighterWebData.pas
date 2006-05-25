@@ -40,7 +40,7 @@ type
     // PHP
     stkPhpSpace, stkPhpIdentifier, stkPhpKeyword, stkPhpFunction, stkPhpVariable,
     stkPhpConst, stkPhpString, stkPhpStringSpecial, stkPhpComment, stkPhpDocComment,
-    stkPhpSymbol, stkPhpNumber, stkPhpError,
+    stkPhpSymbol, stkPhpNumber, stkPhpError, stkPhpInlineText,
     // Other
     stkNull);
 
