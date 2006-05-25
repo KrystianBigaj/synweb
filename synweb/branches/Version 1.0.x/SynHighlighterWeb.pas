@@ -143,7 +143,6 @@ type
     function GetAttribute(idx: integer): TSynHighlighterAttributes; override;
     function GetIdentChars: TSynIdentChars; override;
 
-
     property HtmlVersion: TSynWebHtmlVersion read GetHtmlVersion write SetHtmlVersion;
     property CssVersion: TSynWebCssVersion read GetCssVersion write SetCssVersion;
     property PhpVersion: TSynWebPhpVersion read GetPhpVersion write SetPhpVersion;
@@ -208,6 +207,7 @@ type
     property PhpVersion;
     property PhpShortOpenTag;
     property PhpAspTags;
+    property PhpEmbeded;
   end;
 
   TSynWebCSSSyn = class(TSynWebBase)
@@ -319,6 +319,7 @@ type
     TSynWebProcTableProc;
 
     fPhp_WhitespaceAttri: TSynHighlighterAttributes;
+    fPhp_InlineTextAttri: TSynHighlighterAttributes;
     fPhp_IdentifierAttri: TSynHighlighterAttributes;
     fPhp_KeyAttri: TSynHighlighterAttributes;
     fPhp_FunctionAttri: TSynHighlighterAttributes;
@@ -331,7 +332,6 @@ type
     fPhp_SymbolAttri: TSynHighlighterAttributes;
     fPhp_NumberAttri: TSynHighlighterAttributes;
     fPhp_ErrorAttri: TSynHighlighterAttributes;
-    fPhp_InlineTextAttri: TSynHighlighterAttributes;
 
     // HTML --------------------------------------------------------------------
     procedure Html_MakeMethodTables;
@@ -474,12 +474,13 @@ type
     // PHP ---------------------------------------------------------------------
     procedure Php_MakeMethodTables;
     procedure Php_Next;
+    procedure PhpCli_Next;
     function Php_GetRange: TSynWebPhpRangeState;
     procedure Php_SetRange(const ARange: TSynWebPhpRangeState);
 
     function Php_CheckBegin(ABegin: boolean = True): boolean;
     procedure Php_Begin(ATagKind: TSynWebPhpOpenTag);
-    procedure Php_End;
+    procedure Php_End(AHtmlTag:Boolean);
 
     procedure Php_SpaceProc;
     procedure Php_QuestionProc;
@@ -633,8 +634,11 @@ type
       read fES_ErrorAttri write fES_ErrorAttri;
 
     // PHP
+    property PhpHereDocList: TStringList read FPhpHereDocList;
     property PhpWhitespaceAttri: TSynHighlighterAttributes
       read fPhp_WhitespaceAttri write fPhp_WhitespaceAttri;
+    property PhpCliInlineTextAttri: TSynHighlighterAttributes
+      read fPhp_InlineTextAttri write fPhp_InlineTextAttri;
     property PhpIdentifierAttri: TSynHighlighterAttributes
       read fPhp_IdentifierAttri write fPhp_IdentifierAttri;
     property PhpKeyAttri: TSynHighlighterAttributes
@@ -659,9 +663,6 @@ type
       read fPhp_NumberAttri write fPhp_NumberAttri;
     property PhpErrorAttri: TSynHighlighterAttributes
       read fPhp_ErrorAttri write fPhp_ErrorAttri;
-    property PhpInlineTextAttri: TSynHighlighterAttributes
-      read fPhp_InlineTextAttri write fPhp_InlineTextAttri;
-    property PhpHereDocList: TStringList read FPhpHereDocList;
   end;
 
 implementation
@@ -838,7 +839,9 @@ begin
   Php_MakeMethodTables;
 
   fPhp_WhitespaceAttri := TSynHighlighterAttributes.Create('Php: Whitespace');
-  AddAttribute(fPhp_WhitespaceAttri);
+  AddAttribute(fPhp_WhitespaceAttri);            
+  fPhp_InlineTextAttri := TSynHighlighterAttributes.Create('PhpCli: Inline text');
+  AddAttribute(fPhp_InlineTextAttri);
   fPhp_IdentifierAttri := TSynHighlighterAttributes.Create('Php: Identifier');
   AddAttribute(fPhp_IdentifierAttri);
   fPhp_KeyAttri := TSynHighlighterAttributes.Create('Php: Keyword');
@@ -863,8 +866,6 @@ begin
   AddAttribute(fPhp_NumberAttri);
   fPhp_ErrorAttri := TSynHighlighterAttributes.Create('Php: Error');
   AddAttribute(fPhp_ErrorAttri);
-  fPhp_InlineTextAttri := TSynHighlighterAttributes.Create('Php: Inline text');
-  AddAttribute(fPhp_InlineTextAttri);
 
   fTokenAttributeTable[stkPhpSpace] := fHtml_WhitespaceAttri;
   fTokenAttributeTable[stkPhpIdentifier] := fPhp_IdentifierAttri;
@@ -879,6 +880,9 @@ begin
   fTokenAttributeTable[stkPhpSymbol] := fPhp_SymbolAttri;
   fTokenAttributeTable[stkPhpNumber] := fPhp_NumberAttri;
   fTokenAttributeTable[stkPhpError] := fPhp_ErrorAttri;
+
+  // PHPCli
+
   fTokenAttributeTable[stkPhpInlineText] := fPhp_InlineTextAttri;
 
   // Global
@@ -1004,7 +1008,7 @@ end;
 procedure TSynWebEngine.SetHighlighterType(const AHighlighterType: TSynHighlighterType;
   AClearBits: boolean; ASetAtNextToken: boolean; AUseNextAH: boolean);
 begin
-  if ASetAtNextToken then
+   if ASetAtNextToken then
   begin
     FConfig^.FNextUseNextAH := AUseNextAH;
     FConfig^.FNextHighlighterType := AHighlighterType;
@@ -1025,6 +1029,15 @@ procedure TSynWebEngine.SetupHighlighterType(AClearBits: boolean);
 begin
   case FConfig^.FHighlighterType of
     shtHtml:
+    if FConfig^.FHighlighterMode = shmPhpCli then
+    begin
+      if AClearBits then
+        SetRange_Int(17, 0, 0);
+      FConfig^.FSYN_ATTR_COMMENT := fPhp_InlineTextAttri;
+      FConfig^.FSYN_ATTR_STRING := fPhp_InlineTextAttri;
+      FConfig^.FSYN_ATTR_WHITESPACE := fPhp_InlineTextAttri;
+      FConfig^.FNextProcTable := PhpCli_Next;
+    end else
     begin
       if AClearBits then
         SetRange_Int(17, 0, 0);
@@ -1687,6 +1700,7 @@ begin
             if (ID = Html_TagID_Script) then
               if GetRange_Bit(28) and FConfig^.FPhpEmbeded then
               begin
+                SetRange_Int(17, 0, 0);
                 Php_Begin(spotHTML);
                 Exit;
               end else
@@ -1802,6 +1816,7 @@ begin
             if (ID = Html_TagID_Script) then
               if GetRange_Bit(28) and FConfig^.FPhpEmbeded then
               begin
+                SetRange_Int(17, 0, 0);
                 Php_Begin(spotHTML);
                 Exit;
               end else
@@ -4703,6 +4718,27 @@ begin
     fPhp_RangeProcTable[Php_GetRange];
 end;
 
+procedure TSynWebEngine.PhpCli_Next;
+begin
+  FConfig^.FTokenID := stkPhpInlineText;
+  FConfig^.FTokenPos := FConfig^.FRun;
+  if Html_CheckNull or Php_CheckBegin then
+    Exit;
+  repeat
+    while not (FConfig^.FLine[FConfig^.FRun] in [#0, '<']) do
+      Inc(FConfig^.FRun);
+    case FConfig^.FLine[FConfig^.FRun] of
+    #0:
+      Break;
+    '<':
+      if Php_CheckBegin(False) then
+        Break
+      else
+        Inc(FConfig^.FRun);
+    end;
+  until False;
+end;
+
 function TSynWebEngine.Php_GetRange: TSynWebPhpRangeState;
 begin
   if GetRange_Bit(26) then
@@ -4773,22 +4809,19 @@ begin
   end;
 end;
 
-procedure TSynWebEngine.Php_End;
-var
-  t: Boolean;
+procedure TSynWebEngine.Php_End(AHtmlTag:Boolean);
 begin
   SetRange_Int(12, 17, 0);
   if FConfig^.FLine[FConfig^.FRun] = #0 then
     SetRange_Int(3, 29, Longword(FConfig^.FHighlighterType) - Longword(shtPHP_inHtml))
   else
   begin
-    t := FConfig^.FLine[FConfig^.FRun] = '<'; // Check if php end tag is </script>
     SetHighlighterType(
       TSynHighlighterType(Longword(FConfig^.FHighlighterType) - Longword(shtPHP_inHtml)),
-      t,
+      AHtmlTag,
       True,
-      not t);
-    if t then
+      not AHtmlTag);
+    if AHtmlTag then
       Next;
   end;
 end;
@@ -4808,7 +4841,7 @@ begin
   begin
     Inc(FConfig^.FRun);
     FConfig^.FTokenID := stkHtmlTag;
-    Php_End;
+    Php_End(False);
   end else
     FConfig^.FTokenID := stkPhpSymbol;
 end;
@@ -4970,7 +5003,7 @@ begin
         // (FConfig^.FLine[FConfig^.FRun+7] in [#0..#32, '>']) then
       begin
         Dec(FConfig^.FRun);
-        Php_End;
+        Php_End(True);
         Exit;
       end;
     '=':
@@ -5064,7 +5097,7 @@ begin
     if FConfig^.FPhpAspTags then
     begin
       FConfig^.FTokenID := stkHtmlTag;
-      Php_End;
+      Php_End(False);
     end else
       FConfig^.FTokenID := stkPhpError;
   end else
@@ -6043,7 +6076,7 @@ constructor TSynWebPHPCliSyn.Create(AOwner: TComponent);
 begin
   FConfig.FHighlighterMode := shmPhpCli;
   inherited Create(AOwner);
-  PhpEmbeded := False;
+  PhpEmbeded := True;
   CssEmbeded := False;
   EsEmbeded := False;
 end;
@@ -6055,12 +6088,7 @@ end;
 
 procedure TSynWebPHPCliSyn.ResetRange;
 begin
-  with FConfig do
-  begin
-    FRange := $00000000;
-    FRange := FRange or (Longword(shtPHP_inHtml) shl 29);
-    FRange := FRange or (Longword(srsPhpDefault) shl 23);
-  end;
+  FConfig.FRange := $00000000;
 end;
 
 constructor TSynWebBase.Create(AOwner: TComponent);
@@ -6105,7 +6133,7 @@ end;
 
 procedure TSynWebPHPCliSyn.SetupActiveHighlighter;
 begin
-  FActiveHighlighters := [shtPHP_inHtml, shtPHP_inCss, shtPHP_inES];
+  FActiveHighlighters := [shtHtml];
 end;
 
 function TSynWebBase.GetCssEmbeded: boolean;
