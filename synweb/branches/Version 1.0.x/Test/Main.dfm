@@ -1,14 +1,14 @@
 object Form1: TForm1
-  Left = 253
-  Top = 126
-  Width = 770
-  Height = 610
-  Caption = 'TSynWeb (Multi: HTML+CSS+ES+PHP) - Demo v0.99b'
+  Left = 192
+  Top = 129
+  Width = 696
+  Height = 480
+  Caption = 'Form1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
@@ -18,8 +18,8 @@ object Form1: TForm1
   object SynEdit1: TSynEdit
     Left = 0
     Top = 57
-    Width = 762
-    Height = 507
+    Width = 688
+    Height = 396
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -32,61 +32,48 @@ object Form1: TForm1
     Gutter.Font.Height = -11
     Gutter.Font.Name = 'Courier New'
     Gutter.Font.Style = []
-    Gutter.ShowLineNumbers = True
-    Highlighter = SynWebSyn1
-    Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoDropFiles, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoTabIndent, eoTabsToSpaces, eoTrimTrailingSpaces]
-    TabWidth = 2
-    WantTabs = True
-    WordWrapGlyph.Visible = False
+    Highlighter = SynWebHtmlSyn1
+    Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoDropFiles, eoEnhanceEndKey, eoGroupUndo, eoRightMouseMovesCursor, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabIndent, eoTabsToSpaces, eoTrimTrailingSpaces]
     OnDropFiles = SynEdit1DropFiles
     OnStatusChange = SynEdit1StatusChange
     OnPaintTransient = SynEdit1PaintTransient
   end
-  object StatusBar1: TStatusBar
-    Left = 0
-    Top = 564
-    Width = 762
-    Height = 19
-    Panels = <>
-    SimplePanel = True
-    SimpleText = 'Drop file on SynEdit :)'
-  end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 762
+    Width = 688
     Height = 57
     Align = alTop
     BevelOuter = bvLowered
-    TabOrder = 2
+    TabOrder = 1
     DesignSize = (
-      762
+      688
       57)
     object Label1: TLabel
       Left = 4
       Top = 24
-      Width = 68
+      Width = 65
       Height = 13
       Caption = 'HTMLVersion:'
     end
     object Label2: TLabel
       Left = 224
       Top = 24
-      Width = 56
+      Width = 54
       Height = 13
       Caption = 'CSSVersion'
     end
     object Label3: TLabel
       Left = 372
       Top = 24
-      Width = 57
+      Width = 54
       Height = 13
       Caption = 'PHPVersion'
     end
     object Label4: TLabel
-      Left = 640
+      Left = 566
       Top = 4
-      Width = 85
+      Width = 83
       Height = 13
       Anchors = [akTop, akRight]
       Caption = 'Highlighter MODE'
@@ -107,16 +94,20 @@ object Form1: TForm1
     object Label6: TLabel
       Left = 1
       Top = 43
-      Width = 760
+      Width = 686
       Height = 13
+      Hint = 
+        'Token matching (works in PHP for ('#39'{'#39', '#39'('#39', '#39'['#39', '#39'match_me_open'#39 +
+        ')->(('#39'}'#39', '#39')'#39', '#39']'#39', '#39'match_me_close'#39')'
       Align = alBottom
-      Caption = 'Label6'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clRed
       Font.Height = -11
       Font.Name = 'Verdana'
       Font.Style = [fsBold]
       ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
     end
     object CheckBox1: TCheckBox
       Left = 4
@@ -159,7 +150,7 @@ object Form1: TForm1
       OnClick = Button1Click
     end
     object Button2: TButton
-      Left = 736
+      Left = 662
       Top = 2
       Width = 25
       Height = 17
@@ -174,8 +165,6 @@ object Form1: TForm1
       Width = 65
       Height = 13
       Caption = 'Active &HL'
-      Checked = True
-      State = cbChecked
       TabOrder = 5
       OnClick = CheckBox2Click
     end
@@ -190,21 +179,22 @@ object Form1: TForm1
       OnChange = ComboBox3Change
     end
     object ComboBox4: TComboBox
-      Left = 596
+      Left = 522
       Top = 20
       Width = 165
       Height = 21
       Style = csDropDownList
       Anchors = [akTop, akRight]
       ItemHeight = 13
+      ItemIndex = 0
       TabOrder = 7
+      Text = 'HTM (+PHP, +CSS, +ES)'
       OnChange = ComboBox4Change
       Items.Strings = (
-        'HTML (+CSS, +ES)'
+        'HTM (+PHP, +CSS, +ES)'
         'CSS'
         'JS'
-        'PHP (+HTML, +CSS, +ES)'
-        'PHP (CGI)')
+        'PHP-Cli')
     end
     object CheckBox3: TCheckBox
       Left = 296
@@ -221,16 +211,10 @@ object Form1: TForm1
       Width = 125
       Height = 17
       Caption = 'PHP: &Short open tag?'
+      Checked = True
+      State = cbChecked
       TabOrder = 9
       OnClick = CheckBox4Click
-    end
-    object Edit1: TEdit
-      Left = 520
-      Top = 18
-      Width = 62
-      Height = 21
-      TabOrder = 10
-      Text = 'Edit1'
     end
   end
   object Panel2: TPanel
@@ -242,7 +226,7 @@ object Form1: TForm1
     Color = clRed
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 3
+    TabOrder = 2
   end
   object Panel3: TPanel
     Left = 103
@@ -253,79 +237,117 @@ object Form1: TForm1
     Color = clRed
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 4
+    TabOrder = 3
   end
-  object SynWebSyn1: TSynWebSyn
-    ActiveHighlighter = False
-    HighlighterMode = shmPhp
+  object SynWebEngine1: TSynWebEngine
     InactiveAttri.Foreground = clInactiveCaptionText
+    HtmlCommentAttri.Foreground = clMedGray
+    HtmlEscapeAttri.Foreground = clTeal
+    HtmlSymbolAttri.Foreground = clBlack
+    HtmlTagAttri.Foreground = clNavy
+    HtmlTagNameAttri.Foreground = clBlue
+    HtmlTagNameUndefAttri.Foreground = clBlue
+    HtmlTagNameUndefAttri.Style = [fsUnderline]
+    HtmlTagKeyAttri.Foreground = clRed
+    HtmlTagKeyUndefAttri.Foreground = clRed
+    HtmlTagKeyUndefAttri.Style = [fsUnderline]
+    HtmlTagKeyValueAttri.Foreground = clFuchsia
+    HtmlTagKeyValueQuotedAttri.Foreground = clFuchsia
+    HtmlErrorAttri.Foreground = clRed
+    HtmlErrorAttri.Style = [fsBold, fsUnderline]
+    CssWhitespaceAttri.Background = 15794175
+    CssRulesetWhitespaceAttri.Background = clInfoBk
+    CssSelectorAttri.Foreground = clBlue
+    CssSelectorAttri.Style = [fsBold]
+    CssSelectorUndefAttri.Foreground = clBlue
+    CssSelectorUndefAttri.Style = [fsBold, fsUnderline]
+    CssSelectorClassAttri.Foreground = 12615680
+    CssSelectorClassAttri.Style = [fsBold]
+    CssSelectorIdAttri.Foreground = clGreen
+    CssSelectorIdAttri.Style = [fsBold]
+    CssSpecialAttri.Foreground = clNavy
+    CssCommentAttri.Foreground = clMedGray
+    CssCommentAttri.Style = [fsItalic]
+    CssPropAttri.Foreground = clBlue
+    CssPropUndefAttri.Foreground = clBlue
+    CssPropUndefAttri.Style = [fsUnderline]
+    CssValAttri.Foreground = clRed
+    CssValUndefAttri.Foreground = clRed
+    CssValUndefAttri.Style = [fsUnderline]
+    CssValStringAttri.Foreground = clFuchsia
+    CssValNumberAttri.Foreground = clGreen
+    CssSymbolAttri.Foreground = clBlack
+    CssErrorAttri.Foreground = clRed
+    CssErrorAttri.Style = [fsBold, fsUnderline]
+    ESWhitespaceAttri.Background = 16773360
+    ESIdentifierAttri.Foreground = clBlue
+    ESKeyAttri.Style = [fsBold]
+    ESCommentAttri.Foreground = clGreen
+    ESStringAttri.Foreground = clRed
+    ESNumberAttri.Foreground = clFuchsia
+    ESErrorAttri.Foreground = clRed
+    ESErrorAttri.Style = [fsBold, fsUnderline]
+    PhpWhitespaceAttri.Background = 16119285
+    PhpIdentifierAttri.Foreground = clMaroon
+    PhpKeyAttri.Foreground = clBlue
+    PhpFunctionAttri.Foreground = clRed
+    PhpVariableAttri.Foreground = clTeal
+    PhpConstAttri.Foreground = 33023
+    PhpStringAttri.Foreground = clFuchsia
+    PhpStringSpecialAttri.Background = 15395562
+    PhpStringSpecialAttri.Foreground = clFuchsia
+    PhpCommentAttri.Foreground = clGreen
+    PhpCommentAttri.Style = [fsItalic]
+    PhpDocCommentAttri.Foreground = clGreen
+    PhpDocCommentAttri.Style = [fsBold, fsItalic]
+    PhpNumberAttri.Foreground = clPurple
+    PhpErrorAttri.Foreground = clRed
+    PhpErrorAttri.Style = [fsBold, fsUnderline]
+    Left = 48
+    Top = 228
+  end
+  object SynWebHtmlSyn1: TSynWebHtmlSyn
+    Engine = SynWebEngine1
+    ActiveSwitchHighlighter = False
     HtmlVersion = hvXHtml10Transitional
-    Html_CommentAttri.Foreground = clMedGray
-    Html_EscapeAttri.Foreground = clTeal
-    Html_SymbolAttri.Foreground = clBlack
-    Html_TagAttri.Foreground = clNavy
-    Html_TagNameAttri.Foreground = clBlue
-    Html_TagNameUndefAttri.Foreground = clBlue
-    Html_TagNameUndefAttri.Style = [fsUnderline]
-    Html_TagKeyAttri.Foreground = clRed
-    Html_TagKeyUndefAttri.Foreground = clRed
-    Html_TagKeyUndefAttri.Style = [fsUnderline]
-    Html_TagKeyValueAttri.Foreground = clFuchsia
-    Html_TagKeyValueQuotedAttri.Foreground = clFuchsia
-    Html_ErrorAttri.Foreground = clRed
-    Html_ErrorAttri.Style = [fsBold, fsUnderline]
-    CssVersion = cvCss21
-    Css_WhitespaceAttri.Background = 15794175
-    Css_RulesetWhitespaceAttri.Background = clInfoBk
-    Css_SelectorAttri.Foreground = clBlue
-    Css_SelectorAttri.Style = [fsBold]
-    Css_SelectorUndefAttri.Foreground = clBlue
-    Css_SelectorUndefAttri.Style = [fsBold, fsUnderline]
-    Css_SelectorClassAttri.Foreground = 12615680
-    Css_SelectorClassAttri.Style = [fsBold]
-    Css_SelectorIdAttri.Foreground = clGreen
-    Css_SelectorIdAttri.Style = [fsBold]
-    Css_SpecialAttri.Foreground = clNavy
-    Css_CommentAttri.Foreground = clMedGray
-    Css_CommentAttri.Style = [fsItalic]
-    Css_PropAttri.Foreground = clBlue
-    Css_PropUndefAttri.Foreground = clBlue
-    Css_PropUndefAttri.Style = [fsUnderline]
-    Css_ValAttri.Foreground = clRed
-    Css_ValUndefAttri.Foreground = clRed
-    Css_ValUndefAttri.Style = [fsUnderline]
-    Css_ValStringAttri.Foreground = clFuchsia
-    Css_ValNumberAttri.Foreground = clGreen
-    Css_SymbolAttri.Foreground = clBlack
-    Css_ErrorAttri.Foreground = clRed
-    Css_ErrorAttri.Style = [fsBold, fsUnderline]
-    ES_WhitespaceAttri.Background = 16773360
-    ES_IdentifierAttri.Foreground = clBlue
-    ES_KeyAttri.Style = [fsBold]
-    ES_CommentAttri.Foreground = clGreen
-    ES_StringAttri.Foreground = clRed
-    ES_NumberAttri.Foreground = clFuchsia
-    ES_ErrorAttri.Foreground = clRed
-    ES_ErrorAttri.Style = [fsBold, fsUnderline]
-    PhpVersion = pvPhp5
+    CssVersion = scvCss21
+    PhpVersion = spvPhp5
+    PhpShortOpenTag = True
+    PhpAspTags = True
+    CssEmbeded = True
+    PhpEmbeded = True
+    EsEmbeded = True
+    Left = 48
+    Top = 260
+  end
+  object SynWebCSSSyn1: TSynWebCSSSyn
+    Engine = SynWebEngine1
+    ActiveSwitchHighlighter = False
+    CssVersion = scvCss21
+    PhpVersion = spvPhp5
     PhpShortOpenTag = True
     PhpAspTags = False
-    Php_WhitespaceAttri.Background = 16119285
-    Php_IdentifierAttri.Foreground = clMaroon
-    Php_KeyAttri.Foreground = clBlue
-    Php_FunctionAttri.Foreground = clRed
-    Php_VariableAttri.Foreground = clTeal
-    Php_ConstAttri.Style = [fsBold]
-    Php_StringAttri.Foreground = clFuchsia
-    Php_StringSpecialAttri.Background = 15395562
-    Php_StringSpecialAttri.Foreground = clFuchsia
-    Php_CommentAttri.Foreground = clGreen
-    Php_CommentAttri.Style = [fsItalic]
-    Php_NumberAttri.Foreground = clPurple
-    Php_ErrorAttri.Foreground = clRed
-    Php_ErrorAttri.Style = [fsBold, fsUnderline]
-    Left = 20
-    Top = 64
+    PhpEmbeded = False
+    Left = 112
+    Top = 260
+  end
+  object SynWebESSyn1: TSynWebESSyn
+    Engine = SynWebEngine1
+    ActiveSwitchHighlighter = False
+    PhpVersion = spvPhp5
+    PhpShortOpenTag = True
+    PhpAspTags = False
+    PhpEmbeded = False
+    Left = 144
+    Top = 260
+  end
+  object SynWebPHPCliSyn1: TSynWebPHPCliSyn
+    Engine = SynWebEngine1
+    PhpVersion = spvPhp5
+    PhpShortOpenTag = True
+    PhpAspTags = False
+    Left = 80
+    Top = 260
   end
   object SynExporterHTML1: TSynExporterHTML
     Color = clWindow
@@ -335,7 +357,6 @@ object Form1: TForm1
     Font.Height = -13
     Font.Name = 'Courier New'
     Font.Style = []
-    Highlighter = SynWebSyn1
     Title = 'Untitled'
     UseBackground = False
     Left = 20

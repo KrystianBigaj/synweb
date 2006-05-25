@@ -4,60 +4,61 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, SynEdit, SynEditHighlighter, ComCtrls, StdCtrls, ExtCtrls,
-  SynEditExport, SynExportHTML, SynEditOptionsDialog, SynEditTextBuffer,
-  SynHighlighterWeb, SynHighlighterWebData, SynHighlighterWebMisc,
-  SynEditTypes;
+  Dialogs, SynEdit, SynHighlighterWeb, StdCtrls, SynEditHighlighter,
+  ExtCtrls, SynEditOptionsDialog, SynEditExport, SynExportHTML,
+  SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes;
 
 type
   TForm1 = class(TForm)
+    SynWebEngine1: TSynWebEngine;
+    SynWebHtmlSyn1: TSynWebHtmlSyn;
+    SynWebCSSSyn1: TSynWebCSSSyn;
+    SynWebESSyn1: TSynWebESSyn;
+    SynWebPHPCliSyn1: TSynWebPHPCliSyn;
     SynEdit1: TSynEdit;
-    StatusBar1: TStatusBar;
     Panel1: TPanel;
-    CheckBox1: TCheckBox;
-    ComboBox1: TComboBox;
     Label1: TLabel;
-    ComboBox2: TComboBox;
     Label2: TLabel;
-    SynExporterHTML1: TSynExporterHTML;
-    Button1: TButton;
-    SynEditOptionsDialog1: TSynEditOptionsDialog;
-    Button2: TButton;
-    CheckBox2: TCheckBox;
     Label3: TLabel;
-    ComboBox3: TComboBox;
-    ComboBox4: TComboBox;
     Label4: TLabel;
-    CheckBox3: TCheckBox;
-    CheckBox4: TCheckBox;
-    Edit1: TEdit;
     Label5: TLabel;
     Label6: TLabel;
+    CheckBox1: TCheckBox;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
+    Button1: TButton;
+    Button2: TButton;
+    CheckBox2: TCheckBox;
+    ComboBox3: TComboBox;
+    ComboBox4: TComboBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
     Panel2: TPanel;
     Panel3: TPanel;
-    SynWebSyn1: TSynWebSyn;
+    SynExporterHTML1: TSynExporterHTML;
+    SynEditOptionsDialog1: TSynEditOptionsDialog;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
       AFiles: TStrings);
     procedure CheckBox1Click(Sender: TObject);
-    procedure ComboBox1Change(Sender: TObject);
     procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure CheckBox3Click(Sender: TObject);
+    procedure CheckBox4Click(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
     procedure ComboBox2Change(Sender: TObject);
-    procedure SynEdit1StatusChange(Sender: TObject;
-      Changes: TSynStatusChanges);
-    procedure CheckBox2Click(Sender: TObject);
     procedure ComboBox3Change(Sender: TObject);
     procedure ComboBox4Change(Sender: TObject);
-    procedure CheckBox4Click(Sender: TObject);
-    procedure CheckBox3Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure SynEdit1StatusChange(Sender: TObject;
+      Changes: TSynStatusChanges);
     procedure SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
       TransientType: TTransientType);
+    procedure CheckBox2Click(Sender: TObject);
   private
     { Private declarations }
   public
-    ftLine1,ftLine2:TBufferCoord;
+    { Public declarations }
   end;
 
 var
@@ -65,42 +66,30 @@ var
 
 implementation
 
-uses Types;
-
 {$R *.dfm}
 
 procedure TForm1.FormCreate(Sender: TObject);
 var
   s:String;
-  i:THtmlVersion;
-  j:TCssVersion;
-  k:TPhpVersion;
+  i:TSynWebHtmlVersion;
+  j:TSynWebCssVersion;
+  k:TSynWebPhpVersion;
 begin
-  ftLine1.Char:=0;
-  ftLine2.Line:=0;
-  ftLine1.Char:=0;
-  ftLine2.Line:=0;
-  for i:=Low(THtmlVersion) to High(THtmlVersion) do
-    ComboBox1.Items.Add(THtmlVersionStr[i]);
-  ComboBox1.ItemIndex:=Integer(SynWebSyn1.HtmlVersion);
+  for i:=Low(TSynWebHtmlVersion) to High(TSynWebHtmlVersion) do
+    ComboBox1.Items.Add(TSynWebHtmlVersionStr[i]);
+  ComboBox1.ItemIndex:=Integer(shvXHtml10Transitional);
 
-  for j:=Low(TCssVersion) to High(TCssVersion) do
-    ComboBox2.Items.Add(TCssVersionStr[j]);
-  ComboBox2.ItemIndex:=Integer(SynWebSyn1.CssVersion);
+  for j:=Low(TSynWebCssVersion) to High(TSynWebCssVersion) do
+    ComboBox2.Items.Add(TSynWebCssVersionStr[j]);
+  ComboBox2.ItemIndex:=Integer(scvCss21);
 
-  for k:=Low(TPhpVersion) to High(TPhpVersion) do
-    ComboBox3.Items.Add(TPhpVersionStr[k]);
-  ComboBox3.ItemIndex:=Integer(SynWebSyn1.PhpVersion);
-
-  ComboBox4.ItemIndex:=Integer(SynWebSyn1.HighlighterMode);
-
-  CheckBox3.Checked:=SynWebSyn1.PhpAspTags;
-  CheckBox4.Checked:=SynWebSyn1.PhpShortOpenTag;
+  for k:=Low(TSynWebPhpVersion) to High(TSynWebPhpVersion) do
+    ComboBox3.Items.Add(TSynWebPhpVersionStr[k]);
+  ComboBox3.ItemIndex:=Integer(spvPHP5);
 
   s:=ChangeFileExt(Application.ExeName,'_sample.txt');
   if FileExists(s) then
     SynEdit1.Lines.LoadFromFile(s);
-  CheckBox2.Checked:=SynWebSyn1.ActiveHighlighter;
   CheckBox2Click(nil);
 end;
 
@@ -118,17 +107,8 @@ end;
 
 procedure TForm1.CheckBox1Click(Sender: TObject);
 begin
-//  SynWebSyn1.Enabled:=CheckBox1.Checked;
-  if CheckBox1.Checked then
-    synEdit1.Highlighter:=SynWebSyn1
-  else
-    SynEdit1.Highlighter:=nil;
-end;
-
-procedure TForm1.ComboBox1Change(Sender: TObject);
-begin
-  SynWebSyn1.HtmlVersion:=THtmlVersion(ComboBox1.ItemIndex);
-//  SynEdit1.InvalidateLines;
+  if SynEdit1.Highlighter<>nil then
+    synEdit1.Highlighter.Enabled:=CheckBox1.Checked;
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -136,6 +116,55 @@ begin
   SynExporterHTML1.ExportAsText := TRUE;
   SynExporterHTML1.ExportAll(SynEdit1.Lines);
   SynExporterHTML1.SaveToFile('C:\demo.html');
+end;
+
+procedure TForm1.CheckBox3Click(Sender: TObject);
+begin
+  SynWebHtmlSyn1.PhpAspTags:=CheckBox3.Checked;
+  SynWebCSSSyn1.PhpAspTags:=CheckBox3.Checked;
+  SynWebESSyn1.PhpAspTags:=CheckBox3.Checked;
+  SynWebESSyn1.PhpAspTags:=CheckBox3.Checked;
+end;
+
+procedure TForm1.CheckBox4Click(Sender: TObject);
+begin                    
+  SynWebHtmlSyn1.PhpShortOpenTag:=CheckBox4.Checked;
+  SynWebCSSSyn1.PhpShortOpenTag:=CheckBox4.Checked;
+  SynWebESSyn1.PhpShortOpenTag:=CheckBox4.Checked;
+  SynWebESSyn1.PhpShortOpenTag:=CheckBox4.Checked;
+end;
+
+procedure TForm1.ComboBox1Change(Sender: TObject);
+begin
+  SynWebHtmlSyn1.HtmlVersion:=TSynWebHtmlVersion(ComboBox1.ItemIndex);
+end;
+
+procedure TForm1.ComboBox2Change(Sender: TObject);
+begin
+  SynWebHtmlSyn1.CssVersion:=TSynWebCssVersion(ComboBox2.ItemIndex);
+  SynWebCSSSyn1.CssVersion:=TSynWebCssVersion(ComboBox2.ItemIndex);
+end;
+
+procedure TForm1.ComboBox3Change(Sender: TObject);
+begin
+  SynWebHtmlSyn1.PhpVersion:=TSynWebPhpVersion(ComboBox3.ItemIndex);
+  SynWebCSSSyn1.PhpVersion:=TSynWebPhpVersion(ComboBox3.ItemIndex);
+  SynWebESSyn1.PhpVersion:=TSynWebPhpVersion(ComboBox3.ItemIndex);
+  SynWebESSyn1.PhpVersion:=TSynWebPhpVersion(ComboBox3.ItemIndex);
+end;
+
+procedure TForm1.ComboBox4Change(Sender: TObject);
+begin
+  case ComboBox1.ItemIndex of
+  0:
+    SynEdit1.Highlighter:=SynWebHtmlSyn1;
+  1:
+    SynEdit1.Highlighter:=SynWebCSSSyn1;
+  2:
+    SynEdit1.Highlighter:=SynWebESSyn1;
+  3:
+    SynEdit1.Highlighter:=SynWebPHPCliSyn1;
+  end;
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -148,11 +177,6 @@ begin
     t.AssignTo(SynEdit1);
 end;
 
-procedure TForm1.ComboBox2Change(Sender: TObject);
-begin
-  SynWebSyn1.CssVersion:=TCssVersion(ComboBox2.ItemIndex);
-end;
-
 procedure TForm1.SynEdit1StatusChange(Sender: TObject;
   Changes: TSynStatusChanges);
 var
@@ -161,7 +185,7 @@ begin
   if CheckBox2.Checked then
     if Changes-[scCaretX, scCaretY]<>Changes then
     begin              //, shtCss, shtES, shtPHP_inHtml, shtPHP_inCss, shtPHP_inES
-      t:=SynWeb_UpdateActiveHighlighter(SynEdit1, SynWebSyn1);
+      t:=SynWeb_UpdateActiveHighlighter(SynEdit1, TSynWebBase(SynEdit1.Highlighter));
       Label5.Caption:='';
       if shtHtml in t then
         Label5.Caption:=Label5.Caption+'HTML,';
@@ -174,42 +198,12 @@ begin
     end;
 end;
 
-procedure TForm1.CheckBox2Click(Sender: TObject);
-begin
-  SynWebSyn1.ActiveHighlighter:=CheckBox2.Checked;
-  if CheckBox2.Checked then
-    SynEdit1StatusChange(SynEdit1,[scCaretX, scCaretY]);
-  //else
-    SynEdit1.Repaint;
-end;
-
-procedure TForm1.ComboBox3Change(Sender: TObject);
-begin
-  SynWebSyn1.PhpVersion:=TPhpVersion(ComboBox3.ItemIndex);
-end;
-
-procedure TForm1.ComboBox4Change(Sender: TObject);
-begin
-  SynWebSyn1.HighlighterMode:=TSynHighlighterMode(ComboBox4.ItemIndex);
-  CheckBox2Click(nil);
-end;
-
-procedure TForm1.CheckBox4Click(Sender: TObject);
-begin
-  SynWebSyn1.PhpShortOpenTag:=CheckBox4.Checked;
-end;
-
-procedure TForm1.CheckBox3Click(Sender: TObject);
-begin
-  SynWebSyn1.PhpAspTags:=CheckBox3.Checked;
-end;
-
 procedure TForm1.SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
   TransientType: TTransientType);
 const
   OpenTokens:array[0..3] of String=('{', '(', '[', 'match_me_open');
   CloseTokens:array[0..3] of String=('}', ')', ']', 'match_me_close');
-  TokensID:array[0..3] of TtkTokenKind=(tkPhpSymbol,tkPhpSymbol,tkPhpSymbol, tkPhpIdentifier);
+  TokensID:array[0..3] of TSynWebTokenKind=(stkPhpSymbol,stkPhpSymbol,stkPhpSymbol, stkPhpIdentifier);
 var
   B,b2:TBufferCoord;
   i,id:Integer;
@@ -248,7 +242,7 @@ begin
   if SynEdit1.SelAvail or (TransientType=ttBefore) then
     Exit;
 
-  i:=SynWeb_FindMatchingToken(SynEdit1,SynWebSyn1,
+  i:=SynWeb_FindMatchingToken(SynEdit1,TSynWebBase(SynEdit1.Highlighter),
     OpenTokens,CloseTokens,TokensID,
     SynEdit1.CaretXY,b,id);
   b2:=SynEdit1.CaretXY;
@@ -300,6 +294,15 @@ begin
         DrawOpenClose;
       end;
   end;
+end;
+
+procedure TForm1.CheckBox2Click(Sender: TObject);
+begin
+  TSynWebBase(SynEdit1.Highlighter).ActiveSwitchHighlighter:=CheckBox2.Checked;
+  if CheckBox2.Checked then
+    SynEdit1StatusChange(SynEdit1,[scCaretX, scCaretY]);
+  //else
+    SynEdit1.Repaint;
 end;
 
 end.

@@ -5781,10 +5781,19 @@ begin
     // SYN_ATTR_KEYWORD: ??
     // SYN_ATTR_SYMBOL: ??
     SYN_ATTR_WHITESPACE:
-      //todo: hmmm... ?     if Enabled then
-      Result := FConfig.fSYN_ATTR_WHITESPACE
-    {  else
-        Result := FConfig.fHtml_WhitespaceAttri};
+      if Enabled then
+        Result := FConfig.fSYN_ATTR_WHITESPACE
+      else
+        case FConfig.FHighlighterMode of
+        shmHtml:
+          Result := fEngine.fHtml_WhitespaceAttri;
+        shmCss:
+          Result := fEngine.fCss_WhitespaceAttri;
+        shmES:
+          Result := fEngine.fES_WhitespaceAttri;
+        shmPhpCli:
+          Result := fEngine.fPhp_InlineTextAttri;
+        end;
     SYN_ATTR_COMMENT:
       Result := FConfig.fSYN_ATTR_COMMENT;
     SYN_ATTR_STRING:
