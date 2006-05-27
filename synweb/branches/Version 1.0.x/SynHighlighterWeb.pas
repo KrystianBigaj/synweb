@@ -2079,7 +2079,7 @@ begin
             Inc(FInstance^.FRun);
             FInstance^.FTokenID := stkHtmlTagKeyValueQuoted;
             if GetRangeBit(27) then
-              SetRangeBit(28, UpperCase(GetToken) = '"Php"');
+              SetRangeBit(28, UpperCase(GetToken) = '"PHP"');
             Break;
           end;
         end;
