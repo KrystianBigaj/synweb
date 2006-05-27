@@ -12,10 +12,10 @@ uses
 
 // Global ----------------------------------------------------------------------
 type
-  TSynWebHashTable = array[#0..#255] of longword;
+  TSynWebHashTable = array[#0..#255] of Longword;
 
   TSynHighlighterType = (
-    shtHtml, shtCss, shtEs, shtPhp_inHtml, shtPhp_inCss, shtPhp_inEs
+    shtHtml, shtCss, shtEs, shtPhpInHtml, shtPhpInCss, shtPhpInEs
     );
 
   TSynHighlighterTypes = set of TSynHighlighterType;
@@ -50,7 +50,7 @@ type
   TSynWebIdentFuncTableFunc = function: TSynWebTokenKind of object;
 
   PSynWebIdent2FuncTableFunc = ^TSynWebIdent2FuncTableFunc;
-  TSynWebIdent2FuncTableFunc = function: boolean of object;
+  TSynWebIdent2FuncTableFunc = function: Boolean of object;
 
   PSynWebTokenAttributeTable = ^TSynWebTokenAttributeTable;
   TSynWebTokenAttributeTable = array[Low(TSynWebTokenKind)..High(TSynWebTokenKind)] of
@@ -67,7 +67,7 @@ type
     srsHtmlTagKeyValueQuoted2);
 
 const
-  TSynWebHtmlVersionStr: array[Low(TSynWebHtmlVersion)..High(TSynWebHtmlVersion)] of string = (
+  TSynWebHtmlVersionStr: array[Low(TSynWebHtmlVersion)..High(TSynWebHtmlVersion)] of String = (
     'Html 4.01 Strict',
     'Html 4.01 Transitional',
     'Html 4.01 Frameset',
@@ -92,7 +92,7 @@ const
   TSynWebCssRangeState_RulesetBegin = srsCssProp;
   TSynWebCssRangeState_RulesetEnd = srsCssPropValRect;
 
-  TSynWebCssVersionStr: array[Low(TSynWebCssVersion)..High(TSynWebCssVersion)] of string = (
+  TSynWebCssVersionStr: array[Low(TSynWebCssVersion)..High(TSynWebCssVersion)] of String = (
     'Css 1',
     'Css 2.1'
     );
@@ -120,7 +120,7 @@ type
   TSynWebPhpOpenTags = set of TSynWebPhpOpenTag;
 
 const
-  TSynWebPhpVersionStr: array[Low(TSynWebPhpVersion)..High(TSynWebPhpVersion)] of string = (
+  TSynWebPhpVersionStr: array[Low(TSynWebPhpVersion)..High(TSynWebPhpVersion)] of String = (
 {$I SynHighlighterWeb_PhpVersion.inc}
     );
 

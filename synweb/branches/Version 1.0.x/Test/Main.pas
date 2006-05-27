@@ -176,7 +176,7 @@ begin
   if CheckBox2.Checked then
     if Changes-[scCaretX, scCaretY]<>Changes then
     begin              //, shtCss, shtES, shtPHP_inHtml, shtPHP_inCss, shtPHP_inES
-      t:=SynWeb_UpdateActiveHighlighter(SynEdit1, TSynWebBase(SynEdit1.Highlighter));
+      t:=SynWebUpdateActiveHighlighter(SynEdit1, TSynWebBase(SynEdit1.Highlighter));
       Label5.Caption:='';
       if shtHtml in t then
         Label5.Caption:=Label5.Caption+'HTML,';
@@ -184,7 +184,7 @@ begin
         Label5.Caption:=Label5.Caption+'CSS,';
       if shtES in t then          
         Label5.Caption:=Label5.Caption+'JS,';
-      if t-[shtPHP_inHtml, shtPHP_inCss, shtPHP_inES]<>t then
+      if t-[shtPhpInHtml, shtPhpInCss, shtPhpInES]<>t then
         Label5.Caption:=Label5.Caption+'PHP,';
     end;
 end;
@@ -233,7 +233,7 @@ begin
   if SynEdit1.SelAvail or (TransientType=ttBefore) then
     Exit;
 
-  i:=SynWeb_FindMatchingToken(SynEdit1,TSynWebBase(SynEdit1.Highlighter),
+  i:=SynWebFindMatchingToken(SynEdit1,TSynWebBase(SynEdit1.Highlighter),
     OpenTokens,CloseTokens,TokensID,
     SynEdit1.CaretXY,b,id);
   b2:=SynEdit1.CaretXY;

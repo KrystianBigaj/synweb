@@ -95,7 +95,7 @@ type
   private
     pn:TTreeNode;
     KeyList: TList;
-    appdir:string;
+    appdir:String;
     procedure MakeHashTable;
     procedure ClearLists;
   public
@@ -411,7 +411,7 @@ var
   n:TTreeNode;
   i, x, t:Integer;
   s, s1,s2:TStringList;
-  ss1,ss2:string;
+  ss1,ss2:String;
 begin
   Button12Click(nil);
   s:=TStringList.Create;
@@ -465,7 +465,7 @@ begin
       x:=KeyHash(s[i]);
   s1.Insert(0,'');
 
-  s1.Insert(0,Format('  Php_KeywordsMaxKeyHash = %d;',[x]));
+  s1.Insert(0,Format('  PhpKeywordsMaxKeyHash = %d;',[x]));
 
   s2[s2.Count-1]:=Copy(s2[s2.Count-1],1,Length(s2[s2.Count-1])-2);
   s2.Insert(0,format('  TSynWeb_PhpKeywordsData:array[0..%d] of Longword=(',[t-1]));
@@ -556,7 +556,7 @@ end;
 procedure TForm1.ComboBox1DropDown(Sender: TObject);
 var
   f:TSearchRec;
-  s:string;
+  s:String;
 begin
   s:=ExtractFilePath(Application.ExeName)+'..\!DOC\';
   ComboBox1.Clear;
@@ -600,10 +600,10 @@ var
   sl:TStringList;    
   r,rf,rx:TRegExpr;
   f:TFileStream;
-  s,lf:string;
-  i,xx,tf:integer;
+  s,lf:String;
+  i,xx,tf:Integer;
   n:TTreeNode;
-  lt,lx:longword;
+  lt,lx:Longword;
   ds,dn:TDateTime;
 
   procedure updatestat;
@@ -817,7 +817,7 @@ var
   al:Boolean;
   tab:String;
 
-  procedure AddData(islastgp:boolean=false; islast:boolean=false);
+  procedure AddData(islastgp:Boolean=false; islast:Boolean=false);
   const nc:array[False..True] of String=('or', 'then');
   const nc2:array[False..True] of String=('if', '  ');
   const nc3:array[False..True] of String=('if', '  ');
@@ -825,7 +825,7 @@ var
     case Longword(TLexKeys(KeyList[I]).Data) and $0F of
     $01:
       begin
-        nf.add(tab+Format('%s  Php_KeywordComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
+        nf.add(tab+Format('%s  PhpKeywordComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
         al:=true;
         if islast then
           nf.Add(tab+'  Result := stkPhpKeyword')
@@ -840,17 +840,17 @@ var
       end;
   {  $02:
       begin
-        nf.add(tab+Format('if Php_ConstComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
+        nf.add(tab+Format('if PhpConstComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
         nf.Add(tab+'  Result := stkPhpConst');
       end;
     $04:
       begin
-        nf.add(tab+Format('if Php_VariableComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
+        nf.add(tab+Format('if PhpVariableComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
         nf.Add(tab+'  Result := stkPhpVariable');
       end;    }
     $08:
       begin
-        nf.add(tab+Format('%s  Php_FunctionComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
+        nf.add(tab+Format('%s  PhpFunctionComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
         if islast then
           nf.Add(tab+'  Result := stkPhpFunction');
         al:=true;
@@ -877,11 +877,11 @@ begin
   KeyList.Sort(CompareKeys);
 
   nf:=TStringList.Create;
-  nf.add('    function Php_KeywordIdent: TSynWebTokenKind;');
-  nf.add(Format('    function PhP_KeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[0]).Key]));
+  nf.add('    function PhpKeywordIdent: TSynWebTokenKind;');
+  nf.add(Format('    function PhpKeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[0]).Key]));
   for i:=1 to KeyList.Count-1 do
     if (TLexKeys(KeyList[i-1]).Key <> TLexKeys(KeyList[i]).Key) then
-        nf.add(Format('    function PhP_KeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[i]).Key]));
+        nf.add(Format('    function PhpKeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[i]).Key]));
   nf.SaveToFile(AFileFuncList);
   nf.Free;
 
@@ -895,7 +895,7 @@ begin
         inc(I);
         if I >= KeyList.Count - 1 then break;
       end;
-    nf.add(Format('  fPhp_IdentFuncTable[%d]:=PhP_KeywordFunc%d;',[TLexKeys(KeyList[I]).Key, TLexKeys(KeyList[I]).Key]));
+    nf.add(Format('  FPhpIdentFuncTable[%d]:=PhpKeywordFunc%d;',[TLexKeys(KeyList[I]).Key, TLexKeys(KeyList[I]).Key]));
     inc(I);
   end;
   nf.SaveToFile(AFileFuncTable);
@@ -903,7 +903,7 @@ begin
 
   I := 0;
   nf:=TStringList.Create;
-  nf.add('function TSynWebEngine.Php_KeywordIdent: TSynWebTokenKind;');
+  nf.add('function TSynWebEngine.PhpKeywordIdent: TSynWebTokenKind;');
   nf.add('begin');
   nf.add('  Result := stkPhpIdentifier;');
   nf.add('end;');
@@ -911,7 +911,7 @@ begin
     mx:=0;
   while I < KeyList.Count do
   begin
-    nf.add(Format('function TSynWebEngine.PhP_KeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[I]).Key]));
+    nf.add(Format('function TSynWebEngine.PhpKeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[I]).Key]));
     nf.add('begin');
     tab:='  ';
     mm:=0;
@@ -1012,9 +1012,9 @@ const
 var
   sl:TStringList;
   f:TFileStream;
-  s,lf:string;
-  i,xx,tf:integer;
-  lt,lx:longword;
+  s,lf:String;
+  i,xx,tf:Integer;
+  lt,lx:Longword;
   ds,dn:TDateTime;
 
   p: TTestParser;

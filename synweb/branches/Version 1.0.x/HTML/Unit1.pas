@@ -458,7 +458,7 @@ end;
 
 procedure TForm1.Button15Click(Sender: TObject);
 var
-  i:integer;
+  i:Integer;
 begin
   for i:=0 to TreeView1.Items.Count-1 do
     if nGetBit(TreeView1.Items[i],1) then
@@ -476,7 +476,7 @@ end;
 
 procedure TForm1.Button17Click(Sender: TObject);
 var
-  i:integer;
+  i:Integer;
 begin
   for i:=0 to TreeView1.Items.Count-1 do
     if nGetBit(TreeView1.Items[i],4) then
@@ -527,7 +527,7 @@ end;
 procedure TForm1.Button22Click(Sender: TObject);
 var
   t,a:TTreeNode;
-  b:boolean;
+  b:Boolean;
 begin          
   Memo8.Clear;
   Memo9.Clear;

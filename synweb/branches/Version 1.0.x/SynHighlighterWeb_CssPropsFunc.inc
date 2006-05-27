@@ -1,678 +1,678 @@
-function TSynWebEngine.Css_PropUndef: TSynWebTokenKind;
+function TSynWebEngine.CssPropUndef: TSynWebTokenKind;
 begin
   Result:=stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc29: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc29: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(37) then
+  if  CssPropKeyComp(37) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc39: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc39: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(31) then
+  if  CssPropKeyComp(31) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc40: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc40: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(32) then
+  if  CssPropKeyComp(32) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc43: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc43: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(53) then
+  if  CssPropKeyComp(53) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc51: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc51: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(104) then
+  if  CssPropKeyComp(104) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc52: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc52: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(93) then
+  if  CssPropKeyComp(93) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc54: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc54: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(45) then
+  if  CssPropKeyComp(45) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc55: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc55: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(46) or
-      Css_PropKeyComp(75) then
+  if  CssPropKeyComp(46) or
+      CssPropKeyComp(75) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc56: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc56: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(86) then
+  if  CssPropKeyComp(86) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc57: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc57: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(52) then
+  if  CssPropKeyComp(52) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc60: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc60: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(38) then
+  if  CssPropKeyComp(38) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc61: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc61: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(39) then
+  if  CssPropKeyComp(39) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc62: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc62: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(7) or
-      Css_PropKeyComp(60) or
-      Css_PropKeyComp(83) or
-      Css_PropKeyComp(92) then
+  if  CssPropKeyComp(7) or
+      CssPropKeyComp(60) or
+      CssPropKeyComp(83) or
+      CssPropKeyComp(92) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc63: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc63: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(33) or
-      Css_PropKeyComp(114) then
+  if  CssPropKeyComp(33) or
+      CssPropKeyComp(114) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc64: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc64: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(112) then
+  if  CssPropKeyComp(112) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc74: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc74: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(67) or
-      Css_PropKeyComp(94) then
+  if  CssPropKeyComp(67) or
+      CssPropKeyComp(94) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc76: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc76: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(65) or
-      Css_PropKeyComp(105) then
+  if  CssPropKeyComp(65) or
+      CssPropKeyComp(105) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc78: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc78: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(55) or
-      Css_PropKeyComp(80) then
+  if  CssPropKeyComp(55) or
+      CssPropKeyComp(80) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc79: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc79: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(77) or
-      Css_PropKeyComp(81) then
+  if  CssPropKeyComp(77) or
+      CssPropKeyComp(81) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc81: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc81: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(68) or
-      Css_PropKeyComp(97) then
+  if  CssPropKeyComp(68) or
+      CssPropKeyComp(97) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc82: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc82: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(87) then
+  if  CssPropKeyComp(87) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc83: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc83: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(66) then
+  if  CssPropKeyComp(66) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc85: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc85: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(29) then
+  if  CssPropKeyComp(29) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc86: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc86: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(14) or
-      Css_PropKeyComp(42) or
-      Css_PropKeyComp(62) then
+  if  CssPropKeyComp(14) or
+      CssPropKeyComp(42) or
+      CssPropKeyComp(62) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc87: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc87: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(79) then
+  if  CssPropKeyComp(79) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc88: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc88: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(82) or
-      Css_PropKeyComp(109) then
+  if  CssPropKeyComp(82) or
+      CssPropKeyComp(109) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc90: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc90: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(110) then
+  if  CssPropKeyComp(110) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc91: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc91: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(34) or
-      Css_PropKeyComp(69) then
+  if  CssPropKeyComp(34) or
+      CssPropKeyComp(69) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc93: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc93: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(84) or
-      Css_PropKeyComp(100) or
-      Css_PropKeyComp(111) then
+  if  CssPropKeyComp(84) or
+      CssPropKeyComp(100) or
+      CssPropKeyComp(111) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc94: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc94: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(24) or
-      Css_PropKeyComp(40) or
-      Css_PropKeyComp(64) or
-      Css_PropKeyComp(85) then
+  if  CssPropKeyComp(24) or
+      CssPropKeyComp(40) or
+      CssPropKeyComp(64) or
+      CssPropKeyComp(85) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc95: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc95: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(48) or
-      Css_PropKeyComp(91) then
+  if  CssPropKeyComp(48) or
+      CssPropKeyComp(91) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc96: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc96: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(1) or
-      Css_PropKeyComp(30) or
-      Css_PropKeyComp(70) then
+  if  CssPropKeyComp(1) or
+      CssPropKeyComp(30) or
+      CssPropKeyComp(70) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc97: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc97: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(41) or
-      Css_PropKeyComp(90) then
+  if  CssPropKeyComp(41) or
+      CssPropKeyComp(90) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc98: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc98: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(0) or
-      Css_PropKeyComp(78) then
+  if  CssPropKeyComp(0) or
+      CssPropKeyComp(78) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc100: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc100: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(98) then
+  if  CssPropKeyComp(98) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc101: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc101: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(108) then
+  if  CssPropKeyComp(108) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc102: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc102: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(47) then
+  if  CssPropKeyComp(47) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc103: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc103: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(43) then
+  if  CssPropKeyComp(43) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc105: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc105: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(18) or
-      Css_PropKeyComp(63) then
+  if  CssPropKeyComp(18) or
+      CssPropKeyComp(63) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc106: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc106: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(13) then
+  if  CssPropKeyComp(13) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc107: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc107: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(28) then
+  if  CssPropKeyComp(28) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc108: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc108: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(51) or
-      Css_PropKeyComp(88) then
+  if  CssPropKeyComp(51) or
+      CssPropKeyComp(88) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc110: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc110: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(113) then
+  if  CssPropKeyComp(113) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc111: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc111: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(44) then
+  if  CssPropKeyComp(44) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc112: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc112: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(4) or
-      Css_PropKeyComp(22) then
+  if  CssPropKeyComp(4) or
+      CssPropKeyComp(22) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc114: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc114: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(106) then
+  if  CssPropKeyComp(106) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc115: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc115: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(99) then
+  if  CssPropKeyComp(99) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc116: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc116: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(74) or
-      Css_PropKeyComp(102) then
+  if  CssPropKeyComp(74) or
+      CssPropKeyComp(102) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc117: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc117: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(49) or
-      Css_PropKeyComp(89) or
-      Css_PropKeyComp(95) then
+  if  CssPropKeyComp(49) or
+      CssPropKeyComp(89) or
+      CssPropKeyComp(95) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc121: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc121: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(50) or
-      Css_PropKeyComp(76) then
+  if  CssPropKeyComp(50) or
+      CssPropKeyComp(76) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc122: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc122: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(56) then
+  if  CssPropKeyComp(56) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc124: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc124: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(23) then
+  if  CssPropKeyComp(23) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc126: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc126: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(12) then
+  if  CssPropKeyComp(12) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc128: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc128: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(8) or
-      Css_PropKeyComp(61) then
+  if  CssPropKeyComp(8) or
+      CssPropKeyComp(61) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc130: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc130: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(15) or
-      Css_PropKeyComp(54) then
+  if  CssPropKeyComp(15) or
+      CssPropKeyComp(54) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc131: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc131: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(17) then
+  if  CssPropKeyComp(17) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc136: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc136: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(107) then
+  if  CssPropKeyComp(107) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc138: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc138: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(25) or
-      Css_PropKeyComp(57) then
+  if  CssPropKeyComp(25) or
+      CssPropKeyComp(57) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc139: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc139: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(27) then
+  if  CssPropKeyComp(27) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc140: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc140: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(3) or
-      Css_PropKeyComp(71) then
+  if  CssPropKeyComp(3) or
+      CssPropKeyComp(71) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc141: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc141: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(73) then
+  if  CssPropKeyComp(73) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc142: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc142: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(6) then
+  if  CssPropKeyComp(6) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc144: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc144: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(36) then
+  if  CssPropKeyComp(36) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc148: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc148: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(16) then
+  if  CssPropKeyComp(16) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc149: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc149: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(19) then
+  if  CssPropKeyComp(19) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc150: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc150: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(21) then
+  if  CssPropKeyComp(21) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc154: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc154: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(101) then
+  if  CssPropKeyComp(101) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc156: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc156: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(26) then
+  if  CssPropKeyComp(26) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc158: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc158: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(72) then
+  if  CssPropKeyComp(72) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc167: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc167: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(20) then
+  if  CssPropKeyComp(20) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc169: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc169: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(59) then
+  if  CssPropKeyComp(59) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc172: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc172: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(9) then
+  if  CssPropKeyComp(9) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc173: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc173: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(11) then
+  if  CssPropKeyComp(11) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc174: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc174: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(103) then
+  if  CssPropKeyComp(103) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc178: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc178: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(35) then
+  if  CssPropKeyComp(35) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc182: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc182: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(2) then
+  if  CssPropKeyComp(2) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc187: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc187: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(96) then
+  if  CssPropKeyComp(96) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc190: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc190: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(10) then
+  if  CssPropKeyComp(10) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc194: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc194: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(5) then
+  if  CssPropKeyComp(5) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;
 end;
 
-function TSynWebEngine.Css_PropFunc220: TSynWebTokenKind;
+function TSynWebEngine.CssPropFunc220: TSynWebTokenKind;
 begin
-  if  Css_PropKeyComp(58) then
+  if  CssPropKeyComp(58) then
     Result := stkCssProp
   else
     Result := stkCssPropUndef;

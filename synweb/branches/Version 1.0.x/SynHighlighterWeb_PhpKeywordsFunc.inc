@@ -1,7852 +1,7852 @@
-function TSynWebEngine.Php_KeywordIdent: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordIdent: TSynWebTokenKind;
 begin
   Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc14: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc14: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(272) then
+  if  PhpFunctionComp(272) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc15: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc15: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(41) then
+  if  PhpKeywordComp(41) then
     Result := stkPhpKeyword
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc16: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc16: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(795) then
+  if  PhpFunctionComp(795) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc17: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc17: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1057) or
-      Php_FunctionComp(2520) then
+  if  PhpFunctionComp(1057) or
+      PhpFunctionComp(2520) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc18: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc18: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(18) then
+  if  PhpKeywordComp(18) then
     Result := stkPhpKeyword
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc19: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc19: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(6) or
-      Php_KeywordComp(19) then
+  if  PhpKeywordComp(6) or
+      PhpKeywordComp(19) then
     Result := stkPhpKeyword
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc20: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc20: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(8) then
+  if  PhpKeywordComp(8) then
     Result := stkPhpKeyword
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc22: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc22: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(93) then
+  if  PhpFunctionComp(93) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc23: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc23: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1090) then
+  if  PhpFunctionComp(1090) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc24: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc24: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(486) then
+  if  PhpFunctionComp(486) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc25: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc25: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(3639) then
+  if  PhpFunctionComp(3639) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc28: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc28: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(10) then
+  if  PhpKeywordComp(10) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(4079) then
+    if  PhpFunctionComp(4079) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc29: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc29: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(346) or
-      Php_FunctionComp(355) or
-      Php_FunctionComp(2088) or
-      Php_FunctionComp(2192) then
+  if  PhpFunctionComp(346) or
+      PhpFunctionComp(355) or
+      PhpFunctionComp(2088) or
+      PhpFunctionComp(2192) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc30: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc30: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(547) then
+  if  PhpFunctionComp(547) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc31: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc31: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(20) then
+  if  PhpKeywordComp(20) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(791) or
-        Php_FunctionComp(3348) then
+    if  PhpFunctionComp(791) or
+        PhpFunctionComp(3348) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc32: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc32: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(1) then
+  if  PhpKeywordComp(1) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(1234) or
-        Php_FunctionComp(1240) or
-        Php_FunctionComp(2238) then
+    if  PhpFunctionComp(1234) or
+        PhpFunctionComp(1240) or
+        PhpFunctionComp(2238) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc33: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc33: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(54) then
+  if  PhpKeywordComp(54) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(2255) then
+    if  PhpFunctionComp(2255) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc34: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc34: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1276) or
-      Php_FunctionComp(2203) or
-      Php_FunctionComp(2204) then
+  if  PhpFunctionComp(1276) or
+      PhpFunctionComp(2203) or
+      PhpFunctionComp(2204) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc35: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc35: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(11) then
+  if  PhpKeywordComp(11) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(1091) or
-        Php_FunctionComp(2214) or
-        Php_FunctionComp(2293) or
-        Php_FunctionComp(4755) then
+    if  PhpFunctionComp(1091) or
+        PhpFunctionComp(2214) or
+        PhpFunctionComp(2293) or
+        PhpFunctionComp(4755) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc36: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc36: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(255) or
-      Php_FunctionComp(256) or
-      Php_FunctionComp(1434) or
-      Php_FunctionComp(1508) or
-      Php_FunctionComp(2287) or
-      Php_FunctionComp(2564) then
+  if  PhpFunctionComp(255) or
+      PhpFunctionComp(256) or
+      PhpFunctionComp(1434) or
+      PhpFunctionComp(1508) or
+      PhpFunctionComp(2287) or
+      PhpFunctionComp(2564) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc37: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc37: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(9) then
+  if  PhpKeywordComp(9) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(275) or
-        Php_FunctionComp(297) or
-        Php_FunctionComp(406) or
-        Php_FunctionComp(772) or
-        Php_FunctionComp(1111) or
-        Php_FunctionComp(3322) or
-        Php_FunctionComp(3899) then
+    if  PhpFunctionComp(275) or
+        PhpFunctionComp(297) or
+        PhpFunctionComp(406) or
+        PhpFunctionComp(772) or
+        PhpFunctionComp(1111) or
+        PhpFunctionComp(3322) or
+        PhpFunctionComp(3899) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc38: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc38: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(27) then
+  if  PhpKeywordComp(27) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(94) or
-        Php_FunctionComp(1270) or
-        Php_FunctionComp(2308) then
+    if  PhpFunctionComp(94) or
+        PhpFunctionComp(1270) or
+        PhpFunctionComp(2308) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc39: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc39: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(37) then
+  if  PhpKeywordComp(37) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(779) or
-        Php_FunctionComp(1790) or
-        Php_FunctionComp(3873) then
+    if  PhpFunctionComp(779) or
+        PhpFunctionComp(1790) or
+        PhpFunctionComp(3873) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc40: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc40: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(3) or
-      Php_KeywordComp(30) then
+  if  PhpKeywordComp(3) or
+      PhpKeywordComp(30) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(274) then
+    if  PhpFunctionComp(274) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc41: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc41: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(21) or
-      Php_KeywordComp(71) then
+  if  PhpKeywordComp(21) or
+      PhpKeywordComp(71) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(97) or
-        Php_FunctionComp(1236) or
-        Php_FunctionComp(1518) or
-        Php_FunctionComp(2143) then
+    if  PhpFunctionComp(97) or
+        PhpFunctionComp(1236) or
+        PhpFunctionComp(1518) or
+        PhpFunctionComp(2143) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc42: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc42: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(35) or
-      Php_KeywordComp(50) then
+  if  PhpKeywordComp(35) or
+      PhpKeywordComp(50) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(349) or
-        Php_FunctionComp(2152) or
-        Php_FunctionComp(4111) then
+    if  PhpFunctionComp(349) or
+        PhpFunctionComp(2152) or
+        PhpFunctionComp(4111) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc43: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc43: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(34) or
-      Php_KeywordComp(46) then
+  if  PhpKeywordComp(34) or
+      PhpKeywordComp(46) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(250) or
-        Php_FunctionComp(353) or
-        Php_FunctionComp(638) or
-        Php_FunctionComp(776) or
-        Php_FunctionComp(4756) then
+    if  PhpFunctionComp(250) or
+        PhpFunctionComp(353) or
+        PhpFunctionComp(638) or
+        PhpFunctionComp(776) or
+        PhpFunctionComp(4756) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc44: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc44: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(257) or
-      Php_FunctionComp(1093) then
+  if  PhpFunctionComp(257) or
+      PhpFunctionComp(1093) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc45: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc45: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(70) then
+  if  PhpKeywordComp(70) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(292) or
-        Php_FunctionComp(407) or
-        Php_FunctionComp(1124) or
-        Php_FunctionComp(1438) or
-        Php_FunctionComp(3900) then
+    if  PhpFunctionComp(292) or
+        PhpFunctionComp(407) or
+        PhpFunctionComp(1124) or
+        PhpFunctionComp(1438) or
+        PhpFunctionComp(3900) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc46: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc46: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(95) or
-      Php_FunctionComp(1341) or
-      Php_FunctionComp(1912) or
-      Php_FunctionComp(1913) or
-      Php_FunctionComp(2199) or
-      Php_FunctionComp(2237) or
-      Php_FunctionComp(3006) then
+  if  PhpFunctionComp(95) or
+      PhpFunctionComp(1341) or
+      PhpFunctionComp(1912) or
+      PhpFunctionComp(1913) or
+      PhpFunctionComp(2199) or
+      PhpFunctionComp(2237) or
+      PhpFunctionComp(3006) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc47: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc47: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(294) or
-      Php_FunctionComp(778) or
-      Php_FunctionComp(1267) or
-      Php_FunctionComp(4793) then
+  if  PhpFunctionComp(294) or
+      PhpFunctionComp(778) or
+      PhpFunctionComp(1267) or
+      PhpFunctionComp(4793) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc48: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc48: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(17) then
+  if  PhpKeywordComp(17) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(2125) or
-        Php_FunctionComp(3384) then
+    if  PhpFunctionComp(2125) or
+        PhpFunctionComp(3384) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc49: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc49: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(14) or
-      Php_KeywordComp(40) then
+  if  PhpKeywordComp(14) or
+      PhpKeywordComp(40) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(676) or
-        Php_FunctionComp(773) or
-        Php_FunctionComp(1340) or
-        Php_FunctionComp(1525) or
-        Php_FunctionComp(2521) or
-        Php_FunctionComp(2557) then
+    if  PhpFunctionComp(676) or
+        PhpFunctionComp(773) or
+        PhpFunctionComp(1340) or
+        PhpFunctionComp(1525) or
+        PhpFunctionComp(2521) or
+        PhpFunctionComp(2557) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc50: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc50: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(347) or
-      Php_FunctionComp(774) or
-      Php_FunctionComp(1435) or
-      Php_FunctionComp(1448) or
-      Php_FunctionComp(1588) or
-      Php_FunctionComp(2205) or
-      Php_FunctionComp(2261) or
-      Php_FunctionComp(2408) or
-      Php_FunctionComp(3198) or
-      Php_FunctionComp(3242) or
-      Php_FunctionComp(4112) then
+  if  PhpFunctionComp(347) or
+      PhpFunctionComp(774) or
+      PhpFunctionComp(1435) or
+      PhpFunctionComp(1448) or
+      PhpFunctionComp(1588) or
+      PhpFunctionComp(2205) or
+      PhpFunctionComp(2261) or
+      PhpFunctionComp(2408) or
+      PhpFunctionComp(3198) or
+      PhpFunctionComp(3242) or
+      PhpFunctionComp(4112) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc51: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc51: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(251) or
-      Php_FunctionComp(276) or
-      Php_FunctionComp(412) or
-      Php_FunctionComp(780) then
+  if  PhpFunctionComp(251) or
+      PhpFunctionComp(276) or
+      PhpFunctionComp(412) or
+      PhpFunctionComp(780) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc52: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc52: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(200) or
-      Php_FunctionComp(273) or
-      Php_FunctionComp(352) or
-      Php_FunctionComp(1345) or
-      Php_FunctionComp(2137) or
-      Php_FunctionComp(3063) then
+  if  PhpFunctionComp(200) or
+      PhpFunctionComp(273) or
+      PhpFunctionComp(352) or
+      PhpFunctionComp(1345) or
+      PhpFunctionComp(2137) or
+      PhpFunctionComp(3063) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc53: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc53: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(3307) then
+  if  PhpFunctionComp(3307) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc54: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc54: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(0) or
-      Php_KeywordComp(13) or
-      Php_KeywordComp(36) then
+  if  PhpKeywordComp(0) or
+      PhpKeywordComp(13) or
+      PhpKeywordComp(36) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(369) or
-        Php_FunctionComp(3687) then
+    if  PhpFunctionComp(369) or
+        PhpFunctionComp(3687) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc55: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc55: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(52) then
+  if  PhpKeywordComp(52) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(1344) or
-        Php_FunctionComp(1385) or
-        Php_FunctionComp(1439) or
-        Php_FunctionComp(2570) or
-        Php_FunctionComp(4281) then
+    if  PhpFunctionComp(1344) or
+        PhpFunctionComp(1385) or
+        PhpFunctionComp(1439) or
+        PhpFunctionComp(2570) or
+        PhpFunctionComp(4281) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc56: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc56: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(22) or
-      Php_KeywordComp(38) then
+  if  PhpKeywordComp(22) or
+      PhpKeywordComp(38) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(334) or
-        Php_FunctionComp(785) or
-        Php_FunctionComp(1272) or
-        Php_FunctionComp(3936) or
-        Php_FunctionComp(4338) then
+    if  PhpFunctionComp(334) or
+        PhpFunctionComp(785) or
+        PhpFunctionComp(1272) or
+        PhpFunctionComp(3936) or
+        PhpFunctionComp(4338) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc57: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc57: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(72) or
-      Php_KeywordComp(73) then
+  if  PhpKeywordComp(72) or
+      PhpKeywordComp(73) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(683) or
-        Php_FunctionComp(761) or
-        Php_FunctionComp(1215) or
-        Php_FunctionComp(1238) or
-        Php_FunctionComp(1860) or
-        Php_FunctionComp(1914) or
-        Php_FunctionComp(2100) or
-        Php_FunctionComp(3743) or
-        Php_FunctionComp(4113) then
+    if  PhpFunctionComp(683) or
+        PhpFunctionComp(761) or
+        PhpFunctionComp(1215) or
+        PhpFunctionComp(1238) or
+        PhpFunctionComp(1860) or
+        PhpFunctionComp(1914) or
+        PhpFunctionComp(2100) or
+        PhpFunctionComp(3743) or
+        PhpFunctionComp(4113) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc58: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc58: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(32) then
+  if  PhpKeywordComp(32) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(674) or
-        Php_FunctionComp(1126) or
-        Php_FunctionComp(1437) or
-        Php_FunctionComp(1801) then
+    if  PhpFunctionComp(674) or
+        PhpFunctionComp(1126) or
+        PhpFunctionComp(1437) or
+        PhpFunctionComp(1801) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc59: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc59: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(51) then
+  if  PhpKeywordComp(51) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(101) or
-        Php_FunctionComp(290) or
-        Php_FunctionComp(405) or
-        Php_FunctionComp(2092) or
-        Php_FunctionComp(2252) or
-        Php_FunctionComp(2418) or
-        Php_FunctionComp(3057) or
-        Php_FunctionComp(3907) then
+    if  PhpFunctionComp(101) or
+        PhpFunctionComp(290) or
+        PhpFunctionComp(405) or
+        PhpFunctionComp(2092) or
+        PhpFunctionComp(2252) or
+        PhpFunctionComp(2418) or
+        PhpFunctionComp(3057) or
+        PhpFunctionComp(3907) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc60: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc60: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(49) then
+  if  PhpKeywordComp(49) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(271) or
-        Php_FunctionComp(337) or
-        Php_FunctionComp(350) or
-        Php_FunctionComp(630) or
-        Php_FunctionComp(1198) or
-        Php_FunctionComp(1523) or
-        Php_FunctionComp(2094) or
-        Php_FunctionComp(2230) or
-        Php_FunctionComp(2537) or
-        Php_FunctionComp(3908) or
-        Php_FunctionComp(4080) or
-        Php_FunctionComp(4370) or
-        Php_FunctionComp(4803) then
+    if  PhpFunctionComp(271) or
+        PhpFunctionComp(337) or
+        PhpFunctionComp(350) or
+        PhpFunctionComp(630) or
+        PhpFunctionComp(1198) or
+        PhpFunctionComp(1523) or
+        PhpFunctionComp(2094) or
+        PhpFunctionComp(2230) or
+        PhpFunctionComp(2537) or
+        PhpFunctionComp(3908) or
+        PhpFunctionComp(4080) or
+        PhpFunctionComp(4370) or
+        PhpFunctionComp(4803) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc61: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc61: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(673) or
-      Php_FunctionComp(704) or
-      Php_FunctionComp(1512) or
-      Php_FunctionComp(2182) or
-      Php_FunctionComp(2239) or
-      Php_FunctionComp(3211) or
-      Php_FunctionComp(3695) then
+  if  PhpFunctionComp(673) or
+      PhpFunctionComp(704) or
+      PhpFunctionComp(1512) or
+      PhpFunctionComp(2182) or
+      PhpFunctionComp(2239) or
+      PhpFunctionComp(3211) or
+      PhpFunctionComp(3695) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc62: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc62: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(25) then
+  if  PhpKeywordComp(25) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(194) or
-        Php_FunctionComp(295) or
-        Php_FunctionComp(698) or
-        Php_FunctionComp(1410) or
-        Php_FunctionComp(1411) or
-        Php_FunctionComp(1458) or
-        Php_FunctionComp(2153) or
-        Php_FunctionComp(3385) or
-        Php_FunctionComp(3557) or
-        Php_FunctionComp(3949) or
-        Php_FunctionComp(4339) or
-        Php_FunctionComp(4817) then
+    if  PhpFunctionComp(194) or
+        PhpFunctionComp(295) or
+        PhpFunctionComp(698) or
+        PhpFunctionComp(1410) or
+        PhpFunctionComp(1411) or
+        PhpFunctionComp(1458) or
+        PhpFunctionComp(2153) or
+        PhpFunctionComp(3385) or
+        PhpFunctionComp(3557) or
+        PhpFunctionComp(3949) or
+        PhpFunctionComp(4339) or
+        PhpFunctionComp(4817) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc63: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc63: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(7) or
-      Php_KeywordComp(59) or
-      Php_KeywordComp(68) then
+  if  PhpKeywordComp(7) or
+      PhpKeywordComp(59) or
+      PhpKeywordComp(68) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(269) or
-        Php_FunctionComp(354) or
-        Php_FunctionComp(389) or
-        Php_FunctionComp(1220) or
-        Php_FunctionComp(1524) or
-        Php_FunctionComp(1771) or
-        Php_FunctionComp(2292) or
-        Php_FunctionComp(3003) or
-        Php_FunctionComp(3299) or
-        Php_FunctionComp(4293) then
+    if  PhpFunctionComp(269) or
+        PhpFunctionComp(354) or
+        PhpFunctionComp(389) or
+        PhpFunctionComp(1220) or
+        PhpFunctionComp(1524) or
+        PhpFunctionComp(1771) or
+        PhpFunctionComp(2292) or
+        PhpFunctionComp(3003) or
+        PhpFunctionComp(3299) or
+        PhpFunctionComp(4293) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc64: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc64: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(67) then
+  if  PhpKeywordComp(67) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(557) or
-        Php_FunctionComp(792) or
-        Php_FunctionComp(2042) or
-        Php_FunctionComp(4520) then
+    if  PhpFunctionComp(557) or
+        PhpFunctionComp(792) or
+        PhpFunctionComp(2042) or
+        PhpFunctionComp(4520) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc65: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc65: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(4) then
+  if  PhpKeywordComp(4) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(338) or
-        Php_FunctionComp(672) or
-        Php_FunctionComp(1206) or
-        Php_FunctionComp(1271) or
-        Php_FunctionComp(1504) or
-        Php_FunctionComp(1861) or
-        Php_FunctionComp(3083) or
-        Php_FunctionComp(3148) or
-        Php_FunctionComp(3431) or
-        Php_FunctionComp(4121) or
-        Php_FunctionComp(4838) or
-        Php_FunctionComp(5144) then
+    if  PhpFunctionComp(338) or
+        PhpFunctionComp(672) or
+        PhpFunctionComp(1206) or
+        PhpFunctionComp(1271) or
+        PhpFunctionComp(1504) or
+        PhpFunctionComp(1861) or
+        PhpFunctionComp(3083) or
+        PhpFunctionComp(3148) or
+        PhpFunctionComp(3431) or
+        PhpFunctionComp(4121) or
+        PhpFunctionComp(4838) or
+        PhpFunctionComp(5144) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc66: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc66: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(482) or
-      Php_FunctionComp(700) or
-      Php_FunctionComp(1217) or
-      Php_FunctionComp(1268) or
-      Php_FunctionComp(1269) or
-      Php_FunctionComp(1343) or
-      Php_FunctionComp(1447) or
-      Php_FunctionComp(1640) or
-      Php_FunctionComp(1953) or
-      Php_FunctionComp(3397) or
-      Php_FunctionComp(3485) or
-      Php_FunctionComp(3652) or
-      Php_FunctionComp(4842) or
-      Php_FunctionComp(5143) then
+  if  PhpFunctionComp(482) or
+      PhpFunctionComp(700) or
+      PhpFunctionComp(1217) or
+      PhpFunctionComp(1268) or
+      PhpFunctionComp(1269) or
+      PhpFunctionComp(1343) or
+      PhpFunctionComp(1447) or
+      PhpFunctionComp(1640) or
+      PhpFunctionComp(1953) or
+      PhpFunctionComp(3397) or
+      PhpFunctionComp(3485) or
+      PhpFunctionComp(3652) or
+      PhpFunctionComp(4842) or
+      PhpFunctionComp(5143) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc67: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc67: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(681) or
-      Php_FunctionComp(686) or
-      Php_FunctionComp(1442) or
-      Php_FunctionComp(3942) or
-      Php_FunctionComp(4799) then
+  if  PhpFunctionComp(681) or
+      PhpFunctionComp(686) or
+      PhpFunctionComp(1442) or
+      PhpFunctionComp(3942) or
+      PhpFunctionComp(4799) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc68: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc68: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(43) then
+  if  PhpKeywordComp(43) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(423) or
-        Php_FunctionComp(687) or
-        Php_FunctionComp(786) or
-        Php_FunctionComp(1202) or
-        Php_FunctionComp(1441) or
-        Php_FunctionComp(1456) or
-        Php_FunctionComp(1510) or
-        Php_FunctionComp(3464) or
-        Php_FunctionComp(3910) or
-        Php_FunctionComp(4000) then
+    if  PhpFunctionComp(423) or
+        PhpFunctionComp(687) or
+        PhpFunctionComp(786) or
+        PhpFunctionComp(1202) or
+        PhpFunctionComp(1441) or
+        PhpFunctionComp(1456) or
+        PhpFunctionComp(1510) or
+        PhpFunctionComp(3464) or
+        PhpFunctionComp(3910) or
+        PhpFunctionComp(4000) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc69: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc69: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(382) or
-      Php_FunctionComp(415) or
-      Php_FunctionComp(444) or
-      Php_FunctionComp(708) or
-      Php_FunctionComp(775) or
-      Php_FunctionComp(1064) or
-      Php_FunctionComp(1459) or
-      Php_FunctionComp(1957) or
-      Php_FunctionComp(2527) or
-      Php_FunctionComp(3097) or
-      Php_FunctionComp(3168) or
-      Php_FunctionComp(3603) or
-      Php_FunctionComp(4022) or
-      Php_FunctionComp(5056) then
+  if  PhpFunctionComp(382) or
+      PhpFunctionComp(415) or
+      PhpFunctionComp(444) or
+      PhpFunctionComp(708) or
+      PhpFunctionComp(775) or
+      PhpFunctionComp(1064) or
+      PhpFunctionComp(1459) or
+      PhpFunctionComp(1957) or
+      PhpFunctionComp(2527) or
+      PhpFunctionComp(3097) or
+      PhpFunctionComp(3168) or
+      PhpFunctionComp(3603) or
+      PhpFunctionComp(4022) or
+      PhpFunctionComp(5056) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc70: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc70: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(702) or
-      Php_FunctionComp(1136) or
-      Php_FunctionComp(1201) or
-      Php_FunctionComp(1950) or
-      Php_FunctionComp(2682) or
-      Php_FunctionComp(3359) or
-      Php_FunctionComp(3620) then
+  if  PhpFunctionComp(702) or
+      PhpFunctionComp(1136) or
+      PhpFunctionComp(1201) or
+      PhpFunctionComp(1950) or
+      PhpFunctionComp(2682) or
+      PhpFunctionComp(3359) or
+      PhpFunctionComp(3620) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc71: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc71: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(15) or
-      Php_KeywordComp(24) then
+  if  PhpKeywordComp(15) or
+      PhpKeywordComp(24) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(150) or
-        Php_FunctionComp(193) or
-        Php_FunctionComp(396) or
-        Php_FunctionComp(2067) or
-        Php_FunctionComp(2571) or
-        Php_FunctionComp(3310) or
-        Php_FunctionComp(3744) or
-        Php_FunctionComp(4820) or
-        Php_FunctionComp(4998) then
+    if  PhpFunctionComp(150) or
+        PhpFunctionComp(193) or
+        PhpFunctionComp(396) or
+        PhpFunctionComp(2067) or
+        PhpFunctionComp(2571) or
+        PhpFunctionComp(3310) or
+        PhpFunctionComp(3744) or
+        PhpFunctionComp(4820) or
+        PhpFunctionComp(4998) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc72: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc72: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(48) or
-      Php_KeywordComp(63) then
+  if  PhpKeywordComp(48) or
+      PhpKeywordComp(63) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(577) or
-        Php_FunctionComp(1235) or
-        Php_FunctionComp(1522) or
-        Php_FunctionComp(1922) or
-        Php_FunctionComp(2090) or
-        Php_FunctionComp(2207) or
-        Php_FunctionComp(2208) or
-        Php_FunctionComp(3480) or
-        Php_FunctionComp(3950) or
-        Php_FunctionComp(4282) or
-        Php_FunctionComp(4866) then
+    if  PhpFunctionComp(577) or
+        PhpFunctionComp(1235) or
+        PhpFunctionComp(1522) or
+        PhpFunctionComp(1922) or
+        PhpFunctionComp(2090) or
+        PhpFunctionComp(2207) or
+        PhpFunctionComp(2208) or
+        PhpFunctionComp(3480) or
+        PhpFunctionComp(3950) or
+        PhpFunctionComp(4282) or
+        PhpFunctionComp(4866) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc73: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc73: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(252) or
-      Php_FunctionComp(270) or
-      Php_FunctionComp(408) or
-      Php_FunctionComp(685) or
-      Php_FunctionComp(701) or
-      Php_FunctionComp(1412) or
-      Php_FunctionComp(1466) or
-      Php_FunctionComp(1467) or
-      Php_FunctionComp(1786) or
-      Php_FunctionComp(1917) or
-      Php_FunctionComp(2006) or
-      Php_FunctionComp(2053) or
-      Php_FunctionComp(2206) or
-      Php_FunctionComp(2522) or
-      Php_FunctionComp(3484) or
-      Php_FunctionComp(3946) or
-      Php_FunctionComp(3947) then
+  if  PhpFunctionComp(252) or
+      PhpFunctionComp(270) or
+      PhpFunctionComp(408) or
+      PhpFunctionComp(685) or
+      PhpFunctionComp(701) or
+      PhpFunctionComp(1412) or
+      PhpFunctionComp(1466) or
+      PhpFunctionComp(1467) or
+      PhpFunctionComp(1786) or
+      PhpFunctionComp(1917) or
+      PhpFunctionComp(2006) or
+      PhpFunctionComp(2053) or
+      PhpFunctionComp(2206) or
+      PhpFunctionComp(2522) or
+      PhpFunctionComp(3484) or
+      PhpFunctionComp(3946) or
+      PhpFunctionComp(3947) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc74: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc74: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(100) or
-      Php_FunctionComp(1131) or
-      Php_FunctionComp(1356) or
-      Php_FunctionComp(1638) or
-      Php_FunctionComp(1900) or
-      Php_FunctionComp(1949) or
-      Php_FunctionComp(1979) or
-      Php_FunctionComp(2012) or
-      Php_FunctionComp(2073) or
-      Php_FunctionComp(2098) or
-      Php_FunctionComp(2174) or
-      Php_FunctionComp(3558) or
-      Php_FunctionComp(3764) or
-      Php_FunctionComp(3923) or
-      Php_FunctionComp(4337) or
-      Php_FunctionComp(4829) or
-      Php_FunctionComp(4839) or
-      Php_FunctionComp(4931) then
+  if  PhpFunctionComp(100) or
+      PhpFunctionComp(1131) or
+      PhpFunctionComp(1356) or
+      PhpFunctionComp(1638) or
+      PhpFunctionComp(1900) or
+      PhpFunctionComp(1949) or
+      PhpFunctionComp(1979) or
+      PhpFunctionComp(2012) or
+      PhpFunctionComp(2073) or
+      PhpFunctionComp(2098) or
+      PhpFunctionComp(2174) or
+      PhpFunctionComp(3558) or
+      PhpFunctionComp(3764) or
+      PhpFunctionComp(3923) or
+      PhpFunctionComp(4337) or
+      PhpFunctionComp(4829) or
+      PhpFunctionComp(4839) or
+      PhpFunctionComp(4931) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc75: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc75: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(436) or
-      Php_FunctionComp(552) or
-      Php_FunctionComp(646) or
-      Php_FunctionComp(1528) or
-      Php_FunctionComp(1632) or
-      Php_FunctionComp(1750) or
-      Php_FunctionComp(1919) or
-      Php_FunctionComp(3065) or
-      Php_FunctionComp(3750) or
-      Php_FunctionComp(3786) then
+  if  PhpFunctionComp(436) or
+      PhpFunctionComp(552) or
+      PhpFunctionComp(646) or
+      PhpFunctionComp(1528) or
+      PhpFunctionComp(1632) or
+      PhpFunctionComp(1750) or
+      PhpFunctionComp(1919) or
+      PhpFunctionComp(3065) or
+      PhpFunctionComp(3750) or
+      PhpFunctionComp(3786) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc76: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc76: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(442) or
-      Php_FunctionComp(1239) or
-      Php_FunctionComp(1454) or
-      Php_FunctionComp(1724) or
-      Php_FunctionComp(1996) or
-      Php_FunctionComp(2045) or
-      Php_FunctionComp(2071) or
-      Php_FunctionComp(2091) or
-      Php_FunctionComp(2099) or
-      Php_FunctionComp(2104) or
-      Php_FunctionComp(3311) or
-      Php_FunctionComp(3396) or
-      Php_FunctionComp(3465) or
-      Php_FunctionComp(4291) or
-      Php_FunctionComp(5127) then
+  if  PhpFunctionComp(442) or
+      PhpFunctionComp(1239) or
+      PhpFunctionComp(1454) or
+      PhpFunctionComp(1724) or
+      PhpFunctionComp(1996) or
+      PhpFunctionComp(2045) or
+      PhpFunctionComp(2071) or
+      PhpFunctionComp(2091) or
+      PhpFunctionComp(2099) or
+      PhpFunctionComp(2104) or
+      PhpFunctionComp(3311) or
+      PhpFunctionComp(3396) or
+      PhpFunctionComp(3465) or
+      PhpFunctionComp(4291) or
+      PhpFunctionComp(5127) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc77: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc77: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(56) then
+  if  PhpKeywordComp(56) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(339) or
-        Php_FunctionComp(340) or
-        Php_FunctionComp(1222) or
-        Php_FunctionComp(1653) or
-        Php_FunctionComp(2054) or
-        Php_FunctionComp(2231) or
-        Php_FunctionComp(3417) or
-        Php_FunctionComp(3549) or
-        Php_FunctionComp(3775) or
-        Php_FunctionComp(4105) then
+    if  PhpFunctionComp(339) or
+        PhpFunctionComp(340) or
+        PhpFunctionComp(1222) or
+        PhpFunctionComp(1653) or
+        PhpFunctionComp(2054) or
+        PhpFunctionComp(2231) or
+        PhpFunctionComp(3417) or
+        PhpFunctionComp(3549) or
+        PhpFunctionComp(3775) or
+        PhpFunctionComp(4105) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc78: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc78: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(333) or
-      Php_FunctionComp(603) or
-      Php_FunctionComp(784) or
-      Php_FunctionComp(1473) or
-      Php_FunctionComp(1511) or
-      Php_FunctionComp(1942) or
-      Php_FunctionComp(2052) or
-      Php_FunctionComp(2216) or
-      Php_FunctionComp(2533) or
-      Php_FunctionComp(3201) or
-      Php_FunctionComp(3426) or
-      Php_FunctionComp(3591) or
-      Php_FunctionComp(3957) or
-      Php_FunctionComp(4442) or
-      Php_FunctionComp(4856) or
-      Php_FunctionComp(4860) or
-      Php_FunctionComp(5057) then
+  if  PhpFunctionComp(333) or
+      PhpFunctionComp(603) or
+      PhpFunctionComp(784) or
+      PhpFunctionComp(1473) or
+      PhpFunctionComp(1511) or
+      PhpFunctionComp(1942) or
+      PhpFunctionComp(2052) or
+      PhpFunctionComp(2216) or
+      PhpFunctionComp(2533) or
+      PhpFunctionComp(3201) or
+      PhpFunctionComp(3426) or
+      PhpFunctionComp(3591) or
+      PhpFunctionComp(3957) or
+      PhpFunctionComp(4442) or
+      PhpFunctionComp(4856) or
+      PhpFunctionComp(4860) or
+      PhpFunctionComp(5057) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc79: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc79: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(23) or
-      Php_KeywordComp(26) or
-      Php_KeywordComp(69) then
+  if  PhpKeywordComp(23) or
+      PhpKeywordComp(26) or
+      PhpKeywordComp(69) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(191) or
-        Php_FunctionComp(293) or
-        Php_FunctionComp(356) or
-        Php_FunctionComp(414) or
-        Php_FunctionComp(432) or
-        Php_FunctionComp(626) or
-        Php_FunctionComp(633) or
-        Php_FunctionComp(709) or
-        Php_FunctionComp(1247) or
-        Php_FunctionComp(1353) or
-        Php_FunctionComp(1503) or
-        Php_FunctionComp(1943) or
-        Php_FunctionComp(2476) or
-        Php_FunctionComp(5168) then
+    if  PhpFunctionComp(191) or
+        PhpFunctionComp(293) or
+        PhpFunctionComp(356) or
+        PhpFunctionComp(414) or
+        PhpFunctionComp(432) or
+        PhpFunctionComp(626) or
+        PhpFunctionComp(633) or
+        PhpFunctionComp(709) or
+        PhpFunctionComp(1247) or
+        PhpFunctionComp(1353) or
+        PhpFunctionComp(1503) or
+        PhpFunctionComp(1943) or
+        PhpFunctionComp(2476) or
+        PhpFunctionComp(5168) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc80: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc80: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(29) then
+  if  PhpKeywordComp(29) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(636) or
-        Php_FunctionComp(664) or
-        Php_FunctionComp(768) or
-        Php_FunctionComp(1061) or
-        Php_FunctionComp(1209) or
-        Php_FunctionComp(1244) or
-        Php_FunctionComp(1354) or
-        Php_FunctionComp(3398) or
-        Php_FunctionComp(4524) then
+    if  PhpFunctionComp(636) or
+        PhpFunctionComp(664) or
+        PhpFunctionComp(768) or
+        PhpFunctionComp(1061) or
+        PhpFunctionComp(1209) or
+        PhpFunctionComp(1244) or
+        PhpFunctionComp(1354) or
+        PhpFunctionComp(3398) or
+        PhpFunctionComp(4524) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc81: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc81: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(47) then
+  if  PhpKeywordComp(47) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(697) or
-        Php_FunctionComp(1125) or
-        Php_FunctionComp(1251) or
-        Php_FunctionComp(1384) or
-        Php_FunctionComp(2620) or
-        Php_FunctionComp(3084) or
-        Php_FunctionComp(3266) or
-        Php_FunctionComp(3782) or
-        Php_FunctionComp(3924) or
-        Php_FunctionComp(4083) or
-        Php_FunctionComp(4796) or
-        Php_FunctionComp(4841) then
+    if  PhpFunctionComp(697) or
+        PhpFunctionComp(1125) or
+        PhpFunctionComp(1251) or
+        PhpFunctionComp(1384) or
+        PhpFunctionComp(2620) or
+        PhpFunctionComp(3084) or
+        PhpFunctionComp(3266) or
+        PhpFunctionComp(3782) or
+        PhpFunctionComp(3924) or
+        PhpFunctionComp(4083) or
+        PhpFunctionComp(4796) or
+        PhpFunctionComp(4841) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc82: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc82: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(65) then
+  if  PhpKeywordComp(65) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(253) or
-        Php_FunctionComp(336) or
-        Php_FunctionComp(488) or
-        Php_FunctionComp(649) or
-        Php_FunctionComp(782) or
-        Php_FunctionComp(1237) or
-        Php_FunctionComp(1245) or
-        Php_FunctionComp(1263) or
-        Php_FunctionComp(1457) or
-        Php_FunctionComp(1552) or
-        Php_FunctionComp(1608) or
-        Php_FunctionComp(2096) or
-        Php_FunctionComp(2106) or
-        Php_FunctionComp(2264) or
-        Php_FunctionComp(3117) or
-        Php_FunctionComp(3405) or
-        Php_FunctionComp(3785) or
-        Php_FunctionComp(3853) or
-        Php_FunctionComp(3925) or
-        Php_FunctionComp(4760) then
+    if  PhpFunctionComp(253) or
+        PhpFunctionComp(336) or
+        PhpFunctionComp(488) or
+        PhpFunctionComp(649) or
+        PhpFunctionComp(782) or
+        PhpFunctionComp(1237) or
+        PhpFunctionComp(1245) or
+        PhpFunctionComp(1263) or
+        PhpFunctionComp(1457) or
+        PhpFunctionComp(1552) or
+        PhpFunctionComp(1608) or
+        PhpFunctionComp(2096) or
+        PhpFunctionComp(2106) or
+        PhpFunctionComp(2264) or
+        PhpFunctionComp(3117) or
+        PhpFunctionComp(3405) or
+        PhpFunctionComp(3785) or
+        PhpFunctionComp(3853) or
+        PhpFunctionComp(3925) or
+        PhpFunctionComp(4760) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc83: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc83: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(158) or
-      Php_FunctionComp(416) or
-      Php_FunctionComp(690) or
-      Php_FunctionComp(710) or
-      Php_FunctionComp(783) or
-      Php_FunctionComp(1423) or
-      Php_FunctionComp(1506) or
-      Php_FunctionComp(2086) or
-      Php_FunctionComp(2103) or
-      Php_FunctionComp(2145) or
-      Php_FunctionComp(2146) or
-      Php_FunctionComp(2168) or
-      Php_FunctionComp(2320) or
-      Php_FunctionComp(2424) or
-      Php_FunctionComp(2445) or
-      Php_FunctionComp(2545) or
-      Php_FunctionComp(3068) or
-      Php_FunctionComp(3241) or
-      Php_FunctionComp(3728) or
-      Php_FunctionComp(3731) or
-      Php_FunctionComp(4345) or
-      Php_FunctionComp(4858) then
+  if  PhpFunctionComp(158) or
+      PhpFunctionComp(416) or
+      PhpFunctionComp(690) or
+      PhpFunctionComp(710) or
+      PhpFunctionComp(783) or
+      PhpFunctionComp(1423) or
+      PhpFunctionComp(1506) or
+      PhpFunctionComp(2086) or
+      PhpFunctionComp(2103) or
+      PhpFunctionComp(2145) or
+      PhpFunctionComp(2146) or
+      PhpFunctionComp(2168) or
+      PhpFunctionComp(2320) or
+      PhpFunctionComp(2424) or
+      PhpFunctionComp(2445) or
+      PhpFunctionComp(2545) or
+      PhpFunctionComp(3068) or
+      PhpFunctionComp(3241) or
+      PhpFunctionComp(3728) or
+      PhpFunctionComp(3731) or
+      PhpFunctionComp(4345) or
+      PhpFunctionComp(4858) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc84: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc84: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(5) or
-      Php_KeywordComp(66) then
+  if  PhpKeywordComp(5) or
+      PhpKeywordComp(66) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(190) or
-        Php_FunctionComp(226) or
-        Php_FunctionComp(628) or
-        Php_FunctionComp(757) or
-        Php_FunctionComp(1348) or
-        Php_FunctionComp(1370) or
-        Php_FunctionComp(1720) or
-        Php_FunctionComp(2149) or
-        Php_FunctionComp(2157) or
-        Php_FunctionComp(3069) or
-        Php_FunctionComp(3124) or
-        Php_FunctionComp(3267) or
-        Php_FunctionComp(3318) or
-        Php_FunctionComp(3532) or
-        Php_FunctionComp(3579) or
-        Php_FunctionComp(3637) then
+    if  PhpFunctionComp(190) or
+        PhpFunctionComp(226) or
+        PhpFunctionComp(628) or
+        PhpFunctionComp(757) or
+        PhpFunctionComp(1348) or
+        PhpFunctionComp(1370) or
+        PhpFunctionComp(1720) or
+        PhpFunctionComp(2149) or
+        PhpFunctionComp(2157) or
+        PhpFunctionComp(3069) or
+        PhpFunctionComp(3124) or
+        PhpFunctionComp(3267) or
+        PhpFunctionComp(3318) or
+        PhpFunctionComp(3532) or
+        PhpFunctionComp(3579) or
+        PhpFunctionComp(3637) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc85: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc85: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(370) or
-      Php_FunctionComp(659) or
-      Php_FunctionComp(689) or
-      Php_FunctionComp(1346) or
-      Php_FunctionComp(1349) or
-      Php_FunctionComp(1369) or
-      Php_FunctionComp(1469) or
-      Php_FunctionComp(1585) or
-      Php_FunctionComp(1789) or
-      Php_FunctionComp(1955) or
-      Php_FunctionComp(1989) or
-      Php_FunctionComp(2066) or
-      Php_FunctionComp(2212) or
-      Php_FunctionComp(3581) or
-      Php_FunctionComp(3749) or
-      Php_FunctionComp(4292) then
+  if  PhpFunctionComp(370) or
+      PhpFunctionComp(659) or
+      PhpFunctionComp(689) or
+      PhpFunctionComp(1346) or
+      PhpFunctionComp(1349) or
+      PhpFunctionComp(1369) or
+      PhpFunctionComp(1469) or
+      PhpFunctionComp(1585) or
+      PhpFunctionComp(1789) or
+      PhpFunctionComp(1955) or
+      PhpFunctionComp(1989) or
+      PhpFunctionComp(2066) or
+      PhpFunctionComp(2212) or
+      PhpFunctionComp(3581) or
+      PhpFunctionComp(3749) or
+      PhpFunctionComp(4292) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc86: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc86: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1204) or
-      Php_FunctionComp(1347) or
-      Php_FunctionComp(1388) or
-      Php_FunctionComp(1502) or
-      Php_FunctionComp(1737) or
-      Php_FunctionComp(2011) or
-      Php_FunctionComp(2014) or
-      Php_FunctionComp(2175) or
-      Php_FunctionComp(2234) or
-      Php_FunctionComp(3139) or
-      Php_FunctionComp(3184) or
-      Php_FunctionComp(3200) or
-      Php_FunctionComp(3759) or
-      Php_FunctionComp(3941) or
-      Php_FunctionComp(4450) or
-      Php_FunctionComp(5150) then
+  if  PhpFunctionComp(1204) or
+      PhpFunctionComp(1347) or
+      PhpFunctionComp(1388) or
+      PhpFunctionComp(1502) or
+      PhpFunctionComp(1737) or
+      PhpFunctionComp(2011) or
+      PhpFunctionComp(2014) or
+      PhpFunctionComp(2175) or
+      PhpFunctionComp(2234) or
+      PhpFunctionComp(3139) or
+      PhpFunctionComp(3184) or
+      PhpFunctionComp(3200) or
+      PhpFunctionComp(3759) or
+      PhpFunctionComp(3941) or
+      PhpFunctionComp(4450) or
+      PhpFunctionComp(5150) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc87: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc87: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(64) then
+  if  PhpKeywordComp(64) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(1885) or
-        Php_FunctionComp(1971) or
-        Php_FunctionComp(2101) or
-        Php_FunctionComp(2185) or
-        Php_FunctionComp(2219) or
-        Php_FunctionComp(2288) or
-        Php_FunctionComp(3613) or
-        Php_FunctionComp(3760) or
-        Php_FunctionComp(3904) or
-        Php_FunctionComp(3984) or
-        Php_FunctionComp(4119) or
-        Php_FunctionComp(4845) then
+    if  PhpFunctionComp(1885) or
+        PhpFunctionComp(1971) or
+        PhpFunctionComp(2101) or
+        PhpFunctionComp(2185) or
+        PhpFunctionComp(2219) or
+        PhpFunctionComp(2288) or
+        PhpFunctionComp(3613) or
+        PhpFunctionComp(3760) or
+        PhpFunctionComp(3904) or
+        PhpFunctionComp(3984) or
+        PhpFunctionComp(4119) or
+        PhpFunctionComp(4845) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc88: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc88: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(164) or
-      Php_FunctionComp(207) or
-      Php_FunctionComp(371) or
-      Php_FunctionComp(548) or
-      Php_FunctionComp(678) or
-      Php_FunctionComp(787) or
-      Php_FunctionComp(1443) or
-      Php_FunctionComp(1451) or
-      Php_FunctionComp(1514) or
-      Php_FunctionComp(2151) or
-      Php_FunctionComp(2190) or
-      Php_FunctionComp(2217) or
-      Php_FunctionComp(2347) or
-      Php_FunctionComp(2350) or
-      Php_FunctionComp(3123) or
-      Php_FunctionComp(3176) or
-      Php_FunctionComp(3177) or
-      Php_FunctionComp(3300) or
-      Php_FunctionComp(3526) or
-      Php_FunctionComp(3597) or
-      Php_FunctionComp(3622) or
-      Php_FunctionComp(4003) or
-      Php_FunctionComp(4496) or
-      Php_FunctionComp(4602) or
-      Php_FunctionComp(4762) or
-      Php_FunctionComp(4861) then
+  if  PhpFunctionComp(164) or
+      PhpFunctionComp(207) or
+      PhpFunctionComp(371) or
+      PhpFunctionComp(548) or
+      PhpFunctionComp(678) or
+      PhpFunctionComp(787) or
+      PhpFunctionComp(1443) or
+      PhpFunctionComp(1451) or
+      PhpFunctionComp(1514) or
+      PhpFunctionComp(2151) or
+      PhpFunctionComp(2190) or
+      PhpFunctionComp(2217) or
+      PhpFunctionComp(2347) or
+      PhpFunctionComp(2350) or
+      PhpFunctionComp(3123) or
+      PhpFunctionComp(3176) or
+      PhpFunctionComp(3177) or
+      PhpFunctionComp(3300) or
+      PhpFunctionComp(3526) or
+      PhpFunctionComp(3597) or
+      PhpFunctionComp(3622) or
+      PhpFunctionComp(4003) or
+      PhpFunctionComp(4496) or
+      PhpFunctionComp(4602) or
+      PhpFunctionComp(4762) or
+      PhpFunctionComp(4861) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc89: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc89: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(639) or
-      Php_FunctionComp(1060) or
-      Php_FunctionComp(1137) or
-      Php_FunctionComp(1266) or
-      Php_FunctionComp(1274) or
-      Php_FunctionComp(1387) or
-      Php_FunctionComp(1445) or
-      Php_FunctionComp(1857) or
-      Php_FunctionComp(1948) or
-      Php_FunctionComp(1988) or
-      Php_FunctionComp(2043) or
-      Php_FunctionComp(2072) or
-      Php_FunctionComp(2183) or
-      Php_FunctionComp(2683) or
-      Php_FunctionComp(3358) or
-      Php_FunctionComp(3380) or
-      Php_FunctionComp(3751) or
-      Php_FunctionComp(4116) or
-      Php_FunctionComp(4117) or
-      Php_FunctionComp(4451) or
-      Php_FunctionComp(5135) then
+  if  PhpFunctionComp(639) or
+      PhpFunctionComp(1060) or
+      PhpFunctionComp(1137) or
+      PhpFunctionComp(1266) or
+      PhpFunctionComp(1274) or
+      PhpFunctionComp(1387) or
+      PhpFunctionComp(1445) or
+      PhpFunctionComp(1857) or
+      PhpFunctionComp(1948) or
+      PhpFunctionComp(1988) or
+      PhpFunctionComp(2043) or
+      PhpFunctionComp(2072) or
+      PhpFunctionComp(2183) or
+      PhpFunctionComp(2683) or
+      PhpFunctionComp(3358) or
+      PhpFunctionComp(3380) or
+      PhpFunctionComp(3751) or
+      PhpFunctionComp(4116) or
+      PhpFunctionComp(4117) or
+      PhpFunctionComp(4451) or
+      PhpFunctionComp(5135) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc90: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc90: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(581) or
-      Php_FunctionComp(647) or
-      Php_FunctionComp(1205) or
-      Php_FunctionComp(1364) or
-      Php_FunctionComp(1419) or
-      Php_FunctionComp(1462) or
-      Php_FunctionComp(1509) or
-      Php_FunctionComp(1675) or
-      Php_FunctionComp(1723) or
-      Php_FunctionComp(1733) or
-      Php_FunctionComp(1961) or
-      Php_FunctionComp(2200) or
-      Php_FunctionComp(2202) or
-      Php_FunctionComp(2358) or
-      Php_FunctionComp(2541) or
-      Php_FunctionComp(3178) or
-      Php_FunctionComp(3563) or
-      Php_FunctionComp(3593) or
-      Php_FunctionComp(3625) or
-      Php_FunctionComp(3956) then
+  if  PhpFunctionComp(581) or
+      PhpFunctionComp(647) or
+      PhpFunctionComp(1205) or
+      PhpFunctionComp(1364) or
+      PhpFunctionComp(1419) or
+      PhpFunctionComp(1462) or
+      PhpFunctionComp(1509) or
+      PhpFunctionComp(1675) or
+      PhpFunctionComp(1723) or
+      PhpFunctionComp(1733) or
+      PhpFunctionComp(1961) or
+      PhpFunctionComp(2200) or
+      PhpFunctionComp(2202) or
+      PhpFunctionComp(2358) or
+      PhpFunctionComp(2541) or
+      PhpFunctionComp(3178) or
+      PhpFunctionComp(3563) or
+      PhpFunctionComp(3593) or
+      PhpFunctionComp(3625) or
+      PhpFunctionComp(3956) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc91: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc91: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(33) or
-      Php_KeywordComp(57) then
+  if  PhpKeywordComp(33) or
+      PhpKeywordComp(57) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(249) or
-        Php_FunctionComp(291) or
-        Php_FunctionComp(504) or
-        Php_FunctionComp(1063) or
-        Php_FunctionComp(1128) or
-        Php_FunctionComp(1258) or
-        Php_FunctionComp(1436) or
-        Php_FunctionComp(1651) or
-        Php_FunctionComp(2077) or
-        Php_FunctionComp(2089) or
-        Php_FunctionComp(2095) or
-        Php_FunctionComp(2420) or
-        Php_FunctionComp(2432) or
-        Php_FunctionComp(3217) or
-        Php_FunctionComp(3529) or
-        Php_FunctionComp(3640) or
-        Php_FunctionComp(3689) or
-        Php_FunctionComp(3756) or
-        Php_FunctionComp(3844) or
-        Php_FunctionComp(3901) or
-        Php_FunctionComp(4114) then
+    if  PhpFunctionComp(249) or
+        PhpFunctionComp(291) or
+        PhpFunctionComp(504) or
+        PhpFunctionComp(1063) or
+        PhpFunctionComp(1128) or
+        PhpFunctionComp(1258) or
+        PhpFunctionComp(1436) or
+        PhpFunctionComp(1651) or
+        PhpFunctionComp(2077) or
+        PhpFunctionComp(2089) or
+        PhpFunctionComp(2095) or
+        PhpFunctionComp(2420) or
+        PhpFunctionComp(2432) or
+        PhpFunctionComp(3217) or
+        PhpFunctionComp(3529) or
+        PhpFunctionComp(3640) or
+        PhpFunctionComp(3689) or
+        PhpFunctionComp(3756) or
+        PhpFunctionComp(3844) or
+        PhpFunctionComp(3901) or
+        PhpFunctionComp(4114) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc92: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc92: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(99) or
-      Php_FunctionComp(558) or
-      Php_FunctionComp(679) or
-      Php_FunctionComp(1224) or
-      Php_FunctionComp(1248) or
-      Php_FunctionComp(1359) or
-      Php_FunctionComp(1398) or
-      Php_FunctionComp(2078) or
-      Php_FunctionComp(2126) or
-      Php_FunctionComp(2158) or
-      Php_FunctionComp(2431) or
-      Php_FunctionComp(2528) or
-      Php_FunctionComp(3172) or
-      Php_FunctionComp(3325) or
-      Php_FunctionComp(3392) or
-      Php_FunctionComp(3528) or
-      Php_FunctionComp(3571) or
-      Php_FunctionComp(3604) or
-      Php_FunctionComp(3688) or
-      Php_FunctionComp(3940) or
-      Php_FunctionComp(4059) or
-      Php_FunctionComp(4118) or
-      Php_FunctionComp(4371) or
-      Php_FunctionComp(4515) then
+  if  PhpFunctionComp(99) or
+      PhpFunctionComp(558) or
+      PhpFunctionComp(679) or
+      PhpFunctionComp(1224) or
+      PhpFunctionComp(1248) or
+      PhpFunctionComp(1359) or
+      PhpFunctionComp(1398) or
+      PhpFunctionComp(2078) or
+      PhpFunctionComp(2126) or
+      PhpFunctionComp(2158) or
+      PhpFunctionComp(2431) or
+      PhpFunctionComp(2528) or
+      PhpFunctionComp(3172) or
+      PhpFunctionComp(3325) or
+      PhpFunctionComp(3392) or
+      PhpFunctionComp(3528) or
+      PhpFunctionComp(3571) or
+      PhpFunctionComp(3604) or
+      PhpFunctionComp(3688) or
+      PhpFunctionComp(3940) or
+      PhpFunctionComp(4059) or
+      PhpFunctionComp(4118) or
+      PhpFunctionComp(4371) or
+      PhpFunctionComp(4515) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc93: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc93: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(60) then
+  if  PhpKeywordComp(60) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(222) or
-        Php_FunctionComp(642) or
-        Php_FunctionComp(1210) or
-        Php_FunctionComp(1352) or
-        Php_FunctionComp(1474) or
-        Php_FunctionComp(1513) or
-        Php_FunctionComp(1796) or
-        Php_FunctionComp(1959) or
-        Php_FunctionComp(1978) or
-        Php_FunctionComp(1997) or
-        Php_FunctionComp(2173) or
-        Php_FunctionComp(3218) or
-        Php_FunctionComp(3319) or
-        Php_FunctionComp(3461) or
-        Php_FunctionComp(3813) or
-        Php_FunctionComp(3909) or
-        Php_FunctionComp(4081) or
-        Php_FunctionComp(4082) or
-        Php_FunctionComp(4101) or
-        Php_FunctionComp(4123) or
-        Php_FunctionComp(4857) or
-        Php_FunctionComp(4859) then
+    if  PhpFunctionComp(222) or
+        PhpFunctionComp(642) or
+        PhpFunctionComp(1210) or
+        PhpFunctionComp(1352) or
+        PhpFunctionComp(1474) or
+        PhpFunctionComp(1513) or
+        PhpFunctionComp(1796) or
+        PhpFunctionComp(1959) or
+        PhpFunctionComp(1978) or
+        PhpFunctionComp(1997) or
+        PhpFunctionComp(2173) or
+        PhpFunctionComp(3218) or
+        PhpFunctionComp(3319) or
+        PhpFunctionComp(3461) or
+        PhpFunctionComp(3813) or
+        PhpFunctionComp(3909) or
+        PhpFunctionComp(4081) or
+        PhpFunctionComp(4082) or
+        PhpFunctionComp(4101) or
+        PhpFunctionComp(4123) or
+        PhpFunctionComp(4857) or
+        PhpFunctionComp(4859) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc94: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc94: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(476) or
-      Php_FunctionComp(1546) or
-      Php_FunctionComp(1880) or
-      Php_FunctionComp(2269) or
-      Php_FunctionComp(3098) or
-      Php_FunctionComp(3430) or
-      Php_FunctionComp(3634) or
-      Php_FunctionComp(3841) or
-      Php_FunctionComp(4230) or
-      Php_FunctionComp(4235) or
-      Php_FunctionComp(4240) or
-      Php_FunctionComp(4804) or
-      Php_FunctionComp(4875) then
+  if  PhpFunctionComp(476) or
+      PhpFunctionComp(1546) or
+      PhpFunctionComp(1880) or
+      PhpFunctionComp(2269) or
+      PhpFunctionComp(3098) or
+      PhpFunctionComp(3430) or
+      PhpFunctionComp(3634) or
+      PhpFunctionComp(3841) or
+      PhpFunctionComp(4230) or
+      PhpFunctionComp(4235) or
+      PhpFunctionComp(4240) or
+      PhpFunctionComp(4804) or
+      PhpFunctionComp(4875) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc95: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc95: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(96) or
-      Php_FunctionComp(1092) or
-      Php_FunctionComp(1375) or
-      Php_FunctionComp(1634) or
-      Php_FunctionComp(1739) or
-      Php_FunctionComp(1952) or
-      Php_FunctionComp(2004) or
-      Php_FunctionComp(2132) or
-      Php_FunctionComp(2409) or
-      Php_FunctionComp(2477) or
-      Php_FunctionComp(2552) or
-      Php_FunctionComp(3080) or
-      Php_FunctionComp(3314) or
-      Php_FunctionComp(3696) or
-      Php_FunctionComp(4096) or
-      Php_FunctionComp(4205) or
-      Php_FunctionComp(4514) or
-      Php_FunctionComp(4872) then
+  if  PhpFunctionComp(96) or
+      PhpFunctionComp(1092) or
+      PhpFunctionComp(1375) or
+      PhpFunctionComp(1634) or
+      PhpFunctionComp(1739) or
+      PhpFunctionComp(1952) or
+      PhpFunctionComp(2004) or
+      PhpFunctionComp(2132) or
+      PhpFunctionComp(2409) or
+      PhpFunctionComp(2477) or
+      PhpFunctionComp(2552) or
+      PhpFunctionComp(3080) or
+      PhpFunctionComp(3314) or
+      PhpFunctionComp(3696) or
+      PhpFunctionComp(4096) or
+      PhpFunctionComp(4205) or
+      PhpFunctionComp(4514) or
+      PhpFunctionComp(4872) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc96: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc96: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(62) then
+  if  PhpKeywordComp(62) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(395) or
-        Php_FunctionComp(658) or
-        Php_FunctionComp(1260) or
-        Php_FunctionComp(1350) or
-        Php_FunctionComp(1362) or
-        Php_FunctionComp(1548) or
-        Php_FunctionComp(1647) or
-        Php_FunctionComp(2348) or
-        Php_FunctionComp(3104) or
-        Php_FunctionComp(3127) or
-        Php_FunctionComp(3424) or
-        Php_FunctionComp(3437) or
-        Php_FunctionComp(3937) or
-        Php_FunctionComp(4122) or
-        Php_FunctionComp(4805) then
+    if  PhpFunctionComp(395) or
+        PhpFunctionComp(658) or
+        PhpFunctionComp(1260) or
+        PhpFunctionComp(1350) or
+        PhpFunctionComp(1362) or
+        PhpFunctionComp(1548) or
+        PhpFunctionComp(1647) or
+        PhpFunctionComp(2348) or
+        PhpFunctionComp(3104) or
+        PhpFunctionComp(3127) or
+        PhpFunctionComp(3424) or
+        PhpFunctionComp(3437) or
+        PhpFunctionComp(3937) or
+        PhpFunctionComp(4122) or
+        PhpFunctionComp(4805) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc97: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc97: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(196) or
-      Php_FunctionComp(197) or
-      Php_FunctionComp(1360) or
-      Php_FunctionComp(2068) or
-      Php_FunctionComp(2191) or
-      Php_FunctionComp(2224) or
-      Php_FunctionComp(2555) or
-      Php_FunctionComp(3022) or
-      Php_FunctionComp(3205) or
-      Php_FunctionComp(3315) or
-      Php_FunctionComp(3550) or
-      Php_FunctionComp(3650) or
-      Php_FunctionComp(3805) or
-      Php_FunctionComp(3870) or
-      Php_FunctionComp(3903) or
-      Php_FunctionComp(3954) or
-      Php_FunctionComp(3985) or
-      Php_FunctionComp(4094) or
-      Php_FunctionComp(4129) or
-      Php_FunctionComp(4753) or
-      Php_FunctionComp(4763) or
-      Php_FunctionComp(4846) or
-      Php_FunctionComp(5133) then
+  if  PhpFunctionComp(196) or
+      PhpFunctionComp(197) or
+      PhpFunctionComp(1360) or
+      PhpFunctionComp(2068) or
+      PhpFunctionComp(2191) or
+      PhpFunctionComp(2224) or
+      PhpFunctionComp(2555) or
+      PhpFunctionComp(3022) or
+      PhpFunctionComp(3205) or
+      PhpFunctionComp(3315) or
+      PhpFunctionComp(3550) or
+      PhpFunctionComp(3650) or
+      PhpFunctionComp(3805) or
+      PhpFunctionComp(3870) or
+      PhpFunctionComp(3903) or
+      PhpFunctionComp(3954) or
+      PhpFunctionComp(3985) or
+      PhpFunctionComp(4094) or
+      PhpFunctionComp(4129) or
+      PhpFunctionComp(4753) or
+      PhpFunctionComp(4763) or
+      PhpFunctionComp(4846) or
+      PhpFunctionComp(5133) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc98: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc98: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(318) or
-      Php_FunctionComp(330) or
-      Php_FunctionComp(480) or
-      Php_FunctionComp(1058) or
-      Php_FunctionComp(1118) or
-      Php_FunctionComp(1259) or
-      Php_FunctionComp(1372) or
-      Php_FunctionComp(1433) or
-      Php_FunctionComp(1689) or
-      Php_FunctionComp(1728) or
-      Php_FunctionComp(2313) or
-      Php_FunctionComp(3206) or
-      Php_FunctionComp(3209) or
-      Php_FunctionComp(3236) or
-      Php_FunctionComp(3468) or
-      Php_FunctionComp(3477) or
-      Php_FunctionComp(3739) or
-      Php_FunctionComp(3840) or
-      Php_FunctionComp(4379) or
-      Php_FunctionComp(4798) then
+  if  PhpFunctionComp(318) or
+      PhpFunctionComp(330) or
+      PhpFunctionComp(480) or
+      PhpFunctionComp(1058) or
+      PhpFunctionComp(1118) or
+      PhpFunctionComp(1259) or
+      PhpFunctionComp(1372) or
+      PhpFunctionComp(1433) or
+      PhpFunctionComp(1689) or
+      PhpFunctionComp(1728) or
+      PhpFunctionComp(2313) or
+      PhpFunctionComp(3206) or
+      PhpFunctionComp(3209) or
+      PhpFunctionComp(3236) or
+      PhpFunctionComp(3468) or
+      PhpFunctionComp(3477) or
+      PhpFunctionComp(3739) or
+      PhpFunctionComp(3840) or
+      PhpFunctionComp(4379) or
+      PhpFunctionComp(4798) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc99: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc99: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(134) or
-      Php_FunctionComp(517) or
-      Php_FunctionComp(1089) or
-      Php_FunctionComp(1211) or
-      Php_FunctionComp(1358) or
-      Php_FunctionComp(1368) or
-      Php_FunctionComp(1421) or
-      Php_FunctionComp(1449) or
-      Php_FunctionComp(1649) or
-      Php_FunctionComp(1729) or
-      Php_FunctionComp(1975) or
-      Php_FunctionComp(1977) or
-      Php_FunctionComp(1999) or
-      Php_FunctionComp(3594) or
-      Php_FunctionComp(4091) or
-      Php_FunctionComp(4125) or
-      Php_FunctionComp(4452) or
-      Php_FunctionComp(4516) then
+  if  PhpFunctionComp(134) or
+      PhpFunctionComp(517) or
+      PhpFunctionComp(1089) or
+      PhpFunctionComp(1211) or
+      PhpFunctionComp(1358) or
+      PhpFunctionComp(1368) or
+      PhpFunctionComp(1421) or
+      PhpFunctionComp(1449) or
+      PhpFunctionComp(1649) or
+      PhpFunctionComp(1729) or
+      PhpFunctionComp(1975) or
+      PhpFunctionComp(1977) or
+      PhpFunctionComp(1999) or
+      PhpFunctionComp(3594) or
+      PhpFunctionComp(4091) or
+      PhpFunctionComp(4125) or
+      PhpFunctionComp(4452) or
+      PhpFunctionComp(4516) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc100: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc100: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(230) or
-      Php_FunctionComp(1101) or
-      Php_FunctionComp(1264) or
-      Php_FunctionComp(1367) or
-      Php_FunctionComp(1440) or
-      Php_FunctionComp(1505) or
-      Php_FunctionComp(2085) or
-      Php_FunctionComp(3092) or
-      Php_FunctionComp(3164) or
-      Php_FunctionComp(3220) or
-      Php_FunctionComp(3590) or
-      Php_FunctionComp(3808) or
-      Php_FunctionComp(3812) or
-      Php_FunctionComp(4767) then
+  if  PhpFunctionComp(230) or
+      PhpFunctionComp(1101) or
+      PhpFunctionComp(1264) or
+      PhpFunctionComp(1367) or
+      PhpFunctionComp(1440) or
+      PhpFunctionComp(1505) or
+      PhpFunctionComp(2085) or
+      PhpFunctionComp(3092) or
+      PhpFunctionComp(3164) or
+      PhpFunctionComp(3220) or
+      PhpFunctionComp(3590) or
+      PhpFunctionComp(3808) or
+      PhpFunctionComp(3812) or
+      PhpFunctionComp(4767) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc101: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc101: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(16) then
+  if  PhpKeywordComp(16) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(553) or
-        Php_FunctionComp(663) or
-        Php_FunctionComp(758) or
-        Php_FunctionComp(1323) or
-        Php_FunctionComp(1376) or
-        Php_FunctionComp(1431) or
-        Php_FunctionComp(1465) or
-        Php_FunctionComp(1682) or
-        Php_FunctionComp(1811) or
-        Php_FunctionComp(2144) or
-        Php_FunctionComp(3093) or
-        Php_FunctionComp(3095) or
-        Php_FunctionComp(3143) or
-        Php_FunctionComp(3166) or
-        Php_FunctionComp(3188) or
-        Php_FunctionComp(3458) or
-        Php_FunctionComp(3641) or
-        Php_FunctionComp(3746) or
-        Php_FunctionComp(3807) or
-        Php_FunctionComp(3951) or
-        Php_FunctionComp(4264) or
-        Php_FunctionComp(4351) or
-        Php_FunctionComp(4754) or
-        Php_FunctionComp(5137) or
-        Php_FunctionComp(5152) or
-        Php_FunctionComp(5167) then
+    if  PhpFunctionComp(553) or
+        PhpFunctionComp(663) or
+        PhpFunctionComp(758) or
+        PhpFunctionComp(1323) or
+        PhpFunctionComp(1376) or
+        PhpFunctionComp(1431) or
+        PhpFunctionComp(1465) or
+        PhpFunctionComp(1682) or
+        PhpFunctionComp(1811) or
+        PhpFunctionComp(2144) or
+        PhpFunctionComp(3093) or
+        PhpFunctionComp(3095) or
+        PhpFunctionComp(3143) or
+        PhpFunctionComp(3166) or
+        PhpFunctionComp(3188) or
+        PhpFunctionComp(3458) or
+        PhpFunctionComp(3641) or
+        PhpFunctionComp(3746) or
+        PhpFunctionComp(3807) or
+        PhpFunctionComp(3951) or
+        PhpFunctionComp(4264) or
+        PhpFunctionComp(4351) or
+        PhpFunctionComp(4754) or
+        PhpFunctionComp(5137) or
+        PhpFunctionComp(5152) or
+        PhpFunctionComp(5167) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc102: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc102: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(2) or
-      Php_KeywordComp(39) then
+  if  PhpKeywordComp(2) or
+      PhpKeywordComp(39) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(212) or
-        Php_FunctionComp(331) or
-        Php_FunctionComp(550) or
-        Php_FunctionComp(765) or
-        Php_FunctionComp(1380) or
-        Php_FunctionComp(1810) or
-        Php_FunctionComp(1862) or
-        Php_FunctionComp(2201) or
-        Php_FunctionComp(2253) or
-        Php_FunctionComp(2479) or
-        Php_FunctionComp(2543) or
-        Php_FunctionComp(3361) or
-        Php_FunctionComp(3510) or
-        Php_FunctionComp(3587) or
-        Php_FunctionComp(3605) or
-        Php_FunctionComp(3732) or
-        Php_FunctionComp(3938) or
-        Php_FunctionComp(4023) or
-        Php_FunctionComp(4058) or
-        Php_FunctionComp(4246) or
-        Php_FunctionComp(4283) or
-        Php_FunctionComp(4297) or
-        Php_FunctionComp(4368) or
-        Php_FunctionComp(4505) or
-        Php_FunctionComp(4867) then
+    if  PhpFunctionComp(212) or
+        PhpFunctionComp(331) or
+        PhpFunctionComp(550) or
+        PhpFunctionComp(765) or
+        PhpFunctionComp(1380) or
+        PhpFunctionComp(1810) or
+        PhpFunctionComp(1862) or
+        PhpFunctionComp(2201) or
+        PhpFunctionComp(2253) or
+        PhpFunctionComp(2479) or
+        PhpFunctionComp(2543) or
+        PhpFunctionComp(3361) or
+        PhpFunctionComp(3510) or
+        PhpFunctionComp(3587) or
+        PhpFunctionComp(3605) or
+        PhpFunctionComp(3732) or
+        PhpFunctionComp(3938) or
+        PhpFunctionComp(4023) or
+        PhpFunctionComp(4058) or
+        PhpFunctionComp(4246) or
+        PhpFunctionComp(4283) or
+        PhpFunctionComp(4297) or
+        PhpFunctionComp(4368) or
+        PhpFunctionComp(4505) or
+        PhpFunctionComp(4867) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc103: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc103: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(351) or
-      Php_FunctionComp(632) or
-      Php_FunctionComp(643) or
-      Php_FunctionComp(675) or
-      Php_FunctionComp(688) or
-      Php_FunctionComp(769) or
-      Php_FunctionComp(790) or
-      Php_FunctionComp(1250) or
-      Php_FunctionComp(1336) or
-      Php_FunctionComp(1427) or
-      Php_FunctionComp(1463) or
-      Php_FunctionComp(1515) or
-      Php_FunctionComp(1688) or
-      Php_FunctionComp(1791) or
-      Php_FunctionComp(1808) or
-      Php_FunctionComp(2076) or
-      Php_FunctionComp(2119) or
-      Php_FunctionComp(2147) or
-      Php_FunctionComp(2160) or
-      Php_FunctionComp(2435) or
-      Php_FunctionComp(2484) or
-      Php_FunctionComp(3025) or
-      Php_FunctionComp(3106) or
-      Php_FunctionComp(3126) or
-      Php_FunctionComp(3190) or
-      Php_FunctionComp(3202) or
-      Php_FunctionComp(3230) or
-      Php_FunctionComp(3585) or
-      Php_FunctionComp(3592) or
-      Php_FunctionComp(3763) or
-      Php_FunctionComp(4500) or
-      Php_FunctionComp(4510) or
-      Php_FunctionComp(4752) or
-      Php_FunctionComp(4806) or
-      Php_FunctionComp(4902) or
-      Php_FunctionComp(4999) then
+  if  PhpFunctionComp(351) or
+      PhpFunctionComp(632) or
+      PhpFunctionComp(643) or
+      PhpFunctionComp(675) or
+      PhpFunctionComp(688) or
+      PhpFunctionComp(769) or
+      PhpFunctionComp(790) or
+      PhpFunctionComp(1250) or
+      PhpFunctionComp(1336) or
+      PhpFunctionComp(1427) or
+      PhpFunctionComp(1463) or
+      PhpFunctionComp(1515) or
+      PhpFunctionComp(1688) or
+      PhpFunctionComp(1791) or
+      PhpFunctionComp(1808) or
+      PhpFunctionComp(2076) or
+      PhpFunctionComp(2119) or
+      PhpFunctionComp(2147) or
+      PhpFunctionComp(2160) or
+      PhpFunctionComp(2435) or
+      PhpFunctionComp(2484) or
+      PhpFunctionComp(3025) or
+      PhpFunctionComp(3106) or
+      PhpFunctionComp(3126) or
+      PhpFunctionComp(3190) or
+      PhpFunctionComp(3202) or
+      PhpFunctionComp(3230) or
+      PhpFunctionComp(3585) or
+      PhpFunctionComp(3592) or
+      PhpFunctionComp(3763) or
+      PhpFunctionComp(4500) or
+      PhpFunctionComp(4510) or
+      PhpFunctionComp(4752) or
+      PhpFunctionComp(4806) or
+      PhpFunctionComp(4902) or
+      PhpFunctionComp(4999) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc104: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc104: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(429) or
-      Php_FunctionComp(582) or
-      Php_FunctionComp(644) or
-      Php_FunctionComp(706) or
-      Php_FunctionComp(711) or
-      Php_FunctionComp(759) or
-      Php_FunctionComp(760) or
-      Php_FunctionComp(1094) or
-      Php_FunctionComp(1262) or
-      Php_FunctionComp(1297) or
-      Php_FunctionComp(1342) or
-      Php_FunctionComp(1373) or
-      Php_FunctionComp(1422) or
-      Php_FunctionComp(1583) or
-      Php_FunctionComp(1740) or
-      Php_FunctionComp(1807) or
-      Php_FunctionComp(1909) or
-      Php_FunctionComp(2154) or
-      Php_FunctionComp(2375) or
-      Php_FunctionComp(2411) or
-      Php_FunctionComp(3005) or
-      Php_FunctionComp(3118) or
-      Php_FunctionComp(3182) or
-      Php_FunctionComp(3422) or
-      Php_FunctionComp(3586) or
-      Php_FunctionComp(3948) or
-      Php_FunctionComp(4025) or
-      Php_FunctionComp(4501) or
-      Php_FunctionComp(4504) or
-      Php_FunctionComp(4837) or
-      Php_FunctionComp(4876) or
-      Php_FunctionComp(4953) or
-      Php_FunctionComp(5151) then
+  if  PhpFunctionComp(429) or
+      PhpFunctionComp(582) or
+      PhpFunctionComp(644) or
+      PhpFunctionComp(706) or
+      PhpFunctionComp(711) or
+      PhpFunctionComp(759) or
+      PhpFunctionComp(760) or
+      PhpFunctionComp(1094) or
+      PhpFunctionComp(1262) or
+      PhpFunctionComp(1297) or
+      PhpFunctionComp(1342) or
+      PhpFunctionComp(1373) or
+      PhpFunctionComp(1422) or
+      PhpFunctionComp(1583) or
+      PhpFunctionComp(1740) or
+      PhpFunctionComp(1807) or
+      PhpFunctionComp(1909) or
+      PhpFunctionComp(2154) or
+      PhpFunctionComp(2375) or
+      PhpFunctionComp(2411) or
+      PhpFunctionComp(3005) or
+      PhpFunctionComp(3118) or
+      PhpFunctionComp(3182) or
+      PhpFunctionComp(3422) or
+      PhpFunctionComp(3586) or
+      PhpFunctionComp(3948) or
+      PhpFunctionComp(4025) or
+      PhpFunctionComp(4501) or
+      PhpFunctionComp(4504) or
+      PhpFunctionComp(4837) or
+      PhpFunctionComp(4876) or
+      PhpFunctionComp(4953) or
+      PhpFunctionComp(5151) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc105: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc105: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(12) or
-      Php_KeywordComp(28) or
-      Php_KeywordComp(44) then
+  if  PhpKeywordComp(12) or
+      PhpKeywordComp(28) or
+      PhpKeywordComp(44) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(464) or
-        Php_FunctionComp(641) or
-        Php_FunctionComp(781) or
-        Php_FunctionComp(1122) or
-        Php_FunctionComp(1129) or
-        Php_FunctionComp(1225) or
-        Php_FunctionComp(1355) or
-        Php_FunctionComp(1418) or
-        Php_FunctionComp(1586) or
-        Php_FunctionComp(1602) or
-        Php_FunctionComp(1725) or
-        Php_FunctionComp(1901) or
-        Php_FunctionComp(1906) or
-        Php_FunctionComp(2188) or
-        Php_FunctionComp(2488) or
-        Php_FunctionComp(2539) or
-        Php_FunctionComp(2562) or
-        Php_FunctionComp(3073) or
-        Php_FunctionComp(3129) or
-        Php_FunctionComp(3473) or
-        Php_FunctionComp(3483) or
-        Php_FunctionComp(3559) or
-        Php_FunctionComp(3624) or
-        Php_FunctionComp(4920) or
-        Php_FunctionComp(5118) or
-        Php_FunctionComp(5123) or
-        Php_FunctionComp(5142) or
-        Php_FunctionComp(5159) then
+    if  PhpFunctionComp(464) or
+        PhpFunctionComp(641) or
+        PhpFunctionComp(781) or
+        PhpFunctionComp(1122) or
+        PhpFunctionComp(1129) or
+        PhpFunctionComp(1225) or
+        PhpFunctionComp(1355) or
+        PhpFunctionComp(1418) or
+        PhpFunctionComp(1586) or
+        PhpFunctionComp(1602) or
+        PhpFunctionComp(1725) or
+        PhpFunctionComp(1901) or
+        PhpFunctionComp(1906) or
+        PhpFunctionComp(2188) or
+        PhpFunctionComp(2488) or
+        PhpFunctionComp(2539) or
+        PhpFunctionComp(2562) or
+        PhpFunctionComp(3073) or
+        PhpFunctionComp(3129) or
+        PhpFunctionComp(3473) or
+        PhpFunctionComp(3483) or
+        PhpFunctionComp(3559) or
+        PhpFunctionComp(3624) or
+        PhpFunctionComp(4920) or
+        PhpFunctionComp(5118) or
+        PhpFunctionComp(5123) or
+        PhpFunctionComp(5142) or
+        PhpFunctionComp(5159) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc106: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc106: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(45) or
-      Php_KeywordComp(58) then
+  if  PhpKeywordComp(45) or
+      PhpKeywordComp(58) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(214) or
-        Php_FunctionComp(403) or
-        Php_FunctionComp(506) or
-        Php_FunctionComp(651) or
-        Php_FunctionComp(798) or
-        Php_FunctionComp(1444) or
-        Php_FunctionComp(1455) or
-        Php_FunctionComp(2485) or
-        Php_FunctionComp(2618) or
-        Php_FunctionComp(3066) or
-        Php_FunctionComp(3186) or
-        Php_FunctionComp(3562) or
-        Php_FunctionComp(3692) or
-        Php_FunctionComp(3729) or
-        Php_FunctionComp(4131) or
-        Php_FunctionComp(4233) or
-        Php_FunctionComp(4238) or
-        Php_FunctionComp(4243) or
-        Php_FunctionComp(4298) or
-        Php_FunctionComp(4508) or
-        Php_FunctionComp(4960) or
-        Php_FunctionComp(5121) or
-        Php_FunctionComp(5138) then
+    if  PhpFunctionComp(214) or
+        PhpFunctionComp(403) or
+        PhpFunctionComp(506) or
+        PhpFunctionComp(651) or
+        PhpFunctionComp(798) or
+        PhpFunctionComp(1444) or
+        PhpFunctionComp(1455) or
+        PhpFunctionComp(2485) or
+        PhpFunctionComp(2618) or
+        PhpFunctionComp(3066) or
+        PhpFunctionComp(3186) or
+        PhpFunctionComp(3562) or
+        PhpFunctionComp(3692) or
+        PhpFunctionComp(3729) or
+        PhpFunctionComp(4131) or
+        PhpFunctionComp(4233) or
+        PhpFunctionComp(4238) or
+        PhpFunctionComp(4243) or
+        PhpFunctionComp(4298) or
+        PhpFunctionComp(4508) or
+        PhpFunctionComp(4960) or
+        PhpFunctionComp(5121) or
+        PhpFunctionComp(5138) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc107: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc107: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(162) or
-      Php_FunctionComp(386) or
-      Php_FunctionComp(490) or
-      Php_FunctionComp(551) or
-      Php_FunctionComp(717) or
-      Php_FunctionComp(1249) or
-      Php_FunctionComp(1275) or
-      Php_FunctionComp(1426) or
-      Php_FunctionComp(1529) or
-      Php_FunctionComp(1600) or
-      Php_FunctionComp(1652) or
-      Php_FunctionComp(1783) or
-      Php_FunctionComp(1985) or
-      Php_FunctionComp(2055) or
-      Php_FunctionComp(2155) or
-      Php_FunctionComp(2161) or
-      Php_FunctionComp(2265) or
-      Php_FunctionComp(2273) or
-      Php_FunctionComp(2448) or
-      Php_FunctionComp(2833) or
-      Php_FunctionComp(3007) or
-      Php_FunctionComp(3029) or
-      Php_FunctionComp(3154) or
-      Php_FunctionComp(3212) or
-      Php_FunctionComp(3304) or
-      Php_FunctionComp(3381) or
-      Php_FunctionComp(3572) or
-      Php_FunctionComp(3781) or
-      Php_FunctionComp(3952) or
-      Php_FunctionComp(4358) or
-      Php_FunctionComp(4502) or
-      Php_FunctionComp(4812) or
-      Php_FunctionComp(4863) or
-      Php_FunctionComp(4874) then
+  if  PhpFunctionComp(162) or
+      PhpFunctionComp(386) or
+      PhpFunctionComp(490) or
+      PhpFunctionComp(551) or
+      PhpFunctionComp(717) or
+      PhpFunctionComp(1249) or
+      PhpFunctionComp(1275) or
+      PhpFunctionComp(1426) or
+      PhpFunctionComp(1529) or
+      PhpFunctionComp(1600) or
+      PhpFunctionComp(1652) or
+      PhpFunctionComp(1783) or
+      PhpFunctionComp(1985) or
+      PhpFunctionComp(2055) or
+      PhpFunctionComp(2155) or
+      PhpFunctionComp(2161) or
+      PhpFunctionComp(2265) or
+      PhpFunctionComp(2273) or
+      PhpFunctionComp(2448) or
+      PhpFunctionComp(2833) or
+      PhpFunctionComp(3007) or
+      PhpFunctionComp(3029) or
+      PhpFunctionComp(3154) or
+      PhpFunctionComp(3212) or
+      PhpFunctionComp(3304) or
+      PhpFunctionComp(3381) or
+      PhpFunctionComp(3572) or
+      PhpFunctionComp(3781) or
+      PhpFunctionComp(3952) or
+      PhpFunctionComp(4358) or
+      PhpFunctionComp(4502) or
+      PhpFunctionComp(4812) or
+      PhpFunctionComp(4863) or
+      PhpFunctionComp(4874) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc108: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc108: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(440) or
-      Php_FunctionComp(500) or
-      Php_FunctionComp(650) or
-      Php_FunctionComp(766) or
-      Php_FunctionComp(1095) or
-      Php_FunctionComp(1105) or
-      Php_FunctionComp(1261) or
-      Php_FunctionComp(1379) or
-      Php_FunctionComp(1430) or
-      Php_FunctionComp(1721) or
-      Php_FunctionComp(1769) or
-      Php_FunctionComp(1954) or
-      Php_FunctionComp(3219) or
-      Php_FunctionComp(3308) or
-      Php_FunctionComp(3321) or
-      Php_FunctionComp(3467) or
-      Php_FunctionComp(3582) or
-      Php_FunctionComp(3846) or
-      Php_FunctionComp(4778) or
-      Php_FunctionComp(4818) or
-      Php_FunctionComp(4981) or
-      Php_FunctionComp(5058) or
-      Php_FunctionComp(5119) or
-      Php_FunctionComp(5130) then
+  if  PhpFunctionComp(440) or
+      PhpFunctionComp(500) or
+      PhpFunctionComp(650) or
+      PhpFunctionComp(766) or
+      PhpFunctionComp(1095) or
+      PhpFunctionComp(1105) or
+      PhpFunctionComp(1261) or
+      PhpFunctionComp(1379) or
+      PhpFunctionComp(1430) or
+      PhpFunctionComp(1721) or
+      PhpFunctionComp(1769) or
+      PhpFunctionComp(1954) or
+      PhpFunctionComp(3219) or
+      PhpFunctionComp(3308) or
+      PhpFunctionComp(3321) or
+      PhpFunctionComp(3467) or
+      PhpFunctionComp(3582) or
+      PhpFunctionComp(3846) or
+      PhpFunctionComp(4778) or
+      PhpFunctionComp(4818) or
+      PhpFunctionComp(4981) or
+      PhpFunctionComp(5058) or
+      PhpFunctionComp(5119) or
+      PhpFunctionComp(5130) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc109: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc109: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(238) or
-      Php_FunctionComp(656) or
-      Php_FunctionComp(748) or
-      Php_FunctionComp(939) or
-      Php_FunctionComp(1152) or
-      Php_FunctionComp(1213) or
-      Php_FunctionComp(1246) or
-      Php_FunctionComp(1683) or
-      Php_FunctionComp(1734) or
-      Php_FunctionComp(1792) or
-      Php_FunctionComp(2117) or
-      Php_FunctionComp(2250) or
-      Php_FunctionComp(2258) or
-      Php_FunctionComp(2272) or
-      Php_FunctionComp(2532) or
-      Php_FunctionComp(2651) or
-      Php_FunctionComp(2685) or
-      Php_FunctionComp(3400) or
-      Php_FunctionComp(3512) or
-      Php_FunctionComp(3607) or
-      Php_FunctionComp(4217) or
-      Php_FunctionComp(4234) or
-      Php_FunctionComp(4239) or
-      Php_FunctionComp(4244) or
-      Php_FunctionComp(4453) or
-      Php_FunctionComp(4878) or
-      Php_FunctionComp(4922) or
-      Php_FunctionComp(5084) or
-      Php_FunctionComp(5107) then
+  if  PhpFunctionComp(238) or
+      PhpFunctionComp(656) or
+      PhpFunctionComp(748) or
+      PhpFunctionComp(939) or
+      PhpFunctionComp(1152) or
+      PhpFunctionComp(1213) or
+      PhpFunctionComp(1246) or
+      PhpFunctionComp(1683) or
+      PhpFunctionComp(1734) or
+      PhpFunctionComp(1792) or
+      PhpFunctionComp(2117) or
+      PhpFunctionComp(2250) or
+      PhpFunctionComp(2258) or
+      PhpFunctionComp(2272) or
+      PhpFunctionComp(2532) or
+      PhpFunctionComp(2651) or
+      PhpFunctionComp(2685) or
+      PhpFunctionComp(3400) or
+      PhpFunctionComp(3512) or
+      PhpFunctionComp(3607) or
+      PhpFunctionComp(4217) or
+      PhpFunctionComp(4234) or
+      PhpFunctionComp(4239) or
+      PhpFunctionComp(4244) or
+      PhpFunctionComp(4453) or
+      PhpFunctionComp(4878) or
+      PhpFunctionComp(4922) or
+      PhpFunctionComp(5084) or
+      PhpFunctionComp(5107) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc110: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc110: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(227) or
-      Php_FunctionComp(247) or
-      Php_FunctionComp(434) or
-      Php_FunctionComp(1017) or
-      Php_FunctionComp(1109) or
-      Php_FunctionComp(1145) or
-      Php_FunctionComp(1450) or
-      Php_FunctionComp(1470) or
-      Php_FunctionComp(1659) or
-      Php_FunctionComp(1678) or
-      Php_FunctionComp(1736) or
-      Php_FunctionComp(1762) or
-      Php_FunctionComp(2319) or
-      Php_FunctionComp(2410) or
-      Php_FunctionComp(3096) or
-      Php_FunctionComp(3115) or
-      Php_FunctionComp(3149) or
-      Php_FunctionComp(3167) or
-      Php_FunctionComp(3351) or
-      Php_FunctionComp(3360) or
-      Php_FunctionComp(3390) or
-      Php_FunctionComp(3425) or
-      Php_FunctionComp(3772) or
-      Php_FunctionComp(3823) or
-      Php_FunctionComp(4061) or
-      Php_FunctionComp(4445) or
-      Php_FunctionComp(4490) then
+  if  PhpFunctionComp(227) or
+      PhpFunctionComp(247) or
+      PhpFunctionComp(434) or
+      PhpFunctionComp(1017) or
+      PhpFunctionComp(1109) or
+      PhpFunctionComp(1145) or
+      PhpFunctionComp(1450) or
+      PhpFunctionComp(1470) or
+      PhpFunctionComp(1659) or
+      PhpFunctionComp(1678) or
+      PhpFunctionComp(1736) or
+      PhpFunctionComp(1762) or
+      PhpFunctionComp(2319) or
+      PhpFunctionComp(2410) or
+      PhpFunctionComp(3096) or
+      PhpFunctionComp(3115) or
+      PhpFunctionComp(3149) or
+      PhpFunctionComp(3167) or
+      PhpFunctionComp(3351) or
+      PhpFunctionComp(3360) or
+      PhpFunctionComp(3390) or
+      PhpFunctionComp(3425) or
+      PhpFunctionComp(3772) or
+      PhpFunctionComp(3823) or
+      PhpFunctionComp(4061) or
+      PhpFunctionComp(4445) or
+      PhpFunctionComp(4490) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc111: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc111: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(31) then
+  if  PhpKeywordComp(31) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(126) or
-        Php_FunctionComp(223) or
-        Php_FunctionComp(235) or
-        Php_FunctionComp(425) or
-        Php_FunctionComp(575) or
-        Php_FunctionComp(640) or
-        Php_FunctionComp(682) or
-        Php_FunctionComp(1228) or
-        Php_FunctionComp(1468) or
-        Php_FunctionComp(1731) or
-        Php_FunctionComp(2001) or
-        Php_FunctionComp(2087) or
-        Php_FunctionComp(2102) or
-        Php_FunctionComp(2213) or
-        Php_FunctionComp(2240) or
-        Php_FunctionComp(2551) or
-        Php_FunctionComp(3038) or
-        Php_FunctionComp(3383) or
-        Php_FunctionComp(3386) or
-        Php_FunctionComp(3469) or
-        Php_FunctionComp(3795) or
-        Php_FunctionComp(4021) or
-        Php_FunctionComp(4758) or
-        Php_FunctionComp(4891) or
-        Php_FunctionComp(4901) or
-        Php_FunctionComp(4923) or
-        Php_FunctionComp(5146) then
+    if  PhpFunctionComp(126) or
+        PhpFunctionComp(223) or
+        PhpFunctionComp(235) or
+        PhpFunctionComp(425) or
+        PhpFunctionComp(575) or
+        PhpFunctionComp(640) or
+        PhpFunctionComp(682) or
+        PhpFunctionComp(1228) or
+        PhpFunctionComp(1468) or
+        PhpFunctionComp(1731) or
+        PhpFunctionComp(2001) or
+        PhpFunctionComp(2087) or
+        PhpFunctionComp(2102) or
+        PhpFunctionComp(2213) or
+        PhpFunctionComp(2240) or
+        PhpFunctionComp(2551) or
+        PhpFunctionComp(3038) or
+        PhpFunctionComp(3383) or
+        PhpFunctionComp(3386) or
+        PhpFunctionComp(3469) or
+        PhpFunctionComp(3795) or
+        PhpFunctionComp(4021) or
+        PhpFunctionComp(4758) or
+        PhpFunctionComp(4891) or
+        PhpFunctionComp(4901) or
+        PhpFunctionComp(4923) or
+        PhpFunctionComp(5146) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc112: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc112: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(388) or
-      Php_FunctionComp(465) or
-      Php_FunctionComp(654) or
-      Php_FunctionComp(1691) or
-      Php_FunctionComp(1693) or
-      Php_FunctionComp(1992) or
-      Php_FunctionComp(2047) or
-      Php_FunctionComp(3067) or
-      Php_FunctionComp(3075) or
-      Php_FunctionComp(3114) or
-      Php_FunctionComp(3856) or
-      Php_FunctionComp(3917) or
-      Php_FunctionComp(4128) or
-      Php_FunctionComp(4387) or
-      Php_FunctionComp(4819) then
+  if  PhpFunctionComp(388) or
+      PhpFunctionComp(465) or
+      PhpFunctionComp(654) or
+      PhpFunctionComp(1691) or
+      PhpFunctionComp(1693) or
+      PhpFunctionComp(1992) or
+      PhpFunctionComp(2047) or
+      PhpFunctionComp(3067) or
+      PhpFunctionComp(3075) or
+      PhpFunctionComp(3114) or
+      PhpFunctionComp(3856) or
+      PhpFunctionComp(3917) or
+      PhpFunctionComp(4128) or
+      PhpFunctionComp(4387) or
+      PhpFunctionComp(4819) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc113: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc113: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(319) or
-      Php_FunctionComp(497) or
-      Php_FunctionComp(629) or
-      Php_FunctionComp(1797) or
-      Php_FunctionComp(1802) or
-      Php_FunctionComp(1899) or
-      Php_FunctionComp(1924) or
-      Php_FunctionComp(2015) or
-      Php_FunctionComp(2016) or
-      Php_FunctionComp(2082) or
-      Php_FunctionComp(2184) or
-      Php_FunctionComp(2395) or
-      Php_FunctionComp(2529) or
-      Php_FunctionComp(3320) or
-      Php_FunctionComp(3445) or
-      Php_FunctionComp(3459) or
-      Php_FunctionComp(3475) or
-      Php_FunctionComp(3602) or
-      Php_FunctionComp(4032) or
-      Php_FunctionComp(4084) or
-      Php_FunctionComp(4130) or
-      Php_FunctionComp(5147) then
+  if  PhpFunctionComp(319) or
+      PhpFunctionComp(497) or
+      PhpFunctionComp(629) or
+      PhpFunctionComp(1797) or
+      PhpFunctionComp(1802) or
+      PhpFunctionComp(1899) or
+      PhpFunctionComp(1924) or
+      PhpFunctionComp(2015) or
+      PhpFunctionComp(2016) or
+      PhpFunctionComp(2082) or
+      PhpFunctionComp(2184) or
+      PhpFunctionComp(2395) or
+      PhpFunctionComp(2529) or
+      PhpFunctionComp(3320) or
+      PhpFunctionComp(3445) or
+      PhpFunctionComp(3459) or
+      PhpFunctionComp(3475) or
+      PhpFunctionComp(3602) or
+      PhpFunctionComp(4032) or
+      PhpFunctionComp(4084) or
+      PhpFunctionComp(4130) or
+      PhpFunctionComp(5147) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc114: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc114: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(314) or
-      Php_FunctionComp(524) or
-      Php_FunctionComp(578) or
-      Php_FunctionComp(1150) or
-      Php_FunctionComp(1452) or
-      Php_FunctionComp(1497) or
-      Php_FunctionComp(1933) or
-      Php_FunctionComp(1951) or
-      Php_FunctionComp(2062) or
-      Php_FunctionComp(2097) or
-      Php_FunctionComp(2228) or
-      Php_FunctionComp(2327) or
-      Php_FunctionComp(2368) or
-      Php_FunctionComp(2442) or
-      Php_FunctionComp(2530) or
-      Php_FunctionComp(3229) or
-      Php_FunctionComp(3410) or
-      Php_FunctionComp(3436) or
-      Php_FunctionComp(3471) or
-      Php_FunctionComp(3494) or
-      Php_FunctionComp(3534) or
-      Php_FunctionComp(3784) or
-      Php_FunctionComp(3842) or
-      Php_FunctionComp(4143) or
-      Php_FunctionComp(4225) or
-      Php_FunctionComp(4509) or
-      Php_FunctionComp(4823) then
+  if  PhpFunctionComp(314) or
+      PhpFunctionComp(524) or
+      PhpFunctionComp(578) or
+      PhpFunctionComp(1150) or
+      PhpFunctionComp(1452) or
+      PhpFunctionComp(1497) or
+      PhpFunctionComp(1933) or
+      PhpFunctionComp(1951) or
+      PhpFunctionComp(2062) or
+      PhpFunctionComp(2097) or
+      PhpFunctionComp(2228) or
+      PhpFunctionComp(2327) or
+      PhpFunctionComp(2368) or
+      PhpFunctionComp(2442) or
+      PhpFunctionComp(2530) or
+      PhpFunctionComp(3229) or
+      PhpFunctionComp(3410) or
+      PhpFunctionComp(3436) or
+      PhpFunctionComp(3471) or
+      PhpFunctionComp(3494) or
+      PhpFunctionComp(3534) or
+      PhpFunctionComp(3784) or
+      PhpFunctionComp(3842) or
+      PhpFunctionComp(4143) or
+      PhpFunctionComp(4225) or
+      PhpFunctionComp(4509) or
+      PhpFunctionComp(4823) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc115: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc115: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(142) or
-      Php_FunctionComp(530) or
-      Php_FunctionComp(703) or
-      Php_FunctionComp(1156) or
-      Php_FunctionComp(1184) or
-      Php_FunctionComp(1365) or
-      Php_FunctionComp(1521) or
-      Php_FunctionComp(1633) or
-      Php_FunctionComp(1759) or
-      Php_FunctionComp(2107) or
-      Php_FunctionComp(2229) or
-      Php_FunctionComp(2624) or
-      Php_FunctionComp(3004) or
-      Php_FunctionComp(3039) or
-      Php_FunctionComp(3071) or
-      Php_FunctionComp(3072) or
-      Php_FunctionComp(3116) or
-      Php_FunctionComp(3128) or
-      Php_FunctionComp(3362) or
-      Php_FunctionComp(3399) or
-      Php_FunctionComp(4024) or
-      Php_FunctionComp(4270) or
-      Php_FunctionComp(4955) or
-      Php_FunctionComp(5134) then
+  if  PhpFunctionComp(142) or
+      PhpFunctionComp(530) or
+      PhpFunctionComp(703) or
+      PhpFunctionComp(1156) or
+      PhpFunctionComp(1184) or
+      PhpFunctionComp(1365) or
+      PhpFunctionComp(1521) or
+      PhpFunctionComp(1633) or
+      PhpFunctionComp(1759) or
+      PhpFunctionComp(2107) or
+      PhpFunctionComp(2229) or
+      PhpFunctionComp(2624) or
+      PhpFunctionComp(3004) or
+      PhpFunctionComp(3039) or
+      PhpFunctionComp(3071) or
+      PhpFunctionComp(3072) or
+      PhpFunctionComp(3116) or
+      PhpFunctionComp(3128) or
+      PhpFunctionComp(3362) or
+      PhpFunctionComp(3399) or
+      PhpFunctionComp(4024) or
+      PhpFunctionComp(4270) or
+      PhpFunctionComp(4955) or
+      PhpFunctionComp(5134) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc116: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc116: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(141) or
-      Php_FunctionComp(237) or
-      Php_FunctionComp(431) or
-      Php_FunctionComp(583) or
-      Php_FunctionComp(712) or
-      Php_FunctionComp(764) or
-      Php_FunctionComp(1185) or
-      Php_FunctionComp(1331) or
-      Php_FunctionComp(1351) or
-      Php_FunctionComp(1366) or
-      Php_FunctionComp(1417) or
-      Php_FunctionComp(1667) or
-      Php_FunctionComp(1741) or
-      Php_FunctionComp(1746) or
-      Php_FunctionComp(1897) or
-      Php_FunctionComp(2064) or
-      Php_FunctionComp(2122) or
-      Php_FunctionComp(2127) or
-      Php_FunctionComp(2433) or
-      Php_FunctionComp(3082) or
-      Php_FunctionComp(3147) or
-      Php_FunctionComp(3350) or
-      Php_FunctionComp(3442) or
-      Php_FunctionComp(3463) or
-      Php_FunctionComp(3690) or
-      Php_FunctionComp(3740) or
-      Php_FunctionComp(3847) or
-      Php_FunctionComp(4372) or
-      Php_FunctionComp(4493) or
-      Php_FunctionComp(5080) then
+  if  PhpFunctionComp(141) or
+      PhpFunctionComp(237) or
+      PhpFunctionComp(431) or
+      PhpFunctionComp(583) or
+      PhpFunctionComp(712) or
+      PhpFunctionComp(764) or
+      PhpFunctionComp(1185) or
+      PhpFunctionComp(1331) or
+      PhpFunctionComp(1351) or
+      PhpFunctionComp(1366) or
+      PhpFunctionComp(1417) or
+      PhpFunctionComp(1667) or
+      PhpFunctionComp(1741) or
+      PhpFunctionComp(1746) or
+      PhpFunctionComp(1897) or
+      PhpFunctionComp(2064) or
+      PhpFunctionComp(2122) or
+      PhpFunctionComp(2127) or
+      PhpFunctionComp(2433) or
+      PhpFunctionComp(3082) or
+      PhpFunctionComp(3147) or
+      PhpFunctionComp(3350) or
+      PhpFunctionComp(3442) or
+      PhpFunctionComp(3463) or
+      PhpFunctionComp(3690) or
+      PhpFunctionComp(3740) or
+      PhpFunctionComp(3847) or
+      PhpFunctionComp(4372) or
+      PhpFunctionComp(4493) or
+      PhpFunctionComp(5080) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc117: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc117: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(75) or
-      Php_FunctionComp(108) or
-      Php_FunctionComp(233) or
-      Php_FunctionComp(479) or
-      Php_FunctionComp(536) or
-      Php_FunctionComp(1059) or
-      Php_FunctionComp(1200) or
-      Php_FunctionComp(1409) or
-      Php_FunctionComp(1420) or
-      Php_FunctionComp(1491) or
-      Php_FunctionComp(1543) or
-      Php_FunctionComp(1547) or
-      Php_FunctionComp(1710) or
-      Php_FunctionComp(1732) or
-      Php_FunctionComp(2118) or
-      Php_FunctionComp(2123) or
-      Php_FunctionComp(2247) or
-      Php_FunctionComp(2315) or
-      Php_FunctionComp(2524) or
-      Php_FunctionComp(2544) or
-      Php_FunctionComp(3141) or
-      Php_FunctionComp(3423) or
-      Php_FunctionComp(3441) or
-      Php_FunctionComp(3476) or
-      Php_FunctionComp(3556) or
-      Php_FunctionComp(3777) or
-      Php_FunctionComp(3872) or
-      Php_FunctionComp(4294) or
-      Php_FunctionComp(4444) or
-      Php_FunctionComp(4449) or
-      Php_FunctionComp(4840) or
-      Php_FunctionComp(4853) or
-      Php_FunctionComp(4879) or
-      Php_FunctionComp(4889) or
-      Php_FunctionComp(5149) then
+  if  PhpFunctionComp(75) or
+      PhpFunctionComp(108) or
+      PhpFunctionComp(233) or
+      PhpFunctionComp(479) or
+      PhpFunctionComp(536) or
+      PhpFunctionComp(1059) or
+      PhpFunctionComp(1200) or
+      PhpFunctionComp(1409) or
+      PhpFunctionComp(1420) or
+      PhpFunctionComp(1491) or
+      PhpFunctionComp(1543) or
+      PhpFunctionComp(1547) or
+      PhpFunctionComp(1710) or
+      PhpFunctionComp(1732) or
+      PhpFunctionComp(2118) or
+      PhpFunctionComp(2123) or
+      PhpFunctionComp(2247) or
+      PhpFunctionComp(2315) or
+      PhpFunctionComp(2524) or
+      PhpFunctionComp(2544) or
+      PhpFunctionComp(3141) or
+      PhpFunctionComp(3423) or
+      PhpFunctionComp(3441) or
+      PhpFunctionComp(3476) or
+      PhpFunctionComp(3556) or
+      PhpFunctionComp(3777) or
+      PhpFunctionComp(3872) or
+      PhpFunctionComp(4294) or
+      PhpFunctionComp(4444) or
+      PhpFunctionComp(4449) or
+      PhpFunctionComp(4840) or
+      PhpFunctionComp(4853) or
+      PhpFunctionComp(4879) or
+      PhpFunctionComp(4889) or
+      PhpFunctionComp(5149) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc118: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc118: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(492) or
-      Php_FunctionComp(725) or
-      Php_FunctionComp(1104) or
-      Php_FunctionComp(1279) or
-      Php_FunctionComp(1405) or
-      Php_FunctionComp(1520) or
-      Php_FunctionComp(1613) or
-      Php_FunctionComp(1818) or
-      Php_FunctionComp(2110) or
-      Php_FunctionComp(2316) or
-      Php_FunctionComp(2328) or
-      Php_FunctionComp(2364) or
-      Php_FunctionComp(2519) or
-      Php_FunctionComp(2523) or
-      Php_FunctionComp(2534) or
-      Php_FunctionComp(3207) or
-      Php_FunctionComp(3366) or
-      Php_FunctionComp(3388) or
-      Php_FunctionComp(3574) or
-      Php_FunctionComp(3631) or
-      Php_FunctionComp(3635) or
-      Php_FunctionComp(3796) or
-      Php_FunctionComp(4086) or
-      Php_FunctionComp(4120) or
-      Php_FunctionComp(4127) or
-      Php_FunctionComp(4893) or
-      Php_FunctionComp(4952) or
-      Php_FunctionComp(5090) then
+  if  PhpFunctionComp(492) or
+      PhpFunctionComp(725) or
+      PhpFunctionComp(1104) or
+      PhpFunctionComp(1279) or
+      PhpFunctionComp(1405) or
+      PhpFunctionComp(1520) or
+      PhpFunctionComp(1613) or
+      PhpFunctionComp(1818) or
+      PhpFunctionComp(2110) or
+      PhpFunctionComp(2316) or
+      PhpFunctionComp(2328) or
+      PhpFunctionComp(2364) or
+      PhpFunctionComp(2519) or
+      PhpFunctionComp(2523) or
+      PhpFunctionComp(2534) or
+      PhpFunctionComp(3207) or
+      PhpFunctionComp(3366) or
+      PhpFunctionComp(3388) or
+      PhpFunctionComp(3574) or
+      PhpFunctionComp(3631) or
+      PhpFunctionComp(3635) or
+      PhpFunctionComp(3796) or
+      PhpFunctionComp(4086) or
+      PhpFunctionComp(4120) or
+      PhpFunctionComp(4127) or
+      PhpFunctionComp(4893) or
+      PhpFunctionComp(4952) or
+      PhpFunctionComp(5090) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc119: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc119: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(189) or
-      Php_FunctionComp(231) or
-      Php_FunctionComp(313) or
-      Php_FunctionComp(368) or
-      Php_FunctionComp(430) or
-      Php_FunctionComp(493) or
-      Php_FunctionComp(796) or
-      Php_FunctionComp(955) or
-      Php_FunctionComp(1208) or
-      Php_FunctionComp(1727) or
-      Php_FunctionComp(1742) or
-      Php_FunctionComp(1788) or
-      Php_FunctionComp(1865) or
-      Php_FunctionComp(2050) or
-      Php_FunctionComp(2241) or
-      Php_FunctionComp(2419) or
-      Php_FunctionComp(2626) or
-      Php_FunctionComp(2834) or
-      Php_FunctionComp(3016) or
-      Php_FunctionComp(3040) or
-      Php_FunctionComp(3234) or
-      Php_FunctionComp(3438) or
-      Php_FunctionComp(3455) or
-      Php_FunctionComp(4100) or
-      Php_FunctionComp(4211) or
-      Php_FunctionComp(4309) or
-      Php_FunctionComp(4605) or
-      Php_FunctionComp(4821) then
+  if  PhpFunctionComp(189) or
+      PhpFunctionComp(231) or
+      PhpFunctionComp(313) or
+      PhpFunctionComp(368) or
+      PhpFunctionComp(430) or
+      PhpFunctionComp(493) or
+      PhpFunctionComp(796) or
+      PhpFunctionComp(955) or
+      PhpFunctionComp(1208) or
+      PhpFunctionComp(1727) or
+      PhpFunctionComp(1742) or
+      PhpFunctionComp(1788) or
+      PhpFunctionComp(1865) or
+      PhpFunctionComp(2050) or
+      PhpFunctionComp(2241) or
+      PhpFunctionComp(2419) or
+      PhpFunctionComp(2626) or
+      PhpFunctionComp(2834) or
+      PhpFunctionComp(3016) or
+      PhpFunctionComp(3040) or
+      PhpFunctionComp(3234) or
+      PhpFunctionComp(3438) or
+      PhpFunctionComp(3455) or
+      PhpFunctionComp(4100) or
+      PhpFunctionComp(4211) or
+      PhpFunctionComp(4309) or
+      PhpFunctionComp(4605) or
+      PhpFunctionComp(4821) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc120: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc120: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(204) or
-      Php_FunctionComp(604) or
-      Php_FunctionComp(677) or
-      Php_FunctionComp(684) or
-      Php_FunctionComp(1519) or
-      Php_FunctionComp(1526) or
-      Php_FunctionComp(1718) or
-      Php_FunctionComp(1932) or
-      Php_FunctionComp(1934) or
-      Php_FunctionComp(1947) or
-      Php_FunctionComp(2338) or
-      Php_FunctionComp(2629) or
-      Php_FunctionComp(2686) or
-      Php_FunctionComp(3379) or
-      Php_FunctionComp(3545) or
-      Php_FunctionComp(3554) or
-      Php_FunctionComp(3567) or
-      Php_FunctionComp(3606) or
-      Php_FunctionComp(3742) or
-      Php_FunctionComp(3745) or
-      Php_FunctionComp(3778) or
-      Php_FunctionComp(4011) or
-      Php_FunctionComp(4344) or
-      Php_FunctionComp(4374) or
-      Php_FunctionComp(4503) or
-      Php_FunctionComp(4567) or
-      Php_FunctionComp(4577) or
-      Php_FunctionComp(4882) or
-      Php_FunctionComp(5060) or
-      Php_FunctionComp(5081) then
+  if  PhpFunctionComp(204) or
+      PhpFunctionComp(604) or
+      PhpFunctionComp(677) or
+      PhpFunctionComp(684) or
+      PhpFunctionComp(1519) or
+      PhpFunctionComp(1526) or
+      PhpFunctionComp(1718) or
+      PhpFunctionComp(1932) or
+      PhpFunctionComp(1934) or
+      PhpFunctionComp(1947) or
+      PhpFunctionComp(2338) or
+      PhpFunctionComp(2629) or
+      PhpFunctionComp(2686) or
+      PhpFunctionComp(3379) or
+      PhpFunctionComp(3545) or
+      PhpFunctionComp(3554) or
+      PhpFunctionComp(3567) or
+      PhpFunctionComp(3606) or
+      PhpFunctionComp(3742) or
+      PhpFunctionComp(3745) or
+      PhpFunctionComp(3778) or
+      PhpFunctionComp(4011) or
+      PhpFunctionComp(4344) or
+      PhpFunctionComp(4374) or
+      PhpFunctionComp(4503) or
+      PhpFunctionComp(4567) or
+      PhpFunctionComp(4577) or
+      PhpFunctionComp(4882) or
+      PhpFunctionComp(5060) or
+      PhpFunctionComp(5081) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc121: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc121: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(130) or
-      Php_FunctionComp(280) or
-      Php_FunctionComp(422) or
-      Php_FunctionComp(596) or
-      Php_FunctionComp(793) or
-      Php_FunctionComp(1232) or
-      Php_FunctionComp(1363) or
-      Php_FunctionComp(1381) or
-      Php_FunctionComp(1646) or
-      Php_FunctionComp(1726) or
-      Php_FunctionComp(1800) or
-      Php_FunctionComp(1859) or
-      Php_FunctionComp(2469) or
-      Php_FunctionComp(2535) or
-      Php_FunctionComp(3204) or
-      Php_FunctionComp(3215) or
-      Php_FunctionComp(3376) or
-      Php_FunctionComp(3418) or
-      Php_FunctionComp(3478) or
-      Php_FunctionComp(3514) or
-      Php_FunctionComp(3569) or
-      Php_FunctionComp(3817) or
-      Php_FunctionComp(3850) or
-      Php_FunctionComp(3932) or
-      Php_FunctionComp(4090) or
-      Php_FunctionComp(4245) or
-      Php_FunctionComp(4266) or
-      Php_FunctionComp(4669) or
-      Php_FunctionComp(4868) or
-      Php_FunctionComp(5086) then
+  if  PhpFunctionComp(130) or
+      PhpFunctionComp(280) or
+      PhpFunctionComp(422) or
+      PhpFunctionComp(596) or
+      PhpFunctionComp(793) or
+      PhpFunctionComp(1232) or
+      PhpFunctionComp(1363) or
+      PhpFunctionComp(1381) or
+      PhpFunctionComp(1646) or
+      PhpFunctionComp(1726) or
+      PhpFunctionComp(1800) or
+      PhpFunctionComp(1859) or
+      PhpFunctionComp(2469) or
+      PhpFunctionComp(2535) or
+      PhpFunctionComp(3204) or
+      PhpFunctionComp(3215) or
+      PhpFunctionComp(3376) or
+      PhpFunctionComp(3418) or
+      PhpFunctionComp(3478) or
+      PhpFunctionComp(3514) or
+      PhpFunctionComp(3569) or
+      PhpFunctionComp(3817) or
+      PhpFunctionComp(3850) or
+      PhpFunctionComp(3932) or
+      PhpFunctionComp(4090) or
+      PhpFunctionComp(4245) or
+      PhpFunctionComp(4266) or
+      PhpFunctionComp(4669) or
+      PhpFunctionComp(4868) or
+      PhpFunctionComp(5086) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc122: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc122: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(199) or
-      Php_FunctionComp(409) or
-      Php_FunctionComp(438) or
-      Php_FunctionComp(485) or
-      Php_FunctionComp(747) or
-      Php_FunctionComp(767) or
-      Php_FunctionComp(1151) or
-      Php_FunctionComp(1760) or
-      Php_FunctionComp(1768) or
-      Php_FunctionComp(1799) or
-      Php_FunctionComp(1915) or
-      Php_FunctionComp(1920) or
-      Php_FunctionComp(1940) or
-      Php_FunctionComp(1967) or
-      Php_FunctionComp(2009) or
-      Php_FunctionComp(2331) or
-      Php_FunctionComp(2436) or
-      Php_FunctionComp(2525) or
-      Php_FunctionComp(2558) or
-      Php_FunctionComp(2574) or
-      Php_FunctionComp(2585) or
-      Php_FunctionComp(2868) or
-      Php_FunctionComp(3107) or
-      Php_FunctionComp(3120) or
-      Php_FunctionComp(3142) or
-      Php_FunctionComp(3187) or
-      Php_FunctionComp(3216) or
-      Php_FunctionComp(3357) or
-      Php_FunctionComp(3413) or
-      Php_FunctionComp(3501) or
-      Php_FunctionComp(3566) or
-      Php_FunctionComp(3694) or
-      Php_FunctionComp(3834) or
-      Php_FunctionComp(4089) or
-      Php_FunctionComp(4115) or
-      Php_FunctionComp(4142) or
-      Php_FunctionComp(4331) or
-      Php_FunctionComp(4443) or
-      Php_FunctionComp(4555) or
-      Php_FunctionComp(4586) or
-      Php_FunctionComp(4797) or
-      Php_FunctionComp(4811) or
-      Php_FunctionComp(5000) or
-      Php_FunctionComp(5076) or
-      Php_FunctionComp(5125) then
+  if  PhpFunctionComp(199) or
+      PhpFunctionComp(409) or
+      PhpFunctionComp(438) or
+      PhpFunctionComp(485) or
+      PhpFunctionComp(747) or
+      PhpFunctionComp(767) or
+      PhpFunctionComp(1151) or
+      PhpFunctionComp(1760) or
+      PhpFunctionComp(1768) or
+      PhpFunctionComp(1799) or
+      PhpFunctionComp(1915) or
+      PhpFunctionComp(1920) or
+      PhpFunctionComp(1940) or
+      PhpFunctionComp(1967) or
+      PhpFunctionComp(2009) or
+      PhpFunctionComp(2331) or
+      PhpFunctionComp(2436) or
+      PhpFunctionComp(2525) or
+      PhpFunctionComp(2558) or
+      PhpFunctionComp(2574) or
+      PhpFunctionComp(2585) or
+      PhpFunctionComp(2868) or
+      PhpFunctionComp(3107) or
+      PhpFunctionComp(3120) or
+      PhpFunctionComp(3142) or
+      PhpFunctionComp(3187) or
+      PhpFunctionComp(3216) or
+      PhpFunctionComp(3357) or
+      PhpFunctionComp(3413) or
+      PhpFunctionComp(3501) or
+      PhpFunctionComp(3566) or
+      PhpFunctionComp(3694) or
+      PhpFunctionComp(3834) or
+      PhpFunctionComp(4089) or
+      PhpFunctionComp(4115) or
+      PhpFunctionComp(4142) or
+      PhpFunctionComp(4331) or
+      PhpFunctionComp(4443) or
+      PhpFunctionComp(4555) or
+      PhpFunctionComp(4586) or
+      PhpFunctionComp(4797) or
+      PhpFunctionComp(4811) or
+      PhpFunctionComp(5000) or
+      PhpFunctionComp(5076) or
+      PhpFunctionComp(5125) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc123: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc123: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(221) or
-      Php_FunctionComp(594) or
-      Php_FunctionComp(707) or
-      Php_FunctionComp(1066) or
-      Php_FunctionComp(1166) or
-      Php_FunctionComp(1607) or
-      Php_FunctionComp(1630) or
-      Php_FunctionComp(1668) or
-      Php_FunctionComp(1751) or
-      Php_FunctionComp(1812) or
-      Php_FunctionComp(2121) or
-      Php_FunctionComp(2124) or
-      Php_FunctionComp(2359) or
-      Php_FunctionComp(2480) or
-      Php_FunctionComp(2845) or
-      Php_FunctionComp(3349) or
-      Php_FunctionComp(3541) or
-      Php_FunctionComp(3766) or
-      Php_FunctionComp(3790) or
-      Php_FunctionComp(3816) or
-      Php_FunctionComp(3869) or
-      Php_FunctionComp(3928) or
-      Php_FunctionComp(3931) or
-      Php_FunctionComp(3953) or
-      Php_FunctionComp(4067) or
-      Php_FunctionComp(4144) or
-      Php_FunctionComp(4201) or
-      Php_FunctionComp(4265) or
-      Php_FunctionComp(4318) or
-      Php_FunctionComp(4495) or
-      Php_FunctionComp(4584) or
-      Php_FunctionComp(4585) or
-      Php_FunctionComp(4887) or
-      Php_FunctionComp(5068) then
+  if  PhpFunctionComp(221) or
+      PhpFunctionComp(594) or
+      PhpFunctionComp(707) or
+      PhpFunctionComp(1066) or
+      PhpFunctionComp(1166) or
+      PhpFunctionComp(1607) or
+      PhpFunctionComp(1630) or
+      PhpFunctionComp(1668) or
+      PhpFunctionComp(1751) or
+      PhpFunctionComp(1812) or
+      PhpFunctionComp(2121) or
+      PhpFunctionComp(2124) or
+      PhpFunctionComp(2359) or
+      PhpFunctionComp(2480) or
+      PhpFunctionComp(2845) or
+      PhpFunctionComp(3349) or
+      PhpFunctionComp(3541) or
+      PhpFunctionComp(3766) or
+      PhpFunctionComp(3790) or
+      PhpFunctionComp(3816) or
+      PhpFunctionComp(3869) or
+      PhpFunctionComp(3928) or
+      PhpFunctionComp(3931) or
+      PhpFunctionComp(3953) or
+      PhpFunctionComp(4067) or
+      PhpFunctionComp(4144) or
+      PhpFunctionComp(4201) or
+      PhpFunctionComp(4265) or
+      PhpFunctionComp(4318) or
+      PhpFunctionComp(4495) or
+      PhpFunctionComp(4584) or
+      PhpFunctionComp(4585) or
+      PhpFunctionComp(4887) or
+      PhpFunctionComp(5068) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc124: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc124: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(205) or
-      Php_FunctionComp(268) or
-      Php_FunctionComp(383) or
-      Php_FunctionComp(466) or
-      Php_FunctionComp(502) or
-      Php_FunctionComp(525) or
-      Php_FunctionComp(580) or
-      Php_FunctionComp(680) or
-      Php_FunctionComp(729) or
-      Php_FunctionComp(1446) or
-      Php_FunctionComp(1453) or
-      Php_FunctionComp(1582) or
-      Php_FunctionComp(1669) or
-      Php_FunctionComp(1945) or
-      Php_FunctionComp(1974) or
-      Php_FunctionComp(2271) or
-      Php_FunctionComp(2449) or
-      Php_FunctionComp(2482) or
-      Php_FunctionComp(3101) or
-      Php_FunctionComp(3183) or
-      Php_FunctionComp(3214) or
-      Php_FunctionComp(3378) or
-      Php_FunctionComp(3391) or
-      Php_FunctionComp(3632) or
-      Php_FunctionComp(3691) or
-      Php_FunctionComp(3752) or
-      Php_FunctionComp(3929) or
-      Php_FunctionComp(4498) or
-      Php_FunctionComp(4589) or
-      Php_FunctionComp(4592) or
-      Php_FunctionComp(4593) or
-      Php_FunctionComp(4884) or
-      Php_FunctionComp(4921) or
-      Php_FunctionComp(4925) or
-      Php_FunctionComp(5140) then
+  if  PhpFunctionComp(205) or
+      PhpFunctionComp(268) or
+      PhpFunctionComp(383) or
+      PhpFunctionComp(466) or
+      PhpFunctionComp(502) or
+      PhpFunctionComp(525) or
+      PhpFunctionComp(580) or
+      PhpFunctionComp(680) or
+      PhpFunctionComp(729) or
+      PhpFunctionComp(1446) or
+      PhpFunctionComp(1453) or
+      PhpFunctionComp(1582) or
+      PhpFunctionComp(1669) or
+      PhpFunctionComp(1945) or
+      PhpFunctionComp(1974) or
+      PhpFunctionComp(2271) or
+      PhpFunctionComp(2449) or
+      PhpFunctionComp(2482) or
+      PhpFunctionComp(3101) or
+      PhpFunctionComp(3183) or
+      PhpFunctionComp(3214) or
+      PhpFunctionComp(3378) or
+      PhpFunctionComp(3391) or
+      PhpFunctionComp(3632) or
+      PhpFunctionComp(3691) or
+      PhpFunctionComp(3752) or
+      PhpFunctionComp(3929) or
+      PhpFunctionComp(4498) or
+      PhpFunctionComp(4589) or
+      PhpFunctionComp(4592) or
+      PhpFunctionComp(4593) or
+      PhpFunctionComp(4884) or
+      PhpFunctionComp(4921) or
+      PhpFunctionComp(4925) or
+      PhpFunctionComp(5140) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc125: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc125: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(140) or
-      Php_FunctionComp(234) or
-      Php_FunctionComp(277) or
-      Php_FunctionComp(454) or
-      Php_FunctionComp(1098) or
-      Php_FunctionComp(1167) or
-      Php_FunctionComp(1819) or
-      Php_FunctionComp(1939) or
-      Php_FunctionComp(2007) or
-      Php_FunctionComp(2140) or
-      Php_FunctionComp(2176) or
-      Php_FunctionComp(2540) or
-      Php_FunctionComp(2921) or
-      Php_FunctionComp(3009) or
-      Php_FunctionComp(3102) or
-      Php_FunctionComp(3150) or
-      Php_FunctionComp(3402) or
-      Php_FunctionComp(3491) or
-      Php_FunctionComp(3513) or
-      Php_FunctionComp(3560) or
-      Php_FunctionComp(3575) or
-      Php_FunctionComp(3596) or
-      Php_FunctionComp(3626) or
-      Php_FunctionComp(3767) or
-      Php_FunctionComp(3774) or
-      Php_FunctionComp(3927) or
-      Php_FunctionComp(4088) or
-      Php_FunctionComp(4132) or
-      Php_FunctionComp(4250) or
-      Php_FunctionComp(4290) or
-      Php_FunctionComp(4507) or
-      Php_FunctionComp(4728) or
-      Php_FunctionComp(4761) or
-      Php_FunctionComp(4970) then
+  if  PhpFunctionComp(140) or
+      PhpFunctionComp(234) or
+      PhpFunctionComp(277) or
+      PhpFunctionComp(454) or
+      PhpFunctionComp(1098) or
+      PhpFunctionComp(1167) or
+      PhpFunctionComp(1819) or
+      PhpFunctionComp(1939) or
+      PhpFunctionComp(2007) or
+      PhpFunctionComp(2140) or
+      PhpFunctionComp(2176) or
+      PhpFunctionComp(2540) or
+      PhpFunctionComp(2921) or
+      PhpFunctionComp(3009) or
+      PhpFunctionComp(3102) or
+      PhpFunctionComp(3150) or
+      PhpFunctionComp(3402) or
+      PhpFunctionComp(3491) or
+      PhpFunctionComp(3513) or
+      PhpFunctionComp(3560) or
+      PhpFunctionComp(3575) or
+      PhpFunctionComp(3596) or
+      PhpFunctionComp(3626) or
+      PhpFunctionComp(3767) or
+      PhpFunctionComp(3774) or
+      PhpFunctionComp(3927) or
+      PhpFunctionComp(4088) or
+      PhpFunctionComp(4132) or
+      PhpFunctionComp(4250) or
+      PhpFunctionComp(4290) or
+      PhpFunctionComp(4507) or
+      PhpFunctionComp(4728) or
+      PhpFunctionComp(4761) or
+      PhpFunctionComp(4970) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc126: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc126: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(42) then
+  if  PhpKeywordComp(42) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(131) or
-        Php_FunctionComp(260) or
-        Php_FunctionComp(332) or
-        Php_FunctionComp(345) or
-        Php_FunctionComp(348) or
-        Php_FunctionComp(483) or
-        Php_FunctionComp(634) or
-        Php_FunctionComp(693) or
-        Php_FunctionComp(726) or
-        Php_FunctionComp(1157) or
-        Php_FunctionComp(1188) or
-        Php_FunctionComp(1416) or
-        Php_FunctionComp(1758) or
-        Php_FunctionComp(1986) or
-        Php_FunctionComp(2018) or
-        Php_FunctionComp(2063) or
-        Php_FunctionComp(2093) or
-        Php_FunctionComp(3023) or
-        Php_FunctionComp(3100) or
-        Php_FunctionComp(3221) or
-        Php_FunctionComp(3481) or
-        Php_FunctionComp(3598) or
-        Php_FunctionComp(3866) or
-        Php_FunctionComp(3877) or
-        Php_FunctionComp(3878) or
-        Php_FunctionComp(4102) or
-        Php_FunctionComp(4162) or
-        Php_FunctionComp(4357) or
-        Php_FunctionComp(4441) or
-        Php_FunctionComp(4862) or
-        Php_FunctionComp(4924) or
-        Php_FunctionComp(5122) or
-        Php_FunctionComp(5124) or
-        Php_FunctionComp(5126) then
+    if  PhpFunctionComp(131) or
+        PhpFunctionComp(260) or
+        PhpFunctionComp(332) or
+        PhpFunctionComp(345) or
+        PhpFunctionComp(348) or
+        PhpFunctionComp(483) or
+        PhpFunctionComp(634) or
+        PhpFunctionComp(693) or
+        PhpFunctionComp(726) or
+        PhpFunctionComp(1157) or
+        PhpFunctionComp(1188) or
+        PhpFunctionComp(1416) or
+        PhpFunctionComp(1758) or
+        PhpFunctionComp(1986) or
+        PhpFunctionComp(2018) or
+        PhpFunctionComp(2063) or
+        PhpFunctionComp(2093) or
+        PhpFunctionComp(3023) or
+        PhpFunctionComp(3100) or
+        PhpFunctionComp(3221) or
+        PhpFunctionComp(3481) or
+        PhpFunctionComp(3598) or
+        PhpFunctionComp(3866) or
+        PhpFunctionComp(3877) or
+        PhpFunctionComp(3878) or
+        PhpFunctionComp(4102) or
+        PhpFunctionComp(4162) or
+        PhpFunctionComp(4357) or
+        PhpFunctionComp(4441) or
+        PhpFunctionComp(4862) or
+        PhpFunctionComp(4924) or
+        PhpFunctionComp(5122) or
+        PhpFunctionComp(5124) or
+        PhpFunctionComp(5126) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc127: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc127: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(148) or
-      Php_FunctionComp(229) or
-      Php_FunctionComp(236) or
-      Php_FunctionComp(1785) or
-      Php_FunctionComp(1966) or
-      Php_FunctionComp(2079) or
-      Php_FunctionComp(2284) or
-      Php_FunctionComp(2286) or
-      Php_FunctionComp(2567) or
-      Php_FunctionComp(2627) or
-      Php_FunctionComp(2844) or
-      Php_FunctionComp(3051) or
-      Php_FunctionComp(3169) or
-      Php_FunctionComp(3227) or
-      Php_FunctionComp(3365) or
-      Php_FunctionComp(3427) or
-      Php_FunctionComp(3674) or
-      Php_FunctionComp(4248) or
-      Php_FunctionComp(4380) or
-      Php_FunctionComp(4396) or
-      Php_FunctionComp(4522) or
-      Php_FunctionComp(4601) or
-      Php_FunctionComp(4759) or
-      Php_FunctionComp(4898) or
-      Php_FunctionComp(4958) or
-      Php_FunctionComp(5104) then
+  if  PhpFunctionComp(148) or
+      PhpFunctionComp(229) or
+      PhpFunctionComp(236) or
+      PhpFunctionComp(1785) or
+      PhpFunctionComp(1966) or
+      PhpFunctionComp(2079) or
+      PhpFunctionComp(2284) or
+      PhpFunctionComp(2286) or
+      PhpFunctionComp(2567) or
+      PhpFunctionComp(2627) or
+      PhpFunctionComp(2844) or
+      PhpFunctionComp(3051) or
+      PhpFunctionComp(3169) or
+      PhpFunctionComp(3227) or
+      PhpFunctionComp(3365) or
+      PhpFunctionComp(3427) or
+      PhpFunctionComp(3674) or
+      PhpFunctionComp(4248) or
+      PhpFunctionComp(4380) or
+      PhpFunctionComp(4396) or
+      PhpFunctionComp(4522) or
+      PhpFunctionComp(4601) or
+      PhpFunctionComp(4759) or
+      PhpFunctionComp(4898) or
+      PhpFunctionComp(4958) or
+      PhpFunctionComp(5104) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc128: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc128: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(112) or
-      Php_FunctionComp(202) or
-      Php_FunctionComp(393) or
-      Php_FunctionComp(417) or
-      Php_FunctionComp(449) or
-      Php_FunctionComp(503) or
-      Php_FunctionComp(549) or
-      Php_FunctionComp(600) or
-      Php_FunctionComp(602) or
-      Php_FunctionComp(713) or
-      Php_FunctionComp(750) or
-      Php_FunctionComp(763) or
-      Php_FunctionComp(1241) or
-      Php_FunctionComp(1273) or
-      Php_FunctionComp(1290) or
-      Php_FunctionComp(1472) or
-      Php_FunctionComp(2083) or
-      Php_FunctionComp(2142) or
-      Php_FunctionComp(2227) or
-      Php_FunctionComp(2636) or
-      Php_FunctionComp(3155) or
-      Php_FunctionComp(3565) or
-      Php_FunctionComp(3769) or
-      Php_FunctionComp(4523) or
-      Php_FunctionComp(4808) or
-      Php_FunctionComp(4877) or
-      Php_FunctionComp(4888) then
+  if  PhpFunctionComp(112) or
+      PhpFunctionComp(202) or
+      PhpFunctionComp(393) or
+      PhpFunctionComp(417) or
+      PhpFunctionComp(449) or
+      PhpFunctionComp(503) or
+      PhpFunctionComp(549) or
+      PhpFunctionComp(600) or
+      PhpFunctionComp(602) or
+      PhpFunctionComp(713) or
+      PhpFunctionComp(750) or
+      PhpFunctionComp(763) or
+      PhpFunctionComp(1241) or
+      PhpFunctionComp(1273) or
+      PhpFunctionComp(1290) or
+      PhpFunctionComp(1472) or
+      PhpFunctionComp(2083) or
+      PhpFunctionComp(2142) or
+      PhpFunctionComp(2227) or
+      PhpFunctionComp(2636) or
+      PhpFunctionComp(3155) or
+      PhpFunctionComp(3565) or
+      PhpFunctionComp(3769) or
+      PhpFunctionComp(4523) or
+      PhpFunctionComp(4808) or
+      PhpFunctionComp(4877) or
+      PhpFunctionComp(4888) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc129: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc129: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(209) or
-      Php_FunctionComp(437) or
-      Php_FunctionComp(563) or
-      Php_FunctionComp(657) or
-      Php_FunctionComp(1146) or
-      Php_FunctionComp(1195) or
-      Php_FunctionComp(1757) or
-      Php_FunctionComp(1798) or
-      Php_FunctionComp(1817) or
-      Php_FunctionComp(1982) or
-      Php_FunctionComp(2339) or
-      Php_FunctionComp(2450) or
-      Php_FunctionComp(3108) or
-      Php_FunctionComp(3125) or
-      Php_FunctionComp(3156) or
-      Php_FunctionComp(3213) or
-      Php_FunctionComp(3905) or
-      Php_FunctionComp(4491) or
-      Php_FunctionComp(4883) or
-      Php_FunctionComp(4886) or
-      Php_FunctionComp(4896) or
-      Php_FunctionComp(4962) or
-      Php_FunctionComp(4963) or
-      Php_FunctionComp(5120) then
+  if  PhpFunctionComp(209) or
+      PhpFunctionComp(437) or
+      PhpFunctionComp(563) or
+      PhpFunctionComp(657) or
+      PhpFunctionComp(1146) or
+      PhpFunctionComp(1195) or
+      PhpFunctionComp(1757) or
+      PhpFunctionComp(1798) or
+      PhpFunctionComp(1817) or
+      PhpFunctionComp(1982) or
+      PhpFunctionComp(2339) or
+      PhpFunctionComp(2450) or
+      PhpFunctionComp(3108) or
+      PhpFunctionComp(3125) or
+      PhpFunctionComp(3156) or
+      PhpFunctionComp(3213) or
+      PhpFunctionComp(3905) or
+      PhpFunctionComp(4491) or
+      PhpFunctionComp(4883) or
+      PhpFunctionComp(4886) or
+      PhpFunctionComp(4896) or
+      PhpFunctionComp(4962) or
+      PhpFunctionComp(4963) or
+      PhpFunctionComp(5120) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc130: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc130: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(61) then
+  if  PhpKeywordComp(61) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(303) or
-        Php_FunctionComp(489) or
-        Php_FunctionComp(505) or
-        Php_FunctionComp(561) or
-        Php_FunctionComp(662) or
-        Php_FunctionComp(789) or
-        Php_FunctionComp(797) or
-        Php_FunctionComp(1147) or
-        Php_FunctionComp(1158) or
-        Php_FunctionComp(1187) or
-        Php_FunctionComp(1327) or
-        Php_FunctionComp(1432) or
-        Php_FunctionComp(1475) or
-        Php_FunctionComp(1661) or
-        Php_FunctionComp(1910) or
-        Php_FunctionComp(2262) or
-        Php_FunctionComp(2360) or
-        Php_FunctionComp(2447) or
-        Php_FunctionComp(2637) or
-        Php_FunctionComp(2717) or
-        Php_FunctionComp(2866) or
-        Php_FunctionComp(3094) or
-        Php_FunctionComp(3137) or
-        Php_FunctionComp(3165) or
-        Php_FunctionComp(3415) or
-        Php_FunctionComp(3416) or
-        Php_FunctionComp(3517) or
-        Php_FunctionComp(3539) or
-        Php_FunctionComp(3629) or
-        Php_FunctionComp(3736) or
-        Php_FunctionComp(4020) or
-        Php_FunctionComp(4092) or
-        Php_FunctionComp(4336) or
-        Php_FunctionComp(4591) or
-        Php_FunctionComp(5072) then
+    if  PhpFunctionComp(303) or
+        PhpFunctionComp(489) or
+        PhpFunctionComp(505) or
+        PhpFunctionComp(561) or
+        PhpFunctionComp(662) or
+        PhpFunctionComp(789) or
+        PhpFunctionComp(797) or
+        PhpFunctionComp(1147) or
+        PhpFunctionComp(1158) or
+        PhpFunctionComp(1187) or
+        PhpFunctionComp(1327) or
+        PhpFunctionComp(1432) or
+        PhpFunctionComp(1475) or
+        PhpFunctionComp(1661) or
+        PhpFunctionComp(1910) or
+        PhpFunctionComp(2262) or
+        PhpFunctionComp(2360) or
+        PhpFunctionComp(2447) or
+        PhpFunctionComp(2637) or
+        PhpFunctionComp(2717) or
+        PhpFunctionComp(2866) or
+        PhpFunctionComp(3094) or
+        PhpFunctionComp(3137) or
+        PhpFunctionComp(3165) or
+        PhpFunctionComp(3415) or
+        PhpFunctionComp(3416) or
+        PhpFunctionComp(3517) or
+        PhpFunctionComp(3539) or
+        PhpFunctionComp(3629) or
+        PhpFunctionComp(3736) or
+        PhpFunctionComp(4020) or
+        PhpFunctionComp(4092) or
+        PhpFunctionComp(4336) or
+        PhpFunctionComp(4591) or
+        PhpFunctionComp(5072) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc131: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc131: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(118) or
-      Php_FunctionComp(312) or
-      Php_FunctionComp(1082) or
-      Php_FunctionComp(1097) or
-      Php_FunctionComp(1223) or
-      Php_FunctionComp(1553) or
-      Php_FunctionComp(1584) or
-      Php_FunctionComp(1964) or
-      Php_FunctionComp(2056) or
-      Php_FunctionComp(2070) or
-      Php_FunctionComp(2159) or
-      Php_FunctionComp(2427) or
-      Php_FunctionComp(2650) or
-      Php_FunctionComp(2684) or
-      Php_FunctionComp(2862) or
-      Php_FunctionComp(3010) or
-      Php_FunctionComp(3031) or
-      Php_FunctionComp(3042) or
-      Php_FunctionComp(3131) or
-      Php_FunctionComp(3208) or
-      Php_FunctionComp(3225) or
-      Php_FunctionComp(3316) or
-      Php_FunctionComp(3389) or
-      Php_FunctionComp(3466) or
-      Php_FunctionComp(3507) or
-      Php_FunctionComp(3595) or
-      Php_FunctionComp(3600) or
-      Php_FunctionComp(4126) or
-      Php_FunctionComp(4499) or
-      Php_FunctionComp(4532) or
-      Php_FunctionComp(4571) or
-      Php_FunctionComp(4865) or
-      Php_FunctionComp(4890) then
+  if  PhpFunctionComp(118) or
+      PhpFunctionComp(312) or
+      PhpFunctionComp(1082) or
+      PhpFunctionComp(1097) or
+      PhpFunctionComp(1223) or
+      PhpFunctionComp(1553) or
+      PhpFunctionComp(1584) or
+      PhpFunctionComp(1964) or
+      PhpFunctionComp(2056) or
+      PhpFunctionComp(2070) or
+      PhpFunctionComp(2159) or
+      PhpFunctionComp(2427) or
+      PhpFunctionComp(2650) or
+      PhpFunctionComp(2684) or
+      PhpFunctionComp(2862) or
+      PhpFunctionComp(3010) or
+      PhpFunctionComp(3031) or
+      PhpFunctionComp(3042) or
+      PhpFunctionComp(3131) or
+      PhpFunctionComp(3208) or
+      PhpFunctionComp(3225) or
+      PhpFunctionComp(3316) or
+      PhpFunctionComp(3389) or
+      PhpFunctionComp(3466) or
+      PhpFunctionComp(3507) or
+      PhpFunctionComp(3595) or
+      PhpFunctionComp(3600) or
+      PhpFunctionComp(4126) or
+      PhpFunctionComp(4499) or
+      PhpFunctionComp(4532) or
+      PhpFunctionComp(4571) or
+      PhpFunctionComp(4865) or
+      PhpFunctionComp(4890) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc132: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc132: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(76) or
-      Php_FunctionComp(198) or
-      Php_FunctionComp(544) or
-      Php_FunctionComp(565) or
-      Php_FunctionComp(705) or
-      Php_FunctionComp(799) or
-      Php_FunctionComp(802) or
-      Php_FunctionComp(1003) or
-      Php_FunctionComp(1168) or
-      Php_FunctionComp(1169) or
-      Php_FunctionComp(1194) or
-      Php_FunctionComp(1328) or
-      Php_FunctionComp(1386) or
-      Php_FunctionComp(1574) or
-      Php_FunctionComp(1628) or
-      Php_FunctionComp(1963) or
-      Php_FunctionComp(2010) or
-      Php_FunctionComp(2044) or
-      Php_FunctionComp(2105) or
-      Php_FunctionComp(2162) or
-      Php_FunctionComp(2402) or
-      Php_FunctionComp(2405) or
-      Php_FunctionComp(2670) or
-      Php_FunctionComp(2726) or
-      Php_FunctionComp(3044) or
-      Php_FunctionComp(3064) or
-      Php_FunctionComp(3099) or
-      Php_FunctionComp(4202) or
-      Php_FunctionComp(4326) or
-      Php_FunctionComp(4356) or
-      Php_FunctionComp(4369) or
-      Php_FunctionComp(4769) or
-      Php_FunctionComp(4773) or
-      Php_FunctionComp(5002) or
-      Php_FunctionComp(5066) then
+  if  PhpFunctionComp(76) or
+      PhpFunctionComp(198) or
+      PhpFunctionComp(544) or
+      PhpFunctionComp(565) or
+      PhpFunctionComp(705) or
+      PhpFunctionComp(799) or
+      PhpFunctionComp(802) or
+      PhpFunctionComp(1003) or
+      PhpFunctionComp(1168) or
+      PhpFunctionComp(1169) or
+      PhpFunctionComp(1194) or
+      PhpFunctionComp(1328) or
+      PhpFunctionComp(1386) or
+      PhpFunctionComp(1574) or
+      PhpFunctionComp(1628) or
+      PhpFunctionComp(1963) or
+      PhpFunctionComp(2010) or
+      PhpFunctionComp(2044) or
+      PhpFunctionComp(2105) or
+      PhpFunctionComp(2162) or
+      PhpFunctionComp(2402) or
+      PhpFunctionComp(2405) or
+      PhpFunctionComp(2670) or
+      PhpFunctionComp(2726) or
+      PhpFunctionComp(3044) or
+      PhpFunctionComp(3064) or
+      PhpFunctionComp(3099) or
+      PhpFunctionComp(4202) or
+      PhpFunctionComp(4326) or
+      PhpFunctionComp(4356) or
+      PhpFunctionComp(4369) or
+      PhpFunctionComp(4769) or
+      PhpFunctionComp(4773) or
+      PhpFunctionComp(5002) or
+      PhpFunctionComp(5066) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc133: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc133: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(53) then
+  if  PhpKeywordComp(53) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(213) or
-        Php_FunctionComp(357) or
-        Php_FunctionComp(421) or
-        Php_FunctionComp(469) or
-        Php_FunctionComp(1292) or
-        Php_FunctionComp(1672) or
-        Php_FunctionComp(1717) or
-        Php_FunctionComp(1744) or
-        Php_FunctionComp(1832) or
-        Php_FunctionComp(1981) or
-        Php_FunctionComp(1990) or
-        Php_FunctionComp(2193) or
-        Php_FunctionComp(2885) or
-        Php_FunctionComp(3509) or
-        Php_FunctionComp(3651) or
-        Php_FunctionComp(3653) or
-        Php_FunctionComp(3738) or
-        Php_FunctionComp(3851) or
-        Php_FunctionComp(3883) or
-        Php_FunctionComp(4035) or
-        Php_FunctionComp(4447) then
+    if  PhpFunctionComp(213) or
+        PhpFunctionComp(357) or
+        PhpFunctionComp(421) or
+        PhpFunctionComp(469) or
+        PhpFunctionComp(1292) or
+        PhpFunctionComp(1672) or
+        PhpFunctionComp(1717) or
+        PhpFunctionComp(1744) or
+        PhpFunctionComp(1832) or
+        PhpFunctionComp(1981) or
+        PhpFunctionComp(1990) or
+        PhpFunctionComp(2193) or
+        PhpFunctionComp(2885) or
+        PhpFunctionComp(3509) or
+        PhpFunctionComp(3651) or
+        PhpFunctionComp(3653) or
+        PhpFunctionComp(3738) or
+        PhpFunctionComp(3851) or
+        PhpFunctionComp(3883) or
+        PhpFunctionComp(4035) or
+        PhpFunctionComp(4447) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc134: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc134: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(411) or
-      Php_FunctionComp(695) or
-      Php_FunctionComp(714) or
-      Php_FunctionComp(1161) or
-      Php_FunctionComp(1745) or
-      Php_FunctionComp(2141) or
-      Php_FunctionComp(2235) or
-      Php_FunctionComp(2285) or
-      Php_FunctionComp(2652) or
-      Php_FunctionComp(2744) or
-      Php_FunctionComp(3305) or
-      Php_FunctionComp(3312) or
-      Php_FunctionComp(3433) or
-      Php_FunctionComp(3474) or
-      Php_FunctionComp(3555) or
-      Php_FunctionComp(3753) or
-      Php_FunctionComp(3797) or
-      Php_FunctionComp(4073) or
-      Php_FunctionComp(4446) or
-      Php_FunctionComp(4506) or
-      Php_FunctionComp(4568) or
-      Php_FunctionComp(4768) or
-      Php_FunctionComp(4892) or
-      Php_FunctionComp(4927) or
-      Php_FunctionComp(4972) or
-      Php_FunctionComp(5074) then
+  if  PhpFunctionComp(411) or
+      PhpFunctionComp(695) or
+      PhpFunctionComp(714) or
+      PhpFunctionComp(1161) or
+      PhpFunctionComp(1745) or
+      PhpFunctionComp(2141) or
+      PhpFunctionComp(2235) or
+      PhpFunctionComp(2285) or
+      PhpFunctionComp(2652) or
+      PhpFunctionComp(2744) or
+      PhpFunctionComp(3305) or
+      PhpFunctionComp(3312) or
+      PhpFunctionComp(3433) or
+      PhpFunctionComp(3474) or
+      PhpFunctionComp(3555) or
+      PhpFunctionComp(3753) or
+      PhpFunctionComp(3797) or
+      PhpFunctionComp(4073) or
+      PhpFunctionComp(4446) or
+      PhpFunctionComp(4506) or
+      PhpFunctionComp(4568) or
+      PhpFunctionComp(4768) or
+      PhpFunctionComp(4892) or
+      PhpFunctionComp(4927) or
+      PhpFunctionComp(4972) or
+      PhpFunctionComp(5074) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc135: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc135: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(80) or
-      Php_FunctionComp(146) or
-      Php_FunctionComp(304) or
-      Php_FunctionComp(341) or
-      Php_FunctionComp(413) or
-      Php_FunctionComp(598) or
-      Php_FunctionComp(601) or
-      Php_FunctionComp(653) or
-      Php_FunctionComp(730) or
-      Php_FunctionComp(743) or
-      Php_FunctionComp(928) or
-      Php_FunctionComp(1106) or
-      Php_FunctionComp(1298) or
-      Php_FunctionComp(1516) or
-      Php_FunctionComp(1707) or
-      Php_FunctionComp(1743) or
-      Php_FunctionComp(2131) or
-      Php_FunctionComp(2625) or
-      Php_FunctionComp(2630) or
-      Php_FunctionComp(2832) or
-      Php_FunctionComp(3191) or
-      Php_FunctionComp(3309) or
-      Php_FunctionComp(3382) or
-      Php_FunctionComp(3659) or
-      Php_FunctionComp(3783) or
-      Php_FunctionComp(3849) or
-      Php_FunctionComp(3933) or
-      Php_FunctionComp(4604) then
+  if  PhpFunctionComp(80) or
+      PhpFunctionComp(146) or
+      PhpFunctionComp(304) or
+      PhpFunctionComp(341) or
+      PhpFunctionComp(413) or
+      PhpFunctionComp(598) or
+      PhpFunctionComp(601) or
+      PhpFunctionComp(653) or
+      PhpFunctionComp(730) or
+      PhpFunctionComp(743) or
+      PhpFunctionComp(928) or
+      PhpFunctionComp(1106) or
+      PhpFunctionComp(1298) or
+      PhpFunctionComp(1516) or
+      PhpFunctionComp(1707) or
+      PhpFunctionComp(1743) or
+      PhpFunctionComp(2131) or
+      PhpFunctionComp(2625) or
+      PhpFunctionComp(2630) or
+      PhpFunctionComp(2832) or
+      PhpFunctionComp(3191) or
+      PhpFunctionComp(3309) or
+      PhpFunctionComp(3382) or
+      PhpFunctionComp(3659) or
+      PhpFunctionComp(3783) or
+      PhpFunctionComp(3849) or
+      PhpFunctionComp(3933) or
+      PhpFunctionComp(4604) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc136: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc136: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(117) or
-      Php_FunctionComp(328) or
-      Php_FunctionComp(379) or
-      Php_FunctionComp(387) or
-      Php_FunctionComp(491) or
-      Php_FunctionComp(538) or
-      Php_FunctionComp(573) or
-      Php_FunctionComp(627) or
-      Php_FunctionComp(1049) or
-      Php_FunctionComp(1334) or
-      Php_FunctionComp(1761) or
-      Php_FunctionComp(1822) or
-      Php_FunctionComp(2061) or
-      Php_FunctionComp(2150) or
-      Php_FunctionComp(2222) or
-      Php_FunctionComp(2249) or
-      Php_FunctionComp(2259) or
-      Php_FunctionComp(2440) or
-      Php_FunctionComp(3052) or
-      Php_FunctionComp(3153) or
-      Php_FunctionComp(3306) or
-      Php_FunctionComp(3482) or
-      Php_FunctionComp(3536) or
-      Php_FunctionComp(3979) or
-      Php_FunctionComp(4002) or
-      Php_FunctionComp(4028) or
-      Php_FunctionComp(4135) or
-      Php_FunctionComp(4174) or
-      Php_FunctionComp(4256) or
-      Php_FunctionComp(4284) or
-      Php_FunctionComp(4302) or
-      Php_FunctionComp(4775) or
-      Php_FunctionComp(5073) then
+  if  PhpFunctionComp(117) or
+      PhpFunctionComp(328) or
+      PhpFunctionComp(379) or
+      PhpFunctionComp(387) or
+      PhpFunctionComp(491) or
+      PhpFunctionComp(538) or
+      PhpFunctionComp(573) or
+      PhpFunctionComp(627) or
+      PhpFunctionComp(1049) or
+      PhpFunctionComp(1334) or
+      PhpFunctionComp(1761) or
+      PhpFunctionComp(1822) or
+      PhpFunctionComp(2061) or
+      PhpFunctionComp(2150) or
+      PhpFunctionComp(2222) or
+      PhpFunctionComp(2249) or
+      PhpFunctionComp(2259) or
+      PhpFunctionComp(2440) or
+      PhpFunctionComp(3052) or
+      PhpFunctionComp(3153) or
+      PhpFunctionComp(3306) or
+      PhpFunctionComp(3482) or
+      PhpFunctionComp(3536) or
+      PhpFunctionComp(3979) or
+      PhpFunctionComp(4002) or
+      PhpFunctionComp(4028) or
+      PhpFunctionComp(4135) or
+      PhpFunctionComp(4174) or
+      PhpFunctionComp(4256) or
+      PhpFunctionComp(4284) or
+      PhpFunctionComp(4302) or
+      PhpFunctionComp(4775) or
+      PhpFunctionComp(5073) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc137: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc137: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(439) or
-      Php_FunctionComp(539) or
-      Php_FunctionComp(545) or
-      Php_FunctionComp(665) or
-      Php_FunctionComp(728) or
-      Php_FunctionComp(1029) or
-      Php_FunctionComp(1120) or
-      Php_FunctionComp(1165) or
-      Php_FunctionComp(1382) or
-      Php_FunctionComp(1589) or
-      Php_FunctionComp(1804) or
-      Php_FunctionComp(1821) or
-      Php_FunctionComp(2003) or
-      Php_FunctionComp(2471) or
-      Php_FunctionComp(2581) or
-      Php_FunctionComp(2638) or
-      Php_FunctionComp(2639) or
-      Php_FunctionComp(3210) or
-      Php_FunctionComp(3288) or
-      Php_FunctionComp(3686) or
-      Php_FunctionComp(3770) or
-      Php_FunctionComp(3926) or
-      Php_FunctionComp(4068) or
-      Php_FunctionComp(4269) or
-      Php_FunctionComp(4295) or
-      Php_FunctionComp(4429) or
-      Php_FunctionComp(4573) or
-      Php_FunctionComp(4730) or
-      Php_FunctionComp(4954) or
-      Php_FunctionComp(4973) or
-      Php_FunctionComp(5061) then
+  if  PhpFunctionComp(439) or
+      PhpFunctionComp(539) or
+      PhpFunctionComp(545) or
+      PhpFunctionComp(665) or
+      PhpFunctionComp(728) or
+      PhpFunctionComp(1029) or
+      PhpFunctionComp(1120) or
+      PhpFunctionComp(1165) or
+      PhpFunctionComp(1382) or
+      PhpFunctionComp(1589) or
+      PhpFunctionComp(1804) or
+      PhpFunctionComp(1821) or
+      PhpFunctionComp(2003) or
+      PhpFunctionComp(2471) or
+      PhpFunctionComp(2581) or
+      PhpFunctionComp(2638) or
+      PhpFunctionComp(2639) or
+      PhpFunctionComp(3210) or
+      PhpFunctionComp(3288) or
+      PhpFunctionComp(3686) or
+      PhpFunctionComp(3770) or
+      PhpFunctionComp(3926) or
+      PhpFunctionComp(4068) or
+      PhpFunctionComp(4269) or
+      PhpFunctionComp(4295) or
+      PhpFunctionComp(4429) or
+      PhpFunctionComp(4573) or
+      PhpFunctionComp(4730) or
+      PhpFunctionComp(4954) or
+      PhpFunctionComp(4973) or
+      PhpFunctionComp(5061) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc138: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc138: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1025) or
-      Php_FunctionComp(1575) or
-      Php_FunctionComp(1601) or
-      Php_FunctionComp(2109) or
-      Php_FunctionComp(2374) or
-      Php_FunctionComp(2452) or
-      Php_FunctionComp(2542) or
-      Php_FunctionComp(2851) or
-      Php_FunctionComp(2899) or
-      Php_FunctionComp(3041) or
-      Php_FunctionComp(3151) or
-      Php_FunctionComp(3158) or
-      Php_FunctionComp(3401) or
-      Php_FunctionComp(3443) or
-      Php_FunctionComp(3868) or
-      Php_FunctionComp(4085) or
-      Php_FunctionComp(4155) then
+  if  PhpFunctionComp(1025) or
+      PhpFunctionComp(1575) or
+      PhpFunctionComp(1601) or
+      PhpFunctionComp(2109) or
+      PhpFunctionComp(2374) or
+      PhpFunctionComp(2452) or
+      PhpFunctionComp(2542) or
+      PhpFunctionComp(2851) or
+      PhpFunctionComp(2899) or
+      PhpFunctionComp(3041) or
+      PhpFunctionComp(3151) or
+      PhpFunctionComp(3158) or
+      PhpFunctionComp(3401) or
+      PhpFunctionComp(3443) or
+      PhpFunctionComp(3868) or
+      PhpFunctionComp(4085) or
+      PhpFunctionComp(4155) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc139: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc139: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(461) or
-      Php_FunctionComp(481) or
-      Php_FunctionComp(579) or
-      Php_FunctionComp(666) or
-      Php_FunctionComp(1148) or
-      Php_FunctionComp(1265) or
-      Php_FunctionComp(1324) or
-      Php_FunctionComp(1396) or
-      Php_FunctionComp(1590) or
-      Php_FunctionComp(1625) or
-      Php_FunctionComp(1754) or
-      Php_FunctionComp(1773) or
-      Php_FunctionComp(1923) or
-      Php_FunctionComp(1931) or
-      Php_FunctionComp(2002) or
-      Php_FunctionComp(2400) or
-      Php_FunctionComp(2446) or
-      Php_FunctionComp(2531) or
-      Php_FunctionComp(2600) or
-      Php_FunctionComp(2632) or
-      Php_FunctionComp(2774) or
-      Php_FunctionComp(2777) or
-      Php_FunctionComp(2850) or
-      Php_FunctionComp(2880) or
-      Php_FunctionComp(3265) or
-      Php_FunctionComp(3758) or
-      Php_FunctionComp(3798) or
-      Php_FunctionComp(3906) or
-      Php_FunctionComp(4301) or
-      Php_FunctionComp(4512) or
-      Php_FunctionComp(4531) or
-      Php_FunctionComp(4536) or
-      Php_FunctionComp(4653) or
-      Php_FunctionComp(4844) or
-      Php_FunctionComp(4873) or
-      Php_FunctionComp(4894) or
-      Php_FunctionComp(5079) or
-      Php_FunctionComp(5153) then
+  if  PhpFunctionComp(461) or
+      PhpFunctionComp(481) or
+      PhpFunctionComp(579) or
+      PhpFunctionComp(666) or
+      PhpFunctionComp(1148) or
+      PhpFunctionComp(1265) or
+      PhpFunctionComp(1324) or
+      PhpFunctionComp(1396) or
+      PhpFunctionComp(1590) or
+      PhpFunctionComp(1625) or
+      PhpFunctionComp(1754) or
+      PhpFunctionComp(1773) or
+      PhpFunctionComp(1923) or
+      PhpFunctionComp(1931) or
+      PhpFunctionComp(2002) or
+      PhpFunctionComp(2400) or
+      PhpFunctionComp(2446) or
+      PhpFunctionComp(2531) or
+      PhpFunctionComp(2600) or
+      PhpFunctionComp(2632) or
+      PhpFunctionComp(2774) or
+      PhpFunctionComp(2777) or
+      PhpFunctionComp(2850) or
+      PhpFunctionComp(2880) or
+      PhpFunctionComp(3265) or
+      PhpFunctionComp(3758) or
+      PhpFunctionComp(3798) or
+      PhpFunctionComp(3906) or
+      PhpFunctionComp(4301) or
+      PhpFunctionComp(4512) or
+      PhpFunctionComp(4531) or
+      PhpFunctionComp(4536) or
+      PhpFunctionComp(4653) or
+      PhpFunctionComp(4844) or
+      PhpFunctionComp(4873) or
+      PhpFunctionComp(4894) or
+      PhpFunctionComp(5079) or
+      PhpFunctionComp(5153) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc140: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc140: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(78) or
-      Php_FunctionComp(426) or
-      Php_FunctionComp(531) or
-      Php_FunctionComp(595) or
-      Php_FunctionComp(599) or
-      Php_FunctionComp(652) or
-      Php_FunctionComp(719) or
-      Php_FunctionComp(1023) or
-      Php_FunctionComp(1149) or
-      Php_FunctionComp(1193) or
-      Php_FunctionComp(1858) or
-      Php_FunctionComp(2398) or
-      Php_FunctionComp(2437) or
-      Php_FunctionComp(2472) or
-      Php_FunctionComp(2579) or
-      Php_FunctionComp(2617) or
-      Php_FunctionComp(2681) or
-      Php_FunctionComp(2691) or
-      Php_FunctionComp(3122) or
-      Php_FunctionComp(3377) or
-      Php_FunctionComp(3407) or
-      Php_FunctionComp(3531) or
-      Php_FunctionComp(3657) or
-      Php_FunctionComp(3676) or
-      Php_FunctionComp(3776) or
-      Php_FunctionComp(3793) or
-      Php_FunctionComp(3988) or
-      Php_FunctionComp(4213) or
-      Php_FunctionComp(4475) or
-      Php_FunctionComp(4537) or
-      Php_FunctionComp(4595) or
-      Php_FunctionComp(4869) then
+  if  PhpFunctionComp(78) or
+      PhpFunctionComp(426) or
+      PhpFunctionComp(531) or
+      PhpFunctionComp(595) or
+      PhpFunctionComp(599) or
+      PhpFunctionComp(652) or
+      PhpFunctionComp(719) or
+      PhpFunctionComp(1023) or
+      PhpFunctionComp(1149) or
+      PhpFunctionComp(1193) or
+      PhpFunctionComp(1858) or
+      PhpFunctionComp(2398) or
+      PhpFunctionComp(2437) or
+      PhpFunctionComp(2472) or
+      PhpFunctionComp(2579) or
+      PhpFunctionComp(2617) or
+      PhpFunctionComp(2681) or
+      PhpFunctionComp(2691) or
+      PhpFunctionComp(3122) or
+      PhpFunctionComp(3377) or
+      PhpFunctionComp(3407) or
+      PhpFunctionComp(3531) or
+      PhpFunctionComp(3657) or
+      PhpFunctionComp(3676) or
+      PhpFunctionComp(3776) or
+      PhpFunctionComp(3793) or
+      PhpFunctionComp(3988) or
+      PhpFunctionComp(4213) or
+      PhpFunctionComp(4475) or
+      PhpFunctionComp(4537) or
+      PhpFunctionComp(4595) or
+      PhpFunctionComp(4869) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc141: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc141: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(147) or
-      Php_FunctionComp(519) or
-      Php_FunctionComp(569) or
-      Php_FunctionComp(576) or
-      Php_FunctionComp(585) or
-      Php_FunctionComp(754) or
-      Php_FunctionComp(1175) or
-      Php_FunctionComp(1219) or
-      Php_FunctionComp(1314) or
-      Php_FunctionComp(1339) or
-      Php_FunctionComp(1501) or
-      Php_FunctionComp(1605) or
-      Php_FunctionComp(1609) or
-      Php_FunctionComp(1898) or
-      Php_FunctionComp(1918) or
-      Php_FunctionComp(2030) or
-      Php_FunctionComp(2333) or
-      Php_FunctionComp(2335) or
-      Php_FunctionComp(2550) or
-      Php_FunctionComp(2586) or
-      Php_FunctionComp(2785) or
-      Php_FunctionComp(2935) or
-      Php_FunctionComp(3393) or
-      Php_FunctionComp(3429) or
-      Php_FunctionComp(3530) or
-      Php_FunctionComp(3584) or
-      Php_FunctionComp(3589) or
-      Php_FunctionComp(4124) or
-      Php_FunctionComp(4405) or
-      Php_FunctionComp(4521) or
-      Php_FunctionComp(4538) or
-      Php_FunctionComp(4749) or
-      Php_FunctionComp(4786) then
+  if  PhpFunctionComp(147) or
+      PhpFunctionComp(519) or
+      PhpFunctionComp(569) or
+      PhpFunctionComp(576) or
+      PhpFunctionComp(585) or
+      PhpFunctionComp(754) or
+      PhpFunctionComp(1175) or
+      PhpFunctionComp(1219) or
+      PhpFunctionComp(1314) or
+      PhpFunctionComp(1339) or
+      PhpFunctionComp(1501) or
+      PhpFunctionComp(1605) or
+      PhpFunctionComp(1609) or
+      PhpFunctionComp(1898) or
+      PhpFunctionComp(1918) or
+      PhpFunctionComp(2030) or
+      PhpFunctionComp(2333) or
+      PhpFunctionComp(2335) or
+      PhpFunctionComp(2550) or
+      PhpFunctionComp(2586) or
+      PhpFunctionComp(2785) or
+      PhpFunctionComp(2935) or
+      PhpFunctionComp(3393) or
+      PhpFunctionComp(3429) or
+      PhpFunctionComp(3530) or
+      PhpFunctionComp(3584) or
+      PhpFunctionComp(3589) or
+      PhpFunctionComp(4124) or
+      PhpFunctionComp(4405) or
+      PhpFunctionComp(4521) or
+      PhpFunctionComp(4538) or
+      PhpFunctionComp(4749) or
+      PhpFunctionComp(4786) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc142: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc142: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(119) or
-      Php_FunctionComp(128) or
-      Php_FunctionComp(494) or
-      Php_FunctionComp(499) or
-      Php_FunctionComp(715) or
-      Php_FunctionComp(738) or
-      Php_FunctionComp(1046) or
-      Php_FunctionComp(1183) or
-      Php_FunctionComp(1554) or
-      Php_FunctionComp(1684) or
-      Php_FunctionComp(1815) or
-      Php_FunctionComp(1875) or
-      Php_FunctionComp(1881) or
-      Php_FunctionComp(2005) or
-      Php_FunctionComp(2022) or
-      Php_FunctionComp(2263) or
-      Php_FunctionComp(2336) or
-      Php_FunctionComp(2349) or
-      Php_FunctionComp(2406) or
-      Php_FunctionComp(2526) or
-      Php_FunctionComp(2575) or
-      Php_FunctionComp(2635) or
-      Php_FunctionComp(2874) or
-      Php_FunctionComp(2976) or
-      Php_FunctionComp(3076) or
-      Php_FunctionComp(3492) or
-      Php_FunctionComp(3638) or
-      Php_FunctionComp(3794) or
-      Php_FunctionComp(4146) or
-      Php_FunctionComp(4216) or
-      Php_FunctionComp(4381) or
-      Php_FunctionComp(4539) or
-      Php_FunctionComp(4813) or
-      Php_FunctionComp(4864) or
-      Php_FunctionComp(4899) then
+  if  PhpFunctionComp(119) or
+      PhpFunctionComp(128) or
+      PhpFunctionComp(494) or
+      PhpFunctionComp(499) or
+      PhpFunctionComp(715) or
+      PhpFunctionComp(738) or
+      PhpFunctionComp(1046) or
+      PhpFunctionComp(1183) or
+      PhpFunctionComp(1554) or
+      PhpFunctionComp(1684) or
+      PhpFunctionComp(1815) or
+      PhpFunctionComp(1875) or
+      PhpFunctionComp(1881) or
+      PhpFunctionComp(2005) or
+      PhpFunctionComp(2022) or
+      PhpFunctionComp(2263) or
+      PhpFunctionComp(2336) or
+      PhpFunctionComp(2349) or
+      PhpFunctionComp(2406) or
+      PhpFunctionComp(2526) or
+      PhpFunctionComp(2575) or
+      PhpFunctionComp(2635) or
+      PhpFunctionComp(2874) or
+      PhpFunctionComp(2976) or
+      PhpFunctionComp(3076) or
+      PhpFunctionComp(3492) or
+      PhpFunctionComp(3638) or
+      PhpFunctionComp(3794) or
+      PhpFunctionComp(4146) or
+      PhpFunctionComp(4216) or
+      PhpFunctionComp(4381) or
+      PhpFunctionComp(4539) or
+      PhpFunctionComp(4813) or
+      PhpFunctionComp(4864) or
+      PhpFunctionComp(4899) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc143: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc143: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(132) or
-      Php_FunctionComp(246) or
-      Php_FunctionComp(443) or
-      Php_FunctionComp(477) or
-      Php_FunctionComp(496) or
-      Php_FunctionComp(1065) or
-      Php_FunctionComp(1108) or
-      Php_FunctionComp(1500) or
-      Php_FunctionComp(1660) or
-      Php_FunctionComp(1677) or
-      Php_FunctionComp(1836) or
-      Php_FunctionComp(1872) or
-      Php_FunctionComp(2057) or
-      Php_FunctionComp(2120) or
-      Php_FunctionComp(2138) or
-      Php_FunctionComp(2215) or
-      Php_FunctionComp(2266) or
-      Php_FunctionComp(2330) or
-      Php_FunctionComp(2404) or
-      Php_FunctionComp(2478) or
-      Php_FunctionComp(2483) or
-      Php_FunctionComp(3134) or
-      Php_FunctionComp(3428) or
-      Php_FunctionComp(3432) or
-      Php_FunctionComp(3470) or
-      Php_FunctionComp(3540) or
-      Php_FunctionComp(3675) or
-      Php_FunctionComp(3854) or
-      Php_FunctionComp(3986) or
-      Php_FunctionComp(4328) or
-      Php_FunctionComp(4779) or
-      Php_FunctionComp(4956) or
-      Php_FunctionComp(5067) then
+  if  PhpFunctionComp(132) or
+      PhpFunctionComp(246) or
+      PhpFunctionComp(443) or
+      PhpFunctionComp(477) or
+      PhpFunctionComp(496) or
+      PhpFunctionComp(1065) or
+      PhpFunctionComp(1108) or
+      PhpFunctionComp(1500) or
+      PhpFunctionComp(1660) or
+      PhpFunctionComp(1677) or
+      PhpFunctionComp(1836) or
+      PhpFunctionComp(1872) or
+      PhpFunctionComp(2057) or
+      PhpFunctionComp(2120) or
+      PhpFunctionComp(2138) or
+      PhpFunctionComp(2215) or
+      PhpFunctionComp(2266) or
+      PhpFunctionComp(2330) or
+      PhpFunctionComp(2404) or
+      PhpFunctionComp(2478) or
+      PhpFunctionComp(2483) or
+      PhpFunctionComp(3134) or
+      PhpFunctionComp(3428) or
+      PhpFunctionComp(3432) or
+      PhpFunctionComp(3470) or
+      PhpFunctionComp(3540) or
+      PhpFunctionComp(3675) or
+      PhpFunctionComp(3854) or
+      PhpFunctionComp(3986) or
+      PhpFunctionComp(4328) or
+      PhpFunctionComp(4779) or
+      PhpFunctionComp(4956) or
+      PhpFunctionComp(5067) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc144: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc144: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(120) or
-      Php_FunctionComp(587) or
-      Php_FunctionComp(716) or
-      Php_FunctionComp(732) or
-      Php_FunctionComp(1034) or
-      Php_FunctionComp(1123) or
-      Php_FunctionComp(1371) or
-      Php_FunctionComp(1603) or
-      Php_FunctionComp(1624) or
-      Php_FunctionComp(2693) or
-      Php_FunctionComp(3048) or
-      Php_FunctionComp(3235) or
-      Php_FunctionComp(3313) or
-      Php_FunctionComp(3421) or
-      Php_FunctionComp(3573) or
-      Php_FunctionComp(3578) or
-      Php_FunctionComp(3615) or
-      Php_FunctionComp(3666) or
-      Php_FunctionComp(3741) or
-      Php_FunctionComp(3880) or
-      Php_FunctionComp(3930) or
-      Php_FunctionComp(4060) or
-      Php_FunctionComp(4341) or
-      Php_FunctionComp(4696) or
-      Php_FunctionComp(4776) or
-      Php_FunctionComp(4934) then
+  if  PhpFunctionComp(120) or
+      PhpFunctionComp(587) or
+      PhpFunctionComp(716) or
+      PhpFunctionComp(732) or
+      PhpFunctionComp(1034) or
+      PhpFunctionComp(1123) or
+      PhpFunctionComp(1371) or
+      PhpFunctionComp(1603) or
+      PhpFunctionComp(1624) or
+      PhpFunctionComp(2693) or
+      PhpFunctionComp(3048) or
+      PhpFunctionComp(3235) or
+      PhpFunctionComp(3313) or
+      PhpFunctionComp(3421) or
+      PhpFunctionComp(3573) or
+      PhpFunctionComp(3578) or
+      PhpFunctionComp(3615) or
+      PhpFunctionComp(3666) or
+      PhpFunctionComp(3741) or
+      PhpFunctionComp(3880) or
+      PhpFunctionComp(3930) or
+      PhpFunctionComp(4060) or
+      PhpFunctionComp(4341) or
+      PhpFunctionComp(4696) or
+      PhpFunctionComp(4776) or
+      PhpFunctionComp(4934) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc145: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc145: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(208) or
-      Php_FunctionComp(329) or
-      Php_FunctionComp(498) or
-      Php_FunctionComp(605) or
-      Php_FunctionComp(668) or
-      Php_FunctionComp(691) or
-      Php_FunctionComp(1007) or
-      Php_FunctionComp(1117) or
-      Php_FunctionComp(1400) or
-      Php_FunctionComp(1712) or
-      Php_FunctionComp(1936) or
-      Php_FunctionComp(1969) or
-      Php_FunctionComp(2019) or
-      Php_FunctionComp(2108) or
-      Php_FunctionComp(2171) or
-      Php_FunctionComp(2311) or
-      Php_FunctionComp(2429) or
-      Php_FunctionComp(2572) or
-      Php_FunctionComp(2595) or
-      Php_FunctionComp(2696) or
-      Php_FunctionComp(2872) or
-      Php_FunctionComp(3160) or
-      Php_FunctionComp(3301) or
-      Php_FunctionComp(3656) or
-      Php_FunctionComp(3715) or
-      Php_FunctionComp(3820) or
-      Php_FunctionComp(3863) or
-      Php_FunctionComp(4145) or
-      Php_FunctionComp(4209) or
-      Php_FunctionComp(4232) or
-      Php_FunctionComp(4237) or
-      Php_FunctionComp(4242) or
-      Php_FunctionComp(4323) or
-      Php_FunctionComp(4682) or
-      Php_FunctionComp(4729) or
-      Php_FunctionComp(5105) then
+  if  PhpFunctionComp(208) or
+      PhpFunctionComp(329) or
+      PhpFunctionComp(498) or
+      PhpFunctionComp(605) or
+      PhpFunctionComp(668) or
+      PhpFunctionComp(691) or
+      PhpFunctionComp(1007) or
+      PhpFunctionComp(1117) or
+      PhpFunctionComp(1400) or
+      PhpFunctionComp(1712) or
+      PhpFunctionComp(1936) or
+      PhpFunctionComp(1969) or
+      PhpFunctionComp(2019) or
+      PhpFunctionComp(2108) or
+      PhpFunctionComp(2171) or
+      PhpFunctionComp(2311) or
+      PhpFunctionComp(2429) or
+      PhpFunctionComp(2572) or
+      PhpFunctionComp(2595) or
+      PhpFunctionComp(2696) or
+      PhpFunctionComp(2872) or
+      PhpFunctionComp(3160) or
+      PhpFunctionComp(3301) or
+      PhpFunctionComp(3656) or
+      PhpFunctionComp(3715) or
+      PhpFunctionComp(3820) or
+      PhpFunctionComp(3863) or
+      PhpFunctionComp(4145) or
+      PhpFunctionComp(4209) or
+      PhpFunctionComp(4232) or
+      PhpFunctionComp(4237) or
+      PhpFunctionComp(4242) or
+      PhpFunctionComp(4323) or
+      PhpFunctionComp(4682) or
+      PhpFunctionComp(4729) or
+      PhpFunctionComp(5105) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc146: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc146: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(113) or
-      Php_FunctionComp(133) or
-      Php_FunctionComp(325) or
-      Php_FunctionComp(495) or
-      Php_FunctionComp(541) or
-      Php_FunctionComp(718) or
-      Php_FunctionComp(1021) or
-      Php_FunctionComp(1100) or
-      Php_FunctionComp(1142) or
-      Php_FunctionComp(1182) or
-      Php_FunctionComp(1390) or
-      Php_FunctionComp(1471) or
-      Php_FunctionComp(1567) or
-      Php_FunctionComp(2020) or
-      Php_FunctionComp(2023) or
-      Php_FunctionComp(2040) or
-      Php_FunctionComp(2366) or
-      Php_FunctionComp(2453) or
-      Php_FunctionComp(2561) or
-      Php_FunctionComp(2594) or
-      Php_FunctionComp(2642) or
-      Php_FunctionComp(2654) or
-      Php_FunctionComp(2731) or
-      Php_FunctionComp(3062) or
-      Php_FunctionComp(3078) or
-      Php_FunctionComp(3446) or
-      Php_FunctionComp(3570) or
-      Php_FunctionComp(3599) or
-      Php_FunctionComp(4030) or
-      Php_FunctionComp(4093) or
-      Php_FunctionComp(4139) or
-      Php_FunctionComp(4215) or
-      Php_FunctionComp(4570) or
-      Php_FunctionComp(5075) or
-      Php_FunctionComp(5110) then
+  if  PhpFunctionComp(113) or
+      PhpFunctionComp(133) or
+      PhpFunctionComp(325) or
+      PhpFunctionComp(495) or
+      PhpFunctionComp(541) or
+      PhpFunctionComp(718) or
+      PhpFunctionComp(1021) or
+      PhpFunctionComp(1100) or
+      PhpFunctionComp(1142) or
+      PhpFunctionComp(1182) or
+      PhpFunctionComp(1390) or
+      PhpFunctionComp(1471) or
+      PhpFunctionComp(1567) or
+      PhpFunctionComp(2020) or
+      PhpFunctionComp(2023) or
+      PhpFunctionComp(2040) or
+      PhpFunctionComp(2366) or
+      PhpFunctionComp(2453) or
+      PhpFunctionComp(2561) or
+      PhpFunctionComp(2594) or
+      PhpFunctionComp(2642) or
+      PhpFunctionComp(2654) or
+      PhpFunctionComp(2731) or
+      PhpFunctionComp(3062) or
+      PhpFunctionComp(3078) or
+      PhpFunctionComp(3446) or
+      PhpFunctionComp(3570) or
+      PhpFunctionComp(3599) or
+      PhpFunctionComp(4030) or
+      PhpFunctionComp(4093) or
+      PhpFunctionComp(4139) or
+      PhpFunctionComp(4215) or
+      PhpFunctionComp(4570) or
+      PhpFunctionComp(5075) or
+      PhpFunctionComp(5110) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc147: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc147: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(127) or
-      Php_FunctionComp(300) or
-      Php_FunctionComp(360) or
-      Php_FunctionComp(522) or
-      Php_FunctionComp(723) or
-      Php_FunctionComp(1067) or
-      Php_FunctionComp(1144) or
-      Php_FunctionComp(1406) or
-      Php_FunctionComp(1581) or
-      Php_FunctionComp(1643) or
-      Php_FunctionComp(1787) or
-      Php_FunctionComp(1907) or
-      Php_FunctionComp(1935) or
-      Php_FunctionComp(2355) or
-      Php_FunctionComp(2455) or
-      Php_FunctionComp(2538) or
-      Php_FunctionComp(2648) or
-      Php_FunctionComp(2775) or
-      Php_FunctionComp(2869) or
-      Php_FunctionComp(2884) or
-      Php_FunctionComp(3121) or
-      Php_FunctionComp(3228) or
-      Php_FunctionComp(3244) or
-      Php_FunctionComp(3367) or
-      Php_FunctionComp(3444) or
-      Php_FunctionComp(3547) or
-      Php_FunctionComp(3671) or
-      Php_FunctionComp(3679) or
-      Php_FunctionComp(3859) or
-      Php_FunctionComp(4249) or
-      Php_FunctionComp(4603) or
-      Php_FunctionComp(4737) or
-      Php_FunctionComp(4849) or
-      Php_FunctionComp(5077) then
+  if  PhpFunctionComp(127) or
+      PhpFunctionComp(300) or
+      PhpFunctionComp(360) or
+      PhpFunctionComp(522) or
+      PhpFunctionComp(723) or
+      PhpFunctionComp(1067) or
+      PhpFunctionComp(1144) or
+      PhpFunctionComp(1406) or
+      PhpFunctionComp(1581) or
+      PhpFunctionComp(1643) or
+      PhpFunctionComp(1787) or
+      PhpFunctionComp(1907) or
+      PhpFunctionComp(1935) or
+      PhpFunctionComp(2355) or
+      PhpFunctionComp(2455) or
+      PhpFunctionComp(2538) or
+      PhpFunctionComp(2648) or
+      PhpFunctionComp(2775) or
+      PhpFunctionComp(2869) or
+      PhpFunctionComp(2884) or
+      PhpFunctionComp(3121) or
+      PhpFunctionComp(3228) or
+      PhpFunctionComp(3244) or
+      PhpFunctionComp(3367) or
+      PhpFunctionComp(3444) or
+      PhpFunctionComp(3547) or
+      PhpFunctionComp(3671) or
+      PhpFunctionComp(3679) or
+      PhpFunctionComp(3859) or
+      PhpFunctionComp(4249) or
+      PhpFunctionComp(4603) or
+      PhpFunctionComp(4737) or
+      PhpFunctionComp(4849) or
+      PhpFunctionComp(5077) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc148: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc148: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(98) or
-      Php_FunctionComp(157) or
-      Php_FunctionComp(327) or
-      Php_FunctionComp(692) or
-      Php_FunctionComp(740) or
-      Php_FunctionComp(1018) or
-      Php_FunctionComp(1154) or
-      Php_FunctionComp(1212) or
-      Php_FunctionComp(1216) or
-      Php_FunctionComp(1329) or
-      Php_FunctionComp(1413) or
-      Php_FunctionComp(1464) or
-      Php_FunctionComp(1663) or
-      Php_FunctionComp(1680) or
-      Php_FunctionComp(2033) or
-      Php_FunctionComp(2590) or
-      Php_FunctionComp(2881) or
-      Php_FunctionComp(2994) or
-      Php_FunctionComp(3233) or
-      Php_FunctionComp(3331) or
-      Php_FunctionComp(3454) or
-      Php_FunctionComp(3546) or
-      Php_FunctionComp(3588) or
-      Php_FunctionComp(3614) or
-      Php_FunctionComp(3644) or
-      Php_FunctionComp(3968) or
-      Php_FunctionComp(4278) or
-      Php_FunctionComp(4327) or
-      Php_FunctionComp(4412) or
-      Php_FunctionComp(4470) or
-      Php_FunctionComp(4794) or
-      Php_FunctionComp(4826) or
-      Php_FunctionComp(4854) or
-      Php_FunctionComp(4994) or
-      Php_FunctionComp(5102) then
+  if  PhpFunctionComp(98) or
+      PhpFunctionComp(157) or
+      PhpFunctionComp(327) or
+      PhpFunctionComp(692) or
+      PhpFunctionComp(740) or
+      PhpFunctionComp(1018) or
+      PhpFunctionComp(1154) or
+      PhpFunctionComp(1212) or
+      PhpFunctionComp(1216) or
+      PhpFunctionComp(1329) or
+      PhpFunctionComp(1413) or
+      PhpFunctionComp(1464) or
+      PhpFunctionComp(1663) or
+      PhpFunctionComp(1680) or
+      PhpFunctionComp(2033) or
+      PhpFunctionComp(2590) or
+      PhpFunctionComp(2881) or
+      PhpFunctionComp(2994) or
+      PhpFunctionComp(3233) or
+      PhpFunctionComp(3331) or
+      PhpFunctionComp(3454) or
+      PhpFunctionComp(3546) or
+      PhpFunctionComp(3588) or
+      PhpFunctionComp(3614) or
+      PhpFunctionComp(3644) or
+      PhpFunctionComp(3968) or
+      PhpFunctionComp(4278) or
+      PhpFunctionComp(4327) or
+      PhpFunctionComp(4412) or
+      PhpFunctionComp(4470) or
+      PhpFunctionComp(4794) or
+      PhpFunctionComp(4826) or
+      PhpFunctionComp(4854) or
+      PhpFunctionComp(4994) or
+      PhpFunctionComp(5102) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc149: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc149: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(377) or
-      Php_FunctionComp(515) or
-      Php_FunctionComp(721) or
-      Php_FunctionComp(1135) or
-      Php_FunctionComp(1203) or
-      Php_FunctionComp(1291) or
-      Php_FunctionComp(1681) or
-      Php_FunctionComp(1775) or
-      Php_FunctionComp(2133) or
-      Php_FunctionComp(2329) or
-      Php_FunctionComp(2663) or
-      Php_FunctionComp(2738) or
-      Php_FunctionComp(3074) or
-      Php_FunctionComp(3289) or
-      Php_FunctionComp(3583) or
-      Php_FunctionComp(3627) or
-      Php_FunctionComp(3672) or
-      Php_FunctionComp(3684) or
-      Php_FunctionComp(3737) or
-      Php_FunctionComp(3810) or
-      Php_FunctionComp(3811) or
-      Php_FunctionComp(3874) or
-      Php_FunctionComp(3955) or
-      Php_FunctionComp(4001) or
-      Php_FunctionComp(4311) or
-      Php_FunctionComp(4392) or
-      Php_FunctionComp(4691) or
-      Php_FunctionComp(4734) or
-      Php_FunctionComp(4788) or
-      Php_FunctionComp(4814) or
-      Php_FunctionComp(4974) or
-      Php_FunctionComp(5106) or
-      Php_FunctionComp(5132) then
+  if  PhpFunctionComp(377) or
+      PhpFunctionComp(515) or
+      PhpFunctionComp(721) or
+      PhpFunctionComp(1135) or
+      PhpFunctionComp(1203) or
+      PhpFunctionComp(1291) or
+      PhpFunctionComp(1681) or
+      PhpFunctionComp(1775) or
+      PhpFunctionComp(2133) or
+      PhpFunctionComp(2329) or
+      PhpFunctionComp(2663) or
+      PhpFunctionComp(2738) or
+      PhpFunctionComp(3074) or
+      PhpFunctionComp(3289) or
+      PhpFunctionComp(3583) or
+      PhpFunctionComp(3627) or
+      PhpFunctionComp(3672) or
+      PhpFunctionComp(3684) or
+      PhpFunctionComp(3737) or
+      PhpFunctionComp(3810) or
+      PhpFunctionComp(3811) or
+      PhpFunctionComp(3874) or
+      PhpFunctionComp(3955) or
+      PhpFunctionComp(4001) or
+      PhpFunctionComp(4311) or
+      PhpFunctionComp(4392) or
+      PhpFunctionComp(4691) or
+      PhpFunctionComp(4734) or
+      PhpFunctionComp(4788) or
+      PhpFunctionComp(4814) or
+      PhpFunctionComp(4974) or
+      PhpFunctionComp(5106) or
+      PhpFunctionComp(5132) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc150: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc150: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(211) or
-      Php_FunctionComp(244) or
-      Php_FunctionComp(358) or
-      Php_FunctionComp(384) or
-      Php_FunctionComp(534) or
-      Php_FunctionComp(648) or
-      Php_FunctionComp(727) or
-      Php_FunctionComp(1024) or
-      Php_FunctionComp(1027) or
-      Php_FunctionComp(1214) or
-      Php_FunctionComp(1221) or
-      Php_FunctionComp(1253) or
-      Php_FunctionComp(1492) or
-      Php_FunctionComp(1498) or
-      Php_FunctionComp(1704) or
-      Php_FunctionComp(1738) or
-      Php_FunctionComp(1886) or
-      Php_FunctionComp(1887) or
-      Php_FunctionComp(1946) or
-      Php_FunctionComp(2560) or
-      Php_FunctionComp(2577) or
-      Php_FunctionComp(2593) or
-      Php_FunctionComp(2680) or
-      Php_FunctionComp(3103) or
-      Php_FunctionComp(3138) or
-      Php_FunctionComp(3273) or
-      Php_FunctionComp(3412) or
-      Php_FunctionComp(3448) or
-      Php_FunctionComp(3479) or
-      Php_FunctionComp(3580) or
-      Php_FunctionComp(3720) or
-      Php_FunctionComp(3762) or
-      Php_FunctionComp(3809) or
-      Php_FunctionComp(4097) or
-      Php_FunctionComp(4107) or
-      Php_FunctionComp(4272) then
+  if  PhpFunctionComp(211) or
+      PhpFunctionComp(244) or
+      PhpFunctionComp(358) or
+      PhpFunctionComp(384) or
+      PhpFunctionComp(534) or
+      PhpFunctionComp(648) or
+      PhpFunctionComp(727) or
+      PhpFunctionComp(1024) or
+      PhpFunctionComp(1027) or
+      PhpFunctionComp(1214) or
+      PhpFunctionComp(1221) or
+      PhpFunctionComp(1253) or
+      PhpFunctionComp(1492) or
+      PhpFunctionComp(1498) or
+      PhpFunctionComp(1704) or
+      PhpFunctionComp(1738) or
+      PhpFunctionComp(1886) or
+      PhpFunctionComp(1887) or
+      PhpFunctionComp(1946) or
+      PhpFunctionComp(2560) or
+      PhpFunctionComp(2577) or
+      PhpFunctionComp(2593) or
+      PhpFunctionComp(2680) or
+      PhpFunctionComp(3103) or
+      PhpFunctionComp(3138) or
+      PhpFunctionComp(3273) or
+      PhpFunctionComp(3412) or
+      PhpFunctionComp(3448) or
+      PhpFunctionComp(3479) or
+      PhpFunctionComp(3580) or
+      PhpFunctionComp(3720) or
+      PhpFunctionComp(3762) or
+      PhpFunctionComp(3809) or
+      PhpFunctionComp(4097) or
+      PhpFunctionComp(4107) or
+      PhpFunctionComp(4272) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc151: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc151: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(143) or
-      Php_FunctionComp(1173) or
-      Php_FunctionComp(1186) or
-      Php_FunctionComp(1777) or
-      Php_FunctionComp(1870) or
-      Php_FunctionComp(2038) or
-      Php_FunctionComp(2444) or
-      Php_FunctionComp(2578) or
-      Php_FunctionComp(2647) or
-      Php_FunctionComp(2886) or
-      Php_FunctionComp(2946) or
-      Php_FunctionComp(3616) or
-      Php_FunctionComp(3664) or
-      Php_FunctionComp(3693) or
-      Php_FunctionComp(3902) or
-      Php_FunctionComp(4316) or
-      Php_FunctionComp(5154) then
+  if  PhpFunctionComp(143) or
+      PhpFunctionComp(1173) or
+      PhpFunctionComp(1186) or
+      PhpFunctionComp(1777) or
+      PhpFunctionComp(1870) or
+      PhpFunctionComp(2038) or
+      PhpFunctionComp(2444) or
+      PhpFunctionComp(2578) or
+      PhpFunctionComp(2647) or
+      PhpFunctionComp(2886) or
+      PhpFunctionComp(2946) or
+      PhpFunctionComp(3616) or
+      PhpFunctionComp(3664) or
+      PhpFunctionComp(3693) or
+      PhpFunctionComp(3902) or
+      PhpFunctionComp(4316) or
+      PhpFunctionComp(5154) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc152: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc152: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(129) or
-      Php_FunctionComp(380) or
-      Php_FunctionComp(390) or
-      Php_FunctionComp(669) or
-      Php_FunctionComp(737) or
-      Php_FunctionComp(968) or
-      Php_FunctionComp(1030) or
-      Php_FunctionComp(1035) or
-      Php_FunctionComp(1099) or
-      Php_FunctionComp(1196) or
-      Php_FunctionComp(1735) or
-      Php_FunctionComp(1755) or
-      Php_FunctionComp(1803) or
-      Php_FunctionComp(1911) or
-      Php_FunctionComp(1987) or
-      Php_FunctionComp(2139) or
-      Php_FunctionComp(2209) or
-      Php_FunctionComp(2232) or
-      Php_FunctionComp(2244) or
-      Php_FunctionComp(2357) or
-      Php_FunctionComp(2549) or
-      Php_FunctionComp(2621) or
-      Php_FunctionComp(2694) or
-      Php_FunctionComp(2889) or
-      Php_FunctionComp(3145) or
-      Php_FunctionComp(3194) or
-      Php_FunctionComp(3297) or
-      Php_FunctionComp(3577) or
-      Php_FunctionComp(3677) or
-      Php_FunctionComp(3716) or
-      Php_FunctionComp(3761) or
-      Php_FunctionComp(3779) or
-      Php_FunctionComp(4263) or
-      Php_FunctionComp(4440) or
-      Php_FunctionComp(4497) or
-      Php_FunctionComp(4569) or
-      Php_FunctionComp(4576) or
-      Php_FunctionComp(5065) then
+  if  PhpFunctionComp(129) or
+      PhpFunctionComp(380) or
+      PhpFunctionComp(390) or
+      PhpFunctionComp(669) or
+      PhpFunctionComp(737) or
+      PhpFunctionComp(968) or
+      PhpFunctionComp(1030) or
+      PhpFunctionComp(1035) or
+      PhpFunctionComp(1099) or
+      PhpFunctionComp(1196) or
+      PhpFunctionComp(1735) or
+      PhpFunctionComp(1755) or
+      PhpFunctionComp(1803) or
+      PhpFunctionComp(1911) or
+      PhpFunctionComp(1987) or
+      PhpFunctionComp(2139) or
+      PhpFunctionComp(2209) or
+      PhpFunctionComp(2232) or
+      PhpFunctionComp(2244) or
+      PhpFunctionComp(2357) or
+      PhpFunctionComp(2549) or
+      PhpFunctionComp(2621) or
+      PhpFunctionComp(2694) or
+      PhpFunctionComp(2889) or
+      PhpFunctionComp(3145) or
+      PhpFunctionComp(3194) or
+      PhpFunctionComp(3297) or
+      PhpFunctionComp(3577) or
+      PhpFunctionComp(3677) or
+      PhpFunctionComp(3716) or
+      PhpFunctionComp(3761) or
+      PhpFunctionComp(3779) or
+      PhpFunctionComp(4263) or
+      PhpFunctionComp(4440) or
+      PhpFunctionComp(4497) or
+      PhpFunctionComp(4569) or
+      PhpFunctionComp(4576) or
+      PhpFunctionComp(5065) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc153: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc153: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(123) or
-      Php_FunctionComp(124) or
-      Php_FunctionComp(394) or
-      Php_FunctionComp(447) or
-      Php_FunctionComp(456) or
-      Php_FunctionComp(554) or
-      Php_FunctionComp(591) or
-      Php_FunctionComp(1163) or
-      Php_FunctionComp(1207) or
-      Php_FunctionComp(1218) or
-      Php_FunctionComp(1325) or
-      Php_FunctionComp(1565) or
-      Php_FunctionComp(1763) or
-      Php_FunctionComp(2337) or
-      Php_FunctionComp(2416) or
-      Php_FunctionComp(2473) or
-      Php_FunctionComp(2628) or
-      Php_FunctionComp(2707) or
-      Php_FunctionComp(3223) or
-      Php_FunctionComp(3246) or
-      Php_FunctionComp(3434) or
-      Php_FunctionComp(3535) or
-      Php_FunctionComp(3576) or
-      Php_FunctionComp(3993) or
-      Php_FunctionComp(4063) or
-      Php_FunctionComp(4134) or
-      Php_FunctionComp(4177) or
-      Php_FunctionComp(4376) or
-      Php_FunctionComp(4548) or
-      Php_FunctionComp(5113) then
+  if  PhpFunctionComp(123) or
+      PhpFunctionComp(124) or
+      PhpFunctionComp(394) or
+      PhpFunctionComp(447) or
+      PhpFunctionComp(456) or
+      PhpFunctionComp(554) or
+      PhpFunctionComp(591) or
+      PhpFunctionComp(1163) or
+      PhpFunctionComp(1207) or
+      PhpFunctionComp(1218) or
+      PhpFunctionComp(1325) or
+      PhpFunctionComp(1565) or
+      PhpFunctionComp(1763) or
+      PhpFunctionComp(2337) or
+      PhpFunctionComp(2416) or
+      PhpFunctionComp(2473) or
+      PhpFunctionComp(2628) or
+      PhpFunctionComp(2707) or
+      PhpFunctionComp(3223) or
+      PhpFunctionComp(3246) or
+      PhpFunctionComp(3434) or
+      PhpFunctionComp(3535) or
+      PhpFunctionComp(3576) or
+      PhpFunctionComp(3993) or
+      PhpFunctionComp(4063) or
+      PhpFunctionComp(4134) or
+      PhpFunctionComp(4177) or
+      PhpFunctionComp(4376) or
+      PhpFunctionComp(4548) or
+      PhpFunctionComp(5113) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc154: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc154: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(90) or
-      Php_FunctionComp(121) or
-      Php_FunctionComp(298) or
-      Php_FunctionComp(311) or
-      Php_FunctionComp(487) or
-      Php_FunctionComp(699) or
-      Php_FunctionComp(771) or
-      Php_FunctionComp(788) or
-      Php_FunctionComp(1031) or
-      Php_FunctionComp(1164) or
-      Php_FunctionComp(1174) or
-      Php_FunctionComp(1277) or
-      Php_FunctionComp(1414) or
-      Php_FunctionComp(1538) or
-      Php_FunctionComp(1699) or
-      Php_FunctionComp(1784) or
-      Php_FunctionComp(1908) or
-      Php_FunctionComp(2170) or
-      Php_FunctionComp(2361) or
-      Php_FunctionComp(2371) or
-      Php_FunctionComp(2415) or
-      Php_FunctionComp(2603) or
-      Php_FunctionComp(2653) or
-      Php_FunctionComp(2903) or
-      Php_FunctionComp(2905) or
-      Php_FunctionComp(2924) or
-      Php_FunctionComp(3119) or
-      Php_FunctionComp(3199) or
-      Php_FunctionComp(3374) or
-      Php_FunctionComp(3460) or
-      Php_FunctionComp(3658) or
-      Php_FunctionComp(3698) or
-      Php_FunctionComp(3818) or
-      Php_FunctionComp(3845) or
-      Php_FunctionComp(4057) or
-      Php_FunctionComp(4271) then
+  if  PhpFunctionComp(90) or
+      PhpFunctionComp(121) or
+      PhpFunctionComp(298) or
+      PhpFunctionComp(311) or
+      PhpFunctionComp(487) or
+      PhpFunctionComp(699) or
+      PhpFunctionComp(771) or
+      PhpFunctionComp(788) or
+      PhpFunctionComp(1031) or
+      PhpFunctionComp(1164) or
+      PhpFunctionComp(1174) or
+      PhpFunctionComp(1277) or
+      PhpFunctionComp(1414) or
+      PhpFunctionComp(1538) or
+      PhpFunctionComp(1699) or
+      PhpFunctionComp(1784) or
+      PhpFunctionComp(1908) or
+      PhpFunctionComp(2170) or
+      PhpFunctionComp(2361) or
+      PhpFunctionComp(2371) or
+      PhpFunctionComp(2415) or
+      PhpFunctionComp(2603) or
+      PhpFunctionComp(2653) or
+      PhpFunctionComp(2903) or
+      PhpFunctionComp(2905) or
+      PhpFunctionComp(2924) or
+      PhpFunctionComp(3119) or
+      PhpFunctionComp(3199) or
+      PhpFunctionComp(3374) or
+      PhpFunctionComp(3460) or
+      PhpFunctionComp(3658) or
+      PhpFunctionComp(3698) or
+      PhpFunctionComp(3818) or
+      PhpFunctionComp(3845) or
+      PhpFunctionComp(4057) or
+      PhpFunctionComp(4271) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc155: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc155: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(151) or
-      Php_FunctionComp(160) or
-      Php_FunctionComp(232) or
-      Php_FunctionComp(731) or
-      Php_FunctionComp(794) or
-      Php_FunctionComp(951) or
-      Php_FunctionComp(1160) or
-      Php_FunctionComp(1401) or
-      Php_FunctionComp(1770) or
-      Php_FunctionComp(1827) or
-      Php_FunctionComp(1958) or
-      Php_FunctionComp(2025) or
-      Php_FunctionComp(2169) or
-      Php_FunctionComp(2245) or
-      Php_FunctionComp(2582) or
-      Php_FunctionComp(2708) or
-      Php_FunctionComp(2732) or
-      Php_FunctionComp(2804) or
-      Php_FunctionComp(3011) or
-      Php_FunctionComp(3014) or
-      Php_FunctionComp(3395) or
-      Php_FunctionComp(3452) or
-      Php_FunctionComp(3520) or
-      Php_FunctionComp(3537) or
-      Php_FunctionComp(3538) or
-      Php_FunctionComp(3654) or
-      Php_FunctionComp(4330) or
-      Php_FunctionComp(4427) or
-      Php_FunctionComp(4529) or
-      Php_FunctionComp(4554) or
-      Php_FunctionComp(4663) or
-      Php_FunctionComp(4783) or
-      Php_FunctionComp(4908) or
-      Php_FunctionComp(5141) then
+  if  PhpFunctionComp(151) or
+      PhpFunctionComp(160) or
+      PhpFunctionComp(232) or
+      PhpFunctionComp(731) or
+      PhpFunctionComp(794) or
+      PhpFunctionComp(951) or
+      PhpFunctionComp(1160) or
+      PhpFunctionComp(1401) or
+      PhpFunctionComp(1770) or
+      PhpFunctionComp(1827) or
+      PhpFunctionComp(1958) or
+      PhpFunctionComp(2025) or
+      PhpFunctionComp(2169) or
+      PhpFunctionComp(2245) or
+      PhpFunctionComp(2582) or
+      PhpFunctionComp(2708) or
+      PhpFunctionComp(2732) or
+      PhpFunctionComp(2804) or
+      PhpFunctionComp(3011) or
+      PhpFunctionComp(3014) or
+      PhpFunctionComp(3395) or
+      PhpFunctionComp(3452) or
+      PhpFunctionComp(3520) or
+      PhpFunctionComp(3537) or
+      PhpFunctionComp(3538) or
+      PhpFunctionComp(3654) or
+      PhpFunctionComp(4330) or
+      PhpFunctionComp(4427) or
+      PhpFunctionComp(4529) or
+      PhpFunctionComp(4554) or
+      PhpFunctionComp(4663) or
+      PhpFunctionComp(4783) or
+      PhpFunctionComp(4908) or
+      PhpFunctionComp(5141) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc156: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc156: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(258) or
-      Php_FunctionComp(343) or
-      Php_FunctionComp(424) or
-      Php_FunctionComp(516) or
-      Php_FunctionComp(564) or
-      Php_FunctionComp(1069) or
-      Php_FunctionComp(1134) or
-      Php_FunctionComp(1428) or
-      Php_FunctionComp(1461) or
-      Php_FunctionComp(1481) or
-      Php_FunctionComp(1490) or
-      Php_FunctionComp(1622) or
-      Php_FunctionComp(1748) or
-      Php_FunctionComp(1984) or
-      Php_FunctionComp(2074) or
-      Php_FunctionComp(2414) or
-      Php_FunctionComp(2500) or
-      Php_FunctionComp(2649) or
-      Php_FunctionComp(2658) or
-      Php_FunctionComp(2664) or
-      Php_FunctionComp(2697) or
-      Php_FunctionComp(2730) or
-      Php_FunctionComp(3189) or
-      Php_FunctionComp(3697) or
-      Php_FunctionComp(3887) or
-      Php_FunctionComp(3981) or
-      Php_FunctionComp(4212) or
-      Php_FunctionComp(4397) or
-      Php_FunctionComp(4615) or
-      Php_FunctionComp(4836) or
-      Php_FunctionComp(4935) then
+  if  PhpFunctionComp(258) or
+      PhpFunctionComp(343) or
+      PhpFunctionComp(424) or
+      PhpFunctionComp(516) or
+      PhpFunctionComp(564) or
+      PhpFunctionComp(1069) or
+      PhpFunctionComp(1134) or
+      PhpFunctionComp(1428) or
+      PhpFunctionComp(1461) or
+      PhpFunctionComp(1481) or
+      PhpFunctionComp(1490) or
+      PhpFunctionComp(1622) or
+      PhpFunctionComp(1748) or
+      PhpFunctionComp(1984) or
+      PhpFunctionComp(2074) or
+      PhpFunctionComp(2414) or
+      PhpFunctionComp(2500) or
+      PhpFunctionComp(2649) or
+      PhpFunctionComp(2658) or
+      PhpFunctionComp(2664) or
+      PhpFunctionComp(2697) or
+      PhpFunctionComp(2730) or
+      PhpFunctionComp(3189) or
+      PhpFunctionComp(3697) or
+      PhpFunctionComp(3887) or
+      PhpFunctionComp(3981) or
+      PhpFunctionComp(4212) or
+      PhpFunctionComp(4397) or
+      PhpFunctionComp(4615) or
+      PhpFunctionComp(4836) or
+      PhpFunctionComp(4935) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc157: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc157: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(501) or
-      Php_FunctionComp(523) or
-      Php_FunctionComp(880) or
-      Php_FunctionComp(1143) or
-      Php_FunctionComp(1317) or
-      Php_FunctionComp(1321) or
-      Php_FunctionComp(1483) or
-      Php_FunctionComp(1929) or
-      Php_FunctionComp(1998) or
-      Php_FunctionComp(2148) or
-      Php_FunctionComp(2236) or
-      Php_FunctionComp(2373) or
-      Php_FunctionComp(2609) or
-      Php_FunctionComp(3024) or
-      Php_FunctionComp(3237) or
-      Php_FunctionComp(3317) or
-      Php_FunctionComp(3394) or
-      Php_FunctionComp(3449) or
-      Php_FunctionComp(3548) or
-      Php_FunctionComp(3733) or
-      Php_FunctionComp(3843) or
-      Php_FunctionComp(3861) or
-      Php_FunctionComp(4007) or
-      Php_FunctionComp(4053) or
-      Php_FunctionComp(4231) or
-      Php_FunctionComp(4236) or
-      Php_FunctionComp(4241) or
-      Php_FunctionComp(4578) or
-      Php_FunctionComp(4588) or
-      Php_FunctionComp(4747) or
-      Php_FunctionComp(4790) or
-      Php_FunctionComp(4895) or
-      Php_FunctionComp(5083) then
+  if  PhpFunctionComp(501) or
+      PhpFunctionComp(523) or
+      PhpFunctionComp(880) or
+      PhpFunctionComp(1143) or
+      PhpFunctionComp(1317) or
+      PhpFunctionComp(1321) or
+      PhpFunctionComp(1483) or
+      PhpFunctionComp(1929) or
+      PhpFunctionComp(1998) or
+      PhpFunctionComp(2148) or
+      PhpFunctionComp(2236) or
+      PhpFunctionComp(2373) or
+      PhpFunctionComp(2609) or
+      PhpFunctionComp(3024) or
+      PhpFunctionComp(3237) or
+      PhpFunctionComp(3317) or
+      PhpFunctionComp(3394) or
+      PhpFunctionComp(3449) or
+      PhpFunctionComp(3548) or
+      PhpFunctionComp(3733) or
+      PhpFunctionComp(3843) or
+      PhpFunctionComp(3861) or
+      PhpFunctionComp(4007) or
+      PhpFunctionComp(4053) or
+      PhpFunctionComp(4231) or
+      PhpFunctionComp(4236) or
+      PhpFunctionComp(4241) or
+      PhpFunctionComp(4578) or
+      PhpFunctionComp(4588) or
+      PhpFunctionComp(4747) or
+      PhpFunctionComp(4790) or
+      PhpFunctionComp(4895) or
+      PhpFunctionComp(5083) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc158: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc158: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(135) or
-      Php_FunctionComp(335) or
-      Php_FunctionComp(428) or
-      Php_FunctionComp(907) or
-      Php_FunctionComp(988) or
-      Php_FunctionComp(1170) or
-      Php_FunctionComp(1311) or
-      Php_FunctionComp(1639) or
-      Php_FunctionComp(1730) or
-      Php_FunctionComp(1766) or
-      Php_FunctionComp(2039) or
-      Php_FunctionComp(2248) or
-      Php_FunctionComp(2267) or
-      Php_FunctionComp(2384) or
-      Php_FunctionComp(2434) or
-      Php_FunctionComp(2633) or
-      Php_FunctionComp(2659) or
-      Php_FunctionComp(2687) or
-      Php_FunctionComp(3046) or
-      Php_FunctionComp(3079) or
-      Php_FunctionComp(3130) or
-      Php_FunctionComp(3222) or
-      Php_FunctionComp(3295) or
-      Php_FunctionComp(3375) or
-      Php_FunctionComp(3387) or
-      Php_FunctionComp(3518) or
-      Php_FunctionComp(3611) or
-      Php_FunctionComp(3704) or
-      Php_FunctionComp(4621) or
-      Php_FunctionComp(4784) or
-      Php_FunctionComp(4802) or
-      Php_FunctionComp(5108) then
+  if  PhpFunctionComp(135) or
+      PhpFunctionComp(335) or
+      PhpFunctionComp(428) or
+      PhpFunctionComp(907) or
+      PhpFunctionComp(988) or
+      PhpFunctionComp(1170) or
+      PhpFunctionComp(1311) or
+      PhpFunctionComp(1639) or
+      PhpFunctionComp(1730) or
+      PhpFunctionComp(1766) or
+      PhpFunctionComp(2039) or
+      PhpFunctionComp(2248) or
+      PhpFunctionComp(2267) or
+      PhpFunctionComp(2384) or
+      PhpFunctionComp(2434) or
+      PhpFunctionComp(2633) or
+      PhpFunctionComp(2659) or
+      PhpFunctionComp(2687) or
+      PhpFunctionComp(3046) or
+      PhpFunctionComp(3079) or
+      PhpFunctionComp(3130) or
+      PhpFunctionComp(3222) or
+      PhpFunctionComp(3295) or
+      PhpFunctionComp(3375) or
+      PhpFunctionComp(3387) or
+      PhpFunctionComp(3518) or
+      PhpFunctionComp(3611) or
+      PhpFunctionComp(3704) or
+      PhpFunctionComp(4621) or
+      PhpFunctionComp(4784) or
+      PhpFunctionComp(4802) or
+      PhpFunctionComp(5108) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc159: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc159: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(77) or
-      Php_FunctionComp(278) or
-      Php_FunctionComp(823) or
-      Php_FunctionComp(925) or
-      Php_FunctionComp(1028) or
-      Php_FunctionComp(1179) or
-      Php_FunctionComp(1361) or
-      Php_FunctionComp(1499) or
-      Php_FunctionComp(1629) or
-      Php_FunctionComp(1756) or
-      Php_FunctionComp(1928) or
-      Php_FunctionComp(1941) or
-      Php_FunctionComp(2134) or
-      Php_FunctionComp(2421) or
-      Php_FunctionComp(2576) or
-      Php_FunctionComp(2605) or
-      Php_FunctionComp(2634) or
-      Php_FunctionComp(2923) or
-      Php_FunctionComp(3070) or
-      Php_FunctionComp(3113) or
-      Php_FunctionComp(3175) or
-      Php_FunctionComp(3457) or
-      Php_FunctionComp(3561) or
-      Php_FunctionComp(3681) or
-      Php_FunctionComp(3700) or
-      Php_FunctionComp(4074) or
-      Php_FunctionComp(4087) or
-      Php_FunctionComp(4352) or
-      Php_FunctionComp(4519) or
-      Php_FunctionComp(4572) or
-      Php_FunctionComp(4674) or
-      Php_FunctionComp(4831) or
-      Php_FunctionComp(5101) or
-      Php_FunctionComp(5131) then
+  if  PhpFunctionComp(77) or
+      PhpFunctionComp(278) or
+      PhpFunctionComp(823) or
+      PhpFunctionComp(925) or
+      PhpFunctionComp(1028) or
+      PhpFunctionComp(1179) or
+      PhpFunctionComp(1361) or
+      PhpFunctionComp(1499) or
+      PhpFunctionComp(1629) or
+      PhpFunctionComp(1756) or
+      PhpFunctionComp(1928) or
+      PhpFunctionComp(1941) or
+      PhpFunctionComp(2134) or
+      PhpFunctionComp(2421) or
+      PhpFunctionComp(2576) or
+      PhpFunctionComp(2605) or
+      PhpFunctionComp(2634) or
+      PhpFunctionComp(2923) or
+      PhpFunctionComp(3070) or
+      PhpFunctionComp(3113) or
+      PhpFunctionComp(3175) or
+      PhpFunctionComp(3457) or
+      PhpFunctionComp(3561) or
+      PhpFunctionComp(3681) or
+      PhpFunctionComp(3700) or
+      PhpFunctionComp(4074) or
+      PhpFunctionComp(4087) or
+      PhpFunctionComp(4352) or
+      PhpFunctionComp(4519) or
+      PhpFunctionComp(4572) or
+      PhpFunctionComp(4674) or
+      PhpFunctionComp(4831) or
+      PhpFunctionComp(5101) or
+      PhpFunctionComp(5131) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc160: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc160: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(228) or
-      Php_FunctionComp(245) or
-      Php_FunctionComp(532) or
-      Php_FunctionComp(610) or
-      Php_FunctionComp(1062) or
-      Php_FunctionComp(1229) or
-      Php_FunctionComp(1407) or
-      Php_FunctionComp(1563) or
-      Php_FunctionComp(1604) or
-      Php_FunctionComp(1806) or
-      Php_FunctionComp(1937) or
-      Php_FunctionComp(1980) or
-      Php_FunctionComp(2000) or
-      Php_FunctionComp(2065) or
-      Php_FunctionComp(2268) or
-      Php_FunctionComp(2278) or
-      Php_FunctionComp(2324) or
-      Php_FunctionComp(2369) or
-      Php_FunctionComp(2692) or
-      Php_FunctionComp(2698) or
-      Php_FunctionComp(2867) or
-      Php_FunctionComp(3018) or
-      Php_FunctionComp(3045) or
-      Php_FunctionComp(3515) or
-      Php_FunctionComp(3523) or
-      Php_FunctionComp(3568) or
-      Php_FunctionComp(3623) or
-      Php_FunctionComp(3660) or
-      Php_FunctionComp(3667) or
-      Php_FunctionComp(3718) or
-      Php_FunctionComp(3857) or
-      Php_FunctionComp(3881) or
-      Php_FunctionComp(3998) or
-      Php_FunctionComp(4268) or
-      Php_FunctionComp(4273) or
-      Php_FunctionComp(4303) or
-      Php_FunctionComp(4574) or
-      Php_FunctionComp(4764) or
-      Php_FunctionComp(4771) or
-      Php_FunctionComp(4932) or
-      Php_FunctionComp(4985) then
+  if  PhpFunctionComp(228) or
+      PhpFunctionComp(245) or
+      PhpFunctionComp(532) or
+      PhpFunctionComp(610) or
+      PhpFunctionComp(1062) or
+      PhpFunctionComp(1229) or
+      PhpFunctionComp(1407) or
+      PhpFunctionComp(1563) or
+      PhpFunctionComp(1604) or
+      PhpFunctionComp(1806) or
+      PhpFunctionComp(1937) or
+      PhpFunctionComp(1980) or
+      PhpFunctionComp(2000) or
+      PhpFunctionComp(2065) or
+      PhpFunctionComp(2268) or
+      PhpFunctionComp(2278) or
+      PhpFunctionComp(2324) or
+      PhpFunctionComp(2369) or
+      PhpFunctionComp(2692) or
+      PhpFunctionComp(2698) or
+      PhpFunctionComp(2867) or
+      PhpFunctionComp(3018) or
+      PhpFunctionComp(3045) or
+      PhpFunctionComp(3515) or
+      PhpFunctionComp(3523) or
+      PhpFunctionComp(3568) or
+      PhpFunctionComp(3623) or
+      PhpFunctionComp(3660) or
+      PhpFunctionComp(3667) or
+      PhpFunctionComp(3718) or
+      PhpFunctionComp(3857) or
+      PhpFunctionComp(3881) or
+      PhpFunctionComp(3998) or
+      PhpFunctionComp(4268) or
+      PhpFunctionComp(4273) or
+      PhpFunctionComp(4303) or
+      PhpFunctionComp(4574) or
+      PhpFunctionComp(4764) or
+      PhpFunctionComp(4771) or
+      PhpFunctionComp(4932) or
+      PhpFunctionComp(4985) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc161: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc161: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(84) or
-      Php_FunctionComp(107) or
-      Php_FunctionComp(262) or
-      Php_FunctionComp(323) or
-      Php_FunctionComp(410) or
-      Php_FunctionComp(470) or
-      Php_FunctionComp(543) or
-      Php_FunctionComp(597) or
-      Php_FunctionComp(696) or
-      Php_FunctionComp(1033) or
-      Php_FunctionComp(1159) or
-      Php_FunctionComp(1197) or
-      Php_FunctionComp(1722) or
-      Php_FunctionComp(1825) or
-      Php_FunctionComp(1889) or
-      Php_FunctionComp(1902) or
-      Php_FunctionComp(2210) or
-      Php_FunctionComp(2283) or
-      Php_FunctionComp(2556) or
-      Php_FunctionComp(2565) or
-      Php_FunctionComp(2743) or
-      Php_FunctionComp(2847) or
-      Php_FunctionComp(2896) or
-      Php_FunctionComp(2975) or
-      Php_FunctionComp(2982) or
-      Php_FunctionComp(3254) or
-      Php_FunctionComp(3682) or
-      Php_FunctionComp(3975) or
-      Php_FunctionComp(4196) or
-      Php_FunctionComp(4260) or
-      Php_FunctionComp(4626) or
-      Php_FunctionComp(4746) or
-      Php_FunctionComp(4828) or
-      Php_FunctionComp(4957) or
-      Php_FunctionComp(4965) or
-      Php_FunctionComp(5166) then
+  if  PhpFunctionComp(84) or
+      PhpFunctionComp(107) or
+      PhpFunctionComp(262) or
+      PhpFunctionComp(323) or
+      PhpFunctionComp(410) or
+      PhpFunctionComp(470) or
+      PhpFunctionComp(543) or
+      PhpFunctionComp(597) or
+      PhpFunctionComp(696) or
+      PhpFunctionComp(1033) or
+      PhpFunctionComp(1159) or
+      PhpFunctionComp(1197) or
+      PhpFunctionComp(1722) or
+      PhpFunctionComp(1825) or
+      PhpFunctionComp(1889) or
+      PhpFunctionComp(1902) or
+      PhpFunctionComp(2210) or
+      PhpFunctionComp(2283) or
+      PhpFunctionComp(2556) or
+      PhpFunctionComp(2565) or
+      PhpFunctionComp(2743) or
+      PhpFunctionComp(2847) or
+      PhpFunctionComp(2896) or
+      PhpFunctionComp(2975) or
+      PhpFunctionComp(2982) or
+      PhpFunctionComp(3254) or
+      PhpFunctionComp(3682) or
+      PhpFunctionComp(3975) or
+      PhpFunctionComp(4196) or
+      PhpFunctionComp(4260) or
+      PhpFunctionComp(4626) or
+      PhpFunctionComp(4746) or
+      PhpFunctionComp(4828) or
+      PhpFunctionComp(4957) or
+      PhpFunctionComp(4965) or
+      PhpFunctionComp(5166) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc162: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc162: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(89) or
-      Php_FunctionComp(305) or
-      Php_FunctionComp(559) or
-      Php_FunctionComp(879) or
-      Php_FunctionComp(1130) or
-      Php_FunctionComp(1155) or
-      Php_FunctionComp(1233) or
-      Php_FunctionComp(1392) or
-      Php_FunctionComp(1780) or
-      Php_FunctionComp(1794) or
-      Php_FunctionComp(1816) or
-      Php_FunctionComp(2037) or
-      Php_FunctionComp(2113) or
-      Php_FunctionComp(2166) or
-      Php_FunctionComp(2189) or
-      Php_FunctionComp(2460) or
-      Php_FunctionComp(2547) or
-      Php_FunctionComp(2583) or
-      Php_FunctionComp(2709) or
-      Php_FunctionComp(2710) or
-      Php_FunctionComp(2917) or
-      Php_FunctionComp(2919) or
-      Php_FunctionComp(3050) or
-      Php_FunctionComp(3056) or
-      Php_FunctionComp(3765) or
-      Php_FunctionComp(4214) or
-      Php_FunctionComp(4280) or
-      Php_FunctionComp(4360) or
-      Php_FunctionComp(4424) or
-      Php_FunctionComp(4579) or
-      Php_FunctionComp(4623) or
-      Php_FunctionComp(4656) or
-      Php_FunctionComp(4800) or
-      Php_FunctionComp(5062) then
+  if  PhpFunctionComp(89) or
+      PhpFunctionComp(305) or
+      PhpFunctionComp(559) or
+      PhpFunctionComp(879) or
+      PhpFunctionComp(1130) or
+      PhpFunctionComp(1155) or
+      PhpFunctionComp(1233) or
+      PhpFunctionComp(1392) or
+      PhpFunctionComp(1780) or
+      PhpFunctionComp(1794) or
+      PhpFunctionComp(1816) or
+      PhpFunctionComp(2037) or
+      PhpFunctionComp(2113) or
+      PhpFunctionComp(2166) or
+      PhpFunctionComp(2189) or
+      PhpFunctionComp(2460) or
+      PhpFunctionComp(2547) or
+      PhpFunctionComp(2583) or
+      PhpFunctionComp(2709) or
+      PhpFunctionComp(2710) or
+      PhpFunctionComp(2917) or
+      PhpFunctionComp(2919) or
+      PhpFunctionComp(3050) or
+      PhpFunctionComp(3056) or
+      PhpFunctionComp(3765) or
+      PhpFunctionComp(4214) or
+      PhpFunctionComp(4280) or
+      PhpFunctionComp(4360) or
+      PhpFunctionComp(4424) or
+      PhpFunctionComp(4579) or
+      PhpFunctionComp(4623) or
+      PhpFunctionComp(4656) or
+      PhpFunctionComp(4800) or
+      PhpFunctionComp(5062) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc163: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc163: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(91) or
-      Php_FunctionComp(316) or
-      Php_FunctionComp(321) or
-      Php_FunctionComp(467) or
-      Php_FunctionComp(473) or
-      Php_FunctionComp(800) or
-      Php_FunctionComp(1053) or
-      Php_FunctionComp(1357) or
-      Php_FunctionComp(1486) or
-      Php_FunctionComp(1542) or
-      Php_FunctionComp(1611) or
-      Php_FunctionComp(2112) or
-      Php_FunctionComp(2640) or
-      Php_FunctionComp(2655) or
-      Php_FunctionComp(3135) or
-      Php_FunctionComp(3180) or
-      Php_FunctionComp(3239) or
-      Php_FunctionComp(3680) or
-      Php_FunctionComp(3885) or
-      Php_FunctionComp(4019) or
-      Php_FunctionComp(4363) or
-      Php_FunctionComp(4575) or
-      Php_FunctionComp(4610) or
-      Php_FunctionComp(4781) or
-      Php_FunctionComp(4787) then
+  if  PhpFunctionComp(91) or
+      PhpFunctionComp(316) or
+      PhpFunctionComp(321) or
+      PhpFunctionComp(467) or
+      PhpFunctionComp(473) or
+      PhpFunctionComp(800) or
+      PhpFunctionComp(1053) or
+      PhpFunctionComp(1357) or
+      PhpFunctionComp(1486) or
+      PhpFunctionComp(1542) or
+      PhpFunctionComp(1611) or
+      PhpFunctionComp(2112) or
+      PhpFunctionComp(2640) or
+      PhpFunctionComp(2655) or
+      PhpFunctionComp(3135) or
+      PhpFunctionComp(3180) or
+      PhpFunctionComp(3239) or
+      PhpFunctionComp(3680) or
+      PhpFunctionComp(3885) or
+      PhpFunctionComp(4019) or
+      PhpFunctionComp(4363) or
+      PhpFunctionComp(4575) or
+      PhpFunctionComp(4610) or
+      PhpFunctionComp(4781) or
+      PhpFunctionComp(4787) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc164: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc164: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(435) or
-      Php_FunctionComp(520) or
-      Php_FunctionComp(655) or
-      Php_FunctionComp(1478) or
-      Php_FunctionComp(1535) or
-      Php_FunctionComp(1753) or
-      Php_FunctionComp(1793) or
-      Php_FunctionComp(2084) or
-      Php_FunctionComp(2645) or
-      Php_FunctionComp(2702) or
-      Php_FunctionComp(2828) or
-      Php_FunctionComp(3161) or
-      Php_FunctionComp(3409) or
-      Php_FunctionComp(3487) or
-      Php_FunctionComp(3748) or
-      Php_FunctionComp(3768) or
-      Php_FunctionComp(3801) or
-      Php_FunctionComp(4077) or
-      Php_FunctionComp(4285) or
-      Php_FunctionComp(4346) or
-      Php_FunctionComp(4560) or
-      Php_FunctionComp(4670) or
-      Php_FunctionComp(4807) or
-      Php_FunctionComp(4852) then
+  if  PhpFunctionComp(435) or
+      PhpFunctionComp(520) or
+      PhpFunctionComp(655) or
+      PhpFunctionComp(1478) or
+      PhpFunctionComp(1535) or
+      PhpFunctionComp(1753) or
+      PhpFunctionComp(1793) or
+      PhpFunctionComp(2084) or
+      PhpFunctionComp(2645) or
+      PhpFunctionComp(2702) or
+      PhpFunctionComp(2828) or
+      PhpFunctionComp(3161) or
+      PhpFunctionComp(3409) or
+      PhpFunctionComp(3487) or
+      PhpFunctionComp(3748) or
+      PhpFunctionComp(3768) or
+      PhpFunctionComp(3801) or
+      PhpFunctionComp(4077) or
+      PhpFunctionComp(4285) or
+      PhpFunctionComp(4346) or
+      PhpFunctionComp(4560) or
+      PhpFunctionComp(4670) or
+      PhpFunctionComp(4807) or
+      PhpFunctionComp(4852) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc165: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc165: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(635) or
-      Php_FunctionComp(1319) or
-      Php_FunctionComp(1749) or
-      Php_FunctionComp(1976) or
-      Php_FunctionComp(2060) or
-      Php_FunctionComp(2225) or
-      Php_FunctionComp(2425) or
-      Php_FunctionComp(2536) or
-      Php_FunctionComp(2573) or
-      Php_FunctionComp(2589) or
-      Php_FunctionComp(2752) or
-      Php_FunctionComp(2795) or
-      Php_FunctionComp(2838) or
-      Php_FunctionComp(2985) or
-      Php_FunctionComp(3253) or
-      Php_FunctionComp(3327) or
-      Php_FunctionComp(4494) or
-      Php_FunctionComp(4511) or
-      Php_FunctionComp(4683) or
-      Php_FunctionComp(4825) or
-      Php_FunctionComp(4848) then
+  if  PhpFunctionComp(635) or
+      PhpFunctionComp(1319) or
+      PhpFunctionComp(1749) or
+      PhpFunctionComp(1976) or
+      PhpFunctionComp(2060) or
+      PhpFunctionComp(2225) or
+      PhpFunctionComp(2425) or
+      PhpFunctionComp(2536) or
+      PhpFunctionComp(2573) or
+      PhpFunctionComp(2589) or
+      PhpFunctionComp(2752) or
+      PhpFunctionComp(2795) or
+      PhpFunctionComp(2838) or
+      PhpFunctionComp(2985) or
+      PhpFunctionComp(3253) or
+      PhpFunctionComp(3327) or
+      PhpFunctionComp(4494) or
+      PhpFunctionComp(4511) or
+      PhpFunctionComp(4683) or
+      PhpFunctionComp(4825) or
+      PhpFunctionComp(4848) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc166: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc166: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(210) or
-      Php_FunctionComp(239) or
-      Php_FunctionComp(301) or
-      Php_FunctionComp(391) or
-      Php_FunctionComp(509) or
-      Php_FunctionComp(637) or
-      Php_FunctionComp(660) or
-      Php_FunctionComp(762) or
-      Php_FunctionComp(895) or
-      Php_FunctionComp(940) or
-      Php_FunctionComp(1083) or
-      Php_FunctionComp(1127) or
-      Php_FunctionComp(1190) or
-      Php_FunctionComp(1199) or
-      Php_FunctionComp(1377) or
-      Php_FunctionComp(1415) or
-      Php_FunctionComp(1484) or
-      Php_FunctionComp(1545) or
-      Php_FunctionComp(1591) or
-      Php_FunctionComp(1772) or
-      Php_FunctionComp(1962) or
-      Php_FunctionComp(2021) or
-      Php_FunctionComp(2186) or
-      Php_FunctionComp(2363) or
-      Php_FunctionComp(2631) or
-      Php_FunctionComp(2677) or
-      Php_FunctionComp(2864) or
-      Php_FunctionComp(2895) or
-      Php_FunctionComp(2911) or
-      Php_FunctionComp(3224) or
-      Php_FunctionComp(3542) or
-      Php_FunctionComp(3630) or
-      Php_FunctionComp(3678) or
-      Php_FunctionComp(3747) or
-      Php_FunctionComp(3980) or
-      Php_FunctionComp(4748) or
-      Php_FunctionComp(4810) or
-      Php_FunctionComp(5164) then
+  if  PhpFunctionComp(210) or
+      PhpFunctionComp(239) or
+      PhpFunctionComp(301) or
+      PhpFunctionComp(391) or
+      PhpFunctionComp(509) or
+      PhpFunctionComp(637) or
+      PhpFunctionComp(660) or
+      PhpFunctionComp(762) or
+      PhpFunctionComp(895) or
+      PhpFunctionComp(940) or
+      PhpFunctionComp(1083) or
+      PhpFunctionComp(1127) or
+      PhpFunctionComp(1190) or
+      PhpFunctionComp(1199) or
+      PhpFunctionComp(1377) or
+      PhpFunctionComp(1415) or
+      PhpFunctionComp(1484) or
+      PhpFunctionComp(1545) or
+      PhpFunctionComp(1591) or
+      PhpFunctionComp(1772) or
+      PhpFunctionComp(1962) or
+      PhpFunctionComp(2021) or
+      PhpFunctionComp(2186) or
+      PhpFunctionComp(2363) or
+      PhpFunctionComp(2631) or
+      PhpFunctionComp(2677) or
+      PhpFunctionComp(2864) or
+      PhpFunctionComp(2895) or
+      PhpFunctionComp(2911) or
+      PhpFunctionComp(3224) or
+      PhpFunctionComp(3542) or
+      PhpFunctionComp(3630) or
+      PhpFunctionComp(3678) or
+      PhpFunctionComp(3747) or
+      PhpFunctionComp(3980) or
+      PhpFunctionComp(4748) or
+      PhpFunctionComp(4810) or
+      PhpFunctionComp(5164) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc167: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc167: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(114) or
-      Php_FunctionComp(302) or
-      Php_FunctionComp(310) or
-      Php_FunctionComp(1539) or
-      Php_FunctionComp(1764) or
-      Php_FunctionComp(1828) or
-      Php_FunctionComp(1863) or
-      Php_FunctionComp(1960) or
-      Php_FunctionComp(2243) or
-      Php_FunctionComp(2299) or
-      Php_FunctionComp(2356) or
-      Php_FunctionComp(2706) or
-      Php_FunctionComp(2846) or
-      Php_FunctionComp(3502) or
-      Php_FunctionComp(3642) or
-      Php_FunctionComp(3735) or
-      Php_FunctionComp(3799) or
-      Php_FunctionComp(3970) or
-      Php_FunctionComp(4066) or
-      Php_FunctionComp(4136) or
-      Php_FunctionComp(4365) or
-      Php_FunctionComp(4375) or
-      Php_FunctionComp(4909) then
+  if  PhpFunctionComp(114) or
+      PhpFunctionComp(302) or
+      PhpFunctionComp(310) or
+      PhpFunctionComp(1539) or
+      PhpFunctionComp(1764) or
+      PhpFunctionComp(1828) or
+      PhpFunctionComp(1863) or
+      PhpFunctionComp(1960) or
+      PhpFunctionComp(2243) or
+      PhpFunctionComp(2299) or
+      PhpFunctionComp(2356) or
+      PhpFunctionComp(2706) or
+      PhpFunctionComp(2846) or
+      PhpFunctionComp(3502) or
+      PhpFunctionComp(3642) or
+      PhpFunctionComp(3735) or
+      PhpFunctionComp(3799) or
+      PhpFunctionComp(3970) or
+      PhpFunctionComp(4066) or
+      PhpFunctionComp(4136) or
+      PhpFunctionComp(4365) or
+      PhpFunctionComp(4375) or
+      PhpFunctionComp(4909) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc168: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc168: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(87) or
-      Php_FunctionComp(161) or
-      Php_FunctionComp(261) or
-      Php_FunctionComp(363) or
-      Php_FunctionComp(542) or
-      Php_FunctionComp(586) or
-      Php_FunctionComp(667) or
-      Php_FunctionComp(671) or
-      Php_FunctionComp(913) or
-      Php_FunctionComp(1037) or
-      Php_FunctionComp(1044) or
-      Php_FunctionComp(1606) or
-      Php_FunctionComp(1610) or
-      Php_FunctionComp(1641) or
-      Php_FunctionComp(1692) or
-      Php_FunctionComp(1809) or
-      Php_FunctionComp(1904) or
-      Php_FunctionComp(2386) or
-      Php_FunctionComp(2622) or
-      Php_FunctionComp(2739) or
-      Php_FunctionComp(2860) or
-      Php_FunctionComp(2882) or
-      Php_FunctionComp(2914) or
-      Php_FunctionComp(2922) or
-      Php_FunctionComp(3019) or
-      Php_FunctionComp(3661) or
-      Php_FunctionComp(3771) or
-      Php_FunctionComp(3875) or
-      Php_FunctionComp(3939) or
-      Php_FunctionComp(4078) or
-      Php_FunctionComp(4329) or
-      Php_FunctionComp(4492) or
-      Php_FunctionComp(4513) or
-      Php_FunctionComp(4735) or
-      Php_FunctionComp(4926) or
-      Php_FunctionComp(5059) then
+  if  PhpFunctionComp(87) or
+      PhpFunctionComp(161) or
+      PhpFunctionComp(261) or
+      PhpFunctionComp(363) or
+      PhpFunctionComp(542) or
+      PhpFunctionComp(586) or
+      PhpFunctionComp(667) or
+      PhpFunctionComp(671) or
+      PhpFunctionComp(913) or
+      PhpFunctionComp(1037) or
+      PhpFunctionComp(1044) or
+      PhpFunctionComp(1606) or
+      PhpFunctionComp(1610) or
+      PhpFunctionComp(1641) or
+      PhpFunctionComp(1692) or
+      PhpFunctionComp(1809) or
+      PhpFunctionComp(1904) or
+      PhpFunctionComp(2386) or
+      PhpFunctionComp(2622) or
+      PhpFunctionComp(2739) or
+      PhpFunctionComp(2860) or
+      PhpFunctionComp(2882) or
+      PhpFunctionComp(2914) or
+      PhpFunctionComp(2922) or
+      PhpFunctionComp(3019) or
+      PhpFunctionComp(3661) or
+      PhpFunctionComp(3771) or
+      PhpFunctionComp(3875) or
+      PhpFunctionComp(3939) or
+      PhpFunctionComp(4078) or
+      PhpFunctionComp(4329) or
+      PhpFunctionComp(4492) or
+      PhpFunctionComp(4513) or
+      PhpFunctionComp(4735) or
+      PhpFunctionComp(4926) or
+      PhpFunctionComp(5059) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc169: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc169: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(104) or
-      Php_FunctionComp(1110) or
-      Php_FunctionComp(1541) or
-      Php_FunctionComp(1781) or
-      Php_FunctionComp(2027) or
-      Php_FunctionComp(2309) or
-      Php_FunctionComp(2740) or
-      Php_FunctionComp(2753) or
-      Php_FunctionComp(2791) or
-      Php_FunctionComp(2871) or
-      Php_FunctionComp(3110) or
-      Php_FunctionComp(3171) or
-      Php_FunctionComp(3489) or
-      Php_FunctionComp(3848) or
-      Php_FunctionComp(4015) or
-      Php_FunctionComp(4252) or
-      Php_FunctionComp(4259) or
-      Php_FunctionComp(4364) or
-      Php_FunctionComp(4580) or
-      Php_FunctionComp(4596) or
-      Php_FunctionComp(4707) or
-      Php_FunctionComp(4736) or
-      Php_FunctionComp(4830) or
-      Php_FunctionComp(4832) or
-      Php_FunctionComp(4905) or
-      Php_FunctionComp(5078) or
-      Php_FunctionComp(5145) then
+  if  PhpFunctionComp(104) or
+      PhpFunctionComp(1110) or
+      PhpFunctionComp(1541) or
+      PhpFunctionComp(1781) or
+      PhpFunctionComp(2027) or
+      PhpFunctionComp(2309) or
+      PhpFunctionComp(2740) or
+      PhpFunctionComp(2753) or
+      PhpFunctionComp(2791) or
+      PhpFunctionComp(2871) or
+      PhpFunctionComp(3110) or
+      PhpFunctionComp(3171) or
+      PhpFunctionComp(3489) or
+      PhpFunctionComp(3848) or
+      PhpFunctionComp(4015) or
+      PhpFunctionComp(4252) or
+      PhpFunctionComp(4259) or
+      PhpFunctionComp(4364) or
+      PhpFunctionComp(4580) or
+      PhpFunctionComp(4596) or
+      PhpFunctionComp(4707) or
+      PhpFunctionComp(4736) or
+      PhpFunctionComp(4830) or
+      PhpFunctionComp(4832) or
+      PhpFunctionComp(4905) or
+      PhpFunctionComp(5078) or
+      PhpFunctionComp(5145) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc170: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc170: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(81) or
-      Php_FunctionComp(139) or
-      Php_FunctionComp(203) or
-      Php_FunctionComp(734) or
-      Php_FunctionComp(735) or
-      Php_FunctionComp(801) or
-      Php_FunctionComp(1121) or
-      Php_FunctionComp(1389) or
-      Php_FunctionComp(1765) or
-      Php_FunctionComp(1778) or
-      Php_FunctionComp(2028) or
-      Php_FunctionComp(2379) or
-      Php_FunctionComp(2676) or
-      Php_FunctionComp(2926) or
-      Php_FunctionComp(2984) or
-      Php_FunctionComp(2986) or
-      Php_FunctionComp(3015) or
-      Php_FunctionComp(3369) or
-      Php_FunctionComp(3440) or
-      Php_FunctionComp(3522) or
-      Php_FunctionComp(3855) or
-      Php_FunctionComp(3865) or
-      Php_FunctionComp(4194) or
-      Php_FunctionComp(4206) or
-      Php_FunctionComp(4257) or
-      Php_FunctionComp(4279) or
-      Php_FunctionComp(4310) or
-      Php_FunctionComp(4390) or
-      Php_FunctionComp(4409) or
-      Php_FunctionComp(4517) or
-      Php_FunctionComp(4598) or
-      Php_FunctionComp(4668) or
-      Php_FunctionComp(4733) or
-      Php_FunctionComp(5109) or
-      Php_FunctionComp(5117) then
+  if  PhpFunctionComp(81) or
+      PhpFunctionComp(139) or
+      PhpFunctionComp(203) or
+      PhpFunctionComp(734) or
+      PhpFunctionComp(735) or
+      PhpFunctionComp(801) or
+      PhpFunctionComp(1121) or
+      PhpFunctionComp(1389) or
+      PhpFunctionComp(1765) or
+      PhpFunctionComp(1778) or
+      PhpFunctionComp(2028) or
+      PhpFunctionComp(2379) or
+      PhpFunctionComp(2676) or
+      PhpFunctionComp(2926) or
+      PhpFunctionComp(2984) or
+      PhpFunctionComp(2986) or
+      PhpFunctionComp(3015) or
+      PhpFunctionComp(3369) or
+      PhpFunctionComp(3440) or
+      PhpFunctionComp(3522) or
+      PhpFunctionComp(3855) or
+      PhpFunctionComp(3865) or
+      PhpFunctionComp(4194) or
+      PhpFunctionComp(4206) or
+      PhpFunctionComp(4257) or
+      PhpFunctionComp(4279) or
+      PhpFunctionComp(4310) or
+      PhpFunctionComp(4390) or
+      PhpFunctionComp(4409) or
+      PhpFunctionComp(4517) or
+      PhpFunctionComp(4598) or
+      PhpFunctionComp(4668) or
+      PhpFunctionComp(4733) or
+      PhpFunctionComp(5109) or
+      PhpFunctionComp(5117) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc171: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc171: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(570) or
-      Php_FunctionComp(744) or
-      Php_FunctionComp(1176) or
-      Php_FunctionComp(1181) or
-      Php_FunctionComp(1378) or
-      Php_FunctionComp(1487) or
-      Php_FunctionComp(1637) or
-      Php_FunctionComp(1679) or
-      Php_FunctionComp(1752) or
-      Php_FunctionComp(1814) or
-      Php_FunctionComp(1905) or
-      Php_FunctionComp(1926) or
-      Php_FunctionComp(1972) or
-      Php_FunctionComp(1991) or
-      Php_FunctionComp(2180) or
-      Php_FunctionComp(2233) or
-      Php_FunctionComp(2270) or
-      Php_FunctionComp(2334) or
-      Php_FunctionComp(2451) or
-      Php_FunctionComp(2597) or
-      Php_FunctionComp(2599) or
-      Php_FunctionComp(2719) or
-      Php_FunctionComp(2763) or
-      Php_FunctionComp(2843) or
-      Php_FunctionComp(3105) or
-      Php_FunctionComp(3109) or
-      Php_FunctionComp(3162) or
-      Php_FunctionComp(3302) or
-      Php_FunctionComp(3420) or
-      Php_FunctionComp(3829) or
-      Php_FunctionComp(3914) or
-      Php_FunctionComp(4103) or
-      Php_FunctionComp(4133) or
-      Php_FunctionComp(4261) or
-      Php_FunctionComp(4317) or
-      Php_FunctionComp(4398) or
-      Php_FunctionComp(4822) or
-      Php_FunctionComp(4971) or
-      Php_FunctionComp(5082) or
-      Php_FunctionComp(5128) then
+  if  PhpFunctionComp(570) or
+      PhpFunctionComp(744) or
+      PhpFunctionComp(1176) or
+      PhpFunctionComp(1181) or
+      PhpFunctionComp(1378) or
+      PhpFunctionComp(1487) or
+      PhpFunctionComp(1637) or
+      PhpFunctionComp(1679) or
+      PhpFunctionComp(1752) or
+      PhpFunctionComp(1814) or
+      PhpFunctionComp(1905) or
+      PhpFunctionComp(1926) or
+      PhpFunctionComp(1972) or
+      PhpFunctionComp(1991) or
+      PhpFunctionComp(2180) or
+      PhpFunctionComp(2233) or
+      PhpFunctionComp(2270) or
+      PhpFunctionComp(2334) or
+      PhpFunctionComp(2451) or
+      PhpFunctionComp(2597) or
+      PhpFunctionComp(2599) or
+      PhpFunctionComp(2719) or
+      PhpFunctionComp(2763) or
+      PhpFunctionComp(2843) or
+      PhpFunctionComp(3105) or
+      PhpFunctionComp(3109) or
+      PhpFunctionComp(3162) or
+      PhpFunctionComp(3302) or
+      PhpFunctionComp(3420) or
+      PhpFunctionComp(3829) or
+      PhpFunctionComp(3914) or
+      PhpFunctionComp(4103) or
+      PhpFunctionComp(4133) or
+      PhpFunctionComp(4261) or
+      PhpFunctionComp(4317) or
+      PhpFunctionComp(4398) or
+      PhpFunctionComp(4822) or
+      PhpFunctionComp(4971) or
+      PhpFunctionComp(5082) or
+      PhpFunctionComp(5128) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc172: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc172: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(163) or
-      Php_FunctionComp(446) or
-      Php_FunctionComp(533) or
-      Php_FunctionComp(749) or
-      Php_FunctionComp(1102) or
-      Php_FunctionComp(1648) or
-      Php_FunctionComp(2008) or
-      Php_FunctionComp(2277) or
-      Php_FunctionComp(2314) or
-      Php_FunctionComp(2370) or
-      Php_FunctionComp(2481) or
-      Php_FunctionComp(2727) or
-      Php_FunctionComp(2933) or
-      Php_FunctionComp(3033) or
-      Php_FunctionComp(3447) or
-      Php_FunctionComp(3490) or
-      Php_FunctionComp(3663) or
-      Php_FunctionComp(3665) or
-      Php_FunctionComp(3876) or
-      Php_FunctionComp(3889) or
-      Php_FunctionComp(4064) or
-      Php_FunctionComp(4156) or
-      Php_FunctionComp(4208) or
-      Php_FunctionComp(4518) or
-      Php_FunctionComp(4613) or
-      Php_FunctionComp(4940) then
+  if  PhpFunctionComp(163) or
+      PhpFunctionComp(446) or
+      PhpFunctionComp(533) or
+      PhpFunctionComp(749) or
+      PhpFunctionComp(1102) or
+      PhpFunctionComp(1648) or
+      PhpFunctionComp(2008) or
+      PhpFunctionComp(2277) or
+      PhpFunctionComp(2314) or
+      PhpFunctionComp(2370) or
+      PhpFunctionComp(2481) or
+      PhpFunctionComp(2727) or
+      PhpFunctionComp(2933) or
+      PhpFunctionComp(3033) or
+      PhpFunctionComp(3447) or
+      PhpFunctionComp(3490) or
+      PhpFunctionComp(3663) or
+      PhpFunctionComp(3665) or
+      PhpFunctionComp(3876) or
+      PhpFunctionComp(3889) or
+      PhpFunctionComp(4064) or
+      PhpFunctionComp(4156) or
+      PhpFunctionComp(4208) or
+      PhpFunctionComp(4518) or
+      PhpFunctionComp(4613) or
+      PhpFunctionComp(4940) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc173: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc173: TSynWebTokenKind;
 begin
-  if  Php_KeywordComp(55) then
+  if  PhpKeywordComp(55) then
     Result := stkPhpKeyword
   else
-    if  Php_FunctionComp(324) or
-        Php_FunctionComp(742) or
-        Php_FunctionComp(753) or
-        Php_FunctionComp(908) or
-        Php_FunctionComp(942) or
-        Php_FunctionComp(1702) or
-        Php_FunctionComp(1921) or
-        Php_FunctionComp(1973) or
-        Php_FunctionComp(2226) or
-        Php_FunctionComp(2257) or
-        Php_FunctionComp(2340) or
-        Php_FunctionComp(2601) or
-        Php_FunctionComp(2613) or
-        Php_FunctionComp(2756) or
-        Php_FunctionComp(2878) or
-        Php_FunctionComp(2883) or
-        Php_FunctionComp(2897) or
-        Php_FunctionComp(3030) or
-        Php_FunctionComp(3037) or
-        Php_FunctionComp(3089) or
-        Php_FunctionComp(3152) or
-        Php_FunctionComp(3243) or
-        Php_FunctionComp(3544) or
-        Php_FunctionComp(3788) or
-        Php_FunctionComp(4104) or
-        Php_FunctionComp(4267) or
-        Php_FunctionComp(4471) or
-        Php_FunctionComp(4816) or
-        Php_FunctionComp(4900) or
-        Php_FunctionComp(5129) then
+    if  PhpFunctionComp(324) or
+        PhpFunctionComp(742) or
+        PhpFunctionComp(753) or
+        PhpFunctionComp(908) or
+        PhpFunctionComp(942) or
+        PhpFunctionComp(1702) or
+        PhpFunctionComp(1921) or
+        PhpFunctionComp(1973) or
+        PhpFunctionComp(2226) or
+        PhpFunctionComp(2257) or
+        PhpFunctionComp(2340) or
+        PhpFunctionComp(2601) or
+        PhpFunctionComp(2613) or
+        PhpFunctionComp(2756) or
+        PhpFunctionComp(2878) or
+        PhpFunctionComp(2883) or
+        PhpFunctionComp(2897) or
+        PhpFunctionComp(3030) or
+        PhpFunctionComp(3037) or
+        PhpFunctionComp(3089) or
+        PhpFunctionComp(3152) or
+        PhpFunctionComp(3243) or
+        PhpFunctionComp(3544) or
+        PhpFunctionComp(3788) or
+        PhpFunctionComp(4104) or
+        PhpFunctionComp(4267) or
+        PhpFunctionComp(4471) or
+        PhpFunctionComp(4816) or
+        PhpFunctionComp(4900) or
+        PhpFunctionComp(5129) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc174: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(109) or
-      Php_FunctionComp(745) or
-      Php_FunctionComp(755) or
-      Php_FunctionComp(831) or
-      Php_FunctionComp(889) or
-      Php_FunctionComp(1231) or
-      Php_FunctionComp(1242) or
-      Php_FunctionComp(1335) or
-      Php_FunctionComp(1494) or
-      Php_FunctionComp(1555) or
-      Php_FunctionComp(2029) or
-      Php_FunctionComp(2034) or
-      Php_FunctionComp(2310) or
-      Php_FunctionComp(2474) or
-      Php_FunctionComp(2554) or
-      Php_FunctionComp(2615) or
-      Php_FunctionComp(2786) or
-      Php_FunctionComp(3077) or
-      Php_FunctionComp(3370) or
-      Php_FunctionComp(3519) or
-      Php_FunctionComp(3983) or
-      Php_FunctionComp(4744) or
-      Php_FunctionComp(5005) or
-      Php_FunctionComp(5064) or
-      Php_FunctionComp(5114) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc175: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(159) or
-      Php_FunctionComp(741) or
-      Php_FunctionComp(1177) or
-      Php_FunctionComp(1301) or
-      Php_FunctionComp(1337) or
-      Php_FunctionComp(1374) or
-      Php_FunctionComp(1527) or
-      Php_FunctionComp(1715) or
-      Php_FunctionComp(2035) or
-      Php_FunctionComp(2179) or
-      Php_FunctionComp(2221) or
-      Php_FunctionComp(2678) or
-      Php_FunctionComp(3053) or
-      Php_FunctionComp(3727) or
-      Php_FunctionComp(4527) or
-      Php_FunctionComp(4587) or
-      Php_FunctionComp(4618) or
-      Php_FunctionComp(4961) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc176: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(215) or
-      Php_FunctionComp(540) or
-      Php_FunctionComp(546) or
-      Php_FunctionComp(562) or
-      Php_FunctionComp(572) or
-      Php_FunctionComp(608) or
-      Php_FunctionComp(912) or
-      Php_FunctionComp(1424) or
-      Php_FunctionComp(1507) or
-      Php_FunctionComp(1666) or
-      Php_FunctionComp(1829) or
-      Php_FunctionComp(1869) or
-      Php_FunctionComp(1891) or
-      Php_FunctionComp(2172) or
-      Php_FunctionComp(2643) or
-      Php_FunctionComp(2725) or
-      Php_FunctionComp(2836) or
-      Php_FunctionComp(2863) or
-      Php_FunctionComp(2910) or
-      Php_FunctionComp(3174) or
-      Php_FunctionComp(3259) or
-      Php_FunctionComp(3711) or
-      Php_FunctionComp(3791) or
-      Php_FunctionComp(3835) or
-      Php_FunctionComp(4140) or
-      Php_FunctionComp(4321) or
-      Php_FunctionComp(4389) or
-      Php_FunctionComp(4622) or
-      Php_FunctionComp(4732) or
-      Php_FunctionComp(4907) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc177: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(79) or
-      Php_FunctionComp(195) or
-      Php_FunctionComp(306) or
-      Php_FunctionComp(401) or
-      Php_FunctionComp(441) or
-      Php_FunctionComp(471) or
-      Php_FunctionComp(897) or
-      Php_FunctionComp(931) or
-      Php_FunctionComp(950) or
-      Php_FunctionComp(1004) or
-      Php_FunctionComp(1330) or
-      Php_FunctionComp(1826) or
-      Php_FunctionComp(1890) or
-      Php_FunctionComp(2026) or
-      Php_FunctionComp(2051) or
-      Php_FunctionComp(2282) or
-      Php_FunctionComp(2660) or
-      Php_FunctionComp(2870) or
-      Php_FunctionComp(2912) or
-      Php_FunctionComp(2968) or
-      Php_FunctionComp(2988) or
-      Php_FunctionComp(3002) or
-      Php_FunctionComp(3133) or
-      Php_FunctionComp(3179) or
-      Php_FunctionComp(3435) or
-      Php_FunctionComp(3533) or
-      Php_FunctionComp(3608) or
-      Php_FunctionComp(3673) or
-      Php_FunctionComp(3707) or
-      Php_FunctionComp(3921) or
-      Php_FunctionComp(4414) or
-      Php_FunctionComp(4654) or
-      Php_FunctionComp(4827) or
-      Php_FunctionComp(4871) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc178: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(385) or
-      Php_FunctionComp(739) or
-      Php_FunctionComp(882) or
-      Php_FunctionComp(1009) or
-      Php_FunctionComp(1042) or
-      Php_FunctionComp(1333) or
-      Php_FunctionComp(1670) or
-      Php_FunctionComp(1701) or
-      Php_FunctionComp(1776) or
-      Php_FunctionComp(1894) or
-      Php_FunctionComp(2048) or
-      Php_FunctionComp(2130) or
-      Php_FunctionComp(2135) or
-      Php_FunctionComp(2178) or
-      Php_FunctionComp(2486) or
-      Php_FunctionComp(2661) or
-      Php_FunctionComp(2695) or
-      Php_FunctionComp(2936) or
-      Php_FunctionComp(3026) or
-      Php_FunctionComp(3112) or
-      Php_FunctionComp(3173) or
-      Php_FunctionComp(3303) or
-      Php_FunctionComp(3335) or
-      Php_FunctionComp(3839) or
-      Php_FunctionComp(4047) or
-      Php_FunctionComp(4258) or
-      Php_FunctionComp(4535) or
-      Php_FunctionComp(4552) or
-      Php_FunctionComp(4665) or
-      Php_FunctionComp(4834) or
-      Php_FunctionComp(4911) or
-      Php_FunctionComp(4917) or
-      Php_FunctionComp(4938) or
-      Php_FunctionComp(4983) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc179: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(116) or
-      Php_FunctionComp(265) or
-      Php_FunctionComp(613) or
-      Php_FunctionComp(1180) or
-      Php_FunctionComp(1284) or
-      Php_FunctionComp(1517) or
-      Php_FunctionComp(1824) or
-      Php_FunctionComp(2129) or
-      Php_FunctionComp(2423) or
-      Php_FunctionComp(2502) or
-      Php_FunctionComp(2580) or
-      Php_FunctionComp(2657) or
-      Php_FunctionComp(2837) or
-      Php_FunctionComp(2893) or
-      Php_FunctionComp(3043) or
-      Php_FunctionComp(3049) or
-      Php_FunctionComp(3081) or
-      Php_FunctionComp(3373) or
-      Php_FunctionComp(3804) or
-      Php_FunctionComp(3919) or
-      Php_FunctionComp(3987) or
-      Php_FunctionComp(4049) or
-      Php_FunctionComp(4195) or
-      Php_FunctionComp(4314) or
-      Php_FunctionComp(4348) or
-      Php_FunctionComp(4359) or
-      Php_FunctionComp(4583) or
-      Php_FunctionComp(4937) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc180: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(359) or
-      Php_FunctionComp(478) or
-      Php_FunctionComp(770) or
-      Php_FunctionComp(985) or
-      Php_FunctionComp(1055) or
-      Php_FunctionComp(1716) or
-      Php_FunctionComp(1719) or
-      Php_FunctionComp(1884) or
-      Php_FunctionComp(2081) or
-      Php_FunctionComp(2438) or
-      Php_FunctionComp(2644) or
-      Php_FunctionComp(2764) or
-      Php_FunctionComp(2877) or
-      Php_FunctionComp(2898) or
-      Php_FunctionComp(2952) or
-      Php_FunctionComp(2960) or
-      Php_FunctionComp(3034) or
-      Php_FunctionComp(3140) or
-      Php_FunctionComp(3185) or
-      Php_FunctionComp(3336) or
-      Php_FunctionComp(3499) or
-      Php_FunctionComp(3647) or
-      Php_FunctionComp(3969) or
-      Php_FunctionComp(3990) or
-      Php_FunctionComp(4051) or
-      Php_FunctionComp(4456) or
-      Php_FunctionComp(4547) or
-      Php_FunctionComp(4563) or
-      Php_FunctionComp(4590) or
-      Php_FunctionComp(4597) or
-      Php_FunctionComp(4795) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc181: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(105) or
-      Php_FunctionComp(149) or
-      Php_FunctionComp(512) or
-      Php_FunctionComp(518) or
-      Php_FunctionComp(993) or
-      Php_FunctionComp(1140) or
-      Php_FunctionComp(1255) or
-      Php_FunctionComp(1560) or
-      Php_FunctionComp(1631) or
-      Php_FunctionComp(1694) or
-      Php_FunctionComp(1823) or
-      Php_FunctionComp(2187) or
-      Php_FunctionComp(2276) or
-      Php_FunctionComp(2323) or
-      Php_FunctionComp(2332) or
-      Php_FunctionComp(2729) or
-      Php_FunctionComp(2787) or
-      Php_FunctionComp(3685) or
-      Php_FunctionComp(3860) or
-      Php_FunctionComp(4296) or
-      Php_FunctionComp(4306) or
-      Php_FunctionComp(4361) or
-      Php_FunctionComp(4600) or
-      Php_FunctionComp(4620) or
-      Php_FunctionComp(4685) or
-      Php_FunctionComp(4695) or
-      Php_FunctionComp(4770) or
-      Php_FunctionComp(4914) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc182: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(74) or
-      Php_FunctionComp(122) or
-      Php_FunctionComp(322) or
-      Php_FunctionComp(507) or
-      Php_FunctionComp(1115) or
-      Php_FunctionComp(1338) or
-      Php_FunctionComp(1530) or
-      Php_FunctionComp(1532) or
-      Php_FunctionComp(1578) or
-      Php_FunctionComp(1580) or
-      Php_FunctionComp(1795) or
-      Php_FunctionComp(2343) or
-      Php_FunctionComp(2380) or
-      Php_FunctionComp(2662) or
-      Php_FunctionComp(2665) or
-      Php_FunctionComp(2829) or
-      Php_FunctionComp(2913) or
-      Php_FunctionComp(3012) or
-      Php_FunctionComp(3226) or
-      Php_FunctionComp(3270) or
-      Php_FunctionComp(3527) or
-      Php_FunctionComp(3668) or
-      Php_FunctionComp(4254) or
-      Php_FunctionComp(4347) or
-      Php_FunctionComp(4393) or
-      Php_FunctionComp(4850) or
-      Php_FunctionComp(4980) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc183: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(125) or
-      Php_FunctionComp(508) or
-      Php_FunctionComp(592) or
-      Php_FunctionComp(893) or
-      Php_FunctionComp(1008) or
-      Php_FunctionComp(1162) or
-      Php_FunctionComp(1254) or
-      Php_FunctionComp(1256) or
-      Php_FunctionComp(1320) or
-      Php_FunctionComp(1561) or
-      Php_FunctionComp(1623) or
-      Php_FunctionComp(2341) or
-      Php_FunctionComp(2372) or
-      Php_FunctionComp(2390) or
-      Php_FunctionComp(2399) or
-      Php_FunctionComp(2428) or
-      Php_FunctionComp(2439) or
-      Php_FunctionComp(2559) or
-      Php_FunctionComp(2611) or
-      Php_FunctionComp(2612) or
-      Php_FunctionComp(2674) or
-      Php_FunctionComp(2704) or
-      Php_FunctionComp(2859) or
-      Php_FunctionComp(2945) or
-      Php_FunctionComp(3296) or
-      Php_FunctionComp(3628) or
-      Php_FunctionComp(3800) or
-      Php_FunctionComp(4176) or
-      Php_FunctionComp(4541) or
-      Php_FunctionComp(4689) or
-      Php_FunctionComp(4847) or
-      Php_FunctionComp(4885) or
-      Php_FunctionComp(5069) or
-      Php_FunctionComp(5165) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc184: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(872) or
-      Php_FunctionComp(894) or
-      Php_FunctionComp(1038) or
-      Php_FunctionComp(1112) or
-      Php_FunctionComp(1282) or
-      Php_FunctionComp(1393) or
-      Php_FunctionComp(1837) or
-      Php_FunctionComp(1925) or
-      Php_FunctionComp(2165) or
-      Php_FunctionComp(2256) or
-      Php_FunctionComp(2396) or
-      Php_FunctionComp(2456) or
-      Php_FunctionComp(2646) or
-      Php_FunctionComp(2705) or
-      Php_FunctionComp(2718) or
-      Php_FunctionComp(2967) or
-      Php_FunctionComp(2981) or
-      Php_FunctionComp(2993) or
-      Php_FunctionComp(3027) or
-      Php_FunctionComp(3231) or
-      Php_FunctionComp(3328) or
-      Php_FunctionComp(3453) or
-      Php_FunctionComp(3730) or
-      Php_FunctionComp(4967) or
-      Php_FunctionComp(4968) or
-      Php_FunctionComp(5004) or
-      Php_FunctionComp(5136) or
-      Php_FunctionComp(5155) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc185: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(82) or
-      Php_FunctionComp(92) or
-      Php_FunctionComp(115) or
-      Php_FunctionComp(752) or
-      Php_FunctionComp(983) or
-      Php_FunctionComp(1047) or
-      Php_FunctionComp(1171) or
-      Php_FunctionComp(1596) or
-      Php_FunctionComp(1599) or
-      Php_FunctionComp(1697) or
-      Php_FunctionComp(1877) or
-      Php_FunctionComp(1994) or
-      Php_FunctionComp(2295) or
-      Php_FunctionComp(2413) or
-      Php_FunctionComp(2548) or
-      Php_FunctionComp(2656) or
-      Php_FunctionComp(2701) or
-      Php_FunctionComp(2840) or
-      Php_FunctionComp(2865) or
-      Php_FunctionComp(2958) or
-      Php_FunctionComp(2972) or
-      Php_FunctionComp(3290) or
-      Php_FunctionComp(3329) or
-      Php_FunctionComp(3346) or
-      Php_FunctionComp(3819) or
-      Php_FunctionComp(3831) or
-      Php_FunctionComp(4324) or
-      Php_FunctionComp(4417) or
-      Php_FunctionComp(4428) or
-      Php_FunctionComp(4582) or
-      Php_FunctionComp(4772) or
-      Php_FunctionComp(4936) or
-      Php_FunctionComp(5139) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc186: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(445) or
-      Php_FunctionComp(722) or
-      Php_FunctionComp(733) or
-      Php_FunctionComp(1076) or
-      Php_FunctionComp(1141) or
-      Php_FunctionComp(1844) or
-      Php_FunctionComp(1956) or
-      Php_FunctionComp(2289) or
-      Php_FunctionComp(2381) or
-      Php_FunctionComp(2412) or
-      Php_FunctionComp(2487) or
-      Php_FunctionComp(2588) or
-      Php_FunctionComp(2619) or
-      Php_FunctionComp(2623) or
-      Php_FunctionComp(3170) or
-      Php_FunctionComp(3238) or
-      Php_FunctionComp(3240) or
-      Php_FunctionComp(3439) or
-      Php_FunctionComp(3706) or
-      Php_FunctionComp(3710) or
-      Php_FunctionComp(3815) or
-      Php_FunctionComp(3825) or
-      Php_FunctionComp(4182) or
-      Php_FunctionComp(4199) or
-      Php_FunctionComp(4247) or
-      Php_FunctionComp(4255) or
-      Php_FunctionComp(4382) or
-      Php_FunctionComp(4581) or
-      Php_FunctionComp(4594) or
-      Php_FunctionComp(4918) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc187: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(240) or
-      Php_FunctionComp(645) or
-      Php_FunctionComp(905) or
-      Php_FunctionComp(953) or
-      Php_FunctionComp(1103) or
-      Php_FunctionComp(1587) or
-      Php_FunctionComp(1831) or
-      Php_FunctionComp(1883) or
-      Php_FunctionComp(1903) or
-      Php_FunctionComp(1938) or
-      Php_FunctionComp(2031) or
-      Php_FunctionComp(2164) or
-      Php_FunctionComp(2181) or
-      Php_FunctionComp(2443) or
-      Php_FunctionComp(2587) or
-      Php_FunctionComp(2841) or
-      Php_FunctionComp(2920) or
-      Php_FunctionComp(3564) or
-      Php_FunctionComp(3702) or
-      Php_FunctionComp(4109) or
-      Php_FunctionComp(4220) or
-      Php_FunctionComp(4312) or
-      Php_FunctionComp(4614) or
-      Php_FunctionComp(4661) or
-      Php_FunctionComp(4671) or
-      Php_FunctionComp(4692) or
-      Php_FunctionComp(4697) or
-      Php_FunctionComp(5160) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc188: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(192) or
-      Php_FunctionComp(309) or
-      Php_FunctionComp(381) or
-      Php_FunctionComp(528) or
-      Php_FunctionComp(584) or
-      Php_FunctionComp(904) or
-      Php_FunctionComp(1403) or
-      Php_FunctionComp(1779) or
-      Php_FunctionComp(1854) or
-      Php_FunctionComp(2114) or
-      Php_FunctionComp(2317) or
-      Php_FunctionComp(2326) or
-      Php_FunctionComp(2711) or
-      Php_FunctionComp(2890) or
-      Php_FunctionComp(2964) or
-      Php_FunctionComp(2977) or
-      Php_FunctionComp(3017) or
-      Php_FunctionComp(3111) or
-      Php_FunctionComp(3193) or
-      Php_FunctionComp(3263) or
-      Php_FunctionComp(3669) or
-      Php_FunctionComp(3852) or
-      Php_FunctionComp(3888) or
-      Php_FunctionComp(4210) or
-      Php_FunctionComp(4362) or
-      Php_FunctionComp(4367) or
-      Php_FunctionComp(4388) or
-      Php_FunctionComp(4780) or
-      Php_FunctionComp(4916) or
-      Php_FunctionComp(4933) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc189: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(88) or
-      Php_FunctionComp(264) or
-      Php_FunctionComp(484) or
-      Php_FunctionComp(612) or
-      Php_FunctionComp(1022) or
-      Php_FunctionComp(1536) or
-      Php_FunctionComp(1564) or
-      Php_FunctionComp(1579) or
-      Php_FunctionComp(1650) or
-      Php_FunctionComp(1871) or
-      Php_FunctionComp(2275) or
-      Php_FunctionComp(2616) or
-      Php_FunctionComp(2723) or
-      Php_FunctionComp(2803) or
-      Php_FunctionComp(2918) or
-      Php_FunctionComp(3271) or
-      Php_FunctionComp(3462) or
-      Php_FunctionComp(3503) or
-      Php_FunctionComp(3646) or
-      Php_FunctionComp(4851) or
-      Php_FunctionComp(4928) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc190: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(254) or
-      Php_FunctionComp(315) or
-      Php_FunctionComp(451) or
-      Php_FunctionComp(877) or
-      Php_FunctionComp(1252) or
-      Php_FunctionComp(1278) or
-      Php_FunctionComp(1460) or
-      Php_FunctionComp(1612) or
-      Php_FunctionComp(1665) or
-      Php_FunctionComp(1700) or
-      Php_FunctionComp(1916) or
-      Php_FunctionComp(2382) or
-      Php_FunctionComp(2426) or
-      Php_FunctionComp(2641) or
-      Php_FunctionComp(2835) or
-      Php_FunctionComp(3343) or
-      Php_FunctionComp(3356) or
-      Php_FunctionComp(3505) or
-      Php_FunctionComp(3989) or
-      Php_FunctionComp(4056) or
-      Php_FunctionComp(4315) or
-      Php_FunctionComp(4433) or
-      Php_FunctionComp(4448) or
-      Php_FunctionComp(4785) or
-      Php_FunctionComp(5023) or
-      Php_FunctionComp(5111) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc191: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(611) or
-      Php_FunctionComp(670) or
-      Php_FunctionComp(883) or
-      Php_FunctionComp(885) or
-      Php_FunctionComp(923) or
-      Php_FunctionComp(1866) or
-      Php_FunctionComp(1930) or
-      Php_FunctionComp(2075) or
-      Php_FunctionComp(2700) or
-      Php_FunctionComp(2934) or
-      Php_FunctionComp(2943) or
-      Php_FunctionComp(3047) or
-      Php_FunctionComp(3085) or
-      Php_FunctionComp(3280) or
-      Php_FunctionComp(3411) or
-      Php_FunctionComp(3806) or
-      Php_FunctionComp(3826) or
-      Php_FunctionComp(3911) or
-      Php_FunctionComp(4009) or
-      Php_FunctionComp(4766) or
-      Php_FunctionComp(4809) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc192: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(177) or
-      Php_FunctionComp(458) or
-      Php_FunctionComp(888) or
-      Php_FunctionComp(960) or
-      Php_FunctionComp(1086) or
-      Php_FunctionComp(1429) or
-      Php_FunctionComp(1562) or
-      Php_FunctionComp(1895) or
-      Php_FunctionComp(2059) or
-      Php_FunctionComp(2303) or
-      Php_FunctionComp(2318) or
-      Php_FunctionComp(2365) or
-      Php_FunctionComp(2422) or
-      Php_FunctionComp(2606) or
-      Php_FunctionComp(2758) or
-      Php_FunctionComp(2760) or
-      Php_FunctionComp(2928) or
-      Php_FunctionComp(3157) or
-      Php_FunctionComp(3609) or
-      Php_FunctionComp(3982) or
-      Php_FunctionComp(4044) or
-      Php_FunctionComp(4152) or
-      Php_FunctionComp(4629) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc193: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(453) or
-      Php_FunctionComp(460) or
-      Php_FunctionComp(514) or
-      Php_FunctionComp(535) or
-      Php_FunctionComp(720) or
-      Php_FunctionComp(724) or
-      Php_FunctionComp(973) or
-      Php_FunctionComp(1005) or
-      Php_FunctionComp(1676) or
-      Php_FunctionComp(1882) or
-      Php_FunctionComp(1893) or
-      Php_FunctionComp(2128) or
-      Php_FunctionComp(2458) or
-      Php_FunctionComp(2761) or
-      Php_FunctionComp(2776) or
-      Php_FunctionComp(2942) or
-      Php_FunctionComp(2954) or
-      Php_FunctionComp(2974) or
-      Php_FunctionComp(3372) or
-      Php_FunctionComp(4200) or
-      Php_FunctionComp(4222) or
-      Php_FunctionComp(4377) or
-      Php_FunctionComp(4407) or
-      Php_FunctionComp(4476) or
-      Php_FunctionComp(4483) or
-      Php_FunctionComp(4556) or
-      Php_FunctionComp(4684) or
-      Php_FunctionComp(4941) or
-      Php_FunctionComp(5018) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc194: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(144) or
-      Php_FunctionComp(954) or
-      Php_FunctionComp(1391) or
-      Php_FunctionComp(1635) or
-      Php_FunctionComp(1853) or
-      Php_FunctionComp(1873) or
-      Php_FunctionComp(2279) or
-      Php_FunctionComp(2291) or
-      Php_FunctionComp(2377) or
-      Php_FunctionComp(2604) or
-      Php_FunctionComp(2755) or
-      Php_FunctionComp(2932) or
-      Php_FunctionComp(3090) or
-      Php_FunctionComp(3332) or
-      Php_FunctionComp(3496) or
-      Php_FunctionComp(3498) or
-      Php_FunctionComp(3708) or
-      Php_FunctionComp(4069) or
-      Php_FunctionComp(4075) or
-      Php_FunctionComp(4137) or
-      Php_FunctionComp(4253) or
-      Php_FunctionComp(4401) or
-      Php_FunctionComp(4454) or
-      Php_FunctionComp(4525) or
-      Php_FunctionComp(4745) or
-      Php_FunctionComp(4946) or
-      Php_FunctionComp(5015) or
-      Php_FunctionComp(5063) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc195: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(574) or
-      Php_FunctionComp(932) or
-      Php_FunctionComp(1068) or
-      Php_FunctionComp(1302) or
-      Php_FunctionComp(1496) or
-      Php_FunctionComp(1706) or
-      Php_FunctionComp(1879) or
-      Php_FunctionComp(2036) or
-      Php_FunctionComp(2389) or
-      Php_FunctionComp(2888) or
-      Php_FunctionComp(3091) or
-      Php_FunctionComp(3337) or
-      Php_FunctionComp(3456) or
-      Php_FunctionComp(3486) or
-      Php_FunctionComp(4611) or
-      Php_FunctionComp(4824) or
-      Php_FunctionComp(4897) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc196: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(963) or
-      Php_FunctionComp(980) or
-      Php_FunctionComp(1054) or
-      Php_FunctionComp(1096) or
-      Php_FunctionComp(1113) or
-      Php_FunctionComp(1834) or
-      Php_FunctionComp(1848) or
-      Php_FunctionComp(1852) or
-      Php_FunctionComp(2156) or
-      Php_FunctionComp(2499) or
-      Php_FunctionComp(2736) or
-      Php_FunctionComp(2894) or
-      Php_FunctionComp(2915) or
-      Php_FunctionComp(3136) or
-      Php_FunctionComp(3181) or
-      Php_FunctionComp(3257) or
-      Php_FunctionComp(3406) or
-      Php_FunctionComp(3511) or
-      Php_FunctionComp(3670) or
-      Php_FunctionComp(4612) or
-      Php_FunctionComp(4714) or
-      Php_FunctionComp(4727) or
-      Php_FunctionComp(4855) or
-      Php_FunctionComp(5013) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc197: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(241) or
-      Php_FunctionComp(326) or
-      Php_FunctionComp(606) or
-      Php_FunctionComp(970) or
-      Php_FunctionComp(974) or
-      Php_FunctionComp(1036) or
-      Php_FunctionComp(1566) or
-      Php_FunctionComp(1698) or
-      Php_FunctionComp(1927) or
-      Php_FunctionComp(2195) or
-      Php_FunctionComp(2274) or
-      Php_FunctionComp(2307) or
-      Php_FunctionComp(2563) or
-      Php_FunctionComp(2688) or
-      Php_FunctionComp(2793) or
-      Php_FunctionComp(2998) or
-      Php_FunctionComp(3255) or
-      Php_FunctionComp(3495) or
-      Php_FunctionComp(4026) or
-      Php_FunctionComp(4065) or
-      Php_FunctionComp(4276) or
-      Php_FunctionComp(4469) or
-      Php_FunctionComp(4479) or
-      Php_FunctionComp(4599) or
-      Php_FunctionComp(4659) or
-      Php_FunctionComp(4951) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc198: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(342) or
-      Php_FunctionComp(455) or
-      Php_FunctionComp(941) or
-      Php_FunctionComp(1383) or
-      Php_FunctionComp(1540) or
-      Php_FunctionComp(1703) or
-      Php_FunctionComp(1747) or
-      Php_FunctionComp(1983) or
-      Php_FunctionComp(2251) or
-      Php_FunctionComp(2312) or
-      Php_FunctionComp(2417) or
-      Php_FunctionComp(2782) or
-      Php_FunctionComp(2892) or
-      Php_FunctionComp(2966) or
-      Php_FunctionComp(3196) or
-      Php_FunctionComp(3261) or
-      Php_FunctionComp(3276) or
-      Php_FunctionComp(3371) or
-      Php_FunctionComp(3521) or
-      Php_FunctionComp(3773) or
-      Php_FunctionComp(3792) or
-      Php_FunctionComp(3992) or
-      Php_FunctionComp(4008) or
-      Php_FunctionComp(4391) or
-      Php_FunctionComp(4624) or
-      Php_FunctionComp(4628) or
-      Php_FunctionComp(4906) or
-      Php_FunctionComp(4964) or
-      Php_FunctionComp(5148) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc199: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(170) or
-      Php_FunctionComp(420) or
-      Php_FunctionComp(1072) or
-      Php_FunctionComp(1088) or
-      Php_FunctionComp(1243) or
-      Php_FunctionComp(1309) or
-      Php_FunctionComp(1774) or
-      Php_FunctionComp(1820) or
-      Php_FunctionComp(2220) or
-      Php_FunctionComp(2383) or
-      Php_FunctionComp(2853) or
-      Php_FunctionComp(3247) or
-      Php_FunctionComp(3283) or
-      Php_FunctionComp(3508) or
-      Php_FunctionComp(3524) or
-      Php_FunctionComp(3723) or
-      Php_FunctionComp(4186) or
-      Php_FunctionComp(4192) or
-      Php_FunctionComp(4262) or
-      Php_FunctionComp(4386) or
-      Php_FunctionComp(4558) or
-      Php_FunctionComp(4662) or
-      Php_FunctionComp(4666) or
-      Php_FunctionComp(4667) or
-      Php_FunctionComp(5169) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc200: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(220) or
-      Php_FunctionComp(284) or
-      Php_FunctionComp(433) or
-      Php_FunctionComp(1395) or
-      Php_FunctionComp(1593) or
-      Php_FunctionComp(1598) or
-      Php_FunctionComp(1965) or
-      Php_FunctionComp(2167) or
-      Php_FunctionComp(2211) or
-      Php_FunctionComp(2246) or
-      Php_FunctionComp(2598) or
-      Php_FunctionComp(2754) or
-      Php_FunctionComp(2909) or
-      Php_FunctionComp(2948) or
-      Php_FunctionComp(3472) or
-      Php_FunctionComp(3725) or
-      Php_FunctionComp(4062) or
-      Php_FunctionComp(4076) or
-      Php_FunctionComp(4207) or
-      Php_FunctionComp(4218) or
-      Php_FunctionComp(4425) or
-      Php_FunctionComp(4679) or
-      Php_FunctionComp(4738) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc201: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(102) or
-      Php_FunctionComp(136) or
-      Php_FunctionComp(448) or
-      Php_FunctionComp(472) or
-      Php_FunctionComp(511) or
-      Php_FunctionComp(837) or
-      Php_FunctionComp(911) or
-      Php_FunctionComp(1544) or
-      Php_FunctionComp(1685) or
-      Php_FunctionComp(1782) or
-      Php_FunctionComp(2322) or
-      Php_FunctionComp(2401) or
-      Php_FunctionComp(2720) or
-      Php_FunctionComp(2766) or
-      Php_FunctionComp(2990) or
-      Php_FunctionComp(2995) or
-      Php_FunctionComp(3408) or
-      Php_FunctionComp(3618) or
-      Php_FunctionComp(3827) or
-      Php_FunctionComp(4043) or
-      Php_FunctionComp(4533) or
-      Php_FunctionComp(4606) or
-      Php_FunctionComp(4607) or
-      Php_FunctionComp(4655) or
-      Php_FunctionComp(4705) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc202: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(463) or
-      Php_FunctionComp(474) or
-      Php_FunctionComp(934) or
-      Php_FunctionComp(1296) or
-      Php_FunctionComp(1312) or
-      Php_FunctionComp(1408) or
-      Php_FunctionComp(1830) or
-      Php_FunctionComp(1845) or
-      Php_FunctionComp(1851) or
-      Php_FunctionComp(2017) or
-      Php_FunctionComp(2354) or
-      Php_FunctionComp(2475) or
-      Php_FunctionComp(2842) or
-      Php_FunctionComp(2904) or
-      Php_FunctionComp(2965) or
-      Php_FunctionComp(3355) or
-      Php_FunctionComp(3419) or
-      Php_FunctionComp(3551) or
-      Php_FunctionComp(3552) or
-      Php_FunctionComp(3828) or
-      Php_FunctionComp(4353) or
-      Php_FunctionComp(4464) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc203: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(259) or
-      Php_FunctionComp(896) or
-      Php_FunctionComp(1316) or
-      Php_FunctionComp(1318) or
-      Php_FunctionComp(1674) or
-      Php_FunctionComp(2397) or
-      Php_FunctionComp(2675) or
-      Php_FunctionComp(2784) or
-      Php_FunctionComp(2991) or
-      Php_FunctionComp(3414) or
-      Php_FunctionComp(3898) or
-      Php_FunctionComp(3958) or
-      Php_FunctionComp(4017) or
-      Php_FunctionComp(4034) or
-      Php_FunctionComp(4149) or
-      Php_FunctionComp(4180) or
-      Php_FunctionComp(4219) or
-      Php_FunctionComp(4274) or
-      Php_FunctionComp(4757) or
-      Php_FunctionComp(4782) or
-      Php_FunctionComp(4912) or
-      Php_FunctionComp(5088) or
-      Php_FunctionComp(5158) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc204: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(187) or
-      Php_FunctionComp(560) or
-      Php_FunctionComp(1074) or
-      Php_FunctionComp(1394) or
-      Php_FunctionComp(1673) or
-      Php_FunctionComp(2194) or
-      Php_FunctionComp(2344) or
-      Php_FunctionComp(2762) or
-      Php_FunctionComp(2852) or
-      Php_FunctionComp(2856) or
-      Php_FunctionComp(2873) or
-      Php_FunctionComp(2876) or
-      Php_FunctionComp(2929) or
-      Php_FunctionComp(2953) or
-      Php_FunctionComp(3086) or
-      Php_FunctionComp(3352) or
-      Php_FunctionComp(3787) or
-      Php_FunctionComp(3882) or
-      Php_FunctionComp(3963) or
-      Php_FunctionComp(4099) or
-      Php_FunctionComp(4251) or
-      Php_FunctionComp(4277) or
-      Php_FunctionComp(4657) or
-      Php_FunctionComp(4789) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc205: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(188) or
-      Php_FunctionComp(956) or
-      Php_FunctionComp(1138) or
-      Php_FunctionComp(1627) or
-      Php_FunctionComp(1864) or
-      Php_FunctionComp(1888) or
-      Php_FunctionComp(2353) or
-      Php_FunctionComp(2468) or
-      Php_FunctionComp(2679) or
-      Php_FunctionComp(2722) or
-      Php_FunctionComp(2788) or
-      Php_FunctionComp(2997) or
-      Php_FunctionComp(3032) or
-      Php_FunctionComp(3330) or
-      Php_FunctionComp(3757) or
-      Php_FunctionComp(3858) or
-      Php_FunctionComp(4304) or
-      Php_FunctionComp(4325) or
-      Php_FunctionComp(4406) or
-      Php_FunctionComp(4625) or
-      Php_FunctionComp(4658) or
-      Php_FunctionComp(4660) or
-      Php_FunctionComp(4715) or
-      Php_FunctionComp(4774) or
-      Php_FunctionComp(4949) or
-      Php_FunctionComp(4975) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc206: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(83) or
-      Php_FunctionComp(263) or
-      Php_FunctionComp(279) or
-      Php_FunctionComp(373) or
-      Php_FunctionComp(631) or
-      Php_FunctionComp(886) or
-      Php_FunctionComp(1476) or
-      Php_FunctionComp(1577) or
-      Php_FunctionComp(2351) or
-      Php_FunctionComp(2855) or
-      Php_FunctionComp(3260) or
-      Php_FunctionComp(3344) or
-      Php_FunctionComp(3705) or
-      Php_FunctionComp(4027) or
-      Php_FunctionComp(4029) or
-      Php_FunctionComp(4106) or
-      Php_FunctionComp(4275) or
-      Php_FunctionComp(4542) or
-      Php_FunctionComp(4545) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc207: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(751) or
-      Php_FunctionComp(967) or
-      Php_FunctionComp(1026) or
-      Php_FunctionComp(1084) or
-      Php_FunctionComp(2111) or
-      Php_FunctionComp(2345) or
-      Php_FunctionComp(2607) or
-      Php_FunctionComp(2857) or
-      Php_FunctionComp(2858) or
-      Php_FunctionComp(2937) or
-      Php_FunctionComp(3648) or
-      Php_FunctionComp(3701) or
-      Php_FunctionComp(3726) or
-      Php_FunctionComp(3802) or
-      Php_FunctionComp(4006) or
-      Php_FunctionComp(4179) or
-      Php_FunctionComp(4322) or
-      Php_FunctionComp(4617) or
-      Php_FunctionComp(4708) or
-      Php_FunctionComp(4835) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc208: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(661) or
-      Php_FunctionComp(826) or
-      Php_FunctionComp(1116) or
-      Php_FunctionComp(1767) or
-      Php_FunctionComp(1993) or
-      Php_FunctionComp(2223) or
-      Php_FunctionComp(2503) or
-      Php_FunctionComp(2596) or
-      Php_FunctionComp(2669) or
-      Php_FunctionComp(2802) or
-      Php_FunctionComp(2959) or
-      Php_FunctionComp(2978) or
-      Php_FunctionComp(3028) or
-      Php_FunctionComp(3543) or
-      Php_FunctionComp(3960) or
-      Php_FunctionComp(4319) or
-      Php_FunctionComp(4343) or
-      Php_FunctionComp(5024) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc209: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(288) or
-      Php_FunctionComp(521) or
-      Php_FunctionComp(756) or
-      Php_FunctionComp(1019) or
-      Php_FunctionComp(2242) or
-      Php_FunctionComp(2260) or
-      Php_FunctionComp(2352) or
-      Php_FunctionComp(2666) or
-      Php_FunctionComp(2724) or
-      Php_FunctionComp(2815) or
-      Php_FunctionComp(2879) or
-      Php_FunctionComp(3256) or
-      Php_FunctionComp(3334) or
-      Php_FunctionComp(3506) or
-      Php_FunctionComp(3516) or
-      Php_FunctionComp(3780) or
-      Php_FunctionComp(4221) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc210: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(225) or
-      Php_FunctionComp(1257) or
-      Php_FunctionComp(2290) or
-      Php_FunctionComp(2891) or
-      Php_FunctionComp(2979) or
-      Php_FunctionComp(3146) or
-      Php_FunctionComp(3195) or
-      Php_FunctionComp(3920) or
-      Php_FunctionComp(4004) or
-      Php_FunctionComp(4016) or
-      Php_FunctionComp(4349) or
-      Php_FunctionComp(4354) or
-      Php_FunctionComp(4366) or
-      Php_FunctionComp(4557) or
-      Php_FunctionComp(4698) or
-      Php_FunctionComp(4915) or
-      Php_FunctionComp(4976) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc211: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(374) or
-      Php_FunctionComp(957) or
-      Php_FunctionComp(1020) or
-      Php_FunctionComp(1488) or
-      Php_FunctionComp(1636) or
-      Php_FunctionComp(1995) or
-      Php_FunctionComp(2509) or
-      Php_FunctionComp(2689) or
-      Php_FunctionComp(2796) or
-      Php_FunctionComp(2907) or
-      Php_FunctionComp(2940) or
-      Php_FunctionComp(2941) or
-      Php_FunctionComp(3333) or
-      Php_FunctionComp(3493) or
-      Php_FunctionComp(3662) or
-      Php_FunctionComp(4042) or
-      Php_FunctionComp(4071) or
-      Php_FunctionComp(4342) or
-      Php_FunctionComp(4408) or
-      Php_FunctionComp(4627) or
-      Php_FunctionComp(4688) or
-      Php_FunctionComp(4703) or
-      Php_FunctionComp(4903) or
-      Php_FunctionComp(4984) or
-      Php_FunctionComp(5043) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc212: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(154) or
-      Php_FunctionComp(402) or
-      Php_FunctionComp(468) or
-      Php_FunctionComp(804) or
-      Php_FunctionComp(824) or
-      Php_FunctionComp(1626) or
-      Php_FunctionComp(1876) or
-      Php_FunctionComp(2177) or
-      Php_FunctionComp(2947) or
-      Php_FunctionComp(3709) or
-      Php_FunctionComp(4197) or
-      Php_FunctionComp(4437) or
-      Php_FunctionComp(4480) or
-      Php_FunctionComp(4566) or
-      Php_FunctionComp(4619) or
-      Php_FunctionComp(4686) or
-      Php_FunctionComp(4791) or
-      Php_FunctionComp(4870) or
-      Php_FunctionComp(4939) or
-      Php_FunctionComp(5087) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc213: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(145) or
-      Php_FunctionComp(529) or
-      Php_FunctionComp(1970) or
-      Php_FunctionComp(2568) or
-      Php_FunctionComp(2703) or
-      Php_FunctionComp(2798) or
-      Php_FunctionComp(2961) or
-      Php_FunctionComp(3159) or
-      Php_FunctionComp(3163) or
-      Php_FunctionComp(3338) or
-      Php_FunctionComp(3354) or
-      Php_FunctionComp(3404) or
-      Php_FunctionComp(3488) or
-      Php_FunctionComp(3945) or
-      Php_FunctionComp(4700) or
-      Php_FunctionComp(4702) or
-      Php_FunctionComp(4706) or
-      Php_FunctionComp(4815) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc214: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(317) or
-      Php_FunctionComp(452) or
-      Php_FunctionComp(537) or
-      Php_FunctionComp(625) or
-      Php_FunctionComp(1178) or
-      Php_FunctionComp(1307) or
-      Php_FunctionComp(1654) or
-      Php_FunctionComp(1896) or
-      Php_FunctionComp(2602) or
-      Php_FunctionComp(2887) or
-      Php_FunctionComp(2908) or
-      Php_FunctionComp(3264) or
-      Php_FunctionComp(3341) or
-      Php_FunctionComp(3683) or
-      Php_FunctionComp(3974) or
-      Php_FunctionComp(4385) or
-      Php_FunctionComp(4482) or
-      Php_FunctionComp(4553) or
-      Php_FunctionComp(4561) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc215: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(367) or
-      Php_FunctionComp(607) or
-      Php_FunctionComp(977) or
-      Php_FunctionComp(1050) or
-      Php_FunctionComp(1191) or
-      Php_FunctionComp(1308) or
-      Php_FunctionComp(1485) or
-      Php_FunctionComp(1656) or
-      Php_FunctionComp(1842) or
-      Php_FunctionComp(2517) or
-      Php_FunctionComp(2608) or
-      Php_FunctionComp(2712) or
-      Php_FunctionComp(3643) or
-      Php_FunctionComp(3714) or
-      Php_FunctionComp(3871) or
-      Php_FunctionComp(4187) or
-      Php_FunctionComp(4399) or
-      Php_FunctionComp(4423) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc216: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(180) or
-      Php_FunctionComp(206) or
-      Php_FunctionComp(419) or
-      Php_FunctionComp(616) or
-      Php_FunctionComp(618) or
-      Php_FunctionComp(910) or
-      Php_FunctionComp(1056) or
-      Php_FunctionComp(1425) or
-      Php_FunctionComp(1477) or
-      Php_FunctionComp(1805) or
-      Php_FunctionComp(2032) or
-      Php_FunctionComp(2281) or
-      Php_FunctionComp(2306) or
-      Php_FunctionComp(2362) or
-      Php_FunctionComp(2394) or
-      Php_FunctionComp(2614) or
-      Php_FunctionComp(2902) or
-      Php_FunctionComp(3144) or
-      Php_FunctionComp(3192) or
-      Php_FunctionComp(3248) or
-      Php_FunctionComp(3890) or
-      Php_FunctionComp(3991) or
-      Php_FunctionComp(4457) or
-      Php_FunctionComp(4559) or
-      Php_FunctionComp(4710) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc217: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(217) or
-      Php_FunctionComp(399) or
-      Php_FunctionComp(803) or
-      Php_FunctionComp(978) or
-      Php_FunctionComp(1051) or
-      Php_FunctionComp(1402) or
-      Php_FunctionComp(1594) or
-      Php_FunctionComp(1843) or
-      Php_FunctionComp(2467) or
-      Php_FunctionComp(2501) or
-      Php_FunctionComp(2506) or
-      Php_FunctionComp(2790) or
-      Php_FunctionComp(3262) or
-      Php_FunctionComp(3450) or
-      Php_FunctionComp(3971) or
-      Php_FunctionComp(4052) or
-      Php_FunctionComp(4664) or
-      Php_FunctionComp(4680) or
-      Php_FunctionComp(4792) or
-      Php_FunctionComp(4913) or
-      Php_FunctionComp(4959) or
-      Php_FunctionComp(5103) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc218: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(362) or
-      Php_FunctionComp(364) or
-      Php_FunctionComp(392) or
-      Php_FunctionComp(1533) or
-      Php_FunctionComp(2049) or
-      Php_FunctionComp(2783) or
-      Php_FunctionComp(2849) or
-      Php_FunctionComp(2875) or
-      Php_FunctionComp(3340) or
-      Php_FunctionComp(3612) or
-      Php_FunctionComp(4308) or
-      Php_FunctionComp(4333) or
-      Php_FunctionComp(4468) or
-      Php_FunctionComp(4616) or
-      Php_FunctionComp(4672) or
-      Php_FunctionComp(4678) or
-      Php_FunctionComp(4690) or
-      Php_FunctionComp(4711) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc219: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(344) or
-      Php_FunctionComp(838) or
-      Php_FunctionComp(952) or
-      Php_FunctionComp(1114) or
-      Php_FunctionComp(1322) or
-      Php_FunctionComp(2505) or
-      Php_FunctionComp(2510) or
-      Php_FunctionComp(2591) or
-      Php_FunctionComp(2592) or
-      Php_FunctionComp(2818) or
-      Php_FunctionComp(3617) or
-      Php_FunctionComp(3703) or
-      Php_FunctionComp(3722) or
-      Php_FunctionComp(3824) or
-      Php_FunctionComp(3896) or
-      Php_FunctionComp(4014) or
-      Php_FunctionComp(4526) or
-      Php_FunctionComp(4540) or
-      Php_FunctionComp(4704) or
-      Php_FunctionComp(4930) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc220: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(103) or
-      Php_FunctionComp(137) or
-      Php_FunctionComp(614) or
-      Php_FunctionComp(1397) or
-      Php_FunctionComp(1495) or
-      Php_FunctionComp(1671) or
-      Php_FunctionComp(1835) or
-      Php_FunctionComp(2300) or
-      Php_FunctionComp(2454) or
-      Php_FunctionComp(2610) or
-      Php_FunctionComp(2690) or
-      Php_FunctionComp(2734) or
-      Php_FunctionComp(2925) or
-      Php_FunctionComp(2956) or
-      Php_FunctionComp(3008) or
-      Php_FunctionComp(3601) or
-      Php_FunctionComp(3699) or
-      Php_FunctionComp(4147) or
-      Php_FunctionComp(4929) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc221: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(806) or
-      Php_FunctionComp(808) or
-      Php_FunctionComp(830) or
-      Php_FunctionComp(1189) or
-      Php_FunctionComp(1813) or
-      Php_FunctionComp(2163) or
-      Php_FunctionComp(2810) or
-      Php_FunctionComp(3645) or
-      Php_FunctionComp(3717) or
-      Php_FunctionComp(3915) or
-      Php_FunctionComp(4151) or
-      Php_FunctionComp(4183) or
-      Php_FunctionComp(4340) or
-      Php_FunctionComp(4528) or
-      Php_FunctionComp(4633) or
-      Php_FunctionComp(4635) or
-      Php_FunctionComp(4643) or
-      Php_FunctionComp(5091) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc222: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(165) or
-      Php_FunctionComp(171) or
-      Php_FunctionComp(281) or
-      Php_FunctionComp(307) or
-      Php_FunctionComp(1139) or
-      Php_FunctionComp(2699) or
-      Php_FunctionComp(2759) or
-      Php_FunctionComp(3293) or
-      Php_FunctionComp(3755) or
-      Php_FunctionComp(3789) or
-      Php_FunctionComp(3836) or
-      Php_FunctionComp(4012) or
-      Php_FunctionComp(4394) or
-      Php_FunctionComp(4534) or
-      Php_FunctionComp(4693) or
-      Php_FunctionComp(4777) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc223: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(267) or
-      Php_FunctionComp(299) or
-      Php_FunctionComp(834) or
-      Php_FunctionComp(1576) or
-      Php_FunctionComp(2498) or
-      Php_FunctionComp(2797) or
-      Php_FunctionComp(2916) or
-      Php_FunctionComp(4010) or
-      Php_FunctionComp(4477) or
-      Php_FunctionComp(4694) or
-      Php_FunctionComp(4910) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc224: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(266) or
-      Php_FunctionComp(615) or
-      Php_FunctionComp(736) or
-      Php_FunctionComp(989) or
-      Php_FunctionComp(1153) or
-      Php_FunctionComp(1868) or
-      Php_FunctionComp(2254) or
-      Php_FunctionComp(2280) or
-      Php_FunctionComp(2304) or
-      Php_FunctionComp(2714) or
-      Php_FunctionComp(2765) or
-      Php_FunctionComp(2999) or
-      Php_FunctionComp(3054) or
-      Php_FunctionComp(3203) or
-      Php_FunctionComp(3821) or
-      Php_FunctionComp(3822) or
-      Php_FunctionComp(3884) or
-      Php_FunctionComp(3972) or
-      Php_FunctionComp(4098) or
-      Php_FunctionComp(4198) or
-      Php_FunctionComp(4465) or
-      Php_FunctionComp(4467) or
-      Php_FunctionComp(4473) or
-      Php_FunctionComp(4709) or
-      Php_FunctionComp(4739) or
-      Php_FunctionComp(4989) or
-      Php_FunctionComp(5163) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc225: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(296) or
-      Php_FunctionComp(365) or
-      Php_FunctionComp(372) or
-      Php_FunctionComp(2497) or
-      Php_FunctionComp(2713) or
-      Php_FunctionComp(2735) or
-      Php_FunctionComp(2906) or
-      Php_FunctionComp(2980) or
-      Php_FunctionComp(4562) or
-      Php_FunctionComp(4673) or
-      Php_FunctionComp(5009) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc226: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(138) or
-      Php_FunctionComp(320) or
-      Php_FunctionComp(1892) or
-      Php_FunctionComp(1968) or
-      Php_FunctionComp(2024) or
-      Php_FunctionComp(2430) or
-      Php_FunctionComp(3232) or
-      Php_FunctionComp(3500) or
-      Php_FunctionComp(3649) or
-      Php_FunctionComp(3862) or
-      Php_FunctionComp(4415) or
-      Php_FunctionComp(4485) or
-      Php_FunctionComp(4675) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc227: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(457) or
-      Php_FunctionComp(832) or
-      Php_FunctionComp(903) or
-      Php_FunctionComp(961) or
-      Php_FunctionComp(1313) or
-      Php_FunctionComp(1846) or
-      Php_FunctionComp(2403) or
-      Php_FunctionComp(2507) or
-      Php_FunctionComp(2949) or
-      Php_FunctionComp(3245) or
-      Php_FunctionComp(3363) or
-      Php_FunctionComp(3995) or
-      Php_FunctionComp(4378) or
-      Php_FunctionComp(5001) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc228: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(1559) or
-      Php_FunctionComp(1696) or
-      Php_FunctionComp(1839) or
-      Php_FunctionComp(3610) or
-      Php_FunctionComp(4334) or
-      Php_FunctionComp(4355) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc229: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(777) or
-      Php_FunctionComp(918) or
-      Php_FunctionComp(1558) or
-      Php_FunctionComp(1695) or
-      Php_FunctionComp(1850) or
-      Php_FunctionComp(1867) or
-      Php_FunctionComp(2046) or
-      Php_FunctionComp(2116) or
-      Php_FunctionComp(2392) or
-      Php_FunctionComp(2504) or
-      Php_FunctionComp(2950) or
-      Php_FunctionComp(2983) or
-      Php_FunctionComp(3036) or
-      Php_FunctionComp(3451) or
-      Php_FunctionComp(3734) or
-      Php_FunctionComp(3879) or
-      Php_FunctionComp(3897) or
-      Php_FunctionComp(4050) or
-      Php_FunctionComp(4055) or
-      Php_FunctionComp(4138) or
-      Php_FunctionComp(4458) or
-      Php_FunctionComp(4990) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc230: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(248) or
-      Php_FunctionComp(404) or
-      Php_FunctionComp(2196) or
-      Php_FunctionComp(3013) or
-      Php_FunctionComp(3055) or
-      Php_FunctionComp(3814) or
-      Php_FunctionComp(4350) or
-      Php_FunctionComp(4551) or
-      Php_FunctionComp(4712) or
-      Php_FunctionComp(4724) or
-      Php_FunctionComp(4966) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc231: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(224) or
-      Php_FunctionComp(378) or
-      Php_FunctionComp(1618) or
-      Php_FunctionComp(2667) or
-      Php_FunctionComp(3345) or
-      Php_FunctionComp(3633) or
-      Php_FunctionComp(3712) or
-      Php_FunctionComp(3867) or
-      Php_FunctionComp(4299) or
-      Php_FunctionComp(4402) or
-      Php_FunctionComp(4726) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc232: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(568) or
-      Php_FunctionComp(890) or
-      Php_FunctionComp(1132) or
-      Php_FunctionComp(1299) or
-      Php_FunctionComp(1847) or
-      Php_FunctionComp(1874) or
-      Php_FunctionComp(2747) or
-      Php_FunctionComp(2757) or
-      Php_FunctionComp(2773) or
-      Php_FunctionComp(2848) or
-      Php_FunctionComp(2900) or
-      Php_FunctionComp(3721) or
-      Php_FunctionComp(3833) or
-      Php_FunctionComp(4223) or
-      Php_FunctionComp(4530) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc233: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(216) or
-      Php_FunctionComp(884) or
-      Php_FunctionComp(976) or
-      Php_FunctionComp(2457) or
-      Php_FunctionComp(2668) or
-      Php_FunctionComp(2769) or
-      Php_FunctionComp(2811) or
-      Php_FunctionComp(2963) or
-      Php_FunctionComp(2970) or
-      Php_FunctionComp(3504) or
-      Php_FunctionComp(3724) or
-      Php_FunctionComp(5071) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc234: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(85) or
-      Php_FunctionComp(567) or
-      Php_FunctionComp(1192) or
-      Php_FunctionComp(1557) or
-      Php_FunctionComp(1657) or
-      Php_FunctionComp(2566) or
-      Php_FunctionComp(2767) or
-      Php_FunctionComp(2823) or
-      Php_FunctionComp(2927) or
-      Php_FunctionComp(3000) or
-      Php_FunctionComp(3035) or
-      Php_FunctionComp(3277) or
-      Php_FunctionComp(3342) or
-      Php_FunctionComp(3497) or
-      Php_FunctionComp(3830) or
-      Php_FunctionComp(3891) or
-      Php_FunctionComp(3959) or
-      Php_FunctionComp(4332) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc235: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(620) or
-      Php_FunctionComp(906) or
-      Php_FunctionComp(1283) or
-      Php_FunctionComp(1332) or
-      Php_FunctionComp(2830) or
-      Php_FunctionComp(2930) or
-      Php_FunctionComp(3553) or
-      Php_FunctionComp(4018) or
-      Php_FunctionComp(4070) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc236: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(459) or
-      Php_FunctionComp(1119) or
-      Php_FunctionComp(1480) or
-      Php_FunctionComp(1833) or
-      Php_FunctionComp(2115) or
-      Php_FunctionComp(2584) or
-      Php_FunctionComp(2992) or
-      Php_FunctionComp(3020) or
-      Php_FunctionComp(3060) or
-      Php_FunctionComp(3943) or
-      Php_FunctionComp(3973) or
-      Php_FunctionComp(4048) or
-      Php_FunctionComp(4072) or
-      Php_FunctionComp(4190) or
-      Php_FunctionComp(4226) or
-      Php_FunctionComp(4305) or
-      Php_FunctionComp(4486) or
-      Php_FunctionComp(4638) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc237: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(366) or
-      Php_FunctionComp(397) or
-      Php_FunctionComp(1687) or
-      Php_FunctionComp(1709) or
-      Php_FunctionComp(1840) or
-      Php_FunctionComp(2407) or
-      Php_FunctionComp(2812) or
-      Php_FunctionComp(4288) or
-      Php_FunctionComp(4608) or
-      Php_FunctionComp(5003) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc238: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(219) or
-      Php_FunctionComp(555) or
-      Php_FunctionComp(694) or
-      Php_FunctionComp(892) or
-      Php_FunctionComp(916) or
-      Php_FunctionComp(984) or
-      Php_FunctionComp(2388) or
-      Php_FunctionComp(2493) or
-      Php_FunctionComp(2569) or
-      Php_FunctionComp(2673) or
-      Php_FunctionComp(3021) or
-      Php_FunctionComp(3268) or
-      Php_FunctionComp(4033) or
-      Php_FunctionComp(4039) or
-      Php_FunctionComp(4150) or
-      Php_FunctionComp(4181) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc239: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(609) or
-      Php_FunctionComp(1305) or
-      Php_FunctionComp(1644) or
-      Php_FunctionComp(1645) or
-      Php_FunctionComp(2387) or
-      Php_FunctionComp(2491) or
-      Php_FunctionComp(2741) or
-      Php_FunctionComp(2751) or
-      Php_FunctionComp(2944) or
-      Php_FunctionComp(2969) or
-      Php_FunctionComp(3364) or
-      Php_FunctionComp(4038) or
-      Php_FunctionComp(5022) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc240: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(965) or
-      Php_FunctionComp(981) or
-      Php_FunctionComp(1075) or
-      Php_FunctionComp(1107) or
-      Php_FunctionComp(2378) or
-      Php_FunctionComp(2801) or
-      Php_FunctionComp(2962) or
-      Php_FunctionComp(3274) or
-      Php_FunctionComp(3339) or
-      Php_FunctionComp(3978) or
-      Php_FunctionComp(4632) or
-      Php_FunctionComp(4904) or
-      Php_FunctionComp(5027) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc241: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(86) or
-      Php_FunctionComp(930) or
-      Php_FunctionComp(992) or
-      Php_FunctionComp(1043) or
-      Php_FunctionComp(1133) or
-      Php_FunctionComp(1226) or
-      Php_FunctionComp(1482) or
-      Php_FunctionComp(2342) or
-      Php_FunctionComp(2376) or
-      Php_FunctionComp(2813) or
-      Php_FunctionComp(2957) or
-      Php_FunctionComp(3088) or
-      Php_FunctionComp(3326) or
-      Php_FunctionComp(3655) or
-      Php_FunctionComp(3886) or
-      Php_FunctionComp(4699) or
-      Php_FunctionComp(4701) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc242: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(111) or
-      Php_FunctionComp(152) or
-      Php_FunctionComp(962) or
-      Php_FunctionComp(1856) or
-      Php_FunctionComp(2367) or
-      Php_FunctionComp(3918) or
-      Php_FunctionComp(4110) or
-      Php_FunctionComp(4161) or
-      Php_FunctionComp(4178) or
-      Php_FunctionComp(5054) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc243: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(1534) or
-      Php_FunctionComp(2546) or
-      Php_FunctionComp(2742) or
-      Php_FunctionComp(2792) or
-      Php_FunctionComp(3298) or
-      Php_FunctionComp(3864) or
-      Php_FunctionComp(4095) or
-      Php_FunctionComp(4307) or
-      Php_FunctionComp(4410) or
-      Php_FunctionComp(4431) or
-      Php_FunctionComp(4609) or
-      Php_FunctionComp(4681) or
-      Php_FunctionComp(4943) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc244: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(400) or
-      Php_FunctionComp(590) or
-      Php_FunctionComp(825) or
-      Php_FunctionComp(887) or
-      Php_FunctionComp(969) or
-      Php_FunctionComp(982) or
-      Php_FunctionComp(1878) or
-      Php_FunctionComp(2951) or
-      Php_FunctionComp(3347) or
-      Php_FunctionComp(4228) or
-      Php_FunctionComp(4413) or
-      Php_FunctionComp(4634) or
-      Php_FunctionComp(5115) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc245: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(909) or
-      Php_FunctionComp(936) or
-      Php_FunctionComp(1080) or
-      Php_FunctionComp(1081) or
-      Php_FunctionComp(1281) or
-      Php_FunctionComp(2385) or
-      Php_FunctionComp(2808) or
-      Php_FunctionComp(4565) or
-      Php_FunctionComp(4765) or
-      Php_FunctionComp(5042) or
-      Php_FunctionComp(5048) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc246: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(178) or
-      Php_FunctionComp(589) or
-      Php_FunctionComp(805) or
-      Php_FunctionComp(869) or
-      Php_FunctionComp(902) or
-      Php_FunctionComp(2301) or
-      Php_FunctionComp(2715) or
-      Php_FunctionComp(2822) or
-      Php_FunctionComp(3368) or
-      Php_FunctionComp(3935) or
-      Php_FunctionComp(4108) or
-      Php_FunctionComp(4189) or
-      Php_FunctionComp(4438) or
-      Php_FunctionComp(4463) or
-      Php_FunctionComp(4631) or
-      Php_FunctionComp(4750) or
-      Php_FunctionComp(5046) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc247: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(110) or
-      Php_FunctionComp(174) or
-      Php_FunctionComp(285) or
-      Php_FunctionComp(619) or
-      Php_FunctionComp(958) or
-      Php_FunctionComp(1306) or
-      Php_FunctionComp(1310) or
-      Php_FunctionComp(1549) or
-      Php_FunctionComp(2748) or
-      Php_FunctionComp(3001) or
-      Php_FunctionComp(3837) or
-      Php_FunctionComp(4419) or
-      Php_FunctionComp(4466) or
-      Php_FunctionComp(4687) or
-      Php_FunctionComp(4986) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc248: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(2441) or
-      Php_FunctionComp(3525) or
-      Php_FunctionComp(5016) or
-      Php_FunctionComp(5036) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc249: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(361) or
-      Php_FunctionComp(566) or
-      Php_FunctionComp(617) or
-      Php_FunctionComp(926) or
-      Php_FunctionComp(1849) or
-      Php_FunctionComp(2492) or
-      Php_FunctionComp(2716) or
-      Php_FunctionComp(2737) or
-      Php_FunctionComp(4185) or
-      Php_FunctionComp(4484) or
-      Php_FunctionComp(4713) or
-      Php_FunctionComp(5033) or
-      Php_FunctionComp(5070) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc250: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(308) or
-      Php_FunctionComp(556) or
-      Php_FunctionComp(835) or
-      Php_FunctionComp(857) or
-      Php_FunctionComp(1295) or
-      Php_FunctionComp(1686) or
-      Php_FunctionComp(2814) or
-      Php_FunctionComp(3258) or
-      Php_FunctionComp(3275) or
-      Php_FunctionComp(3636) or
-      Php_FunctionComp(3893) or
-      Php_FunctionComp(4383) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc251: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(475) or
-      Php_FunctionComp(513) or
-      Php_FunctionComp(1010) or
-      Php_FunctionComp(1285) or
-      Php_FunctionComp(1286) or
-      Php_FunctionComp(1287) or
-      Php_FunctionComp(1288) or
-      Php_FunctionComp(1289) or
-      Php_FunctionComp(2490) or
-      Php_FunctionComp(3967) or
-      Php_FunctionComp(4040) or
-      Php_FunctionComp(4148) or
-      Php_FunctionComp(4546) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc252: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(510) or
-      Php_FunctionComp(1085) or
-      Php_FunctionComp(1642) or
-      Php_FunctionComp(2058) or
-      Php_FunctionComp(2464) or
-      Php_FunctionComp(2746) or
-      Php_FunctionComp(3061) or
-      Php_FunctionComp(3282) or
-      Php_FunctionComp(3403) or
-      Php_FunctionComp(4300) or
-      Php_FunctionComp(4636) or
-      Php_FunctionComp(4676) or
-      Php_FunctionComp(4718) or
-      Php_FunctionComp(5029) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc253: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(450) or
-      Php_FunctionComp(814) or
-      Php_FunctionComp(870) or
-      Php_FunctionComp(1658) or
-      Php_FunctionComp(2781) or
-      Php_FunctionComp(2854) or
-      Php_FunctionComp(3803) or
-      Php_FunctionComp(3913) or
-      Php_FunctionComp(4046) or
-      Php_FunctionComp(4184) or
-      Php_FunctionComp(4193) or
-      Php_FunctionComp(4478) or
-      Php_FunctionComp(4637) or
-      Php_FunctionComp(4969) or
-      Php_FunctionComp(5085) or
-      Php_FunctionComp(5116) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc254: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(106) or
-      Php_FunctionComp(218) or
-      Php_FunctionComp(242) or
-      Php_FunctionComp(851) or
-      Php_FunctionComp(959) or
-      Php_FunctionComp(971) or
-      Php_FunctionComp(979) or
-      Php_FunctionComp(991) or
-      Php_FunctionComp(1303) or
-      Php_FunctionComp(1664) or
-      Php_FunctionComp(2831) or
-      Php_FunctionComp(3286) or
-      Php_FunctionComp(3964) or
-      Php_FunctionComp(4036) or
-      Php_FunctionComp(4175) or
-      Php_FunctionComp(4719) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc255: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(166) or
-      Php_FunctionComp(172) or
-      Php_FunctionComp(418) or
-      Php_FunctionComp(966) or
-      Php_FunctionComp(995) or
-      Php_FunctionComp(1326) or
-      Php_FunctionComp(1489) or
-      Php_FunctionComp(1556) or
-      Php_FunctionComp(2461) or
-      Php_FunctionComp(2770) or
-      Php_FunctionComp(2987) or
-      Php_FunctionComp(3278) or
-      Php_FunctionComp(5112) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc256: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(822) or
-      Php_FunctionComp(1713) or
-      Php_FunctionComp(1841) or
-      Php_FunctionComp(2136) or
-      Php_FunctionComp(2780) or
-      Php_FunctionComp(4395) or
-      Php_FunctionComp(4543) or
-      Php_FunctionComp(4644) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc257: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(153) or
-      Php_FunctionComp(1614) or
-      Php_FunctionComp(1690) or
-      Php_FunctionComp(2778) or
-      Php_FunctionComp(3621) or
-      Php_FunctionComp(3922) or
-      Php_FunctionComp(4287) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc258: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(850) or
-      Php_FunctionComp(1016) or
-      Php_FunctionComp(1230) or
-      Php_FunctionComp(1493) or
-      Php_FunctionComp(1621) or
-      Php_FunctionComp(2325) or
-      Php_FunctionComp(2728) or
-      Php_FunctionComp(2771) or
-      Php_FunctionComp(2806) or
-      Php_FunctionComp(4031) or
-      Php_FunctionComp(4153) or
-      Php_FunctionComp(4418) or
-      Php_FunctionComp(4630) or
-      Php_FunctionComp(4647) or
-      Php_FunctionComp(4677) or
-      Php_FunctionComp(4988) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc259: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(833) or
-      Php_FunctionComp(998) or
-      Php_FunctionComp(1280) or
-      Php_FunctionComp(2861) or
-      Php_FunctionComp(2938) or
-      Php_FunctionComp(2939) or
-      Php_FunctionComp(3251) or
-      Php_FunctionComp(3353) or
-      Php_FunctionComp(4430) or
-      Php_FunctionComp(4544) or
-      Php_FunctionComp(4751) or
-      Php_FunctionComp(4987) or
-      Php_FunctionComp(5055) or
-      Php_FunctionComp(5157) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc260: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(946) or
-      Php_FunctionComp(1045) or
-      Php_FunctionComp(2779) or
-      Php_FunctionComp(4641) or
-      Php_FunctionComp(4717) or
-      Php_FunctionComp(5017) or
-      Php_FunctionComp(5089) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc261: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(375) or
-      Php_FunctionComp(588) or
-      Php_FunctionComp(1551) or
-      Php_FunctionComp(1592) or
-      Php_FunctionComp(1595) or
-      Php_FunctionComp(1597) or
-      Php_FunctionComp(1705) or
-      Php_FunctionComp(1855) or
-      Php_FunctionComp(3272) or
-      Php_FunctionComp(3323) or
-      Php_FunctionComp(3754) or
-      Php_FunctionComp(3965) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc262: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(167) or
-      Php_FunctionComp(812) or
-      Php_FunctionComp(919) or
-      Php_FunctionComp(922) or
-      Php_FunctionComp(1404) or
-      Php_FunctionComp(3132) or
-      Php_FunctionComp(3197) or
-      Php_FunctionComp(3252) or
-      Php_FunctionComp(3912) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc263: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(1071) or
-      Php_FunctionComp(1573) or
-      Php_FunctionComp(3249) or
-      Php_FunctionComp(4141) or
-      Php_FunctionComp(4159) or
-      Php_FunctionComp(4188) or
-      Php_FunctionComp(4404) or
-      Php_FunctionComp(4455) or
-      Php_FunctionComp(4649) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc264: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(527) or
-      Php_FunctionComp(943) or
-      Php_FunctionComp(2931) or
-      Php_FunctionComp(3287) or
-      Php_FunctionComp(3292) or
-      Php_FunctionComp(3713) or
-      Php_FunctionComp(4421) or
-      Php_FunctionComp(4651) or
-      Php_FunctionComp(4944) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc265: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(875) or
-      Php_FunctionComp(986) or
-      Php_FunctionComp(1479) or
-      Php_FunctionComp(2041) or
-      Php_FunctionComp(2346) or
-      Php_FunctionComp(2721) or
-      Php_FunctionComp(2819) or
-      Php_FunctionComp(3961) or
-      Php_FunctionComp(4224) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc266: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(186) or
-      Php_FunctionComp(376) or
-      Php_FunctionComp(862) or
-      Php_FunctionComp(1073) or
-      Php_FunctionComp(1838) or
-      Php_FunctionComp(3892) or
-      Php_FunctionComp(4881) or
-      Php_FunctionComp(5008) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc267: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(1172) or
-      Php_FunctionComp(1569) or
-      Php_FunctionComp(2789) or
-      Php_FunctionComp(2827) or
-      Php_FunctionComp(4172) or
-      Php_FunctionComp(4982) or
-      Php_FunctionComp(5020) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc268: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(1079) or
-      Php_FunctionComp(1399) or
-      Php_FunctionComp(4472) or
-      Php_FunctionComp(4945) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc269: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(462) or
-      Php_FunctionComp(915) or
-      Php_FunctionComp(929) or
-      Php_FunctionComp(3838) or
-      Php_FunctionComp(4432) or
-      Php_FunctionComp(4434) or
-      Php_FunctionComp(4439) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc270: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(286) or
-      Php_FunctionComp(624) or
-      Php_FunctionComp(933) or
-      Php_FunctionComp(2807) or
-      Php_FunctionComp(3250) or
-      Php_FunctionComp(4045) or
-      Php_FunctionComp(4335) or
-      Php_FunctionComp(4426) or
-      Php_FunctionComp(4833) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc271: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(914) or
-      Php_FunctionComp(2321) or
-      Php_FunctionComp(2459) or
-      Php_FunctionComp(2518) or
-      Php_FunctionComp(2989) or
-      Php_FunctionComp(3719) or
-      Php_FunctionComp(4041) or
-      Php_FunctionComp(4639) or
-      Php_FunctionComp(4948) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc272: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(623) or
-      Php_FunctionComp(924) or
-      Php_FunctionComp(990) or
-      Php_FunctionComp(1315) or
-      Php_FunctionComp(4289) or
-      Php_FunctionComp(4716) then
-    Result := stkPhpFunction
-  else
-    Result := stkPhpIdentifier;
-end;
-
-function TSynWebEngine.PhP_KeywordFunc273: TSynWebTokenKind;
-begin
-  if  Php_FunctionComp(819) or
-      Php_FunctionComp(1032) or
-      Php_FunctionComp(1619) or
-      Php_FunctionComp(2516) or
-      Php_FunctionComp(2901) or
-      Php_FunctionComp(3944) or
-      Php_FunctionComp(3966) or
-      Php_FunctionComp(4373) or
-      Php_FunctionComp(4488) then
+function TSynWebEngine.PhpKeywordFunc174: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(109) or
+      PhpFunctionComp(745) or
+      PhpFunctionComp(755) or
+      PhpFunctionComp(831) or
+      PhpFunctionComp(889) or
+      PhpFunctionComp(1231) or
+      PhpFunctionComp(1242) or
+      PhpFunctionComp(1335) or
+      PhpFunctionComp(1494) or
+      PhpFunctionComp(1555) or
+      PhpFunctionComp(2029) or
+      PhpFunctionComp(2034) or
+      PhpFunctionComp(2310) or
+      PhpFunctionComp(2474) or
+      PhpFunctionComp(2554) or
+      PhpFunctionComp(2615) or
+      PhpFunctionComp(2786) or
+      PhpFunctionComp(3077) or
+      PhpFunctionComp(3370) or
+      PhpFunctionComp(3519) or
+      PhpFunctionComp(3983) or
+      PhpFunctionComp(4744) or
+      PhpFunctionComp(5005) or
+      PhpFunctionComp(5064) or
+      PhpFunctionComp(5114) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc175: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(159) or
+      PhpFunctionComp(741) or
+      PhpFunctionComp(1177) or
+      PhpFunctionComp(1301) or
+      PhpFunctionComp(1337) or
+      PhpFunctionComp(1374) or
+      PhpFunctionComp(1527) or
+      PhpFunctionComp(1715) or
+      PhpFunctionComp(2035) or
+      PhpFunctionComp(2179) or
+      PhpFunctionComp(2221) or
+      PhpFunctionComp(2678) or
+      PhpFunctionComp(3053) or
+      PhpFunctionComp(3727) or
+      PhpFunctionComp(4527) or
+      PhpFunctionComp(4587) or
+      PhpFunctionComp(4618) or
+      PhpFunctionComp(4961) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc176: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(215) or
+      PhpFunctionComp(540) or
+      PhpFunctionComp(546) or
+      PhpFunctionComp(562) or
+      PhpFunctionComp(572) or
+      PhpFunctionComp(608) or
+      PhpFunctionComp(912) or
+      PhpFunctionComp(1424) or
+      PhpFunctionComp(1507) or
+      PhpFunctionComp(1666) or
+      PhpFunctionComp(1829) or
+      PhpFunctionComp(1869) or
+      PhpFunctionComp(1891) or
+      PhpFunctionComp(2172) or
+      PhpFunctionComp(2643) or
+      PhpFunctionComp(2725) or
+      PhpFunctionComp(2836) or
+      PhpFunctionComp(2863) or
+      PhpFunctionComp(2910) or
+      PhpFunctionComp(3174) or
+      PhpFunctionComp(3259) or
+      PhpFunctionComp(3711) or
+      PhpFunctionComp(3791) or
+      PhpFunctionComp(3835) or
+      PhpFunctionComp(4140) or
+      PhpFunctionComp(4321) or
+      PhpFunctionComp(4389) or
+      PhpFunctionComp(4622) or
+      PhpFunctionComp(4732) or
+      PhpFunctionComp(4907) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc177: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(79) or
+      PhpFunctionComp(195) or
+      PhpFunctionComp(306) or
+      PhpFunctionComp(401) or
+      PhpFunctionComp(441) or
+      PhpFunctionComp(471) or
+      PhpFunctionComp(897) or
+      PhpFunctionComp(931) or
+      PhpFunctionComp(950) or
+      PhpFunctionComp(1004) or
+      PhpFunctionComp(1330) or
+      PhpFunctionComp(1826) or
+      PhpFunctionComp(1890) or
+      PhpFunctionComp(2026) or
+      PhpFunctionComp(2051) or
+      PhpFunctionComp(2282) or
+      PhpFunctionComp(2660) or
+      PhpFunctionComp(2870) or
+      PhpFunctionComp(2912) or
+      PhpFunctionComp(2968) or
+      PhpFunctionComp(2988) or
+      PhpFunctionComp(3002) or
+      PhpFunctionComp(3133) or
+      PhpFunctionComp(3179) or
+      PhpFunctionComp(3435) or
+      PhpFunctionComp(3533) or
+      PhpFunctionComp(3608) or
+      PhpFunctionComp(3673) or
+      PhpFunctionComp(3707) or
+      PhpFunctionComp(3921) or
+      PhpFunctionComp(4414) or
+      PhpFunctionComp(4654) or
+      PhpFunctionComp(4827) or
+      PhpFunctionComp(4871) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc178: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(385) or
+      PhpFunctionComp(739) or
+      PhpFunctionComp(882) or
+      PhpFunctionComp(1009) or
+      PhpFunctionComp(1042) or
+      PhpFunctionComp(1333) or
+      PhpFunctionComp(1670) or
+      PhpFunctionComp(1701) or
+      PhpFunctionComp(1776) or
+      PhpFunctionComp(1894) or
+      PhpFunctionComp(2048) or
+      PhpFunctionComp(2130) or
+      PhpFunctionComp(2135) or
+      PhpFunctionComp(2178) or
+      PhpFunctionComp(2486) or
+      PhpFunctionComp(2661) or
+      PhpFunctionComp(2695) or
+      PhpFunctionComp(2936) or
+      PhpFunctionComp(3026) or
+      PhpFunctionComp(3112) or
+      PhpFunctionComp(3173) or
+      PhpFunctionComp(3303) or
+      PhpFunctionComp(3335) or
+      PhpFunctionComp(3839) or
+      PhpFunctionComp(4047) or
+      PhpFunctionComp(4258) or
+      PhpFunctionComp(4535) or
+      PhpFunctionComp(4552) or
+      PhpFunctionComp(4665) or
+      PhpFunctionComp(4834) or
+      PhpFunctionComp(4911) or
+      PhpFunctionComp(4917) or
+      PhpFunctionComp(4938) or
+      PhpFunctionComp(4983) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc179: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(116) or
+      PhpFunctionComp(265) or
+      PhpFunctionComp(613) or
+      PhpFunctionComp(1180) or
+      PhpFunctionComp(1284) or
+      PhpFunctionComp(1517) or
+      PhpFunctionComp(1824) or
+      PhpFunctionComp(2129) or
+      PhpFunctionComp(2423) or
+      PhpFunctionComp(2502) or
+      PhpFunctionComp(2580) or
+      PhpFunctionComp(2657) or
+      PhpFunctionComp(2837) or
+      PhpFunctionComp(2893) or
+      PhpFunctionComp(3043) or
+      PhpFunctionComp(3049) or
+      PhpFunctionComp(3081) or
+      PhpFunctionComp(3373) or
+      PhpFunctionComp(3804) or
+      PhpFunctionComp(3919) or
+      PhpFunctionComp(3987) or
+      PhpFunctionComp(4049) or
+      PhpFunctionComp(4195) or
+      PhpFunctionComp(4314) or
+      PhpFunctionComp(4348) or
+      PhpFunctionComp(4359) or
+      PhpFunctionComp(4583) or
+      PhpFunctionComp(4937) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc180: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(359) or
+      PhpFunctionComp(478) or
+      PhpFunctionComp(770) or
+      PhpFunctionComp(985) or
+      PhpFunctionComp(1055) or
+      PhpFunctionComp(1716) or
+      PhpFunctionComp(1719) or
+      PhpFunctionComp(1884) or
+      PhpFunctionComp(2081) or
+      PhpFunctionComp(2438) or
+      PhpFunctionComp(2644) or
+      PhpFunctionComp(2764) or
+      PhpFunctionComp(2877) or
+      PhpFunctionComp(2898) or
+      PhpFunctionComp(2952) or
+      PhpFunctionComp(2960) or
+      PhpFunctionComp(3034) or
+      PhpFunctionComp(3140) or
+      PhpFunctionComp(3185) or
+      PhpFunctionComp(3336) or
+      PhpFunctionComp(3499) or
+      PhpFunctionComp(3647) or
+      PhpFunctionComp(3969) or
+      PhpFunctionComp(3990) or
+      PhpFunctionComp(4051) or
+      PhpFunctionComp(4456) or
+      PhpFunctionComp(4547) or
+      PhpFunctionComp(4563) or
+      PhpFunctionComp(4590) or
+      PhpFunctionComp(4597) or
+      PhpFunctionComp(4795) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc181: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(105) or
+      PhpFunctionComp(149) or
+      PhpFunctionComp(512) or
+      PhpFunctionComp(518) or
+      PhpFunctionComp(993) or
+      PhpFunctionComp(1140) or
+      PhpFunctionComp(1255) or
+      PhpFunctionComp(1560) or
+      PhpFunctionComp(1631) or
+      PhpFunctionComp(1694) or
+      PhpFunctionComp(1823) or
+      PhpFunctionComp(2187) or
+      PhpFunctionComp(2276) or
+      PhpFunctionComp(2323) or
+      PhpFunctionComp(2332) or
+      PhpFunctionComp(2729) or
+      PhpFunctionComp(2787) or
+      PhpFunctionComp(3685) or
+      PhpFunctionComp(3860) or
+      PhpFunctionComp(4296) or
+      PhpFunctionComp(4306) or
+      PhpFunctionComp(4361) or
+      PhpFunctionComp(4600) or
+      PhpFunctionComp(4620) or
+      PhpFunctionComp(4685) or
+      PhpFunctionComp(4695) or
+      PhpFunctionComp(4770) or
+      PhpFunctionComp(4914) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc182: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(74) or
+      PhpFunctionComp(122) or
+      PhpFunctionComp(322) or
+      PhpFunctionComp(507) or
+      PhpFunctionComp(1115) or
+      PhpFunctionComp(1338) or
+      PhpFunctionComp(1530) or
+      PhpFunctionComp(1532) or
+      PhpFunctionComp(1578) or
+      PhpFunctionComp(1580) or
+      PhpFunctionComp(1795) or
+      PhpFunctionComp(2343) or
+      PhpFunctionComp(2380) or
+      PhpFunctionComp(2662) or
+      PhpFunctionComp(2665) or
+      PhpFunctionComp(2829) or
+      PhpFunctionComp(2913) or
+      PhpFunctionComp(3012) or
+      PhpFunctionComp(3226) or
+      PhpFunctionComp(3270) or
+      PhpFunctionComp(3527) or
+      PhpFunctionComp(3668) or
+      PhpFunctionComp(4254) or
+      PhpFunctionComp(4347) or
+      PhpFunctionComp(4393) or
+      PhpFunctionComp(4850) or
+      PhpFunctionComp(4980) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc183: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(125) or
+      PhpFunctionComp(508) or
+      PhpFunctionComp(592) or
+      PhpFunctionComp(893) or
+      PhpFunctionComp(1008) or
+      PhpFunctionComp(1162) or
+      PhpFunctionComp(1254) or
+      PhpFunctionComp(1256) or
+      PhpFunctionComp(1320) or
+      PhpFunctionComp(1561) or
+      PhpFunctionComp(1623) or
+      PhpFunctionComp(2341) or
+      PhpFunctionComp(2372) or
+      PhpFunctionComp(2390) or
+      PhpFunctionComp(2399) or
+      PhpFunctionComp(2428) or
+      PhpFunctionComp(2439) or
+      PhpFunctionComp(2559) or
+      PhpFunctionComp(2611) or
+      PhpFunctionComp(2612) or
+      PhpFunctionComp(2674) or
+      PhpFunctionComp(2704) or
+      PhpFunctionComp(2859) or
+      PhpFunctionComp(2945) or
+      PhpFunctionComp(3296) or
+      PhpFunctionComp(3628) or
+      PhpFunctionComp(3800) or
+      PhpFunctionComp(4176) or
+      PhpFunctionComp(4541) or
+      PhpFunctionComp(4689) or
+      PhpFunctionComp(4847) or
+      PhpFunctionComp(4885) or
+      PhpFunctionComp(5069) or
+      PhpFunctionComp(5165) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc184: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(872) or
+      PhpFunctionComp(894) or
+      PhpFunctionComp(1038) or
+      PhpFunctionComp(1112) or
+      PhpFunctionComp(1282) or
+      PhpFunctionComp(1393) or
+      PhpFunctionComp(1837) or
+      PhpFunctionComp(1925) or
+      PhpFunctionComp(2165) or
+      PhpFunctionComp(2256) or
+      PhpFunctionComp(2396) or
+      PhpFunctionComp(2456) or
+      PhpFunctionComp(2646) or
+      PhpFunctionComp(2705) or
+      PhpFunctionComp(2718) or
+      PhpFunctionComp(2967) or
+      PhpFunctionComp(2981) or
+      PhpFunctionComp(2993) or
+      PhpFunctionComp(3027) or
+      PhpFunctionComp(3231) or
+      PhpFunctionComp(3328) or
+      PhpFunctionComp(3453) or
+      PhpFunctionComp(3730) or
+      PhpFunctionComp(4967) or
+      PhpFunctionComp(4968) or
+      PhpFunctionComp(5004) or
+      PhpFunctionComp(5136) or
+      PhpFunctionComp(5155) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc185: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(82) or
+      PhpFunctionComp(92) or
+      PhpFunctionComp(115) or
+      PhpFunctionComp(752) or
+      PhpFunctionComp(983) or
+      PhpFunctionComp(1047) or
+      PhpFunctionComp(1171) or
+      PhpFunctionComp(1596) or
+      PhpFunctionComp(1599) or
+      PhpFunctionComp(1697) or
+      PhpFunctionComp(1877) or
+      PhpFunctionComp(1994) or
+      PhpFunctionComp(2295) or
+      PhpFunctionComp(2413) or
+      PhpFunctionComp(2548) or
+      PhpFunctionComp(2656) or
+      PhpFunctionComp(2701) or
+      PhpFunctionComp(2840) or
+      PhpFunctionComp(2865) or
+      PhpFunctionComp(2958) or
+      PhpFunctionComp(2972) or
+      PhpFunctionComp(3290) or
+      PhpFunctionComp(3329) or
+      PhpFunctionComp(3346) or
+      PhpFunctionComp(3819) or
+      PhpFunctionComp(3831) or
+      PhpFunctionComp(4324) or
+      PhpFunctionComp(4417) or
+      PhpFunctionComp(4428) or
+      PhpFunctionComp(4582) or
+      PhpFunctionComp(4772) or
+      PhpFunctionComp(4936) or
+      PhpFunctionComp(5139) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc186: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(445) or
+      PhpFunctionComp(722) or
+      PhpFunctionComp(733) or
+      PhpFunctionComp(1076) or
+      PhpFunctionComp(1141) or
+      PhpFunctionComp(1844) or
+      PhpFunctionComp(1956) or
+      PhpFunctionComp(2289) or
+      PhpFunctionComp(2381) or
+      PhpFunctionComp(2412) or
+      PhpFunctionComp(2487) or
+      PhpFunctionComp(2588) or
+      PhpFunctionComp(2619) or
+      PhpFunctionComp(2623) or
+      PhpFunctionComp(3170) or
+      PhpFunctionComp(3238) or
+      PhpFunctionComp(3240) or
+      PhpFunctionComp(3439) or
+      PhpFunctionComp(3706) or
+      PhpFunctionComp(3710) or
+      PhpFunctionComp(3815) or
+      PhpFunctionComp(3825) or
+      PhpFunctionComp(4182) or
+      PhpFunctionComp(4199) or
+      PhpFunctionComp(4247) or
+      PhpFunctionComp(4255) or
+      PhpFunctionComp(4382) or
+      PhpFunctionComp(4581) or
+      PhpFunctionComp(4594) or
+      PhpFunctionComp(4918) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc187: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(240) or
+      PhpFunctionComp(645) or
+      PhpFunctionComp(905) or
+      PhpFunctionComp(953) or
+      PhpFunctionComp(1103) or
+      PhpFunctionComp(1587) or
+      PhpFunctionComp(1831) or
+      PhpFunctionComp(1883) or
+      PhpFunctionComp(1903) or
+      PhpFunctionComp(1938) or
+      PhpFunctionComp(2031) or
+      PhpFunctionComp(2164) or
+      PhpFunctionComp(2181) or
+      PhpFunctionComp(2443) or
+      PhpFunctionComp(2587) or
+      PhpFunctionComp(2841) or
+      PhpFunctionComp(2920) or
+      PhpFunctionComp(3564) or
+      PhpFunctionComp(3702) or
+      PhpFunctionComp(4109) or
+      PhpFunctionComp(4220) or
+      PhpFunctionComp(4312) or
+      PhpFunctionComp(4614) or
+      PhpFunctionComp(4661) or
+      PhpFunctionComp(4671) or
+      PhpFunctionComp(4692) or
+      PhpFunctionComp(4697) or
+      PhpFunctionComp(5160) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc188: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(192) or
+      PhpFunctionComp(309) or
+      PhpFunctionComp(381) or
+      PhpFunctionComp(528) or
+      PhpFunctionComp(584) or
+      PhpFunctionComp(904) or
+      PhpFunctionComp(1403) or
+      PhpFunctionComp(1779) or
+      PhpFunctionComp(1854) or
+      PhpFunctionComp(2114) or
+      PhpFunctionComp(2317) or
+      PhpFunctionComp(2326) or
+      PhpFunctionComp(2711) or
+      PhpFunctionComp(2890) or
+      PhpFunctionComp(2964) or
+      PhpFunctionComp(2977) or
+      PhpFunctionComp(3017) or
+      PhpFunctionComp(3111) or
+      PhpFunctionComp(3193) or
+      PhpFunctionComp(3263) or
+      PhpFunctionComp(3669) or
+      PhpFunctionComp(3852) or
+      PhpFunctionComp(3888) or
+      PhpFunctionComp(4210) or
+      PhpFunctionComp(4362) or
+      PhpFunctionComp(4367) or
+      PhpFunctionComp(4388) or
+      PhpFunctionComp(4780) or
+      PhpFunctionComp(4916) or
+      PhpFunctionComp(4933) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc189: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(88) or
+      PhpFunctionComp(264) or
+      PhpFunctionComp(484) or
+      PhpFunctionComp(612) or
+      PhpFunctionComp(1022) or
+      PhpFunctionComp(1536) or
+      PhpFunctionComp(1564) or
+      PhpFunctionComp(1579) or
+      PhpFunctionComp(1650) or
+      PhpFunctionComp(1871) or
+      PhpFunctionComp(2275) or
+      PhpFunctionComp(2616) or
+      PhpFunctionComp(2723) or
+      PhpFunctionComp(2803) or
+      PhpFunctionComp(2918) or
+      PhpFunctionComp(3271) or
+      PhpFunctionComp(3462) or
+      PhpFunctionComp(3503) or
+      PhpFunctionComp(3646) or
+      PhpFunctionComp(4851) or
+      PhpFunctionComp(4928) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc190: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(254) or
+      PhpFunctionComp(315) or
+      PhpFunctionComp(451) or
+      PhpFunctionComp(877) or
+      PhpFunctionComp(1252) or
+      PhpFunctionComp(1278) or
+      PhpFunctionComp(1460) or
+      PhpFunctionComp(1612) or
+      PhpFunctionComp(1665) or
+      PhpFunctionComp(1700) or
+      PhpFunctionComp(1916) or
+      PhpFunctionComp(2382) or
+      PhpFunctionComp(2426) or
+      PhpFunctionComp(2641) or
+      PhpFunctionComp(2835) or
+      PhpFunctionComp(3343) or
+      PhpFunctionComp(3356) or
+      PhpFunctionComp(3505) or
+      PhpFunctionComp(3989) or
+      PhpFunctionComp(4056) or
+      PhpFunctionComp(4315) or
+      PhpFunctionComp(4433) or
+      PhpFunctionComp(4448) or
+      PhpFunctionComp(4785) or
+      PhpFunctionComp(5023) or
+      PhpFunctionComp(5111) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc191: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(611) or
+      PhpFunctionComp(670) or
+      PhpFunctionComp(883) or
+      PhpFunctionComp(885) or
+      PhpFunctionComp(923) or
+      PhpFunctionComp(1866) or
+      PhpFunctionComp(1930) or
+      PhpFunctionComp(2075) or
+      PhpFunctionComp(2700) or
+      PhpFunctionComp(2934) or
+      PhpFunctionComp(2943) or
+      PhpFunctionComp(3047) or
+      PhpFunctionComp(3085) or
+      PhpFunctionComp(3280) or
+      PhpFunctionComp(3411) or
+      PhpFunctionComp(3806) or
+      PhpFunctionComp(3826) or
+      PhpFunctionComp(3911) or
+      PhpFunctionComp(4009) or
+      PhpFunctionComp(4766) or
+      PhpFunctionComp(4809) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc192: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(177) or
+      PhpFunctionComp(458) or
+      PhpFunctionComp(888) or
+      PhpFunctionComp(960) or
+      PhpFunctionComp(1086) or
+      PhpFunctionComp(1429) or
+      PhpFunctionComp(1562) or
+      PhpFunctionComp(1895) or
+      PhpFunctionComp(2059) or
+      PhpFunctionComp(2303) or
+      PhpFunctionComp(2318) or
+      PhpFunctionComp(2365) or
+      PhpFunctionComp(2422) or
+      PhpFunctionComp(2606) or
+      PhpFunctionComp(2758) or
+      PhpFunctionComp(2760) or
+      PhpFunctionComp(2928) or
+      PhpFunctionComp(3157) or
+      PhpFunctionComp(3609) or
+      PhpFunctionComp(3982) or
+      PhpFunctionComp(4044) or
+      PhpFunctionComp(4152) or
+      PhpFunctionComp(4629) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc193: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(453) or
+      PhpFunctionComp(460) or
+      PhpFunctionComp(514) or
+      PhpFunctionComp(535) or
+      PhpFunctionComp(720) or
+      PhpFunctionComp(724) or
+      PhpFunctionComp(973) or
+      PhpFunctionComp(1005) or
+      PhpFunctionComp(1676) or
+      PhpFunctionComp(1882) or
+      PhpFunctionComp(1893) or
+      PhpFunctionComp(2128) or
+      PhpFunctionComp(2458) or
+      PhpFunctionComp(2761) or
+      PhpFunctionComp(2776) or
+      PhpFunctionComp(2942) or
+      PhpFunctionComp(2954) or
+      PhpFunctionComp(2974) or
+      PhpFunctionComp(3372) or
+      PhpFunctionComp(4200) or
+      PhpFunctionComp(4222) or
+      PhpFunctionComp(4377) or
+      PhpFunctionComp(4407) or
+      PhpFunctionComp(4476) or
+      PhpFunctionComp(4483) or
+      PhpFunctionComp(4556) or
+      PhpFunctionComp(4684) or
+      PhpFunctionComp(4941) or
+      PhpFunctionComp(5018) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc194: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(144) or
+      PhpFunctionComp(954) or
+      PhpFunctionComp(1391) or
+      PhpFunctionComp(1635) or
+      PhpFunctionComp(1853) or
+      PhpFunctionComp(1873) or
+      PhpFunctionComp(2279) or
+      PhpFunctionComp(2291) or
+      PhpFunctionComp(2377) or
+      PhpFunctionComp(2604) or
+      PhpFunctionComp(2755) or
+      PhpFunctionComp(2932) or
+      PhpFunctionComp(3090) or
+      PhpFunctionComp(3332) or
+      PhpFunctionComp(3496) or
+      PhpFunctionComp(3498) or
+      PhpFunctionComp(3708) or
+      PhpFunctionComp(4069) or
+      PhpFunctionComp(4075) or
+      PhpFunctionComp(4137) or
+      PhpFunctionComp(4253) or
+      PhpFunctionComp(4401) or
+      PhpFunctionComp(4454) or
+      PhpFunctionComp(4525) or
+      PhpFunctionComp(4745) or
+      PhpFunctionComp(4946) or
+      PhpFunctionComp(5015) or
+      PhpFunctionComp(5063) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc195: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(574) or
+      PhpFunctionComp(932) or
+      PhpFunctionComp(1068) or
+      PhpFunctionComp(1302) or
+      PhpFunctionComp(1496) or
+      PhpFunctionComp(1706) or
+      PhpFunctionComp(1879) or
+      PhpFunctionComp(2036) or
+      PhpFunctionComp(2389) or
+      PhpFunctionComp(2888) or
+      PhpFunctionComp(3091) or
+      PhpFunctionComp(3337) or
+      PhpFunctionComp(3456) or
+      PhpFunctionComp(3486) or
+      PhpFunctionComp(4611) or
+      PhpFunctionComp(4824) or
+      PhpFunctionComp(4897) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc196: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(963) or
+      PhpFunctionComp(980) or
+      PhpFunctionComp(1054) or
+      PhpFunctionComp(1096) or
+      PhpFunctionComp(1113) or
+      PhpFunctionComp(1834) or
+      PhpFunctionComp(1848) or
+      PhpFunctionComp(1852) or
+      PhpFunctionComp(2156) or
+      PhpFunctionComp(2499) or
+      PhpFunctionComp(2736) or
+      PhpFunctionComp(2894) or
+      PhpFunctionComp(2915) or
+      PhpFunctionComp(3136) or
+      PhpFunctionComp(3181) or
+      PhpFunctionComp(3257) or
+      PhpFunctionComp(3406) or
+      PhpFunctionComp(3511) or
+      PhpFunctionComp(3670) or
+      PhpFunctionComp(4612) or
+      PhpFunctionComp(4714) or
+      PhpFunctionComp(4727) or
+      PhpFunctionComp(4855) or
+      PhpFunctionComp(5013) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc197: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(241) or
+      PhpFunctionComp(326) or
+      PhpFunctionComp(606) or
+      PhpFunctionComp(970) or
+      PhpFunctionComp(974) or
+      PhpFunctionComp(1036) or
+      PhpFunctionComp(1566) or
+      PhpFunctionComp(1698) or
+      PhpFunctionComp(1927) or
+      PhpFunctionComp(2195) or
+      PhpFunctionComp(2274) or
+      PhpFunctionComp(2307) or
+      PhpFunctionComp(2563) or
+      PhpFunctionComp(2688) or
+      PhpFunctionComp(2793) or
+      PhpFunctionComp(2998) or
+      PhpFunctionComp(3255) or
+      PhpFunctionComp(3495) or
+      PhpFunctionComp(4026) or
+      PhpFunctionComp(4065) or
+      PhpFunctionComp(4276) or
+      PhpFunctionComp(4469) or
+      PhpFunctionComp(4479) or
+      PhpFunctionComp(4599) or
+      PhpFunctionComp(4659) or
+      PhpFunctionComp(4951) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc198: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(342) or
+      PhpFunctionComp(455) or
+      PhpFunctionComp(941) or
+      PhpFunctionComp(1383) or
+      PhpFunctionComp(1540) or
+      PhpFunctionComp(1703) or
+      PhpFunctionComp(1747) or
+      PhpFunctionComp(1983) or
+      PhpFunctionComp(2251) or
+      PhpFunctionComp(2312) or
+      PhpFunctionComp(2417) or
+      PhpFunctionComp(2782) or
+      PhpFunctionComp(2892) or
+      PhpFunctionComp(2966) or
+      PhpFunctionComp(3196) or
+      PhpFunctionComp(3261) or
+      PhpFunctionComp(3276) or
+      PhpFunctionComp(3371) or
+      PhpFunctionComp(3521) or
+      PhpFunctionComp(3773) or
+      PhpFunctionComp(3792) or
+      PhpFunctionComp(3992) or
+      PhpFunctionComp(4008) or
+      PhpFunctionComp(4391) or
+      PhpFunctionComp(4624) or
+      PhpFunctionComp(4628) or
+      PhpFunctionComp(4906) or
+      PhpFunctionComp(4964) or
+      PhpFunctionComp(5148) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc199: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(170) or
+      PhpFunctionComp(420) or
+      PhpFunctionComp(1072) or
+      PhpFunctionComp(1088) or
+      PhpFunctionComp(1243) or
+      PhpFunctionComp(1309) or
+      PhpFunctionComp(1774) or
+      PhpFunctionComp(1820) or
+      PhpFunctionComp(2220) or
+      PhpFunctionComp(2383) or
+      PhpFunctionComp(2853) or
+      PhpFunctionComp(3247) or
+      PhpFunctionComp(3283) or
+      PhpFunctionComp(3508) or
+      PhpFunctionComp(3524) or
+      PhpFunctionComp(3723) or
+      PhpFunctionComp(4186) or
+      PhpFunctionComp(4192) or
+      PhpFunctionComp(4262) or
+      PhpFunctionComp(4386) or
+      PhpFunctionComp(4558) or
+      PhpFunctionComp(4662) or
+      PhpFunctionComp(4666) or
+      PhpFunctionComp(4667) or
+      PhpFunctionComp(5169) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc200: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(220) or
+      PhpFunctionComp(284) or
+      PhpFunctionComp(433) or
+      PhpFunctionComp(1395) or
+      PhpFunctionComp(1593) or
+      PhpFunctionComp(1598) or
+      PhpFunctionComp(1965) or
+      PhpFunctionComp(2167) or
+      PhpFunctionComp(2211) or
+      PhpFunctionComp(2246) or
+      PhpFunctionComp(2598) or
+      PhpFunctionComp(2754) or
+      PhpFunctionComp(2909) or
+      PhpFunctionComp(2948) or
+      PhpFunctionComp(3472) or
+      PhpFunctionComp(3725) or
+      PhpFunctionComp(4062) or
+      PhpFunctionComp(4076) or
+      PhpFunctionComp(4207) or
+      PhpFunctionComp(4218) or
+      PhpFunctionComp(4425) or
+      PhpFunctionComp(4679) or
+      PhpFunctionComp(4738) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc201: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(102) or
+      PhpFunctionComp(136) or
+      PhpFunctionComp(448) or
+      PhpFunctionComp(472) or
+      PhpFunctionComp(511) or
+      PhpFunctionComp(837) or
+      PhpFunctionComp(911) or
+      PhpFunctionComp(1544) or
+      PhpFunctionComp(1685) or
+      PhpFunctionComp(1782) or
+      PhpFunctionComp(2322) or
+      PhpFunctionComp(2401) or
+      PhpFunctionComp(2720) or
+      PhpFunctionComp(2766) or
+      PhpFunctionComp(2990) or
+      PhpFunctionComp(2995) or
+      PhpFunctionComp(3408) or
+      PhpFunctionComp(3618) or
+      PhpFunctionComp(3827) or
+      PhpFunctionComp(4043) or
+      PhpFunctionComp(4533) or
+      PhpFunctionComp(4606) or
+      PhpFunctionComp(4607) or
+      PhpFunctionComp(4655) or
+      PhpFunctionComp(4705) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc202: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(463) or
+      PhpFunctionComp(474) or
+      PhpFunctionComp(934) or
+      PhpFunctionComp(1296) or
+      PhpFunctionComp(1312) or
+      PhpFunctionComp(1408) or
+      PhpFunctionComp(1830) or
+      PhpFunctionComp(1845) or
+      PhpFunctionComp(1851) or
+      PhpFunctionComp(2017) or
+      PhpFunctionComp(2354) or
+      PhpFunctionComp(2475) or
+      PhpFunctionComp(2842) or
+      PhpFunctionComp(2904) or
+      PhpFunctionComp(2965) or
+      PhpFunctionComp(3355) or
+      PhpFunctionComp(3419) or
+      PhpFunctionComp(3551) or
+      PhpFunctionComp(3552) or
+      PhpFunctionComp(3828) or
+      PhpFunctionComp(4353) or
+      PhpFunctionComp(4464) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc203: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(259) or
+      PhpFunctionComp(896) or
+      PhpFunctionComp(1316) or
+      PhpFunctionComp(1318) or
+      PhpFunctionComp(1674) or
+      PhpFunctionComp(2397) or
+      PhpFunctionComp(2675) or
+      PhpFunctionComp(2784) or
+      PhpFunctionComp(2991) or
+      PhpFunctionComp(3414) or
+      PhpFunctionComp(3898) or
+      PhpFunctionComp(3958) or
+      PhpFunctionComp(4017) or
+      PhpFunctionComp(4034) or
+      PhpFunctionComp(4149) or
+      PhpFunctionComp(4180) or
+      PhpFunctionComp(4219) or
+      PhpFunctionComp(4274) or
+      PhpFunctionComp(4757) or
+      PhpFunctionComp(4782) or
+      PhpFunctionComp(4912) or
+      PhpFunctionComp(5088) or
+      PhpFunctionComp(5158) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc204: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(187) or
+      PhpFunctionComp(560) or
+      PhpFunctionComp(1074) or
+      PhpFunctionComp(1394) or
+      PhpFunctionComp(1673) or
+      PhpFunctionComp(2194) or
+      PhpFunctionComp(2344) or
+      PhpFunctionComp(2762) or
+      PhpFunctionComp(2852) or
+      PhpFunctionComp(2856) or
+      PhpFunctionComp(2873) or
+      PhpFunctionComp(2876) or
+      PhpFunctionComp(2929) or
+      PhpFunctionComp(2953) or
+      PhpFunctionComp(3086) or
+      PhpFunctionComp(3352) or
+      PhpFunctionComp(3787) or
+      PhpFunctionComp(3882) or
+      PhpFunctionComp(3963) or
+      PhpFunctionComp(4099) or
+      PhpFunctionComp(4251) or
+      PhpFunctionComp(4277) or
+      PhpFunctionComp(4657) or
+      PhpFunctionComp(4789) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc205: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(188) or
+      PhpFunctionComp(956) or
+      PhpFunctionComp(1138) or
+      PhpFunctionComp(1627) or
+      PhpFunctionComp(1864) or
+      PhpFunctionComp(1888) or
+      PhpFunctionComp(2353) or
+      PhpFunctionComp(2468) or
+      PhpFunctionComp(2679) or
+      PhpFunctionComp(2722) or
+      PhpFunctionComp(2788) or
+      PhpFunctionComp(2997) or
+      PhpFunctionComp(3032) or
+      PhpFunctionComp(3330) or
+      PhpFunctionComp(3757) or
+      PhpFunctionComp(3858) or
+      PhpFunctionComp(4304) or
+      PhpFunctionComp(4325) or
+      PhpFunctionComp(4406) or
+      PhpFunctionComp(4625) or
+      PhpFunctionComp(4658) or
+      PhpFunctionComp(4660) or
+      PhpFunctionComp(4715) or
+      PhpFunctionComp(4774) or
+      PhpFunctionComp(4949) or
+      PhpFunctionComp(4975) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc206: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(83) or
+      PhpFunctionComp(263) or
+      PhpFunctionComp(279) or
+      PhpFunctionComp(373) or
+      PhpFunctionComp(631) or
+      PhpFunctionComp(886) or
+      PhpFunctionComp(1476) or
+      PhpFunctionComp(1577) or
+      PhpFunctionComp(2351) or
+      PhpFunctionComp(2855) or
+      PhpFunctionComp(3260) or
+      PhpFunctionComp(3344) or
+      PhpFunctionComp(3705) or
+      PhpFunctionComp(4027) or
+      PhpFunctionComp(4029) or
+      PhpFunctionComp(4106) or
+      PhpFunctionComp(4275) or
+      PhpFunctionComp(4542) or
+      PhpFunctionComp(4545) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc207: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(751) or
+      PhpFunctionComp(967) or
+      PhpFunctionComp(1026) or
+      PhpFunctionComp(1084) or
+      PhpFunctionComp(2111) or
+      PhpFunctionComp(2345) or
+      PhpFunctionComp(2607) or
+      PhpFunctionComp(2857) or
+      PhpFunctionComp(2858) or
+      PhpFunctionComp(2937) or
+      PhpFunctionComp(3648) or
+      PhpFunctionComp(3701) or
+      PhpFunctionComp(3726) or
+      PhpFunctionComp(3802) or
+      PhpFunctionComp(4006) or
+      PhpFunctionComp(4179) or
+      PhpFunctionComp(4322) or
+      PhpFunctionComp(4617) or
+      PhpFunctionComp(4708) or
+      PhpFunctionComp(4835) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc208: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(661) or
+      PhpFunctionComp(826) or
+      PhpFunctionComp(1116) or
+      PhpFunctionComp(1767) or
+      PhpFunctionComp(1993) or
+      PhpFunctionComp(2223) or
+      PhpFunctionComp(2503) or
+      PhpFunctionComp(2596) or
+      PhpFunctionComp(2669) or
+      PhpFunctionComp(2802) or
+      PhpFunctionComp(2959) or
+      PhpFunctionComp(2978) or
+      PhpFunctionComp(3028) or
+      PhpFunctionComp(3543) or
+      PhpFunctionComp(3960) or
+      PhpFunctionComp(4319) or
+      PhpFunctionComp(4343) or
+      PhpFunctionComp(5024) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc209: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(288) or
+      PhpFunctionComp(521) or
+      PhpFunctionComp(756) or
+      PhpFunctionComp(1019) or
+      PhpFunctionComp(2242) or
+      PhpFunctionComp(2260) or
+      PhpFunctionComp(2352) or
+      PhpFunctionComp(2666) or
+      PhpFunctionComp(2724) or
+      PhpFunctionComp(2815) or
+      PhpFunctionComp(2879) or
+      PhpFunctionComp(3256) or
+      PhpFunctionComp(3334) or
+      PhpFunctionComp(3506) or
+      PhpFunctionComp(3516) or
+      PhpFunctionComp(3780) or
+      PhpFunctionComp(4221) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc210: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(225) or
+      PhpFunctionComp(1257) or
+      PhpFunctionComp(2290) or
+      PhpFunctionComp(2891) or
+      PhpFunctionComp(2979) or
+      PhpFunctionComp(3146) or
+      PhpFunctionComp(3195) or
+      PhpFunctionComp(3920) or
+      PhpFunctionComp(4004) or
+      PhpFunctionComp(4016) or
+      PhpFunctionComp(4349) or
+      PhpFunctionComp(4354) or
+      PhpFunctionComp(4366) or
+      PhpFunctionComp(4557) or
+      PhpFunctionComp(4698) or
+      PhpFunctionComp(4915) or
+      PhpFunctionComp(4976) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc211: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(374) or
+      PhpFunctionComp(957) or
+      PhpFunctionComp(1020) or
+      PhpFunctionComp(1488) or
+      PhpFunctionComp(1636) or
+      PhpFunctionComp(1995) or
+      PhpFunctionComp(2509) or
+      PhpFunctionComp(2689) or
+      PhpFunctionComp(2796) or
+      PhpFunctionComp(2907) or
+      PhpFunctionComp(2940) or
+      PhpFunctionComp(2941) or
+      PhpFunctionComp(3333) or
+      PhpFunctionComp(3493) or
+      PhpFunctionComp(3662) or
+      PhpFunctionComp(4042) or
+      PhpFunctionComp(4071) or
+      PhpFunctionComp(4342) or
+      PhpFunctionComp(4408) or
+      PhpFunctionComp(4627) or
+      PhpFunctionComp(4688) or
+      PhpFunctionComp(4703) or
+      PhpFunctionComp(4903) or
+      PhpFunctionComp(4984) or
+      PhpFunctionComp(5043) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc212: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(154) or
+      PhpFunctionComp(402) or
+      PhpFunctionComp(468) or
+      PhpFunctionComp(804) or
+      PhpFunctionComp(824) or
+      PhpFunctionComp(1626) or
+      PhpFunctionComp(1876) or
+      PhpFunctionComp(2177) or
+      PhpFunctionComp(2947) or
+      PhpFunctionComp(3709) or
+      PhpFunctionComp(4197) or
+      PhpFunctionComp(4437) or
+      PhpFunctionComp(4480) or
+      PhpFunctionComp(4566) or
+      PhpFunctionComp(4619) or
+      PhpFunctionComp(4686) or
+      PhpFunctionComp(4791) or
+      PhpFunctionComp(4870) or
+      PhpFunctionComp(4939) or
+      PhpFunctionComp(5087) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc213: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(145) or
+      PhpFunctionComp(529) or
+      PhpFunctionComp(1970) or
+      PhpFunctionComp(2568) or
+      PhpFunctionComp(2703) or
+      PhpFunctionComp(2798) or
+      PhpFunctionComp(2961) or
+      PhpFunctionComp(3159) or
+      PhpFunctionComp(3163) or
+      PhpFunctionComp(3338) or
+      PhpFunctionComp(3354) or
+      PhpFunctionComp(3404) or
+      PhpFunctionComp(3488) or
+      PhpFunctionComp(3945) or
+      PhpFunctionComp(4700) or
+      PhpFunctionComp(4702) or
+      PhpFunctionComp(4706) or
+      PhpFunctionComp(4815) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc214: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(317) or
+      PhpFunctionComp(452) or
+      PhpFunctionComp(537) or
+      PhpFunctionComp(625) or
+      PhpFunctionComp(1178) or
+      PhpFunctionComp(1307) or
+      PhpFunctionComp(1654) or
+      PhpFunctionComp(1896) or
+      PhpFunctionComp(2602) or
+      PhpFunctionComp(2887) or
+      PhpFunctionComp(2908) or
+      PhpFunctionComp(3264) or
+      PhpFunctionComp(3341) or
+      PhpFunctionComp(3683) or
+      PhpFunctionComp(3974) or
+      PhpFunctionComp(4385) or
+      PhpFunctionComp(4482) or
+      PhpFunctionComp(4553) or
+      PhpFunctionComp(4561) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc215: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(367) or
+      PhpFunctionComp(607) or
+      PhpFunctionComp(977) or
+      PhpFunctionComp(1050) or
+      PhpFunctionComp(1191) or
+      PhpFunctionComp(1308) or
+      PhpFunctionComp(1485) or
+      PhpFunctionComp(1656) or
+      PhpFunctionComp(1842) or
+      PhpFunctionComp(2517) or
+      PhpFunctionComp(2608) or
+      PhpFunctionComp(2712) or
+      PhpFunctionComp(3643) or
+      PhpFunctionComp(3714) or
+      PhpFunctionComp(3871) or
+      PhpFunctionComp(4187) or
+      PhpFunctionComp(4399) or
+      PhpFunctionComp(4423) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc216: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(180) or
+      PhpFunctionComp(206) or
+      PhpFunctionComp(419) or
+      PhpFunctionComp(616) or
+      PhpFunctionComp(618) or
+      PhpFunctionComp(910) or
+      PhpFunctionComp(1056) or
+      PhpFunctionComp(1425) or
+      PhpFunctionComp(1477) or
+      PhpFunctionComp(1805) or
+      PhpFunctionComp(2032) or
+      PhpFunctionComp(2281) or
+      PhpFunctionComp(2306) or
+      PhpFunctionComp(2362) or
+      PhpFunctionComp(2394) or
+      PhpFunctionComp(2614) or
+      PhpFunctionComp(2902) or
+      PhpFunctionComp(3144) or
+      PhpFunctionComp(3192) or
+      PhpFunctionComp(3248) or
+      PhpFunctionComp(3890) or
+      PhpFunctionComp(3991) or
+      PhpFunctionComp(4457) or
+      PhpFunctionComp(4559) or
+      PhpFunctionComp(4710) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc217: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(217) or
+      PhpFunctionComp(399) or
+      PhpFunctionComp(803) or
+      PhpFunctionComp(978) or
+      PhpFunctionComp(1051) or
+      PhpFunctionComp(1402) or
+      PhpFunctionComp(1594) or
+      PhpFunctionComp(1843) or
+      PhpFunctionComp(2467) or
+      PhpFunctionComp(2501) or
+      PhpFunctionComp(2506) or
+      PhpFunctionComp(2790) or
+      PhpFunctionComp(3262) or
+      PhpFunctionComp(3450) or
+      PhpFunctionComp(3971) or
+      PhpFunctionComp(4052) or
+      PhpFunctionComp(4664) or
+      PhpFunctionComp(4680) or
+      PhpFunctionComp(4792) or
+      PhpFunctionComp(4913) or
+      PhpFunctionComp(4959) or
+      PhpFunctionComp(5103) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc218: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(362) or
+      PhpFunctionComp(364) or
+      PhpFunctionComp(392) or
+      PhpFunctionComp(1533) or
+      PhpFunctionComp(2049) or
+      PhpFunctionComp(2783) or
+      PhpFunctionComp(2849) or
+      PhpFunctionComp(2875) or
+      PhpFunctionComp(3340) or
+      PhpFunctionComp(3612) or
+      PhpFunctionComp(4308) or
+      PhpFunctionComp(4333) or
+      PhpFunctionComp(4468) or
+      PhpFunctionComp(4616) or
+      PhpFunctionComp(4672) or
+      PhpFunctionComp(4678) or
+      PhpFunctionComp(4690) or
+      PhpFunctionComp(4711) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc219: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(344) or
+      PhpFunctionComp(838) or
+      PhpFunctionComp(952) or
+      PhpFunctionComp(1114) or
+      PhpFunctionComp(1322) or
+      PhpFunctionComp(2505) or
+      PhpFunctionComp(2510) or
+      PhpFunctionComp(2591) or
+      PhpFunctionComp(2592) or
+      PhpFunctionComp(2818) or
+      PhpFunctionComp(3617) or
+      PhpFunctionComp(3703) or
+      PhpFunctionComp(3722) or
+      PhpFunctionComp(3824) or
+      PhpFunctionComp(3896) or
+      PhpFunctionComp(4014) or
+      PhpFunctionComp(4526) or
+      PhpFunctionComp(4540) or
+      PhpFunctionComp(4704) or
+      PhpFunctionComp(4930) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc220: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(103) or
+      PhpFunctionComp(137) or
+      PhpFunctionComp(614) or
+      PhpFunctionComp(1397) or
+      PhpFunctionComp(1495) or
+      PhpFunctionComp(1671) or
+      PhpFunctionComp(1835) or
+      PhpFunctionComp(2300) or
+      PhpFunctionComp(2454) or
+      PhpFunctionComp(2610) or
+      PhpFunctionComp(2690) or
+      PhpFunctionComp(2734) or
+      PhpFunctionComp(2925) or
+      PhpFunctionComp(2956) or
+      PhpFunctionComp(3008) or
+      PhpFunctionComp(3601) or
+      PhpFunctionComp(3699) or
+      PhpFunctionComp(4147) or
+      PhpFunctionComp(4929) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc221: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(806) or
+      PhpFunctionComp(808) or
+      PhpFunctionComp(830) or
+      PhpFunctionComp(1189) or
+      PhpFunctionComp(1813) or
+      PhpFunctionComp(2163) or
+      PhpFunctionComp(2810) or
+      PhpFunctionComp(3645) or
+      PhpFunctionComp(3717) or
+      PhpFunctionComp(3915) or
+      PhpFunctionComp(4151) or
+      PhpFunctionComp(4183) or
+      PhpFunctionComp(4340) or
+      PhpFunctionComp(4528) or
+      PhpFunctionComp(4633) or
+      PhpFunctionComp(4635) or
+      PhpFunctionComp(4643) or
+      PhpFunctionComp(5091) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc222: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(165) or
+      PhpFunctionComp(171) or
+      PhpFunctionComp(281) or
+      PhpFunctionComp(307) or
+      PhpFunctionComp(1139) or
+      PhpFunctionComp(2699) or
+      PhpFunctionComp(2759) or
+      PhpFunctionComp(3293) or
+      PhpFunctionComp(3755) or
+      PhpFunctionComp(3789) or
+      PhpFunctionComp(3836) or
+      PhpFunctionComp(4012) or
+      PhpFunctionComp(4394) or
+      PhpFunctionComp(4534) or
+      PhpFunctionComp(4693) or
+      PhpFunctionComp(4777) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc223: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(267) or
+      PhpFunctionComp(299) or
+      PhpFunctionComp(834) or
+      PhpFunctionComp(1576) or
+      PhpFunctionComp(2498) or
+      PhpFunctionComp(2797) or
+      PhpFunctionComp(2916) or
+      PhpFunctionComp(4010) or
+      PhpFunctionComp(4477) or
+      PhpFunctionComp(4694) or
+      PhpFunctionComp(4910) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc224: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(266) or
+      PhpFunctionComp(615) or
+      PhpFunctionComp(736) or
+      PhpFunctionComp(989) or
+      PhpFunctionComp(1153) or
+      PhpFunctionComp(1868) or
+      PhpFunctionComp(2254) or
+      PhpFunctionComp(2280) or
+      PhpFunctionComp(2304) or
+      PhpFunctionComp(2714) or
+      PhpFunctionComp(2765) or
+      PhpFunctionComp(2999) or
+      PhpFunctionComp(3054) or
+      PhpFunctionComp(3203) or
+      PhpFunctionComp(3821) or
+      PhpFunctionComp(3822) or
+      PhpFunctionComp(3884) or
+      PhpFunctionComp(3972) or
+      PhpFunctionComp(4098) or
+      PhpFunctionComp(4198) or
+      PhpFunctionComp(4465) or
+      PhpFunctionComp(4467) or
+      PhpFunctionComp(4473) or
+      PhpFunctionComp(4709) or
+      PhpFunctionComp(4739) or
+      PhpFunctionComp(4989) or
+      PhpFunctionComp(5163) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc225: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(296) or
+      PhpFunctionComp(365) or
+      PhpFunctionComp(372) or
+      PhpFunctionComp(2497) or
+      PhpFunctionComp(2713) or
+      PhpFunctionComp(2735) or
+      PhpFunctionComp(2906) or
+      PhpFunctionComp(2980) or
+      PhpFunctionComp(4562) or
+      PhpFunctionComp(4673) or
+      PhpFunctionComp(5009) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc226: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(138) or
+      PhpFunctionComp(320) or
+      PhpFunctionComp(1892) or
+      PhpFunctionComp(1968) or
+      PhpFunctionComp(2024) or
+      PhpFunctionComp(2430) or
+      PhpFunctionComp(3232) or
+      PhpFunctionComp(3500) or
+      PhpFunctionComp(3649) or
+      PhpFunctionComp(3862) or
+      PhpFunctionComp(4415) or
+      PhpFunctionComp(4485) or
+      PhpFunctionComp(4675) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc227: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(457) or
+      PhpFunctionComp(832) or
+      PhpFunctionComp(903) or
+      PhpFunctionComp(961) or
+      PhpFunctionComp(1313) or
+      PhpFunctionComp(1846) or
+      PhpFunctionComp(2403) or
+      PhpFunctionComp(2507) or
+      PhpFunctionComp(2949) or
+      PhpFunctionComp(3245) or
+      PhpFunctionComp(3363) or
+      PhpFunctionComp(3995) or
+      PhpFunctionComp(4378) or
+      PhpFunctionComp(5001) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc228: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(1559) or
+      PhpFunctionComp(1696) or
+      PhpFunctionComp(1839) or
+      PhpFunctionComp(3610) or
+      PhpFunctionComp(4334) or
+      PhpFunctionComp(4355) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc229: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(777) or
+      PhpFunctionComp(918) or
+      PhpFunctionComp(1558) or
+      PhpFunctionComp(1695) or
+      PhpFunctionComp(1850) or
+      PhpFunctionComp(1867) or
+      PhpFunctionComp(2046) or
+      PhpFunctionComp(2116) or
+      PhpFunctionComp(2392) or
+      PhpFunctionComp(2504) or
+      PhpFunctionComp(2950) or
+      PhpFunctionComp(2983) or
+      PhpFunctionComp(3036) or
+      PhpFunctionComp(3451) or
+      PhpFunctionComp(3734) or
+      PhpFunctionComp(3879) or
+      PhpFunctionComp(3897) or
+      PhpFunctionComp(4050) or
+      PhpFunctionComp(4055) or
+      PhpFunctionComp(4138) or
+      PhpFunctionComp(4458) or
+      PhpFunctionComp(4990) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc230: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(248) or
+      PhpFunctionComp(404) or
+      PhpFunctionComp(2196) or
+      PhpFunctionComp(3013) or
+      PhpFunctionComp(3055) or
+      PhpFunctionComp(3814) or
+      PhpFunctionComp(4350) or
+      PhpFunctionComp(4551) or
+      PhpFunctionComp(4712) or
+      PhpFunctionComp(4724) or
+      PhpFunctionComp(4966) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc231: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(224) or
+      PhpFunctionComp(378) or
+      PhpFunctionComp(1618) or
+      PhpFunctionComp(2667) or
+      PhpFunctionComp(3345) or
+      PhpFunctionComp(3633) or
+      PhpFunctionComp(3712) or
+      PhpFunctionComp(3867) or
+      PhpFunctionComp(4299) or
+      PhpFunctionComp(4402) or
+      PhpFunctionComp(4726) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc232: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(568) or
+      PhpFunctionComp(890) or
+      PhpFunctionComp(1132) or
+      PhpFunctionComp(1299) or
+      PhpFunctionComp(1847) or
+      PhpFunctionComp(1874) or
+      PhpFunctionComp(2747) or
+      PhpFunctionComp(2757) or
+      PhpFunctionComp(2773) or
+      PhpFunctionComp(2848) or
+      PhpFunctionComp(2900) or
+      PhpFunctionComp(3721) or
+      PhpFunctionComp(3833) or
+      PhpFunctionComp(4223) or
+      PhpFunctionComp(4530) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc233: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(216) or
+      PhpFunctionComp(884) or
+      PhpFunctionComp(976) or
+      PhpFunctionComp(2457) or
+      PhpFunctionComp(2668) or
+      PhpFunctionComp(2769) or
+      PhpFunctionComp(2811) or
+      PhpFunctionComp(2963) or
+      PhpFunctionComp(2970) or
+      PhpFunctionComp(3504) or
+      PhpFunctionComp(3724) or
+      PhpFunctionComp(5071) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc234: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(85) or
+      PhpFunctionComp(567) or
+      PhpFunctionComp(1192) or
+      PhpFunctionComp(1557) or
+      PhpFunctionComp(1657) or
+      PhpFunctionComp(2566) or
+      PhpFunctionComp(2767) or
+      PhpFunctionComp(2823) or
+      PhpFunctionComp(2927) or
+      PhpFunctionComp(3000) or
+      PhpFunctionComp(3035) or
+      PhpFunctionComp(3277) or
+      PhpFunctionComp(3342) or
+      PhpFunctionComp(3497) or
+      PhpFunctionComp(3830) or
+      PhpFunctionComp(3891) or
+      PhpFunctionComp(3959) or
+      PhpFunctionComp(4332) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc235: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(620) or
+      PhpFunctionComp(906) or
+      PhpFunctionComp(1283) or
+      PhpFunctionComp(1332) or
+      PhpFunctionComp(2830) or
+      PhpFunctionComp(2930) or
+      PhpFunctionComp(3553) or
+      PhpFunctionComp(4018) or
+      PhpFunctionComp(4070) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc236: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(459) or
+      PhpFunctionComp(1119) or
+      PhpFunctionComp(1480) or
+      PhpFunctionComp(1833) or
+      PhpFunctionComp(2115) or
+      PhpFunctionComp(2584) or
+      PhpFunctionComp(2992) or
+      PhpFunctionComp(3020) or
+      PhpFunctionComp(3060) or
+      PhpFunctionComp(3943) or
+      PhpFunctionComp(3973) or
+      PhpFunctionComp(4048) or
+      PhpFunctionComp(4072) or
+      PhpFunctionComp(4190) or
+      PhpFunctionComp(4226) or
+      PhpFunctionComp(4305) or
+      PhpFunctionComp(4486) or
+      PhpFunctionComp(4638) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc237: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(366) or
+      PhpFunctionComp(397) or
+      PhpFunctionComp(1687) or
+      PhpFunctionComp(1709) or
+      PhpFunctionComp(1840) or
+      PhpFunctionComp(2407) or
+      PhpFunctionComp(2812) or
+      PhpFunctionComp(4288) or
+      PhpFunctionComp(4608) or
+      PhpFunctionComp(5003) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc238: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(219) or
+      PhpFunctionComp(555) or
+      PhpFunctionComp(694) or
+      PhpFunctionComp(892) or
+      PhpFunctionComp(916) or
+      PhpFunctionComp(984) or
+      PhpFunctionComp(2388) or
+      PhpFunctionComp(2493) or
+      PhpFunctionComp(2569) or
+      PhpFunctionComp(2673) or
+      PhpFunctionComp(3021) or
+      PhpFunctionComp(3268) or
+      PhpFunctionComp(4033) or
+      PhpFunctionComp(4039) or
+      PhpFunctionComp(4150) or
+      PhpFunctionComp(4181) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc239: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(609) or
+      PhpFunctionComp(1305) or
+      PhpFunctionComp(1644) or
+      PhpFunctionComp(1645) or
+      PhpFunctionComp(2387) or
+      PhpFunctionComp(2491) or
+      PhpFunctionComp(2741) or
+      PhpFunctionComp(2751) or
+      PhpFunctionComp(2944) or
+      PhpFunctionComp(2969) or
+      PhpFunctionComp(3364) or
+      PhpFunctionComp(4038) or
+      PhpFunctionComp(5022) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc240: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(965) or
+      PhpFunctionComp(981) or
+      PhpFunctionComp(1075) or
+      PhpFunctionComp(1107) or
+      PhpFunctionComp(2378) or
+      PhpFunctionComp(2801) or
+      PhpFunctionComp(2962) or
+      PhpFunctionComp(3274) or
+      PhpFunctionComp(3339) or
+      PhpFunctionComp(3978) or
+      PhpFunctionComp(4632) or
+      PhpFunctionComp(4904) or
+      PhpFunctionComp(5027) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc241: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(86) or
+      PhpFunctionComp(930) or
+      PhpFunctionComp(992) or
+      PhpFunctionComp(1043) or
+      PhpFunctionComp(1133) or
+      PhpFunctionComp(1226) or
+      PhpFunctionComp(1482) or
+      PhpFunctionComp(2342) or
+      PhpFunctionComp(2376) or
+      PhpFunctionComp(2813) or
+      PhpFunctionComp(2957) or
+      PhpFunctionComp(3088) or
+      PhpFunctionComp(3326) or
+      PhpFunctionComp(3655) or
+      PhpFunctionComp(3886) or
+      PhpFunctionComp(4699) or
+      PhpFunctionComp(4701) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc242: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(111) or
+      PhpFunctionComp(152) or
+      PhpFunctionComp(962) or
+      PhpFunctionComp(1856) or
+      PhpFunctionComp(2367) or
+      PhpFunctionComp(3918) or
+      PhpFunctionComp(4110) or
+      PhpFunctionComp(4161) or
+      PhpFunctionComp(4178) or
+      PhpFunctionComp(5054) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc243: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(1534) or
+      PhpFunctionComp(2546) or
+      PhpFunctionComp(2742) or
+      PhpFunctionComp(2792) or
+      PhpFunctionComp(3298) or
+      PhpFunctionComp(3864) or
+      PhpFunctionComp(4095) or
+      PhpFunctionComp(4307) or
+      PhpFunctionComp(4410) or
+      PhpFunctionComp(4431) or
+      PhpFunctionComp(4609) or
+      PhpFunctionComp(4681) or
+      PhpFunctionComp(4943) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc244: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(400) or
+      PhpFunctionComp(590) or
+      PhpFunctionComp(825) or
+      PhpFunctionComp(887) or
+      PhpFunctionComp(969) or
+      PhpFunctionComp(982) or
+      PhpFunctionComp(1878) or
+      PhpFunctionComp(2951) or
+      PhpFunctionComp(3347) or
+      PhpFunctionComp(4228) or
+      PhpFunctionComp(4413) or
+      PhpFunctionComp(4634) or
+      PhpFunctionComp(5115) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc245: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(909) or
+      PhpFunctionComp(936) or
+      PhpFunctionComp(1080) or
+      PhpFunctionComp(1081) or
+      PhpFunctionComp(1281) or
+      PhpFunctionComp(2385) or
+      PhpFunctionComp(2808) or
+      PhpFunctionComp(4565) or
+      PhpFunctionComp(4765) or
+      PhpFunctionComp(5042) or
+      PhpFunctionComp(5048) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc246: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(178) or
+      PhpFunctionComp(589) or
+      PhpFunctionComp(805) or
+      PhpFunctionComp(869) or
+      PhpFunctionComp(902) or
+      PhpFunctionComp(2301) or
+      PhpFunctionComp(2715) or
+      PhpFunctionComp(2822) or
+      PhpFunctionComp(3368) or
+      PhpFunctionComp(3935) or
+      PhpFunctionComp(4108) or
+      PhpFunctionComp(4189) or
+      PhpFunctionComp(4438) or
+      PhpFunctionComp(4463) or
+      PhpFunctionComp(4631) or
+      PhpFunctionComp(4750) or
+      PhpFunctionComp(5046) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc247: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(110) or
+      PhpFunctionComp(174) or
+      PhpFunctionComp(285) or
+      PhpFunctionComp(619) or
+      PhpFunctionComp(958) or
+      PhpFunctionComp(1306) or
+      PhpFunctionComp(1310) or
+      PhpFunctionComp(1549) or
+      PhpFunctionComp(2748) or
+      PhpFunctionComp(3001) or
+      PhpFunctionComp(3837) or
+      PhpFunctionComp(4419) or
+      PhpFunctionComp(4466) or
+      PhpFunctionComp(4687) or
+      PhpFunctionComp(4986) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc248: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(2441) or
+      PhpFunctionComp(3525) or
+      PhpFunctionComp(5016) or
+      PhpFunctionComp(5036) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc249: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(361) or
+      PhpFunctionComp(566) or
+      PhpFunctionComp(617) or
+      PhpFunctionComp(926) or
+      PhpFunctionComp(1849) or
+      PhpFunctionComp(2492) or
+      PhpFunctionComp(2716) or
+      PhpFunctionComp(2737) or
+      PhpFunctionComp(4185) or
+      PhpFunctionComp(4484) or
+      PhpFunctionComp(4713) or
+      PhpFunctionComp(5033) or
+      PhpFunctionComp(5070) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc250: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(308) or
+      PhpFunctionComp(556) or
+      PhpFunctionComp(835) or
+      PhpFunctionComp(857) or
+      PhpFunctionComp(1295) or
+      PhpFunctionComp(1686) or
+      PhpFunctionComp(2814) or
+      PhpFunctionComp(3258) or
+      PhpFunctionComp(3275) or
+      PhpFunctionComp(3636) or
+      PhpFunctionComp(3893) or
+      PhpFunctionComp(4383) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc251: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(475) or
+      PhpFunctionComp(513) or
+      PhpFunctionComp(1010) or
+      PhpFunctionComp(1285) or
+      PhpFunctionComp(1286) or
+      PhpFunctionComp(1287) or
+      PhpFunctionComp(1288) or
+      PhpFunctionComp(1289) or
+      PhpFunctionComp(2490) or
+      PhpFunctionComp(3967) or
+      PhpFunctionComp(4040) or
+      PhpFunctionComp(4148) or
+      PhpFunctionComp(4546) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc252: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(510) or
+      PhpFunctionComp(1085) or
+      PhpFunctionComp(1642) or
+      PhpFunctionComp(2058) or
+      PhpFunctionComp(2464) or
+      PhpFunctionComp(2746) or
+      PhpFunctionComp(3061) or
+      PhpFunctionComp(3282) or
+      PhpFunctionComp(3403) or
+      PhpFunctionComp(4300) or
+      PhpFunctionComp(4636) or
+      PhpFunctionComp(4676) or
+      PhpFunctionComp(4718) or
+      PhpFunctionComp(5029) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc253: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(450) or
+      PhpFunctionComp(814) or
+      PhpFunctionComp(870) or
+      PhpFunctionComp(1658) or
+      PhpFunctionComp(2781) or
+      PhpFunctionComp(2854) or
+      PhpFunctionComp(3803) or
+      PhpFunctionComp(3913) or
+      PhpFunctionComp(4046) or
+      PhpFunctionComp(4184) or
+      PhpFunctionComp(4193) or
+      PhpFunctionComp(4478) or
+      PhpFunctionComp(4637) or
+      PhpFunctionComp(4969) or
+      PhpFunctionComp(5085) or
+      PhpFunctionComp(5116) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc254: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(106) or
+      PhpFunctionComp(218) or
+      PhpFunctionComp(242) or
+      PhpFunctionComp(851) or
+      PhpFunctionComp(959) or
+      PhpFunctionComp(971) or
+      PhpFunctionComp(979) or
+      PhpFunctionComp(991) or
+      PhpFunctionComp(1303) or
+      PhpFunctionComp(1664) or
+      PhpFunctionComp(2831) or
+      PhpFunctionComp(3286) or
+      PhpFunctionComp(3964) or
+      PhpFunctionComp(4036) or
+      PhpFunctionComp(4175) or
+      PhpFunctionComp(4719) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc255: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(166) or
+      PhpFunctionComp(172) or
+      PhpFunctionComp(418) or
+      PhpFunctionComp(966) or
+      PhpFunctionComp(995) or
+      PhpFunctionComp(1326) or
+      PhpFunctionComp(1489) or
+      PhpFunctionComp(1556) or
+      PhpFunctionComp(2461) or
+      PhpFunctionComp(2770) or
+      PhpFunctionComp(2987) or
+      PhpFunctionComp(3278) or
+      PhpFunctionComp(5112) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc256: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(822) or
+      PhpFunctionComp(1713) or
+      PhpFunctionComp(1841) or
+      PhpFunctionComp(2136) or
+      PhpFunctionComp(2780) or
+      PhpFunctionComp(4395) or
+      PhpFunctionComp(4543) or
+      PhpFunctionComp(4644) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc257: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(153) or
+      PhpFunctionComp(1614) or
+      PhpFunctionComp(1690) or
+      PhpFunctionComp(2778) or
+      PhpFunctionComp(3621) or
+      PhpFunctionComp(3922) or
+      PhpFunctionComp(4287) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc258: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(850) or
+      PhpFunctionComp(1016) or
+      PhpFunctionComp(1230) or
+      PhpFunctionComp(1493) or
+      PhpFunctionComp(1621) or
+      PhpFunctionComp(2325) or
+      PhpFunctionComp(2728) or
+      PhpFunctionComp(2771) or
+      PhpFunctionComp(2806) or
+      PhpFunctionComp(4031) or
+      PhpFunctionComp(4153) or
+      PhpFunctionComp(4418) or
+      PhpFunctionComp(4630) or
+      PhpFunctionComp(4647) or
+      PhpFunctionComp(4677) or
+      PhpFunctionComp(4988) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc259: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(833) or
+      PhpFunctionComp(998) or
+      PhpFunctionComp(1280) or
+      PhpFunctionComp(2861) or
+      PhpFunctionComp(2938) or
+      PhpFunctionComp(2939) or
+      PhpFunctionComp(3251) or
+      PhpFunctionComp(3353) or
+      PhpFunctionComp(4430) or
+      PhpFunctionComp(4544) or
+      PhpFunctionComp(4751) or
+      PhpFunctionComp(4987) or
+      PhpFunctionComp(5055) or
+      PhpFunctionComp(5157) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc260: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(946) or
+      PhpFunctionComp(1045) or
+      PhpFunctionComp(2779) or
+      PhpFunctionComp(4641) or
+      PhpFunctionComp(4717) or
+      PhpFunctionComp(5017) or
+      PhpFunctionComp(5089) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc261: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(375) or
+      PhpFunctionComp(588) or
+      PhpFunctionComp(1551) or
+      PhpFunctionComp(1592) or
+      PhpFunctionComp(1595) or
+      PhpFunctionComp(1597) or
+      PhpFunctionComp(1705) or
+      PhpFunctionComp(1855) or
+      PhpFunctionComp(3272) or
+      PhpFunctionComp(3323) or
+      PhpFunctionComp(3754) or
+      PhpFunctionComp(3965) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc262: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(167) or
+      PhpFunctionComp(812) or
+      PhpFunctionComp(919) or
+      PhpFunctionComp(922) or
+      PhpFunctionComp(1404) or
+      PhpFunctionComp(3132) or
+      PhpFunctionComp(3197) or
+      PhpFunctionComp(3252) or
+      PhpFunctionComp(3912) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc263: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(1071) or
+      PhpFunctionComp(1573) or
+      PhpFunctionComp(3249) or
+      PhpFunctionComp(4141) or
+      PhpFunctionComp(4159) or
+      PhpFunctionComp(4188) or
+      PhpFunctionComp(4404) or
+      PhpFunctionComp(4455) or
+      PhpFunctionComp(4649) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc264: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(527) or
+      PhpFunctionComp(943) or
+      PhpFunctionComp(2931) or
+      PhpFunctionComp(3287) or
+      PhpFunctionComp(3292) or
+      PhpFunctionComp(3713) or
+      PhpFunctionComp(4421) or
+      PhpFunctionComp(4651) or
+      PhpFunctionComp(4944) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc265: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(875) or
+      PhpFunctionComp(986) or
+      PhpFunctionComp(1479) or
+      PhpFunctionComp(2041) or
+      PhpFunctionComp(2346) or
+      PhpFunctionComp(2721) or
+      PhpFunctionComp(2819) or
+      PhpFunctionComp(3961) or
+      PhpFunctionComp(4224) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc266: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(186) or
+      PhpFunctionComp(376) or
+      PhpFunctionComp(862) or
+      PhpFunctionComp(1073) or
+      PhpFunctionComp(1838) or
+      PhpFunctionComp(3892) or
+      PhpFunctionComp(4881) or
+      PhpFunctionComp(5008) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc267: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(1172) or
+      PhpFunctionComp(1569) or
+      PhpFunctionComp(2789) or
+      PhpFunctionComp(2827) or
+      PhpFunctionComp(4172) or
+      PhpFunctionComp(4982) or
+      PhpFunctionComp(5020) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc268: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(1079) or
+      PhpFunctionComp(1399) or
+      PhpFunctionComp(4472) or
+      PhpFunctionComp(4945) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc269: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(462) or
+      PhpFunctionComp(915) or
+      PhpFunctionComp(929) or
+      PhpFunctionComp(3838) or
+      PhpFunctionComp(4432) or
+      PhpFunctionComp(4434) or
+      PhpFunctionComp(4439) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc270: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(286) or
+      PhpFunctionComp(624) or
+      PhpFunctionComp(933) or
+      PhpFunctionComp(2807) or
+      PhpFunctionComp(3250) or
+      PhpFunctionComp(4045) or
+      PhpFunctionComp(4335) or
+      PhpFunctionComp(4426) or
+      PhpFunctionComp(4833) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc271: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(914) or
+      PhpFunctionComp(2321) or
+      PhpFunctionComp(2459) or
+      PhpFunctionComp(2518) or
+      PhpFunctionComp(2989) or
+      PhpFunctionComp(3719) or
+      PhpFunctionComp(4041) or
+      PhpFunctionComp(4639) or
+      PhpFunctionComp(4948) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc272: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(623) or
+      PhpFunctionComp(924) or
+      PhpFunctionComp(990) or
+      PhpFunctionComp(1315) or
+      PhpFunctionComp(4289) or
+      PhpFunctionComp(4716) then
+    Result := stkPhpFunction
+  else
+    Result := stkPhpIdentifier;
+end;
+
+function TSynWebEngine.PhpKeywordFunc273: TSynWebTokenKind;
+begin
+  if  PhpFunctionComp(819) or
+      PhpFunctionComp(1032) or
+      PhpFunctionComp(1619) or
+      PhpFunctionComp(2516) or
+      PhpFunctionComp(2901) or
+      PhpFunctionComp(3944) or
+      PhpFunctionComp(3966) or
+      PhpFunctionComp(4373) or
+      PhpFunctionComp(4488) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc274: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc274: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(282) or
-      Php_FunctionComp(746) or
-      Php_FunctionComp(2305) or
-      Php_FunctionComp(2733) or
-      Php_FunctionComp(3994) or
-      Php_FunctionComp(4054) or
-      Php_FunctionComp(4474) or
-      Php_FunctionComp(4487) then
+  if  PhpFunctionComp(282) or
+      PhpFunctionComp(746) or
+      PhpFunctionComp(2305) or
+      PhpFunctionComp(2733) or
+      PhpFunctionComp(3994) or
+      PhpFunctionComp(4054) or
+      PhpFunctionComp(4474) or
+      PhpFunctionComp(4487) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc275: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc275: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(243) or
-      Php_FunctionComp(1077) or
-      Php_FunctionComp(1531) or
-      Php_FunctionComp(2996) or
-      Php_FunctionComp(3996) or
-      Php_FunctionComp(4436) then
+  if  PhpFunctionComp(243) or
+      PhpFunctionComp(1077) or
+      PhpFunctionComp(1531) or
+      PhpFunctionComp(2996) or
+      PhpFunctionComp(3996) or
+      PhpFunctionComp(4436) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc276: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc276: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(571) or
-      Php_FunctionComp(621) or
-      Php_FunctionComp(948) or
-      Php_FunctionComp(994) or
-      Php_FunctionComp(1944) or
-      Php_FunctionComp(2391) or
-      Php_FunctionComp(2816) or
-      Php_FunctionComp(3619) then
+  if  PhpFunctionComp(571) or
+      PhpFunctionComp(621) or
+      PhpFunctionComp(948) or
+      PhpFunctionComp(994) or
+      PhpFunctionComp(1944) or
+      PhpFunctionComp(2391) or
+      PhpFunctionComp(2816) or
+      PhpFunctionComp(3619) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc277: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc277: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(176) or
-      Php_FunctionComp(2508) or
-      Php_FunctionComp(2973) or
-      Php_FunctionComp(3962) or
-      Php_FunctionComp(4037) or
-      Php_FunctionComp(4229) or
-      Php_FunctionComp(4411) then
+  if  PhpFunctionComp(176) or
+      PhpFunctionComp(2508) or
+      PhpFunctionComp(2973) or
+      PhpFunctionComp(3962) or
+      PhpFunctionComp(4037) or
+      PhpFunctionComp(4229) or
+      PhpFunctionComp(4411) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc278: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc278: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1039) or
-      Php_FunctionComp(1041) or
-      Php_FunctionComp(1052) or
-      Php_FunctionComp(3087) or
-      Php_FunctionComp(4422) or
-      Php_FunctionComp(4459) or
-      Php_FunctionComp(4645) or
-      Php_FunctionComp(4723) then
+  if  PhpFunctionComp(1039) or
+      PhpFunctionComp(1041) or
+      PhpFunctionComp(1052) or
+      PhpFunctionComp(3087) or
+      PhpFunctionComp(4422) or
+      PhpFunctionComp(4459) or
+      PhpFunctionComp(4645) or
+      PhpFunctionComp(4723) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc279: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc279: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(866) or
-      Php_FunctionComp(2296) or
-      Php_FunctionComp(4400) or
-      Php_FunctionComp(4991) or
-      Php_FunctionComp(5010) then
+  if  PhpFunctionComp(866) or
+      PhpFunctionComp(2296) or
+      PhpFunctionComp(4400) or
+      PhpFunctionComp(4991) or
+      PhpFunctionComp(5010) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc280: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc280: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(622) or
-      Php_FunctionComp(2825) or
-      Php_FunctionComp(3281) or
-      Php_FunctionComp(3999) or
-      Php_FunctionComp(4286) or
-      Php_FunctionComp(4947) then
+  if  PhpFunctionComp(622) or
+      PhpFunctionComp(2825) or
+      PhpFunctionComp(3281) or
+      PhpFunctionComp(3999) or
+      PhpFunctionComp(4286) or
+      PhpFunctionComp(4947) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc281: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc281: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(173) or
-      Php_FunctionComp(283) or
-      Php_FunctionComp(4564) or
-      Php_FunctionComp(4843) or
-      Php_FunctionComp(5014) or
-      Php_FunctionComp(5026) then
+  if  PhpFunctionComp(173) or
+      PhpFunctionComp(283) or
+      PhpFunctionComp(4564) or
+      PhpFunctionComp(4843) or
+      PhpFunctionComp(5014) or
+      PhpFunctionComp(5026) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc282: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc282: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(836) or
-      Php_FunctionComp(878) or
-      Php_FunctionComp(964) or
-      Php_FunctionComp(3284) then
+  if  PhpFunctionComp(836) or
+      PhpFunctionComp(878) or
+      PhpFunctionComp(964) or
+      PhpFunctionComp(3284) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc283: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc283: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(858) or
-      Php_FunctionComp(937) or
-      Php_FunctionComp(1048) or
-      Php_FunctionComp(4801) or
-      Php_FunctionComp(4880) then
+  if  PhpFunctionComp(858) or
+      PhpFunctionComp(937) or
+      PhpFunctionComp(1048) or
+      PhpFunctionComp(4801) or
+      PhpFunctionComp(4880) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc284: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc284: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1617) or
-      Php_FunctionComp(4157) or
-      Php_FunctionComp(4550) then
+  if  PhpFunctionComp(1617) or
+      PhpFunctionComp(4157) or
+      PhpFunctionComp(4550) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc285: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc285: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(201) or
-      Php_FunctionComp(891) or
-      Php_FunctionComp(997) or
-      Php_FunctionComp(2013) or
-      Php_FunctionComp(2465) or
-      Php_FunctionComp(3832) or
-      Php_FunctionComp(4481) or
-      Php_FunctionComp(4731) or
-      Php_FunctionComp(4919) then
+  if  PhpFunctionComp(201) or
+      PhpFunctionComp(891) or
+      PhpFunctionComp(997) or
+      PhpFunctionComp(2013) or
+      PhpFunctionComp(2465) or
+      PhpFunctionComp(3832) or
+      PhpFunctionComp(4481) or
+      PhpFunctionComp(4731) or
+      PhpFunctionComp(4919) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc286: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc286: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(815) or
-      Php_FunctionComp(818) or
-      Php_FunctionComp(871) or
-      Php_FunctionComp(3291) or
-      Php_FunctionComp(4168) or
-      Php_FunctionComp(5021) then
+  if  PhpFunctionComp(815) or
+      PhpFunctionComp(818) or
+      PhpFunctionComp(871) or
+      PhpFunctionComp(3291) or
+      PhpFunctionComp(4168) or
+      PhpFunctionComp(5021) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc287: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc287: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(854) or
-      Php_FunctionComp(1708) or
-      Php_FunctionComp(4203) or
-      Php_FunctionComp(4204) or
-      Php_FunctionComp(4313) or
-      Php_FunctionComp(4993) then
+  if  PhpFunctionComp(854) or
+      PhpFunctionComp(1708) or
+      PhpFunctionComp(4203) or
+      PhpFunctionComp(4204) or
+      PhpFunctionComp(4313) or
+      PhpFunctionComp(4993) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc288: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc288: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(593) or
-      Php_FunctionComp(2069) or
-      Php_FunctionComp(2393) or
-      Php_FunctionComp(3059) or
-      Php_FunctionComp(4154) or
-      Php_FunctionComp(4320) or
-      Php_FunctionComp(4648) or
-      Php_FunctionComp(4977) then
+  if  PhpFunctionComp(593) or
+      PhpFunctionComp(2069) or
+      PhpFunctionComp(2393) or
+      PhpFunctionComp(3059) or
+      PhpFunctionComp(4154) or
+      PhpFunctionComp(4320) or
+      PhpFunctionComp(4648) or
+      PhpFunctionComp(4977) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc289: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc289: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(972) or
-      Php_FunctionComp(1070) or
-      Php_FunctionComp(2821) or
-      Php_FunctionComp(3294) or
-      Php_FunctionComp(4462) then
+  if  PhpFunctionComp(972) or
+      PhpFunctionComp(1070) or
+      PhpFunctionComp(2821) or
+      PhpFunctionComp(3294) or
+      PhpFunctionComp(4462) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc290: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc290: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(526) or
-      Php_FunctionComp(807) or
-      Php_FunctionComp(1087) or
-      Php_FunctionComp(2466) or
-      Php_FunctionComp(2820) or
-      Php_FunctionComp(2955) or
-      Php_FunctionComp(5025) then
+  if  PhpFunctionComp(526) or
+      PhpFunctionComp(807) or
+      PhpFunctionComp(1087) or
+      PhpFunctionComp(2466) or
+      PhpFunctionComp(2820) or
+      PhpFunctionComp(2955) or
+      PhpFunctionComp(5025) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc291: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc291: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1300) or
-      Php_FunctionComp(2495) or
-      Php_FunctionComp(2809) or
-      Php_FunctionComp(5052) then
+  if  PhpFunctionComp(1300) or
+      PhpFunctionComp(2495) or
+      PhpFunctionComp(2809) or
+      PhpFunctionComp(5052) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc292: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc292: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(852) or
-      Php_FunctionComp(1293) or
-      Php_FunctionComp(2768) or
-      Php_FunctionComp(2805) or
-      Php_FunctionComp(3285) or
-      Php_FunctionComp(3916) then
+  if  PhpFunctionComp(852) or
+      PhpFunctionComp(1293) or
+      PhpFunctionComp(2768) or
+      PhpFunctionComp(2805) or
+      PhpFunctionComp(3285) or
+      PhpFunctionComp(3916) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc293: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc293: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(811) or
-      Php_FunctionComp(901) or
-      Php_FunctionComp(1655) or
-      Php_FunctionComp(2794) or
-      Php_FunctionComp(4740) or
-      Php_FunctionComp(4979) then
+  if  PhpFunctionComp(811) or
+      PhpFunctionComp(901) or
+      PhpFunctionComp(1655) or
+      PhpFunctionComp(2794) or
+      PhpFunctionComp(4740) or
+      PhpFunctionComp(4979) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc294: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc294: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1013) or
-      Php_FunctionComp(3894) or
-      Php_FunctionComp(4227) or
-      Php_FunctionComp(5019) or
-      Php_FunctionComp(5040) then
+  if  PhpFunctionComp(1013) or
+      PhpFunctionComp(3894) or
+      PhpFunctionComp(4227) or
+      PhpFunctionComp(5019) or
+      PhpFunctionComp(5040) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc295: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc295: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(179) or
-      Php_FunctionComp(809) or
-      Php_FunctionComp(898) or
-      Php_FunctionComp(899) or
-      Php_FunctionComp(2971) or
-      Php_FunctionComp(4642) then
+  if  PhpFunctionComp(179) or
+      PhpFunctionComp(809) or
+      PhpFunctionComp(898) or
+      PhpFunctionComp(899) or
+      PhpFunctionComp(2971) or
+      PhpFunctionComp(4642) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc296: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc296: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(169) or
-      Php_FunctionComp(935) or
-      Php_FunctionComp(2817) or
-      Php_FunctionComp(4435) then
+  if  PhpFunctionComp(169) or
+      PhpFunctionComp(935) or
+      PhpFunctionComp(2817) or
+      PhpFunctionComp(4435) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc297: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc297: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(4005) then
+  if  PhpFunctionComp(4005) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc298: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc298: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(398) or
-      Php_FunctionComp(876) or
-      Php_FunctionComp(1000) or
-      Php_FunctionComp(1537) or
-      Php_FunctionComp(2218) or
-      Php_FunctionComp(4650) then
+  if  PhpFunctionComp(398) or
+      PhpFunctionComp(876) or
+      PhpFunctionComp(1000) or
+      PhpFunctionComp(1537) or
+      PhpFunctionComp(2218) or
+      PhpFunctionComp(4650) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc299: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc299: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(155) or
-      Php_FunctionComp(427) or
-      Php_FunctionComp(865) or
-      Php_FunctionComp(873) or
-      Php_FunctionComp(1227) or
-      Php_FunctionComp(1615) or
-      Php_FunctionComp(2080) or
-      Php_FunctionComp(2800) or
-      Php_FunctionComp(3976) or
-      Php_FunctionComp(4158) or
-      Php_FunctionComp(4652) or
-      Php_FunctionComp(4742) then
+  if  PhpFunctionComp(155) or
+      PhpFunctionComp(427) or
+      PhpFunctionComp(865) or
+      PhpFunctionComp(873) or
+      PhpFunctionComp(1227) or
+      PhpFunctionComp(1615) or
+      PhpFunctionComp(2080) or
+      PhpFunctionComp(2800) or
+      PhpFunctionComp(3976) or
+      PhpFunctionComp(4158) or
+      PhpFunctionComp(4652) or
+      PhpFunctionComp(4742) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc300: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc300: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(181) or
-      Php_FunctionComp(859) or
-      Php_FunctionComp(1620) or
-      Php_FunctionComp(5047) then
+  if  PhpFunctionComp(181) or
+      PhpFunctionComp(859) or
+      PhpFunctionComp(1620) or
+      PhpFunctionComp(5047) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc302: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc302: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(944) or
-      Php_FunctionComp(2749) or
-      Php_FunctionComp(4721) then
+  if  PhpFunctionComp(944) or
+      PhpFunctionComp(2749) or
+      PhpFunctionComp(4721) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc303: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc303: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(987) or
-      Php_FunctionComp(2198) or
-      Php_FunctionComp(5034) then
+  if  PhpFunctionComp(987) or
+      PhpFunctionComp(2198) or
+      PhpFunctionComp(5034) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc304: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc304: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(863) or
-      Php_FunctionComp(2489) or
-      Php_FunctionComp(4164) or
-      Php_FunctionComp(4741) then
+  if  PhpFunctionComp(863) or
+      PhpFunctionComp(2489) or
+      PhpFunctionComp(4164) or
+      PhpFunctionComp(4741) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc305: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc305: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(289) or
-      Php_FunctionComp(1714) or
-      Php_FunctionComp(3269) or
-      Php_FunctionComp(4173) then
+  if  PhpFunctionComp(289) or
+      PhpFunctionComp(1714) or
+      PhpFunctionComp(3269) or
+      PhpFunctionComp(4173) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc306: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc306: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(2799) or
-      Php_FunctionComp(4722) then
+  if  PhpFunctionComp(2799) or
+      PhpFunctionComp(4722) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc307: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc307: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1304) then
+  if  PhpFunctionComp(1304) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc308: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc308: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(2672) or
-      Php_FunctionComp(3997) then
+  if  PhpFunctionComp(2672) or
+      PhpFunctionComp(3997) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc309: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc309: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1711) or
-      Php_FunctionComp(2750) or
-      Php_FunctionComp(4013) or
-      Php_FunctionComp(4384) or
-      Php_FunctionComp(4416) or
-      Php_FunctionComp(4489) or
-      Php_FunctionComp(5161) then
+  if  PhpFunctionComp(1711) or
+      PhpFunctionComp(2750) or
+      PhpFunctionComp(4013) or
+      PhpFunctionComp(4384) or
+      PhpFunctionComp(4416) or
+      PhpFunctionComp(4489) or
+      PhpFunctionComp(5161) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc310: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc310: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(947) or
-      Php_FunctionComp(1002) or
-      Php_FunctionComp(2302) or
-      Php_FunctionComp(4461) or
-      Php_FunctionComp(4640) or
-      Php_FunctionComp(4646) then
+  if  PhpFunctionComp(947) or
+      PhpFunctionComp(1002) or
+      PhpFunctionComp(2302) or
+      PhpFunctionComp(4461) or
+      PhpFunctionComp(4640) or
+      PhpFunctionComp(4646) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc311: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc311: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(2297) or
-      Php_FunctionComp(4160) or
-      Php_FunctionComp(4163) then
+  if  PhpFunctionComp(2297) or
+      PhpFunctionComp(4160) or
+      PhpFunctionComp(4163) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc312: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc312: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(868) or
-      Php_FunctionComp(2197) or
-      Php_FunctionComp(2470) or
-      Php_FunctionComp(2553) then
+  if  PhpFunctionComp(868) or
+      PhpFunctionComp(2197) or
+      PhpFunctionComp(2470) or
+      PhpFunctionComp(2553) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc313: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc313: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(2671) or
-      Php_FunctionComp(4942) then
+  if  PhpFunctionComp(2671) or
+      PhpFunctionComp(4942) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc314: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc314: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(156) or
-      Php_FunctionComp(828) or
-      Php_FunctionComp(949) then
+  if  PhpFunctionComp(156) or
+      PhpFunctionComp(828) or
+      PhpFunctionComp(949) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc315: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc315: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5035) then
+  if  PhpFunctionComp(5035) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc316: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc316: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(927) or
-      Php_FunctionComp(975) or
-      Php_FunctionComp(1014) or
-      Php_FunctionComp(2772) then
+  if  PhpFunctionComp(927) or
+      PhpFunctionComp(975) or
+      PhpFunctionComp(1014) or
+      PhpFunctionComp(2772) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc317: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc317: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(867) or
-      Php_FunctionComp(3058) or
-      Php_FunctionComp(4460) or
-      Php_FunctionComp(4743) then
+  if  PhpFunctionComp(867) or
+      PhpFunctionComp(3058) or
+      PhpFunctionComp(4460) or
+      PhpFunctionComp(4743) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc318: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc318: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(842) then
+  if  PhpFunctionComp(842) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc319: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc319: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(855) or
-      Php_FunctionComp(5050) then
+  if  PhpFunctionComp(855) or
+      PhpFunctionComp(5050) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc321: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc321: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1040) or
-      Php_FunctionComp(4725) then
+  if  PhpFunctionComp(1040) or
+      PhpFunctionComp(4725) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc322: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc322: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(2745) or
-      Php_FunctionComp(3279) or
-      Php_FunctionComp(4720) or
-      Php_FunctionComp(5038) then
+  if  PhpFunctionComp(2745) or
+      PhpFunctionComp(3279) or
+      PhpFunctionComp(4720) or
+      PhpFunctionComp(5038) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc323: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc323: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(175) or
-      Php_FunctionComp(1550) or
-      Php_FunctionComp(1662) or
-      Php_FunctionComp(4165) or
-      Php_FunctionComp(4403) then
+  if  PhpFunctionComp(175) or
+      PhpFunctionComp(1550) or
+      PhpFunctionComp(1662) or
+      PhpFunctionComp(4165) or
+      PhpFunctionComp(4403) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc324: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc324: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5053) then
+  if  PhpFunctionComp(5053) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc325: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc325: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(853) then
+  if  PhpFunctionComp(853) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc326: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc326: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1015) or
-      Php_FunctionComp(1078) or
-      Php_FunctionComp(1616) then
+  if  PhpFunctionComp(1015) or
+      PhpFunctionComp(1078) or
+      PhpFunctionComp(1616) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc327: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc327: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(920) or
-      Php_FunctionComp(2824) or
-      Php_FunctionComp(3934) or
-      Php_FunctionComp(5041) then
+  if  PhpFunctionComp(920) or
+      PhpFunctionComp(2824) or
+      PhpFunctionComp(3934) or
+      PhpFunctionComp(5041) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc328: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc328: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(810) or
-      Php_FunctionComp(2496) or
-      Php_FunctionComp(2839) then
+  if  PhpFunctionComp(810) or
+      PhpFunctionComp(2496) or
+      PhpFunctionComp(2839) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc329: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc329: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(945) then
+  if  PhpFunctionComp(945) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc330: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc330: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(996) or
-      Php_FunctionComp(1568) then
+  if  PhpFunctionComp(996) or
+      PhpFunctionComp(1568) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc331: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc331: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(829) or
-      Php_FunctionComp(1001) or
-      Php_FunctionComp(4978) then
+  if  PhpFunctionComp(829) or
+      PhpFunctionComp(1001) or
+      PhpFunctionComp(4978) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc332: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc332: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(874) or
-      Php_FunctionComp(2512) or
-      Php_FunctionComp(3895) then
+  if  PhpFunctionComp(874) or
+      PhpFunctionComp(2512) or
+      PhpFunctionComp(3895) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc333: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc333: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(861) or
-      Php_FunctionComp(5044) then
+  if  PhpFunctionComp(861) or
+      PhpFunctionComp(5044) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc334: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc334: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(185) or
-      Php_FunctionComp(846) or
-      Php_FunctionComp(1294) or
-      Php_FunctionComp(2511) or
-      Php_FunctionComp(4170) or
-      Php_FunctionComp(4996) then
+  if  PhpFunctionComp(185) or
+      PhpFunctionComp(846) or
+      PhpFunctionComp(1294) or
+      PhpFunctionComp(2511) or
+      PhpFunctionComp(4170) or
+      PhpFunctionComp(4996) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc335: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc335: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(827) or
-      Php_FunctionComp(1570) then
+  if  PhpFunctionComp(827) or
+      PhpFunctionComp(1570) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc336: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc336: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1012) or
-      Php_FunctionComp(5031) or
-      Php_FunctionComp(5156) then
+  if  PhpFunctionComp(1012) or
+      PhpFunctionComp(5031) or
+      PhpFunctionComp(5156) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc337: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc337: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(847) or
-      Php_FunctionComp(864) or
-      Php_FunctionComp(1011) then
+  if  PhpFunctionComp(847) or
+      PhpFunctionComp(864) or
+      PhpFunctionComp(1011) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc338: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc338: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(182) or
-      Php_FunctionComp(845) or
-      Php_FunctionComp(860) or
-      Php_FunctionComp(3324) or
-      Php_FunctionComp(4166) or
-      Php_FunctionComp(5051) then
+  if  PhpFunctionComp(182) or
+      PhpFunctionComp(845) or
+      PhpFunctionComp(860) or
+      PhpFunctionComp(3324) or
+      PhpFunctionComp(4166) or
+      PhpFunctionComp(5051) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc339: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc339: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(917) or
-      Php_FunctionComp(2514) or
-      Php_FunctionComp(2826) or
-      Php_FunctionComp(4420) or
-      Php_FunctionComp(5012) or
-      Php_FunctionComp(5030) then
+  if  PhpFunctionComp(917) or
+      PhpFunctionComp(2514) or
+      PhpFunctionComp(2826) or
+      PhpFunctionComp(4420) or
+      PhpFunctionComp(5012) or
+      PhpFunctionComp(5030) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc340: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc340: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(820) then
+  if  PhpFunctionComp(820) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc341: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc341: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(938) or
-      Php_FunctionComp(4169) or
-      Php_FunctionComp(5039) then
+  if  PhpFunctionComp(938) or
+      PhpFunctionComp(4169) or
+      PhpFunctionComp(5039) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc343: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc343: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(183) then
+  if  PhpFunctionComp(183) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc344: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc344: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5028) or
-      Php_FunctionComp(5162) then
+  if  PhpFunctionComp(5028) or
+      PhpFunctionComp(5162) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc345: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc345: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(840) then
+  if  PhpFunctionComp(840) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc346: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc346: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1572) or
-      Php_FunctionComp(5049) then
+  if  PhpFunctionComp(1572) or
+      PhpFunctionComp(5049) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc347: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc347: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(3977) then
+  if  PhpFunctionComp(3977) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc348: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc348: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(168) then
+  if  PhpFunctionComp(168) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc349: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc349: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5037) then
+  if  PhpFunctionComp(5037) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc351: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc351: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(816) then
+  if  PhpFunctionComp(816) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc352: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc352: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(856) then
+  if  PhpFunctionComp(856) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc353: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc353: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(881) or
-      Php_FunctionComp(4171) then
+  if  PhpFunctionComp(881) or
+      PhpFunctionComp(4171) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc354: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc354: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(2462) then
+  if  PhpFunctionComp(2462) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc357: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc357: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(841) or
-      Php_FunctionComp(2294) then
+  if  PhpFunctionComp(841) or
+      PhpFunctionComp(2294) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc358: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc358: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(813) then
+  if  PhpFunctionComp(813) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc359: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc359: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(184) then
+  if  PhpFunctionComp(184) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc360: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc360: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(4549) then
+  if  PhpFunctionComp(4549) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc361: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc361: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(4191) or
-      Php_FunctionComp(4950) or
-      Php_FunctionComp(5006) then
+  if  PhpFunctionComp(4191) or
+      PhpFunctionComp(4950) or
+      PhpFunctionComp(5006) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc364: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc364: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(2463) then
+  if  PhpFunctionComp(2463) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc366: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc366: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5045) then
+  if  PhpFunctionComp(5045) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc369: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc369: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5032) then
+  if  PhpFunctionComp(5032) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc370: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc370: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1571) or
-      Php_FunctionComp(4997) then
+  if  PhpFunctionComp(1571) or
+      PhpFunctionComp(4997) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc373: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc373: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(287) or
-      Php_FunctionComp(821) then
+  if  PhpFunctionComp(287) or
+      PhpFunctionComp(821) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc374: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc374: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(2298) then
+  if  PhpFunctionComp(2298) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc375: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc375: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(839) then
+  if  PhpFunctionComp(839) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc376: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc376: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(2515) or
-      Php_FunctionComp(4992) then
+  if  PhpFunctionComp(2515) or
+      PhpFunctionComp(4992) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc377: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc377: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(843) then
+  if  PhpFunctionComp(843) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc385: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc385: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5007) then
+  if  PhpFunctionComp(5007) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc387: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc387: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5092) then
+  if  PhpFunctionComp(5092) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc393: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc393: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(4167) then
+  if  PhpFunctionComp(4167) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc399: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc399: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5097) then
+  if  PhpFunctionComp(5097) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc402: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc402: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(2494) then
+  if  PhpFunctionComp(2494) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc407: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc407: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(1006) then
+  if  PhpFunctionComp(1006) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc426: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc426: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(900) then
+  if  PhpFunctionComp(900) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc433: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc433: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5096) then
+  if  PhpFunctionComp(5096) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc439: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc439: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5098) then
+  if  PhpFunctionComp(5098) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc442: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc442: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(921) or
-      Php_FunctionComp(4995) then
+  if  PhpFunctionComp(921) or
+      PhpFunctionComp(4995) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc443: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc443: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(844) then
+  if  PhpFunctionComp(844) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc445: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc445: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(999) then
+  if  PhpFunctionComp(999) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc450: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc450: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(2513) then
+  if  PhpFunctionComp(2513) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc465: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc465: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5099) then
+  if  PhpFunctionComp(5099) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc466: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc466: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(817) or
-      Php_FunctionComp(5100) then
+  if  PhpFunctionComp(817) or
+      PhpFunctionComp(5100) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc487: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc487: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5094) then
+  if  PhpFunctionComp(5094) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc491: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc491: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5093) then
+  if  PhpFunctionComp(5093) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc496: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc496: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5011) then
+  if  PhpFunctionComp(5011) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc520: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc520: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(5095) then
+  if  PhpFunctionComp(5095) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc541: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc541: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(848) then
+  if  PhpFunctionComp(848) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
 end;
 
-function TSynWebEngine.PhP_KeywordFunc560: TSynWebTokenKind;
+function TSynWebEngine.PhpKeywordFunc560: TSynWebTokenKind;
 begin
-  if  Php_FunctionComp(849) then
+  if  PhpFunctionComp(849) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;

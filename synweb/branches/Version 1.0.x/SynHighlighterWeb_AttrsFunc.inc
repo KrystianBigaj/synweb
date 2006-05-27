@@ -1,691 +1,691 @@
-function TSynWebEngine.Html_AttrUndef: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrUndef: TSynWebTokenKind;
 begin
   Result:=stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc13: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc13: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(55) then
+  if  HtmlAttrKeyComp(55) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc15: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc15: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(45) then
+  if  HtmlAttrKeyComp(45) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc23: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc23: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(0) then
+  if  HtmlAttrKeyComp(0) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc26: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc26: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(32) then
+  if  HtmlAttrKeyComp(32) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc27: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc27: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(23) then
+  if  HtmlAttrKeyComp(23) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc30: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc30: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(15) then
+  if  HtmlAttrKeyComp(15) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc31: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc31: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(40) then
+  if  HtmlAttrKeyComp(40) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc32: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc32: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(57) or
-      Html_AttrKeyComp(65) then
+  if  HtmlAttrKeyComp(57) or
+      HtmlAttrKeyComp(65) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc33: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc33: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(7) or
-      Html_AttrKeyComp(68) then
+  if  HtmlAttrKeyComp(7) or
+      HtmlAttrKeyComp(68) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc34: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc34: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(58) then
+  if  HtmlAttrKeyComp(58) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc35: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc35: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(95) then
+  if  HtmlAttrKeyComp(95) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc37: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc37: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(19) or
-      Html_AttrKeyComp(51) then
+  if  HtmlAttrKeyComp(19) or
+      HtmlAttrKeyComp(51) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc38: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc38: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(39) then
+  if  HtmlAttrKeyComp(39) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc39: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc39: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(18) or
-      Html_AttrKeyComp(22) or
-      Html_AttrKeyComp(46) then
+  if  HtmlAttrKeyComp(18) or
+      HtmlAttrKeyComp(22) or
+      HtmlAttrKeyComp(46) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc40: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc40: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(107) then
+  if  HtmlAttrKeyComp(107) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc43: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc43: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(5) or
-      Html_AttrKeyComp(47) then
+  if  HtmlAttrKeyComp(5) or
+      HtmlAttrKeyComp(47) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc45: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc45: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(96) then
+  if  HtmlAttrKeyComp(96) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc46: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc46: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(60) then
+  if  HtmlAttrKeyComp(60) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc47: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc47: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(6) then
+  if  HtmlAttrKeyComp(6) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc48: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc48: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(1) or
-      Html_AttrKeyComp(33) or
-      Html_AttrKeyComp(38) then
+  if  HtmlAttrKeyComp(1) or
+      HtmlAttrKeyComp(33) or
+      HtmlAttrKeyComp(38) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc49: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc49: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(27) or
-      Html_AttrKeyComp(104) then
+  if  HtmlAttrKeyComp(27) or
+      HtmlAttrKeyComp(104) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc50: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc50: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(106) then
+  if  HtmlAttrKeyComp(106) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc52: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc52: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(53) then
+  if  HtmlAttrKeyComp(53) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc53: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc53: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(9) or
-      Html_AttrKeyComp(100) then
+  if  HtmlAttrKeyComp(9) or
+      HtmlAttrKeyComp(100) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc54: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc54: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(20) or
-      Html_AttrKeyComp(24) then
+  if  HtmlAttrKeyComp(20) or
+      HtmlAttrKeyComp(24) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc55: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc55: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(73) then
+  if  HtmlAttrKeyComp(73) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc56: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc56: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(41) then
+  if  HtmlAttrKeyComp(41) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc57: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc57: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(16) or
-      Html_AttrKeyComp(50) then
+  if  HtmlAttrKeyComp(16) or
+      HtmlAttrKeyComp(50) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc58: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc58: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(56) or
-      Html_AttrKeyComp(101) then
+  if  HtmlAttrKeyComp(56) or
+      HtmlAttrKeyComp(101) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc59: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc59: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(105) then
+  if  HtmlAttrKeyComp(105) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc60: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc60: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(49) then
+  if  HtmlAttrKeyComp(49) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc61: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc61: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(82) or
-      Html_AttrKeyComp(119) then
+  if  HtmlAttrKeyComp(82) or
+      HtmlAttrKeyComp(119) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc62: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc62: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(4) or
-      Html_AttrKeyComp(12) then
+  if  HtmlAttrKeyComp(4) or
+      HtmlAttrKeyComp(12) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc63: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc63: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(26) then
+  if  HtmlAttrKeyComp(26) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc64: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc64: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(124) then
+  if  HtmlAttrKeyComp(124) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc65: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc65: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(66) or
-      Html_AttrKeyComp(118) then
+  if  HtmlAttrKeyComp(66) or
+      HtmlAttrKeyComp(118) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc66: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc66: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(8) or
-      Html_AttrKeyComp(36) or
-      Html_AttrKeyComp(44) or
-      Html_AttrKeyComp(69) or
-      Html_AttrKeyComp(71) or
-      Html_AttrKeyComp(115) or
-      Html_AttrKeyComp(116) or
-      Html_AttrKeyComp(123) then
+  if  HtmlAttrKeyComp(8) or
+      HtmlAttrKeyComp(36) or
+      HtmlAttrKeyComp(44) or
+      HtmlAttrKeyComp(69) or
+      HtmlAttrKeyComp(71) or
+      HtmlAttrKeyComp(115) or
+      HtmlAttrKeyComp(116) or
+      HtmlAttrKeyComp(123) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc67: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc67: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(21) or
-      Html_AttrKeyComp(75) or
-      Html_AttrKeyComp(76) then
+  if  HtmlAttrKeyComp(21) or
+      HtmlAttrKeyComp(75) or
+      HtmlAttrKeyComp(76) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc68: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc68: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(59) or
-      Html_AttrKeyComp(122) then
+  if  HtmlAttrKeyComp(59) or
+      HtmlAttrKeyComp(122) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc69: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc69: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(114) then
+  if  HtmlAttrKeyComp(114) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc71: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc71: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(29) or
-      Html_AttrKeyComp(42) or
-      Html_AttrKeyComp(52) or
-      Html_AttrKeyComp(113) then
+  if  HtmlAttrKeyComp(29) or
+      HtmlAttrKeyComp(42) or
+      HtmlAttrKeyComp(52) or
+      HtmlAttrKeyComp(113) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc72: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc72: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(11) then
+  if  HtmlAttrKeyComp(11) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc73: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc73: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(103) then
+  if  HtmlAttrKeyComp(103) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc74: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc74: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(17) or
-      Html_AttrKeyComp(31) then
+  if  HtmlAttrKeyComp(17) or
+      HtmlAttrKeyComp(31) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc75: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc75: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(97) or
-      Html_AttrKeyComp(99) or
-      Html_AttrKeyComp(117) then
+  if  HtmlAttrKeyComp(97) or
+      HtmlAttrKeyComp(99) or
+      HtmlAttrKeyComp(117) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc77: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc77: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(37) or
-      Html_AttrKeyComp(125) then
+  if  HtmlAttrKeyComp(37) or
+      HtmlAttrKeyComp(125) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc78: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc78: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(109) then
+  if  HtmlAttrKeyComp(109) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc79: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc79: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(61) or
-      Html_AttrKeyComp(112) then
+  if  HtmlAttrKeyComp(61) or
+      HtmlAttrKeyComp(112) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc80: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc80: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(28) then
+  if  HtmlAttrKeyComp(28) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc81: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc81: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(92) or
-      Html_AttrKeyComp(110) then
+  if  HtmlAttrKeyComp(92) or
+      HtmlAttrKeyComp(110) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc82: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc82: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(74) or
-      Html_AttrKeyComp(127) then
+  if  HtmlAttrKeyComp(74) or
+      HtmlAttrKeyComp(127) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc85: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc85: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(77) or
-      Html_AttrKeyComp(108) then
+  if  HtmlAttrKeyComp(77) or
+      HtmlAttrKeyComp(108) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc87: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc87: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(13) or
-      Html_AttrKeyComp(72) or
-      Html_AttrKeyComp(126) then
+  if  HtmlAttrKeyComp(13) or
+      HtmlAttrKeyComp(72) or
+      HtmlAttrKeyComp(126) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc88: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc88: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(43) then
+  if  HtmlAttrKeyComp(43) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc91: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc91: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(3) or
-      Html_AttrKeyComp(30) then
+  if  HtmlAttrKeyComp(3) or
+      HtmlAttrKeyComp(30) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc93: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc93: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(25) or
-      Html_AttrKeyComp(78) or
-      Html_AttrKeyComp(89) then
+  if  HtmlAttrKeyComp(25) or
+      HtmlAttrKeyComp(78) or
+      HtmlAttrKeyComp(89) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc94: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc94: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(94) then
+  if  HtmlAttrKeyComp(94) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc96: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc96: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(10) or
-      Html_AttrKeyComp(88) or
-      Html_AttrKeyComp(91) then
+  if  HtmlAttrKeyComp(10) or
+      HtmlAttrKeyComp(88) or
+      HtmlAttrKeyComp(91) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc98: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc98: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(93) then
+  if  HtmlAttrKeyComp(93) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc101: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc101: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(14) then
+  if  HtmlAttrKeyComp(14) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc102: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc102: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(121) then
+  if  HtmlAttrKeyComp(121) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc103: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc103: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(2) then
+  if  HtmlAttrKeyComp(2) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc104: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc104: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(64) then
+  if  HtmlAttrKeyComp(64) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc105: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc105: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(48) then
+  if  HtmlAttrKeyComp(48) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc106: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc106: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(98) then
+  if  HtmlAttrKeyComp(98) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc107: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc107: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(81) then
+  if  HtmlAttrKeyComp(81) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc108: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc108: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(67) then
+  if  HtmlAttrKeyComp(67) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc109: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc109: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(102) then
+  if  HtmlAttrKeyComp(102) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc110: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc110: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(111) then
+  if  HtmlAttrKeyComp(111) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc111: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc111: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(70) then
+  if  HtmlAttrKeyComp(70) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc113: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc113: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(90) then
+  if  HtmlAttrKeyComp(90) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc114: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc114: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(35) then
+  if  HtmlAttrKeyComp(35) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc119: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc119: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(34) or
-      Html_AttrKeyComp(54) or
-      Html_AttrKeyComp(62) then
+  if  HtmlAttrKeyComp(34) or
+      HtmlAttrKeyComp(54) or
+      HtmlAttrKeyComp(62) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc126: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc126: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(63) or
-      Html_AttrKeyComp(79) then
+  if  HtmlAttrKeyComp(63) or
+      HtmlAttrKeyComp(79) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc127: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc127: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(120) then
+  if  HtmlAttrKeyComp(120) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc139: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc139: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(87) then
+  if  HtmlAttrKeyComp(87) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc147: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc147: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(80) then
+  if  HtmlAttrKeyComp(80) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc157: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc157: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(84) then
+  if  HtmlAttrKeyComp(84) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc158: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc158: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(83) or
-      Html_AttrKeyComp(85) then
+  if  HtmlAttrKeyComp(83) or
+      HtmlAttrKeyComp(85) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;
 end;
 
-function TSynWebEngine.Html_AttrFunc162: TSynWebTokenKind;
+function TSynWebEngine.HtmlAttrFunc162: TSynWebTokenKind;
 begin
-  if  Html_AttrKeyComp(86) then
+  if  HtmlAttrKeyComp(86) then
     Result := stkHtmlTagKey
   else
     Result := stkHtmlTagKeyUndef;

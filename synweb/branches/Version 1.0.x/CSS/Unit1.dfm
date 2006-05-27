@@ -422,7 +422,7 @@ object Form1: TForm1
     end
     object integer3: TMenuItem
       Tag = 22
-      Caption = '[integer]'
+      Caption = '[Integer]'
       OnClick = Html401Strict1Click
     end
     object integer2: TMenuItem
@@ -437,7 +437,7 @@ object Form1: TForm1
     end
     object string2: TMenuItem
       Tag = 19
-      Caption = '[string]'
+      Caption = '[String]'
       OnClick = Html401Strict1Click
     end
     object color2: TMenuItem

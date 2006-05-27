@@ -1,309 +1,309 @@
-function TSynWebEngine.Css_SpecialUndef: Boolean;
+function TSynWebEngine.CssSpecialUndef: Boolean;
 begin
   Result:=False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc16: Boolean;
+function TSynWebEngine.CssSpecialFunc16: Boolean;
 begin
-  if  Css_SpecialKeyComp(7) or
-      Css_SpecialKeyComp(8) then
+  if  CssSpecialKeyComp(7) or
+      CssSpecialKeyComp(8) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc18: Boolean;
+function TSynWebEngine.CssSpecialFunc18: Boolean;
 begin
-  if  Css_SpecialKeyComp(9) then
+  if  CssSpecialKeyComp(9) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc19: Boolean;
+function TSynWebEngine.CssSpecialFunc19: Boolean;
 begin
-  if  Css_SpecialKeyComp(33) or
-      Css_SpecialKeyComp(40) then
+  if  CssSpecialKeyComp(33) or
+      CssSpecialKeyComp(40) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc23: Boolean;
+function TSynWebEngine.CssSpecialFunc23: Boolean;
 begin
-  if  Css_SpecialKeyComp(24) or
-      Css_SpecialKeyComp(38) then
+  if  CssSpecialKeyComp(24) or
+      CssSpecialKeyComp(38) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc25: Boolean;
+function TSynWebEngine.CssSpecialFunc25: Boolean;
 begin
-  if  Css_SpecialKeyComp(2) then
+  if  CssSpecialKeyComp(2) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc26: Boolean;
+function TSynWebEngine.CssSpecialFunc26: Boolean;
 begin
-  if  Css_SpecialKeyComp(30) then
+  if  CssSpecialKeyComp(30) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc29: Boolean;
+function TSynWebEngine.CssSpecialFunc29: Boolean;
 begin
-  if  Css_SpecialKeyComp(11) or
-      Css_SpecialKeyComp(32) then
+  if  CssSpecialKeyComp(11) or
+      CssSpecialKeyComp(32) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc30: Boolean;
+function TSynWebEngine.CssSpecialFunc30: Boolean;
 begin
-  if  Css_SpecialKeyComp(18) then
+  if  CssSpecialKeyComp(18) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc32: Boolean;
+function TSynWebEngine.CssSpecialFunc32: Boolean;
 begin
-  if  Css_SpecialKeyComp(29) or
-      Css_SpecialKeyComp(31) then
+  if  CssSpecialKeyComp(29) or
+      CssSpecialKeyComp(31) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc34: Boolean;
+function TSynWebEngine.CssSpecialFunc34: Boolean;
 begin
-  if  Css_SpecialKeyComp(21) or
-      Css_SpecialKeyComp(26) then
+  if  CssSpecialKeyComp(21) or
+      CssSpecialKeyComp(26) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc36: Boolean;
+function TSynWebEngine.CssSpecialFunc36: Boolean;
 begin
-  if  Css_SpecialKeyComp(36) then
+  if  CssSpecialKeyComp(36) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc40: Boolean;
+function TSynWebEngine.CssSpecialFunc40: Boolean;
 begin
-  if  Css_SpecialKeyComp(37) then
+  if  CssSpecialKeyComp(37) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc42: Boolean;
+function TSynWebEngine.CssSpecialFunc42: Boolean;
 begin
-  if  Css_SpecialKeyComp(44) then
+  if  CssSpecialKeyComp(44) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc43: Boolean;
+function TSynWebEngine.CssSpecialFunc43: Boolean;
 begin
-  if  Css_SpecialKeyComp(27) then
+  if  CssSpecialKeyComp(27) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc45: Boolean;
+function TSynWebEngine.CssSpecialFunc45: Boolean;
 begin
-  if  Css_SpecialKeyComp(25) then
+  if  CssSpecialKeyComp(25) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc46: Boolean;
+function TSynWebEngine.CssSpecialFunc46: Boolean;
 begin
-  if  Css_SpecialKeyComp(28) then
+  if  CssSpecialKeyComp(28) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc50: Boolean;
+function TSynWebEngine.CssSpecialFunc50: Boolean;
 begin
-  if  Css_SpecialKeyComp(1) then
+  if  CssSpecialKeyComp(1) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc51: Boolean;
+function TSynWebEngine.CssSpecialFunc51: Boolean;
 begin
-  if  Css_SpecialKeyComp(4) or
-      Css_SpecialKeyComp(17) or
-      Css_SpecialKeyComp(45) then
+  if  CssSpecialKeyComp(4) or
+      CssSpecialKeyComp(17) or
+      CssSpecialKeyComp(45) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc56: Boolean;
+function TSynWebEngine.CssSpecialFunc56: Boolean;
 begin
-  if  Css_SpecialKeyComp(19) or
-      Css_SpecialKeyComp(42) then
+  if  CssSpecialKeyComp(19) or
+      CssSpecialKeyComp(42) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc57: Boolean;
+function TSynWebEngine.CssSpecialFunc57: Boolean;
 begin
-  if  Css_SpecialKeyComp(3) then
+  if  CssSpecialKeyComp(3) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc59: Boolean;
+function TSynWebEngine.CssSpecialFunc59: Boolean;
 begin
-  if  Css_SpecialKeyComp(5) then
+  if  CssSpecialKeyComp(5) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc60: Boolean;
+function TSynWebEngine.CssSpecialFunc60: Boolean;
 begin
-  if  Css_SpecialKeyComp(0) then
+  if  CssSpecialKeyComp(0) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc62: Boolean;
+function TSynWebEngine.CssSpecialFunc62: Boolean;
 begin
-  if  Css_SpecialKeyComp(39) then
+  if  CssSpecialKeyComp(39) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc64: Boolean;
+function TSynWebEngine.CssSpecialFunc64: Boolean;
 begin
-  if  Css_SpecialKeyComp(16) or
-      Css_SpecialKeyComp(41) then
+  if  CssSpecialKeyComp(16) or
+      CssSpecialKeyComp(41) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc65: Boolean;
+function TSynWebEngine.CssSpecialFunc65: Boolean;
 begin
-  if  Css_SpecialKeyComp(43) then
+  if  CssSpecialKeyComp(43) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc68: Boolean;
+function TSynWebEngine.CssSpecialFunc68: Boolean;
 begin
-  if  Css_SpecialKeyComp(20) then
+  if  CssSpecialKeyComp(20) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc72: Boolean;
+function TSynWebEngine.CssSpecialFunc72: Boolean;
 begin
-  if  Css_SpecialKeyComp(12) then
+  if  CssSpecialKeyComp(12) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc74: Boolean;
+function TSynWebEngine.CssSpecialFunc74: Boolean;
 begin
-  if  Css_SpecialKeyComp(6) then
+  if  CssSpecialKeyComp(6) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc77: Boolean;
+function TSynWebEngine.CssSpecialFunc77: Boolean;
 begin
-  if  Css_SpecialKeyComp(34) then
+  if  CssSpecialKeyComp(34) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc82: Boolean;
+function TSynWebEngine.CssSpecialFunc82: Boolean;
 begin
-  if  Css_SpecialKeyComp(10) then
+  if  CssSpecialKeyComp(10) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc88: Boolean;
+function TSynWebEngine.CssSpecialFunc88: Boolean;
 begin
-  if  Css_SpecialKeyComp(46) then
+  if  CssSpecialKeyComp(46) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc89: Boolean;
+function TSynWebEngine.CssSpecialFunc89: Boolean;
 begin
-  if  Css_SpecialKeyComp(13) then
+  if  CssSpecialKeyComp(13) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc91: Boolean;
+function TSynWebEngine.CssSpecialFunc91: Boolean;
 begin
-  if  Css_SpecialKeyComp(22) then
+  if  CssSpecialKeyComp(22) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc93: Boolean;
+function TSynWebEngine.CssSpecialFunc93: Boolean;
 begin
-  if  Css_SpecialKeyComp(15) then
+  if  CssSpecialKeyComp(15) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc125: Boolean;
+function TSynWebEngine.CssSpecialFunc125: Boolean;
 begin
-  if  Css_SpecialKeyComp(35) then
+  if  CssSpecialKeyComp(35) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc126: Boolean;
+function TSynWebEngine.CssSpecialFunc126: Boolean;
 begin
-  if  Css_SpecialKeyComp(23) then
+  if  CssSpecialKeyComp(23) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.Css_SpecialFunc133: Boolean;
+function TSynWebEngine.CssSpecialFunc133: Boolean;
 begin
-  if  Css_SpecialKeyComp(14) then
+  if  CssSpecialKeyComp(14) then
     Result := True
   else
     Result := False;

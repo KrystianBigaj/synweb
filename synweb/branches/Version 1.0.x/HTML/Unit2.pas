@@ -54,7 +54,7 @@ type
     procedure FormShow(Sender: TObject);
   private
     KeyList: TList;
-    appdir:string;
+    appdir:String;
     procedure MakeHashTable;
     procedure ClearLists;
   public
@@ -188,7 +188,7 @@ var
   n:TTreeNode;
   i, t,x:Integer;
   s, s1,s2:TStringList; 
-  ss1,ss2:string;
+  ss1,ss2:String;
 begin
   s:=TStringList.Create;
   s1:=TStringList.Create;
@@ -238,12 +238,12 @@ begin
       x:=KeyHash(s[i]);
   s1.Insert(0,'');          
   if Form1.CheckBox3.Checked then
-    s1.Insert(0,Format('  Html_SpecialMaxKeyHash = %d;',[x]))
+    s1.Insert(0,Format('  HtmlSpecialMaxKeyHash = %d;',[x]))
   else
   begin
-    s1.Insert(0,Format('  Html_TagMaxKeyHash = %d;',[x]));
-    s1.Insert(0,Format('  Html_TagID_Style = %d;',[s.IndexOf('style')]));
-    s1.Insert(0,Format('  Html_TagID_Script = %d;',[s.IndexOf('script')]));
+    s1.Insert(0,Format('  HtmlTagMaxKeyHash = %d;',[x]));
+    s1.Insert(0,Format('  HtmlTagID_Style = %d;',[s.IndexOf('style')]));
+    s1.Insert(0,Format('  HtmlTagID_Script = %d;',[s.IndexOf('script')]));
   end;
 
   s2[s2.Count-1]:=Copy(s2[s2.Count-1],1,Length(s2[s2.Count-1])-2);
@@ -263,15 +263,15 @@ begin
                   
   if Form1.CheckBox3.Checked then
     GenerateInc(s,'Boolean', 'True', 'False',
-      'Html_SpecialFunc', 'Html_SpecialUndef',
-      'fHtml_SpecialIdentFuncTable', 'Html_SpecialKeyComp',
+      'HtmlSpecialFunc', 'HtmlSpecialUndef',
+      'FHtmlSpecialIdentFuncTable', 'HtmlSpecialKeyComp',
       appdir+'..\SynHighlighterWeb_SpecialFunc.inc',
       appdir+'..\SynHighlighterWeb_SpecialFuncList.inc',
       appdir+'..\SynHighlighterWeb_SpecialFuncTable.inc')
   else
     GenerateInc(s,'TSynWebTokenKind', 'stkHtmlTagName', 'stkHtmlTagNameUndef',
-      'Html_TagFunc', 'Html_TagUndef',
-      'fHtml_TagIdentFuncTable', 'Html_TagKeyComp',
+      'HtmlTagFunc', 'HtmlTagUndef',
+      'FHtmlTagIdentFuncTable', 'HtmlTagKeyComp',
       appdir+'..\SynHighlighterWeb_TagsFunc.inc',
       appdir+'..\SynHighlighterWeb_TagsFuncList.inc',
       appdir+'..\SynHighlighterWeb_TagsFuncTable.inc');
@@ -291,11 +291,11 @@ var
   sl:TStringList;
   n1,n2:TTreeNode;
   p:array of Longword;
-  i,j,k,l:LongWord;
+  i,j,k,l:Longword;
   x:Integer;
   s:String;  
   s1,s2:TStringList;    
-  ss1:string;
+  ss1:String;
 
   function si(C:Char):String;
   begin
@@ -386,8 +386,8 @@ begin
     if KeyHash(sl[i])>x then
       x:=KeyHash(sl[i]);
   s1.Insert(0,'');
-  s1.Insert(0,Format('  Html_AttrMaxKeyHash = %d;',[x]));
-  s1.Insert(0,Format('  Html_AttrID_Language = %d;',[sl.IndexOf('language')]));
+  s1.Insert(0,Format('  HtmlAttrMaxKeyHash = %d;',[x]));
+  s1.Insert(0,Format('  HtmlAttrID_Language = %d;',[sl.IndexOf('language')]));
 
 
   s2.Insert(0,format('  TSynWeb_AttrsData:array[0..%d] of array[0..%d] of array[0..%d] of Longword=(',[sl.Count-1,6-1,3-1]));
@@ -400,8 +400,8 @@ begin
   SetLength(p,0);
 
   GenerateInc(sl,'TSynWebTokenKind', 'stkHtmlTagKey', 'stkHtmlTagKeyUndef',
-    'Html_AttrFunc', 'Html_AttrUndef',
-    'fHtml_AttrIdentFuncTable', 'Html_AttrKeyComp',
+    'HtmlAttrFunc', 'HtmlAttrUndef',
+    'FHtmlAttrIdentFuncTable', 'HtmlAttrKeyComp',
     appdir+'..\SynHighlighterWeb_AttrsFunc.inc',
     appdir+'..\SynHighlighterWeb_AttrsFuncList.inc',
     appdir+'..\SynHighlighterWeb_AttrsFuncTable.inc');
@@ -464,7 +464,7 @@ var
   i,ia:Integer;
   l:TLexKeys;   
   nf:TStringList;
-  stemp:string;
+  stemp:String;
 begin
   AKeys.Sort;
   ClearLists;

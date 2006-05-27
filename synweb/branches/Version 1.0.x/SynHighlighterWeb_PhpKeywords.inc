@@ -1,4 +1,4 @@
-  Php_KeywordsMaxKeyHash = 560;
+  PhpKeywordsMaxKeyHash = 560;
 
   TSynWeb_PhpKeywords:array[0..5169] of String=(
     '__CLASS__', '__FILE__', '__FUNCTION__', '__LINE__', '__METHOD__', 'abstract', 

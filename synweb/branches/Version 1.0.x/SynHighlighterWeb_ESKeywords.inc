@@ -1,4 +1,4 @@
-  Es_KeywordsMaxKeyHash = 160;
+  EsKeywordsMaxKeyHash = 160;
 
   TSynWeb_EsKeywords:array[0..57] of String=(
     'break', 'case', 'catch', 'continue', 'default', 'delete', 'do', 'else', 

@@ -15,19 +15,18 @@ uses
   SynEditHighlighter,
   SynHighlighterWeb,
   SynHighlighterWebData;
-
 {$ENDIF}
 
-function SynWeb_UpdateActiveHighlighter(ASynEdit: TSynEdit;
+function SynWebUpdateActiveHighlighter(ASynEdit: TSynEdit;
   ASynWeb: TSynWebBase): TSynHighlighterTypes;
 
-function SynWeb_FindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
-  const AOpenTokens, ACloseTokens: array of string;
+function SynWebFindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
+  const AOpenTokens, ACloseTokens: array of String;
   const ATokenIDs: array of TSynWebTokenKind; AStartPoint: TBufferCoord;
-  var AMatchtPoint: TBufferCoord; var ATokenIndex: integer): integer;
+  var AMatchtPoint: TBufferCoord; var ATokenIndex: Integer): Integer;
 
 {
-  SynWeb_FindMatchingToken returns:
+  SynWebFindMatchingToken returns:
   -2 : Close and open token found (open token position in AMatchtPoint)
   -1 : Close token found
    0 : Token not found
@@ -41,23 +40,23 @@ uses Math;
 
 var
   fMatchStack: array of TBufferCoord;
-  fMatchStackID: integer;
+  fMatchStackID: Integer;
 
- // -----------------------------------------------------------------------------
- // -----------------------------------------------------------------------------
- // -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 
-function SynWeb_FindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
-  const AOpenTokens, ACloseTokens: array of string;
+function SynWebFindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
+  const AOpenTokens, ACloseTokens: array of String;
   const ATokenIDs: array of TSynWebTokenKind; AStartPoint: TBufferCoord;
-  var AMatchtPoint: TBufferCoord; var ATokenIndex: integer): integer;
+  var AMatchtPoint: TBufferCoord; var ATokenIndex: Integer): Integer;
 var
-  OpenToken, CloseToken, Token: string;
+  OpenToken, CloseToken, Token: String;
   TokenID: TSynWebTokenKind;
-  Level: integer;
-  I: integer;
+  Level: Integer;
+  I: Integer;
 
-  function CheckToken: boolean;
+  function CheckToken: Boolean;
   begin
     with ASynWeb do
       if GetTokenID = TokenID then
@@ -71,7 +70,7 @@ var
       end;
     if Level = 0 then
     begin
-      SynWeb_FindMatchingToken := 2;
+      SynWebFindMatchingToken := 2;
       AMatchtPoint.Line := AStartPoint.Line + 1;
       AMatchtPoint.char := ASynWeb.GetTokenPos + 1;
       Result := True;
@@ -213,7 +212,7 @@ end;
  // -----------------------------------------------------------------------------
  // -----------------------------------------------------------------------------
 
-function SynWeb_UpdateActiveHighlighter(ASynEdit: TSynEdit;
+function SynWebUpdateActiveHighlighter(ASynEdit: TSynEdit;
   ASynWeb: TSynWebBase): TSynHighlighterTypes;
 begin
   with ASynEdit,ASynWeb do

@@ -96,7 +96,7 @@ type
   private
     pn:TTreeNode;
   public
-    cl:string;
+    cl:String;
     function nGetBit(n:TTreeNode; b:Integer):Boolean;
     procedure nSetBit(n:TTreeNode; b:Integer);
     procedure nClearBit(n:TTreeNode; b:Integer);
@@ -285,7 +285,7 @@ end;
 
 procedure TForm1.PopupMenu1Popup(Sender: TObject);
 var
-  i:integer;
+  i:Integer;
 begin
   pn:=TreeView1.Selected;
   Html401Strict1.Enabled:=pn<>nil;
@@ -333,7 +333,7 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 var
-i:integer;
+i:Integer;
 begin
   if ParamCount=1 then
     Left:=Screen.Width;
@@ -424,8 +424,8 @@ procedure TForm1.Button6Click(Sender: TObject);
 const
   ch=[' ', '[', ']', '|', #13, #10, '.', '*', '+', ',', '?', '/', '{'];
 var
-  i:integer;
-  s,s2:string;
+  i:Integer;
+  s,s2:String;
   sl:TStringList;
 
   procedure space;
@@ -446,7 +446,7 @@ var
     end;
   end;
 
-  function readname:boolean;
+  function readname:Boolean;
   begin
     Result:=false;
     space;
@@ -462,7 +462,7 @@ var
     result:=true;
   end;
 
-  function chk(x:string):String;
+  function chk(x:String):String;
   var
     ci:Integer;
     b:Boolean;
@@ -570,12 +570,12 @@ var
   t,x:TTreeNode;
   sl:TStringList;
 
-  function GetAttrsCss1(tg:TTreeNode):string;
+  function GetAttrsCss1(tg:TTreeNode):String;
   var
-    j:integer;  
+    j:Integer;  
     n:TTreeNode;
 
-    function gv:string;
+    function gv:String;
     begin
       Result:=IfThen(nGetBit(tg,0),'1','0')+IfThen(nGetBit(tg,1),'2','0');
     end;
@@ -648,7 +648,7 @@ end;
 
 procedure TForm1.Button8Click(Sender: TObject);
 var
-  i:integer;
+  i:Integer;
   t:TTreeNode;
 begin
   for i:=TreeView1.Items.Count-1 downto 0 do
@@ -668,7 +668,7 @@ end;
 
 procedure TForm1.Button9Click(Sender: TObject);
 var
-  i:integer;
+  i:Integer;
   t:TTreeNode;
 begin
   TreeView1.Items.BeginUpdate;
@@ -839,7 +839,7 @@ begin
         nSetBit(t.Parent,24);
         t.Delete;
       end else
-      if t.Text='[integer]' then
+      if t.Text='[Integer]' then
       begin
         // SPECIAL !!! css2.1 
         nSetBit(t.Parent,23);
@@ -900,7 +900,7 @@ begin
         nSetBit(t.Parent,16);
         t.Delete;
       end else
-      if t.Text='[string]' then
+      if t.Text='[String]' then
       begin
         // SPECIAL !!! css2.1 
         nSetBit(t.Parent,15);
