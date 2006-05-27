@@ -320,7 +320,7 @@ type
     FHtmlWhitespaceAttri: TSynHighlighterAttributes;
     FHtmlCommentAttri: TSynHighlighterAttributes;
     FHtmlTextAttri: TSynHighlighterAttributes;
-    FHtmlEscapeAmpsAttri: TSynHighlighterAttributes;
+    FHtmlEscapeAttri: TSynHighlighterAttributes;
     FHtmlSymbolAttri: TSynHighlighterAttributes;
     FHtmlTagAttri: TSynHighlighterAttributes;
     FHtmlTagNameAttri: TSynHighlighterAttributes;
@@ -342,7 +342,7 @@ type
     FCssRulesetWhitespaceAttri: TSynHighlighterAttributes;
     FCssSelectorAttri: TSynHighlighterAttributes;
     FCssSelectorUndefAttri: TSynHighlighterAttributes;
-    FCssSelectorClassAmpsAttri: TSynHighlighterAttributes;
+    FCssSelectorClassAttri: TSynHighlighterAttributes;
     FCssSelectorIdAttri: TSynHighlighterAttributes;
     FCssSpecialAttri: TSynHighlighterAttributes;
     FCssCommentAttri: TSynHighlighterAttributes;
@@ -620,7 +620,7 @@ type
     property HtmlTextAttri: TSynHighlighterAttributes
       read FHtmlTextAttri write FHtmlTextAttri;
     property HtmlEscapeAttri: TSynHighlighterAttributes
-      read FHtmlEscapeAmpsAttri write FHtmlEscapeAmpsAttri;
+      read FHtmlEscapeAttri write FHtmlEscapeAttri;
     property HtmlSymbolAttri: TSynHighlighterAttributes
       read FHtmlSymbolAttri write FHtmlSymbolAttri;
     property HtmlTagAttri: TSynHighlighterAttributes
@@ -650,7 +650,7 @@ type
     property CssSelectorUndefAttri: TSynHighlighterAttributes
       read FCssSelectorUndefAttri write FCssSelectorUndefAttri;
     property CssSelectorClassAttri: TSynHighlighterAttributes
-      read FCssSelectorClassAmpsAttri write FCssSelectorClassAmpsAttri;
+      read FCssSelectorClassAttri write FCssSelectorClassAttri;
     property CssSelectorIdAttri: TSynHighlighterAttributes
       read FCssSelectorIdAttri write FCssSelectorIdAttri;
     property CssSpecialAttri: TSynHighlighterAttributes
@@ -6167,36 +6167,61 @@ begin
 
   FHtmlWhitespaceAttri := TSynHighlighterAttributes.Create('Html: Whitespace');
   AddAttribute(FHtmlWhitespaceAttri);
-  FHtmlCommentAttri := TSynHighlighterAttributes.Create('Html: Comment');
+
+  FHtmlCommentAttri := TSynHighlighterAttributes.Create('Html: Comment');  
+  FHtmlCommentAttri.Foreground := clMedGray;
   AddAttribute(FHtmlCommentAttri);
+
   FHtmlTextAttri := TSynHighlighterAttributes.Create('Html: Text');
   AddAttribute(FHtmlTextAttri);
-  FHtmlEscapeAmpsAttri := TSynHighlighterAttributes.Create('Html: Escaped amps');
-  AddAttribute(FHtmlEscapeAmpsAttri);
-  FHtmlSymbolAttri := TSynHighlighterAttributes.Create('Html: Symbol');
+
+  FHtmlEscapeAttri := TSynHighlighterAttributes.Create('Html: Escaped amps');
+  FHtmlEscapeAttri.Foreground := clTeal;
+  AddAttribute(FHtmlEscapeAttri);
+
+  FHtmlSymbolAttri := TSynHighlighterAttributes.Create('Html: Symbol'); 
+  FHtmlSymbolAttri.Foreground := clBlack;
   AddAttribute(FHtmlSymbolAttri);
+
   FHtmlTagAttri := TSynHighlighterAttributes.Create('Html: Tag');
+  FHtmlTagAttri.Foreground := clNavy;
   AddAttribute(FHtmlTagAttri);
-  FHtmlTagNameAttri := TSynHighlighterAttributes.Create('Html: Tag name');
+
+  FHtmlTagNameAttri := TSynHighlighterAttributes.Create('Html: Tag name');  
+  FHtmlTagNameAttri.Foreground := clBlue;
   AddAttribute(FHtmlTagNameAttri);
-  FHtmlTagNameUndefAttri := TSynHighlighterAttributes.Create(
-    'Html: Undefined tag name');
+
+  FHtmlTagNameUndefAttri := TSynHighlighterAttributes.Create('Html: Undefined tag name');
+  FHtmlTagNameUndefAttri.Foreground := clBlue;
+  FHtmlTagNameUndefAttri.Style := [fsUnderline];
   AddAttribute(FHtmlTagNameUndefAttri);
-  FHtmlTagKeyAttri := TSynHighlighterAttributes.Create('Html: Key');
+
+  FHtmlTagKeyAttri := TSynHighlighterAttributes.Create('Html: Key'); 
+  FHtmlTagKeyAttri.Foreground := clRed;
   AddAttribute(FHtmlTagKeyAttri);
-  FHtmlTagKeyUndefAttri := TSynHighlighterAttributes.Create('Html: Undefined key');
+
+  FHtmlTagKeyUndefAttri := TSynHighlighterAttributes.Create('Html: Undefined key');  
+  FHtmlTagKeyUndefAttri.Foreground := clRed;
+  FHtmlTagKeyUndefAttri.Style := [fsUnderline];
   AddAttribute(FHtmlTagKeyUndefAttri);
-  FHtmlTagKeyValueAttri := TSynHighlighterAttributes.Create('Html: Value');
+
+  FHtmlTagKeyValueAttri := TSynHighlighterAttributes.Create('Html: Value'); 
+  FHtmlTagKeyValueAttri.Foreground := clFuchsia;
   AddAttribute(FHtmlTagKeyValueAttri);
-  FHtmlTagKeyValueQuotedAttri := TSynHighlighterAttributes.Create('Html: Quoted value');
+
+  FHtmlTagKeyValueQuotedAttri := TSynHighlighterAttributes.Create('Html: Quoted value'); 
+  FHtmlTagKeyValueQuotedAttri.Foreground := clFuchsia;
   AddAttribute(FHtmlTagKeyValueQuotedAttri);
+
   FHtmlErrorAttri := TSynHighlighterAttributes.Create('Html: Error');
+  FHtmlErrorAttri.Foreground := clRed;
+  FHtmlErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FHtmlErrorAttri);
 
   FTokenAttributeTable[stkHtmlSpace] := FHtmlWhitespaceAttri;
   FTokenAttributeTable[stkHtmlComment] := FHtmlCommentAttri;
   FTokenAttributeTable[stkHtmlText] := FHtmlTextAttri;
-  FTokenAttributeTable[stkHtmlEscape] := FHtmlEscapeAmpsAttri;
+  FTokenAttributeTable[stkHtmlEscape] := FHtmlEscapeAttri;
   FTokenAttributeTable[stkHtmlSymbol] := FHtmlSymbolAttri;
   FTokenAttributeTable[stkHtmlTag] := FHtmlTagAttri;
   FTokenAttributeTable[stkHtmlTagName] := FHtmlTagNameAttri;
@@ -6210,44 +6235,82 @@ begin
   // Css
   CssMakeMethodTables;
 
-  FCssWhitespaceAttri := TSynHighlighterAttributes.Create('Css: Whitespace');
+  FCssWhitespaceAttri := TSynHighlighterAttributes.Create('Css: Whitespace');    
+  FCssWhitespaceAttri.Background := 15794175;
   AddAttribute(FCssWhitespaceAttri);
-  FCssRulesetWhitespaceAttri :=
-    TSynHighlighterAttributes.Create('Css: Ruleset whitespace');
+
+  FCssRulesetWhitespaceAttri := TSynHighlighterAttributes.Create('Css: Ruleset whitespace'); 
+  FCssRulesetWhitespaceAttri.Background := clInfoBk;
   AddAttribute(FCssRulesetWhitespaceAttri);
-  FCssSelectorAttri := TSynHighlighterAttributes.Create('Css: Selector');
+
+  FCssSelectorAttri := TSynHighlighterAttributes.Create('Css: Selector'); 
+  FCssSelectorAttri.Foreground := clBlue;
+  FCssSelectorAttri.Style := [fsBold];
   AddAttribute(FCssSelectorAttri);
-  FCssSelectorUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined selector');
+
+  FCssSelectorUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined selector');   
+  FCssSelectorUndefAttri.Foreground := clBlue;
+  FCssSelectorUndefAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FCssSelectorUndefAttri);
-  FCssSelectorClassAmpsAttri := TSynHighlighterAttributes.Create('Css: Class selector');
-  AddAttribute(FCssSelectorClassAmpsAttri);
-  FCssSelectorIdAttri := TSynHighlighterAttributes.Create('Css: Id selector');
+
+  FCssSelectorClassAttri := TSynHighlighterAttributes.Create('Css: Class selector');   
+  FCssSelectorClassAttri.Foreground := 12615680;
+  FCssSelectorClassAttri.Style := [fsBold];
+  AddAttribute(FCssSelectorClassAttri);
+
+  FCssSelectorIdAttri := TSynHighlighterAttributes.Create('Css: Id selector'); 
+  FCssSelectorIdAttri.Foreground := clGreen;
+  FCssSelectorIdAttri.Style := [fsBold];
   AddAttribute(FCssSelectorIdAttri);
+
   FCssSpecialAttri := TSynHighlighterAttributes.Create('Css: Special');
+  FCssSpecialAttri.Foreground := clNavy;
   AddAttribute(FCssSpecialAttri);
+
   FCssCommentAttri := TSynHighlighterAttributes.Create('Css: Comment');
+  FCssCommentAttri.Foreground := clMedGray;
+  FCssCommentAttri.Style := [fsItalic];
   AddAttribute(FCssCommentAttri);
-  FCssPropAttri := TSynHighlighterAttributes.Create('Css: Property');
+
+  FCssPropAttri := TSynHighlighterAttributes.Create('Css: Property'); 
+  FCssPropAttri.Foreground := clBlue;
   AddAttribute(FCssPropAttri);
-  FCssPropUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined property');
+
+  FCssPropUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined property'); 
+  FCssPropUndefAttri.Foreground := clBlue;
+  FCssPropUndefAttri.Style := [fsUnderline];
   AddAttribute(FCssPropUndefAttri);
-  FCssValAttri := TSynHighlighterAttributes.Create('Css: Value');
+
+  FCssValAttri := TSynHighlighterAttributes.Create('Css: Value');   
+  FCssValAttri.Foreground := clRed;
   AddAttribute(FCssValAttri);
-  FCssValUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined value');
+
+  FCssValUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined value'); 
+  FCssValUndefAttri.Foreground := clRed;
+  FCssValUndefAttri.Style := [fsUnderline];
   AddAttribute(FCssValUndefAttri);
+
   FCssValStringAttri := TSynHighlighterAttributes.Create('Css: String value');
+  FCssValStringAttri.Foreground := clFuchsia ;
   AddAttribute(FCssValStringAttri);
-  FCssValNumberAttri := TSynHighlighterAttributes.Create('Css: Number value');
+
+  FCssValNumberAttri := TSynHighlighterAttributes.Create('Css: Number value');   
+  FCssValNumberAttri.Foreground := clGreen;
   AddAttribute(FCssValNumberAttri);
-  FCssSymbolAttri := TSynHighlighterAttributes.Create('Css: Symbol');
+
+  FCssSymbolAttri := TSynHighlighterAttributes.Create('Css: Symbol');   
+  FCssSymbolAttri.Foreground := clBlack;
   AddAttribute(FCssSymbolAttri);
-  FCssErrorAttri := TSynHighlighterAttributes.Create('Css: Error');
+
+  FCssErrorAttri := TSynHighlighterAttributes.Create('Css: Error');    
+  FCssErrorAttri.Foreground := clRed;
+  FCssErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FCssErrorAttri);
 
   FTokenAttributeTable[stkCssSpace] := FCssWhitespaceAttri;
   FTokenAttributeTable[stkCssSelector] := FCssSelectorAttri;
   FTokenAttributeTable[stkCssSelectorUndef] := FCssSelectorUndefAttri;
-  FTokenAttributeTable[stkCssSelectorClass] := FCssSelectorClassAmpsAttri;
+  FTokenAttributeTable[stkCssSelectorClass] := FCssSelectorClassAttri;
   FTokenAttributeTable[stkCssSelectorId] := FCssSelectorIdAttri;
   FTokenAttributeTable[stkCssSpecial] := FCssSpecialAttri;
   FTokenAttributeTable[stkCssComment] := FCssCommentAttri;
@@ -6263,21 +6326,36 @@ begin
   // ECMAScript
   EsMakeMethodTables;
 
-  FEsWhitespaceAttri := TSynHighlighterAttributes.Create('Es: Whitespace');
+  FEsWhitespaceAttri := TSynHighlighterAttributes.Create('Es: Whitespace'); 
+  FEsWhitespaceAttri.Background := 16773360;
   AddAttribute(FEsWhitespaceAttri);
+
   FEsIdentifierAttri := TSynHighlighterAttributes.Create('Es: Identifier');
+  FEsIdentifierAttri.Foreground := clBlue;
   AddAttribute(FEsIdentifierAttri);
-  FEsKeyAttri := TSynHighlighterAttributes.Create('Es: Key');
+
+  FEsKeyAttri := TSynHighlighterAttributes.Create('Es: Key'); 
+  FEsKeyAttri.Style := [fsBold];
   AddAttribute(FEsKeyAttri);
-  FEsCommentAttri := TSynHighlighterAttributes.Create('Es: Comment');
+
+  FEsCommentAttri := TSynHighlighterAttributes.Create('Es: Comment');    
+  FEsCommentAttri.Foreground := clGreen;
   AddAttribute(FEsCommentAttri);
+
   FEsStringAttri := TSynHighlighterAttributes.Create('Es: String');
+  FEsStringAttri.Foreground := clRed;
   AddAttribute(FEsStringAttri);
+
   FEsNumberAttri := TSynHighlighterAttributes.Create('Es: Number');
+  FEsNumberAttri.Foreground := clFuchsia;
   AddAttribute(FEsNumberAttri);
+
   FEsSymbolAttri := TSynHighlighterAttributes.Create('Es: Symbol');
   AddAttribute(FEsSymbolAttri);
-  FEsErrorAttri := TSynHighlighterAttributes.Create('Es: Error');
+
+  FEsErrorAttri := TSynHighlighterAttributes.Create('Es: Error');  
+  FEsErrorAttri.Foreground := clRed;
+  FEsErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FEsErrorAttri);
 
   FTokenAttributeTable[stkEsSpace] := FEsWhitespaceAttri;
@@ -6292,33 +6370,62 @@ begin
   // Php
   PhpMakeMethodTables;
 
-  FPhpWhitespaceAttri := TSynHighlighterAttributes.Create('Php: Whitespace');
+  FPhpWhitespaceAttri := TSynHighlighterAttributes.Create('Php: Whitespace');   
+  FPhpWhitespaceAttri.Background := 16119285;
   AddAttribute(FPhpWhitespaceAttri);
+
   FPhpInlineTextAttri := TSynHighlighterAttributes.Create('PhpCli: Inline text');
   AddAttribute(FPhpInlineTextAttri);
-  FPhpIdentifierAttri := TSynHighlighterAttributes.Create('Php: Identifier');
+
+  FPhpIdentifierAttri := TSynHighlighterAttributes.Create('Php: Identifier');  
+  FPhpIdentifierAttri.Foreground := clMaroon;
   AddAttribute(FPhpIdentifierAttri);
-  FPhpKeyAttri := TSynHighlighterAttributes.Create('Php: Keyword');
+
+  FPhpKeyAttri := TSynHighlighterAttributes.Create('Php: Keyword'); 
+  FPhpKeyAttri.Foreground := clBlue;
   AddAttribute(FPhpKeyAttri);
-  FPhpFunctionAttri := TSynHighlighterAttributes.Create('Php: Function');
+
+  FPhpFunctionAttri := TSynHighlighterAttributes.Create('Php: Function');  
+  FPhpFunctionAttri.Foreground := clRed;
   AddAttribute(FPhpFunctionAttri);
-  FPhpVariableAttri := TSynHighlighterAttributes.Create('Php: Variable');
+
+  FPhpVariableAttri := TSynHighlighterAttributes.Create('Php: Variable'); 
+  FPhpVariableAttri.Foreground := clTeal;
   AddAttribute(FPhpVariableAttri);
-  FPhpConstAttri := TSynHighlighterAttributes.Create('Php: Constant');
+
+  FPhpConstAttri := TSynHighlighterAttributes.Create('Php: Constant');  
+  FPhpConstAttri.Foreground := 33023;
   AddAttribute(FPhpConstAttri);
-  FPhpStringAttri := TSynHighlighterAttributes.Create('Php: String');
+
+  FPhpStringAttri := TSynHighlighterAttributes.Create('Php: String'); 
+  FPhpStringAttri.Foreground := clFuchsia;
   AddAttribute(FPhpStringAttri);
-  FPhpStringSpecialAttri := TSynHighlighterAttributes.Create('Php: String special');
+
+  FPhpStringSpecialAttri := TSynHighlighterAttributes.Create('Php: String special'); 
+  FPhpStringSpecialAttri.Background := 15395562;
+  FPhpStringSpecialAttri.Foreground := clFuchsia;
   AddAttribute(FPhpStringSpecialAttri);
-  FPhpCommentAttri := TSynHighlighterAttributes.Create('Php: Comment');
+
+  FPhpCommentAttri := TSynHighlighterAttributes.Create('Php: Comment');  
+  FPhpCommentAttri.Foreground := clGreen;
+  FPhpCommentAttri.Style := [fsItalic];
   AddAttribute(FPhpCommentAttri);
-  FPhpDocCommentAttri := TSynHighlighterAttributes.Create('Php: DocComment');
+
+  FPhpDocCommentAttri := TSynHighlighterAttributes.Create('Php: DocComment'); 
+  FPhpDocCommentAttri.Foreground := clGreen;
+  FPhpDocCommentAttri.Style := [fsBold, fsItalic];
   AddAttribute(FPhpDocCommentAttri);
+
   FPhpSymbolAttri := TSynHighlighterAttributes.Create('Php: Symbol');
   AddAttribute(FPhpSymbolAttri);
-  FPhpNumberAttri := TSynHighlighterAttributes.Create('Php: Number');
+
+  FPhpNumberAttri := TSynHighlighterAttributes.Create('Php: Number'); 
+  FPhpNumberAttri.Foreground := clPurple;
   AddAttribute(FPhpNumberAttri);
-  FPhpErrorAttri := TSynHighlighterAttributes.Create('Php: Error');
+
+  FPhpErrorAttri := TSynHighlighterAttributes.Create('Php: Error'); 
+  FPhpErrorAttri.Foreground := clRed;
+  FPhpErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FPhpErrorAttri);
 
   FTokenAttributeTable[stkPhpSpace] := FHtmlWhitespaceAttri;
@@ -6340,12 +6447,7 @@ begin
 
   // Global
   FInactiveAttri := TSynHighlighterAttributes.Create('Global: Inactive');
-  with FInactiveAttri do
-  begin
-    Background := clNone;
-    Foreground := clInactiveCaption;
-    Style := [];
-  end;
+  FInactiveAttri.Foreground := clInactiveCaptionText;
   AddAttribute(FInactiveAttri);
 
   FTokenAttributeTable[stkNull] := nil;

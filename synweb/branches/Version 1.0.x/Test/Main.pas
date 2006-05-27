@@ -175,7 +175,7 @@ var
 begin
   if CheckBox2.Checked then
     if Changes-[scCaretX, scCaretY]<>Changes then
-    begin              //, shtCss, shtES, shtPHP_inHtml, shtPHP_inCss, shtPHP_inES
+    begin           
       t:=SynWebUpdateActiveHighlighter(SynEdit1, TSynWebBase(SynEdit1.Highlighter));
       Label5.Caption:='';
       if shtHtml in t then
