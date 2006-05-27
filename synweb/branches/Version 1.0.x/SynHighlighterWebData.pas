@@ -15,29 +15,29 @@ type
   TSynWebHashTable = array[#0..#255] of longword;
 
   TSynHighlighterType = (
-    shtHtml, shtCss, shtES, shtPHP_inHtml, shtPHP_inCss, shtPHP_inES
+    shtHtml, shtCss, shtEs, shtPhp_inHtml, shtPhp_inCss, shtPhp_inEs
     );
 
   TSynHighlighterTypes = set of TSynHighlighterType;
 
   TSynHighlighterMode = (
-    shmHtml, shmCss, shmES, shmPhpCli
+    shmHtml, shmCss, shmEs, shmPhpCli
     );
 
   TSynWebTokenKind = (
-    // HTML
+    // Html
     stkHtmlSpace, stkHtmlText, stkHtmlEscape, stkHtmlComment, stkHtmlSymbol,
     stkHtmlTag, stkHtmlTagName, stkHtmlTagNameUndef, stkHtmlTagKey,
     stkHtmlTagKeyUndef, stkHtmlTagKeyValue, stkHtmlTagKeyValueQuoted, stkHtmlError,
-    // CSS
+    // Css
     stkCssSpace, stkCssSelector, stkCssSelectorUndef, stkCssSelectorClass,
     stkCssSelectorId, stkCssSpecial, stkCssComment, stkCssProp, stkCssPropUndef,
     stkCssVal, stkCssValUndef, stkCssValString, stkCssValNumber, stkCssSymbol,
     stkCssError,
     // ECMAScript
-    stkESSpace, stkESIdentifier, stkESKeyword, stkESString, stkESComment, stkESSymbol,
-    stkESNumber, stkESError,
-    // PHP
+    stkEsSpace, stkEsIdentifier, stkEsKeyword, stkEsString, stkEsComment, stkEsSymbol,
+    stkEsNumber, stkEsError,
+    // Php
     stkPhpSpace, stkPhpInlineText, stkPhpIdentifier, stkPhpKeyword, stkPhpFunction,
     stkPhpVariable, stkPhpConst, stkPhpString, stkPhpStringSpecial, stkPhpComment,
     stkPhpDocComment, stkPhpSymbol, stkPhpNumber, stkPhpError,
@@ -56,7 +56,7 @@ type
   TSynWebTokenAttributeTable = array[Low(TSynWebTokenKind)..High(TSynWebTokenKind)] of
     TSynHighlighterAttributes;
 
-// HTML ------------------------------------------------------------------------
+// Html ------------------------------------------------------------------------
 type
   TSynWebHtmlVersion = (shvHtml401Strict, shvHtml401Transitional, shvHtml401Frameset,
     shvXHtml10Strict, shvXHtml10Transitional, shvXHtml10Frameset);
@@ -68,15 +68,15 @@ type
 
 const
   TSynWebHtmlVersionStr: array[Low(TSynWebHtmlVersion)..High(TSynWebHtmlVersion)] of string = (
-    'HTML 4.01 Strict',
-    'HTML 4.01 Transitional',
-    'HTML 4.01 Frameset',
-    'XHTML 1.0 Strict',
-    'XHTML 1.0 Transitional',
-    'XHTML 1.0 Frameset'
+    'Html 4.01 Strict',
+    'Html 4.01 Transitional',
+    'Html 4.01 Frameset',
+    'XHtml 1.0 Strict',
+    'XHtml 1.0 Transitional',
+    'XHtml 1.0 Frameset'
     );
 
-// CSS -------------------------------------------------------------------------
+// Css -------------------------------------------------------------------------
 type
   TSynWebCssVersion = (
     scvCss1, scvCss21
@@ -93,8 +93,8 @@ const
   TSynWebCssRangeState_RulesetEnd = srsCssPropValRect;
 
   TSynWebCssVersionStr: array[Low(TSynWebCssVersion)..High(TSynWebCssVersion)] of string = (
-    'CSS 1',
-    'CSS 2.1'
+    'Css 1',
+    'Css 2.1'
     );
 
   TSynWebCssString39 = 4;
@@ -102,10 +102,10 @@ const
 
 // ECMAScript ------------------------------------------------------------------
 type
-  TSynWebESRangeState = (srsESDefault, srsESComment, srsESCommentMulti, srsESString34,
-    srsESString39);
+  TSynWebEsRangeState = (srsEsDefault, srsEsComment, srsEsCommentMulti, srsEsString34,
+    srsEsString39);
 
-// PHP -------------------------------------------------------------------------
+// Php -------------------------------------------------------------------------
 type
   TSynWebPhpVersion = (
     spvPhp4, spvPhp5
@@ -116,7 +116,7 @@ type
     srsPhpStringShell, srsPhpHeredoc
     );
 
-  TSynWebPhpOpenTag = (spotPhp, spotPhpShort, spotHTML, spotASP);
+  TSynWebPhpOpenTag = (spotPhp, spotPhpShort, spotHtml, spotASP);
   TSynWebPhpOpenTags = set of TSynWebPhpOpenTag;
 
 const
@@ -124,14 +124,14 @@ const
 {$I SynHighlighterWeb_PhpVersion.inc}
     );
 
-// HTML ------------------------------------------------------------------------
+// Html ------------------------------------------------------------------------
 const
   {$I SynHighlighterWeb_Tags.inc}
 
   {$I SynHighlighterWeb_Attrs.inc}
 
   {$I SynHighlighterWeb_Special.inc}
-// CSS -------------------------------------------------------------------------
+// Css -------------------------------------------------------------------------
 const
   {$I SynHighlighterWeb_CssProps.inc}
 
@@ -141,9 +141,9 @@ const
 
 // ECAMScript ------------------------------------------------------------------
 const
-  {$I SynHighlighterWeb_ESKeywords.inc}
+  {$I SynHighlighterWeb_EsKeywords.inc}
 
-// PHP -------------------------------------------------------------------------
+// Php -------------------------------------------------------------------------
 const
 {$I SynHighlighterWeb_PhpKeywords.inc}
 
@@ -151,7 +151,7 @@ const
 const
 {$I SynHighlighterWeb_Tables.inc}
 
-  TCrc8_Table: array[$00..$FF] of byte = (
+  TCrc8Table: array[$00..$FF] of byte = (
     $00, $07, $0e, $09, $1c, $1b, $12, $15,
     $38, $3f, $36, $31, $24, $23, $2a, $2d,
     $70, $77, $7e, $79, $6c, $6b, $62, $65,

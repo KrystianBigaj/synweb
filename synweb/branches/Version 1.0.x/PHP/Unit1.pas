@@ -78,7 +78,7 @@ type
     procedure Button14Click(Sender: TObject);
     procedure Button13Click(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
-    procedure HTML401Strict1Click(Sender: TObject);
+    procedure Html401Strict1Click(Sender: TObject);
     procedure Button18Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure php4Click(Sender: TObject);
@@ -232,9 +232,9 @@ begin
   TreeView1.Items.Clear;
   ini:=TIniFile32.Create(OpenDialog1.FileName);
   ini.BeginUpdate;
-  if ini.ReadInteger('Config','IsPHP',0)<>1 then
+  if ini.ReadInteger('Config','IsPhp',0)<>1 then
   begin
-    ShowMessage('This is not PHP-Config FILE!');
+    ShowMessage('This is not Php-Config FILE!');
     ini.Free;
     Exit;
   end;
@@ -248,8 +248,8 @@ begin
       n2.Data:=Pointer(StrToInt(ini.ReadString(format('TAG_%d',[t]),Format('Attr_%d_Data',[a]),'!!! ERROR !!!')));
     end;
   end;
-  Edit1.Text:=ini.ReadString('Config','vPHP4','PHP 4');
-  Edit2.Text:=ini.ReadString('Config','vPHP5','PHP 5');
+  Edit1.Text:=ini.ReadString('Config','vPhp4','Php 4');
+  Edit2.Text:=ini.ReadString('Config','vPhp5','Php 5');
   ini.EndUpdate;
   ini.Free;
   TreeView1.Items.EndUpdate;
@@ -282,7 +282,7 @@ begin
   if not SaveDialog1.Execute then
     Exit;
   f:=TStringList.Create; // (SaveDialog1.FileName, fmCreate)
-  f.Add('IsPHP=1');
+  f.Add('IsPhp=1');
   f.Add(Edit1.Text);
   f.Add(Edit2.Text);
   t:=0;
@@ -321,7 +321,7 @@ begin
   alias.Checked:=nGetBit(pn, alias.Tag);
 end;
 
-procedure TForm1.HTML401Strict1Click(Sender: TObject);
+procedure TForm1.Html401Strict1Click(Sender: TObject);
 begin
   nSwitchBit(pn,TMenuItem(Sender).Tag);
   TreeView1.Selected:=pn;
@@ -627,7 +627,7 @@ var
 
 begin
   if not php4box.Checked and not php5box.Checked and not peclbox.Checked then
-    raise Exception.Create('PHP version?');
+    raise Exception.Create('Php version?');
   ds:=Time;
   pb.Position:=0;
   sl:=TStringList.Create;
@@ -642,11 +642,11 @@ begin
   r.ModifierStr:='is-gm';
   rf.ModifierStr:='isg-m';
   rx.ModifierStr:='s-igm';
-  //r.Expression:='/[*]\s*[{]{3}\s*proto\s+(([*][^/]|[^*])*)[*]/(\s|[#]([\\]([\n]|[\n][\r]|[\r][\n])|[^\n\r])*([\n]|[\n][\r]|[\r][\n])|/[*](([*][^/]|[^*])*)[*]/)*\s*(PHP|ZEND)_FUNCTION';
+  //r.Expression:='/[*]\s*[{]{3}\s*proto\s+(([*][^/]|[^*])*)[*]/(\s|[#]([\\]([\n]|[\n][\r]|[\r][\n])|[^\n\r])*([\n]|[\n][\r]|[\r][\n])|/[*](([*][^/]|[^*])*)[*]/)*\s*(Php|ZEND)_FUNCTION';
   r.Expression:='/[*]\s*[{]{3}\s*proto\s+(([*][^/]|[^*])*)[*]/(.*)/[*]\s*[}]{3}\s*[*]/';
   rf.Expression:='^(\S*?)?\s*(\S+)\s*[(]([^)]*)[)]\s*(.*)$';
 
-  rx.Expression:='^(\s*$|(\s+|/[*](([*][^/]|[^*])*)[*]/|[#]([\\]([\n]|[\r][\n]?)[^\n\r]|[^\n\r])*(([\n]|[\r][\n]?)|$)|(/[^*]|[^/#]))*(PHP|ZEND)_(NAMED_)?FUNCTION)';
+  rx.Expression:='^(\s*$|(\s+|/[*](([*][^/]|[^*])*)[*]/|[#]([\\]([\n]|[\r][\n]?)[^\n\r]|[^\n\r])*(([\n]|[\r][\n]?)|$)|(/[^*]|[^/#]))*(Php|ZEND)_(NAMED_)?FUNCTION)';
   //r.Expression:='^\s/\*\s+\{{3}\s+proto\s+(public\s+)?(\S+)\s+?([^(]+[(])?([^)]+)(.+?)\*/';
   TreeView1.Items.BeginUpdate;
   xx:=0;
@@ -783,11 +783,11 @@ begin
   TreeView1.Items.Clear;
   f:=TStringList.Create; // (SaveDialog1.FileName, fmCreate)
   f.LoadFromFile(OpenDialog1.FileName);
-  if (f.Count<4) or (f[0]<>'IsPHP=1') then
+  if (f.Count<4) or (f[0]<>'IsPhp=1') then
   begin                                         
     f.Free;
     TreeView1.Items.EndUpdate;
-    ShowMessage('This is not PHP-Config FILE!');
+    ShowMessage('This is not Php-Config FILE!');
     Exit;
   end;
   Edit1.Text:=f[1];
@@ -825,7 +825,7 @@ var
     case Longword(TLexKeys(KeyList[I]).Data) and $0F of
     $01:
       begin
-        nf.add(tab+Format('%s  PHP_KeywordComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
+        nf.add(tab+Format('%s  Php_KeywordComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
         al:=true;
         if islast then
           nf.Add(tab+'  Result := stkPhpKeyword')
@@ -840,17 +840,17 @@ var
       end;
   {  $02:
       begin
-        nf.add(tab+Format('if PHP_ConstComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
+        nf.add(tab+Format('if Php_ConstComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
         nf.Add(tab+'  Result := stkPhpConst');
       end;
     $04:
       begin
-        nf.add(tab+Format('if PHP_VariableComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
+        nf.add(tab+Format('if Php_VariableComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
         nf.Add(tab+'  Result := stkPhpVariable');
       end;    }
     $08:
       begin
-        nf.add(tab+Format('%s  PHP_FunctionComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
+        nf.add(tab+Format('%s  Php_FunctionComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
         if islast then
           nf.Add(tab+'  Result := stkPhpFunction');
         al:=true;
@@ -1060,9 +1060,9 @@ begin
   p.FAddTag:=AddTag;
   p.Tree:=TreeView1;
   if php4box.Checked then
-    p.SubPrefix:='PHP4-'
+    p.SubPrefix:='Php4-'
   else
-    p.SubPrefix:='PHP5-';
+    p.SubPrefix:='Php5-';
   for i:=0 to sl.Count-1 do
   begin
     updatestat;

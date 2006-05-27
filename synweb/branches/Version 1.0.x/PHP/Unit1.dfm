@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 84
   Width = 470
   Height = 636
-  Caption = 'SynHighlighterWeb - PHP Data/Export v1.0b '#169'2005 FlatDev'
+  Caption = 'SynHighlighterWeb - Php Data/Export v1.0b '#169'2005 FlatDev'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -34,7 +34,7 @@ object Form1: TForm1
     Width = 63
     Height = 13
     Anchors = [akRight, akBottom]
-    Caption = 'PHP4 Version'
+    Caption = 'Php4 Version'
   end
   object Label3: TLabel
     Left = 318
@@ -42,7 +42,7 @@ object Form1: TForm1
     Width = 63
     Height = 13
     Anchors = [akRight, akBottom]
-    Caption = 'PHP5 Version'
+    Caption = 'Php5 Version'
   end
   object Label5: TLabel
     Left = 317
@@ -227,7 +227,7 @@ object Form1: TForm1
     Width = 48
     Height = 17
     Anchors = [akTop, akRight]
-    Caption = 'PHP4'
+    Caption = 'Php4'
     Checked = True
     State = cbChecked
     TabOrder = 12
@@ -238,7 +238,7 @@ object Form1: TForm1
     Width = 48
     Height = 17
     Anchors = [akTop, akRight]
-    Caption = 'PHP5'
+    Caption = 'Php5'
     TabOrder = 13
   end
   object Button7: TButton
@@ -275,7 +275,7 @@ object Form1: TForm1
     Height = 21
     Anchors = [akRight, akBottom]
     TabOrder = 16
-    Text = 'PHP 4'
+    Text = 'Php 4'
   end
   object Edit2: TEdit
     Left = 317
@@ -284,7 +284,7 @@ object Form1: TForm1
     Height = 21
     Anchors = [akRight, akBottom]
     TabOrder = 17
-    Text = 'PHP 5'
+    Text = 'Php 5'
   end
   object Button8: TButton
     Left = 4

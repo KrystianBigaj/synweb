@@ -241,15 +241,15 @@ begin
 
   if form1.iss.Checked then   
     GenerateInc(s,'Boolean', 'True', 'False',
-      'CSS_SpecialFunc', 'CSS_SpecialUndef',
-      'fCSS_SpecialIdentFuncTable', 'CSS_SpecialKeyComp',
+      'Css_SpecialFunc', 'Css_SpecialUndef',
+      'fCss_SpecialIdentFuncTable', 'Css_SpecialKeyComp',
       appdir+'..\SynHighlighterWeb_CssSpecialFunc.inc',
       appdir+'..\SynHighlighterWeb_CssSpecialFuncList.inc',
       appdir+'..\SynHighlighterWeb_CssSpecialFuncTable.inc')
   else                                                     
     GenerateInc(s,'TSynWebTokenKind', 'stkCssProp', 'stkCssPropUndef',
-      'CSS_PropFunc', 'Css_PropUndef',
-      'fCSS_PropIdentFuncTable', 'CSS_PropKeyComp',
+      'Css_PropFunc', 'Css_PropUndef',
+      'fCss_PropIdentFuncTable', 'Css_PropKeyComp',
       appdir+'..\SynHighlighterWeb_CssPropsFunc.inc',
       appdir+'..\SynHighlighterWeb_CssPropsFuncList.inc',
       appdir+'..\SynHighlighterWeb_CssPropsFuncTable.inc');
@@ -383,8 +383,8 @@ begin
   s1.SaveToFile(appdir+'..\SynHighlighterWeb_CssVals.inc');
     
   GenerateInc(sl,'TSynWebTokenKind', 'stkCssVal', 'stkCssValUndef',
-    'CSS_ValFunc', 'CSS_ValUndef',
-    'fCSS_ValIdentFuncTable', 'CSS_ValKeyComp',
+    'Css_ValFunc', 'Css_ValUndef',
+    'fCss_ValIdentFuncTable', 'Css_ValKeyComp',
     appdir+'..\SynHighlighterWeb_CssValsFunc.inc',
     appdir+'..\SynHighlighterWeb_CssValsFuncList.inc',
     appdir+'..\SynHighlighterWeb_CssValsFuncTable.inc');

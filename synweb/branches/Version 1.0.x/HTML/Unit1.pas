@@ -33,13 +33,13 @@ type
     Button13: TButton;
     Button14: TButton;
     PopupMenu1: TPopupMenu;
-    HTML401Strict1: TMenuItem;
-    HTML401Transitional1: TMenuItem;
-    HTML401Frameset1: TMenuItem;
-    XHTML10Strict1: TMenuItem;
-    XHTML10Transitional1: TMenuItem;
-    XHTML10Frameset1: TMenuItem;
-    XHTML111: TMenuItem;
+    Html401Strict1: TMenuItem;
+    Html401Transitional1: TMenuItem;
+    Html401Frameset1: TMenuItem;
+    XHtml10Strict1: TMenuItem;
+    XHtml10Transitional1: TMenuItem;
+    XHtml10Frameset1: TMenuItem;
+    XHtml111: TMenuItem;
     N1: TMenuItem;
     None1: TMenuItem;
     ComboBox1: TComboBox;
@@ -48,9 +48,9 @@ type
     Button15: TButton;
     Button16: TButton;
     Memo6: TMemo;
-    XHTML10TransitionalDEPRECATED1: TMenuItem;
+    XHtml10TransitionalDEPRECATED1: TMenuItem;
     Button17: TButton;
-    XHTML10FramesetlDEPRECATED1: TMenuItem;
+    XHtml10FramesetlDEPRECATED1: TMenuItem;
     N4: TMenuItem;
     Otherstatus1: TMenuItem;
     CheckBox1: TCheckBox;
@@ -84,7 +84,7 @@ type
     procedure Button14Click(Sender: TObject);
     procedure Button13Click(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
-    procedure HTML401Strict1Click(Sender: TObject);
+    procedure Html401Strict1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button15Click(Sender: TObject);
     procedure Button16Click(Sender: TObject);
@@ -272,14 +272,14 @@ begin
   TreeView1.Items.Clear;
   ini:=TIniFile32.Create(OpenDialog1.FileName);
   ini.BeginUpdate;
-  if ini.ReadInteger('Config','IsHTML',00)<>1 then
+  if ini.ReadInteger('Config','IsHtml',00)<>1 then
   begin
-    ShowMessage('This is not HTML-Config FILE!');
+    ShowMessage('This is not Html-Config FILE!');
     ini.Free;
     Exit;
   end;
-  ComboBox1.ItemIndex:=ini.ReadInteger('Config','HTML',0);
-  CheckBox3.Checked:=ini.ReadBool('Config','HTML-Special',False);
+  ComboBox1.ItemIndex:=ini.ReadInteger('Config','Html',0);
+  CheckBox3.Checked:=ini.ReadBool('Config','Html-Special',False);
   for t:=0 to ini.ReadInteger('Config','Tags',0)-1 do
   begin
     n1:=TreeView1.Items.AddChild(nil,ini.ReadString(format('TAG_%d',[t]),'Name','!!! ERROR !!!'));
@@ -325,9 +325,9 @@ begin
     Inc(t);
   end;       
   ini.WriteInteger('Config','Tags',t);
-  ini.WriteInteger('Config','HTML',ComboBox1.ItemIndex);
-  ini.WriteInteger('Config','IsHTML',1);
-  ini.WriteBool('Config','HTML-Special',CheckBox3.Checked);
+  ini.WriteInteger('Config','Html',ComboBox1.ItemIndex);
+  ini.WriteInteger('Config','IsHtml',1);
+  ini.WriteBool('Config','Html-Special',CheckBox3.Checked);
   ini.EndUpdate;
   ini.Free;
 end;
@@ -335,15 +335,15 @@ end;
 procedure TForm1.PopupMenu1Popup(Sender: TObject);
 begin
   pn:=TreeView1.Selected;
-  HTML401Strict1.Enabled:=pn<>nil;
-  HTML401Transitional1.Enabled:=pn<>nil;
-  HTML401Frameset1.Enabled:=pn<>nil;
-  XHTML10Strict1.Enabled:=pn<>nil;
-  XHTML10Transitional1.Enabled:=pn<>nil;
-  XHTML10Frameset1.Enabled:=pn<>nil;
-  XHTML111.Enabled:=pn<>nil;
-  XHTML10TransitionalDEPRECATED1.Enabled:=pn<>nil;
-  XHTML10FramesetlDEPRECATED1.Enabled:=pn<>nil;
+  Html401Strict1.Enabled:=pn<>nil;
+  Html401Transitional1.Enabled:=pn<>nil;
+  Html401Frameset1.Enabled:=pn<>nil;
+  XHtml10Strict1.Enabled:=pn<>nil;
+  XHtml10Transitional1.Enabled:=pn<>nil;
+  XHtml10Frameset1.Enabled:=pn<>nil;
+  XHtml111.Enabled:=pn<>nil;
+  XHtml10TransitionalDEPRECATED1.Enabled:=pn<>nil;
+  XHtml10FramesetlDEPRECATED1.Enabled:=pn<>nil;
   isEXT.Enabled:=pn<>nil;
   isEXT.Visible:=pn.Level=0;
   NoCLASS1.Enabled:=pn<>nil;
@@ -359,21 +359,21 @@ begin
   TreeView1.Selected:=pn;
   None1.Caption:=pn.Text;
 
-  HTML401Strict1.Checked:=nGetBit(pn,0);
-  HTML401Transitional1.Checked:=nGetBit(pn,1);
-  HTML401Frameset1.Checked:=nGetBit(pn,2);
-  XHTML10Strict1.Checked:=nGetBit(pn,3);
-  XHTML10Transitional1.Checked:=nGetBit(pn,4);
-  XHTML10Frameset1.Checked:=nGetBit(pn,5);
-  XHTML111.Checked:=nGetBit(pn,6);
-  XHTML10TransitionalDEPRECATED1.Checked:=nGetBit(pn,16);
-  XHTML10FramesetlDEPRECATED1.Checked:=nGetBit(pn,17);
+  Html401Strict1.Checked:=nGetBit(pn,0);
+  Html401Transitional1.Checked:=nGetBit(pn,1);
+  Html401Frameset1.Checked:=nGetBit(pn,2);
+  XHtml10Strict1.Checked:=nGetBit(pn,3);
+  XHtml10Transitional1.Checked:=nGetBit(pn,4);
+  XHtml10Frameset1.Checked:=nGetBit(pn,5);
+  XHtml111.Checked:=nGetBit(pn,6);
+  XHtml10TransitionalDEPRECATED1.Checked:=nGetBit(pn,16);
+  XHtml10FramesetlDEPRECATED1.Checked:=nGetBit(pn,17);
   isEXT.Checked:=nGetBit(pn, 29);
   NoCLASS1.Checked:=nGetBit(pn,30);
   EMPTY1.Checked:=nGetBit(pn,31);
 end;
 
-procedure TForm1.HTML401Strict1Click(Sender: TObject);
+procedure TForm1.Html401Strict1Click(Sender: TObject);
 begin
   nSwitchBit(pn,TMenuItem(Sender).Tag);
   TreeView1.Selected:=pn;

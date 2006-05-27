@@ -263,15 +263,15 @@ begin
                   
   if Form1.CheckBox3.Checked then
     GenerateInc(s,'Boolean', 'True', 'False',
-      'HTML_SpecialFunc', 'HTML_SpecialUndef',
-      'fHTML_SpecialIdentFuncTable', 'HTML_SpecialKeyComp',
+      'Html_SpecialFunc', 'Html_SpecialUndef',
+      'fHtml_SpecialIdentFuncTable', 'Html_SpecialKeyComp',
       appdir+'..\SynHighlighterWeb_SpecialFunc.inc',
       appdir+'..\SynHighlighterWeb_SpecialFuncList.inc',
       appdir+'..\SynHighlighterWeb_SpecialFuncTable.inc')
   else
-    GenerateInc(s,'TSynWebTokenKind', 'stkHTMLTagName', 'stkHTMLTagNameUndef',
-      'HTML_TagFunc', 'HTML_TagUndef',
-      'fHTML_TagIdentFuncTable', 'HTML_TagKeyComp',
+    GenerateInc(s,'TSynWebTokenKind', 'stkHtmlTagName', 'stkHtmlTagNameUndef',
+      'Html_TagFunc', 'Html_TagUndef',
+      'fHtml_TagIdentFuncTable', 'Html_TagKeyComp',
       appdir+'..\SynHighlighterWeb_TagsFunc.inc',
       appdir+'..\SynHighlighterWeb_TagsFuncList.inc',
       appdir+'..\SynHighlighterWeb_TagsFuncTable.inc');
@@ -399,9 +399,9 @@ begin
 
   SetLength(p,0);
 
-  GenerateInc(sl,'TSynWebTokenKind', 'stkHTMLTagKey', 'stkHTMLTagKeyUndef',
-    'HTML_AttrFunc', 'HTML_AttrUndef',
-    'fHTML_AttrIdentFuncTable', 'HTML_AttrKeyComp',
+  GenerateInc(sl,'TSynWebTokenKind', 'stkHtmlTagKey', 'stkHtmlTagKeyUndef',
+    'Html_AttrFunc', 'Html_AttrUndef',
+    'fHtml_AttrIdentFuncTable', 'Html_AttrKeyComp',
     appdir+'..\SynHighlighterWeb_AttrsFunc.inc',
     appdir+'..\SynHighlighterWeb_AttrsFuncList.inc',
     appdir+'..\SynHighlighterWeb_AttrsFuncTable.inc');

@@ -35,7 +35,7 @@ object Form2: TForm2
       Width = 117
       Height = 17
       AutoSize = False
-      Caption = 'CSS 2.1'
+      Caption = 'Css 2.1'
       Layout = tlCenter
     end
     object Label2: TLabel
@@ -44,7 +44,7 @@ object Form2: TForm2
       Width = 117
       Height = 17
       AutoSize = False
-      Caption = 'CSS 1'
+      Caption = 'Css 1'
       Layout = tlCenter
     end
     object Bevel2: TBevel

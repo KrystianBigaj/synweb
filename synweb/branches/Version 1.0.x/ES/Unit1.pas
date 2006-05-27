@@ -55,7 +55,7 @@ type
     procedure Button14Click(Sender: TObject);
     procedure Button13Click(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
-    procedure HTML401Strict1Click(Sender: TObject);
+    procedure Html401Strict1Click(Sender: TObject);
     procedure Button18Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure keyword1Click(Sender: TObject);
@@ -280,7 +280,7 @@ begin
 
 end;
 
-procedure TForm1.HTML401Strict1Click(Sender: TObject);
+procedure TForm1.Html401Strict1Click(Sender: TObject);
 begin
   nSwitchBit(pn,TMenuItem(Sender).Tag);
   TreeView1.Selected:=pn;
@@ -405,7 +405,7 @@ begin
   if ss2<>'' then
     s2.Add(ss2);
   s1[s1.Count-1]:=Copy(s1[s1.Count-1],1,Length(s1[s1.Count-1])-2);
-  s1.Insert(0,format('  TSynWeb_ESKeywords:array[0..%d] of String=(',[t-1]));
+  s1.Insert(0,format('  TSynWeb_EsKeywords:array[0..%d] of String=(',[t-1]));
   s1.Add('    );');
 
   x:=KeyHash(s[0]);
@@ -414,21 +414,21 @@ begin
       x:=KeyHash(s[i]);
   s1.Insert(0,'');
 
-  s1.Insert(0,Format('  ES_KeywordsMaxKeyHash = %d;',[x]));
+  s1.Insert(0,Format('  Es_KeywordsMaxKeyHash = %d;',[x]));
 
   s2[s2.Count-1]:=Copy(s2[s2.Count-1],1,Length(s2[s2.Count-1])-2);
-  s2.Insert(0,format('  TSynWeb_ESKeywordsData:array[0..%d] of Longword=(',[t-1]));
+  s2.Insert(0,format('  TSynWeb_EsKeywordsData:array[0..%d] of Longword=(',[t-1]));
 
   s2.Add('    );');
 
   s1.Add('');
   s1.AddStrings(s2);
-  s1.SaveToFile('..\SynHighlighterWeb_ESKeywords.inc');
+  s1.SaveToFile('..\SynHighlighterWeb_EsKeywords.inc');
 
   GenerateInc(s,
-      appdir+'..\SynHighlighterWeb_ESKeywordsFunc.inc',
-      appdir+'..\SynHighlighterWeb_ESKeywordsFuncList.inc',
-      appdir+'..\SynHighlighterWeb_ESKeywordsFuncTable.inc');
+      appdir+'..\SynHighlighterWeb_EsKeywordsFunc.inc',
+      appdir+'..\SynHighlighterWeb_EsKeywordsFuncList.inc',
+      appdir+'..\SynHighlighterWeb_EsKeywordsFuncTable.inc');
 
   s2.Free;
   s1.Free;
@@ -562,14 +562,14 @@ var
     case Longword(TLexKeys(KeyList[I]).Data) and $0F of
     $01, $02:
       begin
-        nf.add(tab+Format('%s  ES_KeywordComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
+        nf.add(tab+Format('%s  Es_KeywordComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
         al:=true;
         if islast then
-          nf.Add(tab+'  Result := stkESKeyword')
+          nf.Add(tab+'  Result := stkEsKeyword')
         else
           if islastgp then
           begin
-            nf.Add(tab+'  Result := stkESKeyword');
+            nf.Add(tab+'  Result := stkEsKeyword');
             nf.Add(tab+'else');
             tab:=tab+'  ';
             al:=false;
@@ -577,19 +577,19 @@ var
       end;
   {  $02:
       begin
-        nf.add(tab+Format('if PHP_ConstComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
+        nf.add(tab+Format('if Php_ConstComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
         nf.Add(tab+'  Result := stkPhpConst');
       end;
     $04:
       begin
-        nf.add(tab+Format('if PHP_VariableComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
+        nf.add(tab+Format('if Php_VariableComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
         nf.Add(tab+'  Result := stkPhpVariable');
       end;    }
    { $08:
       begin
-        nf.add(tab+Format('%s  ES_FunctionComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
+        nf.add(tab+Format('%s  Es_FunctionComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
         if islast then
-          nf.Add(tab+'  Result := stkESFunction');
+          nf.Add(tab+'  Result := stkEsFunction');
         al:=true;
       end; }
     else
@@ -614,11 +614,11 @@ begin
   KeyList.Sort(CompareKeys);
 
   nf:=TStringList.Create;
-  nf.add('    function ES_KeywordIdent: TSynWebTokenKind;');
-  nf.add(Format('    function ES_KeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[0]).Key]));
+  nf.add('    function Es_KeywordIdent: TSynWebTokenKind;');
+  nf.add(Format('    function Es_KeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[0]).Key]));
   for i:=1 to KeyList.Count-1 do
     if (TLexKeys(KeyList[i-1]).Key <> TLexKeys(KeyList[i]).Key) then
-        nf.add(Format('    function ES_KeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[i]).Key]));
+        nf.add(Format('    function Es_KeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[i]).Key]));
   nf.SaveToFile(AFileFuncList);
   nf.Free;
 
@@ -632,7 +632,7 @@ begin
         inc(I);
         if I >= KeyList.Count - 1 then break;
       end;
-    nf.add(Format('  fES_IdentFuncTable[%d]:=ES_KeywordFunc%d;',[TLexKeys(KeyList[I]).Key, TLexKeys(KeyList[I]).Key]));
+    nf.add(Format('  fEs_IdentFuncTable[%d]:=Es_KeywordFunc%d;',[TLexKeys(KeyList[I]).Key, TLexKeys(KeyList[I]).Key]));
     inc(I);
   end;
   nf.SaveToFile(AFileFuncTable);
@@ -640,15 +640,15 @@ begin
 
   I := 0;
   nf:=TStringList.Create;
-  nf.add('function TSynWebEngine.ES_KeywordIdent: TSynWebTokenKind;');
+  nf.add('function TSynWebEngine.Es_KeywordIdent: TSynWebTokenKind;');
   nf.add('begin');
-  nf.add('  Result := stkESIdentifier;');
+  nf.add('  Result := stkEsIdentifier;');
   nf.add('end;');
   nf.add('');     
     mx:=0;
   while I < KeyList.Count do
   begin
-    nf.add(Format('function TSynWebEngine.ES_KeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[I]).Key]));
+    nf.add(Format('function TSynWebEngine.Es_KeywordFunc%d: TSynWebTokenKind;',[TLexKeys(KeyList[I]).Key]));
     nf.add('begin');
     tab:='  ';
     mm:=0;
@@ -669,7 +669,7 @@ begin
     nf.add(Format('      %s(%d) then',[ACompFunc, TLexKeys(KeyList[I]).KeyIndex]));
     nf.add(Format('    Result := %s',[AResTrue]));}
     nf.add(tab+'else');
-    nf.add(tab+'  Result := stkESIdentifier;');
+    nf.add(tab+'  Result := stkEsIdentifier;');
     nf.add('end;');
     inc(I);
     if I < KeyList.Count then

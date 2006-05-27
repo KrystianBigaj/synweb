@@ -29,7 +29,7 @@ located at http://SynEdit.SourceForge.net
 Known Issues:
 - TSynWebSyn support only single line SetLine (don't use more than one line).
 - Doesn't support #13#10, #10 or #13 as new line. Always use #0 as line break.
-- PHP: Doesn't support multi-line encapsuled strings in string, only single line:
+- Php: Doesn't support multi-line encapsuled strings in string, only single line:
   eg. "somestring {$a["some array{$b['key'].... <- only single line encapsuled values
 -------------------------------------------------------------------------------}
 {
@@ -266,7 +266,7 @@ type
     property Options: TSynWebHtmlOptions read GetOptions;
   end;
 
-  TSynWebCSSSyn = class(TSynWebBase)
+  TSynWebCssSyn = class(TSynWebBase)
   private
     procedure SetupActiveHighlighter; override;
     function GetOptions: TSynWebCssOptions;
@@ -278,7 +278,7 @@ type
     property Options: TSynWebCssOptions read GetOptions;
   end;
 
-  TSynWebESSyn = class(TSynWebBase)
+  TSynWebEsSyn = class(TSynWebBase)
   private
     procedure SetupActiveHighlighter; override;
     function GetOptions: TSynWebEsOptions;
@@ -290,7 +290,7 @@ type
     property Options: TSynWebEsOptions read GetOptions;
   end;
 
-  TSynWebPHPCliSyn = class(TSynWebBase)
+  TSynWebPhpCliSyn = class(TSynWebBase)
   private
     procedure SetupActiveHighlighter; override;
     function GetOptions: TSynWebPhpCliOptions;
@@ -307,14 +307,14 @@ type
     // Global ------------------------------------------------------------------
     FNotifyList: TList;
     FInstance: PSynWebInstance;
-    fAttributes: TStringList;
-    fInactiveAttri: TSynHighlighterAttributes;
-    fTokenAttributeTable: TSynWebTokenAttributeTable;
+    FAttributes: TStringList;
+    FInactiveAttri: TSynHighlighterAttributes;
+    FTokenAttributeTable: TSynWebTokenAttributeTable;
     FPhpHereDocList: TStringList;
     FEngineOptions: TSynWebOptions;
     FOptions: TSynWebEngineOptions;
 
-    // HTML --------------------------------------------------------------------
+    // Html --------------------------------------------------------------------
     fHtml_TagIdentFuncTable: array[0..Html_TagMaxKeyHash] of TSynWebIdentFuncTableFunc;
     fHtml_AttrIdentFuncTable: array[0..Html_AttrMaxKeyHash] of TSynWebIdentFuncTableFunc;
     fHtml_SpecialIdentFuncTable: array[0..Html_SpecialMaxKeyHash] of
@@ -337,7 +337,7 @@ type
     fHtml_TagKeyValueQuotedAttri: TSynHighlighterAttributes;
     fHtml_ErrorAttri: TSynHighlighterAttributes;
 
-    // CSS ---------------------------------------------------------------------
+    // Css ---------------------------------------------------------------------
     fCss_ProcTable: array[#0..#255] of TSynWebProcTableProc;
     fCss_PropIdentFuncTable: array[0..Css_PropMaxKeyHash] of TSynWebIdentFuncTableFunc;
     fCss_ValIdentFuncTable: array[0..Css_ValMaxKeyHash] of TSynWebIdentFuncTableFunc;
@@ -364,21 +364,21 @@ type
     fCss_ErrorAttri: TSynHighlighterAttributes;
 
     // ECMAScript --------------------------------------------------------------
-    fES_ProcTable: array[#0..#255] of TSynWebProcTableProc;
-    fES_IdentFuncTable: array[0..ES_KeywordsMaxKeyHash] of TSynWebIdentFuncTableFunc;
-    fES_RangeProcTable: array[Low(TSynWebESRangeState)..High(TSynWebESRangeState)] of
+    fEs_ProcTable: array[#0..#255] of TSynWebProcTableProc;
+    fEs_IdentFuncTable: array[0..Es_KeywordsMaxKeyHash] of TSynWebIdentFuncTableFunc;
+    fEs_RangeProcTable: array[Low(TSynWebEsRangeState)..High(TSynWebEsRangeState)] of
     TSynWebProcTableProc;
 
-    fES_WhitespaceAttri: TSynHighlighterAttributes;
-    fES_IdentifierAttri: TSynHighlighterAttributes;
-    fES_KeyAttri: TSynHighlighterAttributes;
-    fES_CommentAttri: TSynHighlighterAttributes;
-    fES_StringAttri: TSynHighlighterAttributes;
-    fES_NumberAttri: TSynHighlighterAttributes;
-    fES_SymbolAttri: TSynHighlighterAttributes;
-    fES_ErrorAttri: TSynHighlighterAttributes;
+    fEs_WhitespaceAttri: TSynHighlighterAttributes;
+    fEs_IdentifierAttri: TSynHighlighterAttributes;
+    fEs_KeyAttri: TSynHighlighterAttributes;
+    fEs_CommentAttri: TSynHighlighterAttributes;
+    fEs_StringAttri: TSynHighlighterAttributes;
+    fEs_NumberAttri: TSynHighlighterAttributes;
+    fEs_SymbolAttri: TSynHighlighterAttributes;
+    fEs_ErrorAttri: TSynHighlighterAttributes;
 
-    // PHP ---------------------------------------------------------------------
+    // Php ---------------------------------------------------------------------
     fPhp_ProcTable: array[#0..#255] of TSynWebProcTableProc;
     fPhp_IdentFuncTable: array[0..Php_KeywordsMaxKeyHash] of TSynWebIdentFuncTableFunc;
     fPhp_RangeProcTable: array[Low(TSynWebPhpRangeState)..High(TSynWebPhpRangeState)] of
@@ -399,7 +399,7 @@ type
     fPhp_NumberAttri: TSynHighlighterAttributes;
     fPhp_ErrorAttri: TSynHighlighterAttributes;
 
-    // HTML --------------------------------------------------------------------
+    // Html --------------------------------------------------------------------
     procedure Html_MakeMethodTables;
     procedure Html_Next;
     function Html_GetRange: TSynWebHtmlRangeState;
@@ -438,7 +438,7 @@ type
     function Html_SpecialCheck(AStart, ALen: integer): integer;
     {$I SynHighlighterWeb_SpecialFuncList.inc}
 
-    // CSS ---------------------------------------------------------------------
+    // Css ---------------------------------------------------------------------
     procedure Css_MakeMethodTables;
     procedure Css_NextBg;
     procedure Css_Next;
@@ -503,41 +503,41 @@ type
     {$I SynHighlighterWeb_CssSpecialFuncList.inc}
 
     // ECMAScript --------------------------------------------------------------
-    procedure ES_MakeMethodTables;
-    procedure ES_Next;
-    function ES_GetRange: TSynWebESRangeState;
-    procedure ES_SetRange(const ARange: TSynWebESRangeState);
-    function ES_CheckNull(ADo: boolean = True): boolean;
+    procedure Es_MakeMethodTables;
+    procedure Es_Next;
+    function Es_GetRange: TSynWebEsRangeState;
+    procedure Es_SetRange(const ARange: TSynWebEsRangeState);
+    function Es_CheckNull(ADo: boolean = True): boolean;
 
-    procedure ES_SpaceProc;
-    procedure ES_SlashProc;
-    procedure ES_LowerProc;
-    procedure ES_EqualNotProc;
-    procedure ES_GreaterProc;
-    procedure ES_AndProc;
-    procedure ES_PlusProc;
-    procedure ES_MinusProc;
-    procedure ES_OrProc;
-    procedure ES_MulModXorProc;
-    procedure ES_NumberProc;
-    procedure ES_String34Proc;
-    procedure ES_String39Proc;
-    procedure ES_SymbolProc;
-    procedure ES_IdentProc;
-    procedure ES_ErrorProc;
+    procedure Es_SpaceProc;
+    procedure Es_SlashProc;
+    procedure Es_LowerProc;
+    procedure Es_EqualNotProc;
+    procedure Es_GreaterProc;
+    procedure Es_AndProc;
+    procedure Es_PlusProc;
+    procedure Es_MinusProc;
+    procedure Es_OrProc;
+    procedure Es_MulModXorProc;
+    procedure Es_NumberProc;
+    procedure Es_String34Proc;
+    procedure Es_String39Proc;
+    procedure Es_SymbolProc;
+    procedure Es_IdentProc;
+    procedure Es_ErrorProc;
 
-    procedure ES_RangeDefaultProc;
-    procedure ES_RangeCommentProc;
-    procedure ES_RangeCommentMultiProc;
-    procedure ES_RangeString34Proc;
-    procedure ES_RangeString39Proc;
+    procedure Es_RangeDefaultProc;
+    procedure Es_RangeCommentProc;
+    procedure Es_RangeCommentMultiProc;
+    procedure Es_RangeString34Proc;
+    procedure Es_RangeString39Proc;
 
-    function ES_KeywordComp(const ID: integer): boolean;
+    function Es_KeywordComp(const ID: integer): boolean;
 
-    function ES_IdentCheck: TSynWebTokenKind;
-    {$I SynHighlighterWeb_ESKeywordsFuncList.inc}
+    function Es_IdentCheck: TSynWebTokenKind;
+    {$I SynHighlighterWeb_EsKeywordsFuncList.inc}
 
-    // PHP ---------------------------------------------------------------------
+    // Php ---------------------------------------------------------------------
     procedure Php_MakeMethodTables;
     procedure Php_Next;
     procedure PhpCli_Next;
@@ -619,10 +619,10 @@ type
   published
     // Global
     property InactiveAttri: TSynHighlighterAttributes
-      read fInactiveAttri write fInactiveAttri;
+      read FInactiveAttri write FInactiveAttri;
     property Options: TSynWebEngineOptions read FOptions;
 
-    // HTML
+    // Html
     property HtmlWhitespaceAttri: TSynHighlighterAttributes
       read fHtml_WhitespaceAttri write fHtml_WhitespaceAttri;
     property HtmlCommentAttri: TSynHighlighterAttributes
@@ -650,7 +650,7 @@ type
     property HtmlErrorAttri: TSynHighlighterAttributes
       read fHtml_ErrorAttri write fHtml_ErrorAttri;
 
-    // CSS
+    // Css
     property CssWhitespaceAttri: TSynHighlighterAttributes
       read fCss_WhitespaceAttri write fCss_WhitespaceAttri;
     property CssRulesetWhitespaceAttri: TSynHighlighterAttributes
@@ -685,23 +685,23 @@ type
       read fCss_ErrorAttri write fCss_ErrorAttri;
 
     // ECMAScript
-    property ESWhitespaceAttri: TSynHighlighterAttributes
-      read fES_WhitespaceAttri write fES_WhitespaceAttri;
-    property ESIdentifierAttri: TSynHighlighterAttributes
-      read fES_IdentifierAttri write fES_IdentifierAttri;
-    property ESKeyAttri: TSynHighlighterAttributes read fES_KeyAttri write fES_KeyAttri;
-    property ESCommentAttri: TSynHighlighterAttributes
-      read fES_CommentAttri write fES_CommentAttri;
-    property ESStringAttri: TSynHighlighterAttributes
-      read fES_StringAttri write fES_StringAttri;
-    property ESNumberAttri: TSynHighlighterAttributes
-      read fES_NumberAttri write fES_NumberAttri;
-    property ESSymbolAttri: TSynHighlighterAttributes
-      read fES_SymbolAttri write fES_SymbolAttri;
-    property ESErrorAttri: TSynHighlighterAttributes
-      read fES_ErrorAttri write fES_ErrorAttri;
+    property EsWhitespaceAttri: TSynHighlighterAttributes
+      read fEs_WhitespaceAttri write fEs_WhitespaceAttri;
+    property EsIdentifierAttri: TSynHighlighterAttributes
+      read fEs_IdentifierAttri write fEs_IdentifierAttri;
+    property EsKeyAttri: TSynHighlighterAttributes read fEs_KeyAttri write fEs_KeyAttri;
+    property EsCommentAttri: TSynHighlighterAttributes
+      read fEs_CommentAttri write fEs_CommentAttri;
+    property EsStringAttri: TSynHighlighterAttributes
+      read fEs_StringAttri write fEs_StringAttri;
+    property EsNumberAttri: TSynHighlighterAttributes
+      read fEs_NumberAttri write fEs_NumberAttri;
+    property EsSymbolAttri: TSynHighlighterAttributes
+      read fEs_SymbolAttri write fEs_SymbolAttri;
+    property EsErrorAttri: TSynHighlighterAttributes
+      read fEs_ErrorAttri write fEs_ErrorAttri;
 
-    // PHP
+    // Php
     property PhpHereDocList: TStringList read FPhpHereDocList;
     property PhpWhitespaceAttri: TSynHighlighterAttributes
       read fPhp_WhitespaceAttri write fPhp_WhitespaceAttri;
@@ -955,14 +955,14 @@ begin
   if FEngine = nil then
     Result := 0
   else
-    Result := FEngine.fAttributes.Count;
+    Result := FEngine.FAttributes.Count;
 end;
 
 function TSynWebBase.GetAttribute(idx: integer): TSynHighlighterAttributes;
 begin
   Result := nil;
-  if (FEngine <> nil) and (idx >= 0) and (idx < FEngine.fAttributes.Count) then
-    Result := TSynHighlighterAttributes(FEngine.fAttributes.Objects[idx]);
+  if (FEngine <> nil) and (idx >= 0) and (idx < FEngine.FAttributes.Count) then
+    Result := TSynHighlighterAttributes(FEngine.FAttributes.Objects[idx]);
 end;
 
 function TSynWebBase.GetIdentChars: TSynIdentChars;
@@ -977,8 +977,8 @@ begin
   FEngine := nil;
   FDefaultFilter := '';
   FActiveHighlighter := False;
-  FActiveHighlighters := [shtHtml, shtCss, shtES, shtPHP_inHtml,
-    shtPHP_inCss, shtPHP_inES];
+  FActiveHighlighters := [shtHtml, shtCss, shtEs, shtPhp_inHtml,
+    shtPhp_inCss, shtPhp_inEs];
   ResetRange;
   DoDefHighlightChange;
 end;
@@ -998,17 +998,17 @@ begin
       // SYN_ATTR_IDENTIFIER: ??
       // SYN_ATTR_KEYWORD: ??
       // SYN_ATTR_SYMBOL: ??
-      SYN_ATTR_WHITESPACE:
+      SYN_ATTR_WHITEsPACE:
       begin
-        Result := FInstance.fSYN_ATTR_WHITESPACE;
+        Result := FInstance.fSYN_ATTR_WHITEsPACE;
         if not Enabled then
           case FInstance.FHighlighterMode of
             shmHtml:
               Result := fEngine.fHtml_WhitespaceAttri;
             shmCss:
               Result := fEngine.fCss_WhitespaceAttri;
-            shmES:
-              Result := fEngine.fES_WhitespaceAttri;
+            shmEs:
+              Result := fEngine.fEs_WhitespaceAttri;
             shmPhpCli:
               Result := fEngine.fPhp_InlineTextAttri;
           end;
@@ -1028,9 +1028,9 @@ begin
     Result := nil
   else
     if (FInstance.FHighlighterType in FActiveHighlighters) then
-      Result := FEngine.fTokenAttributeTable[FInstance.FTokenID]
+      Result := FEngine.FTokenAttributeTable[FInstance.FTokenID]
     else
-      Result := FEngine.fInactiveAttri;
+      Result := FEngine.FInactiveAttri;
 end;
 
 function TSynWebBase.GetToken: string;
@@ -1127,8 +1127,8 @@ begin
       ActiveHL := FInstance.FPrevHighlighterType
     else
       ActiveHL := lHinghlighter;
-  if ActiveHL >= shtPHP_inHtml then
-    FActiveHighlighters := [shtPHP_inHtml, shtPHP_inCss, shtPHP_inES]
+  if ActiveHL >= shtPhp_inHtml then
+    FActiveHighlighters := [shtPhp_inHtml, shtPhp_inCss, shtPhp_inEs]
   else
     FActiveHighlighters := [ActiveHL];
   Result := f <> FActiveHighlighters;
@@ -1166,19 +1166,19 @@ begin
 
 end;
 
-{ TSynWebCSSSyn }
+{ TSynWebCssSyn }
 
-procedure TSynWebCSSSyn.SetupActiveHighlighter;
+procedure TSynWebCssSyn.SetupActiveHighlighter;
 begin
-  FActiveHighlighters := [shtCSS];
+  FActiveHighlighters := [shtCss];
 end;
 
-function TSynWebCSSSyn.GetOptions: TSynWebCssOptions;
+function TSynWebCssSyn.GetOptions: TSynWebCssOptions;
 begin
   Result := TSynWebCssOptions(FOptions);
 end;
 
-constructor TSynWebCSSSyn.Create(AOwner: TComponent);
+constructor TSynWebCssSyn.Create(AOwner: TComponent);
 begin
   FOptions := TSynWebCssOptions.Create(@FInstance.FOptions);
   FInstance.FHighlighterMode := shmCss;
@@ -1188,7 +1188,7 @@ begin
   FOptions.EsEmbeded := False;
 end;
 
-procedure TSynWebCSSSyn.ResetRange;
+procedure TSynWebCssSyn.ResetRange;
 begin
   with FInstance do
   begin
@@ -1197,60 +1197,60 @@ begin
   end;
 end;
 
-function TSynWebCSSSyn.GetSampleSource: string;
+function TSynWebCssSyn.GetSampleSource: string;
 begin
 
 end;
 
-{ TSynWebESSyn }
+{ TSynWebEsSyn }
 
-procedure TSynWebESSyn.SetupActiveHighlighter;
+procedure TSynWebEsSyn.SetupActiveHighlighter;
 begin
-  FActiveHighlighters := [shtES];
+  FActiveHighlighters := [shtEs];
 end;
 
-function TSynWebESSyn.GetOptions: TSynWebEsOptions;
+function TSynWebEsSyn.GetOptions: TSynWebEsOptions;
 begin
   Result := TSynWebEsOptions(FOptions);
 end;
 
-constructor TSynWebESSyn.Create(AOwner: TComponent);
+constructor TSynWebEsSyn.Create(AOwner: TComponent);
 begin
   FOptions := TSynWebEsOptions.Create(@FInstance.FOptions);
-  FInstance.FHighlighterMode := shmES;
+  FInstance.FHighlighterMode := shmEs;
   inherited Create(AOwner);
   FOptions.PhpEmbeded := False;
   FOptions.CssEmbeded := False;
   FOptions.EsEmbeded := False;
 end;
 
-procedure TSynWebESSyn.ResetRange;
+procedure TSynWebEsSyn.ResetRange;
 begin
   with FInstance do
   begin
     FRange := $00000000;
-    FRange := FRange or (Longword(shtES) shl 29);
+    FRange := FRange or (Longword(shtEs) shl 29);
   end;
 end;
 
-function TSynWebESSyn.GetSampleSource: string;
+function TSynWebEsSyn.GetSampleSource: string;
 begin
 
 end;
 
-{ TSynWebPHPCliSyn }
+{ TSynWebPhpCliSyn }
 
-procedure TSynWebPHPCliSyn.SetupActiveHighlighter;
+procedure TSynWebPhpCliSyn.SetupActiveHighlighter;
 begin
   FActiveHighlighters := [shtHtml];
 end;
 
-function TSynWebPHPCliSyn.GetOptions: TSynWebPhpCliOptions;
+function TSynWebPhpCliSyn.GetOptions: TSynWebPhpCliOptions;
 begin
   Result := TSynWebPhpCliOptions(FOptions);
 end;
 
-constructor TSynWebPHPCliSyn.Create(AOwner: TComponent);
+constructor TSynWebPhpCliSyn.Create(AOwner: TComponent);
 begin
   FOptions := TSynWebPhpCliOptions.Create(@FInstance.FOptions);
   FInstance.FHighlighterMode := shmPhpCli;
@@ -1260,19 +1260,19 @@ begin
   FOptions.EsEmbeded := False;
 end;
 
-procedure TSynWebPHPCliSyn.ResetRange;
+procedure TSynWebPhpCliSyn.ResetRange;
 begin
   FInstance.FRange := $00000000;
 end;
 
-function TSynWebPHPCliSyn.GetSampleSource: string;
+function TSynWebPhpCliSyn.GetSampleSource: string;
 begin
 
 end;
 
 { TSynWebEngine }
 
-// HTML ------------------------------------------------------------------------
+// Html ------------------------------------------------------------------------
 
 procedure TSynWebEngine.Html_MakeMethodTables;
 var
@@ -1866,12 +1866,12 @@ begin
               if GetRange_Bit(28) and FInstance^.FOptions.FPhpEmbeded then
               begin
                 SetRange_Int(17, 0, 0);
-                Php_Begin(spotHTML);
+                Php_Begin(spotHtml);
                 Exit;
               end else
                 if FInstance^.FOptions.FEsEmbeded then
                 begin
-                  SetHighlighterType(shtES, True, True, True);
+                  SetHighlighterType(shtEs, True, True, True);
                   Exit;
                 end;
       Html_SetRange(srsHtmlText);
@@ -1985,12 +1985,12 @@ begin
               if GetRange_Bit(28) and FInstance^.FOptions.FPhpEmbeded then
               begin
                 SetRange_Int(17, 0, 0);
-                Php_Begin(spotHTML);
+                Php_Begin(spotHtml);
                 Exit;
               end else
                 if FInstance^.FOptions.FEsEmbeded then
                 begin
-                  SetHighlighterType(shtES, True, True, True);
+                  SetHighlighterType(shtEs, True, True, True);
                   Exit;
                 end;
         end;
@@ -2021,7 +2021,7 @@ begin
         else
           FInstance^.FTokenID := stkHtmlTagKeyValue;
         if GetRange_Bit(27) then
-          SetRange_Bit(28, UpperCase(GetToken) = 'PHP');
+          SetRange_Bit(28, UpperCase(GetToken) = 'Php');
         Html_SetRange(srsHtmlTagKey);
       end;
   end;
@@ -2055,7 +2055,7 @@ begin
             Inc(FInstance^.FRun);
             FInstance^.FTokenID := stkHtmlTagKeyValueQuoted;
             if GetRange_Bit(27) then
-              SetRange_Bit(28, UpperCase(GetToken) = #39'PHP'#39);
+              SetRange_Bit(28, UpperCase(GetToken) = #39'Php'#39);
             Break;
           end;
         end;
@@ -2091,7 +2091,7 @@ begin
             Inc(FInstance^.FRun);
             FInstance^.FTokenID := stkHtmlTagKeyValueQuoted;
             if GetRange_Bit(27) then
-              SetRange_Bit(28, UpperCase(GetToken) = '"PHP"');
+              SetRange_Bit(28, UpperCase(GetToken) = '"Php"');
             Break;
           end;
         end;
@@ -2272,7 +2272,7 @@ end;
 
 {$I SynHighlighterWeb_SpecialFunc.inc}
 
-// CSS -------------------------------------------------------------------------
+// Css -------------------------------------------------------------------------
 
 procedure TSynWebEngine.Css_MakeMethodTables;
 var
@@ -2361,7 +2361,7 @@ begin
   pF2 := PSynWebIdent2FuncTableFunc(@fCss_SpecialIdentFuncTable);
   for I := Low(fCss_SpecialIdentFuncTable) to High(fCss_SpecialIdentFuncTable) do
   begin
-    pF2^ := CSS_SpecialUndef;
+    pF2^ := Css_SpecialUndef;
     Inc(pF2);
   end;
   {$I SynHighlighterWeb_CssSpecialFuncTable.inc}
@@ -2387,7 +2387,7 @@ begin
     FInstance^.FSYN_ATTR_WHITESPACE := fCss_RulesetWhitespaceAttri
   else
     FInstance^.FSYN_ATTR_WHITESPACE := fCss_WhitespaceAttri;
-  fTokenAttributeTable[stkCssSpace] := FInstance^.FSYN_ATTR_WHITESPACE;
+  FTokenAttributeTable[stkCssSpace] := FInstance^.FSYN_ATTR_WHITESPACE;
 end;
 
 function TSynWebEngine.Css_GetRange: TSynWebCssRangeState;
@@ -4284,7 +4284,7 @@ end;
 
 // ECMAScript ------------------------------------------------------------------
 
-procedure TSynWebEngine.ES_MakeMethodTables;
+procedure TSynWebEngine.Es_MakeMethodTables;
 var
   c: char;
   i: integer;
@@ -4293,74 +4293,74 @@ begin
   for c := #0 to #255 do
     case c of
       #0:
-        fES_ProcTable[c] := NullProc;
+        fEs_ProcTable[c] := NullProc;
       #1..#32:
-        fES_ProcTable[c] := ES_SpaceProc;
+        fEs_ProcTable[c] := Es_SpaceProc;
       '/':
-        fES_ProcTable[c] := ES_SlashProc;
+        fEs_ProcTable[c] := Es_SlashProc;
       '<':
-        fES_ProcTable[c] := ES_LowerProc;
+        fEs_ProcTable[c] := Es_LowerProc;
       '=', '!':
-        fES_ProcTable[c] := ES_EqualNotProc;
+        fEs_ProcTable[c] := Es_EqualNotProc;
       '>':
-        fES_ProcTable[c] := ES_GreaterProc;
+        fEs_ProcTable[c] := Es_GreaterProc;
       '&':
-        fES_ProcTable[c] := ES_AndProc;
+        fEs_ProcTable[c] := Es_AndProc;
       '+':
-        fES_ProcTable[c] := ES_PlusProc;
+        fEs_ProcTable[c] := Es_PlusProc;
       '-':
-        fES_ProcTable[c] := ES_MinusProc;
+        fEs_ProcTable[c] := Es_MinusProc;
       '|':
-        fES_ProcTable[c] := ES_OrProc;
+        fEs_ProcTable[c] := Es_OrProc;
       '*', '%', '^':
-        fES_ProcTable[c] := ES_MulModXorProc;
+        fEs_ProcTable[c] := Es_MulModXorProc;
       '0'..'9':
-        fES_ProcTable[c] := ES_NumberProc;
+        fEs_ProcTable[c] := Es_NumberProc;
       '"':
-        fES_ProcTable[c] := ES_String34Proc;
+        fEs_ProcTable[c] := Es_String34Proc;
       #39:
-        fES_ProcTable[c] := ES_String39Proc;
+        fEs_ProcTable[c] := Es_String39Proc;
       '{', '}', '[', ']', '(', ')', '.', ';', ',', '?', ':', '~':
-        fES_ProcTable[c] :=
-          ES_SymbolProc;
+        fEs_ProcTable[c] :=
+          Es_SymbolProc;
       '$', 'a'..'z', 'A'..'Z', '_':
-        fES_ProcTable[c] := ES_IdentProc;
+        fEs_ProcTable[c] := Es_IdentProc;
       else
-        fES_ProcTable[c] := ES_ErrorProc;
+        fEs_ProcTable[c] := Es_ErrorProc;
     end;
 
-  fES_RangeProcTable[srsESDefault] := ES_RangeDefaultProc;
-  fES_RangeProcTable[srsESComment] := ES_RangeCommentProc;
-  fES_RangeProcTable[srsESCommentMulti] := ES_RangeCommentMultiProc;
-  fES_RangeProcTable[srsESString34] := ES_RangeString34Proc;
-  fES_RangeProcTable[srsESString39] := ES_RangeString39Proc;
+  fEs_RangeProcTable[srsEsDefault] := Es_RangeDefaultProc;
+  fEs_RangeProcTable[srsEsComment] := Es_RangeCommentProc;
+  fEs_RangeProcTable[srsEsCommentMulti] := Es_RangeCommentMultiProc;
+  fEs_RangeProcTable[srsEsString34] := Es_RangeString34Proc;
+  fEs_RangeProcTable[srsEsString39] := Es_RangeString39Proc;
 
-  pF := PSynWebIdentFuncTableFunc(@fES_IdentFuncTable);
-  for I := Low(fES_IdentFuncTable) to High(fES_IdentFuncTable) do
+  pF := PSynWebIdentFuncTableFunc(@fEs_IdentFuncTable);
+  for I := Low(fEs_IdentFuncTable) to High(fEs_IdentFuncTable) do
   begin
-    pF^ := ES_KeywordIdent;
+    pF^ := Es_KeywordIdent;
     Inc(pF);
   end;
-  {$I SynHighlighterWeb_ESKeywordsFuncTable.inc}
+  {$I SynHighlighterWeb_EsKeywordsFuncTable.inc}
 end;
 
-procedure TSynWebEngine.ES_Next;
+procedure TSynWebEngine.Es_Next;
 begin
   FInstance^.FTokenPos := FInstance^.FRun;
-  fES_RangeProcTable[ES_GetRange];
+  fEs_RangeProcTable[Es_GetRange];
 end;
 
-function TSynWebEngine.ES_GetRange: TSynWebESRangeState;
+function TSynWebEngine.Es_GetRange: TSynWebEsRangeState;
 begin
-  Result := TSynWebESRangeState(GetRange_Int(2, 15));
+  Result := TSynWebEsRangeState(GetRange_Int(2, 15));
 end;
 
-procedure TSynWebEngine.ES_SetRange(const ARange: TSynWebESRangeState);
+procedure TSynWebEngine.Es_SetRange(const ARange: TSynWebEsRangeState);
 begin
   SetRange_Int(2, 15, Longword(ARange));
 end;
 
-function TSynWebEngine.ES_CheckNull(ADo: boolean = True): boolean;
+function TSynWebEngine.Es_CheckNull(ADo: boolean = True): boolean;
 begin
   case FInstance^.FLine[FInstance^.FRun] of
     #0:
@@ -4400,26 +4400,26 @@ begin
   end;
 end;
 
-procedure TSynWebEngine.ES_SpaceProc;
+procedure TSynWebEngine.Es_SpaceProc;
 begin
   repeat
     Inc(FInstance^.FRun);
   until not (FInstance^.FLine[FInstance^.FRun] in [#1..#32]);
-  FInstance^.FTokenID := stkESSpace;
+  FInstance^.FTokenID := stkEsSpace;
 end;
 
-procedure TSynWebEngine.ES_SlashProc;
+procedure TSynWebEngine.Es_SlashProc;
 begin
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
     '*':
     begin
       Inc(FInstance^.FRun);
-      ES_SetRange(srsESCommentMulti);
-      if ES_CheckNull(False) or Php_CheckBegin(False) then
-        FInstance^.FTokenID := stkESComment
+      Es_SetRange(srsEsCommentMulti);
+      if Es_CheckNull(False) or Php_CheckBegin(False) then
+        FInstance^.FTokenID := stkEsComment
       else
-        ES_RangeCommentMultiProc;
+        Es_RangeCommentMultiProc;
       Exit;
     end;
     '=':
@@ -4427,20 +4427,20 @@ begin
     '/':
     begin
       Inc(FInstance^.FRun);
-      ES_SetRange(srsESComment);
-      if ES_CheckNull(False) or Php_CheckBegin(False) then
-        FInstance^.FTokenID := stkESComment
+      Es_SetRange(srsEsComment);
+      if Es_CheckNull(False) or Php_CheckBegin(False) then
+        FInstance^.FTokenID := stkEsComment
       else
-        ES_RangeCommentProc;
+        Es_RangeCommentProc;
       Exit;
     end;
   end;
-  FInstance^.FTokenID := stkESSymbol;
+  FInstance^.FTokenID := stkEsSymbol;
 end;
 
-procedure TSynWebEngine.ES_LowerProc;
+procedure TSynWebEngine.Es_LowerProc;
 begin
-  if ES_CheckNull or Php_CheckBegin then
+  if Es_CheckNull or Php_CheckBegin then
     Exit;
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
@@ -4453,10 +4453,10 @@ begin
         Inc(FInstance^.FRun);
     end;
   end;
-  FInstance^.FTokenID := stkESSymbol;
+  FInstance^.FTokenID := stkEsSymbol;
 end;
 
-procedure TSynWebEngine.ES_EqualNotProc;
+procedure TSynWebEngine.Es_EqualNotProc;
 begin
   Inc(FInstance^.FRun);
   if FInstance^.FLine[FInstance^.FRun] = '=' then
@@ -4465,10 +4465,10 @@ begin
     if FInstance^.FLine[FInstance^.FRun] = '=' then
       Inc(FInstance^.FRun);
   end;
-  FInstance^.FTokenID := stkESSymbol;
+  FInstance^.FTokenID := stkEsSymbol;
 end;
 
-procedure TSynWebEngine.ES_GreaterProc;
+procedure TSynWebEngine.Es_GreaterProc;
 begin
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
@@ -4489,52 +4489,52 @@ begin
       end;
     end;
   end;
-  FInstance^.FTokenID := stkESSymbol;
+  FInstance^.FTokenID := stkEsSymbol;
 end;
 
-procedure TSynWebEngine.ES_AndProc;
+procedure TSynWebEngine.Es_AndProc;
 begin
   Inc(FInstance^.FRun);
   if FInstance^.FLine[FInstance^.FRun] in ['=', '&'] then
     Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkESSymbol;
+  FInstance^.FTokenID := stkEsSymbol;
 end;
 
-procedure TSynWebEngine.ES_PlusProc;
+procedure TSynWebEngine.Es_PlusProc;
 begin
   Inc(FInstance^.FRun);
   if FInstance^.FLine[FInstance^.FRun] in ['=', '+'] then
     Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkESSymbol;
+  FInstance^.FTokenID := stkEsSymbol;
 end;
 
-procedure TSynWebEngine.ES_MinusProc;
+procedure TSynWebEngine.Es_MinusProc;
 begin
   Inc(FInstance^.FRun);
   if FInstance^.FLine[FInstance^.FRun] in ['=', '-'] then
     Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkESSymbol;
+  FInstance^.FTokenID := stkEsSymbol;
 end;
 
-procedure TSynWebEngine.ES_OrProc;
+procedure TSynWebEngine.Es_OrProc;
 begin
   Inc(FInstance^.FRun);
   if FInstance^.FLine[FInstance^.FRun] in ['=', '|'] then
     Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkESSymbol;
+  FInstance^.FTokenID := stkEsSymbol;
 end;
 
-procedure TSynWebEngine.ES_MulModXorProc;
+procedure TSynWebEngine.Es_MulModXorProc;
 begin
   Inc(FInstance^.FRun);
   if FInstance^.FLine[FInstance^.FRun] = '=' then
     Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkESSymbol;
+  FInstance^.FTokenID := stkEsSymbol;
 end;
 
-procedure TSynWebEngine.ES_NumberProc;
+procedure TSynWebEngine.Es_NumberProc;
 begin
-  FInstance^.FTokenID := stkESError;
+  FInstance^.FTokenID := stkEsError;
   if (FInstance^.FLine[FInstance^.FRun] = '0') and
     (FInstance^.FLine[FInstance^.FRun + 1] in ['x', 'X']) then
   begin
@@ -4575,68 +4575,68 @@ begin
         Exit;
     end;
   end;
-  FInstance^.FTokenID := stkESNumber;
+  FInstance^.FTokenID := stkEsNumber;
 end;
 
-procedure TSynWebEngine.ES_String34Proc;
+procedure TSynWebEngine.Es_String34Proc;
 begin
   Inc(FInstance^.FRun);
-  if ES_CheckNull(False) then
-    FInstance^.FTokenID := stkESError
+  if Es_CheckNull(False) then
+    FInstance^.FTokenID := stkEsError
   else
   begin
-    ES_SetRange(srsESString34);
+    Es_SetRange(srsEsString34);
     if Php_CheckBegin(False) then
-      FInstance^.FTokenID := stkESString
+      FInstance^.FTokenID := stkEsString
     else
-      ES_RangeString34Proc;
+      Es_RangeString34Proc;
   end;
 end;
 
-procedure TSynWebEngine.ES_String39Proc;
+procedure TSynWebEngine.Es_String39Proc;
 begin
   Inc(FInstance^.FRun);
-  if ES_CheckNull(False) then
-    FInstance^.FTokenID := stkESError
+  if Es_CheckNull(False) then
+    FInstance^.FTokenID := stkEsError
   else
   begin
-    ES_SetRange(srsESString39);
+    Es_SetRange(srsEsString39);
     if Php_CheckBegin(False) then
-      FInstance^.FTokenID := stkESString
+      FInstance^.FTokenID := stkEsString
     else
-      ES_RangeString39Proc;
+      Es_RangeString39Proc;
   end;
 end;
 
-procedure TSynWebEngine.ES_SymbolProc;
+procedure TSynWebEngine.Es_SymbolProc;
 begin
   Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkESSymbol;
+  FInstance^.FTokenID := stkEsSymbol;
 end;
 
-procedure TSynWebEngine.ES_IdentProc;
+procedure TSynWebEngine.Es_IdentProc;
 begin
   repeat
     Inc(FInstance^.FRun);
   until TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun]] and (1 shl 2) = 0;
   // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', '0'..'9', '$']);
-  FInstance^.FTokenID := ES_IdentCheck;
+  FInstance^.FTokenID := Es_IdentCheck;
 end;
 
-procedure TSynWebEngine.ES_ErrorProc;
+procedure TSynWebEngine.Es_ErrorProc;
 begin
   Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkESError;
+  FInstance^.FTokenID := stkEsError;
 end;
 
-procedure TSynWebEngine.ES_RangeDefaultProc;
+procedure TSynWebEngine.Es_RangeDefaultProc;
 begin
-  fES_ProcTable[FInstance^.FLine[FInstance^.FRun]];
+  fEs_ProcTable[FInstance^.FLine[FInstance^.FRun]];
 end;
 
-procedure TSynWebEngine.ES_RangeCommentProc;
+procedure TSynWebEngine.Es_RangeCommentProc;
 begin
-  if not ES_CheckNull then
+  if not Es_CheckNull then
     if Php_CheckBegin then
       Exit
     else
@@ -4647,29 +4647,29 @@ begin
         case FInstance^.FLine[FInstance^.FRun] of
           #0:
           begin
-            FInstance^.FTokenID := stkESComment;
+            FInstance^.FTokenID := stkEsComment;
             Break;
           end;
           '<':
             if Php_CheckBegin(False) then
             begin
-              FInstance^.FTokenID := stkESComment;
+              FInstance^.FTokenID := stkEsComment;
               Exit;
             end else
-              if ES_CheckNull(False) then
+              if Es_CheckNull(False) then
               begin
-                FInstance^.FTokenID := stkESComment;
+                FInstance^.FTokenID := stkEsComment;
                 Break;
               end else
                 Inc(FInstance^.FRun);
         end;
       until False;
-  ES_SetRange(srsESDefault);
+  Es_SetRange(srsEsDefault);
 end;
 
-procedure TSynWebEngine.ES_RangeCommentMultiProc;
+procedure TSynWebEngine.Es_RangeCommentMultiProc;
 begin
-  if ES_CheckNull or Php_CheckBegin then
+  if Es_CheckNull or Php_CheckBegin then
     Exit;
   repeat
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 26) = 0 do
@@ -4679,7 +4679,7 @@ begin
       #0:
         Break;
       '<':
-        if ES_CheckNull(False) or Php_CheckBegin(False) then
+        if Es_CheckNull(False) or Php_CheckBegin(False) then
           Break
         else
           Inc(FInstance^.FRun);
@@ -4689,16 +4689,16 @@ begin
         if FInstance^.FLine[FInstance^.FRun] = '/' then
         begin
           Inc(FInstance^.FRun);
-          ES_SetRange(srsESDefault);
+          Es_SetRange(srsEsDefault);
           Break;
         end;
       end;
     end;
   until False;
-  FInstance^.FTokenID := stkESComment;
+  FInstance^.FTokenID := stkEsComment;
 end;
 
-procedure TSynWebEngine.ES_RangeString34Proc;
+procedure TSynWebEngine.Es_RangeString34Proc;
 begin
   if not Html_CheckNull then
     if Php_CheckBegin then
@@ -4711,20 +4711,20 @@ begin
         case FInstance^.FLine[FInstance^.FRun] of
           #0:
           begin
-            FInstance^.FTokenID := stkESError;
+            FInstance^.FTokenID := stkEsError;
             Break;
           end;
           '<':
             if Php_CheckBegin(False) then
             begin
-              FInstance^.FTokenID := stkESString;
+              FInstance^.FTokenID := stkEsString;
               Exit;
             end else
               Inc(FInstance^.FRun);
           #34:
           begin
             Inc(FInstance^.FRun);
-            FInstance^.FTokenID := stkESString;
+            FInstance^.FTokenID := stkEsString;
             Break;
           end;
           '\':
@@ -4735,10 +4735,10 @@ begin
           end;
         end;
       until False;
-  ES_SetRange(srsESDefault);
+  Es_SetRange(srsEsDefault);
 end;
 
-procedure TSynWebEngine.ES_RangeString39Proc;
+procedure TSynWebEngine.Es_RangeString39Proc;
 begin
   if not Html_CheckNull then
     if Php_CheckBegin then
@@ -4751,20 +4751,20 @@ begin
         case FInstance^.FLine[FInstance^.FRun] of
           #0:
           begin
-            FInstance^.FTokenID := stkESError;
+            FInstance^.FTokenID := stkEsError;
             Break;
           end;
           '<':
             if Php_CheckBegin(False) then
             begin
-              FInstance^.FTokenID := stkESString;
+              FInstance^.FTokenID := stkEsString;
               Exit;
             end else
               Inc(FInstance^.FRun);
           #39:
           begin
             Inc(FInstance^.FRun);
-            FInstance^.FTokenID := stkESString;
+            FInstance^.FTokenID := stkEsString;
             Break;
           end;
           '\':
@@ -4775,16 +4775,16 @@ begin
           end;
         end;
       until False;
-  ES_SetRange(srsESDefault);
+  Es_SetRange(srsEsDefault);
 end;
 
-function TSynWebEngine.ES_KeywordComp(const ID: integer): boolean;
+function TSynWebEngine.Es_KeywordComp(const ID: integer): boolean;
 var
   I: integer;
   Temp: PChar;
   aKey: string;
 begin
-  aKey := TSynWeb_ESKeywords[ID];
+  aKey := TSynWeb_EsKeywords[ID];
   Temp := FInstance^.FToIdent;
   if Length(aKey) = FInstance^.FStringLen then
   begin
@@ -4803,7 +4803,7 @@ begin
     Result := False;
 end;
 
-function TSynWebEngine.ES_IdentCheck: TSynWebTokenKind;
+function TSynWebEngine.Es_IdentCheck: TSynWebTokenKind;
 var
   HashKey: longword;
 
@@ -4824,15 +4824,15 @@ begin
   FInstance^.FToIdent := @FInstance^.FLine[FInstance^.FTokenPos];
   KeyHash(FInstance^.FToIdent);
   FInstance^.FToken_LastID := -1;
-  if HashKey <= ES_KeywordsMaxKeyHash then
-    Result := fES_IdentFuncTable[HashKey]
+  if HashKey <= Es_KeywordsMaxKeyHash then
+    Result := fEs_IdentFuncTable[HashKey]
   else
-    Result := stkESIdentifier;
+    Result := stkEsIdentifier;
 end;
 
-{$I SynHighlighterWeb_ESKeywordsFunc.inc}
+{$I SynHighlighterWeb_EsKeywordsFunc.inc}
 
-// PHP -------------------------------------------------------------------------
+// Php -------------------------------------------------------------------------
 
 procedure TSynWebEngine.Php_MakeMethodTables;
 var
@@ -4998,12 +4998,12 @@ end;
 procedure TSynWebEngine.Php_Begin(ATagKind: TSynWebPhpOpenTag);
 begin
   SetHighlighterType(
-    TSynHighlighterType(Longword(FInstance^.FHighlighterType) + Longword(shtPHP_inHtml)),
+    TSynHighlighterType(Longword(FInstance^.FHighlighterType) + Longword(shtPhp_inHtml)),
     False,
     True,
     ATagKind = spotHtml);
   SetRange_Int(12, 17, 0);
-  if ATagKind = spotHTML then
+  if ATagKind = spotHtml then
     Php_SetRange(srsPhpDefault)
   else
   begin
@@ -5017,11 +5017,11 @@ procedure TSynWebEngine.Php_End(AHtmlTag: boolean);
 begin
   SetRange_Int(12, 17, 0);
   if FInstance^.FLine[FInstance^.FRun] = #0 then
-    SetRange_Int(3, 29, Longword(FInstance^.FHighlighterType) - Longword(shtPHP_inHtml))
+    SetRange_Int(3, 29, Longword(FInstance^.FHighlighterType) - Longword(shtPhp_inHtml))
   else
   begin
     SetHighlighterType(
-      TSynHighlighterType(Longword(FInstance^.FHighlighterType) - Longword(shtPHP_inHtml)),
+      TSynHighlighterType(Longword(FInstance^.FHighlighterType) - Longword(shtPhp_inHtml)),
       AHtmlTag,
       True, not AHtmlTag);
     if AHtmlTag then
@@ -5779,7 +5779,7 @@ begin
       Exit;
     end;
   until False;
-  ES_SetRange(srsESDefault);
+  Es_SetRange(srsEsDefault);
 end;
 
 procedure TSynWebEngine.Php_RangeStringShellProc;
@@ -5946,7 +5946,7 @@ end;
 
 procedure TSynWebEngine.AddAttribute(AAttrib: TSynHighlighterAttributes);
 begin
-  fAttributes.AddObject(AAttrib.Name, AAttrib);
+  FAttributes.AddObject(AAttrib.Name, AAttrib);
 end;
 
 procedure TSynWebEngine.AddToNotifyList(ASynWeb: TSynWebBase);
@@ -5964,9 +5964,9 @@ var
   i: integer;
   Attri: TSynHighlighterAttributes;
 begin
-  for i := fAttributes.Count - 1 downto 0 do
+  for i := FAttributes.Count - 1 downto 0 do
   begin
-    Attri := TSynHighlighterAttributes(fAttributes.Objects[i]);
+    Attri := TSynHighlighterAttributes(FAttributes.Objects[i]);
     if Attri <> nil then
     begin
       Attri.OnChange := AEvent;
@@ -5989,7 +5989,7 @@ var
 begin
   Result := Length(AString);
   for i := 1 to Length(AString) do
-    Result := TCrc8_Table[Result xor Byte(AString[i])];
+    Result := TCrc8Table[Result xor Byte(AString[i])];
 end;
 
 function TSynWebEngine.GetRange_Bit(ABit: longword): boolean;
@@ -6086,14 +6086,14 @@ begin
       Css_UpdateBg;
       FInstance^.FNextProcTable := Css_Next;
     end;
-    shtES:
+    shtEs:
     begin
       if AClearBits then
         SetRange_Int(17, 0, 0);
-      FInstance^.FSYN_ATTR_COMMENT := fES_CommentAttri;
-      FInstance^.FSYN_ATTR_STRING := fES_StringAttri;
-      FInstance^.FSYN_ATTR_WHITESPACE := fES_WhitespaceAttri;
-      FInstance^.FNextProcTable := ES_Next;
+      FInstance^.FSYN_ATTR_COMMENT := fEs_CommentAttri;
+      FInstance^.FSYN_ATTR_STRING := fEs_StringAttri;
+      FInstance^.FSYN_ATTR_WHITESPACE := fEs_WhitespaceAttri;
+      FInstance^.FNextProcTable := Es_Next;
     end;
     else
       if AClearBits then
@@ -6156,7 +6156,7 @@ begin
     Add('eot');
     Add('EOL');
     Add('eol');
-    Add('HTML');
+    Add('Html');
     Add('html');
     Add('CONTENT');
     Add('content');
@@ -6170,11 +6170,11 @@ begin
     Sorted := True;
   end;
 
-  fAttributes := TStringList.Create;
-  fAttributes.Duplicates := dupError;
-  fAttributes.Sorted := True;
+  FAttributes := TStringList.Create;
+  FAttributes.Duplicates := dupError;
+  FAttributes.Sorted := True;
 
-  // HTML
+  // Html
   Html_MakeMethodTables;
 
   fHtml_WhitespaceAttri := TSynHighlighterAttributes.Create('Html: Whitespace');
@@ -6205,21 +6205,21 @@ begin
   fHtml_ErrorAttri := TSynHighlighterAttributes.Create('Html: Error');
   AddAttribute(fHtml_ErrorAttri);
 
-  fTokenAttributeTable[stkHtmlSpace] := fHtml_WhitespaceAttri;
-  fTokenAttributeTable[stkHtmlComment] := fHtml_CommentAttri;
-  fTokenAttributeTable[stkHtmlText] := fHtml_TextAttri;
-  fTokenAttributeTable[stkHtmlEscape] := fHtml_EscapeAmpsAttri;
-  fTokenAttributeTable[stkHtmlSymbol] := fHtml_SymbolAttri;
-  fTokenAttributeTable[stkHtmlTag] := fHtml_TagAttri;
-  fTokenAttributeTable[stkHtmlTagName] := fHtml_TagNameAttri;
-  fTokenAttributeTable[stkHtmlTagNameUndef] := fHtml_TagNameUndefAttri;
-  fTokenAttributeTable[stkHtmlTagKey] := fHtml_TagKeyAttri;
-  fTokenAttributeTable[stkHtmlTagKeyUndef] := fHtml_TagKeyUndefAttri;
-  fTokenAttributeTable[stkHtmlTagKeyValue] := fHtml_TagKeyValueAttri;
-  fTokenAttributeTable[stkHtmlTagKeyValueQuoted] := fHtml_TagKeyValueQuotedAttri;
-  fTokenAttributeTable[stkHtmlError] := fHtml_ErrorAttri;
+  FTokenAttributeTable[stkHtmlSpace] := fHtml_WhitespaceAttri;
+  FTokenAttributeTable[stkHtmlComment] := fHtml_CommentAttri;
+  FTokenAttributeTable[stkHtmlText] := fHtml_TextAttri;
+  FTokenAttributeTable[stkHtmlEscape] := fHtml_EscapeAmpsAttri;
+  FTokenAttributeTable[stkHtmlSymbol] := fHtml_SymbolAttri;
+  FTokenAttributeTable[stkHtmlTag] := fHtml_TagAttri;
+  FTokenAttributeTable[stkHtmlTagName] := fHtml_TagNameAttri;
+  FTokenAttributeTable[stkHtmlTagNameUndef] := fHtml_TagNameUndefAttri;
+  FTokenAttributeTable[stkHtmlTagKey] := fHtml_TagKeyAttri;
+  FTokenAttributeTable[stkHtmlTagKeyUndef] := fHtml_TagKeyUndefAttri;
+  FTokenAttributeTable[stkHtmlTagKeyValue] := fHtml_TagKeyValueAttri;
+  FTokenAttributeTable[stkHtmlTagKeyValueQuoted] := fHtml_TagKeyValueQuotedAttri;
+  FTokenAttributeTable[stkHtmlError] := fHtml_ErrorAttri;
 
-  // CSS
+  // Css
   Css_MakeMethodTables;
 
   fCss_WhitespaceAttri := TSynHighlighterAttributes.Create('Css: Whitespace');
@@ -6256,52 +6256,52 @@ begin
   fCss_ErrorAttri := TSynHighlighterAttributes.Create('Css: Error');
   AddAttribute(fCss_ErrorAttri);
 
-  fTokenAttributeTable[stkCssSpace] := fCss_WhitespaceAttri;
-  fTokenAttributeTable[stkCssSelector] := fCss_SelectorAttri;
-  fTokenAttributeTable[stkCssSelectorUndef] := fCss_SelectorUndefAttri;
-  fTokenAttributeTable[stkCssSelectorClass] := fCss_SelectorClassAmpsAttri;
-  fTokenAttributeTable[stkCssSelectorId] := fCss_SelectorIdAttri;
-  fTokenAttributeTable[stkCssSpecial] := fCss_SpecialAttri;
-  fTokenAttributeTable[stkCssComment] := fCss_CommentAttri;
-  fTokenAttributeTable[stkCssProp] := fCss_PropAttri;
-  fTokenAttributeTable[stkCssPropUndef] := fCss_PropUndefAttri;
-  fTokenAttributeTable[stkCssVal] := fCss_ValAttri;
-  fTokenAttributeTable[stkCssValUndef] := fCss_ValUndefAttri;
-  fTokenAttributeTable[stkCssValString] := fCss_ValStringAttri;
-  fTokenAttributeTable[stkCssValNumber] := fCss_ValNumberAttri;
-  fTokenAttributeTable[stkCssSymbol] := fCss_SymbolAttri;
-  fTokenAttributeTable[stkCssError] := fCss_ErrorAttri;
+  FTokenAttributeTable[stkCssSpace] := fCss_WhitespaceAttri;
+  FTokenAttributeTable[stkCssSelector] := fCss_SelectorAttri;
+  FTokenAttributeTable[stkCssSelectorUndef] := fCss_SelectorUndefAttri;
+  FTokenAttributeTable[stkCssSelectorClass] := fCss_SelectorClassAmpsAttri;
+  FTokenAttributeTable[stkCssSelectorId] := fCss_SelectorIdAttri;
+  FTokenAttributeTable[stkCssSpecial] := fCss_SpecialAttri;
+  FTokenAttributeTable[stkCssComment] := fCss_CommentAttri;
+  FTokenAttributeTable[stkCssProp] := fCss_PropAttri;
+  FTokenAttributeTable[stkCssPropUndef] := fCss_PropUndefAttri;
+  FTokenAttributeTable[stkCssVal] := fCss_ValAttri;
+  FTokenAttributeTable[stkCssValUndef] := fCss_ValUndefAttri;
+  FTokenAttributeTable[stkCssValString] := fCss_ValStringAttri;
+  FTokenAttributeTable[stkCssValNumber] := fCss_ValNumberAttri;
+  FTokenAttributeTable[stkCssSymbol] := fCss_SymbolAttri;
+  FTokenAttributeTable[stkCssError] := fCss_ErrorAttri;
 
   // ECMAScript
-  ES_MakeMethodTables;
+  Es_MakeMethodTables;
 
-  fES_WhitespaceAttri := TSynHighlighterAttributes.Create('ES: Whitespace');
-  AddAttribute(fES_WhitespaceAttri);
-  fES_IdentifierAttri := TSynHighlighterAttributes.Create('ES: Identifier');
-  AddAttribute(fES_IdentifierAttri);
-  fES_KeyAttri := TSynHighlighterAttributes.Create('ES: Key');
-  AddAttribute(fES_KeyAttri);
-  fES_CommentAttri := TSynHighlighterAttributes.Create('ES: Comment');
-  AddAttribute(fES_CommentAttri);
-  fES_StringAttri := TSynHighlighterAttributes.Create('ES: String');
-  AddAttribute(fES_StringAttri);
-  fES_NumberAttri := TSynHighlighterAttributes.Create('ES: Number');
-  AddAttribute(fES_NumberAttri);
-  fES_SymbolAttri := TSynHighlighterAttributes.Create('ES: Symbol');
-  AddAttribute(fES_SymbolAttri);
-  fES_ErrorAttri := TSynHighlighterAttributes.Create('ES: Error');
-  AddAttribute(fES_ErrorAttri);
+  fEs_WhitespaceAttri := TSynHighlighterAttributes.Create('Es: Whitespace');
+  AddAttribute(fEs_WhitespaceAttri);
+  fEs_IdentifierAttri := TSynHighlighterAttributes.Create('Es: Identifier');
+  AddAttribute(fEs_IdentifierAttri);
+  fEs_KeyAttri := TSynHighlighterAttributes.Create('Es: Key');
+  AddAttribute(fEs_KeyAttri);
+  fEs_CommentAttri := TSynHighlighterAttributes.Create('Es: Comment');
+  AddAttribute(fEs_CommentAttri);
+  fEs_StringAttri := TSynHighlighterAttributes.Create('Es: String');
+  AddAttribute(fEs_StringAttri);
+  fEs_NumberAttri := TSynHighlighterAttributes.Create('Es: Number');
+  AddAttribute(fEs_NumberAttri);
+  fEs_SymbolAttri := TSynHighlighterAttributes.Create('Es: Symbol');
+  AddAttribute(fEs_SymbolAttri);
+  fEs_ErrorAttri := TSynHighlighterAttributes.Create('Es: Error');
+  AddAttribute(fEs_ErrorAttri);
 
-  fTokenAttributeTable[stkESSpace] := fES_WhitespaceAttri;
-  fTokenAttributeTable[stkESIdentifier] := fES_IdentifierAttri;
-  fTokenAttributeTable[stkESKeyword] := fES_KeyAttri;
-  fTokenAttributeTable[stkESComment] := fES_CommentAttri;
-  fTokenAttributeTable[stkESString] := fES_StringAttri;
-  fTokenAttributeTable[stkESNumber] := fES_NumberAttri;
-  fTokenAttributeTable[stkESSymbol] := fES_SymbolAttri;
-  fTokenAttributeTable[stkESError] := fES_ErrorAttri;
+  FTokenAttributeTable[stkEsSpace] := fEs_WhitespaceAttri;
+  FTokenAttributeTable[stkEsIdentifier] := fEs_IdentifierAttri;
+  FTokenAttributeTable[stkEsKeyword] := fEs_KeyAttri;
+  FTokenAttributeTable[stkEsComment] := fEs_CommentAttri;
+  FTokenAttributeTable[stkEsString] := fEs_StringAttri;
+  FTokenAttributeTable[stkEsNumber] := fEs_NumberAttri;
+  FTokenAttributeTable[stkEsSymbol] := fEs_SymbolAttri;
+  FTokenAttributeTable[stkEsError] := fEs_ErrorAttri;
 
-  // PHP
+  // Php
   Php_MakeMethodTables;
 
   fPhp_WhitespaceAttri := TSynHighlighterAttributes.Create('Php: Whitespace');
@@ -6333,34 +6333,34 @@ begin
   fPhp_ErrorAttri := TSynHighlighterAttributes.Create('Php: Error');
   AddAttribute(fPhp_ErrorAttri);
 
-  fTokenAttributeTable[stkPhpSpace] := fHtml_WhitespaceAttri;
-  fTokenAttributeTable[stkPhpIdentifier] := fPhp_IdentifierAttri;
-  fTokenAttributeTable[stkPhpKeyword] := fPhp_KeyAttri;
-  fTokenAttributeTable[stkPhpFunction] := fPhp_FunctionAttri;
-  fTokenAttributeTable[stkPhpVariable] := fPhp_VariableAttri;
-  fTokenAttributeTable[stkPhpConst] := fPhp_ConstAttri;
-  fTokenAttributeTable[stkPhpString] := fPhp_StringAttri;
-  fTokenAttributeTable[stkPhpStringSpecial] := fPhp_StringSpecialAttri;
-  fTokenAttributeTable[stkPhpComment] := fPhp_CommentAttri;
-  fTokenAttributeTable[stkPhpDocComment] := fPhp_DocCommentAttri;
-  fTokenAttributeTable[stkPhpSymbol] := fPhp_SymbolAttri;
-  fTokenAttributeTable[stkPhpNumber] := fPhp_NumberAttri;
-  fTokenAttributeTable[stkPhpError] := fPhp_ErrorAttri;
+  FTokenAttributeTable[stkPhpSpace] := fHtml_WhitespaceAttri;
+  FTokenAttributeTable[stkPhpIdentifier] := fPhp_IdentifierAttri;
+  FTokenAttributeTable[stkPhpKeyword] := fPhp_KeyAttri;
+  FTokenAttributeTable[stkPhpFunction] := fPhp_FunctionAttri;
+  FTokenAttributeTable[stkPhpVariable] := fPhp_VariableAttri;
+  FTokenAttributeTable[stkPhpConst] := fPhp_ConstAttri;
+  FTokenAttributeTable[stkPhpString] := fPhp_StringAttri;
+  FTokenAttributeTable[stkPhpStringSpecial] := fPhp_StringSpecialAttri;
+  FTokenAttributeTable[stkPhpComment] := fPhp_CommentAttri;
+  FTokenAttributeTable[stkPhpDocComment] := fPhp_DocCommentAttri;
+  FTokenAttributeTable[stkPhpSymbol] := fPhp_SymbolAttri;
+  FTokenAttributeTable[stkPhpNumber] := fPhp_NumberAttri;
+  FTokenAttributeTable[stkPhpError] := fPhp_ErrorAttri;
 
-  // PHPCli
-  fTokenAttributeTable[stkPhpInlineText] := fPhp_InlineTextAttri;
+  // PhpCli
+  FTokenAttributeTable[stkPhpInlineText] := fPhp_InlineTextAttri;
 
   // Global
-  fInactiveAttri := TSynHighlighterAttributes.Create('Global: Inactive');
-  with fInactiveAttri do
+  FInactiveAttri := TSynHighlighterAttributes.Create('Global: Inactive');
+  with FInactiveAttri do
   begin
     Background := clNone;
     Foreground := clInactiveCaption;
     Style := [];
   end;
-  AddAttribute(fInactiveAttri);
+  AddAttribute(FInactiveAttri);
 
-  fTokenAttributeTable[stkNull] := nil;
+  FTokenAttributeTable[stkNull] := nil;
   SetAttributesOnChange(DefHighlightChange);
 end;
 
@@ -6368,9 +6368,9 @@ destructor TSynWebEngine.Destroy;
 var
   i: integer;
 begin
-  for i := fAttributes.Count - 1 downto 0 do
-    TSynHighlighterAttributes(fAttributes.Objects[i]).Free;
-  fAttributes.Clear;
+  for i := FAttributes.Count - 1 downto 0 do
+    TSynHighlighterAttributes(FAttributes.Objects[i]).Free;
+  FAttributes.Clear;
   for i := 0 to FNotifyList.Count - 1 do
     TSynWebBase(FNotifyList[i]).Engine := nil;
   FNotifyList.Free;
@@ -6382,7 +6382,7 @@ initialization
 
 {$IFNDEF SYN_CPPB_1}
   RegisterPlaceableHighlighter(TSynWebHtmlSyn);
-  RegisterPlaceableHighlighter(TSynWebPHPCliSyn);
+  RegisterPlaceableHighlighter(TSynWebPhpCliSyn);
   RegisterPlaceableHighlighter(TSynWebCssSyn);
   RegisterPlaceableHighlighter(TSynWebEsSyn);
 {$ENDIF}
