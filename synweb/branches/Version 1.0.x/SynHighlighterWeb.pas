@@ -111,16 +111,16 @@ type
     FSYN_ATTR_COMMENT: TSynHighlighterAttributes;
     FSYN_ATTR_STRING: TSynHighlighterAttributes;
     FSYN_ATTR_WHITESPACE: TSynHighlighterAttributes;
-    FOptions: PSynWebOptions;
+    FOptions: TSynWebOptions;
   end;
 
   TSynWebOptionsBase = class(TPersistent)
   private
     FOptions: PSynWebOptions;
-    FMainOptions: PSynWebOptions;
     FEngineOptions: PSynWebOptions;
     FUseEngineOptions: Boolean;
     FOnChange: TNotifyEvent;
+    
     function GetHtmlVersion: TSynWebHtmlVersion;
     procedure SetHtmlVersion(const Value: TSynWebHtmlVersion);
     function GetCssVersion: TSynWebCssVersion;
@@ -137,7 +137,11 @@ type
     procedure SetEsEmbeded(const Value: boolean);
     function GetPhpEmbeded: boolean;
     procedure SetPhpEmbeded(const Value: boolean);
+    
     procedure SetUseEngineOptions(const Value: Boolean);
+    procedure SetEngineOptions(AEngine: PSynWebOptions);
+    procedure DoOnChange;
+    procedure UpdateOptions;
   protected
     property HtmlVersion: TSynWebHtmlVersion read GetHtmlVersion write SetHtmlVersion;
     property CssVersion: TSynWebCssVersion read GetCssVersion write SetCssVersion;
@@ -147,13 +151,11 @@ type
 
     property CssEmbeded: boolean read GetCssEmbeded write SetCssEmbeded;
     property PhpEmbeded: boolean read GetPhpEmbeded write SetPhpEmbeded;
-    property EsEmbeded: boolean read GetEsEmbeded write SetEsEmbeded;
+    property EsEmbeded: Boolean read GetEsEmbeded write SetEsEmbeded;
 
     property UseEngineOptions: Boolean read FUseEngineOptions write SetUseEngineOptions;
-    procedure DoOnChange;
   public
-    constructor Create(AOptions: PSynWebOptions); 
-    procedure SetEngineOptions(AEngine: PSynWebOptions);
+    constructor Create(AOptions: PSynWebOptions);
     property OnChange: TNotifyEvent read FOnChange write FOnChange;
   end;
 
@@ -199,15 +201,14 @@ type
   end;
 
   TSynWebEngineOptions = class(TSynWebOptionsBase)
+  public
+    constructor Create(AOptions: PSynWebOptions);
   published
     property HtmlVersion;
     property CssVersion;
     property PhpVersion;
     property PhpShortOpenTag;
     property PhpAspTags;
-    property CssEmbeded;
-    property PhpEmbeded;
-    property EsEmbeded;
   end;
 
   TSynWebBase = class(TSynCustomHighlighter)
@@ -216,12 +217,13 @@ type
     FEngine: TSynWebEngine;
     FActiveHighlighter: boolean;
     FActiveHighlighters: TSynHighlighterTypes;
-
-    procedure SetActiveHighlighter(const Value: boolean);
+                                                         
     procedure SetupActiveHighlighter; virtual; abstract;
+    procedure SetActiveHighlighter(const Value: boolean);
     function GetActiveHighlighters: TSynHighlighterTypes;
     procedure SetEngine(const Value: TSynWebEngine);
-  protected
+  protected              
+    FOptions: TSynWebOptionsBase;
     procedure DoDefHighlightChange;
     function GetAttribCount: integer; override;
     function GetAttribute(idx: integer): TSynHighlighterAttributes; override;
@@ -254,50 +256,50 @@ type
 
   TSynWebHtmlSyn = class(TSynWebBase)
   private
-    FOptions: TSynWebHtmlOptions;
     procedure SetupActiveHighlighter; override;
+    function GetOptions: TSynWebHtmlOptions;
   public
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
-    function GetSampleSource: string; override;   
+    function GetSampleSource: string; override;
   published
-    property Options: TSynWebHtmlOptions read FOptions;
+    property Options: TSynWebHtmlOptions read GetOptions;
   end;
 
   TSynWebCSSSyn = class(TSynWebBase)
   private
-    FOptions: TSynWebCssOptions;
     procedure SetupActiveHighlighter; override;
+    function GetOptions: TSynWebCssOptions;
   public
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
     function GetSampleSource: string; override;
   published
-    property Options: TSynWebCssOptions read FOptions;
+    property Options: TSynWebCssOptions read GetOptions;
   end;
 
   TSynWebESSyn = class(TSynWebBase)
   private
-    FOptions: TSynWebEsOptions;
     procedure SetupActiveHighlighter; override;
-  public
-    constructor Create(AOwner: TComponent); override;
-    procedure ResetRange; override;
-    function GetSampleSource: string; override;  
-  published
-    property Options: TSynWebEsOptions read FOptions;
-  end;
-
-  TSynWebPHPCliSyn = class(TSynWebBase)
-  private
-    FOptions: TSynWebPhpCliOptions;
-    procedure SetupActiveHighlighter; override;
+    function GetOptions: TSynWebEsOptions;
   public
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
     function GetSampleSource: string; override;
   published
-    property Options: TSynWebPhpCliOptions read FOptions;
+    property Options: TSynWebEsOptions read GetOptions;
+  end;
+
+  TSynWebPHPCliSyn = class(TSynWebBase)
+  private
+    procedure SetupActiveHighlighter; override;
+    function GetOptions: TSynWebPhpCliOptions;
+  public
+    constructor Create(AOwner: TComponent); override;
+    procedure ResetRange; override;
+    function GetSampleSource: string; override;
+  published
+    property Options: TSynWebPhpCliOptions read GetOptions;
   end;
 
   TSynWebEngine = class(TComponent)
@@ -309,7 +311,8 @@ type
     fInactiveAttri: TSynHighlighterAttributes;
     fTokenAttributeTable: TSynWebTokenAttributeTable;
     FPhpHereDocList: TStringList;
-    FOptions: TSynWebOptions;
+    FEngineOptions: TSynWebOptions;
+    FOptions: TSynWebEngineOptions;
 
     // HTML --------------------------------------------------------------------
     fHtml_TagIdentFuncTable: array[0..Html_TagMaxKeyHash] of TSynWebIdentFuncTableFunc;
@@ -617,6 +620,7 @@ type
     // Global
     property InactiveAttri: TSynHighlighterAttributes
       read fInactiveAttri write fInactiveAttri;
+    property Options: TSynWebEngineOptions read FOptions;
 
     // HTML
     property HtmlWhitespaceAttri: TSynHighlighterAttributes
@@ -739,439 +743,534 @@ uses
 
 {$ENDIF}
 
-{ TSynWebEngine }
 
-constructor TSynWebEngine.Create(AOwner: TComponent);
+{ TSynWebOptionsBase }
+
+function TSynWebOptionsBase.GetHtmlVersion: TSynWebHtmlVersion;
 begin
-  inherited Create(AOwner);
-  FNotifyList := TList.Create;
-  FPhpHereDocList := TStringList.Create;
-  with FPhpHereDocList do
-  begin
-    Add('EOF');
-    Add('eof');
-    Add('EOT');
-    Add('eot');
-    Add('EOL');
-    Add('eol');
-    Add('HTML');
-    Add('html');
-    Add('CONTENT');
-    Add('content');
-    Add('HEREDOC');
-    Add('heredoc');
-    Add('OUT');
-    Add('out');
-    Add('STRING');
-    Add('string');
-    CaseSensitive := True;
-    Sorted := True;
-  end;
-
-  fAttributes := TStringList.Create;
-  fAttributes.Duplicates := dupError;
-  fAttributes.Sorted := True;
-
-  // HTML
-  Html_MakeMethodTables;
-
-  fHtml_WhitespaceAttri := TSynHighlighterAttributes.Create('Html: Whitespace');
-  AddAttribute(fHtml_WhitespaceAttri);
-  fHtml_CommentAttri := TSynHighlighterAttributes.Create('Html: Comment');
-  AddAttribute(fHtml_CommentAttri);
-  fHtml_TextAttri := TSynHighlighterAttributes.Create('Html: Text');
-  AddAttribute(fHtml_TextAttri);
-  fHtml_EscapeAmpsAttri := TSynHighlighterAttributes.Create('Html: Escaped amps');
-  AddAttribute(fHtml_EscapeAmpsAttri);
-  fHtml_SymbolAttri := TSynHighlighterAttributes.Create('Html: Symbol');
-  AddAttribute(fHtml_SymbolAttri);
-  fHtml_TagAttri := TSynHighlighterAttributes.Create('Html: Tag');
-  AddAttribute(fHtml_TagAttri);
-  fHtml_TagNameAttri := TSynHighlighterAttributes.Create('Html: Tag name');
-  AddAttribute(fHtml_TagNameAttri);
-  fHtml_TagNameUndefAttri := TSynHighlighterAttributes.Create(
-    'Html: Undefined tag name');
-  AddAttribute(fHtml_TagNameUndefAttri);
-  fHtml_TagKeyAttri := TSynHighlighterAttributes.Create('Html: Key');
-  AddAttribute(fHtml_TagKeyAttri);
-  fHtml_TagKeyUndefAttri := TSynHighlighterAttributes.Create('Html: Undefined key');
-  AddAttribute(fHtml_TagKeyUndefAttri);
-  fHtml_TagKeyValueAttri := TSynHighlighterAttributes.Create('Html: Value');
-  AddAttribute(fHtml_TagKeyValueAttri);
-  fHtml_TagKeyValueQuotedAttri := TSynHighlighterAttributes.Create('Html: Quoted value');
-  AddAttribute(fHtml_TagKeyValueQuotedAttri);
-  fHtml_ErrorAttri := TSynHighlighterAttributes.Create('Html: Error');
-  AddAttribute(fHtml_ErrorAttri);
-
-  fTokenAttributeTable[stkHtmlSpace] := fHtml_WhitespaceAttri;
-  fTokenAttributeTable[stkHtmlComment] := fHtml_CommentAttri;
-  fTokenAttributeTable[stkHtmlText] := fHtml_TextAttri;
-  fTokenAttributeTable[stkHtmlEscape] := fHtml_EscapeAmpsAttri;
-  fTokenAttributeTable[stkHtmlSymbol] := fHtml_SymbolAttri;
-  fTokenAttributeTable[stkHtmlTag] := fHtml_TagAttri;
-  fTokenAttributeTable[stkHtmlTagName] := fHtml_TagNameAttri;
-  fTokenAttributeTable[stkHtmlTagNameUndef] := fHtml_TagNameUndefAttri;
-  fTokenAttributeTable[stkHtmlTagKey] := fHtml_TagKeyAttri;
-  fTokenAttributeTable[stkHtmlTagKeyUndef] := fHtml_TagKeyUndefAttri;
-  fTokenAttributeTable[stkHtmlTagKeyValue] := fHtml_TagKeyValueAttri;
-  fTokenAttributeTable[stkHtmlTagKeyValueQuoted] := fHtml_TagKeyValueQuotedAttri;
-  fTokenAttributeTable[stkHtmlError] := fHtml_ErrorAttri;
-
-  // CSS
-  Css_MakeMethodTables;
-
-  fCss_WhitespaceAttri := TSynHighlighterAttributes.Create('Css: Whitespace');
-  AddAttribute(fCss_WhitespaceAttri);
-  fCss_RulesetWhitespaceAttri :=
-    TSynHighlighterAttributes.Create('Css: Ruleset whitespace');
-  AddAttribute(fCss_RulesetWhitespaceAttri);
-  fCss_SelectorAttri := TSynHighlighterAttributes.Create('Css: Selector');
-  AddAttribute(fCss_SelectorAttri);
-  fCss_SelectorUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined selector');
-  AddAttribute(fCss_SelectorUndefAttri);
-  fCss_SelectorClassAmpsAttri := TSynHighlighterAttributes.Create('Css: Class selector');
-  AddAttribute(fCss_SelectorClassAmpsAttri);
-  fCss_SelectorIdAttri := TSynHighlighterAttributes.Create('Css: Id selector');
-  AddAttribute(fCss_SelectorIdAttri);
-  fCss_SpecialAttri := TSynHighlighterAttributes.Create('Css: Special');
-  AddAttribute(fCss_SpecialAttri);
-  fCss_CommentAttri := TSynHighlighterAttributes.Create('Css: Comment');
-  AddAttribute(fCss_CommentAttri);
-  fCss_PropAttri := TSynHighlighterAttributes.Create('Css: Property');
-  AddAttribute(fCss_PropAttri);
-  fCss_PropUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined property');
-  AddAttribute(fCss_PropUndefAttri);
-  fCss_ValAttri := TSynHighlighterAttributes.Create('Css: Value');
-  AddAttribute(fCss_ValAttri);
-  fCss_ValUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined value');
-  AddAttribute(fCss_ValUndefAttri);
-  fCss_ValStringAttri := TSynHighlighterAttributes.Create('Css: String value');
-  AddAttribute(fCss_ValStringAttri);
-  fCss_ValNumberAttri := TSynHighlighterAttributes.Create('Css: Number value');
-  AddAttribute(fCss_ValNumberAttri);
-  fCss_SymbolAttri := TSynHighlighterAttributes.Create('Css: Symbol');
-  AddAttribute(fCss_SymbolAttri);
-  fCss_ErrorAttri := TSynHighlighterAttributes.Create('Css: Error');
-  AddAttribute(fCss_ErrorAttri);
-
-  fTokenAttributeTable[stkCssSpace] := fCss_WhitespaceAttri;
-  fTokenAttributeTable[stkCssSelector] := fCss_SelectorAttri;
-  fTokenAttributeTable[stkCssSelectorUndef] := fCss_SelectorUndefAttri;
-  fTokenAttributeTable[stkCssSelectorClass] := fCss_SelectorClassAmpsAttri;
-  fTokenAttributeTable[stkCssSelectorId] := fCss_SelectorIdAttri;
-  fTokenAttributeTable[stkCssSpecial] := fCss_SpecialAttri;
-  fTokenAttributeTable[stkCssComment] := fCss_CommentAttri;
-  fTokenAttributeTable[stkCssProp] := fCss_PropAttri;
-  fTokenAttributeTable[stkCssPropUndef] := fCss_PropUndefAttri;
-  fTokenAttributeTable[stkCssVal] := fCss_ValAttri;
-  fTokenAttributeTable[stkCssValUndef] := fCss_ValUndefAttri;
-  fTokenAttributeTable[stkCssValString] := fCss_ValStringAttri;
-  fTokenAttributeTable[stkCssValNumber] := fCss_ValNumberAttri;
-  fTokenAttributeTable[stkCssSymbol] := fCss_SymbolAttri;
-  fTokenAttributeTable[stkCssError] := fCss_ErrorAttri;
-
-  // ECMAScript
-  ES_MakeMethodTables;
-
-  fES_WhitespaceAttri := TSynHighlighterAttributes.Create('ES: Whitespace');
-  AddAttribute(fES_WhitespaceAttri);
-  fES_IdentifierAttri := TSynHighlighterAttributes.Create('ES: Identifier');
-  AddAttribute(fES_IdentifierAttri);
-  fES_KeyAttri := TSynHighlighterAttributes.Create('ES: Key');
-  AddAttribute(fES_KeyAttri);
-  fES_CommentAttri := TSynHighlighterAttributes.Create('ES: Comment');
-  AddAttribute(fES_CommentAttri);
-  fES_StringAttri := TSynHighlighterAttributes.Create('ES: String');
-  AddAttribute(fES_StringAttri);
-  fES_NumberAttri := TSynHighlighterAttributes.Create('ES: Number');
-  AddAttribute(fES_NumberAttri);
-  fES_SymbolAttri := TSynHighlighterAttributes.Create('ES: Symbol');
-  AddAttribute(fES_SymbolAttri);
-  fES_ErrorAttri := TSynHighlighterAttributes.Create('ES: Error');
-  AddAttribute(fES_ErrorAttri);
-
-  fTokenAttributeTable[stkESSpace] := fES_WhitespaceAttri;
-  fTokenAttributeTable[stkESIdentifier] := fES_IdentifierAttri;
-  fTokenAttributeTable[stkESKeyword] := fES_KeyAttri;
-  fTokenAttributeTable[stkESComment] := fES_CommentAttri;
-  fTokenAttributeTable[stkESString] := fES_StringAttri;
-  fTokenAttributeTable[stkESNumber] := fES_NumberAttri;
-  fTokenAttributeTable[stkESSymbol] := fES_SymbolAttri;
-  fTokenAttributeTable[stkESError] := fES_ErrorAttri;
-
-  // PHP
-  Php_MakeMethodTables;
-
-  fPhp_WhitespaceAttri := TSynHighlighterAttributes.Create('Php: Whitespace');
-  AddAttribute(fPhp_WhitespaceAttri);
-  fPhp_InlineTextAttri := TSynHighlighterAttributes.Create('PhpCli: Inline text');
-  AddAttribute(fPhp_InlineTextAttri);
-  fPhp_IdentifierAttri := TSynHighlighterAttributes.Create('Php: Identifier');
-  AddAttribute(fPhp_IdentifierAttri);
-  fPhp_KeyAttri := TSynHighlighterAttributes.Create('Php: Keyword');
-  AddAttribute(fPhp_KeyAttri);
-  fPhp_FunctionAttri := TSynHighlighterAttributes.Create('Php: Function');
-  AddAttribute(fPhp_FunctionAttri);
-  fPhp_VariableAttri := TSynHighlighterAttributes.Create('Php: Variable');
-  AddAttribute(fPhp_VariableAttri);
-  fPhp_ConstAttri := TSynHighlighterAttributes.Create('Php: Constant');
-  AddAttribute(fPhp_ConstAttri);
-  fPhp_StringAttri := TSynHighlighterAttributes.Create('Php: String');
-  AddAttribute(fPhp_StringAttri);
-  fPhp_StringSpecialAttri := TSynHighlighterAttributes.Create('Php: String special');
-  AddAttribute(fPhp_StringSpecialAttri);
-  fPhp_CommentAttri := TSynHighlighterAttributes.Create('Php: Comment');
-  AddAttribute(fPhp_CommentAttri);
-  fPhp_DocCommentAttri := TSynHighlighterAttributes.Create('Php: DocComment');
-  AddAttribute(fPhp_DocCommentAttri);
-  fPhp_SymbolAttri := TSynHighlighterAttributes.Create('Php: Symbol');
-  AddAttribute(fPhp_SymbolAttri);
-  fPhp_NumberAttri := TSynHighlighterAttributes.Create('Php: Number');
-  AddAttribute(fPhp_NumberAttri);
-  fPhp_ErrorAttri := TSynHighlighterAttributes.Create('Php: Error');
-  AddAttribute(fPhp_ErrorAttri);
-
-  fTokenAttributeTable[stkPhpSpace] := fHtml_WhitespaceAttri;
-  fTokenAttributeTable[stkPhpIdentifier] := fPhp_IdentifierAttri;
-  fTokenAttributeTable[stkPhpKeyword] := fPhp_KeyAttri;
-  fTokenAttributeTable[stkPhpFunction] := fPhp_FunctionAttri;
-  fTokenAttributeTable[stkPhpVariable] := fPhp_VariableAttri;
-  fTokenAttributeTable[stkPhpConst] := fPhp_ConstAttri;
-  fTokenAttributeTable[stkPhpString] := fPhp_StringAttri;
-  fTokenAttributeTable[stkPhpStringSpecial] := fPhp_StringSpecialAttri;
-  fTokenAttributeTable[stkPhpComment] := fPhp_CommentAttri;
-  fTokenAttributeTable[stkPhpDocComment] := fPhp_DocCommentAttri;
-  fTokenAttributeTable[stkPhpSymbol] := fPhp_SymbolAttri;
-  fTokenAttributeTable[stkPhpNumber] := fPhp_NumberAttri;
-  fTokenAttributeTable[stkPhpError] := fPhp_ErrorAttri;
-
-  // PHPCli
-  fTokenAttributeTable[stkPhpInlineText] := fPhp_InlineTextAttri;
-
-  // Global
-  fInactiveAttri := TSynHighlighterAttributes.Create('Global: Inactive');
-  with fInactiveAttri do
-  begin
-    Background := clNone;
-    Foreground := clInactiveCaption;
-    Style := [];
-  end;
-  AddAttribute(fInactiveAttri);
-
-  fTokenAttributeTable[stkNull] := nil;
-  SetAttributesOnChange(DefHighlightChange);
+  Result := FOptions^.FHtmlVersion;
 end;
 
-destructor TSynWebEngine.Destroy;
-var
-  i: integer;
+procedure TSynWebOptionsBase.SetHtmlVersion(const Value: TSynWebHtmlVersion);
 begin
-  for i := fAttributes.Count - 1 downto 0 do
-    TSynHighlighterAttributes(fAttributes.Objects[i]).Free;
-  fAttributes.Clear;
-  for i := 0 to FNotifyList.Count - 1 do
-    TSynWebBase(FNotifyList[i]).Engine := nil;
-  FNotifyList.Free;
-  FPhpHereDocList.Free;
+  if UseEngineOptions then
+    Exit;
+  FOptions^.FHtmlVersion := Value;
+  DoOnChange;
+end;
+
+function TSynWebOptionsBase.GetCssVersion: TSynWebCssVersion;
+begin
+  Result := FOptions^.FCssVersion;
+end;
+
+procedure TSynWebOptionsBase.SetCssVersion(const Value: TSynWebCssVersion);
+begin
+  if UseEngineOptions then
+    Exit;
+  FOptions^.FCssVersion := Value;
+  DoOnChange;
+end;
+
+function TSynWebOptionsBase.GetPhpVersion: TSynWebPhpVersion;
+begin
+  Result := FOptions^.FPhpVersion;
+end;
+
+procedure TSynWebOptionsBase.SetPhpVersion(const Value: TSynWebPhpVersion);
+begin
+  if UseEngineOptions then
+    Exit;
+  FOptions^.FPhpVersion := Value;
+  DoOnChange;
+end;
+
+function TSynWebOptionsBase.GetPhpAspTags: boolean;
+begin
+  Result := FOptions^.FPhpAspTags;
+end;
+
+procedure TSynWebOptionsBase.SetPhpAspTags(const Value: boolean);
+begin
+  if UseEngineOptions then
+    Exit;
+  FOptions^.FPhpAspTags := Value;
+  DoOnChange;
+end;
+
+function TSynWebOptionsBase.GetPhpShortOpenTag: boolean;
+begin
+  Result := FOptions^.FPhpShortOpenTag;
+end;
+
+procedure TSynWebOptionsBase.SetPhpShortOpenTag(const Value: boolean);
+begin
+  if UseEngineOptions then
+    Exit;
+  FOptions^.FPhpShortOpenTag := Value;
+  DoOnChange;
+end;
+
+function TSynWebOptionsBase.GetCssEmbeded: boolean;
+begin
+  Result := FOptions^.FCssEmbeded;
+end;
+
+procedure TSynWebOptionsBase.SetCssEmbeded(const Value: boolean);
+begin
+  FOptions^.FCssEmbeded := Value;
+  DoOnChange;
+end;
+
+function TSynWebOptionsBase.GetEsEmbeded: boolean;
+begin
+  Result := FOptions^.FEsEmbeded;
+end;
+
+procedure TSynWebOptionsBase.SetEsEmbeded(const Value: boolean);
+begin
+  FOptions^.FEsEmbeded := Value;
+  DoOnChange;
+end;
+
+function TSynWebOptionsBase.GetPhpEmbeded: boolean;
+begin
+  Result := FOptions^.FPhpEmbeded;
+end;
+
+procedure TSynWebOptionsBase.SetPhpEmbeded(const Value: boolean);
+begin
+  FOptions^.FPhpEmbeded := Value;
+  DoOnChange;
+end;
+
+procedure TSynWebOptionsBase.SetUseEngineOptions(const Value: Boolean);
+begin
+  if (FUseEngineOptions = Value) or (FEngineOptions = nil) then
+    Exit;
+  FUseEngineOptions := Value;
+  UpdateOptions;
+  DoOnChange;
+end;
+
+procedure TSynWebOptionsBase.SetEngineOptions(AEngine: PSynWebOptions);
+begin
+  if AEngine = FEngineOptions then
+    Exit;
+  FEngineOptions := AEngine;
+  if UseEngineOptions and (AEngine <> nil) then
+  begin
+    UpdateOptions;
+    DoOnChange;
+  end;
+end;
+
+procedure TSynWebOptionsBase.DoOnChange;
+begin
+  if Assigned(FOnChange) then
+    FOnChange(Self);
+end;
+
+procedure TSynWebOptionsBase.UpdateOptions;
+begin
+  if UseEngineOptions and (FEngineOptions <> nil) then
+  begin
+    FOptions^.FHtmlVersion := FEngineOptions^.FHtmlVersion;
+    FOptions^.FCssVersion := FEngineOptions^.FCssVersion;
+    FOptions^.FPhpVersion := FEngineOptions^.FPhpVersion;
+    FOptions^.FPhpShortOpenTag := FEngineOptions^.FPhpShortOpenTag;
+    FOptions^.FPhpAspTags := FEngineOptions^.FPhpAspTags;
+  end;
+end;
+
+constructor TSynWebOptionsBase.Create(AOptions: PSynWebOptions);
+begin
+  FOnChange := nil;
+  FEngineOptions := nil;
+  FOptions := AOptions;
+  FUseEngineOptions := True;
+
+  FOptions^.FHtmlVersion := shvXHtml10Transitional;
+  FOptions^.FCssVersion := scvCss21;
+  FOptions^.FPhpVersion := spvPhp5;
+  FOptions^.FPhpShortOpenTag := True;
+  FOptions^.FPhpAspTags := False;
+
+  FOptions^.FPhpEmbeded := False;
+  FOptions^.FCssEmbeded := False;
+  FOptions^.FEsEmbeded := False;
+end;
+
+{ TSynWebEngineOptions }
+
+constructor TSynWebEngineOptions.Create(AOptions: PSynWebOptions);
+begin
+  inherited Create(AOptions);
+  FUseEngineOptions := False;
+end;
+
+{ TSynWebBase }
+
+procedure TSynWebBase.SetActiveHighlighter(const Value: boolean);
+begin
+  FActiveHighlighter := Value;
+  if Value then
+    SetupActiveHighlighter
+  else
+    FActiveHighlighters := [Low(TSynHighlighterType)..High(TSynHighlighterType)];
+  DefHighlightChange(Self);
+end;
+
+function TSynWebBase.GetActiveHighlighters: TSynHighlighterTypes;
+begin
+  Result := FActiveHighlighters;
+end;
+
+procedure TSynWebBase.SetEngine(const Value: TSynWebEngine);
+begin
+  if FEngine <> nil then
+    FEngine.RemoveFromNotifyList(Self);
+  FEngine := Value;
+  if FEngine <> nil then
+  begin
+    FEngine.AddToNotifyList(Self);
+    FOptions.SetEngineOptions(@FEngine.FEngineOptions);
+  end
+  else
+    FOptions.SetEngineOptions(nil);
+end;
+
+procedure TSynWebBase.DoDefHighlightChange;
+begin
+  FOptions.UpdateOptions;
+  if FInstance.FOptions.FHtmlVersion >= shvXHtml10Strict then
+    FInstance.FHashTable := TSynWebSensitiveHashTable
+  else
+    FInstance.FHashTable := TSynWebInsensitiveHashTable;
+  DefHighlightChange(Self);
+end;
+
+function TSynWebBase.GetAttribCount: integer;
+begin
+  if FEngine = nil then
+    Result := 0
+  else
+    Result := FEngine.fAttributes.Count;
+end;
+
+function TSynWebBase.GetAttribute(idx: integer): TSynHighlighterAttributes;
+begin
+  Result := nil;
+  if (FEngine <> nil) and (idx >= 0) and (idx < FEngine.fAttributes.Count) then
+    Result := TSynHighlighterAttributes(FEngine.fAttributes.Objects[idx]);
+end;
+
+function TSynWebBase.GetIdentChars: TSynIdentChars;
+begin
+  Result := TSynValidStringChars;
+end;
+
+constructor TSynWebBase.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+  FOptions.FOnChange := DefHighlightChange;
+  FEngine := nil;
+  FDefaultFilter := '';
+  FActiveHighlighter := False;
+  FActiveHighlighters := [shtHtml, shtCss, shtES, shtPHP_inHtml,
+    shtPHP_inCss, shtPHP_inES];
+  ResetRange;
+  DoDefHighlightChange;
+end;
+
+destructor TSynWebBase.Destroy;
+begin
+  Engine := nil;
   inherited Destroy;
 end;
 
-procedure TSynWebEngine.AddAttribute(AAttrib: TSynHighlighterAttributes);
+function TSynWebBase.GetDefaultAttribute(Index: integer): TSynHighlighterAttributes;
 begin
-  fAttributes.AddObject(AAttrib.Name, AAttrib);
-end;
-
-procedure TSynWebEngine.AddToNotifyList(ASynWeb: TSynWebBase);
-begin
-  FNotifyList.Add(ASynWeb);
-end;
-
-procedure TSynWebEngine.RemoveFromNotifyList(ASynWeb: TSynWebBase);
-begin
-  FNotifyList.Remove(ASynWeb);
-end;
-
-procedure TSynWebEngine.SetAttributesOnChange(AEvent: TNotifyEvent);
-var
-  i: integer;
-  Attri: TSynHighlighterAttributes;
-begin
-  for i := fAttributes.Count - 1 downto 0 do
-  begin
-    Attri := TSynHighlighterAttributes(fAttributes.Objects[i]);
-    if Attri <> nil then
-    begin
-      Attri.OnChange := AEvent;
-      Attri.InternalSaveDefaultValues;
-    end;
-  end;
-end;
-
-procedure TSynWebEngine.DefHighlightChange(Sender: TObject);
-var
-  i: integer;
-begin
-  for i := 0 to FNotifyList.Count - 1 do
-    TSynWebBase(FNotifyList[i]).DoDefHighlightChange;
-end;
-
-function TSynWebEngine.GetCRC8_String(AString: string): byte;
-var
-  i: integer;
-begin
-  Result := Length(AString);
-  for i := 1 to Length(AString) do
-    Result := TCrc8_Table[Result xor Byte(AString[i])];
-end;
-
-function TSynWebEngine.GetRange_Bit(ABit: longword): boolean;
-begin
-  Result := FInstance^.FRange and (1 shl ABit) <> 0;
-end;
-
-procedure TSynWebEngine.SetRange_Bit(ABit: longword; AVal: boolean);
-begin
-  if AVal then
-    FInstance^.FRange := FInstance^.FRange or (1 shl ABit)
+  if FEngine = nil then
+    Result := nil
   else
-    FInstance^.FRange := FInstance^.FRange and not (1 shl ABit);
-end;
-
-function TSynWebEngine.GetRange_Int(ALen, APos: longword): longword;
-begin
-  Result := (FInstance^.FRange shr APos) and not ($FFFFFFFF shl ALen);
-end;
-
-procedure TSynWebEngine.SetRange_Int(ALen, APos, AVal: longword);
-var
-  i: longword;
-begin
-  i := $FFFFFFFF shl ALen;
-  //todo: Does it work in CLX? Should be [EBX].APos? I don't know :(
-  asm
-    mov ecx, APos
-    rol i, cl
-  end;
-  FInstance^.FRange := (FInstance^.FRange and i) or ((AVal shl APos) and not i);
-end;
-
-procedure TSynWebEngine.NullProc;
-begin
-  FInstance^.FTokenID := stkNull;
-end;
-
-procedure TSynWebEngine.NextSetHighlighterType;
-begin
-  SetHighlighterType(FInstance^.FNextHighlighterType, FInstance^.FNextClearBits,
-    False, FInstance^.FNextUseNextAH);
-  Next;
-  FInstance^.FHighlighterSW := True;
-end;
-
-procedure TSynWebEngine.SetHighlighterType(const AHighlighterType: TSynHighlighterType;
-  AClearBits: boolean; ASetAtNextToken: boolean; AUseNextAH: boolean);
-begin
-  if ASetAtNextToken then
-  begin
-    FInstance^.FNextUseNextAH := AUseNextAH;
-    FInstance^.FNextHighlighterType := AHighlighterType;
-    FInstance^.FNextClearBits := AClearBits;
-    FInstance^.FNextProcTable := NextSetHighlighterType;
-  end else
-  begin
-    FInstance^.FUseNextAH := AUseNextAH;
-    FInstance^.FHighlighterSW := True;
-    FInstance^.FPrevHighlighterType := FInstance^.FHighlighterType;
-    FInstance^.FHighlighterType := AHighlighterType;
-    SetRange_Int(3, 29, Longword(AHighlighterType));
-    SetupHighlighterType(AClearBits);
-  end;
-end;
-
-procedure TSynWebEngine.SetupHighlighterType(AClearBits: boolean);
-begin
-  case FInstance^.FHighlighterType of
-    shtHtml:
-      if FInstance^.FHighlighterMode = shmPhpCli then
+    case Index of
+      // SYN_ATTR_IDENTIFIER: ??
+      // SYN_ATTR_KEYWORD: ??
+      // SYN_ATTR_SYMBOL: ??
+      SYN_ATTR_WHITESPACE:
       begin
-        if AClearBits then
-          SetRange_Int(17, 0, 0);
-        FInstance^.FSYN_ATTR_COMMENT := fPhp_InlineTextAttri;
-        FInstance^.FSYN_ATTR_STRING := fPhp_InlineTextAttri;
-        FInstance^.FSYN_ATTR_WHITESPACE := fPhp_InlineTextAttri;
-        FInstance^.FNextProcTable := PhpCli_Next;
-      end else
-      begin
-        if AClearBits then
-          SetRange_Int(17, 0, 0);
-        FInstance^.FSYN_ATTR_COMMENT := fHtml_CommentAttri;
-        FInstance^.FSYN_ATTR_STRING := fHtml_TagKeyValueQuotedAttri;
-        FInstance^.FSYN_ATTR_WHITESPACE := fHtml_WhitespaceAttri;
-        FInstance^.FNextProcTable := Html_Next;
+        Result := FInstance.fSYN_ATTR_WHITESPACE;
+        if not Enabled then
+          case FInstance.FHighlighterMode of
+            shmHtml:
+              Result := fEngine.fHtml_WhitespaceAttri;
+            shmCss:
+              Result := fEngine.fCss_WhitespaceAttri;
+            shmES:
+              Result := fEngine.fES_WhitespaceAttri;
+            shmPhpCli:
+              Result := fEngine.fPhp_InlineTextAttri;
+          end;
       end;
-    shtCss:
-    begin
-      if AClearBits then
-        SetRange_Int(17, 0, 0);
-      FInstance^.FSYN_ATTR_COMMENT := fCss_CommentAttri;
-      FInstance^.FSYN_ATTR_STRING := fCss_ValStringAttri;
-      Css_UpdateBg;
-      FInstance^.FNextProcTable := Css_Next;
+      SYN_ATTR_COMMENT:
+        Result := FInstance.fSYN_ATTR_COMMENT;
+      SYN_ATTR_STRING:
+        Result := FInstance.fSYN_ATTR_STRING;
+      else
+        Result := nil;
     end;
-    shtES:
-    begin
-      if AClearBits then
-        SetRange_Int(17, 0, 0);
-      FInstance^.FSYN_ATTR_COMMENT := fES_CommentAttri;
-      FInstance^.FSYN_ATTR_STRING := fES_StringAttri;
-      FInstance^.FSYN_ATTR_WHITESPACE := fES_WhitespaceAttri;
-      FInstance^.FNextProcTable := ES_Next;
-    end;
+end;
+
+function TSynWebBase.GetTokenAttribute: TSynHighlighterAttributes;
+begin
+  if FEngine = nil then
+    Result := nil
+  else
+    if (FInstance.FHighlighterType in FActiveHighlighters) then
+      Result := FEngine.fTokenAttributeTable[FInstance.FTokenID]
     else
-      if AClearBits then
-        SetRange_Int(12, 17, 0);
-      FInstance^.FSYN_ATTR_COMMENT := fPhp_CommentAttri;
-      FInstance^.FSYN_ATTR_STRING := fPhp_StringAttri;
-      FInstance^.FSYN_ATTR_WHITESPACE := fPhp_WhitespaceAttri;
-      FInstance^.FNextProcTable := Php_Next;
-  end;
+      Result := FEngine.fInactiveAttri;
 end;
 
-procedure TSynWebEngine.SetLine(NewValue: string; LineNumber: integer);
-{$IFDEF SYNWEB_FIXNULL}
-var
-  i:Integer;
-{$ENDIF}
-begin
-  FInstance^.FLineRef := NewValue;
-{$IFDEF SYNWEB_FIXNULL}
-  for i:=1 to Length(FInstance^.FLineRef) do
-    if FInstance^.FLineRef[i]=#0 then
-      FInstance^.FLineRef[i]:=' ';
-{$ENDIF}
-  FInstance^.FLine := PChar(FInstance^.FLineRef);
-  FInstance^.FRun := 0;
-  FInstance^.FLineNumber := LineNumber;
-  FInstance^.FHighlighterType := TSynHighlighterType(GetRange_Int(3, 29));
-  FInstance^.FPrevHighlighterType := FInstance^.FHighlighterType;
-  FInstance^.FHighlighterSW := False;
-  SetupHighlighterType;
-  FInstance^.FNextProcTable;
-end;
-
-procedure TSynWebEngine.Next;
-begin
-  FInstance^.FHighlighterSW := False;
-  FInstance^.FNextProcTable;
-end;
-
-function TSynWebEngine.GetToken: string;
+function TSynWebBase.GetToken: string;
 var
   Len: longint;
 begin
-  Len := FInstance^.FRun - FInstance^.FTokenPos;
-  SetString(Result, (FInstance^.FLine + FInstance^.FTokenPos), Len);
+  Len := FInstance.FRun - FInstance.FTokenPos;
+  SetString(Result, (FInstance.FLine + FInstance.FTokenPos), Len);
 end;
+
+function TSynWebBase.GetTokenLen: integer;
+begin
+  Result := FInstance.FRun - FInstance.FTokenPos;
+end;
+
+function TSynWebBase.GetTokenPos: integer;
+begin
+  Result := FInstance.FTokenPos;
+end;
+
+function TSynWebBase.GetTokenID: TSynWebTokenKind;
+begin
+  Result := FInstance.FTokenID;
+end;
+
+function TSynWebBase.GetTokenKind: integer;
+begin
+  Result := Ord(FInstance.FTokenID);
+end;
+
+function TSynWebBase.GetRange: Pointer;
+begin
+  Result := Pointer(FInstance.FRange);
+end;
+
+function TSynWebBase.GetEol: boolean;
+begin
+  Result := FInstance.FTokenID = stkNull;
+end;
+
+procedure TSynWebBase.SetRange(Value: Pointer);
+begin
+  FInstance.FRange := Longword(Value);
+end;
+
+procedure TSynWebBase.SetLine(NewValue: string; LineNumber: integer);
+begin
+  if FEngine = nil then
+    Exit;
+  FEngine.FInstance := @FInstance;
+  FEngine.SetLine(NewValue, LineNumber);
+end;
+
+procedure TSynWebBase.Next;
+begin
+  if FEngine = nil then
+    FInstance.FTokenID := stkNull
+  else
+  begin
+    FEngine.FInstance := @FInstance;
+    FEngine.Next;
+  end;
+end;
+
+function TSynWebBase.UpdateActiveHighlighter(ARange: Pointer;
+  ALine: string; ACaretX, ACaretY: integer): boolean;
+var
+  f: TSynHighlighterTypes;
+  lPos, lLen: integer;
+  lHinghlighter, ActiveHL: TSynHighlighterType;
+begin
+  Result := True;
+  if not FActiveHighlighter or not (FInstance.FOptions.FPhpEmbeded or FInstance.FOptions.FCssEmbeded or
+    FInstance.FOptions.FEsEmbeded) then
+    Exit;
+  f := FActiveHighlighters;
+  Dec(ACaretX);
+  SetRange(ARange);
+  lHinghlighter := TSynHighlighterType((FInstance.FRange shr 29) and not ($FFFFFFFF shl 3));
+  SetLine(ALine, ACaretY);
+  lPos := GetTokenPos;
+  lLen := GetTokenLen;
+  while (GetTokenPos < ACaretX) and not GetEol do
+  begin
+    lHinghlighter := FInstance.FHighlighterType;
+    lPos := GetTokenPos;
+    lLen := GetTokenLen;
+    Next;
+  end;
+  if FInstance.FUseNextAH and (ACaretX >= lPos + lLen) then
+    ActiveHL := FInstance.FHighlighterType
+  else
+    if FInstance.FHighlighterSW and (ACaretX >= lPos + lLen) then
+      ActiveHL := FInstance.FPrevHighlighterType
+    else
+      ActiveHL := lHinghlighter;
+  if ActiveHL >= shtPHP_inHtml then
+    FActiveHighlighters := [shtPHP_inHtml, shtPHP_inCss, shtPHP_inES]
+  else
+    FActiveHighlighters := [ActiveHL];
+  Result := f <> FActiveHighlighters;
+end;
+
+{ TSynWebHtmlSyn }
+
+procedure TSynWebHtmlSyn.SetupActiveHighlighter;
+begin
+  FActiveHighlighters := [shtHtml];
+end;
+          
+function TSynWebHtmlSyn.GetOptions: TSynWebHtmlOptions;
+begin
+  Result := TSynWebHtmlOptions(FOptions);
+end;
+
+constructor TSynWebHtmlSyn.Create(AOwner: TComponent);
+begin
+  FOptions := TSynWebHtmlOptions.Create(@FInstance.FOptions);
+  FInstance.FHighlighterMode := shmHtml;
+  inherited Create(AOwner);
+  FOptions.PhpEmbeded := True;
+  FOptions.CssEmbeded := True;
+  FOptions.EsEmbeded := True;
+end;
+
+procedure TSynWebHtmlSyn.ResetRange;
+begin
+  FInstance.FRange := $00000000;
+end;
+
+function TSynWebHtmlSyn.GetSampleSource: string;
+begin
+
+end;
+
+{ TSynWebCSSSyn }
+
+procedure TSynWebCSSSyn.SetupActiveHighlighter;
+begin
+  FActiveHighlighters := [shtCSS];
+end;
+
+function TSynWebCSSSyn.GetOptions: TSynWebCssOptions;
+begin
+  Result := TSynWebCssOptions(FOptions);
+end;
+
+constructor TSynWebCSSSyn.Create(AOwner: TComponent);
+begin
+  FOptions := TSynWebCssOptions.Create(@FInstance.FOptions);
+  FInstance.FHighlighterMode := shmCss;
+  inherited Create(AOwner);
+  FOptions.PhpEmbeded := False;
+  FOptions.CssEmbeded := False;
+  FOptions.EsEmbeded := False;
+end;
+
+procedure TSynWebCSSSyn.ResetRange;
+begin
+  with FInstance do
+  begin
+    FRange := $00000000;
+    FRange := FRange or (Longword(shtCss) shl 29);
+  end;
+end;
+
+function TSynWebCSSSyn.GetSampleSource: string;
+begin
+
+end;
+
+{ TSynWebESSyn }
+
+procedure TSynWebESSyn.SetupActiveHighlighter;
+begin
+  FActiveHighlighters := [shtES];
+end;
+
+function TSynWebESSyn.GetOptions: TSynWebEsOptions;
+begin
+  Result := TSynWebEsOptions(FOptions);
+end;
+
+constructor TSynWebESSyn.Create(AOwner: TComponent);
+begin
+  FOptions := TSynWebEsOptions.Create(@FInstance.FOptions);
+  FInstance.FHighlighterMode := shmES;
+  inherited Create(AOwner);
+  FOptions.PhpEmbeded := False;
+  FOptions.CssEmbeded := False;
+  FOptions.EsEmbeded := False;
+end;
+
+procedure TSynWebESSyn.ResetRange;
+begin
+  with FInstance do
+  begin
+    FRange := $00000000;
+    FRange := FRange or (Longword(shtES) shl 29);
+  end;
+end;
+
+function TSynWebESSyn.GetSampleSource: string;
+begin
+
+end;
+
+{ TSynWebPHPCliSyn }
+
+procedure TSynWebPHPCliSyn.SetupActiveHighlighter;
+begin
+  FActiveHighlighters := [shtHtml];
+end;
+
+function TSynWebPHPCliSyn.GetOptions: TSynWebPhpCliOptions;
+begin
+  Result := TSynWebPhpCliOptions(FOptions);
+end;
+
+constructor TSynWebPHPCliSyn.Create(AOwner: TComponent);
+begin
+  FOptions := TSynWebPhpCliOptions.Create(@FInstance.FOptions);
+  FInstance.FHighlighterMode := shmPhpCli;
+  inherited Create(AOwner);
+  FOptions.PhpEmbeded := True;
+  FOptions.CssEmbeded := False;
+  FOptions.EsEmbeded := False;
+end;
+
+procedure TSynWebPHPCliSyn.ResetRange;
+begin
+  FInstance.FRange := $00000000;
+end;
+
+function TSynWebPHPCliSyn.GetSampleSource: string;
+begin
+
+end;
+
+{ TSynWebEngine }
 
 // HTML ------------------------------------------------------------------------
 
@@ -1322,7 +1421,7 @@ begin
     end;
     '?':
     begin
-      if FInstance^.FOptions^.FHtmlVersion >= shvXHtml10Strict then
+      if FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict then
         Inc(FInstance^.FRun);
       SetRange_Bit(12, False);
     end;
@@ -1339,7 +1438,7 @@ begin
         else
           Html_RangeCommentProc;
       end else
-        if (FInstance^.FOptions^.FHtmlVersion >= shvXHtml10Strict) and
+        if (FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict) and
           (FInstance^.FLine[FInstance^.FRun] = '[') and
           (FInstance^.FLine[FInstance^.FRun + 1] = 'C') and
           (FInstance^.FLine[FInstance^.FRun + 2] = 'D') and
@@ -1737,7 +1836,7 @@ begin
       Html_SpaceProc;
     '/':
       if not GetRange_Bit(12) and (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
-        (FInstance^.FOptions^.FHtmlVersion >= shvXHtml10Strict) and
+        (FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict) and
         (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) then
       begin
         Inc(FInstance^.FRun, 2);
@@ -1753,24 +1852,24 @@ begin
       Inc(FInstance^.FRun);
       FInstance^.FTokenID := stkHtmlTag;
       if (ID <> -1) and (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) and
-        (FInstance^.FOptions^.FHtmlVersion >= shvXHtml10Strict) then
+        (FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict) then
         FInstance^.FTokenID := stkHtmlError
       else
         if not GetRange_Bit(12) and ((FInstance^.FRun = 0) or
           (FInstance^.FLine[FInstance^.FRun - 2] <> '/')) then
-          if (ID = Html_TagID_Style) and FInstance^.FOptions^.FCssEmbeded then
+          if (ID = Html_TagID_Style) and FInstance^.FOptions.FCssEmbeded then
           begin
             SetHighlighterType(shtCss, True, True, True);
             Exit;
           end else
             if (ID = Html_TagID_Script) then
-              if GetRange_Bit(28) and FInstance^.FOptions^.FPhpEmbeded then
+              if GetRange_Bit(28) and FInstance^.FOptions.FPhpEmbeded then
               begin
                 SetRange_Int(17, 0, 0);
                 Php_Begin(spotHTML);
                 Exit;
               end else
-                if FInstance^.FOptions^.FEsEmbeded then
+                if FInstance^.FOptions.FEsEmbeded then
                 begin
                   SetHighlighterType(shtES, True, True, True);
                   Exit;
@@ -1816,7 +1915,7 @@ begin
     else
       Html_SetRange(srsHtmlTagKey);
       Html_RangeTagKeyProc;
-      if FInstance^.FOptions^.FHtmlVersion >= shvXHtml10Strict then
+      if FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict then
         FInstance^.FTokenID := stkHtmlError;
   end;
 end;
@@ -1864,7 +1963,7 @@ begin
     end;
     else
       if (FInstance^.FLine[FInstance^.FRun] = '>') or
-        ((FInstance^.FOptions^.FHtmlVersion >= shvXHtml10Strict) and
+        ((FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict) and
         (FInstance^.FLine[FInstance^.FRun] = '/') and
         (FInstance^.FLine[FInstance^.FRun + 1] = '>')) then
       begin
@@ -1877,19 +1976,19 @@ begin
           (FInstance^.FLine[FInstance^.FRun - 2] <> '/')) then
         begin
           ID := Html_GetTag - 1;
-          if (ID = Html_TagID_Style) and FInstance^.FOptions^.FCssEmbeded then
+          if (ID = Html_TagID_Style) and FInstance^.FOptions.FCssEmbeded then
           begin
             SetHighlighterType(shtCss, True, True, True);
             Exit;
           end else
             if (ID = Html_TagID_Script) then
-              if GetRange_Bit(28) and FInstance^.FOptions^.FPhpEmbeded then
+              if GetRange_Bit(28) and FInstance^.FOptions.FPhpEmbeded then
               begin
                 SetRange_Int(17, 0, 0);
                 Php_Begin(spotHTML);
                 Exit;
               end else
-                if FInstance^.FOptions^.FEsEmbeded then
+                if FInstance^.FOptions.FEsEmbeded then
                 begin
                   SetHighlighterType(shtES, True, True, True);
                   Exit;
@@ -1906,7 +2005,7 @@ begin
           case FInstance^.FLine[FInstance^.FRun] of
             '/':
               if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
-                (FInstance^.FOptions^.FHtmlVersion >= shvXHtml10Strict) then
+                (FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict) then
                 Break;
             '<':
               if Php_CheckBegin(False) then
@@ -1917,7 +2016,7 @@ begin
               Break;
           end;
         until False;
-        if FInstance^.FOptions^.FHtmlVersion >= shvXHtml10Strict then
+        if FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict then
           FInstance^.FTokenID := stkHtmlError
         else
           FInstance^.FTokenID := stkHtmlTagKeyValue;
@@ -2006,7 +2105,7 @@ var
   Temp: PChar;
   aKey: string;
 begin
-  if TSynWeb_TagsData[ID] and (1 shl Longword(FInstance^.FOptions^.FHtmlVersion)) = 0 then
+  if TSynWeb_TagsData[ID] and (1 shl Longword(FInstance^.FOptions.FHtmlVersion)) = 0 then
   begin
     Result := False;
     Exit;
@@ -2067,7 +2166,7 @@ var
   aKey: string;
 begin
   tag := Html_GetTag - 1;
-  if (tag = -1) or (TSynWeb_AttrsData[ID][Longword(FInstance^.FOptions^.FHtmlVersion)]
+  if (tag = -1) or (TSynWeb_AttrsData[ID][Longword(FInstance^.FOptions.FHtmlVersion)]
     [tag div 32] and (1 shl (tag mod 32)) = 0) then
   begin
     Result := False;
@@ -2446,7 +2545,7 @@ end;
 
 procedure TSynWebEngine.Css_ChildAnySelectorProc;
 begin
-  if FInstance^.FOptions^.FCssVersion = scvCss21 then
+  if FInstance^.FOptions.FCssVersion = scvCss21 then
     Css_SymbolProc
   else
     Css_ErrorProc;
@@ -2454,7 +2553,7 @@ end;
 
 procedure TSynWebEngine.Css_AttribProc;
 begin
-  if FInstance^.FOptions^.FCssVersion = scvCss1 then
+  if FInstance^.FOptions.FCssVersion = scvCss1 then
     Css_ErrorProc
   else
   begin
@@ -2612,7 +2711,7 @@ begin
     end else
       FInstance^.FTokenID := stkCssError;
   end else
-    if FInstance^.FOptions^.FCssVersion = scvCss21 then
+    if FInstance^.FOptions.FCssVersion = scvCss21 then
       Css_SymbolProc
     else
       Css_ErrorProc;
@@ -2702,7 +2801,7 @@ begin
           SetRange_Bit(8, True);
         FInstance^.FRun := OldRun;
       end else
-        if FInstance^.FOptions^.FCssVersion = scvCss1 then
+        if FInstance^.FOptions.FCssVersion = scvCss1 then
         begin
           FInstance^.FRun := OldRun;
           CheckOther;
@@ -2796,7 +2895,7 @@ begin
         Inc(FInstance^.FRun);
         if FInstance^.FLine[FInstance^.FRun] = #0 then
         begin
-          if FInstance^.FOptions^.FCssVersion = scvCss1 then
+          if FInstance^.FOptions.FCssVersion = scvCss1 then
           begin
             FInstance^.FTokenID := stkCssError;
             Exit;
@@ -2970,7 +3069,7 @@ begin
     // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']);
     prop := Css_SpecialCheck(FInstance^.FTokenPos, FInstance^.FRun - FInstance^.FTokenPos);
     if (prop = -1) or (TSynWeb_CssSpecialData[prop] and
-      (1 shl (15 - Longword(FInstance^.FOptions^.FCssVersion))) = 0) then
+      (1 shl (15 - Longword(FInstance^.FOptions.FCssVersion))) = 0) then
     begin
       FInstance^.FTokenID := stkCssError;
       Css_SetRange(srsCssRuleset);
@@ -3351,7 +3450,7 @@ begin
           FInstance^.FTokenID := stkCssSpecial;
         end;
         Css_SpecialID_Media:
-          if FInstance^.FOptions^.FCssVersion = scvCss1 then
+          if FInstance^.FOptions.FCssVersion = scvCss1 then
           begin
             FInstance^.FTokenID := stkCssError;
             Css_SetRange(srsCssRuleset);
@@ -3361,7 +3460,7 @@ begin
             FInstance^.FTokenID := stkCssSpecial;
           end;
         Css_SpecialID_Page:
-          if FInstance^.FOptions^.FCssVersion = scvCss1 then
+          if FInstance^.FOptions.FCssVersion = scvCss1 then
           begin
             FInstance^.FTokenID := stkCssError;
             Css_SetRange(srsCssRuleset);
@@ -3371,7 +3470,7 @@ begin
             FInstance^.FTokenID := stkCssSpecial;
           end;
         Css_SpecialID_Charset:
-          if FInstance^.FOptions^.FCssVersion = scvCss1 then
+          if FInstance^.FOptions.FCssVersion = scvCss1 then
           begin
             FInstance^.FTokenID := stkCssError;
             Css_SetRange(srsCssRuleset);
@@ -3449,7 +3548,7 @@ begin
     if Css_IdentStartProc then
     begin
       FInstance^.FTokenID := Css_ValCheck;
-      if TSynWeb_CssValsData[FInstance^.FToken_LastID][Longword(FInstance^.FOptions^.FCssVersion)]
+      if TSynWeb_CssValsData[FInstance^.FToken_LastID][Longword(FInstance^.FOptions.FCssVersion)]
         [3] and (1 shl 31) <> 0 then
         if FInstance^.FLine[FInstance^.FRun] = '(' then
         begin
@@ -3864,7 +3963,7 @@ procedure TSynWebEngine.Css_RangePropValRectProc;
         else
           FInstance^.FTokenID := stkCssValNumber;
       end else
-        if FInstance^.FOptions^.FCssVersion = scvCss1 then
+        if FInstance^.FOptions.FCssVersion = scvCss1 then
         begin
           FInstance^.FRun := OldRun;
           CheckOther;
@@ -4039,7 +4138,7 @@ begin
     Result := fCss_PropIdentFuncTable[HashKey];
     if (FInstance^.FToken_LastID <> -1) and
       (TSynWeb_CssPropsData[FInstance^.FToken_LastID] and
-      (1 shl Longword(FInstance^.FOptions^.FCssVersion)) = 0) then
+      (1 shl Longword(FInstance^.FOptions.FCssVersion)) = 0) then
       Result := stkCssPropUndef;
   end else
     Result := stkCssPropUndef;
@@ -4116,7 +4215,7 @@ begin
     begin
       prop := Css_GetProp - 1;
       if (prop = -1) or (TSynWeb_CssValsData[FInstance^.FToken_LastID]
-        [Longword(FInstance^.FOptions^.FCssVersion)][prop div 32] and (1 shl (prop mod 32)) = 0) then
+        [Longword(FInstance^.FOptions.FCssVersion)][prop div 32] and (1 shl (prop mod 32)) = 0) then
         Result := stkCssValUndef;
     end;
   end else
@@ -4865,7 +4964,7 @@ end;
 function TSynWebEngine.Php_CheckBegin(ABegin: boolean): boolean;
 begin
   Result := False;
-  if (FInstance^.FLine[FInstance^.FRun] = '<') and FInstance^.FOptions^.FPhpEmbeded then
+  if (FInstance^.FLine[FInstance^.FRun] = '<') and FInstance^.FOptions.FPhpEmbeded then
     case FInstance^.FLine[FInstance^.FRun + 1] of
       '?':
         if (UpCase(FInstance^.FLine[FInstance^.FRun + 2]) = 'P') and
@@ -4876,14 +4975,14 @@ begin
           if ABegin then
             Php_Begin(spotPhp);
         end else
-          if FInstance^.FOptions^.FPhpShortOpenTag then
+          if FInstance^.FOptions.FPhpShortOpenTag then
           begin
             if ABegin then
               Php_Begin(spotPhpShort);
           end else
             Exit;
       '%':
-        if FInstance^.FOptions^.FPhpAspTags then
+        if FInstance^.FOptions.FPhpAspTags then
         begin
           if ABegin then
             Php_Begin(spotASP);
@@ -4941,7 +5040,7 @@ end;
 procedure TSynWebEngine.Php_QuestionProc;
 begin
   Inc(FInstance^.FRun);
-  if (FInstance^.FLine[FInstance^.FRun] = '>') and FInstance^.FOptions^.FPhpEmbeded then
+  if (FInstance^.FLine[FInstance^.FRun] = '>') and FInstance^.FOptions.FPhpEmbeded then
   begin
     Inc(FInstance^.FRun);
     FInstance^.FTokenID := stkHtmlTag;
@@ -5197,10 +5296,10 @@ end;
 
 procedure TSynWebEngine.Php_PercentProc;
 begin
-  if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and FInstance^.FOptions^.FPhpEmbeded then
+  if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and FInstance^.FOptions.FPhpEmbeded then
   begin
     Inc(FInstance^.FRun, 2);
-    if FInstance^.FOptions^.FPhpAspTags then
+    if FInstance^.FOptions.FPhpAspTags then
     begin
       FInstance^.FTokenID := stkHtmlTag;
       Php_End(False);
@@ -5223,11 +5322,11 @@ begin
         Exit;
       '?':
         if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
-          FInstance^.FOptions^.FPhpEmbeded then
+          FInstance^.FOptions.FPhpEmbeded then
           Exit;
       '%':
         if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
-          FInstance^.FOptions^.FPhpAspTags and FInstance^.FOptions^.FPhpEmbeded then
+          FInstance^.FOptions.FPhpAspTags and FInstance^.FOptions.FPhpEmbeded then
           Exit;
       else
         Exit;
@@ -5578,7 +5677,7 @@ begin
         Inc(FInstance^.FRun, 3);
         FInstance^.FTokenID := stkPhpKeyword;
       end else
-        if (FInstance^.FLine[FInstance^.FRun] = '=') and (FInstance^.FOptions^.FPhpShortOpenTag) then
+        if (FInstance^.FLine[FInstance^.FRun] = '=') and (FInstance^.FOptions.FPhpShortOpenTag) then
         begin
           Inc(FInstance^.FRun);
           FInstance^.FTokenID := stkPhpKeyword;
@@ -5736,7 +5835,7 @@ var
 begin
   Data := TSynWeb_PhpKeywordsData[ID];
   if (Data and $0F <> $01) or ((Data shr 16) and
-    (1 shl Longword(FInstance^.FOptions^.FPhpVersion)) = 0) then
+    (1 shl Longword(FInstance^.FOptions.FPhpVersion)) = 0) then
   begin
     Result := False;
     Exit;
@@ -5787,7 +5886,7 @@ var
 begin
   Data := TSynWeb_PhpKeywordsData[ID];
   if (Data and $0F <> $08) or ((Data shr 16) and
-    (1 shl Longword(FInstance^.FOptions^.FPhpVersion)) = 0) then
+    (1 shl Longword(FInstance^.FOptions.FPhpVersion)) = 0) then
   begin
     Result := False;
     Exit;
@@ -5843,464 +5942,440 @@ end;
 
 {$I SynHighlighterWeb_PhpKeywordsFunc.inc}
 
-{ TSynWebOptionsBase }
+// Other -----------------------------------------------------------------------
 
-function TSynWebOptionsBase.GetHtmlVersion: TSynWebHtmlVersion;
+procedure TSynWebEngine.AddAttribute(AAttrib: TSynHighlighterAttributes);
 begin
-  Result := FOptions^.FHtmlVersion;
+  fAttributes.AddObject(AAttrib.Name, AAttrib);
 end;
 
-procedure TSynWebOptionsBase.SetHtmlVersion(const Value: TSynWebHtmlVersion);
+procedure TSynWebEngine.AddToNotifyList(ASynWeb: TSynWebBase);
 begin
-  FOptions^.FHtmlVersion := Value;
-  DoOnChange;
+  FNotifyList.Add(ASynWeb);
 end;
 
-function TSynWebOptionsBase.GetCssVersion: TSynWebCssVersion;
+procedure TSynWebEngine.RemoveFromNotifyList(ASynWeb: TSynWebBase);
 begin
-  Result := FOptions^.FCssVersion;
+  FNotifyList.Remove(ASynWeb);
 end;
 
-procedure TSynWebOptionsBase.SetCssVersion(const Value: TSynWebCssVersion);
+procedure TSynWebEngine.SetAttributesOnChange(AEvent: TNotifyEvent);
+var
+  i: integer;
+  Attri: TSynHighlighterAttributes;
 begin
-  FOptions^.FCssVersion := Value;
-  DoOnChange;
-end;
-
-function TSynWebOptionsBase.GetPhpVersion: TSynWebPhpVersion;
-begin
-  Result := FOptions^.FPhpVersion;
-end;
-
-procedure TSynWebOptionsBase.SetPhpVersion(const Value: TSynWebPhpVersion);
-begin
-  FOptions^.FPhpVersion := Value;
-  DoOnChange;
-end;
-
-function TSynWebOptionsBase.GetPhpAspTags: boolean;
-begin
-  Result := FOptions^.FPhpAspTags;
-end;
-
-procedure TSynWebOptionsBase.SetPhpAspTags(const Value: boolean);
-begin
-  FOptions^.FPhpAspTags := Value;
-  DoOnChange;
-end;
-
-function TSynWebOptionsBase.GetPhpShortOpenTag: boolean;
-begin
-  Result := FOptions^.FPhpShortOpenTag;
-end;
-
-procedure TSynWebOptionsBase.SetPhpShortOpenTag(const Value: boolean);
-begin
-  FOptions^.FPhpShortOpenTag := Value;
-  DoOnChange;
-end;
-
-function TSynWebOptionsBase.GetCssEmbeded: boolean;
-begin
-  Result := FOptions.FCssEmbeded;
-end;
-
-procedure TSynWebOptionsBase.SetCssEmbeded(const Value: boolean);
-begin
-  FOptions^.FCssEmbeded := Value;
-  DoOnChange;
-end;
-
-function TSynWebOptionsBase.GetEsEmbeded: boolean;
-begin
-  Result := FOptions^.FEsEmbeded;
-end;
-
-procedure TSynWebOptionsBase.SetEsEmbeded(const Value: boolean);
-begin
-  FOptions^.FEsEmbeded := Value;
-  DoOnChange;
-end;
-
-function TSynWebOptionsBase.GetPhpEmbeded: boolean;
-begin
-  Result := FOptions^.FPhpEmbeded;
-end;
-
-procedure TSynWebOptionsBase.SetPhpEmbeded(const Value: boolean);
-begin
-  FOptions^.FPhpEmbeded := Value;
-  DoOnChange;
-end;
-
-
-procedure TSynWebOptionsBase.SetUseEngineOptions(const Value: Boolean);
-begin
-  FUseEngineOptions := Value;
-end;
-
-procedure TSynWebOptionsBase.DoOnChange;
-begin
-  if Assigned(FOnChange) then
-    FOnChange(Self);
-end;
-
-procedure TSynWebOptionsBase.SetEngineOptions(AEngine: PSynWebOptions);
-begin
-  if AEngine = nil then
-    UseEngineOptions := False
-  else
+  for i := fAttributes.Count - 1 downto 0 do
   begin
-    FEngineOptions := AEngine;
-    DoOnChange;
+    Attri := TSynHighlighterAttributes(fAttributes.Objects[i]);
+    if Attri <> nil then
+    begin
+      Attri.OnChange := AEvent;
+      Attri.InternalSaveDefaultValues;
+    end;
   end;
 end;
 
-constructor TSynWebOptionsBase.Create(AOptions: PSynWebOptions);
+procedure TSynWebEngine.DefHighlightChange(Sender: TObject);
+var
+  i: integer;
 begin
-  FMainOptions := AOptions;
-  FEngineOptions := nil;
-  FOptions := FMainOptions;
-  FUseEngineOptions := False;
-
-  FOptions^.FHtmlVersion := shvXHtml10Transitional;
-  FOptions^.FCssVersion := scvCss21;
-  FOptions^.FPhpVersion := spvPhp5;
-  FOptions^.FPhpShortOpenTag := True;
-  FOptions^.FPhpAspTags := False;
-
-  FOptions^.FPhpEmbeded := False;
-  FOptions^.FCssEmbeded := False;
-  FOptions^.FEsEmbeded := False;
+  for i := 0 to FNotifyList.Count - 1 do
+    TSynWebBase(FNotifyList[i]).DoDefHighlightChange;
 end;
 
-{ TSynWebBase }
-
-procedure TSynWebBase.SetActiveHighlighter(const Value: boolean);
+function TSynWebEngine.GetCRC8_String(AString: string): byte;
+var
+  i: integer;
 begin
-  FActiveHighlighter := Value;
-  if Value then
-    SetupActiveHighlighter
+  Result := Length(AString);
+  for i := 1 to Length(AString) do
+    Result := TCrc8_Table[Result xor Byte(AString[i])];
+end;
+
+function TSynWebEngine.GetRange_Bit(ABit: longword): boolean;
+begin
+  Result := FInstance^.FRange and (1 shl ABit) <> 0;
+end;
+
+procedure TSynWebEngine.SetRange_Bit(ABit: longword; AVal: boolean);
+begin
+  if AVal then
+    FInstance^.FRange := FInstance^.FRange or (1 shl ABit)
   else
-    FActiveHighlighters := [Low(TSynHighlighterType)..High(TSynHighlighterType)];
-  DefHighlightChange(Self);
+    FInstance^.FRange := FInstance^.FRange and not (1 shl ABit);
 end;
 
-function TSynWebBase.GetActiveHighlighters: TSynHighlighterTypes;
+function TSynWebEngine.GetRange_Int(ALen, APos: longword): longword;
 begin
-  Result := FActiveHighlighters;
+  Result := (FInstance^.FRange shr APos) and not ($FFFFFFFF shl ALen);
 end;
 
-procedure TSynWebBase.SetEngine(const Value: TSynWebEngine);
+procedure TSynWebEngine.SetRange_Int(ALen, APos, AVal: longword);
+var
+  i: longword;
 begin
-  if FEngine <> nil then
-    FEngine.RemoveFromNotifyList(Self);
-  FEngine := Value;
-  if FEngine <> nil then
-    FEngine.AddToNotifyList(Self);
+  i := $FFFFFFFF shl ALen;
+  //todo: Does it work in CLX? Should be [EBX].APos? I don't know :(
+  asm
+    mov ecx, APos
+    rol i, cl
+  end;
+  FInstance^.FRange := (FInstance^.FRange and i) or ((AVal shl APos) and not i);
 end;
 
-procedure TSynWebBase.DoDefHighlightChange;
+procedure TSynWebEngine.NullProc;
 begin
-  DefHighlightChange(Self);
+  FInstance^.FTokenID := stkNull;
 end;
 
-function TSynWebBase.GetAttribCount: integer;
+procedure TSynWebEngine.NextSetHighlighterType;
 begin
-  if FEngine = nil then
-    Result := 0
-  else
-    Result := FEngine.fAttributes.Count;
+  SetHighlighterType(FInstance^.FNextHighlighterType, FInstance^.FNextClearBits,
+    False, FInstance^.FNextUseNextAH);
+  Next;
+  FInstance^.FHighlighterSW := True;
 end;
 
-function TSynWebBase.GetAttribute(idx: integer): TSynHighlighterAttributes;
+procedure TSynWebEngine.SetHighlighterType(const AHighlighterType: TSynHighlighterType;
+  AClearBits: boolean; ASetAtNextToken: boolean; AUseNextAH: boolean);
 begin
-  Result := nil;
-  if (FEngine <> nil) and (idx >= 0) and (idx < FEngine.fAttributes.Count) then
-    Result := TSynHighlighterAttributes(FEngine.fAttributes.Objects[idx]);
+  if ASetAtNextToken then
+  begin
+    FInstance^.FNextUseNextAH := AUseNextAH;
+    FInstance^.FNextHighlighterType := AHighlighterType;
+    FInstance^.FNextClearBits := AClearBits;
+    FInstance^.FNextProcTable := NextSetHighlighterType;
+  end else
+  begin
+    FInstance^.FUseNextAH := AUseNextAH;
+    FInstance^.FHighlighterSW := True;
+    FInstance^.FPrevHighlighterType := FInstance^.FHighlighterType;
+    FInstance^.FHighlighterType := AHighlighterType;
+    SetRange_Int(3, 29, Longword(AHighlighterType));
+    SetupHighlighterType(AClearBits);
+  end;
 end;
 
-function TSynWebBase.GetIdentChars: TSynIdentChars;
+procedure TSynWebEngine.SetupHighlighterType(AClearBits: boolean);
 begin
-  Result := TSynValidStringChars;
-end;
-
-constructor TSynWebBase.Create(AOwner: TComponent);
-begin
-  inherited Create(AOwner);
-  FEngine := nil;
-  FDefaultFilter := '';
-  FActiveHighlighter := False;
-  FActiveHighlighters := [shtHtml, shtCss, shtES, shtPHP_inHtml,
-    shtPHP_inCss, shtPHP_inES];
-  ResetRange;
-end;
-
-destructor TSynWebBase.Destroy;
-begin
-  Engine := nil;
-  inherited Destroy;
-end;
-
-function TSynWebBase.GetDefaultAttribute(Index: integer): TSynHighlighterAttributes;
-begin
-  if FEngine = nil then
-    Result := nil
-  else
-    case Index of
-      // SYN_ATTR_IDENTIFIER: ??
-      // SYN_ATTR_KEYWORD: ??
-      // SYN_ATTR_SYMBOL: ??
-      SYN_ATTR_WHITESPACE:
+  case FInstance^.FHighlighterType of
+    shtHtml:
+      if FInstance^.FHighlighterMode = shmPhpCli then
       begin
-        Result := FInstance.fSYN_ATTR_WHITESPACE;
-        if not Enabled then
-          case FInstance.FHighlighterMode of
-            shmHtml:
-              Result := fEngine.fHtml_WhitespaceAttri;
-            shmCss:
-              Result := fEngine.fCss_WhitespaceAttri;
-            shmES:
-              Result := fEngine.fES_WhitespaceAttri;
-            shmPhpCli:
-              Result := fEngine.fPhp_InlineTextAttri;
-          end;
+        if AClearBits then
+          SetRange_Int(17, 0, 0);
+        FInstance^.FSYN_ATTR_COMMENT := fPhp_InlineTextAttri;
+        FInstance^.FSYN_ATTR_STRING := fPhp_InlineTextAttri;
+        FInstance^.FSYN_ATTR_WHITESPACE := fPhp_InlineTextAttri;
+        FInstance^.FNextProcTable := PhpCli_Next;
+      end else
+      begin
+        if AClearBits then
+          SetRange_Int(17, 0, 0);
+        FInstance^.FSYN_ATTR_COMMENT := fHtml_CommentAttri;
+        FInstance^.FSYN_ATTR_STRING := fHtml_TagKeyValueQuotedAttri;
+        FInstance^.FSYN_ATTR_WHITESPACE := fHtml_WhitespaceAttri;
+        FInstance^.FNextProcTable := Html_Next;
       end;
-      SYN_ATTR_COMMENT:
-        Result := FInstance.fSYN_ATTR_COMMENT;
-      SYN_ATTR_STRING:
-        Result := FInstance.fSYN_ATTR_STRING;
-      else
-        Result := nil;
+    shtCss:
+    begin
+      if AClearBits then
+        SetRange_Int(17, 0, 0);
+      FInstance^.FSYN_ATTR_COMMENT := fCss_CommentAttri;
+      FInstance^.FSYN_ATTR_STRING := fCss_ValStringAttri;
+      Css_UpdateBg;
+      FInstance^.FNextProcTable := Css_Next;
     end;
-end;
-
-function TSynWebBase.GetTokenAttribute: TSynHighlighterAttributes;
-begin
-  if FEngine = nil then
-    Result := nil
-  else
-    if (FInstance.FHighlighterType in FActiveHighlighters) then
-      Result := FEngine.fTokenAttributeTable[FInstance.FTokenID]
+    shtES:
+    begin
+      if AClearBits then
+        SetRange_Int(17, 0, 0);
+      FInstance^.FSYN_ATTR_COMMENT := fES_CommentAttri;
+      FInstance^.FSYN_ATTR_STRING := fES_StringAttri;
+      FInstance^.FSYN_ATTR_WHITESPACE := fES_WhitespaceAttri;
+      FInstance^.FNextProcTable := ES_Next;
+    end;
     else
-      Result := FEngine.fInactiveAttri;
+      if AClearBits then
+        SetRange_Int(12, 17, 0);
+      FInstance^.FSYN_ATTR_COMMENT := fPhp_CommentAttri;
+      FInstance^.FSYN_ATTR_STRING := fPhp_StringAttri;
+      FInstance^.FSYN_ATTR_WHITESPACE := fPhp_WhitespaceAttri;
+      FInstance^.FNextProcTable := Php_Next;
+  end;
 end;
 
-function TSynWebBase.GetToken: string;
+procedure TSynWebEngine.SetLine(NewValue: string; LineNumber: integer);
+{$IFDEF SYNWEB_FIXNULL}
+var
+  i:Integer;
+{$ENDIF}
+begin
+  FInstance^.FLineRef := NewValue;
+{$IFDEF SYNWEB_FIXNULL}
+  for i:=1 to Length(FInstance^.FLineRef) do
+    if FInstance^.FLineRef[i]=#0 then
+      FInstance^.FLineRef[i]:=' ';
+{$ENDIF}
+  FInstance^.FLine := PChar(FInstance^.FLineRef);
+  FInstance^.FRun := 0;
+  FInstance^.FLineNumber := LineNumber;
+  FInstance^.FHighlighterType := TSynHighlighterType(GetRange_Int(3, 29));
+  FInstance^.FPrevHighlighterType := FInstance^.FHighlighterType;
+  FInstance^.FHighlighterSW := False;
+  SetupHighlighterType;
+  FInstance^.FNextProcTable;
+end;
+
+procedure TSynWebEngine.Next;
+begin
+  FInstance^.FHighlighterSW := False;
+  FInstance^.FNextProcTable;
+end;
+
+function TSynWebEngine.GetToken: string;
 var
   Len: longint;
 begin
-  Len := FInstance.FRun - FInstance.FTokenPos;
-  SetString(Result, (FInstance.FLine + FInstance.FTokenPos), Len);
+  Len := FInstance^.FRun - FInstance^.FTokenPos;
+  SetString(Result, (FInstance^.FLine + FInstance^.FTokenPos), Len);
 end;
 
-function TSynWebBase.GetTokenLen: integer;
+constructor TSynWebEngine.Create(AOwner: TComponent);
 begin
-  Result := FInstance.FRun - FInstance.FTokenPos;
-end;
-
-function TSynWebBase.GetTokenPos: integer;
-begin
-  Result := FInstance.FTokenPos;
-end;
-
-function TSynWebBase.GetTokenID: TSynWebTokenKind;
-begin
-  Result := FInstance.FTokenID;
-end;
-
-function TSynWebBase.GetTokenKind: integer;
-begin
-  Result := Ord(FInstance.FTokenID);
-end;
-
-function TSynWebBase.GetRange: Pointer;
-begin
-  Result := Pointer(FInstance.FRange);
-end;
-
-function TSynWebBase.GetEol: boolean;
-begin
-  Result := FInstance.FTokenID = stkNull;
-end;
-
-procedure TSynWebBase.SetRange(Value: Pointer);
-begin
-  FInstance.FRange := Longword(Value);
-end;
-
-procedure TSynWebBase.SetLine(NewValue: string; LineNumber: integer);
-begin
-  if FEngine = nil then
-    Exit;
-  FEngine.FInstance := @FInstance;
-  FEngine.SetLine(NewValue, LineNumber);
-end;
-
-procedure TSynWebBase.Next;
-begin
-  if FEngine = nil then
-    FInstance.FTokenID := stkNull
-  else
+  inherited Create(AOwner);
+  FOptions := TSynWebEngineOptions.Create(@FEngineOptions);
+  FOptions.FOnChange := DefHighlightChange;
+  FNotifyList := TList.Create;
+  FPhpHereDocList := TStringList.Create;
+  with FPhpHereDocList do
   begin
-    FEngine.FInstance := @FInstance;
-    FEngine.Next;
+    Add('EOF');
+    Add('eof');
+    Add('EOT');
+    Add('eot');
+    Add('EOL');
+    Add('eol');
+    Add('HTML');
+    Add('html');
+    Add('CONTENT');
+    Add('content');
+    Add('HEREDOC');
+    Add('heredoc');
+    Add('OUT');
+    Add('out');
+    Add('STRING');
+    Add('string');
+    CaseSensitive := True;
+    Sorted := True;
   end;
+
+  fAttributes := TStringList.Create;
+  fAttributes.Duplicates := dupError;
+  fAttributes.Sorted := True;
+
+  // HTML
+  Html_MakeMethodTables;
+
+  fHtml_WhitespaceAttri := TSynHighlighterAttributes.Create('Html: Whitespace');
+  AddAttribute(fHtml_WhitespaceAttri);
+  fHtml_CommentAttri := TSynHighlighterAttributes.Create('Html: Comment');
+  AddAttribute(fHtml_CommentAttri);
+  fHtml_TextAttri := TSynHighlighterAttributes.Create('Html: Text');
+  AddAttribute(fHtml_TextAttri);
+  fHtml_EscapeAmpsAttri := TSynHighlighterAttributes.Create('Html: Escaped amps');
+  AddAttribute(fHtml_EscapeAmpsAttri);
+  fHtml_SymbolAttri := TSynHighlighterAttributes.Create('Html: Symbol');
+  AddAttribute(fHtml_SymbolAttri);
+  fHtml_TagAttri := TSynHighlighterAttributes.Create('Html: Tag');
+  AddAttribute(fHtml_TagAttri);
+  fHtml_TagNameAttri := TSynHighlighterAttributes.Create('Html: Tag name');
+  AddAttribute(fHtml_TagNameAttri);
+  fHtml_TagNameUndefAttri := TSynHighlighterAttributes.Create(
+    'Html: Undefined tag name');
+  AddAttribute(fHtml_TagNameUndefAttri);
+  fHtml_TagKeyAttri := TSynHighlighterAttributes.Create('Html: Key');
+  AddAttribute(fHtml_TagKeyAttri);
+  fHtml_TagKeyUndefAttri := TSynHighlighterAttributes.Create('Html: Undefined key');
+  AddAttribute(fHtml_TagKeyUndefAttri);
+  fHtml_TagKeyValueAttri := TSynHighlighterAttributes.Create('Html: Value');
+  AddAttribute(fHtml_TagKeyValueAttri);
+  fHtml_TagKeyValueQuotedAttri := TSynHighlighterAttributes.Create('Html: Quoted value');
+  AddAttribute(fHtml_TagKeyValueQuotedAttri);
+  fHtml_ErrorAttri := TSynHighlighterAttributes.Create('Html: Error');
+  AddAttribute(fHtml_ErrorAttri);
+
+  fTokenAttributeTable[stkHtmlSpace] := fHtml_WhitespaceAttri;
+  fTokenAttributeTable[stkHtmlComment] := fHtml_CommentAttri;
+  fTokenAttributeTable[stkHtmlText] := fHtml_TextAttri;
+  fTokenAttributeTable[stkHtmlEscape] := fHtml_EscapeAmpsAttri;
+  fTokenAttributeTable[stkHtmlSymbol] := fHtml_SymbolAttri;
+  fTokenAttributeTable[stkHtmlTag] := fHtml_TagAttri;
+  fTokenAttributeTable[stkHtmlTagName] := fHtml_TagNameAttri;
+  fTokenAttributeTable[stkHtmlTagNameUndef] := fHtml_TagNameUndefAttri;
+  fTokenAttributeTable[stkHtmlTagKey] := fHtml_TagKeyAttri;
+  fTokenAttributeTable[stkHtmlTagKeyUndef] := fHtml_TagKeyUndefAttri;
+  fTokenAttributeTable[stkHtmlTagKeyValue] := fHtml_TagKeyValueAttri;
+  fTokenAttributeTable[stkHtmlTagKeyValueQuoted] := fHtml_TagKeyValueQuotedAttri;
+  fTokenAttributeTable[stkHtmlError] := fHtml_ErrorAttri;
+
+  // CSS
+  Css_MakeMethodTables;
+
+  fCss_WhitespaceAttri := TSynHighlighterAttributes.Create('Css: Whitespace');
+  AddAttribute(fCss_WhitespaceAttri);
+  fCss_RulesetWhitespaceAttri :=
+    TSynHighlighterAttributes.Create('Css: Ruleset whitespace');
+  AddAttribute(fCss_RulesetWhitespaceAttri);
+  fCss_SelectorAttri := TSynHighlighterAttributes.Create('Css: Selector');
+  AddAttribute(fCss_SelectorAttri);
+  fCss_SelectorUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined selector');
+  AddAttribute(fCss_SelectorUndefAttri);
+  fCss_SelectorClassAmpsAttri := TSynHighlighterAttributes.Create('Css: Class selector');
+  AddAttribute(fCss_SelectorClassAmpsAttri);
+  fCss_SelectorIdAttri := TSynHighlighterAttributes.Create('Css: Id selector');
+  AddAttribute(fCss_SelectorIdAttri);
+  fCss_SpecialAttri := TSynHighlighterAttributes.Create('Css: Special');
+  AddAttribute(fCss_SpecialAttri);
+  fCss_CommentAttri := TSynHighlighterAttributes.Create('Css: Comment');
+  AddAttribute(fCss_CommentAttri);
+  fCss_PropAttri := TSynHighlighterAttributes.Create('Css: Property');
+  AddAttribute(fCss_PropAttri);
+  fCss_PropUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined property');
+  AddAttribute(fCss_PropUndefAttri);
+  fCss_ValAttri := TSynHighlighterAttributes.Create('Css: Value');
+  AddAttribute(fCss_ValAttri);
+  fCss_ValUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined value');
+  AddAttribute(fCss_ValUndefAttri);
+  fCss_ValStringAttri := TSynHighlighterAttributes.Create('Css: String value');
+  AddAttribute(fCss_ValStringAttri);
+  fCss_ValNumberAttri := TSynHighlighterAttributes.Create('Css: Number value');
+  AddAttribute(fCss_ValNumberAttri);
+  fCss_SymbolAttri := TSynHighlighterAttributes.Create('Css: Symbol');
+  AddAttribute(fCss_SymbolAttri);
+  fCss_ErrorAttri := TSynHighlighterAttributes.Create('Css: Error');
+  AddAttribute(fCss_ErrorAttri);
+
+  fTokenAttributeTable[stkCssSpace] := fCss_WhitespaceAttri;
+  fTokenAttributeTable[stkCssSelector] := fCss_SelectorAttri;
+  fTokenAttributeTable[stkCssSelectorUndef] := fCss_SelectorUndefAttri;
+  fTokenAttributeTable[stkCssSelectorClass] := fCss_SelectorClassAmpsAttri;
+  fTokenAttributeTable[stkCssSelectorId] := fCss_SelectorIdAttri;
+  fTokenAttributeTable[stkCssSpecial] := fCss_SpecialAttri;
+  fTokenAttributeTable[stkCssComment] := fCss_CommentAttri;
+  fTokenAttributeTable[stkCssProp] := fCss_PropAttri;
+  fTokenAttributeTable[stkCssPropUndef] := fCss_PropUndefAttri;
+  fTokenAttributeTable[stkCssVal] := fCss_ValAttri;
+  fTokenAttributeTable[stkCssValUndef] := fCss_ValUndefAttri;
+  fTokenAttributeTable[stkCssValString] := fCss_ValStringAttri;
+  fTokenAttributeTable[stkCssValNumber] := fCss_ValNumberAttri;
+  fTokenAttributeTable[stkCssSymbol] := fCss_SymbolAttri;
+  fTokenAttributeTable[stkCssError] := fCss_ErrorAttri;
+
+  // ECMAScript
+  ES_MakeMethodTables;
+
+  fES_WhitespaceAttri := TSynHighlighterAttributes.Create('ES: Whitespace');
+  AddAttribute(fES_WhitespaceAttri);
+  fES_IdentifierAttri := TSynHighlighterAttributes.Create('ES: Identifier');
+  AddAttribute(fES_IdentifierAttri);
+  fES_KeyAttri := TSynHighlighterAttributes.Create('ES: Key');
+  AddAttribute(fES_KeyAttri);
+  fES_CommentAttri := TSynHighlighterAttributes.Create('ES: Comment');
+  AddAttribute(fES_CommentAttri);
+  fES_StringAttri := TSynHighlighterAttributes.Create('ES: String');
+  AddAttribute(fES_StringAttri);
+  fES_NumberAttri := TSynHighlighterAttributes.Create('ES: Number');
+  AddAttribute(fES_NumberAttri);
+  fES_SymbolAttri := TSynHighlighterAttributes.Create('ES: Symbol');
+  AddAttribute(fES_SymbolAttri);
+  fES_ErrorAttri := TSynHighlighterAttributes.Create('ES: Error');
+  AddAttribute(fES_ErrorAttri);
+
+  fTokenAttributeTable[stkESSpace] := fES_WhitespaceAttri;
+  fTokenAttributeTable[stkESIdentifier] := fES_IdentifierAttri;
+  fTokenAttributeTable[stkESKeyword] := fES_KeyAttri;
+  fTokenAttributeTable[stkESComment] := fES_CommentAttri;
+  fTokenAttributeTable[stkESString] := fES_StringAttri;
+  fTokenAttributeTable[stkESNumber] := fES_NumberAttri;
+  fTokenAttributeTable[stkESSymbol] := fES_SymbolAttri;
+  fTokenAttributeTable[stkESError] := fES_ErrorAttri;
+
+  // PHP
+  Php_MakeMethodTables;
+
+  fPhp_WhitespaceAttri := TSynHighlighterAttributes.Create('Php: Whitespace');
+  AddAttribute(fPhp_WhitespaceAttri);
+  fPhp_InlineTextAttri := TSynHighlighterAttributes.Create('PhpCli: Inline text');
+  AddAttribute(fPhp_InlineTextAttri);
+  fPhp_IdentifierAttri := TSynHighlighterAttributes.Create('Php: Identifier');
+  AddAttribute(fPhp_IdentifierAttri);
+  fPhp_KeyAttri := TSynHighlighterAttributes.Create('Php: Keyword');
+  AddAttribute(fPhp_KeyAttri);
+  fPhp_FunctionAttri := TSynHighlighterAttributes.Create('Php: Function');
+  AddAttribute(fPhp_FunctionAttri);
+  fPhp_VariableAttri := TSynHighlighterAttributes.Create('Php: Variable');
+  AddAttribute(fPhp_VariableAttri);
+  fPhp_ConstAttri := TSynHighlighterAttributes.Create('Php: Constant');
+  AddAttribute(fPhp_ConstAttri);
+  fPhp_StringAttri := TSynHighlighterAttributes.Create('Php: String');
+  AddAttribute(fPhp_StringAttri);
+  fPhp_StringSpecialAttri := TSynHighlighterAttributes.Create('Php: String special');
+  AddAttribute(fPhp_StringSpecialAttri);
+  fPhp_CommentAttri := TSynHighlighterAttributes.Create('Php: Comment');
+  AddAttribute(fPhp_CommentAttri);
+  fPhp_DocCommentAttri := TSynHighlighterAttributes.Create('Php: DocComment');
+  AddAttribute(fPhp_DocCommentAttri);
+  fPhp_SymbolAttri := TSynHighlighterAttributes.Create('Php: Symbol');
+  AddAttribute(fPhp_SymbolAttri);
+  fPhp_NumberAttri := TSynHighlighterAttributes.Create('Php: Number');
+  AddAttribute(fPhp_NumberAttri);
+  fPhp_ErrorAttri := TSynHighlighterAttributes.Create('Php: Error');
+  AddAttribute(fPhp_ErrorAttri);
+
+  fTokenAttributeTable[stkPhpSpace] := fHtml_WhitespaceAttri;
+  fTokenAttributeTable[stkPhpIdentifier] := fPhp_IdentifierAttri;
+  fTokenAttributeTable[stkPhpKeyword] := fPhp_KeyAttri;
+  fTokenAttributeTable[stkPhpFunction] := fPhp_FunctionAttri;
+  fTokenAttributeTable[stkPhpVariable] := fPhp_VariableAttri;
+  fTokenAttributeTable[stkPhpConst] := fPhp_ConstAttri;
+  fTokenAttributeTable[stkPhpString] := fPhp_StringAttri;
+  fTokenAttributeTable[stkPhpStringSpecial] := fPhp_StringSpecialAttri;
+  fTokenAttributeTable[stkPhpComment] := fPhp_CommentAttri;
+  fTokenAttributeTable[stkPhpDocComment] := fPhp_DocCommentAttri;
+  fTokenAttributeTable[stkPhpSymbol] := fPhp_SymbolAttri;
+  fTokenAttributeTable[stkPhpNumber] := fPhp_NumberAttri;
+  fTokenAttributeTable[stkPhpError] := fPhp_ErrorAttri;
+
+  // PHPCli
+  fTokenAttributeTable[stkPhpInlineText] := fPhp_InlineTextAttri;
+
+  // Global
+  fInactiveAttri := TSynHighlighterAttributes.Create('Global: Inactive');
+  with fInactiveAttri do
+  begin
+    Background := clNone;
+    Foreground := clInactiveCaption;
+    Style := [];
+  end;
+  AddAttribute(fInactiveAttri);
+
+  fTokenAttributeTable[stkNull] := nil;
+  SetAttributesOnChange(DefHighlightChange);
 end;
 
-function TSynWebBase.UpdateActiveHighlighter(ARange: Pointer;
-  ALine: string; ACaretX, ACaretY: integer): boolean;
+destructor TSynWebEngine.Destroy;
 var
-  f: TSynHighlighterTypes;
-  lPos, lLen: integer;
-  lHinghlighter, ActiveHL: TSynHighlighterType;
+  i: integer;
 begin
-  Result := True;
-  if not FActiveHighlighter or not (FInstance.FOptions^.FPhpEmbeded or FInstance.FOptions^.FCssEmbeded or
-    FInstance.FOptions^.FEsEmbeded) then
-    Exit;
-  f := FActiveHighlighters;
-  Dec(ACaretX);
-  SetRange(ARange);
-  lHinghlighter := TSynHighlighterType((FInstance.FRange shr 29) and not ($FFFFFFFF shl 3));
-  SetLine(ALine, ACaretY);
-  lPos := GetTokenPos;
-  lLen := GetTokenLen;
-  while (GetTokenPos < ACaretX) and not GetEol do
-  begin
-    lHinghlighter := FInstance.FHighlighterType;
-    lPos := GetTokenPos;
-    lLen := GetTokenLen;
-    Next;
-  end;
-  if FInstance.FUseNextAH and (ACaretX >= lPos + lLen) then
-    ActiveHL := FInstance.FHighlighterType
-  else
-    if FInstance.FHighlighterSW and (ACaretX >= lPos + lLen) then
-      ActiveHL := FInstance.FPrevHighlighterType
-    else
-      ActiveHL := lHinghlighter;
-  if ActiveHL >= shtPHP_inHtml then
-    FActiveHighlighters := [shtPHP_inHtml, shtPHP_inCss, shtPHP_inES]
-  else
-    FActiveHighlighters := [ActiveHL];
-  Result := f <> FActiveHighlighters;
-end;
-
-{ TSynWebHtmlSyn }
-
-procedure TSynWebHtmlSyn.SetupActiveHighlighter;
-begin
-  FActiveHighlighters := [shtHtml];
-end;
-
-constructor TSynWebHtmlSyn.Create(AOwner: TComponent);
-begin
-  FOptions := TSynWebHtmlOptions.Create(@FOptions);
-  FInstance.FHighlighterMode := shmHtml;
-  inherited Create(AOwner);
-  FOptions.PhpEmbeded := True;
-  FOptions.CssEmbeded := True;
-  FOptions.EsEmbeded := True;
-end;
-
-procedure TSynWebHtmlSyn.ResetRange;
-begin
-  FInstance.FRange := $00000000;
-end;
-
-function TSynWebHtmlSyn.GetSampleSource: string;
-begin
-
-end;
-          
-{ TSynWebCSSSyn }
-
-procedure TSynWebCSSSyn.SetupActiveHighlighter;
-begin
-  FActiveHighlighters := [shtCSS];
-end;
-
-constructor TSynWebCSSSyn.Create(AOwner: TComponent);
-begin
-  FOptions := TSynWebCssOptions.Create(@FOptions);
-  FInstance.FHighlighterMode := shmCss;
-  inherited Create(AOwner);
-  FOptions.PhpEmbeded := False;
-  FOptions.CssEmbeded := False;
-  FOptions.EsEmbeded := False;
-end;
-
-procedure TSynWebCSSSyn.ResetRange;
-begin
-  with FInstance do
-  begin
-    FRange := $00000000;
-    FRange := FRange or (Longword(shtCss) shl 29);
-  end;
-end;
-
-function TSynWebCSSSyn.GetSampleSource: string;
-begin
-
-end;
-
-{ TSynWebSynES }
-
-procedure TSynWebESSyn.SetupActiveHighlighter;
-begin
-  FActiveHighlighters := [shtES];
-end;
-
-constructor TSynWebESSyn.Create(AOwner: TComponent);
-begin
-  FOptions := TSynWebEsOptions.Create(@FOptions);
-  FInstance.FHighlighterMode := shmES;
-  inherited Create(AOwner);
-  FOptions.PhpEmbeded := False;
-  FOptions.CssEmbeded := False;
-  FOptions.EsEmbeded := False;
-end;
-
-procedure TSynWebESSyn.ResetRange;
-begin
-  with FInstance do
-  begin
-    FRange := $00000000;
-    FRange := FRange or (Longword(shtES) shl 29);
-  end;
-end;
-
-function TSynWebESSyn.GetSampleSource: string;
-begin
-
-end;
-
-{ TSynWebSynPHP }
-
-procedure TSynWebPHPCliSyn.SetupActiveHighlighter;
-begin
-  FActiveHighlighters := [shtHtml];
-end;
-
-constructor TSynWebPHPCliSyn.Create(AOwner: TComponent);
-begin
-  FOptions := TSynWebPhpCliOptions.Create(@FOptions);
-  FInstance.FHighlighterMode := shmPhpCli;
-  inherited Create(AOwner);
-  FOptions.PhpEmbeded := True;
-  FOptions.CssEmbeded := False;
-  FOptions.EsEmbeded := False;
-end;
-
-procedure TSynWebPHPCliSyn.ResetRange;
-begin
-  FInstance.FRange := $00000000;
-end;
-
-function TSynWebPHPCliSyn.GetSampleSource: string;
-begin
-
+  for i := fAttributes.Count - 1 downto 0 do
+    TSynHighlighterAttributes(fAttributes.Objects[i]).Free;
+  fAttributes.Clear;
+  for i := 0 to FNotifyList.Count - 1 do
+    TSynWebBase(FNotifyList[i]).Engine := nil;
+  FNotifyList.Free;
+  FPhpHereDocList.Free;
+  inherited Destroy;
 end;
 
 initialization

@@ -309,46 +309,24 @@ object Form1: TForm1
   object SynWebHtmlSyn1: TSynWebHtmlSyn
     ActiveSwitchHighlighter = False
     Engine = SynWebEngine1
-    HtmlVersion = shvXHtml10Transitional
-    CssVersion = scvCss21
-    PhpVersion = spvPhp5
-    PhpShortOpenTag = True
-    PhpAspTags = True
-    CssEmbeded = True
-    PhpEmbeded = True
-    EsEmbeded = True
     Left = 48
     Top = 260
   end
   object SynWebCSSSyn1: TSynWebCSSSyn
     ActiveSwitchHighlighter = False
     Engine = SynWebEngine1
-    HtmlVersion = shvXHtml10Transitional
-    CssVersion = scvCss21
-    PhpVersion = spvPhp5
-    PhpShortOpenTag = True
-    PhpAspTags = False
-    PhpEmbeded = False
     Left = 112
     Top = 260
   end
   object SynWebESSyn1: TSynWebESSyn
     ActiveSwitchHighlighter = False
     Engine = SynWebEngine1
-    PhpVersion = spvPhp5
-    PhpShortOpenTag = True
-    PhpAspTags = False
-    PhpEmbeded = False
     Left = 144
     Top = 260
   end
   object SynWebPHPCliSyn1: TSynWebPHPCliSyn
     ActiveSwitchHighlighter = False
     Engine = SynWebEngine1
-    PhpVersion = spvPhp5
-    PhpShortOpenTag = True
-    PhpAspTags = False
-    PhpEmbeded = True
     Left = 80
     Top = 260
   end

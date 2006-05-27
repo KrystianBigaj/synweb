@@ -121,42 +121,32 @@ end;
 
 procedure TForm1.CheckBox3Click(Sender: TObject);
 begin
-  SynWebHtmlSyn1.PhpAspTags:=CheckBox3.Checked;
-  SynWebCSSSyn1.PhpAspTags:=CheckBox3.Checked;
-  SynWebESSyn1.PhpAspTags:=CheckBox3.Checked;
-  SynWebESSyn1.PhpAspTags:=CheckBox3.Checked;
+  SynWebEngine1.Options.PhpAspTags:=CheckBox3.Checked;
 end;
 
 procedure TForm1.CheckBox4Click(Sender: TObject);
 begin                    
-  SynWebHtmlSyn1.PhpShortOpenTag:=CheckBox4.Checked;
-  SynWebCSSSyn1.PhpShortOpenTag:=CheckBox4.Checked;
-  SynWebESSyn1.PhpShortOpenTag:=CheckBox4.Checked;
-  SynWebESSyn1.PhpShortOpenTag:=CheckBox4.Checked;
+  SynWebEngine1.Options.PhpShortOpenTag:=CheckBox4.Checked;
 end;
 
 procedure TForm1.ComboBox1Change(Sender: TObject);
 begin
-  SynWebHtmlSyn1.HtmlVersion:=TSynWebHtmlVersion(ComboBox1.ItemIndex);
+  SynWebEngine1.Options.HtmlVersion:=TSynWebHtmlVersion(ComboBox1.ItemIndex);
 end;
 
 procedure TForm1.ComboBox2Change(Sender: TObject);
 begin
-  SynWebHtmlSyn1.CssVersion:=TSynWebCssVersion(ComboBox2.ItemIndex);
-  SynWebCSSSyn1.CssVersion:=TSynWebCssVersion(ComboBox2.ItemIndex);
+  SynWebEngine1.Options.CssVersion:=TSynWebCssVersion(ComboBox2.ItemIndex);
 end;
 
 procedure TForm1.ComboBox3Change(Sender: TObject);
 begin
-  SynWebHtmlSyn1.PhpVersion:=TSynWebPhpVersion(ComboBox3.ItemIndex);
-  SynWebCSSSyn1.PhpVersion:=TSynWebPhpVersion(ComboBox3.ItemIndex);
-  SynWebESSyn1.PhpVersion:=TSynWebPhpVersion(ComboBox3.ItemIndex);
-  SynWebESSyn1.PhpVersion:=TSynWebPhpVersion(ComboBox3.ItemIndex);
+  SynWebEngine1.Options.PhpVersion:=TSynWebPhpVersion(ComboBox3.ItemIndex);
 end;
 
 procedure TForm1.ComboBox4Change(Sender: TObject);
 begin
-  case ComboBox1.ItemIndex of
+  case ComboBox4.ItemIndex of
   0:
     SynEdit1.Highlighter:=SynWebHtmlSyn1;
   1:
