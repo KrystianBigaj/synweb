@@ -1,0 +1,98 @@
+-------------------
+--- Highlighter ---
+-------------------
+
+shmWeb:
+  HTML
+  |- PHP
+  |- CSS
+     |- PHP
+  |- ES
+     |- PHP
+
+shmCss:
+  CSS
+
+shmJS:
+  JS
+
+--------------------------------------
+--- Range (size: 32 bits, 4 bytes) ---
+--------------------------------------
+
+%%%##### #######% %%%%%%%% %%%%%%%%
+  |            |                  |
+  |            |                  |- [ HTML/CSS/ES Highlghter range (0..16: 17 bits) - Type: custom ]
+  |            |
+  |            |- [ PHP highlghter range (17..28: 12 bits) - Type: custom ]
+  |
+  |- [ Current highlighter (29..31: 3 bits) - Type: values from 0 to 7 ]
+       0 = HTML
+       1 = CSS
+       2 = ES
+       3 = PHP (parent: HTML) 
+       4 = PHP (parent: CSS)
+       5 = PHP (parent: ES)
+
+-----------------------------------
+--- HTML range (0..16: 17 bits) ---
+-----------------------------------
+
+******** *******% %%%#%%%% %#######
+                    ||     |      |
+                    ||     |      |- [ Tag ID (0..6: 7 bits) - Type: values from 0 to 127 ]
+                    ||     |
+                    ||     |- [ Status (7..11: 5 bits) - Type: custom ]
+                    ||
+                    ||- [ Is tag closed? (12: 1 bit) - Type: values from 0 to 1 ]
+                    |  
+                    |- [ Range (13..16: 4 bits) - Type: values from 0 to 15 ]
+
+-----------------------------------
+--- CSS range (0..16: 17 bits) ----
+-----------------------------------
+
+******** *******% %%%#%### %%%%%%%%
+                    |||  |        |
+                    |||  |        |- [ Prop ID (0..7: 8 bits) - Type: values from 0 to 255 ]
+                    |||  |
+                    |||  |- [ Status (8..10: 3 bits) - Type: custom ]
+                    |||
+                    |||- [ Media range (11: 1 bit) - Type: values from 0 to 1 ]
+                    ||
+                    ||- [ Comment range (12: 1 bit) - Type: values from 0 to 1 ]
+                    |
+                    |- [ Range (13..16: 4 bits) - Type: values from 0 to 15 ]
+
+-----------------------------------
+--- ES range (0..16: 17 bits) -----
+-----------------------------------
+
+******** *******% %??????? ????????
+                  |  
+                  |- [ Range (15..16: 2 bits) - Type: values from 0 to 3 ]
+
+-----------------------------------
+--- PHP range (17..28: 12 bits ----
+-----------------------------------
+
+***%##%# #%%%%%%* ******** ********
+    | |  |     |
+    | |  |     |- [ Heredoc CRC8 (17..24: 8 bits) - Type: values form $00 to $FF ]
+    | |  |
+    | |  |- [ Range (25..27: 3 bits) - Type: values from 0 to 7 ]
+    | |
+    | |- [ Heredoc range - Type: values from 0 to 1 ]
+    |
+  
+
+
+28 27 26 25 24 23 22 21 20 19 18 17
+XX XX                               - PHP OPEN-TAG
+         XX XX XX                   - RANGE
+                  XX XX XX          - SUB PROC RANGE
+      XX                            - HEREDOC RANGE
+         XX                         - HEREDOC IDENT CRC OR TSTRINGLIST
+            XX XX XX XX XX XX XX XX - HERERDOC CRC
+   XX                               - HTML PREV ATTRIB WAS 'LANGUAGE' ?
+XX                                  - HTML LANGUAGE=php?
