@@ -75,6 +75,7 @@ var
   j:TSynWebCssVersion;
   k:TSynWebPhpVersion;
 begin
+  SynEdit1.Lines.SaveUnicode:=True;
   for i:=Low(TSynWebHtmlVersion) to High(TSynWebHtmlVersion) do
     ComboBox1.Items.Add(TSynWebHtmlVersionStr[i]);
   ComboBox1.ItemIndex:=Integer(shvXHtml10Transitional);
