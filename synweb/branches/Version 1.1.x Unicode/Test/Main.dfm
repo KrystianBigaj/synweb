@@ -240,69 +240,6 @@ object Form1: TForm1
     TabOrder = 3
   end
   object SynWebEngine1: TSynWebEngine
-    InactiveAttri.Foreground = clInactiveCaptionText
-    HtmlCommentAttri.Foreground = clMedGray
-    HtmlEscapeAttri.Foreground = clTeal
-    HtmlSymbolAttri.Foreground = clBlack
-    HtmlTagAttri.Foreground = clNavy
-    HtmlTagNameAttri.Foreground = clBlue
-    HtmlTagNameUndefAttri.Foreground = clBlue
-    HtmlTagNameUndefAttri.Style = [fsUnderline]
-    HtmlTagKeyAttri.Foreground = clRed
-    HtmlTagKeyUndefAttri.Foreground = clRed
-    HtmlTagKeyUndefAttri.Style = [fsUnderline]
-    HtmlTagKeyValueAttri.Foreground = clFuchsia
-    HtmlTagKeyValueQuotedAttri.Foreground = clFuchsia
-    HtmlErrorAttri.Foreground = clRed
-    HtmlErrorAttri.Style = [fsBold, fsUnderline]
-    CssWhitespaceAttri.Background = 15794175
-    CssRulesetWhitespaceAttri.Background = clInfoBk
-    CssSelectorAttri.Foreground = clBlue
-    CssSelectorAttri.Style = [fsBold]
-    CssSelectorUndefAttri.Foreground = clBlue
-    CssSelectorUndefAttri.Style = [fsBold, fsUnderline]
-    CssSelectorClassAttri.Foreground = 12615680
-    CssSelectorClassAttri.Style = [fsBold]
-    CssSelectorIdAttri.Foreground = clGreen
-    CssSelectorIdAttri.Style = [fsBold]
-    CssSpecialAttri.Foreground = clNavy
-    CssCommentAttri.Foreground = clMedGray
-    CssCommentAttri.Style = [fsItalic]
-    CssPropAttri.Foreground = clBlue
-    CssPropUndefAttri.Foreground = clBlue
-    CssPropUndefAttri.Style = [fsUnderline]
-    CssValAttri.Foreground = clRed
-    CssValUndefAttri.Foreground = clRed
-    CssValUndefAttri.Style = [fsUnderline]
-    CssValStringAttri.Foreground = clFuchsia
-    CssValNumberAttri.Foreground = clGreen
-    CssSymbolAttri.Foreground = clBlack
-    CssErrorAttri.Foreground = clRed
-    CssErrorAttri.Style = [fsBold, fsUnderline]
-    ESWhitespaceAttri.Background = 16773360
-    ESIdentifierAttri.Foreground = clBlue
-    ESKeyAttri.Style = [fsBold]
-    ESCommentAttri.Foreground = clGreen
-    ESStringAttri.Foreground = clRed
-    ESNumberAttri.Foreground = clFuchsia
-    ESErrorAttri.Foreground = clRed
-    ESErrorAttri.Style = [fsBold, fsUnderline]
-    PhpWhitespaceAttri.Background = 16119285
-    PhpIdentifierAttri.Foreground = clMaroon
-    PhpKeyAttri.Foreground = clBlue
-    PhpFunctionAttri.Foreground = clRed
-    PhpVariableAttri.Foreground = clTeal
-    PhpConstAttri.Foreground = 33023
-    PhpStringAttri.Foreground = clFuchsia
-    PhpStringSpecialAttri.Background = 15395562
-    PhpStringSpecialAttri.Foreground = clFuchsia
-    PhpCommentAttri.Foreground = clGreen
-    PhpCommentAttri.Style = [fsItalic]
-    PhpDocCommentAttri.Foreground = clGreen
-    PhpDocCommentAttri.Style = [fsBold, fsItalic]
-    PhpNumberAttri.Foreground = clPurple
-    PhpErrorAttri.Foreground = clRed
-    PhpErrorAttri.Style = [fsBold, fsUnderline]
     Left = 48
     Top = 228
   end
@@ -312,19 +249,19 @@ object Form1: TForm1
     Left = 48
     Top = 260
   end
-  object SynWebCSSSyn1: TSynWebCSSSyn
+  object SynWebCSSSyn1: TSynWebCssSyn
     ActiveSwitchHighlighter = False
     Engine = SynWebEngine1
     Left = 112
     Top = 260
   end
-  object SynWebESSyn1: TSynWebESSyn
+  object SynWebESSyn1: TSynWebEsSyn
     ActiveSwitchHighlighter = False
     Engine = SynWebEngine1
     Left = 144
     Top = 260
   end
-  object SynWebPHPCliSyn1: TSynWebPHPCliSyn
+  object SynWebPHPCliSyn1: TSynWebPhpCliSyn
     ActiveSwitchHighlighter = False
     Engine = SynWebEngine1
     Left = 80
@@ -342,6 +279,7 @@ object Form1: TForm1
     UseBackground = False
     Left = 20
     Top = 96
+    TitleW = 'Untitled'
   end
   object SynEditOptionsDialog1: TSynEditOptionsDialog
     UseExtendedStrings = False

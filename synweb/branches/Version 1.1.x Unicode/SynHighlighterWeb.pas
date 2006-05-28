@@ -43,10 +43,6 @@ The TSynWebSyn unit provides SynEdit with an Multi Html/Css/ECAMScript/Php highl
 // SYNWEB_FIXNULL - fix lines containing #0 character (#0 goes into #32)
 {.$DEFINE SYNWEB_FIXNULL}
 
-// UNISYNEDIT - switch TSynWeb to work with UniSynEdit
-
-{$DEFINE UNISYNEDIT}
-
 {$IFNDEF QSYNHIGHLIGHTERWEB}
 unit SynHighlighterWeb;
 {$ENDIF}
@@ -254,9 +250,14 @@ type
 {$IFNDEF UNISYNEDIT}
     procedure SetLine(NewValue: String; LineNumber: Integer); override;
 {$ENDIF}
-    procedure Next; override;
+    procedure Next; override;       
+{$IFDEF UNISYNEDIT}       
+    function UpdateActiveHighlighter(ARange: Pointer; ALine: WideString;
+      ACaretX, ACaretY: Integer): Boolean;
+{$ELSE}    
     function UpdateActiveHighlighter(ARange: Pointer; ALine: String;
       ACaretX, ACaretY: Integer): Boolean;
+{$ENDIF}
     property ActiveHighlighters: TSynHighlighterTypes read GetActiveHighlighters;
   published
     property ActiveSwitchHighlighter: Boolean
@@ -1064,7 +1065,7 @@ begin
 end;
 
 {$IFNDEF UNISYNEDIT}
-function TSynWebBase.GetToken: string;
+function TSynWebBase.GetToken: String;
 var
   Len: longint;
 begin
@@ -1129,14 +1130,18 @@ begin
 {$IFDEF UNISYNEDIT}
     Run := FInstance.FRun;
     fTokenPos := FInstance.FTokenPos;
-
     inherited;          
 {$ENDIF}
   end;
 end;
 
+{$IFDEF UNISYNEDIT}
+function TSynWebBase.UpdateActiveHighlighter(ARange: Pointer;
+  ALine: WideString; ACaretX, ACaretY: Integer): Boolean;
+{$ELSE}
 function TSynWebBase.UpdateActiveHighlighter(ARange: Pointer;
   ALine: String; ACaretX, ACaretY: Integer): Boolean;
+{$ENDIF}
 var
   f: TSynHighlighterTypes;
   lPos, lLen: Integer;
@@ -1204,7 +1209,7 @@ end;
 {$IFDEF UNISYNEDIT}                             
 function TSynWebHtmlSyn.GetSampleSource: WideString;
 {$ELSE}
-function TSynWebHtmlSyn.GetSampleSource: string;
+function TSynWebHtmlSyn.GetSampleSource: String;
 {$ENDIF}
 begin
 
@@ -1243,7 +1248,7 @@ end;
 {$IFDEF UNISYNEDIT}                             
 function TSynWebCssSyn.GetSampleSource: WideString;
 {$ELSE}
-function TSynWebCssSyn.GetSampleSource: string;
+function TSynWebCssSyn.GetSampleSource: String;
 {$ENDIF}
 begin
 
@@ -1282,7 +1287,7 @@ end;
 {$IFDEF UNISYNEDIT}                             
 function TSynWebEsSyn.GetSampleSource: WideString;
 {$ELSE}
-function TSynWebEsSyn.GetSampleSource: string;
+function TSynWebEsSyn.GetSampleSource: String;
 {$ENDIF}
 begin
 
@@ -1318,7 +1323,7 @@ end;
 {$IFDEF UNISYNEDIT}                             
 function TSynWebPhpCliSyn.GetSampleSource: WideString;
 {$ELSE}
-function TSynWebPhpCliSyn.GetSampleSource: string;
+function TSynWebPhpCliSyn.GetSampleSource: String;
 {$ENDIF}
 begin
 
@@ -6199,7 +6204,7 @@ end;
 
 constructor TSynWebEngine.Create(AOwner: TComponent);
 
-  function CreateAttrib(const AName:string): TSynHighlighterAttributes;
+  function CreateAttrib(const AName:String): TSynHighlighterAttributes;
   begin
 {$IFDEF UNISYNEDIT}
     Result := TSynHighlighterAttributes.Create(AName, AName);

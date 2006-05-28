@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, SynEdit, SynHighlighterWeb, StdCtrls, SynEditHighlighter,
   ExtCtrls, SynEditOptionsDialog, SynEditExport, SynExportHTML,
-  SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes;
+  SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes, SynUnicode;
 
 type
   TForm1 = class(TForm)
@@ -39,8 +39,6 @@ type
     SynEditOptionsDialog1: TSynEditOptionsDialog;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
-      AFiles: TStrings);
     procedure CheckBox1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure CheckBox3Click(Sender: TObject);
@@ -55,6 +53,8 @@ type
     procedure SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
       TransientType: TTransientType);
     procedure CheckBox2Click(Sender: TObject);
+    procedure SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
+      AFiles: TWideStrings);
   private
     { Private declarations }
   public
@@ -96,13 +96,6 @@ end;
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
   SynEdit1.Lines.SaveToFile(ChangeFileExt(Application.ExeName,'_sample.txt'));
-end;
-
-procedure TForm1.SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
-  AFiles: TStrings);
-begin
-  if (AFiles.Count>0) and (FileExists(AFiles[0])) then
-    SynEdit1.Lines.LoadFromFile(AFiles[0]);
 end;
 
 procedure TForm1.CheckBox1Click(Sender: TObject);
@@ -294,6 +287,13 @@ begin
     SynEdit1StatusChange(SynEdit1,[scCaretX, scCaretY]);
   //else
     SynEdit1.Repaint;
+end;
+
+procedure TForm1.SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
+  AFiles: TWideStrings);
+begin
+  if (AFiles.Count>0) and (FileExists(AFiles[0])) then
+    SynEdit1.Lines.LoadFromFile(AFiles[0]);
 end;
 
 end.
