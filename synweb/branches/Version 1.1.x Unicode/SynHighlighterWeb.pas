@@ -43,6 +43,10 @@ The TSynWebSyn unit provides SynEdit with an Multi Html/Css/ECAMScript/Php highl
 // SYNWEB_FIXNULL - fix lines containing #0 character (#0 goes into #32)
 {.$DEFINE SYNWEB_FIXNULL}
 
+// UNISYNEDIT - switch TSynWeb to work with UniSynEdit
+
+{$DEFINE UNISYNEDIT}
+
 {$IFNDEF QSYNHIGHLIGHTERWEB}
 unit SynHighlighterWeb;
 {$ENDIF}
@@ -221,18 +225,25 @@ type
     procedure SetActiveHighlighter(const Value: Boolean);
     function GetActiveHighlighters: TSynHighlighterTypes;
     procedure SetEngine(const Value: TSynWebEngine);
-  protected              
+  protected
+{$IFDEF UNISYNEDIT}
+    procedure DoSetLine(const Value: WideString; LineNumber: Integer); override;
+{$ENDIF}
     procedure DoDefHighlightChange;
     function GetAttribCount: Integer; override;
     function GetAttribute(idx: Integer): TSynHighlighterAttributes; override;
+{$IFNDEF UNISYNEDIT}
     function GetIdentChars: TSynIdentChars; override;
+{$ENDIF}
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     function GetDefaultAttribute(Index: Integer): TSynHighlighterAttributes;
       override;
     function GetTokenAttribute: TSynHighlighterAttributes; override;
+{$IFNDEF UNISYNEDIT}
     function GetToken: String; override;
+{$ENDIF}
     function GetTokenLen: Integer;
     function GetTokenPos: Integer; override;
     function GetTokenID: TSynWebTokenKind;
@@ -240,7 +251,9 @@ type
     function GetRange: Pointer; override;
     function GetEol: Boolean; override;
     procedure SetRange(Value: Pointer); override;
+{$IFNDEF UNISYNEDIT}
     procedure SetLine(NewValue: String; LineNumber: Integer); override;
+{$ENDIF}
     procedure Next; override;
     function UpdateActiveHighlighter(ARange: Pointer; ALine: String;
       ACaretX, ACaretY: Integer): Boolean;
@@ -258,7 +271,11 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
+{$IFDEF UNISYNEDIT}
+    function GetSampleSource: WideString; override;
+{$ELSE}
     function GetSampleSource: String; override;
+{$ENDIF}
   published
     property Options: TSynWebHtmlOptions read GetOptions;
   end;
@@ -270,7 +287,11 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
+{$IFDEF UNISYNEDIT}
+    function GetSampleSource: WideString; override;
+{$ELSE}
     function GetSampleSource: String; override;
+{$ENDIF}
   published
     property Options: TSynWebCssOptions read GetOptions;
   end;
@@ -282,7 +303,11 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
+{$IFDEF UNISYNEDIT}
+    function GetSampleSource: WideString; override;
+{$ELSE}
     function GetSampleSource: String; override;
+{$ENDIF}
   published
     property Options: TSynWebEsOptions read GetOptions;
   end;
@@ -294,7 +319,11 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
+{$IFDEF UNISYNEDIT}
+    function GetSampleSource: WideString; override;
+{$ELSE}
     function GetSampleSource: String; override;
+{$ENDIF}
   published
     property Options: TSynWebPhpCliOptions read GetOptions;
   end;
@@ -928,6 +957,17 @@ begin
     FOptions.SetEngineOptions(nil);
 end;
 
+{$IFDEF UNISYNEDIT}
+procedure TSynWebBase.DoSetLine(const Value: WideString; LineNumber: Integer);
+begin
+  inherited DoSetLine(Value, LineNumber);
+  if FEngine = nil then
+    Exit;
+  FEngine.FInstance := @FInstance;
+  FEngine.SetLine(Value, LineNumber);
+end;
+{$ENDIF}
+
 procedure TSynWebBase.DoDefHighlightChange;
 begin
   FOptions.UpdateOptions;
@@ -953,10 +993,12 @@ begin
     Result := TSynHighlighterAttributes(FEngine.FAttributes.Objects[idx]);
 end;
 
+{$IFNDEF UNISYNEDIT}
 function TSynWebBase.GetIdentChars: TSynIdentChars;
 begin
   Result := TSynValidStringChars;
 end;
+{$ENDIF}
 
 constructor TSynWebBase.Create(AOwner: TComponent);
 begin
@@ -986,7 +1028,7 @@ begin
       // SYN_ATTR_IDENTIFIER: ??
       // SYN_ATTR_KEYWORD: ??
       // SYN_ATTR_SYMBOL: ??
-      SYN_ATTR_WHITEsPACE:
+      SYN_ATTR_WHITESPACE:
       begin
         Result := FInstance.fSYN_ATTR_WHITEsPACE;
         if not Enabled then
@@ -1021,13 +1063,15 @@ begin
       Result := FEngine.FInactiveAttri;
 end;
 
-function TSynWebBase.GetToken: String;
+{$IFNDEF UNISYNEDIT}
+function TSynWebBase.GetToken: string;
 var
   Len: longint;
 begin
   Len := FInstance.FRun - FInstance.FTokenPos;
   SetString(Result, (FInstance.FLine + FInstance.FTokenPos), Len);
 end;
+{$ENDIF}
 
 function TSynWebBase.GetTokenLen: Integer;
 begin
@@ -1064,6 +1108,7 @@ begin
   FInstance.FRange := Longword(Value);
 end;
 
+{$IFNDEF UNISYNEDIT}
 procedure TSynWebBase.SetLine(NewValue: String; LineNumber: Integer);
 begin
   if FEngine = nil then
@@ -1071,6 +1116,7 @@ begin
   FEngine.FInstance := @FInstance;
   FEngine.SetLine(NewValue, LineNumber);
 end;
+{$ENDIF}
 
 procedure TSynWebBase.Next;
 begin
@@ -1080,6 +1126,12 @@ begin
   begin
     FEngine.FInstance := @FInstance;
     FEngine.Next;
+{$IFDEF UNISYNEDIT}
+    Run := FInstance.FRun;
+    fTokenPos := FInstance.FTokenPos;
+
+    inherited;          
+{$ENDIF}
   end;
 end;
 
@@ -1149,7 +1201,11 @@ begin
   FInstance.FRange := $00000000;
 end;
 
-function TSynWebHtmlSyn.GetSampleSource: String;
+{$IFDEF UNISYNEDIT}                             
+function TSynWebHtmlSyn.GetSampleSource: WideString;
+{$ELSE}
+function TSynWebHtmlSyn.GetSampleSource: string;
+{$ENDIF}
 begin
 
 end;
@@ -1184,12 +1240,14 @@ begin
     FRange := FRange or (Longword(shtCss) shl 29);
   end;
 end;
-
-function TSynWebCssSyn.GetSampleSource: String;
+{$IFDEF UNISYNEDIT}                             
+function TSynWebCssSyn.GetSampleSource: WideString;
+{$ELSE}
+function TSynWebCssSyn.GetSampleSource: string;
+{$ENDIF}
 begin
 
 end;
-
 { TSynWebEsSyn }
 
 procedure TSynWebEsSyn.SetupActiveHighlighter;
@@ -1221,7 +1279,11 @@ begin
   end;
 end;
 
-function TSynWebEsSyn.GetSampleSource: String;
+{$IFDEF UNISYNEDIT}                             
+function TSynWebEsSyn.GetSampleSource: WideString;
+{$ELSE}
+function TSynWebEsSyn.GetSampleSource: string;
+{$ENDIF}
 begin
 
 end;
@@ -1253,7 +1315,11 @@ begin
   FInstance.FRange := $00000000;
 end;
 
-function TSynWebPhpCliSyn.GetSampleSource: String;
+{$IFDEF UNISYNEDIT}                             
+function TSynWebPhpCliSyn.GetSampleSource: WideString;
+{$ELSE}
+function TSynWebPhpCliSyn.GetSampleSource: string;
+{$ENDIF}
 begin
 
 end;
@@ -6112,7 +6178,9 @@ begin
   FInstance^.FPrevHighlighterType := FInstance^.FHighlighterType;
   FInstance^.FHighlighterSW := False;
   SetupHighlighterType;
+{$IFNDEF UNISYNEDIT}
   FInstance^.FNextProcTable;
+{$ENDIF}
 end;
 
 procedure TSynWebEngine.Next;
@@ -6130,6 +6198,16 @@ begin
 end;
 
 constructor TSynWebEngine.Create(AOwner: TComponent);
+
+  function CreateAttrib(const AName:string): TSynHighlighterAttributes;
+  begin
+{$IFDEF UNISYNEDIT}
+    Result := TSynHighlighterAttributes.Create(AName, AName);
+{$ELSE}                                                      
+    Result := TSynHighlighterAttributes.Create(AName);
+{$ENDIF}
+  end;
+
 begin
   inherited Create(AOwner);
   FOptions := TSynWebEngineOptions.Create(@FEngineOptions);
@@ -6165,55 +6243,55 @@ begin
   // Html
   HtmlMakeMethodTables;
 
-  FHtmlWhitespaceAttri := TSynHighlighterAttributes.Create('Html: Whitespace');
+  FHtmlWhitespaceAttri := CreateAttrib('Html: Whitespace');
   AddAttribute(FHtmlWhitespaceAttri);
 
-  FHtmlCommentAttri := TSynHighlighterAttributes.Create('Html: Comment');  
+  FHtmlCommentAttri := CreateAttrib('Html: Comment');
   FHtmlCommentAttri.Foreground := clMedGray;
   AddAttribute(FHtmlCommentAttri);
 
-  FHtmlTextAttri := TSynHighlighterAttributes.Create('Html: Text');
+  FHtmlTextAttri := CreateAttrib('Html: Text');
   AddAttribute(FHtmlTextAttri);
 
-  FHtmlEscapeAttri := TSynHighlighterAttributes.Create('Html: Escaped amps');
+  FHtmlEscapeAttri := CreateAttrib('Html: Escaped amps');
   FHtmlEscapeAttri.Foreground := clTeal;
   AddAttribute(FHtmlEscapeAttri);
 
-  FHtmlSymbolAttri := TSynHighlighterAttributes.Create('Html: Symbol'); 
+  FHtmlSymbolAttri := CreateAttrib('Html: Symbol'); 
   FHtmlSymbolAttri.Foreground := clBlack;
   AddAttribute(FHtmlSymbolAttri);
 
-  FHtmlTagAttri := TSynHighlighterAttributes.Create('Html: Tag');
+  FHtmlTagAttri := CreateAttrib('Html: Tag');
   FHtmlTagAttri.Foreground := clNavy;
   AddAttribute(FHtmlTagAttri);
 
-  FHtmlTagNameAttri := TSynHighlighterAttributes.Create('Html: Tag name');  
+  FHtmlTagNameAttri := CreateAttrib('Html: Tag name');  
   FHtmlTagNameAttri.Foreground := clBlue;
   AddAttribute(FHtmlTagNameAttri);
 
-  FHtmlTagNameUndefAttri := TSynHighlighterAttributes.Create('Html: Undefined tag name');
+  FHtmlTagNameUndefAttri := CreateAttrib('Html: Undefined tag name');
   FHtmlTagNameUndefAttri.Foreground := clBlue;
   FHtmlTagNameUndefAttri.Style := [fsUnderline];
   AddAttribute(FHtmlTagNameUndefAttri);
 
-  FHtmlTagKeyAttri := TSynHighlighterAttributes.Create('Html: Key'); 
+  FHtmlTagKeyAttri := CreateAttrib('Html: Key'); 
   FHtmlTagKeyAttri.Foreground := clRed;
   AddAttribute(FHtmlTagKeyAttri);
 
-  FHtmlTagKeyUndefAttri := TSynHighlighterAttributes.Create('Html: Undefined key');  
+  FHtmlTagKeyUndefAttri := CreateAttrib('Html: Undefined key');  
   FHtmlTagKeyUndefAttri.Foreground := clRed;
   FHtmlTagKeyUndefAttri.Style := [fsUnderline];
   AddAttribute(FHtmlTagKeyUndefAttri);
 
-  FHtmlTagKeyValueAttri := TSynHighlighterAttributes.Create('Html: Value'); 
+  FHtmlTagKeyValueAttri := CreateAttrib('Html: Value'); 
   FHtmlTagKeyValueAttri.Foreground := clFuchsia;
   AddAttribute(FHtmlTagKeyValueAttri);
 
-  FHtmlTagKeyValueQuotedAttri := TSynHighlighterAttributes.Create('Html: Quoted value'); 
+  FHtmlTagKeyValueQuotedAttri := CreateAttrib('Html: Quoted value'); 
   FHtmlTagKeyValueQuotedAttri.Foreground := clFuchsia;
   AddAttribute(FHtmlTagKeyValueQuotedAttri);
 
-  FHtmlErrorAttri := TSynHighlighterAttributes.Create('Html: Error');
+  FHtmlErrorAttri := CreateAttrib('Html: Error');
   FHtmlErrorAttri.Foreground := clRed;
   FHtmlErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FHtmlErrorAttri);
@@ -6235,74 +6313,74 @@ begin
   // Css
   CssMakeMethodTables;
 
-  FCssWhitespaceAttri := TSynHighlighterAttributes.Create('Css: Whitespace');    
+  FCssWhitespaceAttri := CreateAttrib('Css: Whitespace');    
   FCssWhitespaceAttri.Background := 15794175;
   AddAttribute(FCssWhitespaceAttri);
 
-  FCssRulesetWhitespaceAttri := TSynHighlighterAttributes.Create('Css: Ruleset whitespace'); 
+  FCssRulesetWhitespaceAttri := CreateAttrib('Css: Ruleset whitespace'); 
   FCssRulesetWhitespaceAttri.Background := clInfoBk;
   AddAttribute(FCssRulesetWhitespaceAttri);
 
-  FCssSelectorAttri := TSynHighlighterAttributes.Create('Css: Selector'); 
+  FCssSelectorAttri := CreateAttrib('Css: Selector'); 
   FCssSelectorAttri.Foreground := clBlue;
   FCssSelectorAttri.Style := [fsBold];
   AddAttribute(FCssSelectorAttri);
 
-  FCssSelectorUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined selector');   
+  FCssSelectorUndefAttri := CreateAttrib('Css: Undefined selector');   
   FCssSelectorUndefAttri.Foreground := clBlue;
   FCssSelectorUndefAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FCssSelectorUndefAttri);
 
-  FCssSelectorClassAttri := TSynHighlighterAttributes.Create('Css: Class selector');   
+  FCssSelectorClassAttri := CreateAttrib('Css: Class selector');   
   FCssSelectorClassAttri.Foreground := 12615680;
   FCssSelectorClassAttri.Style := [fsBold];
   AddAttribute(FCssSelectorClassAttri);
 
-  FCssSelectorIdAttri := TSynHighlighterAttributes.Create('Css: Id selector'); 
+  FCssSelectorIdAttri := CreateAttrib('Css: Id selector'); 
   FCssSelectorIdAttri.Foreground := clGreen;
   FCssSelectorIdAttri.Style := [fsBold];
   AddAttribute(FCssSelectorIdAttri);
 
-  FCssSpecialAttri := TSynHighlighterAttributes.Create('Css: Special');
+  FCssSpecialAttri := CreateAttrib('Css: Special');
   FCssSpecialAttri.Foreground := clNavy;
   AddAttribute(FCssSpecialAttri);
 
-  FCssCommentAttri := TSynHighlighterAttributes.Create('Css: Comment');
+  FCssCommentAttri := CreateAttrib('Css: Comment');
   FCssCommentAttri.Foreground := clMedGray;
   FCssCommentAttri.Style := [fsItalic];
   AddAttribute(FCssCommentAttri);
 
-  FCssPropAttri := TSynHighlighterAttributes.Create('Css: Property'); 
+  FCssPropAttri := CreateAttrib('Css: Property'); 
   FCssPropAttri.Foreground := clBlue;
   AddAttribute(FCssPropAttri);
 
-  FCssPropUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined property'); 
+  FCssPropUndefAttri := CreateAttrib('Css: Undefined property'); 
   FCssPropUndefAttri.Foreground := clBlue;
   FCssPropUndefAttri.Style := [fsUnderline];
   AddAttribute(FCssPropUndefAttri);
 
-  FCssValAttri := TSynHighlighterAttributes.Create('Css: Value');   
+  FCssValAttri := CreateAttrib('Css: Value');   
   FCssValAttri.Foreground := clRed;
   AddAttribute(FCssValAttri);
 
-  FCssValUndefAttri := TSynHighlighterAttributes.Create('Css: Undefined value'); 
+  FCssValUndefAttri := CreateAttrib('Css: Undefined value'); 
   FCssValUndefAttri.Foreground := clRed;
   FCssValUndefAttri.Style := [fsUnderline];
   AddAttribute(FCssValUndefAttri);
 
-  FCssValStringAttri := TSynHighlighterAttributes.Create('Css: String value');
+  FCssValStringAttri := CreateAttrib('Css: String value');
   FCssValStringAttri.Foreground := clFuchsia ;
   AddAttribute(FCssValStringAttri);
 
-  FCssValNumberAttri := TSynHighlighterAttributes.Create('Css: Number value');   
+  FCssValNumberAttri := CreateAttrib('Css: Number value');   
   FCssValNumberAttri.Foreground := clGreen;
   AddAttribute(FCssValNumberAttri);
 
-  FCssSymbolAttri := TSynHighlighterAttributes.Create('Css: Symbol');   
+  FCssSymbolAttri := CreateAttrib('Css: Symbol');   
   FCssSymbolAttri.Foreground := clBlack;
   AddAttribute(FCssSymbolAttri);
 
-  FCssErrorAttri := TSynHighlighterAttributes.Create('Css: Error');    
+  FCssErrorAttri := CreateAttrib('Css: Error');    
   FCssErrorAttri.Foreground := clRed;
   FCssErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FCssErrorAttri);
@@ -6326,34 +6404,34 @@ begin
   // ECMAScript
   EsMakeMethodTables;
 
-  FEsWhitespaceAttri := TSynHighlighterAttributes.Create('Es: Whitespace'); 
+  FEsWhitespaceAttri := CreateAttrib('Es: Whitespace'); 
   FEsWhitespaceAttri.Background := 16773360;
   AddAttribute(FEsWhitespaceAttri);
 
-  FEsIdentifierAttri := TSynHighlighterAttributes.Create('Es: Identifier');
+  FEsIdentifierAttri := CreateAttrib('Es: Identifier');
   FEsIdentifierAttri.Foreground := clBlue;
   AddAttribute(FEsIdentifierAttri);
 
-  FEsKeyAttri := TSynHighlighterAttributes.Create('Es: Key'); 
+  FEsKeyAttri := CreateAttrib('Es: Key'); 
   FEsKeyAttri.Style := [fsBold];
   AddAttribute(FEsKeyAttri);
 
-  FEsCommentAttri := TSynHighlighterAttributes.Create('Es: Comment');    
+  FEsCommentAttri := CreateAttrib('Es: Comment');    
   FEsCommentAttri.Foreground := clGreen;
   AddAttribute(FEsCommentAttri);
 
-  FEsStringAttri := TSynHighlighterAttributes.Create('Es: String');
+  FEsStringAttri := CreateAttrib('Es: String');
   FEsStringAttri.Foreground := clRed;
   AddAttribute(FEsStringAttri);
 
-  FEsNumberAttri := TSynHighlighterAttributes.Create('Es: Number');
+  FEsNumberAttri := CreateAttrib('Es: Number');
   FEsNumberAttri.Foreground := clFuchsia;
   AddAttribute(FEsNumberAttri);
 
-  FEsSymbolAttri := TSynHighlighterAttributes.Create('Es: Symbol');
+  FEsSymbolAttri := CreateAttrib('Es: Symbol');
   AddAttribute(FEsSymbolAttri);
 
-  FEsErrorAttri := TSynHighlighterAttributes.Create('Es: Error');  
+  FEsErrorAttri := CreateAttrib('Es: Error');  
   FEsErrorAttri.Foreground := clRed;
   FEsErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FEsErrorAttri);
@@ -6370,60 +6448,60 @@ begin
   // Php
   PhpMakeMethodTables;
 
-  FPhpWhitespaceAttri := TSynHighlighterAttributes.Create('Php: Whitespace');   
+  FPhpWhitespaceAttri := CreateAttrib('Php: Whitespace');   
   FPhpWhitespaceAttri.Background := 16119285;
   AddAttribute(FPhpWhitespaceAttri);
 
-  FPhpInlineTextAttri := TSynHighlighterAttributes.Create('PhpCli: Inline text');
+  FPhpInlineTextAttri := CreateAttrib('PhpCli: Inline text');
   AddAttribute(FPhpInlineTextAttri);
 
-  FPhpIdentifierAttri := TSynHighlighterAttributes.Create('Php: Identifier');  
+  FPhpIdentifierAttri := CreateAttrib('Php: Identifier');  
   FPhpIdentifierAttri.Foreground := clMaroon;
   AddAttribute(FPhpIdentifierAttri);
 
-  FPhpKeyAttri := TSynHighlighterAttributes.Create('Php: Keyword'); 
+  FPhpKeyAttri := CreateAttrib('Php: Keyword'); 
   FPhpKeyAttri.Foreground := clBlue;
   AddAttribute(FPhpKeyAttri);
 
-  FPhpFunctionAttri := TSynHighlighterAttributes.Create('Php: Function');  
+  FPhpFunctionAttri := CreateAttrib('Php: Function');  
   FPhpFunctionAttri.Foreground := clRed;
   AddAttribute(FPhpFunctionAttri);
 
-  FPhpVariableAttri := TSynHighlighterAttributes.Create('Php: Variable'); 
+  FPhpVariableAttri := CreateAttrib('Php: Variable'); 
   FPhpVariableAttri.Foreground := clTeal;
   AddAttribute(FPhpVariableAttri);
 
-  FPhpConstAttri := TSynHighlighterAttributes.Create('Php: Constant');  
+  FPhpConstAttri := CreateAttrib('Php: Constant');  
   FPhpConstAttri.Foreground := 33023;
   AddAttribute(FPhpConstAttri);
 
-  FPhpStringAttri := TSynHighlighterAttributes.Create('Php: String'); 
+  FPhpStringAttri := CreateAttrib('Php: String'); 
   FPhpStringAttri.Foreground := clFuchsia;
   AddAttribute(FPhpStringAttri);
 
-  FPhpStringSpecialAttri := TSynHighlighterAttributes.Create('Php: String special'); 
+  FPhpStringSpecialAttri := CreateAttrib('Php: String special'); 
   FPhpStringSpecialAttri.Background := 15395562;
   FPhpStringSpecialAttri.Foreground := clFuchsia;
   AddAttribute(FPhpStringSpecialAttri);
 
-  FPhpCommentAttri := TSynHighlighterAttributes.Create('Php: Comment');  
+  FPhpCommentAttri := CreateAttrib('Php: Comment');  
   FPhpCommentAttri.Foreground := clGreen;
   FPhpCommentAttri.Style := [fsItalic];
   AddAttribute(FPhpCommentAttri);
 
-  FPhpDocCommentAttri := TSynHighlighterAttributes.Create('Php: DocComment'); 
+  FPhpDocCommentAttri := CreateAttrib('Php: DocComment'); 
   FPhpDocCommentAttri.Foreground := clGreen;
   FPhpDocCommentAttri.Style := [fsBold, fsItalic];
   AddAttribute(FPhpDocCommentAttri);
 
-  FPhpSymbolAttri := TSynHighlighterAttributes.Create('Php: Symbol');
+  FPhpSymbolAttri := CreateAttrib('Php: Symbol');
   AddAttribute(FPhpSymbolAttri);
 
-  FPhpNumberAttri := TSynHighlighterAttributes.Create('Php: Number'); 
+  FPhpNumberAttri := CreateAttrib('Php: Number'); 
   FPhpNumberAttri.Foreground := clPurple;
   AddAttribute(FPhpNumberAttri);
 
-  FPhpErrorAttri := TSynHighlighterAttributes.Create('Php: Error'); 
+  FPhpErrorAttri := CreateAttrib('Php: Error'); 
   FPhpErrorAttri.Foreground := clRed;
   FPhpErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FPhpErrorAttri);
@@ -6446,7 +6524,7 @@ begin
   FTokenAttributeTable[stkPhpInlineText] := FPhpInlineTextAttri;
 
   // Global
-  FInactiveAttri := TSynHighlighterAttributes.Create('Global: Inactive');
+  FInactiveAttri := CreateAttrib('Global: Inactive');
   FInactiveAttri.Foreground := clInactiveCaptionText;
   AddAttribute(FInactiveAttri);
 
