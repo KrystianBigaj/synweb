@@ -228,7 +228,7 @@ begin
     Exit;
 
   b2:=SynEdit1.CaretXY;
-  i:=SynWebFindMatchingToken(SynEdit1,TSynWebBase(SynEdit1.Highlighter),
+  i:=SynWebFindMatchingTokenEx(SynEdit1,TSynWebBase(SynEdit1.Highlighter),
     OpenTokens,CloseTokens,TokensID,
     b2,b,id);
 

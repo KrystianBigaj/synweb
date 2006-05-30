@@ -34,17 +34,19 @@ function SynWebFindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
   +2 : Open and close token found (close token position in AMatchtPoint)
 }
 
+function SynWebFindMatchingTokenEx(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
+  const AOpenTokens, ACloseTokens: array of String;
+  const ATokenIDs: array of TSynWebTokenKind; var AStartPoint: TBufferCoord;
+  var AMatchtPoint: TBufferCoord; var ATokenIndex: Integer): Integer;
+
+
 implementation
 
 uses Math;
 
 var
-  fMatchStack: array of TBufferCoord;
-  fMatchStackID: Integer;
-
-// -----------------------------------------------------------------------------
-// -----------------------------------------------------------------------------
-// -----------------------------------------------------------------------------
+  FMatchStack: array of TBufferCoord;
+  FMatchStackID: Integer;
 
 function SynWebFindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
   const AOpenTokens, ACloseTokens: array of String;
@@ -87,17 +89,17 @@ var
         if Token = CloseToken then
         begin
           Dec(Level);
-          if fMatchStackID >= 0 then
-            Dec(fMatchStackID);
+          if FMatchStackID >= 0 then
+            Dec(FMatchStackID);
         end else
           if Token = OpenToken then
           begin
             Inc(Level);
-            Inc(fMatchStackID);
-            if fMatchStackID >= Length(fMatchStack) then
-              SetLength(fMatchStack, Length(fMatchStack) + 32);
-            fMatchStack[fMatchStackID].Line := ScanLine + 1;
-            fMatchStack[fMatchStackID].char := ASynWeb.GetTokenPos + 1;
+            Inc(FMatchStackID);
+            if FMatchStackID >= Length(FMatchStack) then
+              SetLength(FMatchStack, Length(FMatchStack) + 32);
+            FMatchStack[FMatchStackID].Line := ScanLine + 1;
+            FMatchStack[FMatchStackID].char := ASynWeb.GetTokenPos + 1;
           end;
       end;
     ASynWeb.Next;
@@ -114,12 +116,17 @@ begin
   with ASynWeb do
   begin
     Level := -1;
-    while not GetEol and (GetTokenPos < AStartPoint.Char - 1) do
+    Dec(AStartPoint.Char);
+    while not GetEol and (GetTokenPos < AStartPoint.Char) and
+      not (AStartPoint.Char < GetTokenPos + GetTokenLen) do
       Next;
-    if GetTokenPos <> AStartPoint.char - 1 then
+    Inc(AStartPoint.Char);
+    if GetEol then
       Exit;
     TokenID := GetTokenID;
-    for I := 0 to Length(ATokenIDs) - 1 do
+    I := 0;
+    while I < Length(ATokenIDs) do
+    begin
       if TokenID = ATokenIDs[I] then
       begin
         Token := ASynWeb.GetToken;
@@ -134,8 +141,11 @@ begin
             Break;
           end;
       end;
+      Inc(I);
+    end;
     if Result = 0 then
       Exit;
+    AStartPoint.Char := GetTokenPos + 1;
     ATokenIndex := I;
     TokenID := ATokenIDs[I];
     OpenToken := AOpenTokens[I];
@@ -168,22 +178,22 @@ begin
       end;
     end else
     begin
-      if Length(fMatchStack) < 32 then
-        SetLength(fMatchStack, 32);
-      fMatchStackID := -1;
+      if Length(FMatchStack) < 32 then
+        SetLength(FMatchStack, 32);
+      FMatchStackID := -1;
       Level := -1;
       with ASynWeb, ASynEdit do
       begin
         SetRange(TSynEditStringList(Lines).Ranges[ScanLine - 1]);
         SetLine(Lines[ScanLine], +1);
       end;
-      while not GetEol and (GetTokenPos < AStartPoint.char) do
+      while not GetEol and (GetTokenPos < AStartPoint.Char - 1) do
         CheckTokenBack;
 
-      if fMatchStackID > -1 then
+      if FMatchStackID > -1 then
       begin
         Result := -2;
-        AMatchtPoint := fMatchStack[fMatchStackID];
+        AMatchtPoint := FMatchStack[FMatchStackID];
       end else
         while ScanLine > 0 do
         begin
@@ -193,13 +203,13 @@ begin
             SetRange(TSynEditStringList(Lines).Ranges[ScanLine - 1]);
             SetLine(Lines[ScanLine], +1);
           end;
-          fMatchStackID := -1;
+          FMatchStackID := -1;
           while not GetEol do
             CheckTokenBack;
-          if (Level >= 0) and (Level <= fMatchStackID) then
+          if (Level >= 0) and (Level <= FMatchStackID) then
           begin
             Result := -2;
-            AMatchtPoint := fMatchStack[Level];
+            AMatchtPoint := FMatchStack[Level];
             Break;
           end;
         end;
@@ -207,9 +217,20 @@ begin
   end;
 end;
 
- // -----------------------------------------------------------------------------
- // -----------------------------------------------------------------------------
- // -----------------------------------------------------------------------------
+function SynWebFindMatchingTokenEx(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
+  const AOpenTokens, ACloseTokens: array of String;
+  const ATokenIDs: array of TSynWebTokenKind; var AStartPoint: TBufferCoord;
+  var AMatchtPoint: TBufferCoord; var ATokenIndex: Integer): Integer;
+begin
+  Result := SynWebFindMatchingToken(ASynEdit, ASynWeb, AOpenTokens, ACloseTokens,
+    ATokenIDs, AStartPoint, AMatchtPoint, ATokenIndex);
+  if (Result = 0) and (AStartPoint.Char > 1) then
+  begin
+    Dec(AStartPoint.Char);
+    Result := SynWebFindMatchingToken(ASynEdit, ASynWeb, AOpenTokens, ACloseTokens,
+      ATokenIDs, AStartPoint, AMatchtPoint, ATokenIndex);
+  end;
+end;
 
 function SynWebUpdateActiveHighlighter(ASynEdit: TSynEdit;
   ASynWeb: TSynWebBase): TSynHighlighterTypes;
@@ -226,6 +247,6 @@ end;
 initialization
   // None
 finalization
-  SetLength(fMatchStack, 0);
+  SetLength(FMatchStack, 0);
 end.
 
