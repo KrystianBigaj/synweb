@@ -165,7 +165,7 @@ end;
 procedure TForm1.SynEdit1StatusChange(Sender: TObject;
   Changes: TSynStatusChanges);
 var
-  t:TSynHighlighterTypes;
+  t:TSynWebHighlighterTypes;
 begin
   if CheckBox2.Checked then
     if Changes-[scCaretX, scCaretY]<>Changes then

@@ -24,7 +24,7 @@ uses
 {$ENDIF}
 
 function SynWebUpdateActiveHighlighter(ASynEdit: TSynEdit;
-  ASynWeb: TSynWebBase): TSynHighlighterTypes;
+  ASynWeb: TSynWebBase): TSynWebHighlighterTypes;
 
 function SynWebFindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
   const AOpenTokens, ACloseTokens: array of String;
@@ -44,7 +44,6 @@ function SynWebFindMatchingTokenEx(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
   const AOpenTokens, ACloseTokens: array of String;
   const ATokenIDs: array of TSynWebTokenKind; var AStartPoint: TBufferCoord;
   var AMatchtPoint: TBufferCoord; var ATokenIndex: Integer): Integer;
-
 
 implementation
 
@@ -239,7 +238,7 @@ begin
 end;
 
 function SynWebUpdateActiveHighlighter(ASynEdit: TSynEdit;
-  ASynWeb: TSynWebBase): TSynHighlighterTypes;
+  ASynWeb: TSynWebBase): TSynWebHighlighterTypes;
 begin
   with ASynEdit,ASynWeb do
   begin

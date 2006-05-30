@@ -103,9 +103,9 @@ type
     FNextClearBits: Boolean;
     FNextUseNextAH: Boolean;
     FUseNextAH: Boolean;
-    FHighlighterType, FPrevHighlighterType, FNextHighlighterType: TSynHighlighterType;
+    FHighlighterType, FPrevHighlighterType, FNextHighlighterType: TSynWebHighlighterType;
     FHighlighterSW: Boolean;
-    FHighlighterMode: TSynHighlighterMode;
+    FHighlighterMode: TSynWebHighlighterMode;
     FCssMask: Longword;
     FNextProcTable: TSynWebProcTableProc;
     FSYN_ATTR_COMMENT: TSynHighlighterAttributes;
@@ -216,11 +216,11 @@ type
     FInstance: TSynWebInstance;
     FEngine: TSynWebEngine;
     FActiveHighlighter: Boolean;
-    FActiveHighlighters: TSynHighlighterTypes;	
+    FActiveHighlighters: TSynWebHighlighterTypes;	
     FOptions: TSynWebOptionsBase;
     procedure SetupActiveHighlighter; virtual; abstract;
     procedure SetActiveHighlighter(const Value: Boolean);
-    function GetActiveHighlighters: TSynHighlighterTypes;
+    function GetActiveHighlighters: TSynWebHighlighterTypes;
     procedure SetEngine(const Value: TSynWebEngine);
   protected
 {$IFDEF UNISYNEDIT}
@@ -259,7 +259,7 @@ type
     function UpdateActiveHighlighter(ARange: Pointer; ALine: String;
       ACaretX, ACaretY: Integer): Boolean;
 {$ENDIF}
-    property ActiveHighlighters: TSynHighlighterTypes read GetActiveHighlighters;
+    property ActiveHighlighters: TSynWebHighlighterTypes read GetActiveHighlighters;
   published
     property ActiveSwitchHighlighter: Boolean
       read FActiveHighlighter write SetActiveHighlighter;
@@ -628,7 +628,7 @@ type
 
     procedure NullProc;
     procedure NextSetHighlighterType;
-    procedure SetHighlighterType(const AHighlighterType: TSynHighlighterType;
+    procedure SetHighlighterType(const AHighlighterType: TSynWebHighlighterType;
       AClearBits: Boolean; ASetAtNextToken: Boolean; AUseNextAH: Boolean);
     procedure SetupHighlighterType(AClearBits: Boolean = False);
     procedure SetLine(NewValue: String; LineNumber: Integer);
@@ -936,11 +936,11 @@ begin
   if Value then
     SetupActiveHighlighter
   else
-    FActiveHighlighters := [Low(TSynHighlighterType)..High(TSynHighlighterType)];
+    FActiveHighlighters := [Low(TSynWebHighlighterType)..High(TSynWebHighlighterType)];
   DefHighlightChange(Self);
 end;
 
-function TSynWebBase.GetActiveHighlighters: TSynHighlighterTypes;
+function TSynWebBase.GetActiveHighlighters: TSynWebHighlighterTypes;
 begin
   Result := FActiveHighlighters;
 end;
@@ -1144,9 +1144,9 @@ function TSynWebBase.UpdateActiveHighlighter(ARange: Pointer;
   ALine: String; ACaretX, ACaretY: Integer): Boolean;
 {$ENDIF}
 var
-  f: TSynHighlighterTypes;
+  f: TSynWebHighlighterTypes;
   lPos, lLen: Integer;
-  lHinghlighter, ActiveHL: TSynHighlighterType;
+  lHinghlighter, ActiveHL: TSynWebHighlighterType;
 begin
   Result := True;
   if not FActiveHighlighter or not (FInstance.FOptions.FPhpEmbeded or FInstance.FOptions.FCssEmbeded or
@@ -1155,7 +1155,7 @@ begin
   f := FActiveHighlighters;
   Dec(ACaretX);
   SetRange(ARange);
-  lHinghlighter := TSynHighlighterType((FInstance.FRange shr 29) and not ($FFFFFFFF shl 3));
+  lHinghlighter := TSynWebHighlighterType((FInstance.FRange shr 29) and not ($FFFFFFFF shl 3));
   SetLine(ALine, ACaretY);
   lPos := GetTokenPos;
   lLen := GetTokenLen;
@@ -5058,7 +5058,7 @@ end;
 procedure TSynWebEngine.PhpBegin(ATagKind: TSynWebPhpOpenTag);
 begin
   SetHighlighterType(
-    TSynHighlighterType(Longword(FInstance^.FHighlighterType) + Longword(shtPhpInHtml)),
+    TSynWebHighlighterType(Longword(FInstance^.FHighlighterType) + Longword(shtPhpInHtml)),
     False,
     True,
     ATagKind = spotHtml);
@@ -5081,7 +5081,7 @@ begin
   else
   begin
     SetHighlighterType(
-      TSynHighlighterType(Longword(FInstance^.FHighlighterType) - Longword(shtPhpInHtml)),
+      TSynWebHighlighterType(Longword(FInstance^.FHighlighterType) - Longword(shtPhpInHtml)),
       AHtmlTag,
       True, not AHtmlTag);
     if AHtmlTag then
@@ -6096,7 +6096,7 @@ begin
   FInstance^.FHighlighterSW := True;
 end;
 
-procedure TSynWebEngine.SetHighlighterType(const AHighlighterType: TSynHighlighterType;
+procedure TSynWebEngine.SetHighlighterType(const AHighlighterType: TSynWebHighlighterType;
   AClearBits: Boolean; ASetAtNextToken: Boolean; AUseNextAH: Boolean);
 begin
   if ASetAtNextToken then
@@ -6180,7 +6180,7 @@ begin
   FInstance^.FLine := PChar(FInstance^.FLineRef);
   FInstance^.FRun := 0;
   FInstance^.FLineNumber := LineNumber;
-  FInstance^.FHighlighterType := TSynHighlighterType(GetRangeInt(3, 29));
+  FInstance^.FHighlighterType := TSynWebHighlighterType(GetRangeInt(3, 29));
   FInstance^.FPrevHighlighterType := FInstance^.FHighlighterType;
   FInstance^.FHighlighterSW := False;
   SetupHighlighterType;

@@ -18,13 +18,13 @@ uses
 type
   TSynWebHashTable = array[#0..#255] of Longword;
 
-  TSynHighlighterType = (
+  TSynWebHighlighterType = (
     shtHtml, shtCss, shtEs, shtPhpInHtml, shtPhpInCss, shtPhpInEs
     );
 
-  TSynHighlighterTypes = set of TSynHighlighterType;
+  TSynWebHighlighterTypes = set of TSynWebHighlighterType;
 
-  TSynHighlighterMode = (
+  TSynWebHighlighterMode = (
     shmHtml, shmCss, shmEs, shmPhpCli
     );
 
