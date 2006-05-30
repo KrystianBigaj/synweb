@@ -27,17 +27,17 @@ You may retrieve the latest version of this file at the SynEdit home page,
 located at http://SynEdit.SourceForge.net
 
 Known Issues:
-- TSynWebSyn support only single line SetLine (don't use more than one line).
+- TSynWeb support only single line SetLine (don't use more than one line).
 - Doesn't support #13#10, #10 or #13 as new line. Always use #0 as line break.
 - Php: Doesn't support multi-line encapsuled strings in String, only single line:
   eg. "somestring {$a["some array{$b['key'].... <- only single line encapsuled values
 -------------------------------------------------------------------------------}
 {
-@abstract(Provides an web-files (Multi Html/Css/ECAMScript/Php) highlighter for SynEdit
-@author(FlatDev <flatdev@mail.ru>)
+@abstract(Provides an web-files (Multi Html/Css/ECMAScript/Php) highlighter for SynEdit
+@author(FlatDev <krystian.bigaj@gmail.com>)
 @created(2005-05-21)
 @lastmod(2006-02-10)
-The TSynWebSyn unit provides SynEdit with an Multi Html/Css/ECAMScript/Php highlighter.
+The TSynWeb unit provides SynEdit with an Multi Html/Css/ECMAScript/Php highlighter.
 }
 
 // SYNWEB_FIXNULL - fix lines containing #0 character (#0 goes into #32)
@@ -55,15 +55,16 @@ uses
 {$IFDEF SYN_CLX}
   QGraphics,
   QSynEditTypes,
-  QSynEditHighlighter,
+  QSynEditHighlighter,  
+  QSynHighlighterWebData,
 {$ELSE}
   Graphics,
   SynEditTypes,                 
-  SynEditHighlighter,
+  SynEditHighlighter, 
+  SynHighlighterWebData,
 {$ENDIF}
   Classes,
-  SysUtils,
-  SynHighlighterWebData;
+  SysUtils;
 
 // Highlighter -----------------------------------------------------------------
 

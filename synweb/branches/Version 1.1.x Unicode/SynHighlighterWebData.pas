@@ -1,4 +1,8 @@
+{$IFNDEF QSYNHIGHLIGHTERWEBDATA}
 unit SynHighlighterWebData;
+{$ENDIF}
+
+{$I SynEdit.inc}
 
 interface
 

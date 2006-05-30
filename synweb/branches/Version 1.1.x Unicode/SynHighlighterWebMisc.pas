@@ -1,4 +1,8 @@
+{$IFNDEF QSYNHIGHLIGHTERWEBMISC}
 unit SynHighlighterWebMisc;
+{$ENDIF}
+
+{$I SynEdit.inc}
 
 interface
 
@@ -7,7 +11,9 @@ uses
   QSynEdit,
   QSynEditTextBuffer,
   QSynEditTypes,
-  QSynEditHighlighter;
+  QSynEditHighlighter,
+  QSynHighlighterWeb,
+  QSynHighlighterWebData;
 {$ELSE}
   SynEdit,
   SynEditTextBuffer,
