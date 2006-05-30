@@ -227,10 +227,10 @@ begin
   if SynEdit1.SelAvail or (TransientType=ttBefore) then
     Exit;
 
+  b2:=SynEdit1.CaretXY;
   i:=SynWebFindMatchingToken(SynEdit1,TSynWebBase(SynEdit1.Highlighter),
     OpenTokens,CloseTokens,TokensID,
-    SynEdit1.CaretXY,b,id);
-  b2:=SynEdit1.CaretXY;
+    b2,b,id);
 
   case i of
   -2:

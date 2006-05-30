@@ -22,7 +22,7 @@ function SynWebUpdateActiveHighlighter(ASynEdit: TSynEdit;
 
 function SynWebFindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
   const AOpenTokens, ACloseTokens: array of String;
-  const ATokenIDs: array of TSynWebTokenKind; AStartPoint: TBufferCoord;
+  const ATokenIDs: array of TSynWebTokenKind; var AStartPoint: TBufferCoord;
   var AMatchtPoint: TBufferCoord; var ATokenIndex: Integer): Integer;
 
 {
@@ -48,13 +48,13 @@ var
 
 function SynWebFindMatchingToken(ASynEdit: TSynEdit; ASynWeb: TSynWebBase;
   const AOpenTokens, ACloseTokens: array of String;
-  const ATokenIDs: array of TSynWebTokenKind; AStartPoint: TBufferCoord;
+  const ATokenIDs: array of TSynWebTokenKind; var AStartPoint: TBufferCoord;
   var AMatchtPoint: TBufferCoord; var ATokenIndex: Integer): Integer;
 var
   OpenToken, CloseToken, Token: String;
   TokenID: TSynWebTokenKind;
   Level: Integer;
-  I: Integer;
+  ScanLine, I: Integer;
 
   function CheckToken: Boolean;
   begin
@@ -71,7 +71,7 @@ var
     if Level = 0 then
     begin
       SynWebFindMatchingToken := 2;
-      AMatchtPoint.Line := AStartPoint.Line + 1;
+      AMatchtPoint.Line := ScanLine + 1;
       AMatchtPoint.char := ASynWeb.GetTokenPos + 1;
       Result := True;
     end else
@@ -96,7 +96,7 @@ var
             Inc(fMatchStackID);
             if fMatchStackID >= Length(fMatchStack) then
               SetLength(fMatchStack, Length(fMatchStack) + 32);
-            fMatchStack[fMatchStackID].Line := AStartPoint.Line + 1;
+            fMatchStack[fMatchStackID].Line := ScanLine + 1;
             fMatchStack[fMatchStackID].char := ASynWeb.GetTokenPos + 1;
           end;
       end;
@@ -105,19 +105,18 @@ var
 
 begin
   Result := 0;
-  Dec(AStartPoint.char);
-  Dec(AStartPoint.Line);
+  ScanLine := AStartPoint.Line - 1;
   with ASynWeb, ASynEdit do
   begin
-    SetRange(TSynEditStringList(Lines).Ranges[AStartPoint.Line - 1]);
-    SetLine(Lines[AStartPoint.Line], +1);
+    SetRange(TSynEditStringList(Lines).Ranges[ScanLine - 1]);
+    SetLine(Lines[ScanLine], +1);
   end;
   with ASynWeb do
   begin
     Level := -1;
-    while not GetEol and (GetTokenPos < AStartPoint.char) do
+    while not GetEol and (GetTokenPos < AStartPoint.Char - 1) do
       Next;
-    if GetTokenPos <> AStartPoint.char then
+    if GetTokenPos <> AStartPoint.char - 1 then
       Exit;
     TokenID := GetTokenID;
     for I := 0 to Length(ATokenIDs) - 1 do
@@ -151,13 +150,13 @@ begin
         if CheckToken then
           Exit;
       end;
-      Inc(AStartPoint.Line);
-      while AStartPoint.Line < ASynEdit.Lines.Count do
+      Inc(ScanLine);
+      while ScanLine < ASynEdit.Lines.Count do
       begin
         with ASynWeb, ASynEdit do
         begin
-          SetRange(TSynEditStringList(Lines).Ranges[AStartPoint.Line - 1]);
-          SetLine(Lines[AStartPoint.Line], +1);
+          SetRange(TSynEditStringList(Lines).Ranges[ScanLine - 1]);
+          SetLine(Lines[ScanLine], +1);
         end;
         while not GetEol do
         begin
@@ -165,7 +164,7 @@ begin
             Exit;
           Next;
         end;
-        Inc(AStartPoint.Line);
+        Inc(ScanLine);
       end;
     end else
     begin
@@ -175,8 +174,8 @@ begin
       Level := -1;
       with ASynWeb, ASynEdit do
       begin
-        SetRange(TSynEditStringList(Lines).Ranges[AStartPoint.Line - 1]);
-        SetLine(Lines[AStartPoint.Line], +1);
+        SetRange(TSynEditStringList(Lines).Ranges[ScanLine - 1]);
+        SetLine(Lines[ScanLine], +1);
       end;
       while not GetEol and (GetTokenPos < AStartPoint.char) do
         CheckTokenBack;
@@ -186,13 +185,13 @@ begin
         Result := -2;
         AMatchtPoint := fMatchStack[fMatchStackID];
       end else
-        while AStartPoint.Line > 0 do
+        while ScanLine > 0 do
         begin
-          Dec(AStartPoint.Line);
+          Dec(ScanLine);
           with ASynWeb, ASynEdit do
           begin
-            SetRange(TSynEditStringList(Lines).Ranges[AStartPoint.Line - 1]);
-            SetLine(Lines[AStartPoint.Line], +1);
+            SetRange(TSynEditStringList(Lines).Ranges[ScanLine - 1]);
+            SetLine(Lines[ScanLine], +1);
           end;
           fMatchStackID := -1;
           while not GetEol do
