@@ -13,45 +13,18 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object SynEdit1: TSynEdit
     Left = 0
     Top = 0
     Width = 688
-    Height = 41
-    Align = alTop
-    BevelOuter = bvNone
-    TabOrder = 0
-    object Label6: TLabel
-      Left = 0
-      Top = 28
-      Width = 688
-      Height = 13
-      Hint = 
-        'Token matching (works in PHP for ('#39'{'#39', '#39'('#39', '#39'['#39', '#39'match_me_open'#39 +
-        ')->(('#39'}'#39', '#39')'#39', '#39']'#39', '#39'match_me_close'#39')'
-      Align = alBottom
-      Font.Charset = EASTEUROPE_CHARSET
-      Font.Color = clRed
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = True
-    end
-  end
-  object SynEdit1: TSynEdit
-    Left = 0
-    Top = 41
-    Width = 688
-    Height = 412
+    Height = 453
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'Courier New'
     Font.Style = []
-    TabOrder = 1
+    TabOrder = 0
     Gutter.Font.Charset = DEFAULT_CHARSET
     Gutter.Font.Color = clWindowText
     Gutter.Font.Height = -11
@@ -59,10 +32,9 @@ object Form1: TForm1
     Gutter.Font.Style = []
     Highlighter = SynPasSyn1
     Lines.WideStrings = 
-      '( { comment, close brace in comment ) } )'#13#10'if( (A > 10) and // )' +
-      ' ) ()( )(()()'#13#10'  (B <25)) then'#13#10'begin'#13#10'begin end'#13#10'begin end'#13#10'end' +
-      #13#10#13#10#13#10#13#10#13#10'begin // unmached begin-end'#13#10#13#10#13#10#13#10'// end'
-    WordWrap = True
+      'if ( (a > b) and // close brace in comment  ) )))))) ((('#13#10'  (b<4' +
+      ') or (S='#39')( begin end ( '#39' ) ) then'#13#10'begin'#13#10#13#10'try'#13#10#13#10'try'#13#10'except'#13 +
+      #10'end'#13#10#13#10'finally'#13#10#13#10#13#10'end;'#13#10#13#10'end;'#13#10#13#10'TSyn=class;'#13#10'...'#13#10'end;'
     OnPaintTransient = SynEdit1PaintTransient
   end
   object SynPasSyn1: TSynPasSyn

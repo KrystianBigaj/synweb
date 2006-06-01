@@ -8,18 +8,25 @@ uses
   SynHighlighterCpp, SynTokenMatch, StdCtrls, SynEditTypes;
 
 const
-  PasTokens:array[0..2] of TSynTokenMatch=(
+  PasTokens:array[0..11] of TSynTokenMatch=(
     (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(SynHighlighterPas.tkSymbol)),
     (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(SynHighlighterPas.tkSymbol)),
-    (OpenToken: 'begin'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey))
+    (OpenToken: 'begin'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
+    (OpenToken: 'class'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
+    (OpenToken: 'interface'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
+    (OpenToken: 'record'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
+    (OpenToken: 'case'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
+    (OpenToken: 'asm'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
+    (OpenToken: 'try'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
+    (OpenToken: 'implementation'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
+    (OpenToken: 'package'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
+    (OpenToken: 'repat'; CloseToken: 'until'; TokenKind: Integer(SynHighlighterPas.tkKey))
     );
 
 type
   TForm1 = class(TForm)
-    Panel1: TPanel;
     SynEdit1: TSynEdit;
     SynPasSyn1: TSynPasSyn;
-    Label6: TLabel;
     procedure SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
       TransientType: TTransientType);
   private
@@ -59,8 +66,7 @@ begin
 
   Canvas.Brush.Style := bsSolid;
   Canvas.Font.Assign(Editor.Font);
-//  Canvas.Font.Style := Match.TokenAttri.Style;
-  Canvas.Font.Style := [fsBold];
+  Canvas.Font.Style := Match.TokenAttri.Style;
 
   if (TransientType = ttBefore) then   
     Canvas.Brush.Color := Match.TokenAttri.Background
