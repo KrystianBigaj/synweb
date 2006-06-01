@@ -90,7 +90,7 @@ var
   Token: String;
 {$ENDIF}
   TokenKind: Integer;
-  Level, I, J, FMatchStackID, OpenDupLen, CloseDupLen: Integer;
+  Level, DeltaLevel, I, J, FMatchStackID, OpenDupLen, CloseDupLen: Integer;
 
   function IsOpenToken: Boolean;
   var
@@ -276,17 +276,18 @@ begin
       end else
         while APoint.Line > 0 do
         begin
+          DeltaLevel := -Level - 1;
           Dec(APoint.Line);
           SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
           SetLine(Lines[APoint.Line], APoint.Line + 1);
           FMatchStackID := -1;
           while not GetEol do
             CheckTokenBack;
-          if (Level >= 0) and (Level <= FMatchStackID) then
+          if (DeltaLevel <= FMatchStackID) then
           begin
             Result := -2;
-            AMatch.OpenToken := FMatchStack[Level].Token;
-            AMatch.OpenTokenPos := FMatchStack[Level].Pos;
+            AMatch.OpenToken := FMatchStack[FMatchStackID - DeltaLevel].Token;
+            AMatch.OpenTokenPos := FMatchStack[FMatchStackID - DeltaLevel].Pos;
             Exit;
           end;
         end;
