@@ -93,8 +93,8 @@ type
     srsCssComment);
 
 const
-  TSynWebCssRangeState_RulesetBegin = srsCssProp;
-  TSynWebCssRangeState_RulesetEnd = srsCssPropValRect;
+  TSynWebCssRangeStateRulesetBegin = srsCssProp;
+  TSynWebCssRangeStateRulesetEnd = srsCssPropValRect;
 
   TSynWebCssVersionStr: array[Low(TSynWebCssVersion)..High(TSynWebCssVersion)] of String = (
     'Css 1',

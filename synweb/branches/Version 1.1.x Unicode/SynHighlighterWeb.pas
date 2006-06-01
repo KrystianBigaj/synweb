@@ -2443,7 +2443,7 @@ end;
 procedure TSynWebEngine.CssUpdateBg;
 begin
   if TSynWebCssRangeState(GetRangeInt(4, 13)) in
-    [TSynWebCssRangeState_RulesetBegin..TSynWebCssRangeState_RulesetEnd] then
+    [TSynWebCssRangeStateRulesetBegin..TSynWebCssRangeStateRulesetEnd] then
     FInstance^.FSYN_ATTR_WHITESPACE := FCssRulesetWhitespaceAttri
   else
     FInstance^.FSYN_ATTR_WHITESPACE := FCssWhitespaceAttri;
@@ -2464,10 +2464,10 @@ begin
     SetRangeBit(12, True)
   else
   begin
-    if not (ARange in [TSynWebCssRangeState_RulesetBegin..
-      TSynWebCssRangeState_RulesetEnd]) and
+    if not (ARange in [TSynWebCssRangeStateRulesetBegin..
+      TSynWebCssRangeStateRulesetEnd]) and
       (TSynWebCssRangeState(GetRangeInt(4, 13)) in
-      [TSynWebCssRangeState_RulesetBegin..TSynWebCssRangeState_RulesetEnd]) then
+      [TSynWebCssRangeStateRulesetBegin..TSynWebCssRangeStateRulesetEnd]) then
     begin
       SetRangeInt(4, 13, Longword(ARange));
       FInstance^.FNextProcTable := CssNextBg;
@@ -6222,22 +6222,23 @@ begin
   FPhpHereDocList := TStringList.Create;
   with FPhpHereDocList do
   begin
-    Add('EOF');
-    Add('eof');
-    Add('EOT');
-    Add('eot');
-    Add('EOL');
-    Add('eol');
-    Add('Html');
-    Add('html');
-    Add('CONTENT');
-    Add('content');
-    Add('HEREDOC');
-    Add('heredoc');
-    Add('OUT');
-    Add('out');
-    Add('String');
-    Add('String');
+    Text :=
+      'EOF'#13#10+
+      'eof'#13#10+
+      'EOT'#13#10+
+      'eot'#13#10+
+      'EOL'#13#10+
+      'eol'#13#10+
+      'Html'#13#10+
+      'html'#13#10+
+      'CONTENT'#13#10+
+      'content'#13#10+
+      'HEREDOC'#13#10+
+      'heredoc'#13#10+
+      'OUT'#13#10+
+      'out'#13#10+
+      'string'#13#10+
+      'STRING';
     CaseSensitive := True;
     Sorted := True;
   end;

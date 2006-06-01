@@ -17,9 +17,9 @@ object Form1: TForm1
   TextHeight = 13
   object SynEdit1: TSynEdit
     Left = 0
-    Top = 57
+    Top = 45
     Width = 688
-    Height = 396
+    Height = 408
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -42,13 +42,13 @@ object Form1: TForm1
     Left = 0
     Top = 0
     Width = 688
-    Height = 57
+    Height = 45
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 1
     DesignSize = (
       688
-      57)
+      45)
     object Label1: TLabel
       Left = 4
       Top = 24
@@ -90,24 +90,6 @@ object Form1: TForm1
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
-    end
-    object Label6: TLabel
-      Left = 1
-      Top = 43
-      Width = 686
-      Height = 13
-      Hint = 
-        'Token matching (works in PHP for ('#39'{'#39', '#39'('#39', '#39'['#39', '#39'match_me_open'#39 +
-        ')->(('#39'}'#39', '#39')'#39', '#39']'#39', '#39'match_me_close'#39')'
-      Align = alBottom
-      Font.Charset = EASTEUROPE_CHARSET
-      Font.Color = clRed
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = True
     end
     object CheckBox1: TCheckBox
       Left = 4
@@ -216,28 +198,6 @@ object Form1: TForm1
       TabOrder = 9
       OnClick = CheckBox4Click
     end
-  end
-  object Panel2: TPanel
-    Left = 85
-    Top = 105
-    Width = 12
-    Height = 2
-    BevelOuter = bvNone
-    Color = clRed
-    ParentShowHint = False
-    ShowHint = True
-    TabOrder = 2
-  end
-  object Panel3: TPanel
-    Left = 103
-    Top = 105
-    Width = 12
-    Height = 2
-    BevelOuter = bvNone
-    Color = clRed
-    ParentShowHint = False
-    ShowHint = True
-    TabOrder = 3
   end
   object SynWebEngine1: TSynWebEngine
     Left = 48

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, SynEdit, SynHighlighterWeb, StdCtrls, SynEditHighlighter,
-  ExtCtrls, SynEditOptionsDialog, SynEditExport, SynExportHTML,
+  ExtCtrls, SynEditOptionsDialog, SynEditExport, SynExportHTML, SynTokenMatch,
   SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes, SynUnicode;
 
 type
@@ -22,7 +22,6 @@ type
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
-    Label6: TLabel;
     CheckBox1: TCheckBox;
     ComboBox1: TComboBox;
     ComboBox2: TComboBox;
@@ -33,8 +32,6 @@ type
     ComboBox4: TComboBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
-    Panel2: TPanel;
-    Panel3: TPanel;
     SynExporterHTML1: TSynExporterHTML;
     SynEditOptionsDialog1: TSynEditOptionsDialog;
     procedure FormCreate(Sender: TObject);
@@ -186,98 +183,56 @@ end;
 procedure TForm1.SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
   TransientType: TTransientType);
 const
-  OpenTokens:array[0..3] of String=('{', '(', '[', 'match_me_open');
-  CloseTokens:array[0..3] of String=('}', ')', ']', 'match_me_close');
-  TokensID:array[0..3] of TSynWebTokenKind=(stkPhpSymbol,stkPhpSymbol,stkPhpSymbol, stkPhpIdentifier);
+  PasTokens:array[0..2] of TSynTokenMatch=(
+    (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(stkPhpSymbol)),
+    (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(stkPhpSymbol)),
+    (OpenToken: '{'; CloseToken: '}'; TokenKind: Integer(stkPhpSymbol)));
 var
-  B,b2:TBufferCoord;
-  i,id:Integer;
-  t1,t2:String;
+  Editor : TSynEdit;  
+  Pix: TPoint;      
+  Match: TSynTokenMatches;
+  I: Integer;
 
-  procedure DrawOpen;
-  var
-    p:TPoint;
+  function CharToPixels(P: TBufferCoord): TPoint;
   begin
-    p:=SynEdit1.RowColumnToPixels(SynEdit1.BufferToDisplayPos(b2));
-    Panel2.Left:=SynEdit1.Left+p.X+2;
-    Panel2.Top:=SynEdit1.Top+p.Y+SynEdit1.LineHeight;
-    Panel2.Width:=Length(t1)*SynEdit1.CharWidth;
-    Panel2.Visible:=True;
+    Result:=Editor.RowColumnToPixels(Editor.BufferToDisplayPos(P));
   end;
 
-  procedure DrawClose;  
-  var
-    p:TPoint;
-  begin
-    p:=SynEdit1.RowColumnToPixels(SynEdit1.BufferToDisplayPos(b));
-    Panel3.Left:=SynEdit1.Left+p.X+2;
-    Panel3.Top:=SynEdit1.Top+p.Y+SynEdit1.LineHeight;
-    Panel3.Width:=Length(t2)*SynEdit1.CharWidth;
-    Panel3.Visible:=True;
-  end;
-
-  procedure DrawOpenClose;
-  begin
-    DrawOpen;
-    DrawClose;
-  end;
-
-begin
-  Caption:='';
-  if SynEdit1.SelAvail or (TransientType=ttBefore) then
+begin                  
+  Editor := TSynEdit(Sender);
+  if Editor.SelAvail then
     Exit;
 
-  b2:=SynEdit1.CaretXY;
-  i:=SynWebFindMatchingTokenEx(SynEdit1,TSynWebBase(SynEdit1.Highlighter),
-    OpenTokens,CloseTokens,TokensID,
-    b2,b,id);
+  I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, PasTokens, Match);
+  if I = 0 then
+    Exit;
 
-  case i of
-  -2:
-      begin
-        Label6.Caption:=
-          Format('Open token ("%s") found at [%d, %d].'+
-                 'Close token ("%s") found at [%d, %d].',
-                 [OpenTokens[id],b.Line,b.Char,CloseTokens[id],b2.Line,b2.Char]);      
-        t1:=CloseTokens[id];
-        t2:=OpenTokens[id];
-        DrawOpenClose;
-      end;
-  -1:
-      begin
-        Label6.Caption:=
-          Format('Open token ("%s") found at [%d, %d].'+
-                 'Close token ("%s") didn''t match!',
-                 [OpenTokens[id],b.Line,b.Char,CloseTokens[id]]);    
-        t1:=CloseTokens[id];
-        DrawOpen;
-        Panel3.Visible:=False;
-      end;
-   0: begin
-        Panel2.Visible:=False;
-        Panel3.Visible:=False;
-        Label6.Caption:='Token match not found!';
-      end;
-   1:
-      begin
-        Label6.Caption:=
-          Format('Open token ("%s") found at [%d, %d].'+
-                 'Close token ("%s") didn''t match!',
-                 [OpenTokens[id],b2.Line,b2.Char,CloseTokens[id]]);
-        t1:=OpenTokens[id];
-        DrawOpen;
-        Panel3.Visible:=False;
-      end;
-   2:
-      begin
-        Label6.Caption:=
-          Format('Open token ("%s") found at [%d, %d].'+
-                 'Close token ("%s") found at [%d, %d].',
-                 [OpenTokens[id],b2.Line,b2.Char,CloseTokens[id],b.Line,b.Char]);
-        t1:=OpenTokens[id];   
-        t2:=CloseTokens[id];
-        DrawOpenClose;
-      end;
+  Canvas.Brush.Style := bsSolid;
+  Canvas.Font.Assign(Editor.Font);
+  Canvas.Font.Style := Match.TokenAttri.Style;
+
+  if (TransientType = ttBefore) then   
+    Canvas.Brush.Color := Match.TokenAttri.Background
+  else
+    if Abs(I) = 2 then
+      Canvas.Brush.Color := clAqua
+    else                          
+      Canvas.Brush.Color := clYellow;
+
+  if Canvas.Font.Color = clNone then
+    Canvas.Font.Color := Editor.Font.Color;
+  if Canvas.Brush.Color = clNone then
+    Canvas.Brush.Color := Editor.Color;
+
+  if I <> -1 then
+  begin
+    Pix := CharToPixels(Match.OpenTokenPos);
+    Canvas.TextOut(Pix.X, Pix.Y, Match.OpenToken);
+  end;
+  if I <> 1 then
+  begin
+    Pix := CharToPixels(Match.CloseTokenPos);
+    Canvas.TextOut(Pix.X, Pix.Y, Match.CloseToken);
   end;
 end;
 
