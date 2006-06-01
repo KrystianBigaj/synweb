@@ -33,8 +33,9 @@ object Form1: TForm1
     Highlighter = SynPasSyn1
     Lines.WideStrings = 
       'if ( (a > b) and // close brace in comment  ) )))))) ((('#13#10'  (b<4' +
-      ') or (S='#39')( begin end ( '#39' ) ) then'#13#10'begin'#13#10#13#10'try'#13#10#13#10'try'#13#10'except'#13 +
-      #10'end'#13#10#13#10'finally'#13#10#13#10#13#10'end;'#13#10#13#10'end;'#13#10#13#10'TSyn=class;'#13#10'...'#13#10'end;'
+      ') or (S='#39')( begin end ( '#39' ) ) then'#13#10'begin'#13#10'  try'#13#10'    try'#13#10'    e' +
+      'xcept'#13#10'    end'#13#10'  finally'#13#10'  end;'#13#10'end;'#13#10#13#10'TSyn=class;'#13#10'...'#13#10'end' +
+      ';'
     OnPaintTransient = SynEdit1PaintTransient
   end
   object SynPasSyn1: TSynPasSyn
