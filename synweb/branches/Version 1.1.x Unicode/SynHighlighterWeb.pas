@@ -6229,7 +6229,7 @@ begin
       'eot'#13#10+
       'EOL'#13#10+
       'eol'#13#10+
-      'Html'#13#10+
+      'HTML'#13#10+
       'html'#13#10+
       'CONTENT'#13#10+
       'content'#13#10+
@@ -6237,8 +6237,8 @@ begin
       'heredoc'#13#10+
       'OUT'#13#10+
       'out'#13#10+
-      'string'#13#10+
-      'STRING';
+      'STRING'#13#10+
+      'string';
     CaseSensitive := True;
     Sorted := True;
   end;
