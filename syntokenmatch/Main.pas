@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, SynEdit, SynHighlighterPas, SynEditHighlighter,
-  SynHighlighterCpp, SynTokenMatch, StdCtrls, SynEditTypes;
+  SynHighlighterCpp, SynTokenMatch, StdCtrls, SynEditTypes,
+  SynHighlighterURI, SynURIOpener;
 
 const
   PasTokens:array[0..11] of TSynTokenMatch=(
@@ -59,7 +60,8 @@ var
 begin
   if FUpdating then
   begin
-    FUpdating := False;
+    if TransientType = ttAfter then
+      FUpdating := False;
     Exit;
   end;
   Editor := TSynEdit(Sender);
@@ -69,14 +71,11 @@ begin
     if I = 0 then
       Exit;
     FUpdating := True;
-    case Abs(I) of
-    2:
-      Editor.InvalidateLines(Match.OpenTokenPos.Line, Match.CloseTokenPos.Line);
-    1:
+    if I <> -1 then
       Editor.InvalidateLines(Match.OpenTokenPos.Line, Match.OpenTokenPos.Line);
-    -1:
+    if I <> 1 then
       Editor.InvalidateLines(Match.CloseTokenPos.Line, Match.CloseTokenPos.Line);
-    end;
+    Application.ProcessMessages;
     Exit;
   end;
   if Editor.SelAvail then
@@ -85,8 +84,8 @@ begin
   if I = 0 then
     Exit;
   Canvas.Brush.Style := bsSolid;
+  Canvas.Font.Color := Editor.Font.Color;                             
   Canvas.Font.Style := Match.TokenAttri.Style;   // doesn't work, but why ????
-  Canvas.Font.Color := Editor.Font.Color;
   if Abs(I) = 2 then
     Canvas.Brush.Color := clAqua // matched color
   else
