@@ -5,8 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, SynEdit, SynHighlighterPas, SynEditHighlighter,
-  SynHighlighterCpp, SynTokenMatch, StdCtrls, SynEditTypes,
-  SynHighlighterURI, SynURIOpener;
+  SynHighlighterCpp, SynTokenMatch, StdCtrls, SynEditTypes;
 
 const
   PasTokens:array[0..11] of TSynTokenMatch=(
@@ -21,7 +20,7 @@ const
     (OpenToken: 'try'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
     (OpenToken: 'implementation'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
     (OpenToken: 'package'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
-    (OpenToken: 'repat'; CloseToken: 'until'; TokenKind: Integer(SynHighlighterPas.tkKey))
+    (OpenToken: 'repeat'; CloseToken: 'until'; TokenKind: Integer(SynHighlighterPas.tkKey))
     );
 
 type
@@ -48,7 +47,7 @@ procedure TForm1.SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
   TransientType: TTransientType);
 var
   Editor : TSynEdit;  
-  Pix: TPoint;      
+  PixOpen, PixClose: TPoint;      
   Match: TSynTokenMatches;
   I: Integer;
 
@@ -79,9 +78,7 @@ begin
   I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, PasTokens, Match);
   if I = 0 then
     Exit;
-  Canvas.Brush.Style := bsSolid;
-  Canvas.Font.Color := Editor.Font.Color;                             
-  Canvas.Font.Style := Match.TokenAttri.Style;   // doesn't work, but why ????
+  Canvas.Brush.Style := bsSolid;                           
   if Abs(I) = 2 then
     Canvas.Brush.Color := clAqua // matched color
   else
@@ -89,11 +86,15 @@ begin
   if I <> -1 then
   begin
     Pix := CharToPixels(Match.OpenTokenPos);
+    Canvas.Font.Color := Editor.Font.Color;
+    Canvas.Font.Style := Match.TokenAttri.Style;
     Canvas.TextOut(Pix.X, Pix.Y, Match.OpenToken);
   end;
   if I <> 1 then
   begin
-    Pix := CharToPixels(Match.CloseTokenPos);   
+    Pix := CharToPixels(Match.CloseTokenPos);    
+    Canvas.Font.Color := Editor.Font.Color;
+    Canvas.Font.Style := Match.TokenAttri.Style;  
     Canvas.TextOut(Pix.X, Pix.Y, Match.CloseToken);
   end;
 end;
