@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 192
-  Top = 129
-  Width = 696
-  Height = 480
+  Left = 209
+  Top = 131
+  Width = 682
+  Height = 499
   Caption = 'Form1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,9 +18,10 @@ object Form1: TForm1
   object SynEdit1: TSynEdit
     Left = 0
     Top = 45
-    Width = 688
-    Height = 408
+    Width = 674
+    Height = 427
     Align = alClient
+    ActiveLineColor = 15724527
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -41,13 +42,13 @@ object Form1: TForm1
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 688
+    Width = 674
     Height = 45
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 1
     DesignSize = (
-      688
+      674
       45)
     object Label1: TLabel
       Left = 4
@@ -71,7 +72,7 @@ object Form1: TForm1
       Caption = 'PHPVersion'
     end
     object Label4: TLabel
-      Left = 566
+      Left = 552
       Top = 4
       Width = 83
       Height = 13
@@ -132,7 +133,7 @@ object Form1: TForm1
       OnClick = Button1Click
     end
     object Button2: TButton
-      Left = 662
+      Left = 648
       Top = 2
       Width = 25
       Height = 17
@@ -161,7 +162,7 @@ object Form1: TForm1
       OnChange = ComboBox3Change
     end
     object ComboBox4: TComboBox
-      Left = 522
+      Left = 508
       Top = 20
       Width = 165
       Height = 21
