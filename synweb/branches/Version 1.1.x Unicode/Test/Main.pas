@@ -53,7 +53,7 @@ type
     procedure SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
       AFiles: TWideStrings);
   private
-    { Private declarations }
+    FPaintUpdating: Boolean;
   public
     { Public declarations }
   end;
@@ -72,6 +72,7 @@ var
   j:TSynWebCssVersion;
   k:TSynWebPhpVersion;
 begin
+  FPaintUpdating := False;
   SynEdit1.Lines.SaveUnicode:=True;
   for i:=Low(TSynWebHtmlVersion) to High(TSynWebHtmlVersion) do
     ComboBox1.Items.Add(TSynWebHtmlVersionStr[i]);
@@ -192,76 +193,49 @@ var
   Pix: TPoint;      
   Match: TSynTokenMatches;
   I: Integer;
-  FGColor, BGColor: TColor;
 
   function CharToPixels(P: TBufferCoord): TPoint;
   begin
     Result:=Editor.RowColumnToPixels(Editor.BufferToDisplayPos(P));
   end;
 
-  procedure UpdateColors(ALine: Integer); 
-  var
-    iAttri: TSynHighlighterAttributes;
-    b: Boolean;
-  begin
-    BGColor := clNone;
-    FGColor := clNone;
-    if (TransientType = ttBefore) then
-      with Editor do
-      begin       
-        FGColor := Match.TokenAttri.Foreground;
-        if (ActiveLineColor <> clNone) and (CaretY = ALine) then
-          BGColor := ActiveLineColor
-        else
-        begin
-          BGColor := Match.TokenAttri.Background;
-          if BGColor = clNone then
-          begin
-            iAttri := Highlighter.WhitespaceAttribute;
-            if (iAttri <> nil) and (iAttri.Background <> clNone) then
-              BGColor := iAttri.Background;
-          end;
-        end;
-        if Assigned(Editor.OnSpecialLineColors) then
-          Editor.OnSpecialLineColors(Editor, ALine, b, FGColor, BGColor);
-      end
-    else
-    begin
-      FGColor := Editor.Font.Color;
-      if Abs(I) = 2 then
-        BGColor := clAqua // matched color
-      else
-        BGColor := clYellow; // unmatched color
-    end;
-
-    if BGColor = clNone then
-      BGColor := Editor.Color;
-    if FGColor = clNone then
-      FGColor := Editor.Font.Color;
-
-    Canvas.Brush.Color := BGColor;
-    Canvas.Font.Color :=  FGColor;
-  end;
-
-begin                  
+begin
+  if FPaintUpdating then
+    Exit;
   Editor := TSynEdit(Sender);
+  if TransientType = ttBefore then
+  begin
+    I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, PasTokens, Match);
+    if I = 0 then
+      Exit;
+    FPaintUpdating := True;
+    if I <> -1 then
+      Editor.InvalidateLines(Match.OpenTokenPos.Line, Match.OpenTokenPos.Line);
+    if I <> 1 then
+      Editor.InvalidateLines(Match.CloseTokenPos.Line, Match.CloseTokenPos.Line);
+    FPaintUpdating := False;
+    Exit;
+  end;
   if Editor.SelAvail then
     Exit;
   I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, PasTokens, Match);
   if I = 0 then
-    Exit;                              
+    Exit;
   Canvas.Brush.Style := bsSolid;
-  Canvas.Font.Style := Match.TokenAttri.Style;
+  Canvas.Font.Color := Editor.Font.Color;                             
+  Canvas.Font.Style := Match.TokenAttri.Style;   // doesn't work, but why ????
+  if Abs(I) = 2 then
+    Canvas.Brush.Color := clAqua // matched color
+  else
+    Canvas.Brush.Color := clYellow; // unmatched color
   if I <> -1 then
   begin
     Pix := CharToPixels(Match.OpenTokenPos);
-    UpdateColors(Match.OpenTokenPos.Line);
     Canvas.TextOut(Pix.X, Pix.Y, Match.OpenToken);
   end;
   if I <> 1 then
   begin
     Pix := CharToPixels(Match.CloseTokenPos);   
-    UpdateColors(Match.CloseTokenPos.Line);
     Canvas.TextOut(Pix.X, Pix.Y, Match.CloseToken);
   end;
 end;
