@@ -33,8 +33,8 @@ type
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
-  public
-    FUpdating: Boolean;
+  public      
+    FPaintUpdating: Boolean;
   end;
 
 var
@@ -58,24 +58,20 @@ var
   end;
 
 begin
-  if FUpdating then
-  begin
-    if TransientType = ttAfter then
-      FUpdating := False;
+  if FPaintUpdating then
     Exit;
-  end;
   Editor := TSynEdit(Sender);
   if TransientType = ttBefore then
   begin
     I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, PasTokens, Match);
     if I = 0 then
       Exit;
-    FUpdating := True;
+    FPaintUpdating := True;
     if I <> -1 then
       Editor.InvalidateLines(Match.OpenTokenPos.Line, Match.OpenTokenPos.Line);
     if I <> 1 then
       Editor.InvalidateLines(Match.CloseTokenPos.Line, Match.CloseTokenPos.Line);
-    Application.ProcessMessages;
+    FPaintUpdating := False;
     Exit;
   end;
   if Editor.SelAvail then
@@ -104,7 +100,7 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  FUpdating := False;
+  FPaintUpdating := False;
 end;
 
 end.
