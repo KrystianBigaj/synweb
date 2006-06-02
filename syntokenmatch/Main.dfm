@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 318
+  Left = 317
   Top = 163
-  Width = 696
+  Width = 697
   Height = 480
   Caption = 'Form1'
   Color = clBtnFace
@@ -11,12 +11,13 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object SynEdit1: TSynEdit
     Left = 0
     Top = 0
-    Width = 688
+    Width = 689
     Height = 453
     Align = alClient
     ActiveLineColor = clInfoBk
