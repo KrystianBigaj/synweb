@@ -49,46 +49,76 @@ var
   Pix: TPoint;      
   Match: TSynTokenMatches;
   I: Integer;
+  FGColor, BGColor: TColor;
 
   function CharToPixels(P: TBufferCoord): TPoint;
   begin
     Result:=Editor.RowColumnToPixels(Editor.BufferToDisplayPos(P));
   end;
 
+  procedure UpdateColors(ALine: Integer); 
+  var
+    iAttri: TSynHighlighterAttributes;
+    b: Boolean;
+  begin
+    BGColor := clNone;
+    FGColor := clNone;
+    if (TransientType = ttBefore) then
+      with Editor do
+      begin       
+        FGColor := Match.TokenAttri.Foreground;
+        if (ActiveLineColor <> clNone) and (CaretY = ALine) then
+          BGColor := ActiveLineColor
+        else
+        begin
+          BGColor := Match.TokenAttri.Background;
+          if BGColor = clNone then
+          begin
+            iAttri := Highlighter.WhitespaceAttribute;
+            if (iAttri <> nil) and (iAttri.Background <> clNone) then
+              BGColor := iAttri.Background;
+          end;
+        end;
+        if Assigned(Editor.OnSpecialLineColors) then
+          Editor.OnSpecialLineColors(Editor, ALine, b, FGColor, BGColor);
+      end
+    else
+    begin
+      FGColor := Editor.Font.Color;
+      if Abs(I) = 2 then
+        BGColor := clAqua // matched color
+      else
+        BGColor := clYellow; // unmatched color
+    end;
+
+    if BGColor = clNone then
+      BGColor := Editor.Color;
+    if FGColor = clNone then
+      FGColor := Editor.Font.Color;
+
+    Canvas.Brush.Color := BGColor;
+    Canvas.Font.Color :=  FGColor;
+  end;
+
 begin                  
   Editor := TSynEdit(Sender);
   if Editor.SelAvail then
     Exit;
-
   I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, PasTokens, Match);
   if I = 0 then
-    Exit;
-
+    Exit;                              
   Canvas.Brush.Style := bsSolid;
-  Canvas.Font.Assign(Editor.Font);
   Canvas.Font.Style := Match.TokenAttri.Style;
-
-  if (TransientType = ttBefore) then   
-    Canvas.Brush.Color := Match.TokenAttri.Background
-  else
-    if Abs(I) = 2 then
-      Canvas.Brush.Color := clAqua
-    else                          
-      Canvas.Brush.Color := clYellow;
-
-  if Canvas.Font.Color = clNone then
-    Canvas.Font.Color := Editor.Font.Color;
-  if Canvas.Brush.Color = clNone then
-    Canvas.Brush.Color := Editor.Color;
-
   if I <> -1 then
   begin
     Pix := CharToPixels(Match.OpenTokenPos);
+    UpdateColors(Match.OpenTokenPos.Line);
     Canvas.TextOut(Pix.X, Pix.Y, Match.OpenToken);
   end;
   if I <> 1 then
   begin
-    Pix := CharToPixels(Match.CloseTokenPos);
+    Pix := CharToPixels(Match.CloseTokenPos);   
+    UpdateColors(Match.CloseTokenPos.Line);
     Canvas.TextOut(Pix.X, Pix.Y, Match.CloseToken);
   end;
 end;

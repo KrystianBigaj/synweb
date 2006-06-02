@@ -19,6 +19,7 @@ object Form1: TForm1
     Width = 688
     Height = 453
     Align = alClient
+    ActiveLineColor = clInfoBk
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
