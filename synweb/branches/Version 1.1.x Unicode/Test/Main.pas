@@ -221,9 +221,7 @@ begin
   I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, PasTokens, Match);
   if I = 0 then
     Exit;
-  Canvas.Brush.Style := bsSolid;
-  Canvas.Font.Color := Editor.Font.Color;                             
-  Canvas.Font.Style := Match.TokenAttri.Style;   // doesn't work, but why ????
+  Canvas.Brush.Style := bsSolid;                           
   if Abs(I) = 2 then
     Canvas.Brush.Color := clAqua // matched color
   else
@@ -231,11 +229,15 @@ begin
   if I <> -1 then
   begin
     Pix := CharToPixels(Match.OpenTokenPos);
+    Canvas.Font.Color := Editor.Font.Color;
+    Canvas.Font.Style := Match.TokenAttri.Style;
     Canvas.TextOut(Pix.X, Pix.Y, Match.OpenToken);
   end;
   if I <> 1 then
   begin
-    Pix := CharToPixels(Match.CloseTokenPos);   
+    Pix := CharToPixels(Match.CloseTokenPos);    
+    Canvas.Font.Color := Editor.Font.Color;
+    Canvas.Font.Style := Match.TokenAttri.Style;  
     Canvas.TextOut(Pix.X, Pix.Y, Match.CloseToken);
   end;
 end;
