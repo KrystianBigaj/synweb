@@ -182,8 +182,11 @@ begin
   Dec(APoint.Char);
   with ASynEdit, ASynEdit.Highlighter do
   begin
-    SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
-    SetLine(Lines[APoint.Line], APoint.Line + 1);
+    if APoint.Line = 0 then
+      ResetRange
+    else
+      SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
+    SetLine(Lines[APoint.Line], APoint.Line);
     while not GetEol and (APoint.Char >= GetTokenPos + Length(GetToken)) do
       Next;
     if GetEol then
@@ -252,7 +255,7 @@ begin
       Inc(APoint.Line);
       while APoint.Line < ASynEdit.Lines.Count do
       begin
-        SetLine(Lines[APoint.Line], APoint.Line + 1);
+        SetLine(Lines[APoint.Line], APoint.Line);
         while not GetEol do
           if CheckToken then
             Exit;
@@ -264,8 +267,11 @@ begin
         SetLength(FMatchStack, 32);
       FMatchStackID := -1;
       Level := -1;
-      SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
-      SetLine(Lines[APoint.Line], APoint.Line + 1);
+      if APoint.Line = 0 then
+        ResetRange
+      else
+        SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
+      SetLine(Lines[APoint.Line], APoint.Line);
       while not GetEol and (GetTokenPos < AMatch.CloseTokenPos.Char -1) do
         CheckTokenBack;
       if FMatchStackID > -1 then
@@ -278,8 +284,11 @@ begin
         begin
           DeltaLevel := -Level - 1;
           Dec(APoint.Line);
-          SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
-          SetLine(Lines[APoint.Line], APoint.Line + 1);
+          if APoint.Line = 0 then
+            ResetRange
+          else
+            SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
+          SetLine(Lines[APoint.Line], APoint.Line);
           FMatchStackID := -1;
           while not GetEol do
             CheckTokenBack;

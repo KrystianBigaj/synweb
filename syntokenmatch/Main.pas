@@ -8,7 +8,7 @@ uses
   SynHighlighterCpp, SynTokenMatch, StdCtrls, SynEditTypes;
 
 const
-  PasTokens:array[0..11] of TSynTokenMatch=(
+  PasTokens:array[0..14] of TSynTokenMatch=(
     (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(SynHighlighterPas.tkSymbol)),
     (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(SynHighlighterPas.tkSymbol)),
     (OpenToken: 'begin'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
@@ -20,7 +20,10 @@ const
     (OpenToken: 'try'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
     (OpenToken: 'implementation'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
     (OpenToken: 'package'; CloseToken: 'end'; TokenKind: Integer(SynHighlighterPas.tkKey)),
-    (OpenToken: 'repeat'; CloseToken: 'until'; TokenKind: Integer(SynHighlighterPas.tkKey))
+    (OpenToken: 'for'; CloseToken: 'do'; TokenKind: Integer(SynHighlighterPas.tkKey)),
+    (OpenToken: 'repeat'; CloseToken: 'until'; TokenKind: Integer(SynHighlighterPas.tkKey)),
+    (OpenToken: 'while'; CloseToken: 'do'; TokenKind: Integer(SynHighlighterPas.tkKey)),
+    (OpenToken: 'if'; CloseToken: 'then'; TokenKind: Integer(SynHighlighterPas.tkKey))
     );
 
 type
@@ -47,7 +50,7 @@ procedure TForm1.SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
   TransientType: TTransientType);
 var
   Editor : TSynEdit;  
-  PixOpen, PixClose: TPoint;      
+  Pix: TPoint;      
   Match: TSynTokenMatches;
   I: Integer;
 
