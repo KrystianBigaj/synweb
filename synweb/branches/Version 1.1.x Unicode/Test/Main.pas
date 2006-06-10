@@ -184,7 +184,13 @@ end;
 procedure TForm1.SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
   TransientType: TTransientType);
 const
-  PasTokens:array[0..2] of TSynTokenMatch=(
+  Tokens:array[0..8] of TSynTokenMatch=(
+    (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(stkCssSymbol)),
+    (OpenToken: '{'; CloseToken: '}'; TokenKind: Integer(stkCssSymbol)),
+    (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(stkCssSymbol)),
+    (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(stkEsSymbol)),
+    (OpenToken: '{'; CloseToken: '}'; TokenKind: Integer(stkEsSymbol)),
+    (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(stkEsSymbol)),
     (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(stkPhpSymbol)),
     (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(stkPhpSymbol)),
     (OpenToken: '{'; CloseToken: '}'; TokenKind: Integer(stkPhpSymbol)));
@@ -205,7 +211,7 @@ begin
   Editor := TSynEdit(Sender);
   if TransientType = ttBefore then
   begin
-    I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, PasTokens, Match);
+    I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, Tokens, Match);
     if I = 0 then
       Exit;
     FPaintUpdating := True;
@@ -218,7 +224,7 @@ begin
   end;
   if Editor.SelAvail then
     Exit;
-  I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, PasTokens, Match);
+  I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, Tokens, Match);
   if I = 0 then
     Exit;
   Canvas.Brush.Style := bsSolid;                           
