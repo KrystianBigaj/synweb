@@ -2925,6 +2925,12 @@ function TSynWebEngine.CssCustomStringProc(AShl: Longword; ADo: Boolean): Boolea
 begin
   if CssCheckNull(ADo) then
   begin
+    if (FInstance^.FOptions.FCssVersion > scvCss1) and (FInstance^.FRun > 0) and
+      (FInstance^.FLine[FInstance^.FRun - 1] = '\') then
+    begin
+      Result := False;
+      Exit;
+    end;
     if not ADo then
       FInstance^.FTokenID := stkCssError;
     Result := True;
