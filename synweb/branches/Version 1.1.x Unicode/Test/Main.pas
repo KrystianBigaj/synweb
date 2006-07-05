@@ -34,6 +34,7 @@ type
     CheckBox4: TCheckBox;
     SynExporterHTML1: TSynExporterHTML;
     SynEditOptionsDialog1: TSynEditOptionsDialog;
+    Button3: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -52,6 +53,7 @@ type
     procedure CheckBox2Click(Sender: TObject);
     procedure SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
       AFiles: TWideStrings);
+    procedure Button3Click(Sender: TObject);
   private
     FPaintUpdating: Boolean;
   public
@@ -184,7 +186,7 @@ end;
 procedure TForm1.SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
   TransientType: TTransientType);
 const
-  Tokens:array[0..8] of TSynTokenMatch=(
+  Tokens:array[0..15] of TSynTokenMatch=(
     (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(stkCssSymbol)),
     (OpenToken: '{'; CloseToken: '}'; TokenKind: Integer(stkCssSymbol)),
     (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(stkCssSymbol)),
@@ -193,7 +195,14 @@ const
     (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(stkEsSymbol)),
     (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(stkPhpSymbol)),
     (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(stkPhpSymbol)),
-    (OpenToken: '{'; CloseToken: '}'; TokenKind: Integer(stkPhpSymbol)));
+    (OpenToken: '{'; CloseToken: '}'; TokenKind: Integer(stkPhpSymbol)),
+    (OpenToken: '<'; CloseToken: '>'; TokenKind: Integer(stkHtmlTag)),
+    (OpenToken: '<'; CloseToken: '/>'; TokenKind: Integer(stkHtmlTag)),
+    (OpenToken: '</'; CloseToken: '>'; TokenKind: Integer(stkHtmlTag)),
+    (OpenToken: '<!'; CloseToken: '>'; TokenKind: Integer(stkHtmlTag)),
+    (OpenToken: '<![cdata['; CloseToken: ']]>'; TokenKind: Integer(stkHtmlTag)),
+    (OpenToken: '<?'; CloseToken: '?>'; TokenKind: Integer(stkHtmlTag)),
+    (OpenToken: '<%'; CloseToken: '%>'; TokenKind: Integer(stkHtmlTag)));
 var
   Editor : TSynEdit;  
   Pix: TPoint;      
@@ -262,6 +271,20 @@ procedure TForm1.SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
 begin
   if (AFiles.Count>0) and (FileExists(AFiles[0])) then
     SynEdit1.Lines.LoadFromFile(AFiles[0]);
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  case ComboBox4.ItemIndex of
+  0:
+    SynEdit1.Text := TSynWebHtmlSyn.SynWebSample;
+  1:
+    SynEdit1.Text := TSynWebCssSyn.SynWebSample;
+  2:
+    SynEdit1.Text := TSynWebEsSyn.SynWebSample;
+  3:
+    SynEdit1.Text := TSynWebPhpCliSyn.SynWebSample;
+  end;
 end;
 
 end.

@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 209
   Top = 131
-  Width = 682
+  Width = 788
   Height = 499
   Caption = 'Form1'
   Color = clBtnFace
@@ -18,7 +18,7 @@ object Form1: TForm1
   object SynEdit1: TSynEdit
     Left = 0
     Top = 45
-    Width = 674
+    Width = 780
     Height = 427
     Align = alClient
     ActiveLineColor = 15724527
@@ -42,13 +42,13 @@ object Form1: TForm1
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 674
+    Width = 780
     Height = 45
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 1
     DesignSize = (
-      674
+      780
       45)
     object Label1: TLabel
       Left = 4
@@ -72,7 +72,7 @@ object Form1: TForm1
       Caption = 'PHPVersion'
     end
     object Label4: TLabel
-      Left = 552
+      Left = 658
       Top = 4
       Width = 83
       Height = 13
@@ -133,7 +133,7 @@ object Form1: TForm1
       OnClick = Button1Click
     end
     object Button2: TButton
-      Left = 648
+      Left = 754
       Top = 2
       Width = 25
       Height = 17
@@ -162,7 +162,7 @@ object Form1: TForm1
       OnChange = ComboBox3Change
     end
     object ComboBox4: TComboBox
-      Left = 508
+      Left = 614
       Top = 20
       Width = 165
       Height = 21
@@ -198,6 +198,22 @@ object Form1: TForm1
       State = cbChecked
       TabOrder = 9
       OnClick = CheckBox4Click
+    end
+    object Button3: TButton
+      Left = 572
+      Top = 24
+      Width = 41
+      Height = 17
+      Anchors = [akTop, akRight]
+      Caption = 'Load def'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -9
+      Font.Name = 'Small Fonts'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 10
+      OnClick = Button3Click
     end
   end
   object SynWebEngine1: TSynWebEngine
