@@ -32,7 +32,7 @@ type
     TokenKind: Integer;
   end;
 
-  TSynTokenMatches = record
+  TSynTokenMatched = record
 {$IFDEF UNISYNEDIT}
     OpenToken: WideString;
     CloseToken: WideString;
@@ -46,20 +46,20 @@ type
     TokenAttri: TSynHighlighterAttributes;
   end;
 
-function SynEditGetMatchingToken(ASynEdit: TSynEdit; APoint: TBufferCoord;
-  const ATokens: array of TSynTokenMatch; var AMatch: TSynTokenMatches): Integer;
-
 {
-  SynEditGetMatchingToken returns:
-  -2 : Close and open Kind found
-  -1 : Close Kind found
+  SynEditGetMatchingToken(Ex) returns:
+  -2 : Close and open token found
+  -1 : Close token found
    0 : Kind not found
-  +1 : Open Kind found
-  +2 : Open and close Kind found
+  +1 : Open token found
+  +2 : Open and close token found
 }
 
+function SynEditGetMatchingToken(ASynEdit: TSynEdit; APoint: TBufferCoord;
+  const ATokens: array of TSynTokenMatch; var AMatch: TSynTokenMatched): Integer;
+
 function SynEditGetMatchingTokenEx(ASynEdit: TSynEdit; APoint: TBufferCoord;
-  const ATokens: array of TSynTokenMatch; var AMatch: TSynTokenMatches): Integer;
+  const ATokens: array of TSynTokenMatch; var AMatch: TSynTokenMatched): Integer;
 
 implementation
 
@@ -81,7 +81,7 @@ var
   FMatchOpenDup, FMatchCloseDup: array of Integer;
 
 function SynEditGetMatchingToken(ASynEdit: TSynEdit; APoint: TBufferCoord;
-  const ATokens: array of TSynTokenMatch; var AMatch: TSynTokenMatches): Integer;
+  const ATokens: array of TSynTokenMatch; var AMatch: TSynTokenMatched): Integer;
 var
   TokenMatch: PSynTokenMatch;
 {$IFDEF UNISYNEDIT}
@@ -244,22 +244,19 @@ begin
           Inc(OpenDupLen);
         end;
       end;
-
     if Result = 1 then
     begin
       Level := 1;
       Next;
-      while not GetEol do
-        if CheckToken then
-          Exit;
-      Inc(APoint.Line);
-      while APoint.Line < ASynEdit.Lines.Count do
+      while True do
       begin
-        SetLine(Lines[APoint.Line], APoint.Line);
         while not GetEol do
           if CheckToken then
             Exit;
         Inc(APoint.Line);
+        if APoint.Line >= ASynEdit.Lines.Count then
+          Break;
+        SetLine(Lines[APoint.Line], APoint.Line);
       end;
     end else
     begin
@@ -305,7 +302,7 @@ begin
 end;
 
 function SynEditGetMatchingTokenEx(ASynEdit: TSynEdit; APoint: TBufferCoord;
-  const ATokens: array of TSynTokenMatch; var AMatch: TSynTokenMatches): Integer;
+  const ATokens: array of TSynTokenMatch; var AMatch: TSynTokenMatched): Integer;
 begin
   Result := SynEditGetMatchingToken(ASynEdit, APoint, ATokens, AMatch);
   if (Result = 0) and (APoint.Char > 1) then
