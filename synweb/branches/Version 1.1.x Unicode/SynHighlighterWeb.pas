@@ -112,6 +112,7 @@ type
     FSYN_ATTR_STRING: TSynHighlighterAttributes;
     FSYN_ATTR_WHITESPACE: TSynHighlighterAttributes;
     FOptions: TSynWebOptions;
+    FBase: TSynWebBase;
   end;
 
   TSynWebOptionsBase = class(TPersistent)
@@ -292,6 +293,9 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
+
+    function GetTagID: Integer;
+    function GetIsOpenTag: Boolean;
   published
     property Options: TSynWebHtmlOptions read GetOptions;
   end;
@@ -952,7 +956,8 @@ end;
 
 constructor TSynWebBase.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner);
+  inherited Create(AOwner); 
+  FInstance.FBase := Self;
   FOptions.FOnChange := DefHighlightChange;
   FEngine := nil;
   FDefaultFilter := '';
@@ -1318,6 +1323,22 @@ end;
 procedure TSynWebHtmlSyn.ResetRange;
 begin
   FInstance.FRange := $00000000;
+end;
+
+function TSynWebHtmlSyn.GetTagID: Integer;
+begin
+  if (FEngine <> nil) and (FInstance.FHighlighterType = shtHtml) and
+    (FEngine.HtmlGetRange in [srsHtmlTag, srsHtmlTagClose, srsHtmlTagKey, srsHtmlTagKeyEq,
+    srsHtmlTagKeyValue, srsHtmlTagKeyValueQuoted1, srsHtmlTagKeyValueQuoted2]) then
+    Result := FEngine.HtmlGetTag -1
+  else
+    Result := -1;
+end;
+
+function TSynWebHtmlSyn.GetIsOpenTag: Boolean;
+begin
+  Result := (FEngine <> nil) and (FInstance.FHighlighterType = shtHtml) and
+    (FEngine.HtmlGetRange <> srsHtmlTagClose);
 end;
 
 { TSynWebCssSyn }
@@ -2444,7 +2465,7 @@ begin
         (FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict) then
         FInstance^.FTokenID := stkHtmlError
       else
-        if not GetRangeBit(12) and ((FInstance^.FRun = 0) or
+        if not GetRangeBit(12) and ((FInstance^.FRun < 2) or
           (FInstance^.FLine[FInstance^.FRun - 2] <> '/')) then
           if (ID = HtmlTagID_Style) and FInstance^.FOptions.FCssEmbeded then
           begin
@@ -5614,7 +5635,7 @@ begin
   begin
     if ATagKind = spotPhp then
       SetRangeBit(19, True);
-    Next;
+    FInstance^.FBase.Next;
   end;
 end;
 
@@ -5630,7 +5651,7 @@ begin
       AHtmlTag,
       True, not AHtmlTag);
     if AHtmlTag then
-      Next;
+      FInstance^.FBase.Next;
   end;
 end;
 
@@ -6637,7 +6658,7 @@ procedure TSynWebEngine.NextSetHighlighterType;
 begin
   SetHighlighterType(FInstance^.FNextHighlighterType, FInstance^.FNextClearBits,
     False, FInstance^.FNextUseNextAH);
-  Next;
+  FInstance^.FBase.Next;
   FInstance^.FHighlighterSW := True;
 end;
 

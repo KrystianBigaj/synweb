@@ -583,17 +583,17 @@ object Form1: TForm1
     end
     object isEXT: TMenuItem
       Tag = 29
-      Caption = 'IS "<?... ?>" ?'
+      Caption = '29 - IS "<?... ?>" ?'
       OnClick = Html401Strict1Click
     end
     object NoCLASS1: TMenuItem
       Tag = 30
-      Caption = 'No CLASS'
+      Caption = '30 - No CLASS'
       OnClick = Html401Strict1Click
     end
     object EMPTY1: TMenuItem
       Tag = 31
-      Caption = 'Is EMPTY'
+      Caption = '31 - Is EMPTY'
       OnClick = Html401Strict1Click
     end
   end
