@@ -1566,7 +1566,9 @@ begin
       'out'#13#10+
       'STRING'#13#10+
       'string';
+{$IFDEF SYN_COMPILER_6_UP}
     CaseSensitive := True;
+{$ENDIF}
     Sorted := True;
   end;
 
@@ -1581,7 +1583,7 @@ begin
   AddAttribute(FHtmlWhitespaceAttri);
 
   FHtmlCommentAttri := CreateAttrib('Html: Comment');
-  FHtmlCommentAttri.Foreground := clMedGray;
+  FHtmlCommentAttri.Foreground := $A4A0A0;
   AddAttribute(FHtmlCommentAttri);
 
   FHtmlTextAttri := CreateAttrib('Html: Text');
@@ -1648,7 +1650,7 @@ begin
   CssMakeMethodTables;
 
   FCssWhitespaceAttri := CreateAttrib('Css: Whitespace');    
-  FCssWhitespaceAttri.Background := 15794175;
+  FCssWhitespaceAttri.Background := $F0FFFF;
   AddAttribute(FCssWhitespaceAttri);
 
   FCssRulesetWhitespaceAttri := CreateAttrib('Css: Ruleset whitespace'); 
@@ -1666,7 +1668,7 @@ begin
   AddAttribute(FCssSelectorUndefAttri);
 
   FCssSelectorClassAttri := CreateAttrib('Css: Class selector');   
-  FCssSelectorClassAttri.Foreground := 12615680;
+  FCssSelectorClassAttri.Foreground := $C08000;
   FCssSelectorClassAttri.Style := [fsBold];
   AddAttribute(FCssSelectorClassAttri);
 
@@ -1680,7 +1682,7 @@ begin
   AddAttribute(FCssSpecialAttri);
 
   FCssCommentAttri := CreateAttrib('Css: Comment');
-  FCssCommentAttri.Foreground := clMedGray;
+  FCssCommentAttri.Foreground := $A4A0A0;
   FCssCommentAttri.Style := [fsItalic];
   AddAttribute(FCssCommentAttri);
 
@@ -1739,7 +1741,7 @@ begin
   EsMakeMethodTables;
 
   FEsWhitespaceAttri := CreateAttrib('Es: Whitespace'); 
-  FEsWhitespaceAttri.Background := 16773360;
+  FEsWhitespaceAttri.Background := $FFF0F0;
   AddAttribute(FEsWhitespaceAttri);
 
   FEsIdentifierAttri := CreateAttrib('Es: Identifier');
@@ -1783,7 +1785,7 @@ begin
   PhpMakeMethodTables;
 
   FPhpWhitespaceAttri := CreateAttrib('Php: Whitespace');   
-  FPhpWhitespaceAttri.Background := 16119285;
+  FPhpWhitespaceAttri.Background := $F5F5F5;
   AddAttribute(FPhpWhitespaceAttri);
 
   FPhpInlineTextAttri := CreateAttrib('PhpCli: Inline text');
@@ -1806,15 +1808,15 @@ begin
   AddAttribute(FPhpVariableAttri);
 
   FPhpConstAttri := CreateAttrib('Php: Constant');  
-  FPhpConstAttri.Foreground := 33023;
+  FPhpConstAttri.Foreground := $0080FF;
   AddAttribute(FPhpConstAttri);
 
   FPhpStringAttri := CreateAttrib('Php: String'); 
   FPhpStringAttri.Foreground := clFuchsia;
   AddAttribute(FPhpStringAttri);
 
-  FPhpStringSpecialAttri := CreateAttrib('Php: String special'); 
-  FPhpStringSpecialAttri.Background := 15395562;
+  FPhpStringSpecialAttri := CreateAttrib('Php: String special');
+  FPhpStringSpecialAttri.Background := $EAEAEA;
   FPhpStringSpecialAttri.Foreground := clFuchsia;
   AddAttribute(FPhpStringSpecialAttri);
 

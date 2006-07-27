@@ -122,7 +122,7 @@ var
           if (GetTokenID in [stkHtmlTag, stkHtmlError]) then
           begin
             Result := GetToken;
-            if Result = '>' then
+            if (Result = '>') or (Result = '/>') then
               Exit;
           end;
           Next;
