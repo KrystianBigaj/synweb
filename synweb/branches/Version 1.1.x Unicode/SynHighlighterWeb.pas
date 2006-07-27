@@ -112,7 +112,6 @@ type
     FSYN_ATTR_STRING: TSynHighlighterAttributes;
     FSYN_ATTR_WHITESPACE: TSynHighlighterAttributes;
     FOptions: TSynWebOptions;
-    FBase: TSynWebBase;
   end;
 
   TSynWebOptionsBase = class(TPersistent)
@@ -957,7 +956,6 @@ end;
 constructor TSynWebBase.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner); 
-  FInstance.FBase := Self;
   FOptions.FOnChange := DefHighlightChange;
   FEngine := nil;
   FDefaultFilter := '';
@@ -1989,8 +1987,8 @@ begin
       else
         repeat
           Inc(FInstance^.FRun)
-          // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9']);
         until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 10) = 0;
+        // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9']);
     end else
       if not (FInstance^.FLine[FInstance^.FRun] in ['0'..'9']) then
         FInstance^.FTokenID := stkHtmlError
@@ -1999,15 +1997,15 @@ begin
           Inc(FInstance^.FRun)
         until not (FInstance^.FLine[FInstance^.FRun] in ['0'..'9']);
   end else
-  // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z'] then
+    // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z'] then
     if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
       FInstance^.FTokenID := stkHtmlError
     else
     begin
       repeat
         Inc(FInstance^.FRun)
-        // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z'];
       until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0;
+      // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z'];
       if HtmlSpecialCheck(FInstance^.FTokenPos + 1, FInstance^.FRun -
         FInstance^.FTokenPos - 1) = -1 then
         FInstance^.FTokenID := stkHtmlError;
@@ -2119,8 +2117,8 @@ begin
     else
       repeat
         Inc(FInstance^.FRun);
-        // until FInstance^.FLine[FInstance^.FRun] In [#0..#32, '<', '>', '&'];
       until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 6) <> 0;
+      // until FInstance^.FLine[FInstance^.FRun] In [#0..#32, '<', '>', '&'];
       FInstance^.FTokenID := stkHtmlText;
   end;
 end;
@@ -2249,8 +2247,8 @@ begin
             end;
           end;
           else
+            // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']) then
             if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
-              // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']) then
             begin
               Inc(FInstance^.FRun);
               FInstance^.FTokenID := stkHtmlError;
@@ -2269,8 +2267,8 @@ begin
           Exit
         else
           repeat
+            // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<']) do
             while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 21) = 0 do
-              // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<']) do
               Inc(FInstance^.FRun);
             case FInstance^.FLine[FInstance^.FRun] of
               #0:
@@ -2302,8 +2300,8 @@ begin
           Exit
         else
           repeat
+            // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '"', '<']) do
             while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 22) = 0 do
-              // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '"', '<']) do
               Inc(FInstance^.FRun);
             case FInstance^.FLine[FInstance^.FRun] of
               #0:
@@ -2487,14 +2485,14 @@ begin
       HtmlSetRange(srsHtmlText);
     end;
     else
+      // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']) then
       if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
-        // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']) then
         HtmlErrorProc
       else
       begin
         repeat
           Inc(FInstance^.FRun);
-        until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) = 0;
+        until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) = 0;    
         // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', ':', '-']);
         if ID = -1 then
           FInstance^.FTokenID := stkHtmlTagKeyUndef
@@ -2644,8 +2642,8 @@ begin
       Exit
     else
       repeat
+        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<']) do
         while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 21) = 0 do
-          // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<']) do
           Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun] of
           #0:
@@ -2680,8 +2678,8 @@ begin
       Exit
     else
       repeat
+        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '"', '<']) do
         while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 22) = 0 do
-          // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '"', '<']) do
           Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun] of
           #0:
@@ -3069,8 +3067,8 @@ begin
         Result := True;
         if ADo then
         begin
-          FInstance^.FTokenID := stkHtmlTag;
           SetHighlighterType(shtHtml, True, False, False);
+          Next;
         end;
       end else
         Result := False;
@@ -3089,8 +3087,8 @@ end;
 
 procedure TSynWebEngine.CssAtKeywordProc;
 begin
+  // if not (FInstance^.FLine[FInstance^.FRun+1] in ['a'..'z', 'A'..'Z']) then
   if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and (1 shl 0) = 0 then
-    // if not (FInstance^.FLine[FInstance^.FRun+1] in ['a'..'z', 'A'..'Z']) then
     CssErrorProc
   else
   begin
@@ -3176,20 +3174,20 @@ procedure TSynWebEngine.CssHashProc;
 begin
   if CssGetRange = srsCssPropVal then
   begin
+    // if FInstance^.FLine[FInstance^.FRun+1] in ['a'..'f', 'A'..'F', '0'..'9'] and
     if (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and (1 shl 10) <> 0) and
-      // if FInstance^.FLine[FInstance^.FRun+1] in ['a'..'f', 'A'..'F', '0'..'9'] and
+      // FInstance^.FLine[FInstance^.FRun+2] in ['a'..'f', 'A'..'F', '0'..'9'] and
       (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 2]] and (1 shl 10) <> 0) and
-      //   FInstance^.FLine[FInstance^.FRun+2] in ['a'..'f', 'A'..'F', '0'..'9'] and
+      // FInstance^.FLine[FInstance^.FRun+3] in ['a'..'f', 'A'..'F', '0'..'9'] then
       (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 3]] and (1 shl 10) <> 0) then
-      //   FInstance^.FLine[FInstance^.FRun+3] in ['a'..'f', 'A'..'F', '0'..'9'] then
     begin
       CssSymbolProc;
       CssSetRange(srsCssPropValSpecial);
     end else
       CssErrorProc;
   end else
+    // if not (FInstance^.FLine[FInstance^.FRun+1] in ['a'..'z', 'A'..'Z', '\']) or
     if (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and (1 shl 8) = 0) or
-      // if not (FInstance^.FLine[FInstance^.FRun+1] in ['a'..'z', 'A'..'Z', '\']) or
       ((FInstance^.FLine[FInstance^.FRun + 1] = '\') and
       (FInstance^.FLine[FInstance^.FRun + 2] in [#0..#31])) then
       CssErrorProc
@@ -3212,8 +3210,8 @@ begin
       CssErrorProc;
   end else
   begin
+    // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '\']) or
     if (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and (1 shl 8) = 0) or
-      // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '\']) or
       ((FInstance^.FLine[FInstance^.FRun + 1] = '\') and
       (FInstance^.FLine[FInstance^.FRun + 2] in [#0..#31])) then
     begin
@@ -3243,8 +3241,8 @@ end;
 
 procedure TSynWebEngine.CssColonProc;
 begin
+  // if not (FInstance^.FLine[FInstance^.FRun+1] in ['a'..'z', 'A'..'Z']) then
   if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and (1 shl 0) = 0 then
-    // if not (FInstance^.FLine[FInstance^.FRun+1] in ['a'..'z', 'A'..'Z']) then
     CssErrorProc
   else
   begin
@@ -3313,8 +3311,8 @@ begin
   if CssGetRange = srsCssPropVal then
   begin
     Inc(FInstance^.FRun);
+    // if FInstance^.FLine[FInstance^.FRun] in ['0'..'9', '.'] then
     if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 13) <> 0 then
-      // if FInstance^.FLine[FInstance^.FRun] in ['0'..'9', '.'] then
     begin
       FInstance^.FCssMask := $F5400000;
       CssNumberDefProc;
@@ -3332,8 +3330,8 @@ begin
   if CssGetRange = srsCssPropVal then
   begin
     Inc(FInstance^.FRun);
+    // if FInstance^.FLine[FInstance^.FRun] in ['0'..'9', '.'] then
     if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 13) <> 0 then
-      // if FInstance^.FLine[FInstance^.FRun] in ['0'..'9', '.'] then
     begin
       FInstance^.FCssMask := $8AA00000;
       CssNumberDefProc;
@@ -3445,8 +3443,8 @@ end;
 
 function TSynWebEngine.CssIdentStartProc: Boolean;
 begin
+  // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '\']) or
   if (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 8) = 0) or
-    // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '\']) or
     ((FInstance^.FLine[FInstance^.FRun] = '\') and
     (FInstance^.FLine[FInstance^.FRun + 1] in [#0..#31])) then
   begin
@@ -3496,8 +3494,8 @@ begin
   Result := True;
   AShl := 1 shl AShl;
   repeat
+    // while not (FInstance^.FLine[FInstance^.FRun] in [#0, AChar, '\', '<']) do
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and AShl = 0 do
-      // while not (FInstance^.FLine[FInstance^.FRun] in [#0, AChar, '\', '<']) do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
       #39, '"':
@@ -3547,8 +3545,8 @@ begin
   Result := False;
   if CssCheckNull or PhpCheckBegin then
     Exit;
+  // if FInstance^.FLine[FInstance^.FRun] in [#0..#32, '/'] then
   if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 11) <> 0 then
-    // if FInstance^.FLine[FInstance^.FRun] in [#0..#32, '/'] then
     FCssProcTable[FInstance^.FLine[FInstance^.FRun]]
   else
     Result := True;
@@ -3858,9 +3856,9 @@ var
               if CssCheckNull or PhpCheckBegin then
                 Exit;
               repeat
+                // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
                 while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
                   (1 shl 14) = 0 do
-                  // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
                   Inc(FInstance^.FRun);
                 case FInstance^.FLine[FInstance^.FRun] of
                   '\':
@@ -3974,9 +3972,9 @@ var
             '{':
               AtPage_Declaration;
             ':':
+              // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '\']) or
               if (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and
                 (1 shl 8) = 0) or
-                // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '\']) or
                 ((FInstance^.FLine[FInstance^.FRun + 1] = '\') and
                 (FInstance^.FLine[FInstance^.FRun + 2] in [#0..#31])) then
                 DoError
@@ -4160,8 +4158,8 @@ end;
 
 procedure TSynWebEngine.CssRangePropValProc;
 begin
+  // if FInstance^.FLine[FInstance^.FRun] in [#0..#32, '/', '#', '!', ';', '}', '+', '-', '0'..'9', '.', ',', '"', #39, '<'] then
   if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 12) <> 0 then
-    // if FInstance^.FLine[FInstance^.FRun] in [#0..#32, '/', '#', '!', ';', '}', '+', '-', '0'..'9', '.', ',', '"', #39, '<'] then
     FCssProcTable[FInstance^.FLine[FInstance^.FRun]]
   else
     if CssIdentStartProc then
@@ -4367,12 +4365,12 @@ begin
     if (FInstance^.FRun > 0) and (FInstance^.FLine[FInstance^.FRun - 1] = '#') then
     begin
       Inc(FInstance^.FRun, 3);
+      // if (FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9']) and
       if (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 10) <> 0) and
-        // if (FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9']) and
-        (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and (1 shl 10) <> 0) and
         // if (FInstance^.FLine[FInstance^.FRun+1] in ['a'..'f', 'A'..'F', '0'..'9']) and
-        (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 2]] and (1 shl 10) <> 0) then
+        (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and (1 shl 10) <> 0) and
         // if (FInstance^.FLine[FInstance^.FRun+2] in ['a'..'f', 'A'..'F', '0'..'9']) then
+        (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 2]] and (1 shl 10) <> 0) then
         Inc(FInstance^.FRun, 3);
       prop := CssGetProp - 1;
       if (prop = -1) or (TSynWeb_CssPropsData[prop] and (1 shl 18) = 0) then
@@ -4481,9 +4479,9 @@ begin
               if CssCheckNull or PhpCheckBegin then
                 Exit;
               repeat
+                // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
                 while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
                   (1 shl 14) = 0 do
-                  // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
                   Inc(FInstance^.FRun);
                 case FInstance^.FLine[FInstance^.FRun] of
                   '\':
@@ -4666,8 +4664,8 @@ begin
   if CssCheckNull or PhpCheckBegin then
     Exit;
   repeat
+    // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '*', '<']) do
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 26) = 0 do
-      // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '*', '<']) do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
       #0:
@@ -5002,15 +5000,15 @@ begin
         FInstance^.FHashTable['p']) and
         (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 7]] =
         FInstance^.FHashTable['t']) and
-        (TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 8]] and (1 shl 0) <> 0) and
+        (TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 8]] and (1 shl 0) <> 0) and                    
         // (FInstance^.FLine[FInstance^.FRun+8] in [#0..#32, '>']) and
         (FInstance^.FHighlighterMode = shmHtml) then
       begin
         Result := True;
         if ADo then
         begin
-          FInstance^.FTokenID := stkHtmlTag;
           SetHighlighterType(shtHtml, True, False, False);
+          Next;
         end;
       end else
         Result := False;
@@ -5158,13 +5156,12 @@ begin
     (FInstance^.FLine[FInstance^.FRun + 1] in ['x', 'X']) then
   begin
     Inc(FInstance^.FRun, 2);
+    // if FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
     if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 10) <> 0 then
-      // if FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
       repeat
         Inc(FInstance^.FRun);
-      until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
-        (1 shl 10) = 0
-    // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'])
+      until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 10) = 0
+      // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'])
     else
       Exit;
   end else
@@ -5298,8 +5295,8 @@ begin
   if EsCheckNull or PhpCheckBegin then
     Exit;
   repeat
+    // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '*', '<']) do
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 26) = 0 do
-      // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '*', '<']) do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
       #0:
@@ -5331,8 +5328,8 @@ begin
       Exit
     else
       repeat
+        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #34, '<', '\']) do
         while TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun]] and (1 shl 3) = 0 do
-          // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #34, '<', '\']) do
           Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun] of
           #0:
@@ -5371,8 +5368,8 @@ begin
       Exit
     else
       repeat
+        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<', '\']) do
         while TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun]] and (1 shl 4) = 0 do
-          // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<', '\']) do
           Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun] of
           #0:
@@ -5635,7 +5632,7 @@ begin
   begin
     if ATagKind = spotPhp then
       SetRangeBit(19, True);
-    FInstance^.FBase.Next;
+    Next;
   end;
 end;
 
@@ -5651,7 +5648,7 @@ begin
       AHtmlTag,
       True, not AHtmlTag);
     if AHtmlTag then
-      FInstance^.FBase.Next;
+      Next;
   end;
 end;
 
@@ -5690,12 +5687,12 @@ begin
     (FInstance^.FLine[FInstance^.FRun + 1] = 'x') then
   begin
     Inc(FInstance^.FRun, 2);
+    // if FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
     if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 10) <> 0 then
-      // if FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
       repeat
         Inc(FInstance^.FRun);
       until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 10) = 0
-    // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'])
+      // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'])
     else
       Exit;
   end else
@@ -5732,8 +5729,8 @@ procedure TSynWebEngine.PhpString34Proc;
 begin
   Inc(FInstance^.FRun);
   PhpSetRange(srsPhpString34);
+  // if FInstance^.FLine[FInstance^.FRun] in [#0, '\', '{', '$'] then
   if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 30) <> 0 then
-    // if FInstance^.FLine[FInstance^.FRun] in [#0, '\', '{', '$'] then
     FInstance^.FTokenID := stkPhpString
   else
     PhpRangeString34Proc;
@@ -5849,8 +5846,8 @@ begin
           tmpRun := FInstance^.FRun;
           while FInstance^.FLine[tmpRun] in [#1..#32] do
             Inc(tmpRun);
+          // if not (FInstance^.FLine[tmpRun] in ['a'..'z', 'A'..'Z', '_', #$7F..#$FF]) then
           if TSynWebIdentTable[FInstance^.FLine[tmpRun]] and (1 shl 28) = 0 then
-            // if not (FInstance^.FLine[tmpRun] in ['a'..'z', 'A'..'Z', '_', #$7F..#$FF]) then
           begin
             FInstance^.FTokenID := stkPhpError;
             Exit;
@@ -5994,8 +5991,8 @@ begin
   Inc(FInstance^.FRun);
   if FInstance^.FLine[FInstance^.FRun] = '$' then
     Inc(FInstance^.FRun);
+  // if FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', #$7F..#$FF] then
   if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 28) <> 0 then
-    // if FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', #$7F..#$FF] then
     FInstance^.FTokenID := stkPhpKeyword
   else
     FInstance^.FTokenID := stkPhpError;
@@ -6040,8 +6037,8 @@ var
 
   function TryDoIdent: Boolean;
   begin
+    // if FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', #$7F..#$FF] then
     if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 28) <> 0 then
-      // if FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', #$7F..#$FF] then
     begin
       DoIdent;
       Result := True;
@@ -6059,8 +6056,8 @@ var
         if FInstance^.FLine[FInstance^.FRun] in [#39, '\'] then
           Inc(FInstance^.FRun);
       end;
+      // while not(FInstance^.FLine[FInstance^.FRun] in [#0, #39, '\'] do
       while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 24) = 0 do
-        // while not(FInstance^.FLine[FInstance^.FRun] in [#0, #39, '\'] do
         Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = '\' then
         Continue
@@ -6222,8 +6219,8 @@ begin
     '\':
     begin
       Inc(FInstance^.FRun);
+      // if FInstance^.FLine[FInstance^.FRun] in ['n', 'r', 't', '\', '$', #34, '0'..'7', 'x'] then
       if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 18) <> 0 then
-        // if FInstance^.FLine[FInstance^.FRun] in ['n', 'r', 't', '\', '$', #34, '0'..'7', 'x'] then
       begin
         Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun - 1] of
@@ -6238,13 +6235,13 @@ begin
             Exit;
           end;
           'x':
+            // if FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
             if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 10) <> 0 then
-              // if FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
             begin
               Inc(FInstance^.FRun);
+              // if FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
               if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
                 (1 shl 10) <> 0 then
-                // if FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
                 Inc(FInstance^.FRun);
               Exit;
             end;
@@ -6257,12 +6254,12 @@ begin
   FInstance^.FTokenID := stkPhpString;
   repeat
     if StringChar = #34 then
+      // while not(FInstance^.FLine[FInstance^.FRun] in [#0, #34, '\', '{', '$'] do
       while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 25) = 0 do
-        // while not(FInstance^.FLine[FInstance^.FRun] in [#0, #34, '\', '{', '$'] do
         Inc(FInstance^.FRun)
     else
+      // while not(FInstance^.FLine[FInstance^.FRun] in [#0, '`', '\', '{', '$'] do
       while TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun]] and (1 shl 5) = 0 do
-        // while not(FInstance^.FLine[FInstance^.FRun] in [#0, '`', '\', '{', '$'] do
         Inc(FInstance^.FRun);
     if FInstance^.FLine[FInstance^.FRun] = StringChar then
       if AIsHeredoc then
@@ -6393,8 +6390,8 @@ begin
   end;
   FInstance^.FTokenID := stkPhpString;
   repeat
+    // while not(FInstance^.FLine[FInstance^.FRun] in [#0, #39, '\'] do
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 24) = 0 do
-      // while not(FInstance^.FLine[FInstance^.FRun] in [#0, #39, '\'] do
       Inc(FInstance^.FRun);
     if FInstance^.FLine[FInstance^.FRun] <> #39 then
       Exit
@@ -6422,8 +6419,8 @@ var
   OldRun: longint;
   s: String;
 begin
+  // if FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', #$7F..#$FF] then
   if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 28) <> 0 then
-    // if FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', #$7F..#$FF] then
   begin
     OldRun := FInstance^.FRun;
     repeat
@@ -6655,11 +6652,17 @@ begin
 end;
 
 procedure TSynWebEngine.NextSetHighlighterType;
+var
+  OldRun: Integer;
 begin
   SetHighlighterType(FInstance^.FNextHighlighterType, FInstance^.FNextClearBits,
     False, FInstance^.FNextUseNextAH);
-  FInstance^.FBase.Next;
+  OldRun := FInstance^.FRun;
+  Next;
+  if OldRun = FInstance^.FRun then
+    Next;
   FInstance^.FHighlighterSW := True;
+
 end;
 
 procedure TSynWebEngine.SetHighlighterType(const AHighlighterType: TSynWebHighlighterType;

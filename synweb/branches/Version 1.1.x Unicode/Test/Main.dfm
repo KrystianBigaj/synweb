@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 209
-  Top = 131
+  Left = 368
+  Top = 140
   Width = 788
   Height = 499
   Caption = 'Form1'
@@ -21,6 +21,7 @@ object Form1: TForm1
     Width = 780
     Height = 427
     Align = alClient
+    ActiveLineColor = 16448250
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -46,9 +47,6 @@ object Form1: TForm1
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 1
-    DesignSize = (
-      780
-      45)
     object Label1: TLabel
       Left = 4
       Top = 24
@@ -168,9 +166,7 @@ object Form1: TForm1
       Style = csDropDownList
       Anchors = [akTop, akRight]
       ItemHeight = 13
-      ItemIndex = 0
       TabOrder = 7
-      Text = 'HTM (+PHP, +CSS, +ES)'
       OnChange = ComboBox4Change
       Items.Strings = (
         'HTM (+PHP, +CSS, +ES)'
