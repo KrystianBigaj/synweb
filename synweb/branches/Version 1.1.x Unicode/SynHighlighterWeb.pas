@@ -259,6 +259,8 @@ type
     function GetTokenKind: Integer; override;
     function GetRange: Pointer; override;
     function GetEol: Boolean; override;
+    function GetHighlighterType: TSynWebHighlighterType;
+    function GetNextHighlighterType: TSynWebHighlighterType;
     procedure SetRange(Value: Pointer); override;
 {$IFNDEF UNISYNEDIT}
     procedure SetLine(NewValue: String; LineNumber: Integer); override;
@@ -282,7 +284,7 @@ type
   private
     procedure SetupActiveHighlighter; override;
     function GetOptions: TSynWebHtmlOptions;
-  public        
+  public
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
     class function SynWebSample: WideString; override;
@@ -294,7 +296,7 @@ type
     procedure ResetRange; override;
 
     function GetTagID: Integer;
-    function GetIsOpenTag: Boolean;
+    function GetTagKind: Integer;
   published
     property Options: TSynWebHtmlOptions read GetOptions;
   end;
@@ -1144,6 +1146,16 @@ begin
   Result := FInstance.FTokenID = stkNull;
 end;
 
+function TSynWebBase.GetHighlighterType: TSynWebHighlighterType;
+begin
+  Result := FInstance.FHighlighterType;
+end;
+
+function TSynWebBase.GetNextHighlighterType: TSynWebHighlighterType;
+begin
+  Result := FInstance.FNextHighlighterType;
+end;
+
 procedure TSynWebBase.SetRange(Value: Pointer);
 begin
   FInstance.FRange := Longword(Value);
@@ -1328,15 +1340,20 @@ begin
   if (FEngine <> nil) and (FInstance.FHighlighterType = shtHtml) and
     (FEngine.HtmlGetRange in [srsHtmlTag, srsHtmlTagClose, srsHtmlTagKey, srsHtmlTagKeyEq,
     srsHtmlTagKeyValue, srsHtmlTagKeyValueQuoted1, srsHtmlTagKeyValueQuoted2]) then
-    Result := FEngine.HtmlGetTag -1
+    Result := FEngine.HtmlGetTag - 1
   else
     Result := -1;
 end;
 
-function TSynWebHtmlSyn.GetIsOpenTag: Boolean;
+function TSynWebHtmlSyn.GetTagKind: Integer;
 begin
-  Result := (FEngine <> nil) and (FInstance.FHighlighterType = shtHtml) and
-    (FEngine.HtmlGetRange <> srsHtmlTagClose);
+  if (FEngine = nil) or (FInstance.FHighlighterType <> shtHtml) then
+    Result := 0
+  else
+    if FEngine.HtmlGetRange = srsHtmlTagClose then
+      Result := -1
+    else
+      Result := 1;
 end;
 
 { TSynWebCssSyn }
@@ -1392,11 +1409,7 @@ end;
 
 procedure TSynWebCssSyn.ResetRange;
 begin
-  with FInstance do
-  begin
-    FRange := $00000000;
-    FRange := FRange or (Longword(shtCss) shl 29);
-  end;
+  FInstance.FRange := $00000000 or (Longword(shtCss) shl 29);
 end;
 
 { TSynWebEsSyn }
@@ -1445,11 +1458,7 @@ end;
 
 procedure TSynWebEsSyn.ResetRange;
 begin
-  with FInstance do
-  begin
-    FRange := $00000000;
-    FRange := FRange or (Longword(shtEs) shl 29);
-  end;
+  FInstance.FRange := $00000000 or (Longword(shtEs) shl 29);
 end;
 
 { TSynWebPhpCliSyn }

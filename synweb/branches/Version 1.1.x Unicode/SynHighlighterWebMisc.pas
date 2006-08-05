@@ -10,7 +10,7 @@ uses
 {$IFDEF SYN_CLX}
   QSynEdit,
   QSynEditTextBuffer,
-  QSynEditHighlighter,  
+  QSynEditHighlighter,
   QSynEditTypes,
   QSynHighlighterWeb,
   QSynHighlighterWebData,
@@ -67,11 +67,196 @@ type
 
 var
   FMatchStack: array of TSynTokenBuf;
-  FMatchOpenDup, FMatchCloseDup: array of Integer;
 
 function SynEditGetMatchingTag(ASynEdit: TSynEdit; APoint: TBufferCoord;
   var AMatch: TSynTokenMatched): Integer;
 var
+  TagID: Integer;
+  Level, DeltaLevel, FMatchStackID: Integer;   
+  H: TSynWebHtmlSyn;
+  bSpecial: Boolean;
+
+{$IFDEF UNISYNEDIT}         
+  function ScanToEndOfTag: WideString;
+{$ELSE}
+  function ScanToEndOfTag: String;
+{$ENDIF}
+  begin
+    with ASynEdit, H do
+    begin
+      Next;
+      while True do
+      begin
+        while not GetEol do
+        begin
+          if (GetTokenID in [stkHtmlTag, stkHtmlError]) then
+          begin
+            Result := GetToken;
+            if (Result = '>') or (Result = '/>') then
+            begin
+              if GetIsOpenTag and (GetTagID in [HtmlTagID_Script, HtmlTagID_Style]) and
+                (GetNextHighlighterType = shtHtml) then
+                Result := '/>';
+              Exit;
+            end;
+          end;
+          Next;
+        end;
+        Inc(APoint.Line);
+        if APoint.Line >= Lines.Count then
+          Break;
+        SetLine(Lines[APoint.Line], APoint.Line);
+      end;
+    end;
+    Result := '';
+  end;
+
+  function CheckToken: Boolean;
+  begin
+    with H do
+    begin
+      if GetTokenId = stkHtmlTagName then
+        Inc(Level, GetTagKind);
+      if Level = 0 then
+      begin
+        SynEditGetMatchingTag := 2;
+        AMatch.CloseToken := GetToken;
+        AMatch.CloseTokenPos.Line := APoint.Line + 1;
+        AMatch.CloseTokenPos.Char := GetTokenPos + 1;
+        Result := True;
+      end else
+      begin
+        Next;
+        Result := False;
+      end;
+    end;
+  end;
+
+  procedure CheckTokenBack;
+  begin
+    with H do
+    begin
+      if GetTokenId = stkHtmlTagName then
+        case GetTagKind of
+        -1:
+          begin
+            Dec(Level);
+            if FMatchStackID >= 0 then
+              Dec(FMatchStackID);
+          end;
+        1:
+          begin
+            Inc(Level);
+            Inc(FMatchStackID);
+            if FMatchStackID >= Length(FMatchStack) then
+              SetLength(FMatchStack, Length(FMatchStack) + 32);
+            FMatchStack[FMatchStackID].Token := GetToken;
+            FMatchStack[FMatchStackID].Pos.Line := APoint.Line + 1;
+            FMatchStack[FMatchStackID].Pos.Char := GetTokenPos + 1;
+          end;
+        end;
+      Next;
+    end;
+  end;
+
+begin
+  Result := 0;
+  if not (ASynEdit.Highlighter is TSynWebHtmlSyn) then
+    Exit;
+  H := TSynWebHtmlSyn(ASynEdit.Highlighter);
+  with ASynEdit, H do
+  begin       
+    if Engine = nil then
+      Exit;         
+    Dec(APoint.Line);
+    Dec(APoint.Char);
+    if APoint.Line = 0 then
+      ResetRange
+    else
+      SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
+    SetLine(Lines[APoint.Line], APoint.Line);
+    while not GetEol and (APoint.Char >= GetTokenPos + Length(GetToken)) do
+      Next;         
+    TagID := GetTagID;
+    if GetEol or (TagID = -1) or (GetTokenID <> stkHtmlTagName) or
+      (TSynWeb_TagsData[TagID] and (1 shl 31) <> 0) then
+      Exit;
+    bSpecial := TagID in [HtmlTagID_Script, HtmlTagID_Style]; 
+    case GetTagKind of
+    1:
+      begin
+        Result := 1;
+        AMatch.OpenToken := GetToken;
+        AMatch.OpenTokenPos.Line := APoint.Line + 1;
+        AMatch.OpenTokenPos.Char := GetTokenPos + 1;
+      end;
+    -1:
+      begin
+        Result := -1;
+        AMatch.CloseToken := GetToken;
+        AMatch.CloseTokenPos.Line := APoint.Line + 1;
+        AMatch.CloseTokenPos.Char := GetTokenPos + 1;
+      end;
+    end;
+    AMatch.TokenKind := GetTokenKind;
+    AMatch.TokenAttri := GetTokenAttribute;
+    if Result = 1 then
+    begin
+      Level := 1;
+      Next;
+      while True do
+      begin
+        while not GetEol do
+          if CheckToken then
+            Exit;
+        Inc(APoint.Line);
+        if APoint.Line >= ASynEdit.Lines.Count then
+          Break;
+        SetLine(Lines[APoint.Line], APoint.Line);
+      end;
+    end else
+    begin
+      if Length(FMatchStack) < 32 then
+        SetLength(FMatchStack, 32);
+      FMatchStackID := -1;
+      Level := -1;
+      if APoint.Line = 0 then
+        ResetRange
+      else
+        SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
+      SetLine(Lines[APoint.Line], APoint.Line);
+      while not GetEol and (GetTokenPos < AMatch.CloseTokenPos.Char -1) do
+        CheckTokenBack;
+      if FMatchStackID > -1 then
+      begin
+        Result := -2;
+        AMatch.OpenToken := FMatchStack[FMatchStackID].Token;
+        AMatch.OpenTokenPos := FMatchStack[FMatchStackID].Pos;
+      end else
+        while APoint.Line > 0 do
+        begin
+          DeltaLevel := -Level - 1;
+          Dec(APoint.Line);
+          if APoint.Line = 0 then
+            ResetRange
+          else
+            SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
+          SetLine(Lines[APoint.Line], APoint.Line);
+          FMatchStackID := -1;
+          while not GetEol do
+            CheckTokenBack;
+          if (DeltaLevel <= FMatchStackID) then
+          begin
+            Result := -2;
+            AMatch.OpenToken := FMatchStack[FMatchStackID - DeltaLevel].Token;
+            AMatch.OpenTokenPos := FMatchStack[FMatchStackID - DeltaLevel].Pos;
+            Exit;
+          end;
+        end;
+    end;
+  end;
+
+(*var
 {$IFDEF UNISYNEDIT}
   Token: WideString;
 {$ELSE}
@@ -123,7 +308,12 @@ var
           begin
             Result := GetToken;
             if (Result = '>') or (Result = '/>') then
+            begin
+              if GetIsOpenTag and (GetTagID in [HtmlTagID_Script, HtmlTagID_Style]) and
+                (GetNextHighlighterType = shtHtml) then
+                Result := '/>';
               Exit;
+            end;
           end;
           Next;
         end;
@@ -136,27 +326,6 @@ var
     Result := '';
   end;
 
-  procedure CheckTokenBack;
-  begin
-    // TODO: Back tag matching
-  end;
-
-begin
-  Result := 0;
-  if not (ASynEdit.Highlighter is TSynWebHtmlSyn) then
-    Exit;
-  H := TSynWebHtmlSyn(ASynEdit.Highlighter);
-  with ASynEdit, H do
-  begin
-    if Engine = nil then
-      Exit;
-    Dec(APoint.Line);
-    Dec(APoint.Char);
-    if APoint.Line = 0 then
-      ResetRange
-    else
-      SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
-    SetLine(Lines[APoint.Line], APoint.Line);
     while not GetEol and (APoint.Char >= GetTokenPos + Length(GetToken)) do
       Next;
     TagID := GetTagID;
@@ -165,6 +334,11 @@ begin
       Exit;
     if GetIsOpenTag then
     begin
+      if (GetTagID in [HtmlTagID_Script, HtmlTagID_Style]) then
+      begin
+        if GetNextHighlighterType = shtHtml then
+          Exit;
+      end;
       Result := 1;
       AMatch.OpenToken := GetToken;
       AMatch.OpenTokenPos.Line := APoint.Line + 1;
@@ -183,7 +357,7 @@ begin
     begin
       Result := 0;
       Exit;
-    end;    
+    end;
     if Result = 1 then
     begin
       Level := 1;
@@ -225,7 +399,7 @@ begin
     begin
       // TODO: Back tag matching
     end;
-  end;
+  end;*)
 end;
 
 function SynEditGetMatchingTagEx(ASynEdit: TSynEdit; APoint: TBufferCoord;

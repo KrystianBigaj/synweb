@@ -192,7 +192,7 @@ begin
     while not GetEol and (CaretX-1 >= GetTokenPos + Length(GetToken)) do
       Next;
     Caption := Format('%.8x, %s, %d, %d', [Integer(GetRange),
-      GetToken, GetTagID, Integer(GetIsOpenTag)]);
+      GetToken, GetTagID, GetTagKind]);
   end;
 end;
 
