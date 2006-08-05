@@ -260,7 +260,6 @@ type
     function GetRange: Pointer; override;
     function GetEol: Boolean; override;
     function GetHighlighterType: TSynWebHighlighterType;
-    function GetNextHighlighterType: TSynWebHighlighterType;
     procedure SetRange(Value: Pointer); override;
 {$IFNDEF UNISYNEDIT}
     procedure SetLine(NewValue: String; LineNumber: Integer); override;
@@ -1149,11 +1148,6 @@ end;
 function TSynWebBase.GetHighlighterType: TSynWebHighlighterType;
 begin
   Result := FInstance.FHighlighterType;
-end;
-
-function TSynWebBase.GetNextHighlighterType: TSynWebHighlighterType;
-begin
-  Result := FInstance.FNextHighlighterType;
 end;
 
 procedure TSynWebBase.SetRange(Value: Pointer);
