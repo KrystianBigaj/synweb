@@ -133,7 +133,6 @@ var
   procedure CheckTokenBack;
   var
     OldLine: Integer;
-    bEnd: Boolean;
   begin
     with H do
     begin
@@ -156,17 +155,22 @@ var
             if bSpecial then
             begin
               OldLine := APoint.Line;
-              bEnd :=  ScanToEndOfSpecialTag;   
+              if ScanToEndOfSpecialTag then
+              begin
+                Dec(FMatchStackID);
+                if OldLine <> APoint.Line then
+                begin
+                  APoint.Line := OldLine;
+                  while not GetEol do
+                    Next;
+                end else
+                  Next;
+                Exit;
+              end;  
               if OldLine <> APoint.Line then
               begin
                 APoint.Line := OldLine;
                 while not GetEol do
-                  Next;
-              end;
-              if bEnd then
-              begin
-                Dec(FMatchStackID);
-                if not GetEol then
                   Next;
                 Exit;
               end;
@@ -300,7 +304,7 @@ begin
     if UpdateActiveHighlighter(TSynEditStringList(Lines).Ranges[CaretY-2],
        Lines[CaretY-1], CaretX, CaretY) then
       Repaint;
-    Result:=ASynWeb.ActiveHighlighters;
+    Result := ASynWeb.ActiveHighlighters;
   end;
 end;
 
