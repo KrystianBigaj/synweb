@@ -113,7 +113,7 @@ var
   begin
     with H do
     begin
-      if GetTokenId = stkHtmlTagName then
+      if (GetTokenId = stkHtmlTagName) and (TagID = GetTagID) then
         Inc(Level, GetTagKind);
       if Level = 0 then
       begin
@@ -136,7 +136,7 @@ var
   begin
     with H do
     begin
-      if GetTokenId = stkHtmlTagName then
+      if (GetTokenId = stkHtmlTagName) and (TagID = GetTagID) then
         case GetTagKind of
         -1:
           begin
