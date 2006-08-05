@@ -1,0 +1,4 @@
+SynEdit.inc
+SynHighlighterWeb.pas
+SynHighlighterWebData.pas
+SynHighlighterWebMisc.pas
