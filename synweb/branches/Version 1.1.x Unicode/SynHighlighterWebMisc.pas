@@ -77,13 +77,10 @@ var
   bSpecial: Boolean;
 
   function ScanToEndOfSpecialTag: Boolean;
-  var
-    tid: Integer;
   begin
     Result := False;
     with ASynEdit, H do
     begin
-      tid := GetTagID;
       Next;
       while True do
       begin
@@ -100,9 +97,13 @@ var
               Exit;
             end;
           end else
-            if (GetTokenID in [stkHtmlTag, stkHtmlError]) and (GetToken = '>')
-              and (tid <> -1) then
-              Exit;
+            if (GetTokenID in [stkHtmlTag, stkHtmlError]) and (GetToken = '>') then
+            begin
+              Next;
+              if GetTagID = -1 then
+                Exit;
+              Continue;
+            end;
           Next;
         end;
         Inc(APoint.Line);
