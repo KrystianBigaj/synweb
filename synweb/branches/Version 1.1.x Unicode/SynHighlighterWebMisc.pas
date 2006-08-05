@@ -97,7 +97,8 @@ var
               Exit;
             end;
           end else
-            if (GetTokenID in [stkHtmlTag, stkHtmlError]) and (GetToken = '>') then
+            if (GetTokenID in [stkHtmlTag, stkHtmlError]) and (GetToken = '>')
+              and (GetTagID = -1) then
               Exit;
           Next;
         end;
