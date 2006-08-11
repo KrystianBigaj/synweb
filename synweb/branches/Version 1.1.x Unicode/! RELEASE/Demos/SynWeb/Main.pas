@@ -89,9 +89,13 @@ begin
     ComboBox3.Items.Add(TSynWebPhpVersionStr[k]);
   ComboBox3.ItemIndex:=Integer(spvPHP5);
 
+  ComboBox4.ItemIndex := 0;
+
   s:=ChangeFileExt(Application.ExeName,'_sample.txt');
   if FileExists(s) then
-    SynEdit1.Lines.LoadFromFile(s);
+    SynEdit1.Lines.LoadFromFile(s)
+  else
+    Button3.Click;
   CheckBox2Click(nil);
 end;
 

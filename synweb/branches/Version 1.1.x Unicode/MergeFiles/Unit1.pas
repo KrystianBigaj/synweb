@@ -3,7 +3,7 @@ unit Unit1;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, RegExpr;
 
 type
@@ -138,7 +138,7 @@ begin
         sl.Text:=StringReplace(sl.Text,r.Match[0],sl2.Text,[]);
       end;
     until not r.ExecNext;
-  s:=d+'Output\'+ExtractFileName(AFileName);
+  s:=d+'! RELEASE\Source\'+ExtractFileName(AFileName);
   sl.SaveToFile(s);
   sl2.Free;
   r.Free;
