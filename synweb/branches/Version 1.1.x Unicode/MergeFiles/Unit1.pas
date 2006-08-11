@@ -104,8 +104,7 @@ begin
   Enabled:=False;
   Label2.Caption:=Format('Merging "%s".',[AFileName]);
   s:=ExtractFilePath(Application.ExeName)+AFileName;
-  d:=ExtractFilePath(s);
-  CreateDir(d+'Output\');
+  d:=ExtractFilePath(Application.ExeName)+'..\';
   r:=TRegExpr.Create;
   sl:=TStringList.Create;
   sl2:=TStringList.Create;

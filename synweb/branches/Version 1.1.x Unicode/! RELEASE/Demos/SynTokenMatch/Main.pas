@@ -3,7 +3,7 @@ unit Main;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, SynEdit, SynHighlighterPas, SynEditHighlighter,
   SynHighlighterCpp, SynTokenMatch, StdCtrls, SynEditTypes;
 
@@ -51,7 +51,7 @@ procedure TForm1.SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
 var
   Editor : TSynEdit;  
   Pix: TPoint;      
-  Match: TSynTokenMatches;
+  Match: TSynTokenMatched;
   I: Integer;
 
   function CharToPixels(P: TBufferCoord): TPoint;

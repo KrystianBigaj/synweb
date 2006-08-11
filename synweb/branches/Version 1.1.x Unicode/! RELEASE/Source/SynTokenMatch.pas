@@ -2,7 +2,7 @@
 unit SynTokenMatch;
 {$ENDIF}
 
-{$I SynEdit.Inc}
+{$I SynWeb.inc}
 
 interface
 
