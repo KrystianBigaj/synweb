@@ -40,14 +40,11 @@ Known Issues:
 The TSynWeb unit provides SynEdit with an Multi Html/Css/ECMAScript/Php highlighter.
 }
 
-// SYNWEB_FIXNULL - fix lines containing #0 character (#0 goes into #32)
-{.$DEFINE SYNWEB_FIXNULL}
-
 {$IFNDEF QSYNHIGHLIGHTERWEB}
 unit SynHighlighterWeb;
 {$ENDIF}
 
-{$I SynEdit.inc}
+{$I SynWeb.inc}
 
 interface
 
