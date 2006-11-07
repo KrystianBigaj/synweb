@@ -105,7 +105,7 @@ var
     Result := False
   end;
 
-  function IsCloseToken: Boolean; 
+  function IsCloseToken: Boolean;
   var
     X: Integer;
   begin

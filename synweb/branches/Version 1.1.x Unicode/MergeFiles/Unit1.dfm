@@ -17,6 +17,9 @@ object Form1: TForm1
   Position = poDesktopCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  DesignSize = (
+    706
+    349)
   PixelsPerInch = 96
   TextHeight = 13
   object Label2: TLabel
@@ -36,6 +39,9 @@ object Form1: TForm1
     Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = 'Export'
     TabOrder = 0
+    DesignSize = (
+      463
+      197)
     object Memo2: TMemo
       Left = 8
       Top = 44
@@ -81,6 +87,9 @@ object Form1: TForm1
     Anchors = [akLeft, akTop, akBottom]
     Caption = 'Merge'
     TabOrder = 1
+    DesignSize = (
+      229
+      193)
     object Label1: TLabel
       Left = 8
       Top = 92
@@ -148,6 +157,9 @@ object Form1: TForm1
     Height = 129
     Caption = 'Log'
     TabOrder = 2
+    DesignSize = (
+      697
+      129)
     object Memo4: TMemo
       Left = 8
       Top = 16
