@@ -1,4 +1,4 @@
-  Css_PropMaxKeyHash = 220;
+  CssPropMaxKeyHash = 220;
 
   TSynWeb_CssProps:array[0..114] of String=(
     'azimuth', 'background', 'background-attachment', 'background-color', 

@@ -1,509 +1,509 @@
-function TSynWebSyn.HTML_TagUndef: TtkTokenKind;
+function TSynWebEngine.HtmlTagUndef: TSynWebTokenKind;
 begin
-  Result:=tkHTMLTagNameUndef;
+  Result:=stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc1: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc1: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(0) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(0) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc2: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc2: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(6) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(6) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc8: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc8: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(21) or
-      HTML_TagKeyComp(34) or
-      HTML_TagKeyComp(35) or
-      HTML_TagKeyComp(36) or
-      HTML_TagKeyComp(37) or
-      HTML_TagKeyComp(38) or
-      HTML_TagKeyComp(39) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(21) or
+      HtmlTagKeyComp(34) or
+      HtmlTagKeyComp(35) or
+      HtmlTagKeyComp(36) or
+      HtmlTagKeyComp(37) or
+      HtmlTagKeyComp(38) or
+      HtmlTagKeyComp(39) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc9: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc9: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(43) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(43) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc16: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc16: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(26) or
-      HTML_TagKeyComp(63) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(26) or
+      HtmlTagKeyComp(63) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc17: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc17: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(49) or
-      HTML_TagKeyComp(66) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(49) or
+      HtmlTagKeyComp(66) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc18: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc18: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(10) or
-      HTML_TagKeyComp(28) or
-      HTML_TagKeyComp(40) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(10) or
+      HtmlTagKeyComp(28) or
+      HtmlTagKeyComp(40) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc19: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc19: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(67) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(67) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc20: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc20: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(13) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(13) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc21: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc21: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(9) or
-      HTML_TagKeyComp(22) or
-      HTML_TagKeyComp(52) or
-      HTML_TagKeyComp(88) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(9) or
+      HtmlTagKeyComp(22) or
+      HtmlTagKeyComp(52) or
+      HtmlTagKeyComp(88) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc23: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc23: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(1) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(1) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc24: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc24: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(23) or
-      HTML_TagKeyComp(27) or
-      HTML_TagKeyComp(80) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(23) or
+      HtmlTagKeyComp(27) or
+      HtmlTagKeyComp(80) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc25: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc25: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(5) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(5) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc26: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc26: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(41) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(41) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc27: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc27: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(7) or
-      HTML_TagKeyComp(18) or
-      HTML_TagKeyComp(60) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(7) or
+      HtmlTagKeyComp(18) or
+      HtmlTagKeyComp(60) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc28: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc28: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(83) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(83) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc29: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc29: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(45) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(45) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc30: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc30: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(19) or
-      HTML_TagKeyComp(54) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(19) or
+      HtmlTagKeyComp(54) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc31: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc31: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(24) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(24) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc32: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc32: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(50) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(50) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc33: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc33: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(89) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(89) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc35: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc35: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(25) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(25) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc37: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc37: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(17) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(17) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc38: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc38: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(84) or
-      HTML_TagKeyComp(86) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(84) or
+      HtmlTagKeyComp(86) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc39: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc39: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(56) or
-      HTML_TagKeyComp(65) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(56) or
+      HtmlTagKeyComp(65) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc40: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc40: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(78) or
-      HTML_TagKeyComp(87) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(78) or
+      HtmlTagKeyComp(87) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc41: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc41: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(90) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(90) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc42: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc42: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(47) or
-      HTML_TagKeyComp(76) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(47) or
+      HtmlTagKeyComp(76) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc43: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc43: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(32) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(32) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc46: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc46: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(12) or
-      HTML_TagKeyComp(53) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(12) or
+      HtmlTagKeyComp(53) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc47: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc47: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(51) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(51) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc49: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc49: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(64) or
-      HTML_TagKeyComp(68) or
-      HTML_TagKeyComp(91) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(64) or
+      HtmlTagKeyComp(68) or
+      HtmlTagKeyComp(91) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc50: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc50: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(72) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(72) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc52: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc52: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(31) or
-      HTML_TagKeyComp(44) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(31) or
+      HtmlTagKeyComp(44) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc53: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc53: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(42) or
-      HTML_TagKeyComp(55) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(42) or
+      HtmlTagKeyComp(55) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc55: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc55: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(30) or
-      HTML_TagKeyComp(59) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(30) or
+      HtmlTagKeyComp(59) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc56: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc56: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(77) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(77) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc57: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc57: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(71) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(71) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc64: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc64: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(70) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(70) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc65: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc65: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(16) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(16) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc66: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc66: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(79) or
-      HTML_TagKeyComp(85) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(79) or
+      HtmlTagKeyComp(85) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc70: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc70: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(3) or
-      HTML_TagKeyComp(4) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(3) or
+      HtmlTagKeyComp(4) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc76: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc76: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(82) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(82) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc78: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc78: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(15) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(15) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc80: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc80: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(29) or
-      HTML_TagKeyComp(46) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(29) or
+      HtmlTagKeyComp(46) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc81: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc81: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(75) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(75) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc82: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc82: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(8) or
-      HTML_TagKeyComp(73) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(8) or
+      HtmlTagKeyComp(73) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc84: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc84: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(48) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(48) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc85: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc85: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(69) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(69) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc87: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc87: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(33) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(33) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc89: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc89: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(2) or
-      HTML_TagKeyComp(62) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(2) or
+      HtmlTagKeyComp(62) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc91: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc91: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(57) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(57) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc92: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc92: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(14) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(14) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc93: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc93: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(74) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(74) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc94: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc94: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(81) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(81) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc107: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc107: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(20) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(20) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc114: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc114: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(58) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(58) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc121: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc121: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(11) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(11) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;
 
-function TSynWebSyn.HTML_TagFunc128: TtkTokenKind;
+function TSynWebEngine.HtmlTagFunc128: TSynWebTokenKind;
 begin
-  if  HTML_TagKeyComp(61) then
-    Result := tkHTMLTagName
+  if  HtmlTagKeyComp(61) then
+    Result := stkHtmlTagName
   else
-    Result := tkHTMLTagNameUndef;
+    Result := stkHtmlTagNameUndef;
 end;

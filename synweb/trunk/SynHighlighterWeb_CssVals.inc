@@ -1,7 +1,7 @@
-  Css_ValMaxKeyHash = 158;
-  Css_ValID_Rgb = 130;
-  Css_ValID_Url = 183;
-  Css_ValID_Rect = 124;
+  CssValMaxKeyHash = 158;
+  CssValID_Rgb = 130;
+  CssValID_Url = 183;
+  CssValID_Rect = 124;
 
   TSynWeb_CssVals:array[0..198] of String=(
     'above', 'absolute', 'always', 'aqua', 'armenian', 'attr', 'auto', 'avoid', 

@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 438
+  Left = 439
   Top = 84
-  Width = 470
-  Height = 636
-  Caption = 'SynHighlighterWeb - PHP Data/Export v1.0b '#169'2005 FlatDev'
+  Width = 472
+  Height = 655
+  Caption = 'SynHighlighterWeb - Php Data/Export v1.0b '#169'2005 FlatDev'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,37 +16,37 @@ object Form1: TForm1
   OnDestroy = FormDestroy
   OnShow = FormShow
   DesignSize = (
-    462
-    609)
+    464
+    628)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 319
-    Top = 428
+    Left = 321
+    Top = 423
     Width = 15
     Height = 13
     Anchors = [akRight, akBottom]
     Caption = '0 0'
   end
   object Label2: TLabel
-    Left = 318
-    Top = 487
-    Width = 63
+    Left = 320
+    Top = 482
+    Width = 62
     Height = 13
     Anchors = [akRight, akBottom]
-    Caption = 'PHP4 Version'
+    Caption = 'Php4 Version'
   end
   object Label3: TLabel
-    Left = 318
-    Top = 527
-    Width = 63
+    Left = 320
+    Top = 522
+    Width = 62
     Height = 13
     Anchors = [akRight, akBottom]
-    Caption = 'PHP5 Version'
+    Caption = 'Php5 Version'
   end
   object Label5: TLabel
-    Left = 317
-    Top = 579
+    Left = 319
+    Top = 574
     Width = 141
     Height = 14
     Align = alCustom
@@ -61,8 +61,24 @@ object Form1: TForm1
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 317
-    Top = 563
+    Left = 319
+    Top = 558
+    Width = 141
+    Height = 14
+    Align = alCustom
+    Anchors = [akRight, akBottom]
+    AutoSize = False
+    Caption = '-'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Courier New'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label6: TLabel
+    Left = 319
+    Top = 590
     Width = 141
     Height = 14
     Align = alCustom
@@ -79,8 +95,8 @@ object Form1: TForm1
   object TreeView1: TTreeView
     Left = 4
     Top = 4
-    Width = 310
-    Height = 577
+    Width = 312
+    Height = 596
     Anchors = [akLeft, akTop, akRight, akBottom]
     HideSelection = False
     Indent = 19
@@ -92,7 +108,7 @@ object Form1: TForm1
     OnCompare = TreeView1Compare
   end
   object Button1: TButton
-    Left = 319
+    Left = 321
     Top = 32
     Width = 57
     Height = 25
@@ -102,7 +118,7 @@ object Form1: TForm1
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 319
+    Left = 321
     Top = 4
     Width = 57
     Height = 25
@@ -112,8 +128,8 @@ object Form1: TForm1
     OnClick = Button2Click
   end
   object Button4: TButton
-    Left = 319
-    Top = 402
+    Left = 321
+    Top = 397
     Width = 134
     Height = 25
     Anchors = [akRight, akBottom]
@@ -122,8 +138,8 @@ object Form1: TForm1
     OnClick = Button4Click
   end
   object Button11: TButton
-    Left = 347
-    Top = 426
+    Left = 349
+    Top = 421
     Width = 45
     Height = 17
     Anchors = [akRight, akBottom]
@@ -132,8 +148,8 @@ object Form1: TForm1
     OnClick = Button11Click
   end
   object Button12: TButton
-    Left = 399
-    Top = 425
+    Left = 401
+    Top = 420
     Width = 57
     Height = 18
     Anchors = [akRight, akBottom]
@@ -142,7 +158,7 @@ object Form1: TForm1
     OnClick = Button12Click
   end
   object Button13: TButton
-    Left = 399
+    Left = 401
     Top = 32
     Width = 57
     Height = 25
@@ -152,7 +168,7 @@ object Form1: TForm1
     OnClick = Button13Click
   end
   object Button14: TButton
-    Left = 375
+    Left = 377
     Top = 4
     Width = 23
     Height = 29
@@ -164,8 +180,8 @@ object Form1: TForm1
     OnClick = Button14Click
   end
   object Button18: TButton
-    Left = 320
-    Top = 446
+    Left = 322
+    Top = 441
     Width = 133
     Height = 21
     Anchors = [akRight, akBottom]
@@ -180,7 +196,7 @@ object Form1: TForm1
     OnClick = Button18Click
   end
   object Memo1: TMemo
-    Left = 318
+    Left = 320
     Top = 164
     Width = 137
     Height = 89
@@ -189,7 +205,7 @@ object Form1: TForm1
     TabOrder = 9
   end
   object Button3: TButton
-    Left = 318
+    Left = 320
     Top = 80
     Width = 137
     Height = 25
@@ -206,7 +222,7 @@ object Form1: TForm1
   end
   object Button5: TButton
     Tag = 1
-    Left = 318
+    Left = 320
     Top = 108
     Width = 137
     Height = 25
@@ -222,28 +238,28 @@ object Form1: TForm1
     OnClick = Button3Click
   end
   object php4box: TCheckBox
-    Left = 318
+    Left = 320
     Top = 60
     Width = 48
     Height = 17
     Anchors = [akTop, akRight]
-    Caption = 'PHP4'
+    Caption = 'Php4'
     Checked = True
     State = cbChecked
     TabOrder = 12
   end
   object php5box: TCheckBox
-    Left = 366
+    Left = 368
     Top = 60
     Width = 48
     Height = 17
     Anchors = [akTop, akRight]
-    Caption = 'PHP5'
+    Caption = 'Php5'
     TabOrder = 13
   end
   object Button7: TButton
     Tag = 2
-    Left = 318
+    Left = 320
     Top = 136
     Width = 137
     Height = 25
@@ -259,8 +275,8 @@ object Form1: TForm1
     OnClick = Button3Click
   end
   object CheckBox1: TCheckBox
-    Left = 318
-    Top = 470
+    Left = 320
+    Top = 465
     Width = 97
     Height = 17
     Anchors = [akRight, akBottom]
@@ -269,26 +285,26 @@ object Form1: TForm1
     OnClick = CheckBox1Click
   end
   object Edit1: TEdit
-    Left = 318
-    Top = 503
+    Left = 320
+    Top = 498
     Width = 141
     Height = 21
     Anchors = [akRight, akBottom]
     TabOrder = 16
-    Text = 'PHP 4'
+    Text = 'Php 4'
   end
   object Edit2: TEdit
-    Left = 317
-    Top = 543
+    Left = 319
+    Top = 538
     Width = 141
     Height = 21
     Anchors = [akRight, akBottom]
     TabOrder = 17
-    Text = 'PHP 5'
+    Text = 'Php 5'
   end
   object Button8: TButton
     Left = 4
-    Top = 592
+    Top = 611
     Width = 45
     Height = 17
     Anchors = [akLeft, akBottom]
@@ -298,8 +314,8 @@ object Form1: TForm1
   end
   object ComboBox1: TComboBox
     Left = 92
-    Top = 592
-    Width = 367
+    Top = 611
+    Width = 369
     Height = 21
     Anchors = [akLeft, akRight, akBottom]
     ItemHeight = 13
@@ -308,16 +324,16 @@ object Form1: TForm1
   end
   object pb: TProgressBar
     Left = 4
-    Top = 584
-    Width = 310
+    Top = 603
+    Width = 312
     Height = 9
     Anchors = [akLeft, akRight, akBottom]
     Smooth = True
     TabOrder = 20
   end
   object Button9: TButton
-    Left = 317
-    Top = 380
+    Left = 319
+    Top = 375
     Width = 133
     Height = 21
     Anchors = [akRight, akBottom]
@@ -326,7 +342,7 @@ object Form1: TForm1
     OnClick = Button9Click
   end
   object Button6: TButton
-    Left = 399
+    Left = 401
     Top = 4
     Width = 57
     Height = 25
@@ -336,7 +352,7 @@ object Form1: TForm1
     OnClick = Button6Click
   end
   object Memo2: TMemo
-    Left = 317
+    Left = 319
     Top = 256
     Width = 142
     Height = 45
@@ -349,7 +365,7 @@ object Form1: TForm1
   end
   object Button10: TButton
     Left = 52
-    Top = 592
+    Top = 611
     Width = 45
     Height = 17
     Anchors = [akLeft, akBottom]
@@ -358,7 +374,7 @@ object Form1: TForm1
     OnClick = Button10Click
   end
   object peclbox: TCheckBox
-    Left = 414
+    Left = 416
     Top = 60
     Width = 44
     Height = 17
@@ -367,16 +383,22 @@ object Form1: TForm1
     TabOrder = 25
   end
   object Memo3: TMemo
-    Left = 317
+    Left = 319
     Top = 304
-    Width = 142
-    Height = 70
+    Width = 80
+    Height = 69
     Anchors = [akTop, akRight, akBottom]
-    Lines.Strings = (
-      'Memo'
-      '2')
     ScrollBars = ssBoth
     TabOrder = 26
+  end
+  object Memo4: TMemo
+    Left = 407
+    Top = 304
+    Width = 56
+    Height = 69
+    Anchors = [akTop, akRight, akBottom]
+    ScrollBars = ssBoth
+    TabOrder = 27
   end
   object OpenDialog1: TOpenDialog
     Left = 28

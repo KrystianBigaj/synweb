@@ -1,6 +1,6 @@
-  Html_TagID_Script = 69;
-  Html_TagID_Style = 75;
-  Html_TagMaxKeyHash = 128;
+  HtmlTagID_Script = 69;
+  HtmlTagID_Style = 75;
+  HtmlTagMaxKeyHash = 128;
 
   TSynWeb_Tags:array[0..91] of String=(
     'a', 'abbr', 'acronym', 'address', 'applet', 'area', 'b', 'base', 'basefont', 

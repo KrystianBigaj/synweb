@@ -42,7 +42,7 @@ type
     procedure FormShow(Sender: TObject);
   private
     KeyList: TList;
-    appdir:string;
+    appdir:String;
     procedure MakeHashTable;
     procedure ClearLists;
   public
@@ -160,7 +160,7 @@ var
   n:TTreeNode;
   i, x, t:Integer;
   s, s1,s2:TStringList; 
-  ss1,ss2:string;
+  ss1,ss2:String;
 begin
   s:=TStringList.Create;
   s1:=TStringList.Create;
@@ -212,17 +212,17 @@ begin
 
   if form1.iss.Checked then
   begin
-    s1.Insert(0,Format('  Css_SpecialID_Auto = %d;',[s.IndexOf('auto')]));
-    s1.Insert(0,Format('  Css_SpecialID_Url = %d;',[s.IndexOf('url')]));
-    s1.Insert(0,Format('  Css_SpecialID_Lang = %d;',[s.IndexOf('lang')]));
-    s1.Insert(0,Format('  Css_SpecialID_Important = %d;',[s.IndexOf('important')]));
-    s1.Insert(0,Format('  Css_SpecialID_Charset = %d;',[s.IndexOf('charset')]));
-    s1.Insert(0,Format('  Css_SpecialID_Page = %d;',[s.IndexOf('page')]));
-    s1.Insert(0,Format('  Css_SpecialID_Media = %d;',[s.IndexOf('media')]));
-    s1.Insert(0,Format('  Css_SpecialID_Import = %d;',[s.IndexOf('import')]));
-    s1.Insert(0,Format('  Css_SpecialMaxKeyHash = %d;',[x]));
+    s1.Insert(0,Format('  CssSpecialID_Auto = %d;',[s.IndexOf('auto')]));
+    s1.Insert(0,Format('  CssSpecialID_Url = %d;',[s.IndexOf('url')]));
+    s1.Insert(0,Format('  CssSpecialID_Lang = %d;',[s.IndexOf('lang')]));
+    s1.Insert(0,Format('  CssSpecialID_Important = %d;',[s.IndexOf('important')]));
+    s1.Insert(0,Format('  CssSpecialID_Charset = %d;',[s.IndexOf('charset')]));
+    s1.Insert(0,Format('  CssSpecialID_Page = %d;',[s.IndexOf('page')]));
+    s1.Insert(0,Format('  CssSpecialID_Media = %d;',[s.IndexOf('media')]));
+    s1.Insert(0,Format('  CssSpecialID_Import = %d;',[s.IndexOf('import')]));
+    s1.Insert(0,Format('  CssSpecialMaxKeyHash = %d;',[x]));
   end else
-    s1.Insert(0,Format('  Css_PropMaxKeyHash = %d;',[x]));
+    s1.Insert(0,Format('  CssPropMaxKeyHash = %d;',[x]));
 
   s2[s2.Count-1]:=Copy(s2[s2.Count-1],1,Length(s2[s2.Count-1])-2);
   if form1.iss.Checked then
@@ -241,15 +241,15 @@ begin
 
   if form1.iss.Checked then   
     GenerateInc(s,'Boolean', 'True', 'False',
-      'CSS_SpecialFunc', 'CSS_SpecialUndef',
-      'fCSS_SpecialIdentFuncTable', 'CSS_SpecialKeyComp',
+      'CssSpecialFunc', 'CssSpecialUndef',
+      'FCssSpecialIdentFuncTable', 'CssSpecialKeyComp',
       appdir+'..\SynHighlighterWeb_CssSpecialFunc.inc',
       appdir+'..\SynHighlighterWeb_CssSpecialFuncList.inc',
       appdir+'..\SynHighlighterWeb_CssSpecialFuncTable.inc')
   else                                                     
-    GenerateInc(s,'TtkTokenKind', 'tkCssProp', 'tkCssPropUndef',
-      'CSS_PropFunc', 'Css_PropUndef',
-      'fCSS_PropIdentFuncTable', 'CSS_PropKeyComp',
+    GenerateInc(s,'TSynWebTokenKind', 'stkCssProp', 'stkCssPropUndef',
+      'CssPropFunc', 'CssPropUndef',
+      'FCssPropIdentFuncTable', 'CssPropKeyComp',
       appdir+'..\SynHighlighterWeb_CssPropsFunc.inc',
       appdir+'..\SynHighlighterWeb_CssPropsFuncList.inc',
       appdir+'..\SynHighlighterWeb_CssPropsFuncTable.inc');
@@ -269,11 +269,11 @@ var
   sl:TStringList;
   n1,n2:TTreeNode;
   p:array[0..300] of array[0..1] of array[0..3] of Longword;
-  i,j,k,l:LongWord;
+  i,j,k,l:Longword;
   x:Integer;
   s:String;    
   s1,s2:TStringList;  
-  ss1,ss2:string;
+  ss1,ss2:String;
 
   function si(C:Char):String;
   begin
@@ -369,10 +369,10 @@ begin
     if KeyHash(sl[i])>x then
       x:=KeyHash(sl[i]);
   s1.Insert(0,'');
-  s1.Insert(0,Format('  Css_ValID_Rect = %d;',[sl.IndexOf('rect')]));
-  s1.Insert(0,Format('  Css_ValID_Url = %d;',[sl.IndexOf('url')]));
-  s1.Insert(0,Format('  Css_ValID_Rgb = %d;',[sl.IndexOf('rgb')]));
-  s1.Insert(0,Format('  Css_ValMaxKeyHash = %d;',[x]));
+  s1.Insert(0,Format('  CssValID_Rect = %d;',[sl.IndexOf('rect')]));
+  s1.Insert(0,Format('  CssValID_Url = %d;',[sl.IndexOf('url')]));
+  s1.Insert(0,Format('  CssValID_Rgb = %d;',[sl.IndexOf('rgb')]));
+  s1.Insert(0,Format('  CssValMaxKeyHash = %d;',[x]));
 
 //  Form3.Memo2.Lines[Form3.Memo2.Lines.Count-1]:=Copy(Form3.Memo2.Lines[Form3.Memo2.Lines.Count-1],1,Length(Form3.Memo2.Lines[Form3.Memo2.Lines.Count-1])-1);
   s2.Insert(0,format('  TSynWeb_CssValsData:array[0..%d] of array[0..%d] of array[0..%d] of Longword=(',[sl.Count-1,2-1,4-1]));
@@ -382,9 +382,9 @@ begin
   s1.AddStrings(s2);
   s1.SaveToFile(appdir+'..\SynHighlighterWeb_CssVals.inc');
     
-  GenerateInc(sl,'TtkTokenKind', 'tkCssVal', 'tkCssValUndef',
-    'CSS_ValFunc', 'CSS_ValUndef',
-    'fCSS_ValIdentFuncTable', 'CSS_ValKeyComp',
+  GenerateInc(sl,'TSynWebTokenKind', 'stkCssVal', 'stkCssValUndef',
+    'CssValFunc', 'CssValUndef',
+    'FCssValIdentFuncTable', 'CssValKeyComp',
     appdir+'..\SynHighlighterWeb_CssValsFunc.inc',
     appdir+'..\SynHighlighterWeb_CssValsFuncList.inc',
     appdir+'..\SynHighlighterWeb_CssValsFuncTable.inc');
@@ -434,7 +434,7 @@ var
   i,ia:Integer;
   l:TLexKeys;
   nf:TStringList;
-  stemp:string;
+  stemp:String;
 begin
   AKeys.Sort;
   ClearLists;
@@ -474,14 +474,14 @@ begin
 
   I := 0;
   nf:=TStringList.Create;
-  nf.add(Format('function TSynWebSyn.%s: %s;',[AFuncUndef, AResType]));
+  nf.add(Format('function TSynWebEngine.%s: %s;',[AFuncUndef, AResType]));
   nf.add('begin');
   nf.add(Format('  Result:=%s;',[AResFalse]));
   nf.add('end;');
   nf.add('');
   while I < KeyList.Count do
   begin
-    nf.add(Format('function TSynWebSyn.%s%d: %s;',[AFunc,TLexKeys(KeyList[I]).Key,AResType]));
+    nf.add(Format('function TSynWebEngine.%s%d: %s;',[AFunc,TLexKeys(KeyList[I]).Key,AResType]));
     nf.add('begin');
     //nf.add('  if');
     ia:=nf.Count;

@@ -215,8 +215,8 @@ object Form1: TForm1
     Top = 280
   end
   object SaveDialog1: TSaveDialog
-    Left = 40
-    Top = 292
+    Left = 28
+    Top = 312
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup

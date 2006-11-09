@@ -5,20 +5,26 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Menus, IniFiles32, clipbrd, ExtCtrls, RegExpr,
-  TestParser;
+  SynHighlighterCpp;
 
 var
   mKeyHashTable: array[#0..#255] of Integer;
 
 type
-  TLexKeys = Class
+  TLexKeys = class
   public
     KeyIndex: Integer;
     Key: Integer;
     Data: Pointer;
-
   end;
-  
+
+  TMatchFn = record
+    freturn, fname, fparam, fdesc, fphp: string;
+    fimp: Boolean;
+    falias: Boolean;
+    fclassmethod: Boolean;
+  end;
+
 type
   TForm1 = class(TForm)
     TreeView1: TTreeView;
@@ -68,6 +74,8 @@ type
     Button10: TButton;
     peclbox: TCheckBox;
     Memo3: TMemo;
+    Memo4: TMemo;
+    Label6: TLabel;
     procedure TreeView1Compare(Sender: TObject; Node1, Node2: TTreeNode;
       Data: Integer; var Compare: Integer);
     procedure Button4Click(Sender: TObject);
@@ -78,7 +86,7 @@ type
     procedure Button14Click(Sender: TObject);
     procedure Button13Click(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
-    procedure HTML401Strict1Click(Sender: TObject);
+    procedure Html401Strict1Click(Sender: TObject);
     procedure Button18Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure php4Click(Sender: TObject);
@@ -93,22 +101,23 @@ type
     procedure FormShow(Sender: TObject);
     procedure Button10Click(Sender: TObject);
   private
-    pn:TTreeNode;
+    pn: TTreeNode;
     KeyList: TList;
-    appdir:string;
+    appdir: string;
     procedure MakeHashTable;
     procedure ClearLists;
   public
-    function KeyHash(ToHash: String): Integer;
-    procedure GenerateInc(AKeys:TStringList; AFileFunc, AFileFuncList, AFileFuncTable: String);
-    function nGetBit(n:TTreeNode; b:Integer):Boolean;
-    procedure nSetBit(n:TTreeNode; b:Integer);
-    procedure nClearBit(n:TTreeNode; b:Integer);
-    procedure nSwitchBit(n:TTreeNode; b:Integer);
-    procedure AddAtrib(n:TTreeNode; s:String);
-    function AddTag(s:String; b:Integer):TTreeNode;
-    procedure nSetType(n:TTreeNode; b:Integer);
-    procedure get_parsefiles(ADir:String; AStringList:TStringList);
+    function KeyHash(ToHash: string): Integer;
+    procedure GenerateInc(AKeys: TStringList; AFileFunc, AFileFuncList,
+      AFileFuncTable: string);
+    function nGetBit(n: TTreeNode; b: Integer): Boolean;
+    procedure nSetBit(n: TTreeNode; b: Integer);
+    procedure nClearBit(n: TTreeNode; b: Integer);
+    procedure nSwitchBit(n: TTreeNode; b: Integer);
+    procedure AddAtrib(n: TTreeNode; s: string);
+    function AddTag(s: string; b: Integer): TTreeNode;
+    procedure nSetType(n: TTreeNode; b: Integer);
+    procedure get_parsefiles(ADir: string; AStringList: TStringList);
   end;
 
 var
@@ -124,23 +133,20 @@ function CompareKeys(Item1, Item2: Pointer): Integer;
 begin
   if TLexKeys(Item1).Key < TLexKeys(Item2).Key then
     Result := -1
+  else if TLexKeys(Item1).Key > TLexKeys(Item2).Key then
+    Result := 1
+  else if (Longword(TLexKeys(Item1).Data) and (1 shl 0) <> 0) and
+    (Longword(TLexKeys(Item2).Data) and (1 shl 0) = 0) then
+    Result := -1
+  else if (Longword(TLexKeys(Item1).Data) and (1 shl 0) = 0) and
+    (Longword(TLexKeys(Item2).Data) and (1 shl 0) <> 0) then
+    Result := 1
+  else if TLexKeys(Item1).KeyIndex < TLexKeys(Item2).KeyIndex then
+    Result := -1
+  else if TLexKeys(Item1).KeyIndex > TLexKeys(Item2).KeyIndex then
+    Result := 1
   else
-    if TLexKeys(Item1).Key > TLexKeys(Item2).Key then
-      Result := 1
-    else
-      if (Longword(TLexKeys(Item1).Data)and(1 shl 0)<>0) and (Longword(TLexKeys(Item2).Data)and(1 shl 0)=0) then
-        Result := -1
-      else
-        if (Longword(TLexKeys(Item1).Data)and(1 shl 0)=0) and (Longword(TLexKeys(Item2).Data)and(1 shl 0)<>0) then
-          Result := 1
-        else
-          if TLexKeys(Item1).KeyIndex < TLexKeys(Item2).KeyIndex then
-            Result := -1
-          else
-            if TLexKeys(Item1).KeyIndex > TLexKeys(Item2).KeyIndex then
-              Result := 1
-            else
-              Result := 0;
+    Result := 0;
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -157,46 +163,46 @@ end;
 
 procedure TForm1.Button4Click(Sender: TObject);
 begin
-  if TreeView1.Selected<>nil then
+  if TreeView1.Selected <> nil then
     TreeView1.Selected.Delete;
   TreeView1.SetFocus;
 end;
 
 procedure TForm1.Button11Click(Sender: TObject);
 var
-  t,a:Integer;
-  attr:TStringList;
-  n1:TTreeNode;
-{
-  procedure lcheck;
-  var
-    n3:TTreeNode;
-  begin
-    n3:=n2.getNextSibling;
-    while n3<>nil do
+  t, a: Integer;
+  attr: TStringList;
+  n1: TTreeNode;
+  {
+    procedure lcheck;
+    var
+      n3:TTreeNode;
     begin
-      if n3.Level=1 then
-        if n2.Text=n3.Text then
-          if(nGetBit(n2,0)<>nGetBit(n3,0))or
-            (nGetBit(n2,1)<>nGetBit(n3,1))or
-            (nGetBit(n2,2)<>nGetBit(n3,2))or
-            (nGetBit(n2,3)<>nGetBit(n3,3))or
-            (nGetBit(n2,4)<>nGetBit(n3,4))or
-            (nGetBit(n2,5)<>nGetBit(n3,5)) then
-          begin
-           Form3.Memo1.Lines.Add(format('Attr: %s (tag: %s)<>%s (tag: %s)',[n2.Text,n2.Parent.Text,n3.Text,n3.Parent.Text]));
-           break;
-          end;
-      n3:=n3.GetNext;
+      n3:=n2.getNextSibling;
+      while n3<>nil do
+      begin
+        if n3.Level=1 then
+          if n2.Text=n3.Text then
+            if(nGetBit(n2,0)<>nGetBit(n3,0))or
+              (nGetBit(n2,1)<>nGetBit(n3,1))or
+              (nGetBit(n2,2)<>nGetBit(n3,2))or
+              (nGetBit(n2,3)<>nGetBit(n3,3))or
+              (nGetBit(n2,4)<>nGetBit(n3,4))or
+              (nGetBit(n2,5)<>nGetBit(n3,5)) then
+            begin
+             Form3.Memo1.Lines.Add(format('Attr: %s (tag: %s)<>%s (tag: %s)',[n2.Text,n2.Parent.Text,n3.Text,n3.Parent.Text]));
+             break;
+            end;
+        n3:=n3.GetNext;
+      end;
     end;
-  end;
-}
+  }
 begin
-  attr:=TStringList.Create;
-  t:=0;
-  a:=0;
-  n1:=TreeView1.Items.GetFirstNode;
-  while n1<>nil do
+  attr := TStringList.Create;
+  t := 0;
+  a := 0;
+  n1 := TreeView1.Items.GetFirstNode;
+  while n1 <> nil do
   begin
     Inc(t);
     {n2:=n1.getFirstChild;
@@ -209,9 +215,9 @@ begin
       end;
       n2:=n2.GetNextChild(n2);
     end; }
-    n1:=n1.GetNextChild(n1);
+    n1 := n1.GetNextChild(n1);
   end;
-  Label1.Caption:=format('%d %d',[t,a]);
+  Label1.Caption := format('%d %d', [t, a]);
   attr.Free;
 end;
 
@@ -222,34 +228,38 @@ end;
 
 procedure TForm1.Button14Click(Sender: TObject);
 var
-  ini:TIniFile32;
-  t,a:Integer;
-  n1,n2:TTreeNode;
+  ini: TIniFile32;
+  t, a: Integer;
+  n1, n2: TTreeNode;
 begin
   if not OpenDialog1.Execute then
     Exit;
   TreeView1.Items.BeginUpdate;
   TreeView1.Items.Clear;
-  ini:=TIniFile32.Create(OpenDialog1.FileName);
+  ini := TIniFile32.Create(OpenDialog1.FileName);
   ini.BeginUpdate;
-  if ini.ReadInteger('Config','IsPHP',0)<>1 then
+  if ini.ReadInteger('Config', 'IsPhp', 0) <> 1 then
   begin
-    ShowMessage('This is not PHP-Config FILE!');
+    ShowMessage('This is not Php-Config FILE!');
     ini.Free;
     Exit;
   end;
-  for t:=0 to ini.ReadInteger('Config','Tags',0)-1 do
+  for t := 0 to ini.ReadInteger('Config', 'Tags', 0) - 1 do
   begin
-    n1:=TreeView1.Items.AddChild(nil,ini.ReadString(format('TAG_%d',[t]),'Name','!!! ERROR !!!'));
-    n1.Data:=Pointer(StrToInt(ini.ReadString(format('TAG_%d',[t]),'Data','!!! ERROR !!!')));
-    for a:=0 to ini.ReadInteger(format('TAG_%d',[t]),'Attr_Count',0)-1 do
+    n1 := TreeView1.Items.AddChild(nil, ini.ReadString(format('TAG_%d', [t]),
+      'Name', '!!! ERROR !!!'));
+    n1.Data := Pointer(StrToInt(ini.ReadString(format('TAG_%d', [t]), 'Data',
+      '!!! ERROR !!!')));
+    for a := 0 to ini.ReadInteger(format('TAG_%d', [t]), 'Attr_Count', 0) - 1 do
     begin
-      n2:=TreeView1.Items.AddChild(n1,ini.ReadString(format('TAG_%d',[t]),Format('Attr_%d_Name',[a]),'!!! ERROR !!!'));
-      n2.Data:=Pointer(StrToInt(ini.ReadString(format('TAG_%d',[t]),Format('Attr_%d_Data',[a]),'!!! ERROR !!!')));
+      n2 := TreeView1.Items.AddChild(n1, ini.ReadString(format('TAG_%d', [t]),
+        Format('Attr_%d_Name', [a]), '!!! ERROR !!!'));
+      n2.Data := Pointer(StrToInt(ini.ReadString(format('TAG_%d', [t]),
+        Format('Attr_%d_Data', [a]), '!!! ERROR !!!')));
     end;
   end;
-  Edit1.Text:=ini.ReadString('Config','vPHP4','PHP 4');
-  Edit2.Text:=ini.ReadString('Config','vPHP5','PHP 5');
+  Edit1.Text := ini.ReadString('Config', 'vPhp4', 'Php 4');
+  Edit2.Text := ini.ReadString('Config', 'vPhp5', 'Php 5');
   ini.EndUpdate;
   ini.Free;
   TreeView1.Items.EndUpdate;
@@ -257,218 +267,221 @@ end;
 
 procedure TForm1.Button13Click(Sender: TObject);
 var
-  f:TStringList;
-  t:Integer;
-  n1:TTreeNode;
+  f: TStringList;
+  t: Integer;
+  n1: TTreeNode;
 
-  procedure SaveNode(node:TTreeNode);
+  procedure SaveNode(node: TTreeNode);
   var
-    x:Integer;
-    fn:TTreeNode;
+    x: Integer;
+    fn: TTreeNode;
   begin
-    fn:=node.getFirstChild;
-    x:=node.Count;
-    f.Add(StringReplace(StringReplace(node.Text,#13,'',[rfReplaceAll]),#10,'',[rfReplaceAll]));
-    f.Add('$'+IntToHex(Longword(node.Data),8));
+    fn := node.getFirstChild;
+    x := node.Count;
+    f.Add(StringReplace(StringReplace(node.Text, #13, '', [rfReplaceAll]), #10,
+      '', [rfReplaceAll]));
+    f.Add('$' + IntToHex(Longword(node.Data), 8));
     f.Add(inttostr(x));
-    while fn<>nil do
+    while fn <> nil do
     begin
       SaveNode(fn);
-      fn:=fn.GetNextChild(fn);
+      fn := fn.GetNextChild(fn);
     end;
   end;
 
 begin
   if not SaveDialog1.Execute then
     Exit;
-  f:=TStringList.Create; // (SaveDialog1.FileName, fmCreate)
-  f.Add('IsPHP=1');
+  f := TStringList.Create; // (SaveDialog1.FileName, fmCreate)
+  f.Add('IsPhp=1');
   f.Add(Edit1.Text);
   f.Add(Edit2.Text);
-  t:=0;
-  n1:=TreeView1.Items.GetFirstNode;
-  while n1<>nil do
+  t := 0;
+  n1 := TreeView1.Items.GetFirstNode;
+  while n1 <> nil do
   begin
     SaveNode(n1);
-    n1:=n1.GetNextChild(n1);
+    n1 := n1.GetNextChild(n1);
     Inc(t);
   end;
-  f.Insert(3,inttostr(t));
+  f.Insert(3, inttostr(t));
   f.SaveToFile(SaveDialog1.FileName);
   f.Free;
 end;
 
 procedure TForm1.PopupMenu1Popup(Sender: TObject);
 begin
-  pn:=TreeView1.Selected;
-  keyword1.Enabled:=pn<>nil;
-  const1.Enabled:=pn<>nil;
-  function1.Enabled:=pn<>nil;
-  var1.Enabled:=pn<>nil;
-  
-  php4.Enabled:=pn<>nil;
-  php5.Enabled:=pn<>nil;
-  
-  keyword1.Checked:=nGetBit(pn, keyword1.Tag);
-  const1.Checked:=nGetBit(pn, const1.Tag);
-  function1.Checked:=nGetBit(pn, function1.Tag);
-  var1.Checked:=nGetBit(pn, var1.Tag);
+  pn := TreeView1.Selected;
+  keyword1.Enabled := pn <> nil;
+  const1.Enabled := pn <> nil;
+  function1.Enabled := pn <> nil;
+  var1.Enabled := pn <> nil;
 
-  php4.Checked:=nGetBit(pn, php4.Tag);
-  php5.Checked:=nGetBit(pn, php5.Tag);
+  php4.Enabled := pn <> nil;
+  php5.Enabled := pn <> nil;
 
-  pecl.Checked:=nGetBit(pn, pecl.Tag);
-  alias.Checked:=nGetBit(pn, alias.Tag);
+  keyword1.Checked := nGetBit(pn, keyword1.Tag);
+  const1.Checked := nGetBit(pn, const1.Tag);
+  function1.Checked := nGetBit(pn, function1.Tag);
+  var1.Checked := nGetBit(pn, var1.Tag);
+
+  php4.Checked := nGetBit(pn, php4.Tag);
+  php5.Checked := nGetBit(pn, php5.Tag);
+
+  pecl.Checked := nGetBit(pn, pecl.Tag);
+  alias.Checked := nGetBit(pn, alias.Tag);
 end;
 
-procedure TForm1.HTML401Strict1Click(Sender: TObject);
+procedure TForm1.Html401Strict1Click(Sender: TObject);
 begin
-  nSwitchBit(pn,TMenuItem(Sender).Tag);
-  TreeView1.Selected:=pn;
+  nSwitchBit(pn, TMenuItem(Sender).Tag);
+  TreeView1.Selected := pn;
 end;
 
 procedure TForm1.nClearBit(n: TTreeNode; b: Integer);
 begin
-  if n<>nil then
-    n.Data:=Pointer(Longword(n.Data) and (not (1 shl b)));
+  if n <> nil then
+    n.Data := Pointer(Longword(n.Data) and (not (1 shl b)));
 end;
 
 function TForm1.nGetBit(n: TTreeNode; b: Integer): Boolean;
-begin             
-  if n<>nil then
-    Result:=Longword(n.Data) and (1 shl b)>0
+begin
+  if n <> nil then
+    Result := Longword(n.Data) and (1 shl b) > 0
   else
-    Result:=False;
+    Result := False;
 end;
 
 procedure TForm1.nSetBit(n: TTreeNode; b: Integer);
 begin
-  if n<>nil then
-    n.Data:=Pointer(Integer(n.Data) or (1 shl b));
+  if n <> nil then
+    n.Data := Pointer(Integer(n.Data) or (1 shl b));
 end;
 
 procedure TForm1.nSwitchBit(n: TTreeNode; b: Integer);
 begin
-  if n<>nil then
-    n.Data:=Pointer(Integer(n.Data) xor (1 shl b));
+  if n <> nil then
+    n.Data := Pointer(Integer(n.Data) xor (1 shl b));
 end;
 
-procedure TForm1.AddAtrib(n:TTreeNode; s:String);
+procedure TForm1.AddAtrib(n: TTreeNode; s: string);
 var
-  nn:TTreeNode;
+  nn: TTreeNode;
 begin
-  if n=nil then
+  if n = nil then
     Exit;
-  while n.Level<>0 do
-    n:=n.Parent;
-  TreeView1.Selected:=n;
-  s:=LowerCase(Trim(s));
-  nn:=n.getFirstChild;
-  while nn<>nil do
-    if s=nn.Text then
+  while n.Level <> 0 do
+    n := n.Parent;
+  TreeView1.Selected := n;
+  s := LowerCase(Trim(s));
+  nn := n.getFirstChild;
+  while nn <> nil do
+    if s = nn.Text then
       break
     else
-      nn:=n.GetNextChild(nn);
-  if nn=nil then
-    nn:=TreeView1.Items.AddChild(n,s);
-//  nSetBit(nn,ComboBox1.ItemIndex);
+      nn := n.GetNextChild(nn);
+  if nn = nil then
+    nn := TreeView1.Items.AddChild(n, s);
+  //  nSetBit(nn,ComboBox1.ItemIndex);
   nn.MakeVisible;
   TreeView1.SetFocus;
 end;
 
-function TForm1.AddTag(s: String; b:Integer):TTreeNode;
+function TForm1.AddTag(s: string; b: Integer): TTreeNode;
 var
-  n:TTreeNode;
+  n: TTreeNode;
 begin
-  Result:=nil;
-  s:=(Trim(s));
-  if s='' then
+  Result := nil;
+  s := (Trim(s));
+  if s = '' then
     exit;
-  n:=TreeView1.Items.GetFirstNode;
-  while n<>nil do
-    if s=n.Text then
+  n := TreeView1.Items.GetFirstNode;
+  while n <> nil do
+    if s = n.Text then
       break
     else
-      n:=n.GetNextChild(n);
-  if n=nil then
-    n:=TreeView1.Items.AddChild(nil,s);
-  if b<>3 then
-    n.Selected:=True;
-  Result:=n;
+      n := n.GetNextChild(n);
+  if n = nil then
+    n := TreeView1.Items.AddChild(nil, s);
+  if b <> 3 then
+    n.Selected := True;
+  Result := n;
 
   if php4box.Checked then
-    nSetBit(n,php4.Tag);
+    nSetBit(n, php4.Tag);
   if php5box.Checked then
-    nSetBit(n,php5.Tag);
+    nSetBit(n, php5.Tag);
   if peclbox.Checked then
-    nSetBit(n,pecl.Tag);
+    nSetBit(n, pecl.Tag);
 
-  nSetType(n,b);
+  nSetType(n, b);
 end;
 
 procedure TForm1.Button18Click(Sender: TObject);
 var
-  n:TTreeNode;
-  i, x, t:Integer;
-  s, s1,s2:TStringList;
-  ss1,ss2:string;
+  n: TTreeNode;
+  i, x, t: Integer;
+  s, s1, s2: TStringList;
+  ss1, ss2: string;
 begin
   Button12Click(nil);
-  s:=TStringList.Create;
-  s1:=TStringList.Create;
-  s2:=TStringList.Create;
-  s.Add(Format('    ''%s'',',[Edit1.Text]));
-  s.Add(Format('    ''%s''',[Edit2.Text]));
-  s.SaveToFile(appdir+'..\SynHighlighterWeb_PhpVersion.inc');
+  s := TStringList.Create;
+  s1 := TStringList.Create;
+  s2 := TStringList.Create;
+  s.Add(Format('    ''%s'',', [Edit1.Text]));
+  s.Add(Format('    ''%s''', [Edit2.Text]));
+  s.SaveToFile(appdir + '..\SynHighlighterWeb_PhpVersion.inc');
   s.Clear;
-  n:=form1.TreeView1.Items.GetFirstNode;
-  t:=0;
-  ss1:='    ';
-  ss2:='    ';
-  while n<>nil do
+  n := form1.TreeView1.Items.GetFirstNode;
+  t := 0;
+  ss1 := '    ';
+  ss2 := '    ';
+  while n <> nil do
   begin
     if nGetBit(n, keyword1.Tag) or nGetBit(n, function1.Tag) then
     begin
-      s.AddObject(n.Text,TObject(n.Data));
-  //    s1.Add(Format('    //%4.d',[t]));
-  //    s1.Add(Forma('    ''%s'',',[n.Text]));
-      if Length(ss1+n.Text+',')>80 then
+      s.AddObject(n.Text, TObject(n.Data));
+      //    s1.Add(Format('    //%4.d',[t]));
+      //    s1.Add(Forma('    ''%s'',',[n.Text]));
+      if Length(ss1 + n.Text + ',') > 80 then
       begin
         s1.Add(ss1);
-        ss1:='    ';
+        ss1 := '    ';
       end;
-      ss1:=Format('%s''%s'', ',[ss1,n.Text]);
+      ss1 := Format('%s''%s'', ', [ss1, n.Text]);
 
       //s2.Add(Format('    //%4.d: %s',[t,n.Text]));
       //s2.Add(Format('    $%s,',[IntToHex(Longword(n.Data),8)]));
-      if Length(ss2+IntToHex(Longword(n.Data),8)+',')>80 then
+      if Length(ss2 + IntToHex(Longword(n.Data), 8) + ',') > 80 then
       begin
         s2.Add(ss2);
-        ss2:='    ';
+        ss2 := '    ';
       end;
-      ss2:=Format('%s$%s, ',[ss2,IntToHex(Longword(n.Data),8)]);
+      ss2 := Format('%s$%s, ', [ss2, IntToHex(Longword(n.Data), 8)]);
       inc(t);
     end;
-    n:=n.GetNextChild(n);
+    n := n.GetNextChild(n);
   end;
-  if ss1<>'' then
+  if ss1 <> '' then
     s1.Add(ss1);
-  if ss2<>'' then
+  if ss2 <> '' then
     s2.Add(ss2);
-  s1[s1.Count-1]:=Copy(s1[s1.Count-1],1,Length(s1[s1.Count-1])-2);
-  s1.Insert(0,format('  TSynWeb_PhpKeywords:array[0..%d] of String=(',[t-1]));
+  s1[s1.Count - 1] := Copy(s1[s1.Count - 1], 1, Length(s1[s1.Count - 1]) - 2);
+  s1.Insert(0, format('  TSynWeb_PhpKeywords:array[0..%d] of String=(', [t -
+    1]));
   s1.Add('    );');
 
-  x:=KeyHash(s[0]);
-  for i:=1 to s.Count-1 do
-    if KeyHash(s[i])>x then
-      x:=KeyHash(s[i]);
-  s1.Insert(0,'');
+  x := KeyHash(s[0]);
+  for i := 1 to s.Count - 1 do
+    if KeyHash(s[i]) > x then
+      x := KeyHash(s[i]);
+  s1.Insert(0, '');
 
-  s1.Insert(0,Format('  Php_KeywordsMaxKeyHash = %d;',[x]));
+  s1.Insert(0, Format('  PhpKeywordsMaxKeyHash = %d;', [x]));
 
-  s2[s2.Count-1]:=Copy(s2[s2.Count-1],1,Length(s2[s2.Count-1])-2);
-  s2.Insert(0,format('  TSynWeb_PhpKeywordsData:array[0..%d] of Longword=(',[t-1]));
+  s2[s2.Count - 1] := Copy(s2[s2.Count - 1], 1, Length(s2[s2.Count - 1]) - 2);
+  s2.Insert(0, format('  TSynWeb_PhpKeywordsData:array[0..%d] of Longword=(', [t
+    - 1]));
 
   s2.Add('    );');
 
@@ -477,282 +490,292 @@ begin
   s1.SaveToFile('..\SynHighlighterWeb_PhpKeywords.inc');
 
   GenerateInc(s,
-      appdir+'..\SynHighlighterWeb_PhpKeywordsFunc.inc',
-      appdir+'..\SynHighlighterWeb_PhpKeywordsFuncList.inc',
-      appdir+'..\SynHighlighterWeb_PhpKeywordsFuncTable.inc');
+    appdir + '..\SynHighlighterWeb_PhpKeywordsFunc.inc',
+    appdir + '..\SynHighlighterWeb_PhpKeywordsFuncList.inc',
+    appdir + '..\SynHighlighterWeb_PhpKeywordsFuncTable.inc');
 
   s2.Free;
   s1.Free;
   s.Free;
-  if ParamCount<>1 then
+  if ParamCount <> 1 then
     ShowMessage('Done.');
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);
 
 begin
-  while Memo1.Lines.Count>0 do
+  while Memo1.Lines.Count > 0 do
   begin
-    AddTag(Memo1.Lines[0],TButton(Sender).Tag);
+    AddTag(Memo1.Lines[0], TButton(Sender).Tag);
     Memo1.Lines.Delete(0);
   end;
-    TreeView1.SetFocus;
+  TreeView1.SetFocus;
 end;
 
 procedure TForm1.php4Click(Sender: TObject);
 begin
-  nSetBit(TreeView1.Selected,TMenuItem(Sender).Tag);
+  nSetBit(TreeView1.Selected, TMenuItem(Sender).Tag);
 end;
 
 procedure TForm1.nSetType(n: TTreeNode; b: Integer);
 begin
-  if n=nil then
+  if n = nil then
     exit;
   case b of
-  0:
-    begin
-      nSetBit(n,keyword1.Tag);
-      nClearBit(n,const1.Tag);
-      nClearBit(n,var1.Tag);
-      nClearBit(n,function1.Tag);
-    end;
-  1:
-    begin
-      nClearBit(n,keyword1.Tag);
-      nSetBit(n,const1.Tag);
-      nClearBit(n,var1.Tag);
-      nClearBit(n,function1.Tag);
-    end;
-  2:
-    begin
-      nClearBit(n,keyword1.Tag);
-      nClearBit(n,const1.Tag);
-      nSetBit(n,var1.Tag);
-      nClearBit(n,function1.Tag);
-    end;
-  3:
-    begin
-      nClearBit(n,keyword1.Tag);
-      nClearBit(n,const1.Tag);
-      nClearBit(n,var1.Tag);
-      nSetBit(n,function1.Tag);
-    end;
+    0:
+      begin
+        nSetBit(n, keyword1.Tag);
+        nClearBit(n, const1.Tag);
+        nClearBit(n, var1.Tag);
+        nClearBit(n, function1.Tag);
+      end;
+    1:
+      begin
+        nClearBit(n, keyword1.Tag);
+        nSetBit(n, const1.Tag);
+        nClearBit(n, var1.Tag);
+        nClearBit(n, function1.Tag);
+      end;
+    2:
+      begin
+        nClearBit(n, keyword1.Tag);
+        nClearBit(n, const1.Tag);
+        nSetBit(n, var1.Tag);
+        nClearBit(n, function1.Tag);
+      end;
+    3:
+      begin
+        nClearBit(n, keyword1.Tag);
+        nClearBit(n, const1.Tag);
+        nClearBit(n, var1.Tag);
+        nSetBit(n, function1.Tag);
+      end;
   end;
 end;
 
 procedure TForm1.keyword1Click(Sender: TObject);
 begin
-  nSetType(pn,TMenuItem(Sender).Tag);
+  nSetType(pn, TMenuItem(Sender).Tag);
 end;
 
 procedure TForm1.CheckBox1Click(Sender: TObject);
 begin
   if CheckBox1.Checked then
-    FormStyle:=fsStayOnTop
+    FormStyle := fsStayOnTop
   else
-    FormStyle:=fsNormal;
+    FormStyle := fsNormal;
 end;
 
 procedure TForm1.ComboBox1DropDown(Sender: TObject);
 var
-  f:TSearchRec;
-  s:string;
+  f: TSearchRec;
+  s: string;
 begin
-  s:=ExtractFilePath(Application.ExeName)+'..\!DOC\';
+  s := ExtractFilePath(Application.ExeName) + '..\!DOC\';
   ComboBox1.Clear;
-  if FindFirst(s+'*',faAnyFile,f)=0 then
+  if FindFirst(s + '*', faAnyFile, f) = 0 then
   begin
-    if (f.Attr and faDirectory=faDirectory) and (f.Name<>'.') and (f.Name<>'..') then
-      ComboBox1.Items.Add(s+f.Name);
-    while FindNext(f)=0 do         
-      if (f.Attr and faDirectory=faDirectory) and (f.Name<>'.') and (f.Name<>'..') then
-        ComboBox1.Items.Add(s+f.Name);
+    if (f.Attr and faDirectory = faDirectory) and (f.Name <> '.') and (f.Name <>
+      '..') then
+      ComboBox1.Items.Add(s + f.Name);
+    while FindNext(f) = 0 do
+      if (f.Attr and faDirectory = faDirectory) and (f.Name <> '.') and (f.Name
+        <> '..') then
+        ComboBox1.Items.Add(s + f.Name);
   end;
 end;
 
-procedure TForm1.get_parsefiles(ADir: String; AStringList:TStringList);
+procedure TForm1.get_parsefiles(ADir: string; AStringList: TStringList);
 var
-  f:TSearchRec;
-  r:TRegExpr;
+  f: TSearchRec;
+  r: TRegExpr;
 begin
-  if RightStr(ADir,1)<>'\' then
-    ADir:=ADir+'\';
-  if FindFirst(ADir+'*',faAnyFile,f)<>0 then
+  if RightStr(ADir, 1) <> '\' then
+    ADir := ADir + '\';
+  if FindFirst(ADir + '*', faAnyFile, f) <> 0 then
     Exit;
-  r:=TRegExpr.Create;
-  r.ModifierStr:='i';
-  r.Expression:='\.(c|cpp|h|ec)$';
+  r := TRegExpr.Create;
+  r.ModifierStr := 'i';
+  r.Expression := '\.(c|cpp|h|ec)$';
   repeat
-    if (f.Name<>'.') and (f.Name<>'..') then
-      if f.Attr and faDirectory=faDirectory then
-        get_parsefiles(ADir+f.Name,AStringList)
-      else
-        if r.Exec(ADir+f.Name) then
-          AStringList.Add(ADir+f.Name);
-  until FindNext(f)<>0;
+    if (f.Name <> '.') and (f.Name <> '..') then
+      if f.Attr and faDirectory = faDirectory then
+        get_parsefiles(ADir + f.Name, AStringList)
+      else if r.Exec(ADir + f.Name) then
+        AStringList.Add(ADir + f.Name);
+  until FindNext(f) <> 0;
   r.Free;
 end;
 
 procedure TForm1.Button8Click(Sender: TObject);
 const
-  lx_:array[0..7] of Char=('|', '/', '-', '\', '|', '/', '-', '\');
+  lx_: array[0..7] of Char = ('|', '/', '-', '\', '|', '/', '-', '\');
 var
-  sl:TStringList;    
-  r,rf,rx:TRegExpr;
-  f:TFileStream;
-  s,lf:string;
-  i,xx,tf:integer;
-  n:TTreeNode;
-  lt,lx:longword;
-  ds,dn:TDateTime;
+  sl: TStringList;
+  r, rf, rx: TRegExpr;
+  f: TFileStream;
+  s, lf: string;
+  i, xx, tf: Integer;
+  n: TTreeNode;
+  lt, lx: Longword;
+  ds, dn: TDateTime;
 
   procedure updatestat;
   begin
-    dn:=Time-ds;
-    if (GetTickCount-lt>1000) then
+    dn := Time - ds;
+    if (GetTickCount - lt > 1000) then
     begin
-      if i<(sl.Count/10) then
-        Label4.Caption:=TimeToStr(dn)+' / -'
+      if i < (sl.Count / 10) then
+        Label4.Caption := TimeToStr(dn) + ' / -'
       else
-        Label4.Caption:=TimeToStr(dn)+' / '+TimeToStr(dn*(sl.Count/(i+1)));
+        Label4.Caption := TimeToStr(dn) + ' / ' + TimeToStr(dn * (sl.Count / (i
+          + 1)));
       //Label4.Repaint;
-      Label5.Caption:=Format(lf,[lx_[lx mod 8], i, tf]);
+      Label5.Caption := Format(lf, [lx_[lx mod 8], i, tf]);
       //Label5.Repaint;
-      pb.Position:=i;
+      pb.Position := i;
       inc(lx);
-      lt:=GetTickCount;
+      lt := GetTickCount;
       Application.ProcessMessages;
     end;
   end;
 
 begin
   if not php4box.Checked and not php5box.Checked and not peclbox.Checked then
-    raise Exception.Create('PHP version?');
-  ds:=Time;
-  pb.Position:=0;
-  sl:=TStringList.Create;
-  get_parsefiles(ComboBox1.Text,sl);
-  if sl.Count=0 then
+    raise Exception.Create('Php version?');
+  ds := Time;
+  pb.Position := 0;
+  sl := TStringList.Create;
+  get_parsefiles(ComboBox1.Text, sl);
+  if sl.Count = 0 then
     exit;
   sl.Sort;
-  pb.Max:=sl.Count-1;
-  r:=TRegExpr.Create;
-  rf:=TRegExpr.Create;
-  rx:=TRegExpr.Create;
-  r.ModifierStr:='is-gm';
-  rf.ModifierStr:='isg-m';
-  rx.ModifierStr:='s-igm';
-  //r.Expression:='/[*]\s*[{]{3}\s*proto\s+(([*][^/]|[^*])*)[*]/(\s|[#]([\\]([\n]|[\n][\r]|[\r][\n])|[^\n\r])*([\n]|[\n][\r]|[\r][\n])|/[*](([*][^/]|[^*])*)[*]/)*\s*(PHP|ZEND)_FUNCTION';
-  r.Expression:='/[*]\s*[{]{3}\s*proto\s+(([*][^/]|[^*])*)[*]/(.*)/[*]\s*[}]{3}\s*[*]/';
-  rf.Expression:='^(\S*?)?\s*(\S+)\s*[(]([^)]*)[)]\s*(.*)$';
+  pb.Max := sl.Count - 1;
+  r := TRegExpr.Create;
+  rf := TRegExpr.Create;
+  rx := TRegExpr.Create;
+  r.ModifierStr := 'is-gm';
+  rf.ModifierStr := 'isg-m';
+  rx.ModifierStr := 's-igm';
+  //r.Expression:='/[*]\s*[{]{3}\s*proto\s+(([*][^/]|[^*])*)[*]/(\s|[#]([\\]([\n]|[\n][\r]|[\r][\n])|[^\n\r])*([\n]|[\n][\r]|[\r][\n])|/[*](([*][^/]|[^*])*)[*]/)*\s*(Php|ZEND)_FUNCTION';
+  r.Expression :=
+    '/[*]\s*[{]{3}\s*proto\s+(([*][^/]|[^*])*)[*]/(.*)/[*]\s*[}]{3}\s*[*]/';
+  rf.Expression := '^(\S*?)?\s*(\S+)\s*[(]([^)]*)[)]\s*(.*)$';
 
-  rx.Expression:='^(\s*$|(\s+|/[*](([*][^/]|[^*])*)[*]/|[#]([\\]([\n]|[\r][\n]?)[^\n\r]|[^\n\r])*(([\n]|[\r][\n]?)|$)|(/[^*]|[^/#]))*(PHP|ZEND)_(NAMED_)?FUNCTION)';
+  rx.Expression :=
+    '^(\s*$|(\s+|/[*](([*][^/]|[^*])*)[*]/|[#]([\\]([\n]|[\r][\n]?)[^\n\r]|[^\n\r])*(([\n]|[\r][\n]?)|$)|(/[^*]|[^/#]))*(Php|ZEND)_(NAMED_)?FUNCTION)';
   //r.Expression:='^\s/\*\s+\{{3}\s+proto\s+(public\s+)?(\S+)\s+?([^(]+[(])?([^)]+)(.+?)\*/';
   TreeView1.Items.BeginUpdate;
-  xx:=0;
-  lf:=Format('[%%s] %%4.d/%4.d (%%4.d)',[sl.Count]);
-  lt:=0;
-  lx:=0;
-  tf:=0;
-  TreeView1.SortType:=stNone;
+  xx := 0;
+  lf := Format('[%%s] %%4.d/%4.d (%%4.d)', [sl.Count]);
+  lt := 0;
+  lx := 0;
+  tf := 0;
+  TreeView1.SortType := stNone;
   Memo2.Clear;
-  for i:=0 to sl.Count-1 do
+  for i := 0 to sl.Count - 1 do
   begin
     updatestat;
-    f:=TFileStream.Create(sl[i],fmOpenRead);
-    SetLength(s,f.Size);
-    f.Read(s[1],length(s));
+    f := TFileStream.Create(sl[i], fmOpenRead);
+    SetLength(s, f.Size);
+    f.Read(s[1], length(s));
     f.Free;
     //if pos('proto mixed msg_receive',s)>0 then
     //  s:=StringReplace(s,'errorcode]]]','errorcode]]])',[rfReplaceAll]);
     if r.Exec(s) then
       repeat
 
-    if tf>=299 then
-      updatestat;
+        if tf >= 299 then
+          updatestat;
         if rf.Exec(r.Match[1]) then
         begin
           if not rx.Exec(r.Match[3]) then
-            memo3.Lines.Add('#define ERROR_RegCheck_Match_Error_in_FILE "'+sl[i]+'"'#13#10+r.Match[0])
+            memo3.Lines.Add('#define ERROR_RegCheck_Match_Error_in_FILE "' +
+              sl[i] + '"'#13#10 + r.Match[0])
           else
           begin
-            if pos('::',rf.Match[2])>0 then
+            if pos('::', rf.Match[2]) > 0 then
             begin
-              memo2.Lines.Add('#define ERROR_Static_Method_Found_In_Proto_Def_In_FILE "'+sl[i]+'"'#13#10+r.Match[0]);
+              memo2.Lines.Add('#define ERROR_Static_Method_Found_In_Proto_Def_In_FILE "' + sl[i] + '"'#13#10 + r.Match[0]);
               Continue;
             end;
-            if pos('->',rf.Match[2])>0 then
+            if pos('->', rf.Match[2]) > 0 then
             begin
-              memo2.Lines.Add('#define ERROR_Dynamic_Method_Found_In_Proto_Def_In_FILE "'+sl[i]+'"'#13#10+r.Match[0]);
+              memo2.Lines.Add('#define ERROR_Dynamic_Method_Found_In_Proto_Def_In_FILE "' + sl[i] + '"'#13#10 + r.Match[0]);
               Continue;
             end;
-            n:=AddTag(trim(rf.Match[2]),3);
+            n := AddTag(trim(rf.Match[2]), 3);
             Inc(tf);
 
             if php4box.Checked then
             begin
-              n:=TreeView1.Items.AddChild(n,Edit1.Text);
-              nSetBit(n,php4.Tag);
-            end else
-              if php5box.Checked then
-              begin
-                n:=TreeView1.Items.AddChild(n,Edit2.Text);
-                nSetBit(n,php5.Tag);
-              end else
-                if peclbox.Checked then
-                begin
-                  n:=TreeView1.Items.AddChild(n,'PECL');
-                  nSetBit(n,pecl.Tag);
-                end;
-            if rf.Match[1]<>'' then
-              TreeView1.Items.AddChild(n,'Return: '+trim(rf.Match[1]))
+              n := TreeView1.Items.AddChild(n, Edit1.Text);
+              nSetBit(n, php4.Tag);
+            end
+            else if php5box.Checked then
+            begin
+              n := TreeView1.Items.AddChild(n, Edit2.Text);
+              nSetBit(n, php5.Tag);
+            end
+            else if peclbox.Checked then
+            begin
+              n := TreeView1.Items.AddChild(n, 'PECL');
+              nSetBit(n, pecl.Tag);
+            end;
+            if rf.Match[1] <> '' then
+              TreeView1.Items.AddChild(n, 'Return: ' + trim(rf.Match[1]))
             else
-              TreeView1.Items.AddChild(n,'Return ?');
-            TreeView1.Items.AddChild(n,'Parameters: '+StringReplace(trim(rf.Match[3]),#10,' ',[rfReplaceAll]));
-            TreeView1.Items.AddChild(n,'Description: '+StringReplace(trim(rf.Match[4]),#10,' ',[rfReplaceAll]));
-            TreeView1.Items.AddChild(n,'File: '+ExtractRelativePath(ComboBox1.Text,sl[i]));
-          {  if rx.Exec(rf.Match[1]) then
-              TreeView1.Items.AddChild(n,'Return: '+trim(rx.Match[2]))
-            else
-              TreeView1.Items.AddChild(n,'Return ?');
-            TreeView1.Items.AddChild(n,'Parameters: '+StringReplace(trim(rf.Match[3]),#10,' ',[rfReplaceAll]));
-            TreeView1.Items.AddChild(n,'Description: '+StringReplace(trim(rf.Match[4]),#10,' ',[rfReplaceAll])); }
+              TreeView1.Items.AddChild(n, 'Return ?');
+            TreeView1.Items.AddChild(n, 'Parameters: ' +
+              StringReplace(trim(rf.Match[3]), #10, ' ', [rfReplaceAll]));
+            TreeView1.Items.AddChild(n, 'Description: ' +
+              StringReplace(trim(rf.Match[4]), #10, ' ', [rfReplaceAll]));
+            TreeView1.Items.AddChild(n, 'File: ' +
+              ExtractRelativePath(ComboBox1.Text, sl[i]));
+            {  if rx.Exec(rf.Match[1]) then
+                TreeView1.Items.AddChild(n,'Return: '+trim(rx.Match[2]))
+              else
+                TreeView1.Items.AddChild(n,'Return ?');
+              TreeView1.Items.AddChild(n,'Parameters: '+StringReplace(trim(rf.Match[3]),#10,' ',[rfReplaceAll]));
+              TreeView1.Items.AddChild(n,'Description: '+StringReplace(trim(rf.Match[4]),#10,' ',[rfReplaceAll])); }
           end;
-        end else
+        end
+        else
         begin
-          memo3.Lines.Add('#define ERROR_RegFunction_Match_Error_in_FILE "'+sl[i]+'"'#13#10+r.Match[0]);
+          memo3.Lines.Add('#define ERROR_RegFunction_Match_Error_in_FILE "' +
+            sl[i] + '"'#13#10 + r.Match[0]);
           Inc(xx);
         end;
         updatestat;
         //  TreeView1.Items.EndUpdate; exit
       until not r.ExecNext;
   end;
-  lt:=0;
-  updatestat;     
-  Caption:=inttostr(xx);
-  Label5.Caption:='Sorting...';
+  lt := 0;
+  updatestat;
+  Caption := inttostr(xx);
+  Label5.Caption := 'Sorting...';
   Label5.Repaint;
-  TreeView1.SortType:=stBoth;
+  TreeView1.SortType := stBoth;
   TreeView1.Items.EndUpdate;
   r.Free;
   rf.Free;
   rx.Free;
   sl.Free;
-  Label5.Caption:='Done';
-  pb.Position:=0;
+  Label5.Caption := 'Done';
+  pb.Position := 0;
 end;
 
 procedure TForm1.Button9Click(Sender: TObject);
 var
-  n,nd:TTreeNode;
+  n, nd: TTreeNode;
 begin
   TreeView1.Items.BeginUpdate;
-  n:=TreeView1.Items.GetFirstNode;
-  while n<>nil do
+  n := TreeView1.Items.GetFirstNode;
+  while n <> nil do
   begin
-    nd:=n;
-    n:=n.GetNextChild(n);
-    if nGetBit(nd,function1.Tag) then
+    nd := n;
+    n := n.GetNextChild(n);
+    if nGetBit(nd, function1.Tag) then
       nd.Delete;
   end;
   TreeView1.Items.EndUpdate;
@@ -760,41 +783,41 @@ end;
 
 procedure TForm1.Button6Click(Sender: TObject);
 var
-  f:TStringList;
-  t,ln,i:Integer;
+  f: TStringList;
+  t, ln, i: Integer;
 
-  function LoadNode(cn:TTreeNode=nil):TTreeNode;
+  function LoadNode(cn: TTreeNode = nil): TTreeNode;
   var
-    x:Integer;
+    x: Integer;
   begin
-    Result:=TreeView1.Items.AddChildObject(cn,f[ln],Pointer(StrToInt(f[ln+1])));
-    Inc(ln,3);
-    for x:=0 to StrToIntDef(f[ln-1],0)-1 do
+    Result := TreeView1.Items.AddChildObject(cn, f[ln], Pointer(StrToInt(f[ln +
+      1])));
+    Inc(ln, 3);
+    for x := 0 to StrToIntDef(f[ln - 1], 0) - 1 do
       LoadNode(Result);
   end;
 
 begin
-  if ParamCount=1 then
-    OpenDialog1.FileName:=ParamStr(1)
-  else
-    if not OpenDialog1.Execute then
-      Exit;
+  if ParamCount = 1 then
+    OpenDialog1.FileName := ParamStr(1)
+  else if not OpenDialog1.Execute then
+    Exit;
   TreeView1.Items.BeginUpdate;
   TreeView1.Items.Clear;
-  f:=TStringList.Create; // (SaveDialog1.FileName, fmCreate)
+  f := TStringList.Create; // (SaveDialog1.FileName, fmCreate)
   f.LoadFromFile(OpenDialog1.FileName);
-  if (f.Count<4) or (f[0]<>'IsPHP=1') then
-  begin                                         
+  if (f.Count < 4) or (f[0] <> 'IsPhp=1') then
+  begin
     f.Free;
     TreeView1.Items.EndUpdate;
-    ShowMessage('This is not PHP-Config FILE!');
+    ShowMessage('This is not Php-Config FILE!');
     Exit;
   end;
-  Edit1.Text:=f[1];
-  Edit2.Text:=f[2];
-  t:=StrToIntDef(f[3],0);
-  ln:=4;
-  for i:=0 to t-1 do
+  Edit1.Text := f[1];
+  Edit2.Text := f[2];
+  t := StrToIntDef(f[3], 0);
+  ln := 4;
+  for i := 0 to t - 1 do
     LoadNode;
   f.Free;
   TreeView1.Items.EndUpdate;
@@ -802,59 +825,64 @@ end;
 
 procedure TForm1.ClearLists;
 begin
-  while KeyList.Count>0 do
+  while KeyList.Count > 0 do
   begin
     Dispose(KeyList[0]);
     KeyList.Delete(0);
   end;
 end;
 
-procedure TForm1.GenerateInc(AKeys: TStringList; AFileFunc, AFileFuncList, AFileFuncTable: String);
+procedure TForm1.GenerateInc(AKeys: TStringList; AFileFunc, AFileFuncList,
+  AFileFuncTable: string);
 var
-  i,mx,mm:Integer;
-  l:TLexKeys;
-  nf:TStringList;
-  al:Boolean;
-  tab:String;
+  i, mx, mm: Integer;
+  l: TLexKeys;
+  nf: TStringList;
+  al: Boolean;
+  tab: string;
 
-  procedure AddData(islastgp:boolean=false; islast:boolean=false);
-  const nc:array[False..True] of String=('or', 'then');
-  const nc2:array[False..True] of String=('if', '  ');
-  const nc3:array[False..True] of String=('if', '  ');
+  procedure AddData(islastgp: Boolean = false; islast: Boolean = false);
+  const
+    nc: array[False..True] of string = ('or', 'then');
+  const
+    nc2: array[False..True] of string = ('if', '  ');
+  const
+    nc3: array[False..True] of string = ('if', '  ');
   begin
     case Longword(TLexKeys(KeyList[I]).Data) and $0F of
-    $01:
-      begin
-        nf.add(tab+Format('%s  PHP_KeywordComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
-        al:=true;
-        if islast then
-          nf.Add(tab+'  Result := tkPhpKeyword')
-        else
-          if islastgp then
+      $01:
+        begin
+          nf.add(tab + Format('%s  PhpKeywordComp(%d) %s', [nc2[al],
+            TLexKeys(KeyList[I]).KeyIndex, nc[islastgp]]));
+          al := true;
+          if islast then
+            nf.Add(tab + '  Result := stkPhpKeyword')
+          else if islastgp then
           begin
-            nf.Add(tab+'  Result := tkPhpKeyword');
-            nf.Add(tab+'else');
-            tab:=tab+'  ';
-            al:=false;
+            nf.Add(tab + '  Result := stkPhpKeyword');
+            nf.Add(tab + 'else');
+            tab := tab + '  ';
+            al := false;
           end;
-      end;
-  {  $02:
-      begin
-        nf.add(tab+Format('if PHP_ConstComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
-        nf.Add(tab+'  Result := tkPhpConst');
-      end;
-    $04:
-      begin
-        nf.add(tab+Format('if PHP_VariableComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
-        nf.Add(tab+'  Result := tkPhpVariable');
-      end;    }
-    $08:
-      begin
-        nf.add(tab+Format('%s  PHP_FunctionComp(%d) %s',[nc2[al],TLexKeys(KeyList[I]).KeyIndex,nc[islastgp]]));
-        if islast then
-          nf.Add(tab+'  Result := tkPhpFunction');
-        al:=true;
-      end;
+        end;
+      {  $02:
+          begin
+            nf.add(tab+Format('if PhpConstComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
+            nf.Add(tab+'  Result := stkPhpConst');
+          end;
+        $04:
+          begin
+            nf.add(tab+Format('if PhpVariableComp(%d) then',[TLexKeys(KeyList[I]).KeyIndex]));
+            nf.Add(tab+'  Result := stkPhpVariable');
+          end;    }
+      $08:
+        begin
+          nf.add(tab + Format('%s  PhpFunctionComp(%d) %s', [nc2[al],
+            TLexKeys(KeyList[I]).KeyIndex, nc[islastgp]]));
+          if islast then
+            nf.Add(tab + '  Result := stkPhpFunction');
+          al := true;
+        end;
     else
       raise Exception.Create('Invalid type!');
     end;
@@ -866,73 +894,80 @@ var
 
 begin
   ClearLists;
-  for i:=0 to AKeys.Count-1 do
+  for i := 0 to AKeys.Count - 1 do
   begin
-    l:=TLexKeys.Create;
-    l.KeyIndex:=i;
-    l.Key:=KeyHash(AKeys[i]);
-    l.Data:=AKeys.Objects[i];
+    l := TLexKeys.Create;
+    l.KeyIndex := i;
+    l.Key := KeyHash(AKeys[i]);
+    l.Data := AKeys.Objects[i];
     KeyList.Add(l);
   end;
   KeyList.Sort(CompareKeys);
 
-  nf:=TStringList.Create;
-  nf.add('    function Php_KeywordIdent: TtkTokenKind;');
-  nf.add(Format('    function PhP_KeywordFunc%d: TtkTokenKind;',[TLexKeys(KeyList[0]).Key]));
-  for i:=1 to KeyList.Count-1 do
-    if (TLexKeys(KeyList[i-1]).Key <> TLexKeys(KeyList[i]).Key) then
-        nf.add(Format('    function PhP_KeywordFunc%d: TtkTokenKind;',[TLexKeys(KeyList[i]).Key]));
+  nf := TStringList.Create;
+  nf.add('    function PhpKeywordIdent: TSynWebTokenKind;');
+  nf.add(Format('    function PhpKeywordFunc%d: TSynWebTokenKind;',
+    [TLexKeys(KeyList[0]).Key]));
+  for i := 1 to KeyList.Count - 1 do
+    if (TLexKeys(KeyList[i - 1]).Key <> TLexKeys(KeyList[i]).Key) then
+      nf.add(Format('    function PhpKeywordFunc%d: TSynWebTokenKind;',
+        [TLexKeys(KeyList[i]).Key]));
   nf.SaveToFile(AFileFuncList);
   nf.Free;
 
   I := 0;
-  nf:=TStringList.Create;
+  nf := TStringList.Create;
   while I < KeyList.Count do
   begin
     if I < KeyList.Count - 1 then
       while TLexKeys(KeyList[I]).Key = TLexKeys(KeyList[I + 1]).Key do
       begin
         inc(I);
-        if I >= KeyList.Count - 1 then break;
+        if I >= KeyList.Count - 1 then
+          break;
       end;
-    nf.add(Format('  fPhp_IdentFuncTable[%d]:=PhP_KeywordFunc%d;',[TLexKeys(KeyList[I]).Key, TLexKeys(KeyList[I]).Key]));
+    nf.add(Format('  FPhpIdentFuncTable[%d]:=PhpKeywordFunc%d;',
+      [TLexKeys(KeyList[I]).Key, TLexKeys(KeyList[I]).Key]));
     inc(I);
   end;
   nf.SaveToFile(AFileFuncTable);
   nf.free;
 
   I := 0;
-  nf:=TStringList.Create;
-  nf.add('function TSynWebSyn.Php_KeywordIdent: TtkTokenKind;');
+  nf := TStringList.Create;
+  nf.add('function TSynWebEngine.PhpKeywordIdent: TSynWebTokenKind;');
   nf.add('begin');
-  nf.add('  Result := tkPhpIdentifier;');
+  nf.add('  Result := stkPhpIdentifier;');
   nf.add('end;');
-  nf.add('');     
-    mx:=0;
+  nf.add('');
+  mx := 0;
   while I < KeyList.Count do
   begin
-    nf.add(Format('function TSynWebSyn.PhP_KeywordFunc%d: TtkTokenKind;',[TLexKeys(KeyList[I]).Key]));
+    nf.add(Format('function TSynWebEngine.PhpKeywordFunc%d: TSynWebTokenKind;',
+      [TLexKeys(KeyList[I]).Key]));
     nf.add('begin');
-    tab:='  ';
-    mm:=0;
-    al:=false;
+    tab := '  ';
+    mm := 0;
+    al := false;
     if I < KeyList.Count - 1 then
       while TLexKeys(KeyList[I]).Key = TLexKeys(KeyList[I + 1]).Key do
       begin
-        AddData(Longword(TLexKeys(KeyList[I]).Data) and $0F<>Longword(TLexKeys(KeyList[I+1]).Data) and $0F);
+        AddData(Longword(TLexKeys(KeyList[I]).Data) and $0F <>
+          Longword(TLexKeys(KeyList[I + 1]).Data) and $0F);
         inc(I);
         inc(mm);
-        if I >= KeyList.Count - 1 then break;
-      end;      
-        inc(mm);
-    AddData(True,True);
-    if mm>mx then
-      mx:=mm;
-{    nf.add('      // ' + AKeys[TLexKeys(KeyList[I]).KeyIndex]);
-    nf.add(Format('      %s(%d) then',[ACompFunc, TLexKeys(KeyList[I]).KeyIndex]));
-    nf.add(Format('    Result := %s',[AResTrue]));}
-    nf.add(tab+'else');
-    nf.add(tab+'  Result := tkPhpIdentifier;');
+        if I >= KeyList.Count - 1 then
+          break;
+      end;
+    inc(mm);
+    AddData(True, True);
+    if mm > mx then
+      mx := mm;
+    {    nf.add('      // ' + AKeys[TLexKeys(KeyList[I]).KeyIndex]);
+        nf.add(Format('      %s(%d) then',[ACompFunc, TLexKeys(KeyList[I]).KeyIndex]));
+        nf.add(Format('    Result := %s',[AResTrue]));}
+    nf.add(tab + 'else');
+    nf.add(tab + '  Result := stkPhpIdentifier;');
     nf.add('end;');
     inc(I);
     if I < KeyList.Count then
@@ -940,11 +975,11 @@ begin
   end;
   nf.SaveToFile(AFileFunc);
   nf.Free;
-  if ParamCount<>1 then
+  if ParamCount <> 1 then
     ShowMessage(IntToStr(mx));
 end;
 
-function TForm1.KeyHash(ToHash: String): Integer;
+function TForm1.KeyHash(ToHash: string): Integer;
 var
   I: Integer;
 begin
@@ -960,7 +995,7 @@ begin
   for I := #0 to #255 do
   begin
     J := UpperCase(I)[1];
-    Case I in ['A'..'Z', 'a'..'z', ':', '-'] of
+    case I in ['A'..'Z', 'a'..'z', ':', '-'] of
       True: mKeyHashTable[I] := Ord(J) - 64;
     else
       mKeyHashTable[I] := 0;
@@ -970,11 +1005,11 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  if ParamCount=1 then
-    Left:=Screen.Width;            
-  appdir:=ExtractFilePath(Application.ExeName);
+  if ParamCount = 1 then
+    Left := Screen.Width;
+  appdir := ExtractFilePath(Application.ExeName);
   MakeHashTable;
-  KeyList:=TList.Create;
+  KeyList := TList.Create;
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -985,7 +1020,7 @@ end;
 
 procedure TForm1.FormShow(Sender: TObject);
 begin
-  if ParamCount=1 then
+  if ParamCount = 1 then
   begin
     Button12Click(nil);
     Button6Click(nil);
@@ -997,115 +1032,390 @@ end;
 procedure TForm1.TreeView1Compare(Sender: TObject; Node1, Node2: TTreeNode;
   Data: Integer; var Compare: Integer);
 begin
-  if (Longword(Node1.Data)and 1<>0) and (Longword(Node2.Data)and 1=0) then
+  if (Longword(Node1.Data) and 1 <> 0) and (Longword(Node2.Data) and 1 = 0) then
     Compare := -1
+  else if (Longword(Node1.Data) and 1 = 0) and (Longword(Node2.Data) and 1 <> 0)
+    then
+    Compare := 1
   else
-    if (Longword(Node1.Data)and 1=0) and (Longword(Node2.Data)and 1<>0) then
-      Compare := 1
-    else
-      Compare:=AnsiCompareStr(Node1.Text,Node2.Text);
+    Compare := AnsiCompareStr(Node1.Text, Node2.Text);
 end;
 
 procedure TForm1.Button10Click(Sender: TObject);
 const
-  lx_:array[0..7] of Char=('|', '/', '-', '\', '|', '/', '-', '\');
+  lx_: array[0..7] of Char = ('|', '/', '-', '\', '|', '/', '-', '\');
 var
-  sl:TStringList;
-  f:TFileStream;
-  s,lf:string;
-  i,xx,tf:integer;
-  lt,lx:longword;
-  ds,dn:TDateTime;
-
-  p: TTestParser;
+  sl: TStringList;
+  f: TStringList;
+  s, lf: string;
+  i, j, xx, tf: Integer;
+  lt, lx: Longword;
+  ds, dn: TDateTime;
+  hl: TSynCppSyn;
+  scanline: Integer;
+  r, rf, rx, r_proto: TRegExpr;
+  m: TMatchFn;
+  n: TTreeNode;
 
   procedure updatestat;
   begin
-    dn:=Time-ds;
-    if (GetTickCount-lt>1000) then
+    dn := Time - ds;
+    if (GetTickCount - lt > 1000) then
     begin
-      if i<(sl.Count/10) then
-        Label4.Caption:=TimeToStr(dn)+' / -'
+      if i < (sl.Count / 10) then
+        Label4.Caption := TimeToStr(dn) + ' / -'
       else
-        Label4.Caption:=TimeToStr(dn)+' / '+TimeToStr(dn*(sl.Count/(i+1)));
+        Label4.Caption := TimeToStr(dn) + ' / ' + TimeToStr(dn * (sl.Count / (i
+          + 1)));
       //Label4.Repaint;
-      Label5.Caption:=Format(lf,[lx_[lx mod 8], i, tf]);
+      Label5.Caption := Format(lf, [lx_[lx mod 8], i, tf]);
+      if (i>=0) and (i<sl.Count) then
+      Label6.Caption:=ExtractFileName(sl[i])
+      else
+        Label6.Caption:='-';
       //Label5.Repaint;
-      pb.Position:=i;
+      pb.Position := i;
       inc(lx);
-      lt:=GetTickCount;
+      lt := GetTickCount;
       Application.ProcessMessages;
     end;
   end;
 
+  function hlGetToken: string;
+  begin
+    if hl.GetEol then
+      Result := #13#10
+    else
+      Result := hl.GetToken;
+  end;
+
+  function NextToken: Boolean;
+  begin
+    if hl.GetEol then
+    begin
+      Inc(scanline);
+      if scanline >= f.Count then
+      begin
+        Result := False;
+        Exit;
+      end;
+      hl.SetLine(f[scanline], scanline + 1);
+    end
+    else
+      hl.Next;
+    Result := True;
+  end;
+
+  function ScanForFunction: Boolean;
+  var
+    sfp, sfp_full: string;
+  begin
+    Result := False;
+    repeat
+      if (hl.GetTokenID = tkComment) and (LeftStr(hlGetToken, 2) = '/*') then
+      begin
+        sfp := '';
+        repeat
+          sfp := sfp + hlGetToken;
+          if RightStr(hlGetToken, 2) = '*/' then
+          begin
+            if not NextToken then
+              Exit;
+            if not r_proto.Exec(sfp) then
+              Break;
+            if not r.Exec(sfp) then
+            begin
+              memo3.Lines.Add('#define r_proto.exec=true but r.exec=false !!! File (' + sl[i] + ') >>> '#13#10 + sfp + #13#10'<<< '#13#10);
+              break;
+            end;
+            if not rf.Exec(r.Match[1]) then
+            begin
+              memo3.Lines.Add('#define rf.exec=FALSE !!! File (' + sl[i] +
+                ') >>> '#13#10 + sfp + #13#10'<<< '#13#10);
+              break;
+            end;
+            if rf.Match[1] <> '' then
+              m.freturn := trim(rf.Match[1])
+            else
+              m.freturn := '?';
+            m.fname := trim(rf.Match[2]);
+            m.fparam := StringReplace(trim(rf.Match[3]), #10, ' ',
+              [rfReplaceAll]);
+            m.fdesc := StringReplace(trim(rf.Match[4]), #10, ' ',
+              [rfReplaceAll]);
+            m.fimp := False;
+            m.falias := False;
+            m.fclassmethod := Pos('::', m.fname) > 0;
+            sfp_full := sfp;
+            while NextToken do
+            begin
+              sfp_full := sfp_full + hlGetToken;
+              if hl.GetTokenID = tkComment then
+              begin
+                if r_proto.Exec(hlGetToken) then
+                begin
+                  Memo4.Lines.Add(Format('File: %s; close-proto "}}}" missed, proto:'#13#10'%s'#13#10, [sl[i], hlGetToken,m.fname,sfp]));
+                  hl.SetLine(' '+sl[i], scanline);
+                  result:=True;
+                  Exit;
+                end;
+                if ExecRegExpr('^/[*]\s*[}]{3}', hlGetToken) then
+                begin
+                  if not m.fimp then
+                    memo3.Lines.Add('#define func not/invalid implemented !!! File (' + sl[i] + ') >>> '#13#10 + sfp_full + #13#10'<<< '#13#10);
+                  Result := True;
+                  Exit;
+                end;
+              end
+              else
+              if not m.fimp then
+              if m.fclassmethod then
+              begin
+                if (hlGetToken = 'PHP_METHOD') or (hlGetToken = 'ZEND_METHOD')
+                  then
+                begin
+                  m.fimp := True;
+                  NextToken;
+                  sfp_full := sfp_full + hlGetToken;
+                  if hlGetToken = '(' then
+                  begin
+                    NextToken;
+                    sfp_full := sfp_full + hlGetToken;
+                    if LowerCase(hlGetToken) = LowerCase(copy(m.fname, 1,
+                      pos('::', m.fname))) then
+                    begin
+                      NextToken;
+                      sfp_full := sfp_full + hlGetToken;
+                      if hlGetToken = ',' then
+                      begin                     
+                        NextToken;
+                        sfp_full := sfp_full + hlGetToken;
+                        if hl.GetTokenID = tkSpace then
+                        begin
+                          NextToken;
+                          sfp_full := sfp_full + hlGetToken;
+                        end;
+                        if LowerCase(hlGetToken) <> LowerCase(copy(m.fname,
+                          pos('::', m.fname) + 2, maxint)) then
+                          memo3.Lines.Add('#define ERROR: class method name different from proto definitnion !!! File (' + sl[i] + ') >>> '#13#10 + sfp_full + #13#10'<<< '#13#10);
+                      end else
+                        memo3.Lines.Add('#define ERROR: INVALID implemented - "," missed !!! File (' + sl[i] + ') >>> '#13#10 + sfp_full + #13#10'<<< '#13#10);
+                    end else
+                      memo3.Lines.Add('#define ERROR: class name different from proto definitnion !!! File (' + sl[i] + ') >>> '#13#10 + sfp_full + #13#10'<<< '#13#10);
+                  end else
+                    memo3.Lines.Add('#define ERROR: INVALID implemented - "(" missed !!! File (' + sl[i] + ') >>> '#13#10 + sfp_full + #13#10'<<< '#13#10);
+                end;
+              end
+              else
+              begin
+                if (hlGetToken = 'PHP_FUNCTION') or (hlGetToken =
+                  'ZEND_FUNCTION') or (hlGetToken = 'PHP_FN') then
+                begin
+                  m.fimp := True;
+                  NextToken;
+                  sfp_full := sfp_full + hlGetToken;
+                  if hlGetToken = '(' then
+                  begin
+                    NextToken;
+                    sfp_full := sfp_full + hlGetToken;
+                    if LowerCase(hlGetToken) <> LowerCase(m.fname) then
+                      Memo4.Lines.Add(Format('File: %s; php name: %s, proto name: %s, proto:'#13#10'%s'#13#10, [sl[i], hlGetToken,m.fname,sfp]));
+//                      memo3.Lines.Add('#define ERROR: function name different from proto definitnion !!! File (' + sl[i] + ') >>> '#13#10 + sfp_full + #13#10'<<< '#13#10);
+                  end else
+                    memo3.Lines.Add('#define ERROR: INVALID implemented - "(" missed !!! File (' + sl[i] + ') >>> '#13#10 + sfp_full + #13#10'<<< '#13#10);
+                end;
+                if (hlGetToken = 'PHP_NAMED_FUNCTION') then
+                begin
+                  m.fimp := True;
+                  NextToken;
+                  sfp_full := sfp_full + hlGetToken;
+                  if hlGetToken = '(' then
+                  begin
+                    NextToken;
+                    sfp_full := sfp_full + hlGetToken;
+                    if (LowerCase(copy(hlGetToken, Length('php_if_')+1, maxint))
+                      <> LowerCase(m.fname)) and (LowerCase(copy(hlGetToken, Length('zif_')+1, maxint))
+                      <> LowerCase(m.fname)) then
+                        if LeftStr(hlGetToken, 4)='zif_' then
+                      Memo4.Lines.Add(Format('File: %s; php name: %s, proto name: %s, proto:'#13#10'%s'#13#10, [sl[i], copy(hlGetToken, Length('zif_')+1, maxint),m.fname,sfp]))
+                      else
+                      Memo4.Lines.Add(Format('File: %s; php name: %s, proto name: %s, proto:'#13#10'%s'#13#10, [sl[i], copy(hlGetToken, Length('php_if_')+1, maxint),m.fname,sfp]))
+                      //memo3.Lines.Add('#define ERROR: function name different from proto definitnion !!! File (' + sl[i] + ') >>> '#13#10 + sfp_full + #13#10'<<< '#13#10);
+                  end else
+                    memo3.Lines.Add('#define ERROR: INVALID implemented - "(" missed !!! File (' + sl[i] + ') >>> '#13#10 + sfp_full + #13#10'<<< '#13#10);
+                end;
+                if (hlGetToken = 'ZEND_NAMED_FUNCTION') then
+                begin
+                  m.fimp := True;
+                  NextToken;
+                  sfp_full := sfp_full + hlGetToken;
+                  if hlGetToken = '(' then
+                  begin
+                    NextToken;
+                    sfp_full := sfp_full + hlGetToken;
+                    if LowerCase(copy(hlGetToken, Length('zend_if_')+1, maxint))
+                      <> LowerCase(m.fname) then     
+                      Memo4.Lines.Add(Format('File: %s; php name: %s, proto name: %s, proto:'#13#10'%s'#13#10, [sl[i], copy(hlGetToken, Length('zend_if_')+1, maxint),m.fname,sfp]));
+                      //memo3.Lines.Add('#define ERROR: function name different from proto definitnion !!! File (' + sl[i] + ') >>> '#13#10 + sfp_full + #13#10'<<< '#13#10);
+                  end else
+                    memo3.Lines.Add('#define ERROR: INVALID implemented - "(" missed !!! File (' + sl[i] + ') >>> '#13#10 + sfp_full + #13#10'<<< '#13#10);
+                end;
+              end;
+            end;
+          end;
+        until not NextToken;
+      end;
+    until not NextToken;
+  end;
+
 begin
-  ds:=Time;
-  pb.Position:=0;
-  sl:=TStringList.Create;
-  get_parsefiles(ComboBox1.Text,sl);
-  if sl.Count=0 then
+  ds := Time;
+  pb.Position := 0;
+  sl := TStringList.Create;
+  get_parsefiles(ComboBox1.Text, sl);
+  if sl.Count = 0 then
     exit;
   sl.Sort;
-  pb.Max:=sl.Count-1;
+  pb.Max := sl.Count - 1;
 
   TreeView1.Items.BeginUpdate;
-  xx:=0;
-  lf:=Format('[%%s] %%4.d/%4.d (%%4.d)',[sl.Count]);
-  lt:=0;
-  lx:=0;
-  tf:=0;
-  TreeView1.SortType:=stNone;
+  xx := 0;
+  lf := Format('[%%s] %%4.d/%4.d (%%4.d)', [sl.Count]);
+  lt := 0;
+  lx := 0;
+  tf := 0;
+
+  r_proto := TRegExpr.Create;
+  r := TRegExpr.Create;
+  rf := TRegExpr.Create;
+  rx := TRegExpr.Create;
+  r.ModifierStr := 'is-gm';
+  r_proto.ModifierStr := 'is-gm';
+  rf.ModifierStr := 'isg-m';
+  rx.ModifierStr := 's-igm';
+  r_proto.Expression := '^/[*]\s*[{]{3}\s*proto\s+';
+  //r.Expression:='/[*]\s*[{]{3}\s*proto\s+(([*][^/]|[^*])*)[*]/(\s|[#]([\\]([\n]|[\n][\r]|[\r][\n])|[^\n\r])*([\n]|[\n][\r]|[\r][\n])|/[*](([*][^/]|[^*])*)[*]/)*\s*(Php|ZEND)_FUNCTION';
+  // r.Expression:='/[*]\s*[{]{3}\s*proto\s+(([*][^/]|[^*])*)[*]/(.*)/[*]\s*[}]{3}\s*[*]/';
+  r.Expression := '/[*]\s*[{]{3}\s*proto\s+(([*][^/]|[^*])*)[*]/';
+  rf.Expression := '^(\S*?)?\s*(\S+)\s*[(]([^)]*)[)]\s*(.*)$';
+
+  rx.Expression :=
+    '^(\s*$|(\s+|/[*](([*][^/]|[^*])*)[*]/|[#]([\\]([\n]|[\r][\n]?)[^\n\r]|[^\n\r])*(([\n]|[\r][\n]?)|$)|(/[^*]|[^/#]))*(Php|ZEND)_(NAMED_)?FUNCTION)';
+
+  TreeView1.SortType := stNone;
   Memo2.Clear;
-  p:=TTestParser.Create;
-  p.FAddTag:=AddTag;
-  p.Tree:=TreeView1;
-  if php4box.Checked then
-    p.SubPrefix:='PHP4-'
-  else
-    p.SubPrefix:='PHP5-';
-  for i:=0 to sl.Count-1 do
+  hl := TSynCppSyn.Create(nil);
+  f := TStringList.Create;
+  for i := 0 to sl.Count - 1 do
   begin
     updatestat;
-    f:=TFileStream.Create(sl[i],fmOpenRead);
-    SetLength(s,f.Size);
-    f.Read(s[1],length(s));
-    f.Free;
-    p.SourceString:=s;
-    p.ErrorStr:='';
-    p.counter:=0;
-    p.Parse;
-    if p.ErrorStr<>'' then
-      Exception.Create(sl[i]+#13#10+p.ErrorStr);
-    Inc(tf,p.counter);
-  {  if true then
+    f.LoadFromFile(sl[i]);
+    if f.Count = 0 then
+      Continue;
+    scanline := 0;
+    hl.ResetRange;
+    hl.SetLine(f[0], 1);
+    while ScanForFunction do
     begin
-          n:=AddTag(trim(rf.Match[2]),3);
-          Inc(tf);
-          if php4box.Checked then
-          begin
-            n:=TreeView1.Items.AddChild(n,Edit1.Text);
-            nSetBit(n,php4.Tag);
-          end else
-            if php5box.Checked then
-            begin
-              n:=TreeView1.Items.AddChild(n,Edit2.Text);
-              nSetBit(n,php5.Tag);
-            end;
+      n := AddTag(m.fname, 3);
+      Inc(tf);
+      if php4box.Checked then
+      begin
+        n := TreeView1.Items.AddChild(n, Edit1.Text);
+        nSetBit(n, php4.Tag);
+      end
+      else if php5box.Checked then
+      begin
+        n := TreeView1.Items.AddChild(n, Edit2.Text);
+        nSetBit(n, php5.Tag);
+      end
+      else if peclbox.Checked then
+      begin
+        n := TreeView1.Items.AddChild(n, 'PECL');
+        nSetBit(n, pecl.Tag);
+      end;
+      TreeView1.Items.AddChild(n, 'Return: ' + m.freturn);
+      TreeView1.Items.AddChild(n, 'Parameters: ' + m.fparam);
+      TreeView1.Items.AddChild(n, 'Description: ' + m.fdesc);
+      TreeView1.Items.AddChild(n, 'File: ' + ExtractRelativePath(ComboBox1.Text,
+        sl[i]));
+      if m.fimp then
+        TreeView1.Items.AddChild(n, 'Implemented: True')
+      else
+        TreeView1.Items.AddChild(n, 'Implemented: False');
+    end;
 
-    end;     }
+    (*          if rf.Exec(r.Match[1]) then
+          begin
+            if not rx.Exec(r.Match[3]) then
+              memo3.Lines.Add('#define ERROR_RegCheck_Match_Error_in_FILE "'+sl[i]+'"'#13#10+r.Match[0])
+            else
+            begin
+              if pos('::',rf.Match[2])>0 then
+              begin
+                memo2.Lines.Add('#define ERROR_Static_Method_Found_In_Proto_Def_In_FILE "'+sl[i]+'"'#13#10+r.Match[0]);
+                Continue;
+              end;
+              if pos('->',rf.Match[2])>0 then
+              begin
+                memo2.Lines.Add('#define ERROR_Dynamic_Method_Found_In_Proto_Def_In_FILE "'+sl[i]+'"'#13#10+r.Match[0]);
+                Continue;
+              end;
+              n:=AddTag(trim(rf.Match[2]),3);
+              Inc(tf);
+
+              if php4box.Checked then
+              begin
+                n:=TreeView1.Items.AddChild(n,Edit1.Text);
+                nSetBit(n,php4.Tag);
+              end else
+                if php5box.Checked then
+                begin
+                  n:=TreeView1.Items.AddChild(n,Edit2.Text);
+                  nSetBit(n,php5.Tag);
+                end else
+                  if peclbox.Checked then
+                  begin
+                    n:=TreeView1.Items.AddChild(n,'PECL');
+                    nSetBit(n,pecl.Tag);
+                  end;
+              if rf.Match[1]<>'' then
+                TreeView1.Items.AddChild(n,'Return: '+trim(rf.Match[1]))
+              else
+                TreeView1.Items.AddChild(n,'Return ?');
+              TreeView1.Items.AddChild(n,'Parameters: '+StringReplace(trim(rf.Match[3]),#10,' ',[rfReplaceAll]));
+              TreeView1.Items.AddChild(n,'Description: '+StringReplace(trim(rf.Match[4]),#10,' ',[rfReplaceAll]));
+              TreeView1.Items.AddChild(n,'File: '+ExtractRelativePath(ComboBox1.Text,sl[i]));
+            {  if rx.Exec(rf.Match[1]) then
+                TreeView1.Items.AddChild(n,'Return: '+trim(rx.Match[2]))
+              else
+                TreeView1.Items.AddChild(n,'Return ?');
+              TreeView1.Items.AddChild(n,'Parameters: '+StringReplace(trim(rf.Match[3]),#10,' ',[rfReplaceAll]));
+              TreeView1.Items.AddChild(n,'Description: '+StringReplace(trim(rf.Match[4]),#10,' ',[rfReplaceAll])); }
+            end;
+          end else
+          begin
+            memo3.Lines.Add('#define ERROR_RegFunction_Match_Error_in_FILE "'+sl[i]+'"'#13#10+r.Match[0]);
+            Inc(xx);
+          end;
+          updatestat;
+             *)
   end;
-  p.Free;
-  lt:=0;
+  hl.Free;
+  F.Free;
+  r.Free;
+  rf.Free;
+  rx.Free;
+  lt := 0;
   updatestat;
-  Label5.Caption:='Sorting...';
+  Label5.Caption := 'Sorting...';
   Label5.Repaint;
-  TreeView1.SortType:=stBoth;
-  Caption:=inttostr(xx);
+  TreeView1.SortType := stBoth;
+  Caption := inttostr(xx);
   TreeView1.Items.EndUpdate;
-  Label5.Caption:='Done';
-  pb.Position:=0;
+  Label5.Caption := 'Done';
+  pb.Position := 0;
 end;
 
 end.
-
 

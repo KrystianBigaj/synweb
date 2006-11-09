@@ -1,679 +1,679 @@
-function TSynWebSyn.Css_PropUndef: TtkTokenKind;
+function TSynWebEngine.CssPropUndef: TSynWebTokenKind;
 begin
-  Result:=tkCssPropUndef;
+  Result:=stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc29: TtkTokenKind;
+function TSynWebEngine.CssPropFunc29: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(37) then
-    Result := tkCssProp
+  if  CssPropKeyComp(37) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc39: TtkTokenKind;
+function TSynWebEngine.CssPropFunc39: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(31) then
-    Result := tkCssProp
+  if  CssPropKeyComp(31) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc40: TtkTokenKind;
+function TSynWebEngine.CssPropFunc40: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(32) then
-    Result := tkCssProp
+  if  CssPropKeyComp(32) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc43: TtkTokenKind;
+function TSynWebEngine.CssPropFunc43: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(53) then
-    Result := tkCssProp
+  if  CssPropKeyComp(53) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc51: TtkTokenKind;
+function TSynWebEngine.CssPropFunc51: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(104) then
-    Result := tkCssProp
+  if  CssPropKeyComp(104) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc52: TtkTokenKind;
+function TSynWebEngine.CssPropFunc52: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(93) then
-    Result := tkCssProp
+  if  CssPropKeyComp(93) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc54: TtkTokenKind;
+function TSynWebEngine.CssPropFunc54: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(45) then
-    Result := tkCssProp
+  if  CssPropKeyComp(45) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc55: TtkTokenKind;
+function TSynWebEngine.CssPropFunc55: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(46) or
-      CSS_PropKeyComp(75) then
-    Result := tkCssProp
+  if  CssPropKeyComp(46) or
+      CssPropKeyComp(75) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc56: TtkTokenKind;
+function TSynWebEngine.CssPropFunc56: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(86) then
-    Result := tkCssProp
+  if  CssPropKeyComp(86) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc57: TtkTokenKind;
+function TSynWebEngine.CssPropFunc57: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(52) then
-    Result := tkCssProp
+  if  CssPropKeyComp(52) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc60: TtkTokenKind;
+function TSynWebEngine.CssPropFunc60: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(38) then
-    Result := tkCssProp
+  if  CssPropKeyComp(38) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc61: TtkTokenKind;
+function TSynWebEngine.CssPropFunc61: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(39) then
-    Result := tkCssProp
+  if  CssPropKeyComp(39) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc62: TtkTokenKind;
+function TSynWebEngine.CssPropFunc62: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(7) or
-      CSS_PropKeyComp(60) or
-      CSS_PropKeyComp(83) or
-      CSS_PropKeyComp(92) then
-    Result := tkCssProp
+  if  CssPropKeyComp(7) or
+      CssPropKeyComp(60) or
+      CssPropKeyComp(83) or
+      CssPropKeyComp(92) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc63: TtkTokenKind;
+function TSynWebEngine.CssPropFunc63: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(33) or
-      CSS_PropKeyComp(114) then
-    Result := tkCssProp
+  if  CssPropKeyComp(33) or
+      CssPropKeyComp(114) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc64: TtkTokenKind;
+function TSynWebEngine.CssPropFunc64: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(112) then
-    Result := tkCssProp
+  if  CssPropKeyComp(112) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc74: TtkTokenKind;
+function TSynWebEngine.CssPropFunc74: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(67) or
-      CSS_PropKeyComp(94) then
-    Result := tkCssProp
+  if  CssPropKeyComp(67) or
+      CssPropKeyComp(94) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc76: TtkTokenKind;
+function TSynWebEngine.CssPropFunc76: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(65) or
-      CSS_PropKeyComp(105) then
-    Result := tkCssProp
+  if  CssPropKeyComp(65) or
+      CssPropKeyComp(105) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc78: TtkTokenKind;
+function TSynWebEngine.CssPropFunc78: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(55) or
-      CSS_PropKeyComp(80) then
-    Result := tkCssProp
+  if  CssPropKeyComp(55) or
+      CssPropKeyComp(80) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc79: TtkTokenKind;
+function TSynWebEngine.CssPropFunc79: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(77) or
-      CSS_PropKeyComp(81) then
-    Result := tkCssProp
+  if  CssPropKeyComp(77) or
+      CssPropKeyComp(81) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc81: TtkTokenKind;
+function TSynWebEngine.CssPropFunc81: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(68) or
-      CSS_PropKeyComp(97) then
-    Result := tkCssProp
+  if  CssPropKeyComp(68) or
+      CssPropKeyComp(97) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc82: TtkTokenKind;
+function TSynWebEngine.CssPropFunc82: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(87) then
-    Result := tkCssProp
+  if  CssPropKeyComp(87) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc83: TtkTokenKind;
+function TSynWebEngine.CssPropFunc83: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(66) then
-    Result := tkCssProp
+  if  CssPropKeyComp(66) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc85: TtkTokenKind;
+function TSynWebEngine.CssPropFunc85: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(29) then
-    Result := tkCssProp
+  if  CssPropKeyComp(29) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc86: TtkTokenKind;
+function TSynWebEngine.CssPropFunc86: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(14) or
-      CSS_PropKeyComp(42) or
-      CSS_PropKeyComp(62) then
-    Result := tkCssProp
+  if  CssPropKeyComp(14) or
+      CssPropKeyComp(42) or
+      CssPropKeyComp(62) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc87: TtkTokenKind;
+function TSynWebEngine.CssPropFunc87: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(79) then
-    Result := tkCssProp
+  if  CssPropKeyComp(79) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc88: TtkTokenKind;
+function TSynWebEngine.CssPropFunc88: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(82) or
-      CSS_PropKeyComp(109) then
-    Result := tkCssProp
+  if  CssPropKeyComp(82) or
+      CssPropKeyComp(109) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc90: TtkTokenKind;
+function TSynWebEngine.CssPropFunc90: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(110) then
-    Result := tkCssProp
+  if  CssPropKeyComp(110) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc91: TtkTokenKind;
+function TSynWebEngine.CssPropFunc91: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(34) or
-      CSS_PropKeyComp(69) then
-    Result := tkCssProp
+  if  CssPropKeyComp(34) or
+      CssPropKeyComp(69) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc93: TtkTokenKind;
+function TSynWebEngine.CssPropFunc93: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(84) or
-      CSS_PropKeyComp(100) or
-      CSS_PropKeyComp(111) then
-    Result := tkCssProp
+  if  CssPropKeyComp(84) or
+      CssPropKeyComp(100) or
+      CssPropKeyComp(111) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc94: TtkTokenKind;
+function TSynWebEngine.CssPropFunc94: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(24) or
-      CSS_PropKeyComp(40) or
-      CSS_PropKeyComp(64) or
-      CSS_PropKeyComp(85) then
-    Result := tkCssProp
+  if  CssPropKeyComp(24) or
+      CssPropKeyComp(40) or
+      CssPropKeyComp(64) or
+      CssPropKeyComp(85) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc95: TtkTokenKind;
+function TSynWebEngine.CssPropFunc95: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(48) or
-      CSS_PropKeyComp(91) then
-    Result := tkCssProp
+  if  CssPropKeyComp(48) or
+      CssPropKeyComp(91) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc96: TtkTokenKind;
+function TSynWebEngine.CssPropFunc96: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(1) or
-      CSS_PropKeyComp(30) or
-      CSS_PropKeyComp(70) then
-    Result := tkCssProp
+  if  CssPropKeyComp(1) or
+      CssPropKeyComp(30) or
+      CssPropKeyComp(70) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc97: TtkTokenKind;
+function TSynWebEngine.CssPropFunc97: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(41) or
-      CSS_PropKeyComp(90) then
-    Result := tkCssProp
+  if  CssPropKeyComp(41) or
+      CssPropKeyComp(90) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc98: TtkTokenKind;
+function TSynWebEngine.CssPropFunc98: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(0) or
-      CSS_PropKeyComp(78) then
-    Result := tkCssProp
+  if  CssPropKeyComp(0) or
+      CssPropKeyComp(78) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc100: TtkTokenKind;
+function TSynWebEngine.CssPropFunc100: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(98) then
-    Result := tkCssProp
+  if  CssPropKeyComp(98) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc101: TtkTokenKind;
+function TSynWebEngine.CssPropFunc101: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(108) then
-    Result := tkCssProp
+  if  CssPropKeyComp(108) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc102: TtkTokenKind;
+function TSynWebEngine.CssPropFunc102: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(47) then
-    Result := tkCssProp
+  if  CssPropKeyComp(47) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc103: TtkTokenKind;
+function TSynWebEngine.CssPropFunc103: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(43) then
-    Result := tkCssProp
+  if  CssPropKeyComp(43) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc105: TtkTokenKind;
+function TSynWebEngine.CssPropFunc105: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(18) or
-      CSS_PropKeyComp(63) then
-    Result := tkCssProp
+  if  CssPropKeyComp(18) or
+      CssPropKeyComp(63) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc106: TtkTokenKind;
+function TSynWebEngine.CssPropFunc106: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(13) then
-    Result := tkCssProp
+  if  CssPropKeyComp(13) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc107: TtkTokenKind;
+function TSynWebEngine.CssPropFunc107: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(28) then
-    Result := tkCssProp
+  if  CssPropKeyComp(28) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc108: TtkTokenKind;
+function TSynWebEngine.CssPropFunc108: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(51) or
-      CSS_PropKeyComp(88) then
-    Result := tkCssProp
+  if  CssPropKeyComp(51) or
+      CssPropKeyComp(88) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc110: TtkTokenKind;
+function TSynWebEngine.CssPropFunc110: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(113) then
-    Result := tkCssProp
+  if  CssPropKeyComp(113) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc111: TtkTokenKind;
+function TSynWebEngine.CssPropFunc111: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(44) then
-    Result := tkCssProp
+  if  CssPropKeyComp(44) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc112: TtkTokenKind;
+function TSynWebEngine.CssPropFunc112: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(4) or
-      CSS_PropKeyComp(22) then
-    Result := tkCssProp
+  if  CssPropKeyComp(4) or
+      CssPropKeyComp(22) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc114: TtkTokenKind;
+function TSynWebEngine.CssPropFunc114: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(106) then
-    Result := tkCssProp
+  if  CssPropKeyComp(106) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc115: TtkTokenKind;
+function TSynWebEngine.CssPropFunc115: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(99) then
-    Result := tkCssProp
+  if  CssPropKeyComp(99) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc116: TtkTokenKind;
+function TSynWebEngine.CssPropFunc116: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(74) or
-      CSS_PropKeyComp(102) then
-    Result := tkCssProp
+  if  CssPropKeyComp(74) or
+      CssPropKeyComp(102) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc117: TtkTokenKind;
+function TSynWebEngine.CssPropFunc117: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(49) or
-      CSS_PropKeyComp(89) or
-      CSS_PropKeyComp(95) then
-    Result := tkCssProp
+  if  CssPropKeyComp(49) or
+      CssPropKeyComp(89) or
+      CssPropKeyComp(95) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc121: TtkTokenKind;
+function TSynWebEngine.CssPropFunc121: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(50) or
-      CSS_PropKeyComp(76) then
-    Result := tkCssProp
+  if  CssPropKeyComp(50) or
+      CssPropKeyComp(76) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc122: TtkTokenKind;
+function TSynWebEngine.CssPropFunc122: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(56) then
-    Result := tkCssProp
+  if  CssPropKeyComp(56) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc124: TtkTokenKind;
+function TSynWebEngine.CssPropFunc124: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(23) then
-    Result := tkCssProp
+  if  CssPropKeyComp(23) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc126: TtkTokenKind;
+function TSynWebEngine.CssPropFunc126: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(12) then
-    Result := tkCssProp
+  if  CssPropKeyComp(12) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc128: TtkTokenKind;
+function TSynWebEngine.CssPropFunc128: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(8) or
-      CSS_PropKeyComp(61) then
-    Result := tkCssProp
+  if  CssPropKeyComp(8) or
+      CssPropKeyComp(61) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc130: TtkTokenKind;
+function TSynWebEngine.CssPropFunc130: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(15) or
-      CSS_PropKeyComp(54) then
-    Result := tkCssProp
+  if  CssPropKeyComp(15) or
+      CssPropKeyComp(54) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc131: TtkTokenKind;
+function TSynWebEngine.CssPropFunc131: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(17) then
-    Result := tkCssProp
+  if  CssPropKeyComp(17) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc136: TtkTokenKind;
+function TSynWebEngine.CssPropFunc136: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(107) then
-    Result := tkCssProp
+  if  CssPropKeyComp(107) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc138: TtkTokenKind;
+function TSynWebEngine.CssPropFunc138: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(25) or
-      CSS_PropKeyComp(57) then
-    Result := tkCssProp
+  if  CssPropKeyComp(25) or
+      CssPropKeyComp(57) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc139: TtkTokenKind;
+function TSynWebEngine.CssPropFunc139: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(27) then
-    Result := tkCssProp
+  if  CssPropKeyComp(27) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc140: TtkTokenKind;
+function TSynWebEngine.CssPropFunc140: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(3) or
-      CSS_PropKeyComp(71) then
-    Result := tkCssProp
+  if  CssPropKeyComp(3) or
+      CssPropKeyComp(71) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc141: TtkTokenKind;
+function TSynWebEngine.CssPropFunc141: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(73) then
-    Result := tkCssProp
+  if  CssPropKeyComp(73) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc142: TtkTokenKind;
+function TSynWebEngine.CssPropFunc142: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(6) then
-    Result := tkCssProp
+  if  CssPropKeyComp(6) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc144: TtkTokenKind;
+function TSynWebEngine.CssPropFunc144: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(36) then
-    Result := tkCssProp
+  if  CssPropKeyComp(36) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc148: TtkTokenKind;
+function TSynWebEngine.CssPropFunc148: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(16) then
-    Result := tkCssProp
+  if  CssPropKeyComp(16) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc149: TtkTokenKind;
+function TSynWebEngine.CssPropFunc149: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(19) then
-    Result := tkCssProp
+  if  CssPropKeyComp(19) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc150: TtkTokenKind;
+function TSynWebEngine.CssPropFunc150: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(21) then
-    Result := tkCssProp
+  if  CssPropKeyComp(21) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc154: TtkTokenKind;
+function TSynWebEngine.CssPropFunc154: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(101) then
-    Result := tkCssProp
+  if  CssPropKeyComp(101) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc156: TtkTokenKind;
+function TSynWebEngine.CssPropFunc156: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(26) then
-    Result := tkCssProp
+  if  CssPropKeyComp(26) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc158: TtkTokenKind;
+function TSynWebEngine.CssPropFunc158: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(72) then
-    Result := tkCssProp
+  if  CssPropKeyComp(72) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc167: TtkTokenKind;
+function TSynWebEngine.CssPropFunc167: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(20) then
-    Result := tkCssProp
+  if  CssPropKeyComp(20) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc169: TtkTokenKind;
+function TSynWebEngine.CssPropFunc169: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(59) then
-    Result := tkCssProp
+  if  CssPropKeyComp(59) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc172: TtkTokenKind;
+function TSynWebEngine.CssPropFunc172: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(9) then
-    Result := tkCssProp
+  if  CssPropKeyComp(9) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc173: TtkTokenKind;
+function TSynWebEngine.CssPropFunc173: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(11) then
-    Result := tkCssProp
+  if  CssPropKeyComp(11) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc174: TtkTokenKind;
+function TSynWebEngine.CssPropFunc174: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(103) then
-    Result := tkCssProp
+  if  CssPropKeyComp(103) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc178: TtkTokenKind;
+function TSynWebEngine.CssPropFunc178: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(35) then
-    Result := tkCssProp
+  if  CssPropKeyComp(35) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc182: TtkTokenKind;
+function TSynWebEngine.CssPropFunc182: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(2) then
-    Result := tkCssProp
+  if  CssPropKeyComp(2) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc187: TtkTokenKind;
+function TSynWebEngine.CssPropFunc187: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(96) then
-    Result := tkCssProp
+  if  CssPropKeyComp(96) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc190: TtkTokenKind;
+function TSynWebEngine.CssPropFunc190: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(10) then
-    Result := tkCssProp
+  if  CssPropKeyComp(10) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc194: TtkTokenKind;
+function TSynWebEngine.CssPropFunc194: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(5) then
-    Result := tkCssProp
+  if  CssPropKeyComp(5) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
 
-function TSynWebSyn.CSS_PropFunc220: TtkTokenKind;
+function TSynWebEngine.CssPropFunc220: TSynWebTokenKind;
 begin
-  if  CSS_PropKeyComp(58) then
-    Result := tkCssProp
+  if  CssPropKeyComp(58) then
+    Result := stkCssProp
   else
-    Result := tkCssPropUndef;
+    Result := stkCssPropUndef;
 end;
