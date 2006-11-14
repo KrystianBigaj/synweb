@@ -49,12 +49,11 @@ object Form1: TForm1
       Height = 145
       Anchors = [akLeft, akTop, akRight, akBottom]
       Lines.Strings = (
-        '..\PHP\PHP.exe ..\Config\PHP-wPECL.ini'
+        '..\PHP\PHP.exe ..\Config\PHP.ini'
         '..\HTML\HTML.exe ..\Config\HTML.ini'
         '..\HTML\HTML.exe ..\Config\HTML-Special.ini'
         '..\CSS\CSS.exe ..\Config\CSS.ini'
-        '..\CSS\CSS.exe ..\Config\CSS-Special.ini'
-        '..\ES\ES.exe ..\Config\ES.ini')
+        '..\CSS\CSS.exe ..\Config\CSS-Special.ini')
       ScrollBars = ssBoth
       TabOrder = 0
     end
@@ -104,12 +103,7 @@ object Form1: TForm1
       Height = 73
       Anchors = [akLeft, akTop, akRight, akBottom]
       Lines.Strings = (
-        'SynEdit.inc'
-        'SynWeb.inc'
-        'SynHighlighterWeb.pas'
-        'SynHighlighterWebData.pas'
-        'SynTokenMatch.pas'
-        'SynHighlighterWebMisc.pas')
+        'SynEdit.inc')
       ScrollBars = ssBoth
       TabOrder = 0
     end
@@ -131,13 +125,7 @@ object Form1: TForm1
       Anchors = [akLeft, akTop, akRight]
       Lines.Strings = (
         '..\SynHighlighterWeb.pas'
-        '..\SynHighlighterWebData.pas'
-        '..\SynHighlighterWebMisc.pas'
-        '..\QSynHighlighterWeb.pas'
-        '..\QSynHighlighterWebData.pas'
-        '..\QSynHighlighterWebMisc.pas'
-        '..\..\SynTokenMatch\SynTokenMatch.pas'
-        '..\..\SynTokenMatch\QSynTokenMatch.pas')
+        '..\SynHighlighterWebData.pas')
       ScrollBars = ssBoth
       TabOrder = 2
     end

@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 368
-  Top = 140
-  Width = 788
-  Height = 499
+  Left = 192
+  Top = 129
+  Width = 696
+  Height = 480
   Caption = 'Form1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,11 +17,10 @@ object Form1: TForm1
   TextHeight = 13
   object SynEdit1: TSynEdit
     Left = 0
-    Top = 45
-    Width = 780
-    Height = 427
+    Top = 57
+    Width = 688
+    Height = 396
     Align = alClient
-    ActiveLineColor = 16448250
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -42,11 +41,14 @@ object Form1: TForm1
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 780
-    Height = 45
+    Width = 688
+    Height = 57
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 1
+    DesignSize = (
+      688
+      57)
     object Label1: TLabel
       Left = 4
       Top = 24
@@ -69,7 +71,7 @@ object Form1: TForm1
       Caption = 'PHPVersion'
     end
     object Label4: TLabel
-      Left = 658
+      Left = 566
       Top = 4
       Width = 83
       Height = 13
@@ -88,6 +90,24 @@ object Form1: TForm1
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 1
+      Top = 43
+      Width = 686
+      Height = 13
+      Hint = 
+        'Token matching (works in PHP for ('#39'{'#39', '#39'('#39', '#39'['#39', '#39'match_me_open'#39 +
+        ')->(('#39'}'#39', '#39')'#39', '#39']'#39', '#39'match_me_close'#39')'
+      Align = alBottom
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
     end
     object CheckBox1: TCheckBox
       Left = 4
@@ -130,7 +150,7 @@ object Form1: TForm1
       OnClick = Button1Click
     end
     object Button2: TButton
-      Left = 754
+      Left = 662
       Top = 2
       Width = 25
       Height = 17
@@ -159,14 +179,16 @@ object Form1: TForm1
       OnChange = ComboBox3Change
     end
     object ComboBox4: TComboBox
-      Left = 614
+      Left = 522
       Top = 20
       Width = 165
       Height = 21
       Style = csDropDownList
       Anchors = [akTop, akRight]
       ItemHeight = 13
+      ItemIndex = 0
       TabOrder = 7
+      Text = 'HTM (+PHP, +CSS, +ES)'
       OnChange = ComboBox4Change
       Items.Strings = (
         'HTM (+PHP, +CSS, +ES)'
@@ -194,22 +216,28 @@ object Form1: TForm1
       TabOrder = 9
       OnClick = CheckBox4Click
     end
-    object Button3: TButton
-      Left = 572
-      Top = 24
-      Width = 41
-      Height = 17
-      Anchors = [akTop, akRight]
-      Caption = 'Load def'
-      Font.Charset = EASTEUROPE_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -9
-      Font.Name = 'Small Fonts'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 10
-      OnClick = Button3Click
-    end
+  end
+  object Panel2: TPanel
+    Left = 85
+    Top = 105
+    Width = 12
+    Height = 2
+    BevelOuter = bvNone
+    Color = clRed
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+  end
+  object Panel3: TPanel
+    Left = 103
+    Top = 105
+    Width = 12
+    Height = 2
+    BevelOuter = bvNone
+    Color = clRed
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
   end
   object SynWebEngine1: TSynWebEngine
     Left = 48

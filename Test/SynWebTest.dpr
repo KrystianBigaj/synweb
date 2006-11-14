@@ -8,8 +8,7 @@ uses
   Main in 'Main.pas' {Form1},
   SynHighlighterWeb in '..\SynHighlighterWeb.pas',
   SynHighlighterWebData in '..\SynHighlighterWebData.pas',
-  SynHighlighterWebMisc in '..\SynHighlighterWebMisc.pas',
-  SynTokenMatch in '..\..\SynTokenMatch\SynTokenMatch.pas';
+  SynHighlighterWebMisc in '..\SynHighlighterWebMisc.pas';
 
 {$R *.res}
 

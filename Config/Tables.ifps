@@ -119,30 +119,27 @@ begin
 
     if check(j, '[\] [{] [}] [[] []] [$] ["]') then 
       fIdentTable[I]:=fIdentTable[I] or (1 shl 31);
-
+      
 // fIdentTable2 ----------------------------------------------------------------
-
+     
     if check(j, '0-32 [>]') then 
       fIdentTable2[I]:=fIdentTable2[I] or (1 shl 0);
-
+      
     if check(j, '0-32 [<] []]') then 
       fIdentTable2[I]:=fIdentTable2[I] or (1 shl 1);
-
+                                     
     if check(j, '[$] [_] [a]-[z] [A]-[Z] [0]-[9]') then 
       fIdentTable2[I]:=fIdentTable2[I] or (1 shl 2);
-
+                                    
     if check(j, '0 34 [<] [\]') then 
       fIdentTable2[I]:=fIdentTable2[I] or (1 shl 3);
-
+                                    
     if check(j, '0 39 [<] [\]') then 
       fIdentTable2[I]:=fIdentTable2[I] or (1 shl 4);
 
     if check(j, '0 [`] [\] [{] [$]') then 
       fIdentTable2[I]:=fIdentTable2[I] or (1 shl 5);
-
-    if check(j,'[a]-[z] [A]-[Z] [-]') then
-      fIdentTable2[I]:=fIdentTable2[I] or (1 shl 6);      
-
+                                      
 // -----------------------------------------------------------------------------
 
     J:=UpCase(chr(ord(I)));
@@ -202,7 +199,8 @@ begin
       s:=TrimRight(s)+#13#10+'    ';
   end;
   s:=trimRight(s)+#13#10#13#10;
-    
+  
+  
   fs:=TFileStream.Create(OutDir+'SynHighlighterWeb_Tables.inc',fmCreate);
   fs.Write(s,length(s));
   fs.Free;

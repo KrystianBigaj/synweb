@@ -13,6 +13,7 @@ object Form1: TForm1
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
+  Position = poDefault
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnShow = FormShow
@@ -582,17 +583,17 @@ object Form1: TForm1
     end
     object isEXT: TMenuItem
       Tag = 29
-      Caption = '29 - IS "<?... ?>" ?'
+      Caption = 'IS "<?... ?>" ?'
       OnClick = Html401Strict1Click
     end
     object NoCLASS1: TMenuItem
       Tag = 30
-      Caption = '30 - No CLASS'
+      Caption = 'No CLASS'
       OnClick = Html401Strict1Click
     end
     object EMPTY1: TMenuItem
       Tag = 31
-      Caption = '31 - Is EMPTY'
+      Caption = 'Is EMPTY'
       OnClick = Html401Strict1Click
     end
   end

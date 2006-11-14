@@ -3,11 +3,10 @@ unit Main;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, SynEdit, SynHighlighterWeb, StdCtrls, SynEditHighlighter,
-  ExtCtrls, SynEditOptionsDialog, SynEditExport, SynExportHTML, SynTokenMatch,
-  SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes, SynUnicode,
-  SynEditTextBuffer;
+  ExtCtrls, SynEditOptionsDialog, SynEditExport, SynExportHTML,
+  SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes, SynUnicode;
 
 type
   TForm1 = class(TForm)
@@ -23,6 +22,7 @@ type
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
+    Label6: TLabel;
     CheckBox1: TCheckBox;
     ComboBox1: TComboBox;
     ComboBox2: TComboBox;
@@ -33,9 +33,10 @@ type
     ComboBox4: TComboBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
+    Panel2: TPanel;
+    Panel3: TPanel;
     SynExporterHTML1: TSynExporterHTML;
     SynEditOptionsDialog1: TSynEditOptionsDialog;
-    Button3: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -54,9 +55,8 @@ type
     procedure CheckBox2Click(Sender: TObject);
     procedure SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
       AFiles: TWideStrings);
-    procedure Button3Click(Sender: TObject);
   private
-    FPaintUpdating: Boolean;
+    { Private declarations }
   public
     { Public declarations }
   end;
@@ -75,7 +75,6 @@ var
   j:TSynWebCssVersion;
   k:TSynWebPhpVersion;
 begin
-  FPaintUpdating := False;
   SynEdit1.Lines.SaveUnicode:=True;
   for i:=Low(TSynWebHtmlVersion) to High(TSynWebHtmlVersion) do
     ComboBox1.Items.Add(TSynWebHtmlVersionStr[i]);
@@ -89,13 +88,9 @@ begin
     ComboBox3.Items.Add(TSynWebPhpVersionStr[k]);
   ComboBox3.ItemIndex:=Integer(spvPHP5);
 
-  ComboBox4.ItemIndex := 0;
-
   s:=ChangeFileExt(Application.ExeName,'_sample.txt');
   if FileExists(s) then
-    SynEdit1.Lines.LoadFromFile(s)
-  else
-    Button3.Click;
+    SynEdit1.Lines.LoadFromFile(s);
   CheckBox2Click(nil);
 end;
 
@@ -170,7 +165,7 @@ end;
 procedure TForm1.SynEdit1StatusChange(Sender: TObject;
   Changes: TSynStatusChanges);
 var
-  t:TSynWebHighlighterTypes;
+  t:TSynHighlighterTypes;
 begin
   if CheckBox2.Checked then
     if Changes-[scCaretX, scCaretY]<>Changes then
@@ -186,98 +181,103 @@ begin
       if t-[shtPhpInHtml, shtPhpInCss, shtPhpInES]<>t then
         Label5.Caption:=Label5.Caption+'PHP,';
     end;
-  with SynEdit1, SynWebHtmlSyn1 do
-  begin
-    if SynEdit1.CaretY = 1 then
-      ResetRange
-    else
-      SetRange(TSynEditStringList(Lines).Ranges[CaretY - 2]);
-    SetLine(Lines[CaretY-1], CaretY-1);
-    while not GetEol and (CaretX-1 >= GetTokenPos + Length(GetToken)) do
-      Next;
-    Caption := Format('%.8x, %s, %d, %d', [Integer(GetRange),
-      GetToken, GetTagID, GetTagKind]);
-  end;
 end;
 
 procedure TForm1.SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
   TransientType: TTransientType);
 const
-  Tokens:array[0..15] of TSynTokenMatch=(
-    (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(stkCssSymbol)),
-    (OpenToken: '{'; CloseToken: '}'; TokenKind: Integer(stkCssSymbol)),
-    (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(stkCssSymbol)),
-    (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(stkEsSymbol)),
-    (OpenToken: '{'; CloseToken: '}'; TokenKind: Integer(stkEsSymbol)),
-    (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(stkEsSymbol)),
-    (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(stkPhpSymbol)),
-    (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(stkPhpSymbol)),
-    (OpenToken: '{'; CloseToken: '}'; TokenKind: Integer(stkPhpSymbol)),
-    (OpenToken: '<'; CloseToken: '>'; TokenKind: Integer(stkHtmlTag)),
-    (OpenToken: '<'; CloseToken: '/>'; TokenKind: Integer(stkHtmlTag)),
-    (OpenToken: '</'; CloseToken: '>'; TokenKind: Integer(stkHtmlTag)),
-    (OpenToken: '<!'; CloseToken: '>'; TokenKind: Integer(stkHtmlTag)),
-    (OpenToken: '<![cdata['; CloseToken: ']]>'; TokenKind: Integer(stkHtmlTag)),
-    (OpenToken: '<?'; CloseToken: '?>'; TokenKind: Integer(stkHtmlTag)),
-    (OpenToken: '<%'; CloseToken: '%>'; TokenKind: Integer(stkHtmlTag)));
+  OpenTokens:array[0..3] of String=('{', '(', '[', 'match_me_open');
+  CloseTokens:array[0..3] of String=('}', ')', ']', 'match_me_close');
+  TokensID:array[0..3] of TSynWebTokenKind=(stkPhpSymbol,stkPhpSymbol,stkPhpSymbol, stkPhpIdentifier);
 var
-  Editor : TSynEdit;  
-  Pix: TPoint;      
-  Match: TSynTokenMatched;
-  I: Integer;
+  B,b2:TBufferCoord;
+  i,id:Integer;
+  t1,t2:String;
 
-  function CharToPixels(P: TBufferCoord): TPoint;
+  procedure DrawOpen;
+  var
+    p:TPoint;
   begin
-    Result:=Editor.RowColumnToPixels(Editor.BufferToDisplayPos(P));
+    p:=SynEdit1.RowColumnToPixels(SynEdit1.BufferToDisplayPos(b2));
+    Panel2.Left:=SynEdit1.Left+p.X+2;
+    Panel2.Top:=SynEdit1.Top+p.Y+SynEdit1.LineHeight;
+    Panel2.Width:=Length(t1)*SynEdit1.CharWidth;
+    Panel2.Visible:=True;
   end;
 
-  function TryMatch: Integer;
+  procedure DrawClose;  
+  var
+    p:TPoint;
   begin
-    Result := SynEditGetMatchingTagEx(Editor, Editor.CaretXY, Match);
-    if Result = 0 then
-      Result := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, Tokens, Match);
+    p:=SynEdit1.RowColumnToPixels(SynEdit1.BufferToDisplayPos(b));
+    Panel3.Left:=SynEdit1.Left+p.X+2;
+    Panel3.Top:=SynEdit1.Top+p.Y+SynEdit1.LineHeight;
+    Panel3.Width:=Length(t2)*SynEdit1.CharWidth;
+    Panel3.Visible:=True;
+  end;
+
+  procedure DrawOpenClose;
+  begin
+    DrawOpen;
+    DrawClose;
   end;
 
 begin
-  if FPaintUpdating then
+  Caption:='';
+  if SynEdit1.SelAvail or (TransientType=ttBefore) then
     Exit;
-  Editor := TSynEdit(Sender);
-  if TransientType = ttBefore then
-  begin
-    I := TryMatch;
-    if I = 0 then
-      Exit;
-    FPaintUpdating := True;
-    if I <> -1 then
-      Editor.InvalidateLines(Match.OpenTokenPos.Line, Match.OpenTokenPos.Line);
-    if I <> 1 then
-      Editor.InvalidateLines(Match.CloseTokenPos.Line, Match.CloseTokenPos.Line);
-    FPaintUpdating := False;
-    Exit;
-  end;
-  if Editor.SelAvail then
-    Exit;
-  I := TryMatch;
-  if I = 0 then
-    Exit;
-  Canvas.Brush.Style := bsSolid;                           
-  if Abs(I) = 2 then
-    Canvas.Brush.Color := clAqua // matched color
-  else
-    Canvas.Brush.Color := clYellow; // unmatched color
-  if I <> -1 then
-  begin
-    Pix := CharToPixels(Match.OpenTokenPos);
-    Canvas.Font.Color := Editor.Font.Color;
-    Canvas.Font.Style := Match.TokenAttri.Style;
-    Canvas.TextOut(Pix.X, Pix.Y, Match.OpenToken);
-  end;
-  if I <> 1 then
-  begin
-    Pix := CharToPixels(Match.CloseTokenPos);    
-    Canvas.Font.Color := Editor.Font.Color;
-    Canvas.Font.Style := Match.TokenAttri.Style;  
-    Canvas.TextOut(Pix.X, Pix.Y, Match.CloseToken);
+
+  i:=SynWebFindMatchingToken(SynEdit1,TSynWebBase(SynEdit1.Highlighter),
+    OpenTokens,CloseTokens,TokensID,
+    SynEdit1.CaretXY,b,id);
+  b2:=SynEdit1.CaretXY;
+
+  case i of
+  -2:
+      begin
+        Label6.Caption:=
+          Format('Open token ("%s") found at [%d, %d].'+
+                 'Close token ("%s") found at [%d, %d].',
+                 [OpenTokens[id],b.Line,b.Char,CloseTokens[id],b2.Line,b2.Char]);      
+        t1:=CloseTokens[id];
+        t2:=OpenTokens[id];
+        DrawOpenClose;
+      end;
+  -1:
+      begin
+        Label6.Caption:=
+          Format('Open token ("%s") found at [%d, %d].'+
+                 'Close token ("%s") didn''t match!',
+                 [OpenTokens[id],b.Line,b.Char,CloseTokens[id]]);    
+        t1:=CloseTokens[id];
+        DrawOpen;
+        Panel3.Visible:=False;
+      end;
+   0: begin
+        Panel2.Visible:=False;
+        Panel3.Visible:=False;
+        Label6.Caption:='Token match not found!';
+      end;
+   1:
+      begin
+        Label6.Caption:=
+          Format('Open token ("%s") found at [%d, %d].'+
+                 'Close token ("%s") didn''t match!',
+                 [OpenTokens[id],b2.Line,b2.Char,CloseTokens[id]]);
+        t1:=OpenTokens[id];
+        DrawOpen;
+        Panel3.Visible:=False;
+      end;
+   2:
+      begin
+        Label6.Caption:=
+          Format('Open token ("%s") found at [%d, %d].'+
+                 'Close token ("%s") found at [%d, %d].',
+                 [OpenTokens[id],b2.Line,b2.Char,CloseTokens[id],b.Line,b.Char]);
+        t1:=OpenTokens[id];   
+        t2:=CloseTokens[id];
+        DrawOpenClose;
+      end;
   end;
 end;
 
@@ -295,20 +295,6 @@ procedure TForm1.SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
 begin
   if (AFiles.Count>0) and (FileExists(AFiles[0])) then
     SynEdit1.Lines.LoadFromFile(AFiles[0]);
-end;
-
-procedure TForm1.Button3Click(Sender: TObject);
-begin
-  case ComboBox4.ItemIndex of
-  0:
-    SynEdit1.Text := TSynWebHtmlSyn.SynWebSample;
-  1:
-    SynEdit1.Text := TSynWebCssSyn.SynWebSample;
-  2:
-    SynEdit1.Text := TSynWebEsSyn.SynWebSample;
-  3:
-    SynEdit1.Text := TSynWebPhpCliSyn.SynWebSample;
-  end;
 end;
 
 end.

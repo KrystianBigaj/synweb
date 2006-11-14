@@ -1,8 +1,4 @@
-{$IFNDEF QSYNHIGHLIGHTERWEBDATA}
 unit SynHighlighterWebData;
-{$ENDIF}
-
-{$I SynWeb.inc}
 
 interface
 
@@ -18,13 +14,13 @@ uses
 type
   TSynWebHashTable = array[#0..#255] of Longword;
 
-  TSynWebHighlighterType = (
+  TSynHighlighterType = (
     shtHtml, shtCss, shtEs, shtPhpInHtml, shtPhpInCss, shtPhpInEs
     );
 
-  TSynWebHighlighterTypes = set of TSynWebHighlighterType;
+  TSynHighlighterTypes = set of TSynHighlighterType;
 
-  TSynWebHighlighterMode = (
+  TSynHighlighterMode = (
     shmHtml, shmCss, shmEs, shmPhpCli
     );
 
@@ -93,8 +89,8 @@ type
     srsCssComment);
 
 const
-  TSynWebCssRangeStateRulesetBegin = srsCssProp;
-  TSynWebCssRangeStateRulesetEnd = srsCssPropValRect;
+  TSynWebCssRangeState_RulesetBegin = srsCssProp;
+  TSynWebCssRangeState_RulesetEnd = srsCssPropValRect;
 
   TSynWebCssVersionStr: array[Low(TSynWebCssVersion)..High(TSynWebCssVersion)] of String = (
     'Css 1',
