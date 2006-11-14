@@ -1,4 +1,4 @@
-  HtmlSpecialMaxKeyHash = 111;
+  Html_SpecialMaxKeyHash = 111;
 
   TSynWeb_Special:array[0..252] of String=(
     'aacute', 'Aacute', 'acirc', 'Acirc', 'acute', 'aelig', 'AElig', 'agrave', 

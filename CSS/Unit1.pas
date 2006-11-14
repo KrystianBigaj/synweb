@@ -24,9 +24,9 @@ type
     Button13: TButton;
     Button14: TButton;
     PopupMenu1: TPopupMenu;
-    Html401Strict1: TMenuItem;
-    Html401Transitional1: TMenuItem;
-    Html401Frameset1: TMenuItem;
+    HTML401Strict1: TMenuItem;
+    HTML401Transitional1: TMenuItem;
+    HTML401Frameset1: TMenuItem;
     N1: TMenuItem;
     None1: TMenuItem;
     ComboBox1: TComboBox;
@@ -80,7 +80,7 @@ type
     procedure Button14Click(Sender: TObject);
     procedure Button13Click(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
-    procedure Html401Strict1Click(Sender: TObject);
+    procedure HTML401Strict1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button18Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
@@ -96,7 +96,7 @@ type
   private
     pn:TTreeNode;
   public
-    cl:String;
+    cl:string;
     function nGetBit(n:TTreeNode; b:Integer):Boolean;
     procedure nSetBit(n:TTreeNode; b:Integer);
     procedure nClearBit(n:TTreeNode; b:Integer);
@@ -223,13 +223,13 @@ begin
   TreeView1.Items.Clear;
   ini:=TIniFile32.Create(OpenDialog1.FileName);
   ini.BeginUpdate;
-  if ini.ReadInteger('Config','IsCss',0)<>1 then
+  if ini.ReadInteger('Config','IsCSS',0)<>1 then
   begin
-    ShowMessage('This is not Css-Config FILE!');
+    ShowMessage('This is not CSS-Config FILE!');
     ini.Free;
     Exit;
   end;
-  ComboBox1.ItemIndex:=ini.ReadInteger('Config','Html',0);
+  ComboBox1.ItemIndex:=ini.ReadInteger('Config','HTML',0);
   iss.Checked:=ini.ReadBool('Config','IsSpecial',False);
   for t:=0 to ini.ReadInteger('Config','Tags',0)-1 do
   begin
@@ -276,8 +276,8 @@ begin
     Inc(t);
   end;       
   ini.WriteInteger('Config','Tags',t);
-  ini.WriteInteger('Config','IsCss',1);
-  ini.WriteInteger('Config','Html',ComboBox1.ItemIndex);
+  ini.WriteInteger('Config','IsCSS',1);
+  ini.WriteInteger('Config','HTML',ComboBox1.ItemIndex);
   ini.WriteBool('Config','IsSpecial',iss.Checked);
   ini.EndUpdate;
   ini.Free;
@@ -285,12 +285,12 @@ end;
 
 procedure TForm1.PopupMenu1Popup(Sender: TObject);
 var
-  i:Integer;
+  i:integer;
 begin
   pn:=TreeView1.Selected;
-  Html401Strict1.Enabled:=pn<>nil;
-  Html401Transitional1.Enabled:=pn<>nil;
-  Html401Frameset1.Enabled:=pn<>nil;
+  HTML401Strict1.Enabled:=pn<>nil;
+  HTML401Transitional1.Enabled:=pn<>nil;
+  HTML401Frameset1.Enabled:=pn<>nil;
 
   IDENT1.Visible:=pn.Level=1;
   IDENT1.Enabled:=pn<>nil;
@@ -313,9 +313,9 @@ begin
   TreeView1.Selected:=pn;
   None1.Caption:=pn.Text;
 
-  Html401Strict1.Checked:=nGetBit(pn,0);
-  Html401Transitional1.Checked:=nGetBit(pn,1);
-  Html401Frameset1.Checked:=nGetBit(pn,2);
+  HTML401Strict1.Checked:=nGetBit(pn,0);
+  HTML401Transitional1.Checked:=nGetBit(pn,1);
+  HTML401Frameset1.Checked:=nGetBit(pn,2);
   IDENT1.Checked:=nGetBit(pn,31);
 
   for i:=PopupMenu1.Items.IndexOf(angle6) to PopupMenu1.Items.Count-1 do  
@@ -325,7 +325,7 @@ begin
       PopupMenu1.Items[i].Checked:=nGetBit(pn,PopupMenu1.Items[i].Tag);
 end;
 
-procedure TForm1.Html401Strict1Click(Sender: TObject);
+procedure TForm1.HTML401Strict1Click(Sender: TObject);
 begin
   nSwitchBit(pn,TMenuItem(Sender).Tag);
   TreeView1.Selected:=pn;
@@ -333,7 +333,7 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 var
-i:Integer;
+i:integer;
 begin
   if ParamCount=1 then
     Left:=Screen.Width;
@@ -424,8 +424,8 @@ procedure TForm1.Button6Click(Sender: TObject);
 const
   ch=[' ', '[', ']', '|', #13, #10, '.', '*', '+', ',', '?', '/', '{'];
 var
-  i:Integer;
-  s,s2:String;
+  i:integer;
+  s,s2:string;
   sl:TStringList;
 
   procedure space;
@@ -446,7 +446,7 @@ var
     end;
   end;
 
-  function readname:Boolean;
+  function readname:boolean;
   begin
     Result:=false;
     space;
@@ -462,7 +462,7 @@ var
     result:=true;
   end;
 
-  function chk(x:String):String;
+  function chk(x:string):String;
   var
     ci:Integer;
     b:Boolean;
@@ -570,12 +570,12 @@ var
   t,x:TTreeNode;
   sl:TStringList;
 
-  function GetAttrsCss1(tg:TTreeNode):String;
+  function GetAttrsCSS1(tg:TTreeNode):string;
   var
-    j:Integer;  
+    j:integer;  
     n:TTreeNode;
 
-    function gv:String;
+    function gv:string;
     begin
       Result:=IfThen(nGetBit(tg,0),'1','0')+IfThen(nGetBit(tg,1),'2','0');
     end;
@@ -598,7 +598,7 @@ var
               n:=n.getFirstChild;
               while n<>nil do
               begin
-                result:=result+GetAttrsCss1(n);
+                result:=result+GetAttrsCSS1(n);
                 n:=n.GetNextChild(n);
               end;
               break;
@@ -624,7 +624,7 @@ begin
      // if (LeftStr(t.Text,1)='<') and (RightStr(t.Text,1)='>') then
       begin
         sl.Clear;
-        sl.Text:=GetAttrsCss1(t);
+        sl.Text:=GetAttrsCSS1(t);
         x:=t.Parent;
         t.Delete;
         for k:=0 to sl.Count-1 do
@@ -648,7 +648,7 @@ end;
 
 procedure TForm1.Button8Click(Sender: TObject);
 var
-  i:Integer;
+  i:integer;
   t:TTreeNode;
 begin
   for i:=TreeView1.Items.Count-1 downto 0 do
@@ -668,7 +668,7 @@ end;
 
 procedure TForm1.Button9Click(Sender: TObject);
 var
-  i:Integer;
+  i:integer;
   t:TTreeNode;
 begin
   TreeView1.Items.BeginUpdate;
@@ -839,7 +839,7 @@ begin
         nSetBit(t.Parent,24);
         t.Delete;
       end else
-      if t.Text='[Integer]' then
+      if t.Text='[integer]' then
       begin
         // SPECIAL !!! css2.1 
         nSetBit(t.Parent,23);
@@ -900,7 +900,7 @@ begin
         nSetBit(t.Parent,16);
         t.Delete;
       end else
-      if t.Text='[String]' then
+      if t.Text='[string]' then
       begin
         // SPECIAL !!! css2.1 
         nSetBit(t.Parent,15);

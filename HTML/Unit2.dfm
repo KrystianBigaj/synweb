@@ -35,7 +35,7 @@ object Form2: TForm2
       Width = 117
       Height = 17
       AutoSize = False
-      Caption = 'Html 4.01 Transitional'
+      Caption = 'HTML 4.01 Transitional'
       Layout = tlCenter
     end
     object Label2: TLabel
@@ -44,7 +44,7 @@ object Form2: TForm2
       Width = 117
       Height = 17
       AutoSize = False
-      Caption = 'Html 4.01 Strict'
+      Caption = 'HTML 4.01 Strict'
       Layout = tlCenter
     end
     object Label4: TLabel
@@ -53,7 +53,7 @@ object Form2: TForm2
       Width = 117
       Height = 17
       AutoSize = False
-      Caption = 'Html 4.01 Frameset'
+      Caption = 'HTML 4.01 Frameset'
       Layout = tlCenter
     end
     object Label5: TLabel
@@ -62,7 +62,7 @@ object Form2: TForm2
       Width = 117
       Height = 17
       AutoSize = False
-      Caption = 'XHtml 1.0 Strict'
+      Caption = 'XHTML 1.0 Strict'
       Layout = tlCenter
     end
     object Label8: TLabel
@@ -71,7 +71,7 @@ object Form2: TForm2
       Width = 117
       Height = 17
       AutoSize = False
-      Caption = 'XHtml 1.0 Transitional'
+      Caption = 'XHTML 1.0 Transitional'
       Layout = tlCenter
     end
     object Label9: TLabel
@@ -80,7 +80,7 @@ object Form2: TForm2
       Width = 117
       Height = 17
       AutoSize = False
-      Caption = 'XHtml 1.0 Frameset'
+      Caption = 'XHTML 1.0 Frameset'
       Layout = tlCenter
     end
     object Bevel1: TBevel

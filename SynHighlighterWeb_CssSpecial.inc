@@ -1,12 +1,12 @@
-  CssSpecialMaxKeyHash = 133;
-  CssSpecialID_Import = 22;
-  CssSpecialID_Media = 29;
-  CssSpecialID_Page = 32;
-  CssSpecialID_Charset = 6;
-  CssSpecialID_Important = 23;
-  CssSpecialID_Lang = 26;
-  CssSpecialID_Url = 45;
-  CssSpecialID_Auto = 3;
+  Css_SpecialMaxKeyHash = 133;
+  Css_SpecialID_Import = 22;
+  Css_SpecialID_Media = 29;
+  Css_SpecialID_Page = 32;
+  Css_SpecialID_Charset = 6;
+  Css_SpecialID_Important = 23;
+  Css_SpecialID_Lang = 26;
+  Css_SpecialID_Url = 45;
+  Css_SpecialID_Auto = 3;
 
   TSynWeb_CssSpecial:array[0..46] of String=(
     'active', 'after', 'all', 'auto', 'before', 'braille', 'charset', 'cm', 'deg', 

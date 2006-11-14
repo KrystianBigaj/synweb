@@ -92,7 +92,7 @@ XX XX                               - PHP OPEN-TAG
          XX XX XX                   - RANGE
                   XX XX XX          - SUB PROC RANGE
       XX                            - HEREDOC RANGE
-         XX                         - HEREDOC IDENT CRC OR TSTRINGLIST
+         XX                         - HEREDOC IDENT PARTIRTY LEN
             XX XX XX XX XX XX XX XX - HERERDOC CRC
-   XX                               - HTML PREV ATTRIB WAS 'LANGUAGE' ?
-XX                                  - HTML LANGUAGE=php?
+                                 XX - HTML SCRIPT OPEN TAG IS PHP
+                              XX    - HTML LAST TAG WAS SCRIPT

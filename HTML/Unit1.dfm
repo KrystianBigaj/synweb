@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 415
   Top = 8
   BorderStyle = bsSingle
-  Caption = 'SynHighlighterWeb - Html Data/Export v1.0b '#169'2005 FlatDev'
+  Caption = 'SynHighlighterWeb - HTML Data/Export v1.0b '#169'2005 FlatDev'
   ClientHeight = 703
   ClientWidth = 569
   Color = clBtnFace
@@ -13,6 +13,7 @@ object Form1: TForm1
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
+  Position = poDefault
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnShow = FormShow
@@ -321,13 +322,13 @@ object Form1: TForm1
     ItemHeight = 13
     TabOrder = 21
     Items.Strings = (
-      'Html 4.01 Strict'
-      'Html 4.01 Transitional'
-      'Html 4.01 Frameset'
-      'XHtml 1.0 Strict'
-      'XHtml 1.0 Transitional'
-      'XHtml 1.0 Frameset'
-      'XHtml 1.1')
+      'HTML 4.01 Strict'
+      'HTML 4.01 Transitional'
+      'HTML 4.01 Frameset'
+      'XHTML 1.0 Strict'
+      'XHTML 1.0 Transitional'
+      'XHTML 1.0 Frameset'
+      'XHTML 1.1')
   end
   object Button15: TButton
     Left = 324
@@ -335,7 +336,7 @@ object Form1: TForm1
     Width = 237
     Height = 17
     Anchors = [akLeft, akBottom]
-    Caption = 'Html 4.01 Transitional - > Html 4.01 Frameset'
+    Caption = 'HTML 4.01 Transitional - > HTML 4.01 Frameset'
     TabOrder = 22
     OnClick = Button15Click
   end
@@ -376,7 +377,7 @@ object Form1: TForm1
     Width = 237
     Height = 17
     Anchors = [akLeft, akBottom]
-    Caption = 'XHtml 1.0 Transitional - > XHtml 1.0 Frameset'
+    Caption = 'XHTML 1.0 Transitional - > XHTML 1.0 Frameset'
     TabOrder = 25
     OnClick = Button17Click
   end
@@ -469,7 +470,7 @@ object Form1: TForm1
     Width = 145
     Height = 25
     Anchors = [akTop, akRight]
-    Caption = 'Select No-Css'
+    Caption = 'Select No-CSS'
     TabOrder = 34
     OnClick = Button22Click
   end
@@ -521,45 +522,45 @@ object Form1: TForm1
     object N1: TMenuItem
       Caption = '-'
     end
-    object Html401Strict1: TMenuItem
-      Caption = 'Html 4.01 Strict'
-      OnClick = Html401Strict1Click
+    object HTML401Strict1: TMenuItem
+      Caption = 'HTML 4.01 Strict'
+      OnClick = HTML401Strict1Click
     end
-    object Html401Transitional1: TMenuItem
+    object HTML401Transitional1: TMenuItem
       Tag = 1
-      Caption = 'Html 4.01 Transitional'
-      OnClick = Html401Strict1Click
+      Caption = 'HTML 4.01 Transitional'
+      OnClick = HTML401Strict1Click
     end
-    object Html401Frameset1: TMenuItem
+    object HTML401Frameset1: TMenuItem
       Tag = 2
-      Caption = 'Html 4.01 Frameset'
-      OnClick = Html401Strict1Click
+      Caption = 'HTML 4.01 Frameset'
+      OnClick = HTML401Strict1Click
     end
     object N2: TMenuItem
       Caption = '-'
     end
-    object XHtml10Strict1: TMenuItem
+    object XHTML10Strict1: TMenuItem
       Tag = 3
-      Caption = 'XHtml 1.0 Strict'
-      OnClick = Html401Strict1Click
+      Caption = 'XHTML 1.0 Strict'
+      OnClick = HTML401Strict1Click
     end
-    object XHtml10Transitional1: TMenuItem
+    object XHTML10Transitional1: TMenuItem
       Tag = 4
-      Caption = 'XHtml 1.0 Transitional'
-      OnClick = Html401Strict1Click
+      Caption = 'XHTML 1.0 Transitional'
+      OnClick = HTML401Strict1Click
     end
-    object XHtml10Frameset1: TMenuItem
+    object XHTML10Frameset1: TMenuItem
       Tag = 5
-      Caption = 'XHtml 1.0 Frameset'
-      OnClick = Html401Strict1Click
+      Caption = 'XHTML 1.0 Frameset'
+      OnClick = HTML401Strict1Click
     end
     object N3: TMenuItem
       Caption = '-'
     end
-    object XHtml111: TMenuItem
+    object XHTML111: TMenuItem
       Tag = 6
-      Caption = 'XHtml 1.1'
-      OnClick = Html401Strict1Click
+      Caption = 'XHTML 1.1'
+      OnClick = HTML401Strict1Click
     end
     object N4: TMenuItem
       Caption = '-'
@@ -568,32 +569,32 @@ object Form1: TForm1
       Caption = 'Other status'
       Enabled = False
     end
-    object XHtml10TransitionalDEPRECATED1: TMenuItem
+    object XHTML10TransitionalDEPRECATED1: TMenuItem
       Tag = 16
-      Caption = 'XHtml 1.0 Transitional DEPRECATED'
-      OnClick = Html401Strict1Click
+      Caption = 'XHTML 1.0 Transitional DEPRECATED'
+      OnClick = HTML401Strict1Click
     end
-    object XHtml10FramesetlDEPRECATED1: TMenuItem
+    object XHTML10FramesetlDEPRECATED1: TMenuItem
       Tag = 17
-      Caption = 'XHtml 1.0 Frameset DEPRECATED'
+      Caption = 'XHTML 1.0 Frameset DEPRECATED'
     end
     object N5: TMenuItem
       Caption = '-'
     end
     object isEXT: TMenuItem
       Tag = 29
-      Caption = '29 - IS "<?... ?>" ?'
-      OnClick = Html401Strict1Click
+      Caption = 'IS "<?... ?>" ?'
+      OnClick = HTML401Strict1Click
     end
     object NoCLASS1: TMenuItem
       Tag = 30
-      Caption = '30 - No CLASS'
-      OnClick = Html401Strict1Click
+      Caption = 'No CLASS'
+      OnClick = HTML401Strict1Click
     end
     object EMPTY1: TMenuItem
       Tag = 31
-      Caption = '31 - Is EMPTY'
-      OnClick = Html401Strict1Click
+      Caption = 'Is EMPTY'
+      OnClick = HTML401Strict1Click
     end
   end
 end

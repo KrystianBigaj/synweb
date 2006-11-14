@@ -1,383 +1,383 @@
-function TSynWebEngine.EsKeywordIdent: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordIdent: TtkTokenKind;
 begin
-  Result := stkEsIdentifier;
+  Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc15: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc15: TtkTokenKind;
 begin
-  if  EsKeywordComp(12) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(12) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc19: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc19: TtkTokenKind;
 begin
-  if  EsKeywordComp(6) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(6) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc23: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc23: TtkTokenKind;
 begin
-  if  EsKeywordComp(13) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(13) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc28: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc28: TtkTokenKind;
 begin
-  if  EsKeywordComp(1) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(1) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc30: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc30: TtkTokenKind;
 begin
-  if  EsKeywordComp(30) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(30) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc35: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc35: TtkTokenKind;
 begin
-  if  EsKeywordComp(2) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(2) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc37: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc37: TtkTokenKind;
 begin
-  if  EsKeywordComp(0) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(0) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc39: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc39: TtkTokenKind;
 begin
-  if  EsKeywordComp(10) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(10) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc41: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc41: TtkTokenKind;
 begin
-  if  EsKeywordComp(7) or
-      EsKeywordComp(23) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(7) or
+      ES_KeywordComp(23) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc42: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc42: TtkTokenKind;
 begin
-  if  EsKeywordComp(15) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(15) then
+    Result := tkESKeyword
   else
-    if  EsKeywordComp(38) then
-      Result := stkEsKeyword
+    if  ES_KeywordComp(38) then
+      Result := tkESKeyword
     else
-      Result := stkEsIdentifier;
+      Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc43: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc43: TtkTokenKind;
 begin
-  if  EsKeywordComp(8) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(8) then
+    Result := tkESKeyword
   else
-    if  EsKeywordComp(43) then
-      Result := stkEsKeyword
+    if  ES_KeywordComp(43) then
+      Result := tkESKeyword
     else
-      Result := stkEsIdentifier;
+      Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc44: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc44: TtkTokenKind;
 begin
-  if  EsKeywordComp(47) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(47) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc48: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc48: TtkTokenKind;
 begin
-  if  EsKeywordComp(45) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(45) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc50: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc50: TtkTokenKind;
 begin
-  if  EsKeywordComp(24) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(24) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc51: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc51: TtkTokenKind;
 begin
-  if  EsKeywordComp(5) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(5) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc52: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc52: TtkTokenKind;
 begin
-  if  EsKeywordComp(29) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(29) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc53: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc53: TtkTokenKind;
 begin
-  if  EsKeywordComp(35) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(35) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc54: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc54: TtkTokenKind;
 begin
-  if  EsKeywordComp(31) or
-      EsKeywordComp(39) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(31) or
+      ES_KeywordComp(39) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc56: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc56: TtkTokenKind;
 begin
-  if  EsKeywordComp(18) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(18) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc57: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc57: TtkTokenKind;
 begin
-  if  EsKeywordComp(25) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(25) then
+    Result := tkESKeyword
   else
-    if  EsKeywordComp(40) then
-      Result := stkEsKeyword
+    if  ES_KeywordComp(40) then
+      Result := tkESKeyword
     else
-      Result := stkEsIdentifier;
+      Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc59: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc59: TtkTokenKind;
 begin
-  if  EsKeywordComp(34) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(34) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc60: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc60: TtkTokenKind;
 begin
-  if  EsKeywordComp(26) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(26) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc63: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc63: TtkTokenKind;
 begin
-  if  EsKeywordComp(21) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(21) then
+    Result := tkESKeyword
   else
-    if  EsKeywordComp(50) then
-      Result := stkEsKeyword
+    if  ES_KeywordComp(50) then
+      Result := tkESKeyword
     else
-      Result := stkEsIdentifier;
+      Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc64: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc64: TtkTokenKind;
 begin
-  if  EsKeywordComp(20) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(20) then
+    Result := tkESKeyword
   else
-    if  EsKeywordComp(28) then
-      Result := stkEsKeyword
+    if  ES_KeywordComp(28) then
+      Result := tkESKeyword
     else
-      Result := stkEsIdentifier;
+      Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc69: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc69: TtkTokenKind;
 begin
-  if  EsKeywordComp(4) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(4) then
+    Result := tkESKeyword
   else
-    if  EsKeywordComp(33) then
-      Result := stkEsKeyword
+    if  ES_KeywordComp(33) then
+      Result := tkESKeyword
     else
-      Result := stkEsIdentifier;
+      Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc71: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc71: TtkTokenKind;
 begin
-  if  EsKeywordComp(32) or
-      EsKeywordComp(46) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(32) or
+      ES_KeywordComp(46) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc72: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc72: TtkTokenKind;
 begin
-  if  EsKeywordComp(52) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(52) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc79: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc79: TtkTokenKind;
 begin
-  if  EsKeywordComp(9) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(9) then
+    Result := tkESKeyword
   else
-    if  EsKeywordComp(53) then
-      Result := stkEsKeyword
+    if  ES_KeywordComp(53) then
+      Result := tkESKeyword
     else
-      Result := stkEsIdentifier;
+      Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc80: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc80: TtkTokenKind;
 begin
-  if  EsKeywordComp(51) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(51) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc81: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc81: TtkTokenKind;
 begin
-  if  EsKeywordComp(44) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(44) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc82: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc82: TtkTokenKind;
 begin
-  if  EsKeywordComp(17) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(17) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc84: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc84: TtkTokenKind;
 begin
-  if  EsKeywordComp(19) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(19) then
+    Result := tkESKeyword
   else
-    if  EsKeywordComp(27) then
-      Result := stkEsKeyword
+    if  ES_KeywordComp(27) then
+      Result := tkESKeyword
     else
-      Result := stkEsIdentifier;
+      Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc87: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc87: TtkTokenKind;
 begin
-  if  EsKeywordComp(22) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(22) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc91: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc91: TtkTokenKind;
 begin
-  if  EsKeywordComp(37) or
-      EsKeywordComp(42) or
-      EsKeywordComp(48) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(37) or
+      ES_KeywordComp(42) or
+      ES_KeywordComp(48) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc96: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc96: TtkTokenKind;
 begin
-  if  EsKeywordComp(16) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(16) then
+    Result := tkESKeyword
   else
-    if  EsKeywordComp(57) then
-      Result := stkEsKeyword
+    if  ES_KeywordComp(57) then
+      Result := tkESKeyword
     else
-      Result := stkEsIdentifier;
+      Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc98: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc98: TtkTokenKind;
 begin
-  if  EsKeywordComp(36) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(36) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc101: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc101: TtkTokenKind;
 begin
-  if  EsKeywordComp(3) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(3) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc102: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc102: TtkTokenKind;
 begin
-  if  EsKeywordComp(11) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(11) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc103: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc103: TtkTokenKind;
 begin
-  if  EsKeywordComp(55) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(55) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc106: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc106: TtkTokenKind;
 begin
-  if  EsKeywordComp(14) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(14) then
+    Result := tkESKeyword
   else
-    if  EsKeywordComp(49) then
-      Result := stkEsKeyword
+    if  ES_KeywordComp(49) then
+      Result := tkESKeyword
     else
-      Result := stkEsIdentifier;
+      Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc120: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc120: TtkTokenKind;
 begin
-  if  EsKeywordComp(56) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(56) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc126: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc126: TtkTokenKind;
 begin
-  if  EsKeywordComp(41) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(41) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;
 
-function TSynWebEngine.EsKeywordFunc160: TSynWebTokenKind;
+function TSynWebSyn.ES_KeywordFunc160: TtkTokenKind;
 begin
-  if  EsKeywordComp(54) then
-    Result := stkEsKeyword
+  if  ES_KeywordComp(54) then
+    Result := tkESKeyword
   else
-    Result := stkEsIdentifier;
+    Result := tkESIdentifier;
 end;

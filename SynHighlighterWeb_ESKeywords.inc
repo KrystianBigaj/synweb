@@ -1,6 +1,6 @@
-  EsKeywordsMaxKeyHash = 160;
+  ES_KeywordsMaxKeyHash = 160;
 
-  TSynWeb_EsKeywords:array[0..57] of String=(
+  TSynWeb_ESKeywords:array[0..57] of String=(
     'break', 'case', 'catch', 'continue', 'default', 'delete', 'do', 'else', 
     'false', 'finally', 'for', 'function', 'if', 'in', 'instanceof', 'new', 
     'return', 'switch', 'this', 'throw', 'true', 'try', 'typeof', 'var', 'void', 
@@ -11,7 +11,7 @@
     'throws', 'transient', 'volatile'
     );
 
-  TSynWeb_EsKeywordsData:array[0..57] of Longword=(
+  TSynWeb_ESKeywordsData:array[0..57] of Longword=(
     $00000001, $00000001, $00000001, $00000001, $00000001, $00000001, $00000001, 
     $00000001, $00000001, $00000001, $00000001, $00000001, $00000001, $00000001, 
     $00000001, $00000001, $00000001, $00000001, $00000001, $00000001, $00000001, 

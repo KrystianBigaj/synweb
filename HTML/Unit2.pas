@@ -54,7 +54,7 @@ type
     procedure FormShow(Sender: TObject);
   private
     KeyList: TList;
-    appdir:String;
+    appdir:string;
     procedure MakeHashTable;
     procedure ClearLists;
   public
@@ -188,7 +188,7 @@ var
   n:TTreeNode;
   i, t,x:Integer;
   s, s1,s2:TStringList; 
-  ss1,ss2:String;
+  ss1,ss2:string;
 begin
   s:=TStringList.Create;
   s1:=TStringList.Create;
@@ -238,12 +238,12 @@ begin
       x:=KeyHash(s[i]);
   s1.Insert(0,'');          
   if Form1.CheckBox3.Checked then
-    s1.Insert(0,Format('  HtmlSpecialMaxKeyHash = %d;',[x]))
+    s1.Insert(0,Format('  Html_SpecialMaxKeyHash = %d;',[x]))
   else
   begin
-    s1.Insert(0,Format('  HtmlTagMaxKeyHash = %d;',[x]));
-    s1.Insert(0,Format('  HtmlTagID_Style = %d;',[s.IndexOf('style')]));
-    s1.Insert(0,Format('  HtmlTagID_Script = %d;',[s.IndexOf('script')]));
+    s1.Insert(0,Format('  Html_TagMaxKeyHash = %d;',[x]));
+    s1.Insert(0,Format('  Html_TagID_Style = %d;',[s.IndexOf('style')]));
+    s1.Insert(0,Format('  Html_TagID_Script = %d;',[s.IndexOf('script')]));
   end;
 
   s2[s2.Count-1]:=Copy(s2[s2.Count-1],1,Length(s2[s2.Count-1])-2);
@@ -263,15 +263,15 @@ begin
                   
   if Form1.CheckBox3.Checked then
     GenerateInc(s,'Boolean', 'True', 'False',
-      'HtmlSpecialFunc', 'HtmlSpecialUndef',
-      'FHtmlSpecialIdentFuncTable', 'HtmlSpecialKeyComp',
+      'HTML_SpecialFunc', 'HTML_SpecialUndef',
+      'fHTML_SpecialIdentFuncTable', 'HTML_SpecialKeyComp',
       appdir+'..\SynHighlighterWeb_SpecialFunc.inc',
       appdir+'..\SynHighlighterWeb_SpecialFuncList.inc',
       appdir+'..\SynHighlighterWeb_SpecialFuncTable.inc')
   else
-    GenerateInc(s,'TSynWebTokenKind', 'stkHtmlTagName', 'stkHtmlTagNameUndef',
-      'HtmlTagFunc', 'HtmlTagUndef',
-      'FHtmlTagIdentFuncTable', 'HtmlTagKeyComp',
+    GenerateInc(s,'TtkTokenKind', 'tkHTMLTagName', 'tkHTMLTagNameUndef',
+      'HTML_TagFunc', 'HTML_TagUndef',
+      'fHTML_TagIdentFuncTable', 'HTML_TagKeyComp',
       appdir+'..\SynHighlighterWeb_TagsFunc.inc',
       appdir+'..\SynHighlighterWeb_TagsFuncList.inc',
       appdir+'..\SynHighlighterWeb_TagsFuncTable.inc');
@@ -291,11 +291,11 @@ var
   sl:TStringList;
   n1,n2:TTreeNode;
   p:array of Longword;
-  i,j,k,l:Longword;
+  i,j,k,l:LongWord;
   x:Integer;
   s:String;  
   s1,s2:TStringList;    
-  ss1:String;
+  ss1:string;
 
   function si(C:Char):String;
   begin
@@ -386,8 +386,8 @@ begin
     if KeyHash(sl[i])>x then
       x:=KeyHash(sl[i]);
   s1.Insert(0,'');
-  s1.Insert(0,Format('  HtmlAttrMaxKeyHash = %d;',[x]));
-  s1.Insert(0,Format('  HtmlAttrID_Language = %d;',[sl.IndexOf('language')]));
+  s1.Insert(0,Format('  Html_AttrMaxKeyHash = %d;',[x]));
+  s1.Insert(0,Format('  Html_AttrID_Language = %d;',[sl.IndexOf('language')]));
 
 
   s2.Insert(0,format('  TSynWeb_AttrsData:array[0..%d] of array[0..%d] of array[0..%d] of Longword=(',[sl.Count-1,6-1,3-1]));
@@ -399,9 +399,9 @@ begin
 
   SetLength(p,0);
 
-  GenerateInc(sl,'TSynWebTokenKind', 'stkHtmlTagKey', 'stkHtmlTagKeyUndef',
-    'HtmlAttrFunc', 'HtmlAttrUndef',
-    'FHtmlAttrIdentFuncTable', 'HtmlAttrKeyComp',
+  GenerateInc(sl,'TtkTokenKind', 'tkHTMLTagKey', 'tkHTMLTagKeyUndef',
+    'HTML_AttrFunc', 'HTML_AttrUndef',
+    'fHTML_AttrIdentFuncTable', 'HTML_AttrKeyComp',
     appdir+'..\SynHighlighterWeb_AttrsFunc.inc',
     appdir+'..\SynHighlighterWeb_AttrsFuncList.inc',
     appdir+'..\SynHighlighterWeb_AttrsFuncTable.inc');
@@ -464,7 +464,7 @@ var
   i,ia:Integer;
   l:TLexKeys;   
   nf:TStringList;
-  stemp:String;
+  stemp:string;
 begin
   AKeys.Sort;
   ClearLists;
@@ -504,14 +504,14 @@ begin
 
   I := 0;
   nf:=TStringList.Create;
-  nf.add(Format('function TSynWebEngine.%s: %s;',[AFuncUndef, AResType]));
+  nf.add(Format('function TSynWebSyn.%s: %s;',[AFuncUndef, AResType]));
   nf.add('begin');
   nf.add(Format('  Result:=%s;',[AResFalse]));
   nf.add('end;');
   nf.add('');
   while I < KeyList.Count do
   begin
-    nf.add(Format('function TSynWebEngine.%s%d: %s;',[AFunc,TLexKeys(KeyList[I]).Key,AResType]));
+    nf.add(Format('function TSynWebSyn.%s%d: %s;',[AFunc,TLexKeys(KeyList[I]).Key,AResType]));
     nf.add('begin');
     ia:=nf.Count;
 //    nf.add('  if');

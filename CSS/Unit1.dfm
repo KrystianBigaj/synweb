@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 665
-  Top = 10
+  Left = 679
+  Top = -4
   Width = 350
   Height = 730
-  Caption = 'SynHighlighterWeb - Css Data/Export v1.0b '#169'2005 FlatDev'
+  Caption = 'SynHighlighterWeb - CSS Data/Export v1.0b '#169'2005 FlatDev'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,6 +12,7 @@ object Form1: TForm1
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
+  Position = poDefault
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
@@ -176,11 +177,11 @@ object Form1: TForm1
     ItemHeight = 13
     ItemIndex = 1
     TabOrder = 12
-    Text = 'Css 2.1'
+    Text = 'CSS 2.1'
     Items.Strings = (
-      'Css 1'
-      'Css 2.1'
-      'Css3')
+      'CSS 1'
+      'CSS 2.1'
+      'CSS3')
   end
   object CheckBox1: TCheckBox
     Left = 311
@@ -246,7 +247,7 @@ object Form1: TForm1
     Width = 125
     Height = 25
     Anchors = [akTop, akRight]
-    Caption = 'Css: Convert'
+    Caption = 'CSS: Convert'
     TabOrder = 17
     OnClick = Button7Click
   end
@@ -266,7 +267,7 @@ object Form1: TForm1
     Width = 125
     Height = 25
     Anchors = [akTop, akRight]
-    Caption = 'Css: Add other (Css2)'
+    Caption = 'CSS: Add other (CSS2)'
     TabOrder = 19
     OnClick = Button9Click
   end
@@ -304,7 +305,7 @@ object Form1: TForm1
     Width = 109
     Height = 17
     Anchors = [akLeft, akBottom]
-    Caption = 'Is Special (Css)?'
+    Caption = 'Is Special (CSS)?'
     TabOrder = 23
   end
   object Button15: TButton
@@ -348,20 +349,20 @@ object Form1: TForm1
     object N1: TMenuItem
       Caption = '-'
     end
-    object Html401Strict1: TMenuItem
-      Caption = '0 - Css 1'
-      OnClick = Html401Strict1Click
+    object HTML401Strict1: TMenuItem
+      Caption = '0 - CSS 1'
+      OnClick = HTML401Strict1Click
     end
-    object Html401Transitional1: TMenuItem
+    object HTML401Transitional1: TMenuItem
       Tag = 1
-      Caption = '1 - Css 2.1'
-      OnClick = Html401Strict1Click
+      Caption = '1 - CSS 2.1'
+      OnClick = HTML401Strict1Click
     end
-    object Html401Frameset1: TMenuItem
+    object HTML401Frameset1: TMenuItem
       Tag = 2
-      Caption = '2 - Css 3 ??'
+      Caption = '2 - CSS 3 ??'
       Visible = False
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object CLOSEPOPUP1: TMenuItem
       Caption = '<CLOSE POPUP>'
@@ -372,112 +373,112 @@ object Form1: TForm1
     object IDENT1: TMenuItem
       Tag = 31
       Caption = '[(function)]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object angle6: TMenuItem
       Tag = 31
       Caption = '[angle]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object frequency2: TMenuItem
       Tag = 30
       Caption = '[frequency]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object time2: TMenuItem
       Tag = 29
       Caption = '[time]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object length3: TMenuItem
       Tag = 28
       Caption = '[length]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object length2: TMenuItem
       Tag = 27
       Caption = '[length-negative]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object percentage3: TMenuItem
       Tag = 26
       Caption = '[percentage]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object percentage2: TMenuItem
       Tag = 25
       Caption = '[percentage-negative]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object number3: TMenuItem
       Tag = 24
       Caption = '[number]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object number2: TMenuItem
       Tag = 23
       Caption = '[number-negative]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object integer3: TMenuItem
       Tag = 22
-      Caption = '[Integer]'
-      OnClick = Html401Strict1Click
+      Caption = '[integer]'
+      OnClick = HTML401Strict1Click
     end
     object integer2: TMenuItem
       Tag = 21
       Caption = '[integer-negative]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object identifier2: TMenuItem
       Tag = 20
       Caption = '[identifier]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object string2: TMenuItem
       Tag = 19
-      Caption = '[String]'
-      OnClick = Html401Strict1Click
+      Caption = '[string]'
+      OnClick = HTML401Strict1Click
     end
     object color2: TMenuItem
       Tag = 18
       Caption = '[color]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object N1009002: TMenuItem
       Tag = 17
       Caption = '[100-900]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object N4: TMenuItem
       Tag = 16
       Caption = '[,]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object pseudo1: TMenuItem
       Tag = 15
       Caption = '[css1: pseudo]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object media2: TMenuItem
       Tag = 14
       Caption = '[css21: pseudo]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object media1: TMenuItem
       Tag = 13
       Caption = '[media]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object atkeyword1: TMenuItem
       Tag = 12
       Caption = '[at-keyword]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object page1: TMenuItem
       Tag = 11
       Caption = '[page]'
-      OnClick = Html401Strict1Click
+      OnClick = HTML401Strict1Click
     end
     object N3: TMenuItem
       Tag = -1

@@ -3,7 +3,7 @@ unit Unit1;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, RegExpr;
 
 type
@@ -27,7 +27,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
   private
-    FTotalSize, FTotalLines: Integer;
+    { Private declarations }
   public
     procedure MergeFile(AFileName:String);
   end;
@@ -97,19 +97,22 @@ procedure TForm1.MergeFile(AFileName: String);
 var
   r:TRegExpr;
   sl,sl2:TStringList;
-  s,d:String;
+  i,j,x:Integer;
+  s,d,t:String;
   f:TFileStream;
 begin
   Enabled:=False;
   Label2.Caption:=Format('Merging "%s".',[AFileName]);
   s:=ExtractFilePath(Application.ExeName)+AFileName;
-  d:=ExtractFilePath(Application.ExeName)+'..\';
+  d:=ExtractFilePath(s);
+  CreateDir(d+'Output\');
   r:=TRegExpr.Create;
   sl:=TStringList.Create;
   sl2:=TStringList.Create;
   sl.LoadFromFile(s);
   r.Expression:=' *\{\$I\ (.*?)\} *[\n\r]{0,2}';
   r.ModifierI:=True;
+  x:=0;
   if r.Exec(sl.Text) then
     repeat         
       Label2.Caption:=Label2.Caption+'.';
@@ -135,13 +138,11 @@ begin
         sl.Text:=StringReplace(sl.Text,r.Match[0],sl2.Text,[]);
       end;
     until not r.ExecNext;
-  s:=d+'! RELEASE\Source\'+ExtractFileName(AFileName);
+  s:=d+'Output\'+ExtractFileName(AFileName);
   sl.SaveToFile(s);
   sl2.Free;
   r.Free;
   f:=TFileStream.Create(s,fmOpenRead);
-  Inc(FTotalSize, f.Size);
-  Inc(FTotalLines, sl.Count);
   Memo4.Lines.Add(Format('File saved to "%s" (Size: %d kB, Lines: %d).',[s, f.Size div 1024, sl.Count]));
   Label2.Caption:='Ready.';
   sl.Free;
@@ -152,12 +153,9 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 var
   i:integer;
-begin        
-  FTotalSize := 0;
-  FTotalLines := 0;
+begin
   for i:=0 to Memo3.Lines.Count-1 do
-    MergeFile(Memo3.Lines[i]);   
-  Memo4.Lines.Add(Format('--- Total size: %d kB, Total lines: %d).',[FTotalSize div 1024, FTotalLines]));
+    MergeFile(Memo3.Lines[i]);       
   Memo4.Lines.Add('--- Merge done.');
 end;
 
