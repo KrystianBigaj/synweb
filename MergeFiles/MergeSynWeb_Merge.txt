@@ -1,0 +1,8 @@
+..\SynHighlighterWeb.pas
+..\SynHighlighterWebData.pas
+..\SynHighlighterWebMisc.pas
+..\QSynHighlighterWeb.pas
+..\QSynHighlighterWebData.pas
+..\QSynHighlighterWebMisc.pas
+..\..\SynTokenMatch\SynTokenMatch.pas
+..\..\SynTokenMatch\QSynTokenMatch.pas
