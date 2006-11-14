@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 368
-  Top = 140
-  Width = 788
-  Height = 499
+  Left = 192
+  Top = 129
+  Width = 696
+  Height = 480
   Caption = 'Form1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,11 +17,10 @@ object Form1: TForm1
   TextHeight = 13
   object SynEdit1: TSynEdit
     Left = 0
-    Top = 45
-    Width = 780
-    Height = 427
+    Top = 57
+    Width = 688
+    Height = 396
     Align = alClient
-    ActiveLineColor = 16448250
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -42,11 +41,14 @@ object Form1: TForm1
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 780
-    Height = 45
+    Width = 688
+    Height = 57
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 1
+    DesignSize = (
+      688
+      57)
     object Label1: TLabel
       Left = 4
       Top = 24
@@ -69,7 +71,7 @@ object Form1: TForm1
       Caption = 'PHPVersion'
     end
     object Label4: TLabel
-      Left = 658
+      Left = 566
       Top = 4
       Width = 83
       Height = 13
@@ -88,6 +90,24 @@ object Form1: TForm1
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 1
+      Top = 43
+      Width = 686
+      Height = 13
+      Hint = 
+        'Token matching (works in PHP for ('#39'{'#39', '#39'('#39', '#39'['#39', '#39'match_me_open'#39 +
+        ')->(('#39'}'#39', '#39')'#39', '#39']'#39', '#39'match_me_close'#39')'
+      Align = alBottom
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
     end
     object CheckBox1: TCheckBox
       Left = 4
@@ -130,7 +150,7 @@ object Form1: TForm1
       OnClick = Button1Click
     end
     object Button2: TButton
-      Left = 754
+      Left = 662
       Top = 2
       Width = 25
       Height = 17
@@ -159,14 +179,16 @@ object Form1: TForm1
       OnChange = ComboBox3Change
     end
     object ComboBox4: TComboBox
-      Left = 614
+      Left = 522
       Top = 20
       Width = 165
       Height = 21
       Style = csDropDownList
       Anchors = [akTop, akRight]
       ItemHeight = 13
+      ItemIndex = 0
       TabOrder = 7
+      Text = 'HTM (+PHP, +CSS, +ES)'
       OnChange = ComboBox4Change
       Items.Strings = (
         'HTM (+PHP, +CSS, +ES)'
@@ -194,24 +216,93 @@ object Form1: TForm1
       TabOrder = 9
       OnClick = CheckBox4Click
     end
-    object Button3: TButton
-      Left = 572
-      Top = 24
-      Width = 41
-      Height = 17
-      Anchors = [akTop, akRight]
-      Caption = 'Load def'
-      Font.Charset = EASTEUROPE_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -9
-      Font.Name = 'Small Fonts'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 10
-      OnClick = Button3Click
-    end
+  end
+  object Panel2: TPanel
+    Left = 85
+    Top = 105
+    Width = 12
+    Height = 2
+    BevelOuter = bvNone
+    Color = clRed
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+  end
+  object Panel3: TPanel
+    Left = 103
+    Top = 105
+    Width = 12
+    Height = 2
+    BevelOuter = bvNone
+    Color = clRed
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
   end
   object SynWebEngine1: TSynWebEngine
+    InactiveAttri.Foreground = clInactiveCaptionText
+    HtmlCommentAttri.Foreground = clMedGray
+    HtmlEscapeAttri.Foreground = clTeal
+    HtmlSymbolAttri.Foreground = clBlack
+    HtmlTagAttri.Foreground = clNavy
+    HtmlTagNameAttri.Foreground = clBlue
+    HtmlTagNameUndefAttri.Foreground = clBlue
+    HtmlTagNameUndefAttri.Style = [fsUnderline]
+    HtmlTagKeyAttri.Foreground = clRed
+    HtmlTagKeyUndefAttri.Foreground = clRed
+    HtmlTagKeyUndefAttri.Style = [fsUnderline]
+    HtmlTagKeyValueAttri.Foreground = clFuchsia
+    HtmlTagKeyValueQuotedAttri.Foreground = clFuchsia
+    HtmlErrorAttri.Foreground = clRed
+    HtmlErrorAttri.Style = [fsBold, fsUnderline]
+    CssWhitespaceAttri.Background = 15794175
+    CssRulesetWhitespaceAttri.Background = clInfoBk
+    CssSelectorAttri.Foreground = clBlue
+    CssSelectorAttri.Style = [fsBold]
+    CssSelectorUndefAttri.Foreground = clBlue
+    CssSelectorUndefAttri.Style = [fsBold, fsUnderline]
+    CssSelectorClassAttri.Foreground = 12615680
+    CssSelectorClassAttri.Style = [fsBold]
+    CssSelectorIdAttri.Foreground = clGreen
+    CssSelectorIdAttri.Style = [fsBold]
+    CssSpecialAttri.Foreground = clNavy
+    CssCommentAttri.Foreground = clMedGray
+    CssCommentAttri.Style = [fsItalic]
+    CssPropAttri.Foreground = clBlue
+    CssPropUndefAttri.Foreground = clBlue
+    CssPropUndefAttri.Style = [fsUnderline]
+    CssValAttri.Foreground = clRed
+    CssValUndefAttri.Foreground = clRed
+    CssValUndefAttri.Style = [fsUnderline]
+    CssValStringAttri.Foreground = clFuchsia
+    CssValNumberAttri.Foreground = clGreen
+    CssSymbolAttri.Foreground = clBlack
+    CssErrorAttri.Foreground = clRed
+    CssErrorAttri.Style = [fsBold, fsUnderline]
+    ESWhitespaceAttri.Background = 16773360
+    ESIdentifierAttri.Foreground = clBlue
+    ESKeyAttri.Style = [fsBold]
+    ESCommentAttri.Foreground = clGreen
+    ESStringAttri.Foreground = clRed
+    ESNumberAttri.Foreground = clFuchsia
+    ESErrorAttri.Foreground = clRed
+    ESErrorAttri.Style = [fsBold, fsUnderline]
+    PhpWhitespaceAttri.Background = 16119285
+    PhpIdentifierAttri.Foreground = clMaroon
+    PhpKeyAttri.Foreground = clBlue
+    PhpFunctionAttri.Foreground = clRed
+    PhpVariableAttri.Foreground = clTeal
+    PhpConstAttri.Foreground = 33023
+    PhpStringAttri.Foreground = clFuchsia
+    PhpStringSpecialAttri.Background = 15395562
+    PhpStringSpecialAttri.Foreground = clFuchsia
+    PhpCommentAttri.Foreground = clGreen
+    PhpCommentAttri.Style = [fsItalic]
+    PhpDocCommentAttri.Foreground = clGreen
+    PhpDocCommentAttri.Style = [fsBold, fsItalic]
+    PhpNumberAttri.Foreground = clPurple
+    PhpErrorAttri.Foreground = clRed
+    PhpErrorAttri.Style = [fsBold, fsUnderline]
     Left = 48
     Top = 228
   end
@@ -221,19 +312,19 @@ object Form1: TForm1
     Left = 48
     Top = 260
   end
-  object SynWebCSSSyn1: TSynWebCssSyn
+  object SynWebCSSSyn1: TSynWebCSSSyn
     ActiveSwitchHighlighter = False
     Engine = SynWebEngine1
     Left = 112
     Top = 260
   end
-  object SynWebESSyn1: TSynWebEsSyn
+  object SynWebESSyn1: TSynWebESSyn
     ActiveSwitchHighlighter = False
     Engine = SynWebEngine1
     Left = 144
     Top = 260
   end
-  object SynWebPHPCliSyn1: TSynWebPhpCliSyn
+  object SynWebPHPCliSyn1: TSynWebPHPCliSyn
     ActiveSwitchHighlighter = False
     Engine = SynWebEngine1
     Left = 80
@@ -251,7 +342,6 @@ object Form1: TForm1
     UseBackground = False
     Left = 20
     Top = 96
-    TitleW = 'Untitled'
   end
   object SynEditOptionsDialog1: TSynEditOptionsDialog
     UseExtendedStrings = False
