@@ -13,6 +13,7 @@ object Form1: TForm1
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
+  Position = poDefault
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnShow = FormShow

@@ -967,8 +967,6 @@ end;
 destructor TSynWebBase.Destroy;
 begin
   Engine := nil;
-  if FOptions <> nil then
-    FOptions.Free;
   inherited Destroy;
 end;
 
@@ -1875,9 +1873,8 @@ var
   i: Integer;
 begin
   for i := FAttributes.Count - 1 downto 0 do
-    TSynHighlighterAttributes(FAttributes.Objects[i]).Free;                                        
-  FAttributes.Free;
-  FOptions.Free;
+    TSynHighlighterAttributes(FAttributes.Objects[i]).Free;
+  FAttributes.Clear;
   for i := 0 to FNotifyList.Count - 1 do
     TSynWebBase(FNotifyList[i]).Engine := nil;
   FNotifyList.Free;
