@@ -3,11 +3,10 @@ unit Main;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, SynEdit, SynHighlighterWeb, StdCtrls, SynEditHighlighter,
   ExtCtrls, SynEditOptionsDialog, SynEditExport, SynExportHTML, SynTokenMatch,
-  SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes, SynUnicode,
-  SynEditTextBuffer;
+  SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes, SynUnicode;
 
 type
   TForm1 = class(TForm)
@@ -89,13 +88,9 @@ begin
     ComboBox3.Items.Add(TSynWebPhpVersionStr[k]);
   ComboBox3.ItemIndex:=Integer(spvPHP5);
 
-  ComboBox4.ItemIndex := 0;
-
   s:=ChangeFileExt(Application.ExeName,'_sample.txt');
   if FileExists(s) then
-    SynEdit1.Lines.LoadFromFile(s)
-  else
-    Button3.Click;
+    SynEdit1.Lines.LoadFromFile(s);
   CheckBox2Click(nil);
 end;
 
@@ -186,18 +181,6 @@ begin
       if t-[shtPhpInHtml, shtPhpInCss, shtPhpInES]<>t then
         Label5.Caption:=Label5.Caption+'PHP,';
     end;
-  with SynEdit1, SynWebHtmlSyn1 do
-  begin
-    if SynEdit1.CaretY = 1 then
-      ResetRange
-    else
-      SetRange(TSynEditStringList(Lines).Ranges[CaretY - 2]);
-    SetLine(Lines[CaretY-1], CaretY-1);
-    while not GetEol and (CaretX-1 >= GetTokenPos + Length(GetToken)) do
-      Next;
-    Caption := Format('%.8x, %s, %d, %d', [Integer(GetRange),
-      GetToken, GetTagID, GetTagKind]);
-  end;
 end;
 
 procedure TForm1.SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
@@ -223,19 +206,12 @@ const
 var
   Editor : TSynEdit;  
   Pix: TPoint;      
-  Match: TSynTokenMatched;
+  Match: TSynTokenMatches;
   I: Integer;
 
   function CharToPixels(P: TBufferCoord): TPoint;
   begin
     Result:=Editor.RowColumnToPixels(Editor.BufferToDisplayPos(P));
-  end;
-
-  function TryMatch: Integer;
-  begin
-    Result := SynEditGetMatchingTagEx(Editor, Editor.CaretXY, Match);
-    if Result = 0 then
-      Result := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, Tokens, Match);
   end;
 
 begin
@@ -244,7 +220,7 @@ begin
   Editor := TSynEdit(Sender);
   if TransientType = ttBefore then
   begin
-    I := TryMatch;
+    I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, Tokens, Match);
     if I = 0 then
       Exit;
     FPaintUpdating := True;
@@ -257,7 +233,7 @@ begin
   end;
   if Editor.SelAvail then
     Exit;
-  I := TryMatch;
+  I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, Tokens, Match);
   if I = 0 then
     Exit;
   Canvas.Brush.Style := bsSolid;                           

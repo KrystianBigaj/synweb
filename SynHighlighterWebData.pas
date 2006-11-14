@@ -2,7 +2,7 @@
 unit SynHighlighterWebData;
 {$ENDIF}
 
-{$I SynWeb.inc}
+{$I SynEdit.inc}
 
 interface
 
