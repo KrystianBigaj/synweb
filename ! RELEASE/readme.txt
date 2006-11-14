@@ -75,4 +75,5 @@ TSynMultiSyn notice:
 
 Author: Krystian Bigaj
 Email: krystian.bigaj@gmail.com
-Homepage: http://flatdev.dotgeek.org
+Homepage: http://flatdev.ovh.org
+Project page: http://sourceforge.net/projects/synweb

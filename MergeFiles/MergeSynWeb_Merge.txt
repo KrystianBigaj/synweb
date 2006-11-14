@@ -6,3 +6,4 @@
 ..\QSynHighlighterWebMisc.pas
 ..\syntokenmatch\SynTokenMatch.pas
 ..\syntokenmatch\QSynTokenMatch.pas
+..\SynWeb.inc
