@@ -29,7 +29,7 @@ package SynWeb_D2006;
 
 requires
   designide,
-  SynWeb_R2005;
+  SynWeb_R2006;
 
 contains
   SynWebReg in '..\Source\SynWebReg.pas';
