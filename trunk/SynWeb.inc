@@ -1,4 +1,6 @@
-{$I SynEdit.inc}
+// **************************************************************************************
+// *** User configuration section --------------------------------------------------- ***
+// **************************************************************************************
 
 {$DEFINE UNISYNEDIT}  // Enable SynWeb Unicode version. Comment/delete this line to switch SynWeb into ANSI-Version
 
@@ -7,6 +9,8 @@
 // **************************************************************************************
 // *** SynWeb compiler directives. Do NOT change, unless you know what are you doing! ***
 // **************************************************************************************
+
+{$I SynEdit.inc}
 
 // Debug
 {.$DEFINE DEBUG}
@@ -19,5 +23,5 @@
   {$R-}
 {$ENDIF}
 
-// Turn off Boolean short-circuit evaluation
-{$B+}
+// Turn on Boolean short-circuit evaluation
+{$B-}
