@@ -208,6 +208,8 @@ type
     property PhpAspTags;
   end;
 
+  TSynWebBaseClass = class of TSynWebBase;
+
   TSynWebBase = class(TSynCustomHighlighter)
   private
     FInstance: TSynWebInstance;
@@ -276,6 +278,8 @@ type
     property Engine: TSynWebEngine read FEngine write SetEngine;
   end;
 
+  TSynWebHtmlSynClass = class of TSynWebHtmlSyn;
+
   TSynWebHtmlSyn = class(TSynWebBase)
   private
     procedure SetupActiveHighlighter; override;
@@ -297,6 +301,8 @@ type
     property Options: TSynWebHtmlOptions read GetOptions;
   end;
 
+  TSynWebCssSynClass = class of TSynWebCssSyn;
+
   TSynWebCssSyn = class(TSynWebBase)
   private
     procedure SetupActiveHighlighter; override;
@@ -315,6 +321,8 @@ type
     property Options: TSynWebCssOptions read GetOptions;
   end;
 
+  TSynWebEsSynClass = class of TSynWebEsSyn;
+
   TSynWebEsSyn = class(TSynWebBase)
   private
     procedure SetupActiveHighlighter; override;
@@ -332,6 +340,8 @@ type
   published
     property Options: TSynWebEsOptions read GetOptions;
   end;
+
+  TSynWebPhpCliSynClass = class of TSynWebPhpCliSyn;
 
   TSynWebPhpCliSyn = class(TSynWebBase)
   private
@@ -1874,12 +1884,12 @@ destructor TSynWebEngine.Destroy;
 var
   i: Integer;
 begin
+  for i := FNotifyList.Count - 1 downto 0 do
+    TSynWebBase(FNotifyList[i]).Engine := nil;
   for i := FAttributes.Count - 1 downto 0 do
     TSynHighlighterAttributes(FAttributes.Objects[i]).Free;                                        
   FAttributes.Free;
   FOptions.Free;
-  for i := 0 to FNotifyList.Count - 1 do
-    TSynWebBase(FNotifyList[i]).Engine := nil;
   FNotifyList.Free;
   FPhpHereDocList.Free;
   inherited Destroy;
