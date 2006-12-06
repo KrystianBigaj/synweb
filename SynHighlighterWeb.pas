@@ -1,4 +1,8 @@
 {-------------------------------------------------------------------------------
+SynWeb
+Copyright (C) 2006  Krystian Bigaj
+
+*** MPL
 The contents of this file are subject to the Mozilla Public License
 Version 1.1 (the "License"); you may not use this file except in compliance
 with the License. You may obtain a copy of the License at
@@ -8,36 +12,53 @@ Software distributed under the License is distributed on an "AS IS" basis,
 WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
 the specific language governing rights and limitations under the License.
 
-Contributors to the SynEdit and mwEdit projects are listed in the
-Contributors.txt file.
+The Original Code is Krystian Bigaj.
 
-Alternatively, the contents of this file may be used under the terms of the
-GNU General Public License Version 2 or later (the "GPL"), in which case
-the provisions of the GPL are applicable instead of those above.
-If you wish to allow use of your version of this file only under the terms
-of the GPL and not to allow others to use your version of this file
-under the MPL, indicate your decision by deleting the provisions above and
-replace them with the notice and other provisions required by the GPL.
-If you do not delete the provisions above, a recipient may use your version
-of this file under either the MPL or the GPL.
+Alternatively, the contents of this file may be used under the terms
+of the GNU Lesser General Public license (the  "LGPL License"),
+in which case the provisions of LGPL License are applicable instead of those
+above. If you wish to allow use of your version of this file only
+under the terms of the LGPL License and not to allow others to use
+your version of this file under the MPL, indicate your decision by
+deleting the provisions above and replace them with the notice and
+other provisions required by the LGPL License. If you do not delete
+the provisions above, a recipient may use your version of this file
+under either the MPL or the LGPL License.
 
-$Id: SynHighlighterWeb.pas,v 1.0 2005/05/21 00:00:00 flatdev Exp $
+*** LGPL
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
 
-You may retrieve the latest version of this file at the SynEdit home page,
-located at http://SynEdit.SourceForge.net
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+***
+
+You may retrieve the latest version of this file at the SynWeb home page,
+located at http://sourceforge.net/projects/synweb
+
+Contact: krystian.bigaj@gmail.com
+Homepage: http://flatdev.ovh.org
 
 Known Issues:
-- TSynWeb support only single line SetLine (don't use more than one line).
+- SynWeb highlighters support only single line SetLine (don't use more than one line).
 - Doesn't support #13#10, #10 or #13 as new line. Always use #0 as line break.
 - Php: Doesn't support multi-line encapsuled strings in String, only single line:
   eg. "somestring {$a["some array{$b['key'].... <- only single line encapsuled values
 -------------------------------------------------------------------------------}
 {
-@abstract(Provides an web-files (Multi Html/Css/ECMAScript/Php) highlighter for SynEdit
+@abstract(Provides an web-files (Multi Html/XHtml/Wml/Css/ECMAScript/Php) highlighter for SynEdit
 @author(FlatDev <krystian.bigaj@gmail.com>)
 @created(2005-05-21)
-@lastmod(2006-02-10)
-The TSynWeb unit provides SynEdit with an Multi Html/Css/ECMAScript/Php highlighter.
+@lastmod(2006-12-05)
+The SynHighlighterWeb unit provides SynEdit with a Multi Html/XHtml/Wml/Css/ECMAScript/Php highlighter.
 }
 
 {$IFNDEF QSYNHIGHLIGHTERWEB}
@@ -72,7 +93,9 @@ type
   PSynWebOptions = ^TSynWebOptions;
 
   TSynWebOptions = record
+    FMLVersion: TSynWebMLVersion;
     FHtmlVersion: TSynWebHtmlVersion;
+    FWmlVersion: TSynWebWmlVersion;
     FCssVersion: TSynWebCssVersion;
     FPhpVersion: TSynWebPhpVersion;
     FPhpShortOpenTag: Boolean;
@@ -119,6 +142,8 @@ type
     FOnChange: TNotifyEvent;
     function GetHtmlVersion: TSynWebHtmlVersion;
     procedure SetHtmlVersion(const Value: TSynWebHtmlVersion);
+    function GetWmlVersion: TSynWebWmlVersion;
+    procedure SetWmlVersion(const Value: TSynWebWmlVersion);
     function GetCssVersion: TSynWebCssVersion;
     procedure SetCssVersion(const Value: TSynWebCssVersion);
     function GetPhpVersion: TSynWebPhpVersion;
@@ -140,7 +165,12 @@ type
     procedure DoOnChange;
     procedure UpdateOptions;
   protected
+    procedure AssignTo(Dest: TPersistent); override;
+    procedure UpdateMLOption; virtual;
+    function CanUseEngineOptions: Boolean;
+
     property HtmlVersion: TSynWebHtmlVersion read GetHtmlVersion write SetHtmlVersion;
+    property WmlVersion: TSynWebWmlVersion read GetWmlVersion write SetWmlVersion;
     property CssVersion: TSynWebCssVersion read GetCssVersion write SetCssVersion;
     property PhpVersion: TSynWebPhpVersion read GetPhpVersion write SetPhpVersion;
     property PhpShortOpenTag: Boolean read GetPhpShortOpenTag write SetPhpShortOpenTag;
@@ -157,6 +187,10 @@ type
   end;
 
   TSynWebHtmlOptions = class(TSynWebOptionsBase)
+  protected
+    procedure UpdateMLOption; override;
+  public
+    constructor Create(AOptions: PSynWebOptions);
   published
     property HtmlVersion;
     property CssVersion;
@@ -166,6 +200,20 @@ type
     property CssEmbeded;
     property PhpEmbeded;
     property EsEmbeded;
+    property UseEngineOptions;
+  end;
+
+  TSynWebWmlOptions = class(TSynWebOptionsBase)  
+  protected
+    procedure UpdateMLOption; override;
+  public
+    constructor Create(AOptions: PSynWebOptions);
+  published
+    property WmlVersion;
+    property PhpVersion;
+    property PhpShortOpenTag;
+    property PhpAspTags;
+    property PhpEmbeded;
     property UseEngineOptions;
   end;
 
@@ -202,12 +250,13 @@ type
     constructor Create(AOptions: PSynWebOptions);
   published
     property HtmlVersion;
+    property WmlVersion;
     property CssVersion;
     property PhpVersion;
     property PhpShortOpenTag;
     property PhpAspTags;
   end;
-
+              
   TSynWebBaseClass = class of TSynWebBase;
 
   TSynWebBase = class(TSynCustomHighlighter)
@@ -273,17 +322,28 @@ type
 {$ENDIF}
     property ActiveHighlighters: TSynWebHighlighterTypes read GetActiveHighlighters;
   published
-    property ActiveSwitchHighlighter: Boolean
+    property ActiveHighlighterSwitch: Boolean
       read FActiveHighlighter write SetActiveHighlighter;
     property Engine: TSynWebEngine read FEngine write SetEngine;
   end;
 
-  TSynWebHtmlSynClass = class of TSynWebHtmlSyn;
-
-  TSynWebHtmlSyn = class(TSynWebBase)
+  TSynWebMLSyn = class(TSynWebBase)
   private
     procedure SetupActiveHighlighter; override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    procedure ResetRange; override;
+
+    function GetTagID: Integer;
+    function GetTagKind: Integer;
+  end;
+
+  TSynWebHtmlSynClass = class of TSynWebHtmlSyn;
+
+  TSynWebHtmlSyn = class(TSynWebMLSyn)
+  private
     function GetOptions: TSynWebHtmlOptions;
+    procedure SetOptions(const AValue: TSynWebHtmlOptions);
   public
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
@@ -293,12 +353,27 @@ type
 {$ENDIF}
   public
     constructor Create(AOwner: TComponent); override;
-    procedure ResetRange; override;
-
-    function GetTagID: Integer;
-    function GetTagKind: Integer;
   published
-    property Options: TSynWebHtmlOptions read GetOptions;
+    property Options: TSynWebHtmlOptions read GetOptions write SetOptions;
+  end;
+
+  TSynWebWmlSynClass = class of TSynWebWmlSyn;
+
+  TSynWebWmlSyn = class(TSynWebMLSyn)
+  private
+    function GetOptions: TSynWebWmlOptions;
+    procedure SetOptions(const AValue: TSynWebWmlOptions);
+  public
+    class function GetLanguageName: string; override;
+{$IFDEF UNISYNEDIT}
+    class function SynWebSample: WideString; override;
+{$ELSE}
+    class function SynWebSample: String; override;
+{$ENDIF}
+  public
+    constructor Create(AOwner: TComponent); override;
+  published
+    property Options: TSynWebWmlOptions read GetOptions write SetOptions;
   end;
 
   TSynWebCssSynClass = class of TSynWebCssSyn;
@@ -307,6 +382,7 @@ type
   private
     procedure SetupActiveHighlighter; override;
     function GetOptions: TSynWebCssOptions;
+    procedure SetOptions(const AValue: TSynWebCssOptions);
   public        
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
@@ -318,7 +394,7 @@ type
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
   published
-    property Options: TSynWebCssOptions read GetOptions;
+    property Options: TSynWebCssOptions read GetOptions write SetOptions;
   end;
 
   TSynWebEsSynClass = class of TSynWebEsSyn;
@@ -327,6 +403,7 @@ type
   private
     procedure SetupActiveHighlighter; override;
     function GetOptions: TSynWebEsOptions;
+    procedure SetOptions(const AValue: TSynWebEsOptions);
   public
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
@@ -338,7 +415,7 @@ type
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
   published
-    property Options: TSynWebEsOptions read GetOptions;
+    property Options: TSynWebEsOptions read GetOptions write SetOptions;
   end;
 
   TSynWebPhpCliSynClass = class of TSynWebPhpCliSyn;
@@ -347,6 +424,7 @@ type
   private
     procedure SetupActiveHighlighter; override;
     function GetOptions: TSynWebPhpCliOptions;
+    procedure SetOptions(const AValue: TSynWebPhpCliOptions);
   public
     class function GetLanguageName: string; override;  
 {$IFDEF UNISYNEDIT}
@@ -358,7 +436,7 @@ type
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
   published
-    property Options: TSynWebPhpCliOptions read GetOptions;
+    property Options: TSynWebPhpCliOptions read GetOptions write SetOptions;
   end;
 
   TSynWebEngine = class(TComponent)
@@ -373,25 +451,25 @@ type
     FEngineOptions: TSynWebOptions;
     FOptions: TSynWebEngineOptions;
 
-    // Html --------------------------------------------------------------------
-    FHtmlTagIdentFuncTable: array[0..HtmlTagMaxKeyHash] of TSynWebIdentFuncTableFunc;
-    FHtmlAttrIdentFuncTable: array[0..HtmlAttrMaxKeyHash] of TSynWebIdentFuncTableFunc;
-    FHtmlSpecialIdentFuncTable: array[0..HtmlSpecialMaxKeyHash] of TSynWebIdent2FuncTableFunc;
-    FHtmlRangeProcTable: array[Low(TSynWebHtmlRangeState)..High(TSynWebHtmlRangeState)] of TSynWebProcTableProc;
+    // Markup Language ---------------------------------------------------------
+    FMLTagIdentFuncTable: array[0..MLTagMaxKeyHash] of TSynWebIdentFuncTableFunc;
+    FMLAttrIdentFuncTable: array[0..MLAttrMaxKeyHash] of TSynWebIdentFuncTableFunc;
+    FMLSpecialIdentFuncTable: array[0..MLSpecialMaxKeyHash] of TSynWebIdent2FuncTableFunc;
+    FMLRangeProcTable: array[Low(TSynWebMLRangeState)..High(TSynWebMLRangeState)] of TSynWebProcTableProc;
 
-    FHtmlWhitespaceAttri: TSynHighlighterAttributes;
-    FHtmlCommentAttri: TSynHighlighterAttributes;
-    FHtmlTextAttri: TSynHighlighterAttributes;
-    FHtmlEscapeAttri: TSynHighlighterAttributes;
-    FHtmlSymbolAttri: TSynHighlighterAttributes;
-    FHtmlTagAttri: TSynHighlighterAttributes;
-    FHtmlTagNameAttri: TSynHighlighterAttributes;
-    FHtmlTagNameUndefAttri: TSynHighlighterAttributes;
-    FHtmlTagKeyAttri: TSynHighlighterAttributes;
-    FHtmlTagKeyUndefAttri: TSynHighlighterAttributes;
-    FHtmlTagKeyValueAttri: TSynHighlighterAttributes;
-    FHtmlTagKeyValueQuotedAttri: TSynHighlighterAttributes;
-    FHtmlErrorAttri: TSynHighlighterAttributes;
+    FMLWhitespaceAttri: TSynHighlighterAttributes;
+    FMLCommentAttri: TSynHighlighterAttributes;
+    FMLTextAttri: TSynHighlighterAttributes;
+    FMLEscapeAttri: TSynHighlighterAttributes;
+    FMLSymbolAttri: TSynHighlighterAttributes;
+    FMLTagAttri: TSynHighlighterAttributes;
+    FMLTagNameAttri: TSynHighlighterAttributes;
+    FMLTagNameUndefAttri: TSynHighlighterAttributes;
+    FMLTagKeyAttri: TSynHighlighterAttributes;
+    FMLTagKeyUndefAttri: TSynHighlighterAttributes;
+    FMLTagKeyValueAttri: TSynHighlighterAttributes;
+    FMLTagKeyValueQuotedAttri: TSynHighlighterAttributes;
+    FMLErrorAttri: TSynHighlighterAttributes;
 
     // Css ---------------------------------------------------------------------
     FCssProcTable: array[#0..#255] of TSynWebProcTableProc;
@@ -451,43 +529,43 @@ type
     FPhpNumberAttri: TSynHighlighterAttributes;
     FPhpErrorAttri: TSynHighlighterAttributes;
 
-    // Html --------------------------------------------------------------------
-    procedure HtmlMakeMethodTables;
-    procedure HtmlNext;
-    function HtmlGetRange: TSynWebHtmlRangeState;
-    procedure HtmlSetRange(const ARange: TSynWebHtmlRangeState);
-    function HtmlGetTag: Integer;
-    procedure HtmlSetTag(const ATag: Integer);
-    function HtmlCheckNull(ADo: Boolean = True): Boolean;
+    // MarkupLanguage ----------------------------------------------------------
+    procedure MLMakeMethodTables;
+    procedure MLNext;
+    function MLGetRange: TSynWebMLRangeState;
+    procedure MLSetRange(const ARange: TSynWebMLRangeState);
+    function MLGetTag: Integer;
+    procedure MLSetTag(const ATag: Integer);
+    function MLCheckNull(ADo: Boolean = True): Boolean;
 
-    procedure HtmlSpaceProc;
-    procedure HtmlAmpersandProc;
-    procedure HtmlBraceOpenProc;
-    procedure HtmlErrorProc;
+    procedure MLSpaceProc;
+    procedure MLAmpersandProc;
+    procedure MLBraceOpenProc;
+    procedure MLErrorProc;
 
-    procedure HtmlRangeTextProc;
-    procedure HtmlRangeCommentProc;
-    procedure HtmlRangeCommentCloseProc;
-    procedure HtmlRangeTagDOCTYPEProc;
-    procedure HtmlRangeTagCDATAProc;
-    procedure HtmlRangeTagProc;
-    procedure HtmlRangeTagCloseProc;
-    procedure HtmlRangeTagKeyProc;
-    procedure HtmlRangeTagKeyEqProc;
-    procedure HtmlRangeTagKeyValueProc;
-    procedure HtmlRangeTagKeyValueQuoted1Proc;
-    procedure HtmlRangeTagKeyValueQuoted2Proc;
+    procedure MLRangeTextProc;
+    procedure MLRangeCommentProc;
+    procedure MLRangeCommentCloseProc;
+    procedure MLRangeTagDOCTYPEProc;
+    procedure MLRangeTagCDATAProc;
+    procedure MLRangeTagProc;
+    procedure MLRangeTagCloseProc;
+    procedure MLRangeTagKeyProc;
+    procedure MLRangeTagKeyEqProc;
+    procedure MLRangeTagKeyValueProc;
+    procedure MLRangeTagKeyValueQuoted1Proc;
+    procedure MLRangeTagKeyValueQuoted2Proc;
 
-    function HtmlTagKeyComp(const ID: Integer): Boolean;
-    function HtmlTagCheck: TSynWebTokenKind;
+    function MLTagKeyComp(const ID: Integer): Boolean;
+    function MLTagCheck: TSynWebTokenKind;
     {$I SynHighlighterWeb_TagsFuncList.inc}
 
-    function HtmlAttrKeyComp(const ID: Integer): Boolean;
-    function HtmlAttrCheck: TSynWebTokenKind;
+    function MLAttrKeyComp(const ID: Integer): Boolean;
+    function MLAttrCheck: TSynWebTokenKind;
     {$I SynHighlighterWeb_AttrsFuncList.inc}
 
-    function HtmlSpecialKeyComp(const ID: Integer): Boolean;
-    function HtmlSpecialCheck(AStart, ALen: Integer): Integer;
+    function MLSpecialKeyComp(const ID: Integer): Boolean;
+    function MLSpecialCheck(AStart, ALen: Integer): Integer;
     {$I SynHighlighterWeb_SpecialFuncList.inc}
 
     // Css ---------------------------------------------------------------------
@@ -598,7 +676,7 @@ type
 
     function PhpCheckBegin(ABegin: Boolean = True): Boolean;
     procedure PhpBegin(ATagKind: TSynWebPhpOpenTag);
-    procedure PhpEnd(AHtmlTag: Boolean);
+    procedure PhpEnd(AMLTag: Boolean);
 
     procedure PhpSpaceProc;
     procedure PhpQuestionProc;
@@ -672,35 +750,35 @@ type
     // Global
     property InactiveAttri: TSynHighlighterAttributes
       read FInactiveAttri write FInactiveAttri;
-    property Options: TSynWebEngineOptions read FOptions;
+    property Options: TSynWebEngineOptions read FOptions write FOptions;
 
-    // Html
-    property HtmlWhitespaceAttri: TSynHighlighterAttributes
-      read FHtmlWhitespaceAttri write FHtmlWhitespaceAttri;
-    property HtmlCommentAttri: TSynHighlighterAttributes
-      read FHtmlCommentAttri write FHtmlCommentAttri;
-    property HtmlTextAttri: TSynHighlighterAttributes
-      read FHtmlTextAttri write FHtmlTextAttri;
-    property HtmlEscapeAttri: TSynHighlighterAttributes
-      read FHtmlEscapeAttri write FHtmlEscapeAttri;
-    property HtmlSymbolAttri: TSynHighlighterAttributes
-      read FHtmlSymbolAttri write FHtmlSymbolAttri;
-    property HtmlTagAttri: TSynHighlighterAttributes
-      read FHtmlTagAttri write FHtmlTagAttri;
-    property HtmlTagNameAttri: TSynHighlighterAttributes
-      read FHtmlTagNameAttri write FHtmlTagNameAttri;
-    property HtmlTagNameUndefAttri: TSynHighlighterAttributes
-      read FHtmlTagNameUndefAttri write FHtmlTagNameUndefAttri;
-    property HtmlTagKeyAttri: TSynHighlighterAttributes
-      read FHtmlTagKeyAttri write FHtmlTagKeyAttri;
-    property HtmlTagKeyUndefAttri: TSynHighlighterAttributes
-      read FHtmlTagKeyUndefAttri write FHtmlTagKeyUndefAttri;
-    property HtmlTagKeyValueAttri: TSynHighlighterAttributes
-      read FHtmlTagKeyValueAttri write FHtmlTagKeyValueAttri;
-    property HtmlTagKeyValueQuotedAttri: TSynHighlighterAttributes
-      read FHtmlTagKeyValueQuotedAttri write FHtmlTagKeyValueQuotedAttri;
-    property HtmlErrorAttri: TSynHighlighterAttributes
-      read FHtmlErrorAttri write FHtmlErrorAttri;
+    // ML
+    property MLWhitespaceAttri: TSynHighlighterAttributes
+      read FMLWhitespaceAttri write FMLWhitespaceAttri;
+    property MLCommentAttri: TSynHighlighterAttributes
+      read FMLCommentAttri write FMLCommentAttri;
+    property MLTextAttri: TSynHighlighterAttributes
+      read FMLTextAttri write FMLTextAttri;
+    property MLEscapeAttri: TSynHighlighterAttributes
+      read FMLEscapeAttri write FMLEscapeAttri;
+    property MLSymbolAttri: TSynHighlighterAttributes
+      read FMLSymbolAttri write FMLSymbolAttri;
+    property MLTagAttri: TSynHighlighterAttributes
+      read FMLTagAttri write FMLTagAttri;
+    property MLTagNameAttri: TSynHighlighterAttributes
+      read FMLTagNameAttri write FMLTagNameAttri;
+    property MLTagNameUndefAttri: TSynHighlighterAttributes
+      read FMLTagNameUndefAttri write FMLTagNameUndefAttri;
+    property MLTagKeyAttri: TSynHighlighterAttributes
+      read FMLTagKeyAttri write FMLTagKeyAttri;
+    property MLTagKeyUndefAttri: TSynHighlighterAttributes
+      read FMLTagKeyUndefAttri write FMLTagKeyUndefAttri;
+    property MLTagKeyValueAttri: TSynHighlighterAttributes
+      read FMLTagKeyValueAttri write FMLTagKeyValueAttri;
+    property MLTagKeyValueQuotedAttri: TSynHighlighterAttributes
+      read FMLTagKeyValueQuotedAttri write FMLTagKeyValueQuotedAttri;
+    property MLErrorAttri: TSynHighlighterAttributes
+      read FMLErrorAttri write FMLErrorAttri;
 
     // Css
     property CssWhitespaceAttri: TSynHighlighterAttributes
@@ -801,9 +879,10 @@ begin
   FOnChange := nil;
   FEngineOptions := nil;
   FOptions := AOptions;
-  FUseEngineOptions := True;
+  FUseEngineOptions := False;
 
   FOptions^.FHtmlVersion := shvXHtml10Transitional;
+  FOptions^.FWmlVersion := swvWml13;
   FOptions^.FCssVersion := scvCss21;
   FOptions^.FPhpVersion := spvPhp5;
   FOptions^.FPhpShortOpenTag := True;
@@ -821,9 +900,24 @@ end;
 
 procedure TSynWebOptionsBase.SetHtmlVersion(const Value: TSynWebHtmlVersion);
 begin
-  if UseEngineOptions then
+  if CanUseEngineOptions then
     Exit;
   FOptions^.FHtmlVersion := Value;
+  UpdateMLOption;
+  DoOnChange;
+end;
+
+function TSynWebOptionsBase.GetWmlVersion: TSynWebWmlVersion;
+begin
+  Result := FOptions^.FWmlVersion;
+end;
+
+procedure TSynWebOptionsBase.SetWmlVersion(const Value: TSynWebWmlVersion);
+begin
+  if CanUseEngineOptions then
+    Exit;
+  FOptions^.FWmlVersion := Value;
+  UpdateMLOption;
   DoOnChange;
 end;
 
@@ -834,7 +928,7 @@ end;
 
 procedure TSynWebOptionsBase.SetCssVersion(const Value: TSynWebCssVersion);
 begin
-  if UseEngineOptions then
+  if CanUseEngineOptions then
     Exit;
   FOptions^.FCssVersion := Value;
   DoOnChange;
@@ -847,7 +941,7 @@ end;
 
 procedure TSynWebOptionsBase.SetPhpVersion(const Value: TSynWebPhpVersion);
 begin
-  if UseEngineOptions then
+  if CanUseEngineOptions then
     Exit;
   FOptions^.FPhpVersion := Value;
   DoOnChange;
@@ -860,7 +954,7 @@ end;
 
 procedure TSynWebOptionsBase.SetPhpAspTags(const Value: Boolean);
 begin
-  if UseEngineOptions then
+  if CanUseEngineOptions then
     Exit;
   FOptions^.FPhpAspTags := Value;
   DoOnChange;
@@ -873,7 +967,7 @@ end;
 
 procedure TSynWebOptionsBase.SetPhpShortOpenTag(const Value: Boolean);
 begin
-  if UseEngineOptions then
+  if CanUseEngineOptions then
     Exit;
   FOptions^.FPhpShortOpenTag := Value;
   DoOnChange;
@@ -914,7 +1008,7 @@ end;
 
 procedure TSynWebOptionsBase.SetUseEngineOptions(const Value: Boolean);
 begin
-  if (FUseEngineOptions = Value) or (FEngineOptions = nil) then
+  if FUseEngineOptions = Value then
     Exit;
   FUseEngineOptions := Value;
   UpdateOptions;
@@ -926,7 +1020,7 @@ begin
   if AEngine = FEngineOptions then
     Exit;
   FEngineOptions := AEngine;
-  if UseEngineOptions and (AEngine <> nil) then
+  if CanUseEngineOptions then // todo: FUseEngineOptions and (AEngine <> nil) ?
   begin
     UpdateOptions;
     DoOnChange;
@@ -941,14 +1035,70 @@ end;
 
 procedure TSynWebOptionsBase.UpdateOptions;
 begin
-  if UseEngineOptions and (FEngineOptions <> nil) then
+  if CanUseEngineOptions then
   begin
     FOptions^.FHtmlVersion := FEngineOptions^.FHtmlVersion;
+    FOptions^.FWmlVersion := FEngineOptions^.FWmlVersion;
+    UpdateMLOption;
     FOptions^.FCssVersion := FEngineOptions^.FCssVersion;
     FOptions^.FPhpVersion := FEngineOptions^.FPhpVersion;
     FOptions^.FPhpShortOpenTag := FEngineOptions^.FPhpShortOpenTag;
     FOptions^.FPhpAspTags := FEngineOptions^.FPhpAspTags;
   end;
+end;
+
+procedure TSynWebOptionsBase.UpdateMLOption;
+begin
+  //
+end;
+
+function TSynWebOptionsBase.CanUseEngineOptions: Boolean;
+begin
+  Result := FUseEngineOptions and (FEngineOptions <> nil);
+end;
+
+procedure TSynWebOptionsBase.AssignTo(Dest: TPersistent);
+begin
+  if Dest is TSynWebOptionsBase then
+    with TSynWebOptionsBase(Dest) do
+    begin
+      HtmlVersion := Self.HtmlVersion;
+      WmlVersion := Self.WmlVersion;
+      CssVersion := Self.CssVersion;
+      PhpVersion := Self.PhpVersion;
+      PhpShortOpenTag := Self.PhpShortOpenTag;
+      PhpAspTags := Self.PhpAspTags;
+      PhpEmbeded := Self.PhpEmbeded;
+      CssEmbeded := Self.CssEmbeded;
+      EsEmbeded := Self.EsEmbeded;
+      UseEngineOptions := Self.UseEngineOptions;
+    end;
+end;
+
+{ TSynWebHtmlOptions }
+
+constructor TSynWebHtmlOptions.Create(AOptions: PSynWebOptions);
+begin
+  inherited Create(AOptions);
+  UpdateMLOption;
+end;
+
+procedure TSynWebHtmlOptions.UpdateMLOption;
+begin
+  FOptions^.FMLVersion := TSynWebMLVersion(FOptions^.FHtmlVersion);
+end;
+
+{ TSynWebWmlOptions }
+
+constructor TSynWebWmlOptions.Create(AOptions: PSynWebOptions);
+begin
+  inherited Create(AOptions);
+  UpdateMLOption;
+end;
+
+procedure TSynWebWmlOptions.UpdateMLOption;
+begin
+  FOptions^.FMLVersion := TSynWebMLVersion(Integer(smlwvWml11) + Integer(FOptions^.FWmlVersion));
 end;
 
 { TSynWebEngineOptions }
@@ -968,7 +1118,7 @@ begin
   FEngine := nil;
   FDefaultFilter := '';
   FActiveHighlighter := False;
-  FActiveHighlighters := [shtHtml, shtCss, shtEs, shtPhpInHtml,
+  FActiveHighlighters := [shtML, shtCss, shtEs, shtPhpInML,
     shtPhpInCss, shtPhpInEs];
   ResetRange;
   DoDefHighlightChange;
@@ -1002,13 +1152,13 @@ begin
   if FEngine <> nil then
     FEngine.RemoveFromNotifyList(Self);
   FEngine := Value;
-  if FEngine <> nil then
+  if FEngine = nil then
+    FOptions.SetEngineOptions(nil)
+  else
   begin
     FEngine.AddToNotifyList(Self);
     FOptions.SetEngineOptions(@FEngine.FEngineOptions);
-  end
-  else
-    FOptions.SetEngineOptions(nil);
+  end;
 end;
 
 {$IFDEF UNISYNEDIT}
@@ -1025,7 +1175,7 @@ end;
 procedure TSynWebBase.DoDefHighlightChange;
 begin
   FOptions.UpdateOptions;
-  if FInstance.FOptions.FHtmlVersion >= shvXHtml10Strict then
+  if FInstance.FOptions.FMLVersion >= smlhvXHtml10Strict then
     FInstance.FHashTable := TSynWebSensitiveHashTable
   else
     FInstance.FHashTable := TSynWebInsensitiveHashTable;
@@ -1084,8 +1234,8 @@ begin
         Result := FInstance.fSYN_ATTR_WHITEsPACE;
         if not Enabled then
           case FInstance.FHighlighterMode of
-            shmHtml:
-              Result := fEngine.FHtmlWhitespaceAttri;
+            shmML:
+              Result := fEngine.FMLWhitespaceAttri;
             shmCss:
               Result := fEngine.FCssWhitespaceAttri;
             shmEs:
@@ -1227,11 +1377,50 @@ begin
       ActiveHL := FInstance.FPrevHighlighterType
     else
       ActiveHL := lHinghlighter;
-  if ActiveHL >= shtPhpInHtml then
-    FActiveHighlighters := [shtPhpInHtml, shtPhpInCss, shtPhpInEs]
+  if ActiveHL >= shtPhpInML then
+    FActiveHighlighters := [shtPhpInML, shtPhpInCss, shtPhpInEs]
   else
     FActiveHighlighters := [ActiveHL];
   Result := f <> FActiveHighlighters;
+end;
+
+{ TSynWebMLSyn }
+
+constructor TSynWebMLSyn.Create(AOwner: TComponent);
+begin          
+  FInstance.FHighlighterMode := shmML;
+  inherited Create(AOwner);
+end;
+
+procedure TSynWebMLSyn.SetupActiveHighlighter;
+begin       
+  FActiveHighlighters := [shtML];
+end;
+
+procedure TSynWebMLSyn.ResetRange;
+begin
+  FInstance.FRange := $00000000;
+end;
+
+function TSynWebMLSyn.GetTagID: Integer;
+begin
+  if (FEngine <> nil) and (FInstance.FHighlighterType = shtML) and
+    (FEngine.MLGetRange in [srsMLTag, srsMLTagClose, srsMLTagKey, srsMLTagKeyEq,
+    srsMLTagKeyValue, srsMLTagKeyValueQuoted1, srsMLTagKeyValueQuoted2]) then
+    Result := FEngine.MLGetTag - 1
+  else
+    Result := -1;
+end;
+
+function TSynWebMLSyn.GetTagKind: Integer;
+begin
+  if (FEngine = nil) or (FInstance.FHighlighterType <> shtML) then
+    Result := 0
+  else
+    if FEngine.MLGetRange = srsMLTagClose then
+      Result := -1
+    else
+      Result := 1;
 end;
 
 { TSynWebHtmlSyn }
@@ -1239,16 +1428,10 @@ end;
 constructor TSynWebHtmlSyn.Create(AOwner: TComponent);
 begin
   FOptions := TSynWebHtmlOptions.Create(@FInstance.FOptions);
-  FInstance.FHighlighterMode := shmHtml;
   inherited Create(AOwner);
   FOptions.PhpEmbeded := True;
   FOptions.CssEmbeded := True;
   FOptions.EsEmbeded := True;
-end;
-
-procedure TSynWebHtmlSyn.SetupActiveHighlighter;
-begin
-  FActiveHighlighters := [shtHtml];
 end;
 
 function TSynWebHtmlSyn.GetOptions: TSynWebHtmlOptions;
@@ -1256,9 +1439,14 @@ begin
   Result := TSynWebHtmlOptions(FOptions);
 end;
 
+procedure TSynWebHtmlSyn.SetOptions(const AValue: TSynWebHtmlOptions);
+begin
+  FOptions := AValue;
+end;
+
 class function TSynWebHtmlSyn.GetLanguageName: String;
 begin
-  Result := 'TSynWeb: HTML (+CSS, +ES, +PHP)';
+  Result := 'TSynWeb: HTML/XHTML (+CSS, +ES, +PHP)';
 end;
 
 {$IFDEF UNISYNEDIT}
@@ -1333,30 +1521,103 @@ begin
     '</html>'#13#10;
 end;
 
-procedure TSynWebHtmlSyn.ResetRange;
+{ TSynWebWmlSyn }
+
+constructor TSynWebWmlSyn.Create(AOwner: TComponent);
 begin
-  FInstance.FRange := $00000000;
+  FOptions := TSynWebWmlOptions.Create(@FInstance.FOptions);
+  inherited Create(AOwner);
+  FOptions.PhpEmbeded := True;
+  FOptions.CssEmbeded := False;
+  FOptions.EsEmbeded := False;
 end;
 
-function TSynWebHtmlSyn.GetTagID: Integer;
+function TSynWebWmlSyn.GetOptions: TSynWebWmlOptions;
 begin
-  if (FEngine <> nil) and (FInstance.FHighlighterType = shtHtml) and
-    (FEngine.HtmlGetRange in [srsHtmlTag, srsHtmlTagClose, srsHtmlTagKey, srsHtmlTagKeyEq,
-    srsHtmlTagKeyValue, srsHtmlTagKeyValueQuoted1, srsHtmlTagKeyValueQuoted2]) then
-    Result := FEngine.HtmlGetTag - 1
-  else
-    Result := -1;
+  Result := TSynWebWmlOptions(FOptions);
 end;
 
-function TSynWebHtmlSyn.GetTagKind: Integer;
+procedure TSynWebWmlSyn.SetOptions(const AValue: TSynWebWmlOptions);
 begin
-  if (FEngine = nil) or (FInstance.FHighlighterType <> shtHtml) then
-    Result := 0
-  else
-    if FEngine.HtmlGetRange = srsHtmlTagClose then
-      Result := -1
-    else
-      Result := 1;
+  FOptions := AValue;
+end;
+
+class function TSynWebWmlSyn.GetLanguageName: String;
+begin
+  Result := 'TSynWeb: WML (+PHP)';
+end;
+
+{$IFDEF UNISYNEDIT}
+class function TSynWebWmlSyn.SynWebSample: WideString;
+{$ELSE}
+class function TSynWebWmlSyn.SynWebSample: String;
+{$ENDIF}
+begin
+  Result := 'TODO:'; // todo: TSynWebWmlSyn.SynWebSample
+(*  Result := '<!DOCTYPE html public "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'#13#10 +
+    '<html xmlns="http://www.w3.org/1999/xhtml">'#13#10 +
+    '<head>'#13#10 +
+    '  <title><!-- comment > -- >TSynWeb<!-- space after two ''-'' allowed --></title>'#13#10 +
+    '<style type="text/css">'#13#10 +
+    ''#13#10 +
+    TSynWebCssSyn.SynWebSample +
+    ''#13#10 +
+    '<?php // php works also in css ?>'#13#10 +
+    ''#13#10 +
+    '/* <?php // in comments ?> */'#13#10 +
+    ''#13#10 +
+    'span {'#13#10 +
+    '  background-image: url("<?= $secure ? ''https://'' : ''http://'''#13#10 +
+    '  // php in css-string ?>www.example.com/img.png"); }'#13#10 +
+    ''#13#10 +
+    '</style>'#13#10 +
+    '  '#13#10 +
+    '</head>'#13#10 +
+    ''#13#10 +
+    '<body>'#13#10 +
+    ''#13#10 +
+    '<![CDATA['#13#10 +
+    '  <a href="test"> CDATA Support </a> Warning! CDATA supported only in XHTML'#13#10 +
+    '    <?php // no html highlight in CDATA,everything goes here as plain texte, except PHP of course ?>'#13#10 +
+    ']]>'#13#10 +
+    ''#13#10 +
+    '&amp; &copy;'#13#10 +
+    '&earth; &copy <!-- invalid amp-tags, ''earth'' not supported and '';'' missed -->'#13#10 +
+    ''#13#10 +
+    '<script language="php">  // php long open tag (html)'#13#10 +
+    ''#13#10 +
+    '$b = ''ple'';'#13#10 +
+    '$a = <<< my_custom_heredoc'#13#10 +
+    'exam$b'#13#10 +
+    'my_custom_heredoc;'#13#10 +
+    ''#13#10 +
+    '</script>'#13#10 +
+    ''#13#10 +
+    '<a href="http://www.<?= $a; ?>.com">Example.com</a>'#13#10 +
+    '<br />'#13#10 +
+    ''#13#10 +
+    '<div href="whoops" style="someDiv">'#13#10 +
+    ''#13#10 +
+    '</div>'#13#10 +
+    ''#13#10 +
+    TSynWebPhpCliSyn.SynWebSample +
+    ''#13#10 +
+    '<script type="text/javascript" language="javascript">'#13#10 +
+    ''#13#10 +
+    TSynWebEsSyn.SynWebSample +
+    ''#13#10 +
+    '// comm<?php'#13#10 +
+    '?>'#13#10 +
+    'ent'#13#10 +
+    ''#13#10 +
+    '/* comment <?= ''2''; ?> */'#13#10 +
+    ''#13#10 +
+    'new s = "test <?= ''3''; ?>";'#13#10 +
+    ''#13#10 +
+    '</script>'#13#10 +
+    ''#13#10 +
+    '</body>'#13#10 +
+    '</html>'#13#10;   *)
 end;
 
 { TSynWebCssSyn }
@@ -1379,6 +1640,11 @@ end;
 function TSynWebCssSyn.GetOptions: TSynWebCssOptions;
 begin
   Result := TSynWebCssOptions(FOptions);
+end;
+
+procedure TSynWebCssSyn.SetOptions(const AValue: TSynWebCssOptions);
+begin
+  FOptions := AValue;
 end;
 
 class function TSynWebCssSyn.GetLanguageName: String;
@@ -1437,9 +1703,14 @@ begin
   Result := TSynWebEsOptions(FOptions);
 end;
 
+procedure TSynWebEsSyn.SetOptions(const AValue: TSynWebEsOptions);
+begin
+  FOptions := AValue;
+end;
+
 class function TSynWebEsSyn.GetLanguageName: String;
 begin
-  Result := 'TSynWeb: ES (+PHP)';
+  Result := 'TSynWeb: JS/ES (+PHP)';
 end;
 
 {$IFDEF UNISYNEDIT}
@@ -1478,12 +1749,17 @@ end;
 
 procedure TSynWebPhpCliSyn.SetupActiveHighlighter;
 begin
-  FActiveHighlighters := [shtHtml];
+  FActiveHighlighters := [shtML];
 end;
 
 function TSynWebPhpCliSyn.GetOptions: TSynWebPhpCliOptions;
 begin
   Result := TSynWebPhpCliOptions(FOptions);
+end;
+
+procedure TSynWebPhpCliSyn.SetOptions(const AValue: TSynWebPhpCliOptions);
+begin
+  FOptions := AValue;
 end;
 
 class function TSynWebPhpCliSyn.GetLanguageName: String;
@@ -1588,75 +1864,75 @@ begin
   FAttributes.Duplicates := dupError;
   FAttributes.Sorted := True;
 
-  // Html
-  HtmlMakeMethodTables;
+  // Markup Language
+  MLMakeMethodTables;
 
-  FHtmlWhitespaceAttri := CreateAttrib('Html: Whitespace');
-  AddAttribute(FHtmlWhitespaceAttri);
+  FMLWhitespaceAttri := CreateAttrib('ML: Whitespace');
+  AddAttribute(FMLWhitespaceAttri);
 
-  FHtmlCommentAttri := CreateAttrib('Html: Comment');
-  FHtmlCommentAttri.Foreground := $A4A0A0;
-  AddAttribute(FHtmlCommentAttri);
+  FMLCommentAttri := CreateAttrib('ML: Comment');
+  FMLCommentAttri.Foreground := $A4A0A0;
+  AddAttribute(FMLCommentAttri);
 
-  FHtmlTextAttri := CreateAttrib('Html: Text');
-  AddAttribute(FHtmlTextAttri);
+  FMLTextAttri := CreateAttrib('ML: Text');
+  AddAttribute(FMLTextAttri);
 
-  FHtmlEscapeAttri := CreateAttrib('Html: Escaped amps');
-  FHtmlEscapeAttri.Foreground := clTeal;
-  AddAttribute(FHtmlEscapeAttri);
+  FMLEscapeAttri := CreateAttrib('ML: Escaped amps');
+  FMLEscapeAttri.Foreground := clTeal;
+  AddAttribute(FMLEscapeAttri);
 
-  FHtmlSymbolAttri := CreateAttrib('Html: Symbol'); 
-  FHtmlSymbolAttri.Foreground := clBlack;
-  AddAttribute(FHtmlSymbolAttri);
+  FMLSymbolAttri := CreateAttrib('ML: Symbol'); 
+  FMLSymbolAttri.Foreground := clBlack;
+  AddAttribute(FMLSymbolAttri);
 
-  FHtmlTagAttri := CreateAttrib('Html: Tag');
-  FHtmlTagAttri.Foreground := clNavy;
-  AddAttribute(FHtmlTagAttri);
+  FMLTagAttri := CreateAttrib('ML: Tag');
+  FMLTagAttri.Foreground := clNavy;
+  AddAttribute(FMLTagAttri);
 
-  FHtmlTagNameAttri := CreateAttrib('Html: Tag name');  
-  FHtmlTagNameAttri.Foreground := clBlue;
-  AddAttribute(FHtmlTagNameAttri);
+  FMLTagNameAttri := CreateAttrib('ML: Tag name');  
+  FMLTagNameAttri.Foreground := clBlue;
+  AddAttribute(FMLTagNameAttri);
 
-  FHtmlTagNameUndefAttri := CreateAttrib('Html: Undefined tag name');
-  FHtmlTagNameUndefAttri.Foreground := clBlue;
-  FHtmlTagNameUndefAttri.Style := [fsUnderline];
-  AddAttribute(FHtmlTagNameUndefAttri);
+  FMLTagNameUndefAttri := CreateAttrib('ML: Undefined tag name');
+  FMLTagNameUndefAttri.Foreground := clBlue;
+  FMLTagNameUndefAttri.Style := [fsUnderline];
+  AddAttribute(FMLTagNameUndefAttri);
 
-  FHtmlTagKeyAttri := CreateAttrib('Html: Key'); 
-  FHtmlTagKeyAttri.Foreground := clRed;
-  AddAttribute(FHtmlTagKeyAttri);
+  FMLTagKeyAttri := CreateAttrib('ML: Key'); 
+  FMLTagKeyAttri.Foreground := clRed;
+  AddAttribute(FMLTagKeyAttri);
 
-  FHtmlTagKeyUndefAttri := CreateAttrib('Html: Undefined key');  
-  FHtmlTagKeyUndefAttri.Foreground := clRed;
-  FHtmlTagKeyUndefAttri.Style := [fsUnderline];
-  AddAttribute(FHtmlTagKeyUndefAttri);
+  FMLTagKeyUndefAttri := CreateAttrib('ML: Undefined key');  
+  FMLTagKeyUndefAttri.Foreground := clRed;
+  FMLTagKeyUndefAttri.Style := [fsUnderline];
+  AddAttribute(FMLTagKeyUndefAttri);
 
-  FHtmlTagKeyValueAttri := CreateAttrib('Html: Value'); 
-  FHtmlTagKeyValueAttri.Foreground := clFuchsia;
-  AddAttribute(FHtmlTagKeyValueAttri);
+  FMLTagKeyValueAttri := CreateAttrib('ML: Value'); 
+  FMLTagKeyValueAttri.Foreground := clFuchsia;
+  AddAttribute(FMLTagKeyValueAttri);
 
-  FHtmlTagKeyValueQuotedAttri := CreateAttrib('Html: Quoted value'); 
-  FHtmlTagKeyValueQuotedAttri.Foreground := clFuchsia;
-  AddAttribute(FHtmlTagKeyValueQuotedAttri);
+  FMLTagKeyValueQuotedAttri := CreateAttrib('ML: Quoted value'); 
+  FMLTagKeyValueQuotedAttri.Foreground := clFuchsia;
+  AddAttribute(FMLTagKeyValueQuotedAttri);
 
-  FHtmlErrorAttri := CreateAttrib('Html: Error');
-  FHtmlErrorAttri.Foreground := clRed;
-  FHtmlErrorAttri.Style := [fsBold, fsUnderline];
-  AddAttribute(FHtmlErrorAttri);
+  FMLErrorAttri := CreateAttrib('ML: Error');
+  FMLErrorAttri.Foreground := clRed;
+  FMLErrorAttri.Style := [fsBold, fsUnderline];
+  AddAttribute(FMLErrorAttri);
 
-  FTokenAttributeTable[stkHtmlSpace] := FHtmlWhitespaceAttri;
-  FTokenAttributeTable[stkHtmlComment] := FHtmlCommentAttri;
-  FTokenAttributeTable[stkHtmlText] := FHtmlTextAttri;
-  FTokenAttributeTable[stkHtmlEscape] := FHtmlEscapeAttri;
-  FTokenAttributeTable[stkHtmlSymbol] := FHtmlSymbolAttri;
-  FTokenAttributeTable[stkHtmlTag] := FHtmlTagAttri;
-  FTokenAttributeTable[stkHtmlTagName] := FHtmlTagNameAttri;
-  FTokenAttributeTable[stkHtmlTagNameUndef] := FHtmlTagNameUndefAttri;
-  FTokenAttributeTable[stkHtmlTagKey] := FHtmlTagKeyAttri;
-  FTokenAttributeTable[stkHtmlTagKeyUndef] := FHtmlTagKeyUndefAttri;
-  FTokenAttributeTable[stkHtmlTagKeyValue] := FHtmlTagKeyValueAttri;
-  FTokenAttributeTable[stkHtmlTagKeyValueQuoted] := FHtmlTagKeyValueQuotedAttri;
-  FTokenAttributeTable[stkHtmlError] := FHtmlErrorAttri;
+  FTokenAttributeTable[stkMLSpace] := FMLWhitespaceAttri;
+  FTokenAttributeTable[stkMLComment] := FMLCommentAttri;
+  FTokenAttributeTable[stkMLText] := FMLTextAttri;
+  FTokenAttributeTable[stkMLEscape] := FMLEscapeAttri;
+  FTokenAttributeTable[stkMLSymbol] := FMLSymbolAttri;
+  FTokenAttributeTable[stkMLTag] := FMLTagAttri;
+  FTokenAttributeTable[stkMLTagName] := FMLTagNameAttri;
+  FTokenAttributeTable[stkMLTagNameUndef] := FMLTagNameUndefAttri;
+  FTokenAttributeTable[stkMLTagKey] := FMLTagKeyAttri;
+  FTokenAttributeTable[stkMLTagKeyUndef] := FMLTagKeyUndefAttri;
+  FTokenAttributeTable[stkMLTagKeyValue] := FMLTagKeyValueAttri;
+  FTokenAttributeTable[stkMLTagKeyValueQuoted] := FMLTagKeyValueQuotedAttri;
+  FTokenAttributeTable[stkMLError] := FMLErrorAttri;
 
   // Css
   CssMakeMethodTables;
@@ -1854,7 +2130,7 @@ begin
   FPhpErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FPhpErrorAttri);
 
-  FTokenAttributeTable[stkPhpSpace] := FHtmlWhitespaceAttri;
+  FTokenAttributeTable[stkPhpSpace] := FMLWhitespaceAttri;
   FTokenAttributeTable[stkPhpIdentifier] := FPhpIdentifierAttri;
   FTokenAttributeTable[stkPhpKeyword] := FPhpKeyAttri;
   FTokenAttributeTable[stkPhpFunction] := FPhpFunctionAttri;
@@ -1895,79 +2171,79 @@ begin
   inherited Destroy;
 end;
 
-// Html ------------------------------------------------------------------------
+// Markup Language -------------------------------------------------------------
 
-procedure TSynWebEngine.HtmlMakeMethodTables;
+procedure TSynWebEngine.MLMakeMethodTables;
 var
   i: Integer;
   pF: PSynWebIdentFuncTableFunc;
   pF2: PSynWebIdent2FuncTableFunc;
 begin
-  FHtmlRangeProcTable[srsHtmlText] := HtmlRangeTextProc;
-  FHtmlRangeProcTable[srsHtmlComment] := HtmlRangeCommentProc;
-  FHtmlRangeProcTable[srsHtmlCommentClose] := HtmlRangeCommentCloseProc;
-  FHtmlRangeProcTable[srsHtmlTag] := HtmlRangeTagProc;
-  FHtmlRangeProcTable[srsHtmlTagClose] := HtmlRangeTagCloseProc;
-  FHtmlRangeProcTable[srsHtmlTagDOCTYPE] := HtmlRangeTagDOCTYPEProc;
-  FHtmlRangeProcTable[srsHtmlTagCDATA] := HtmlRangeTagCDATAProc;
-  FHtmlRangeProcTable[srsHtmlTagKey] := HtmlRangeTagKeyProc;
-  FHtmlRangeProcTable[srsHtmlTagKeyEq] := HtmlRangeTagKeyEqProc;
-  FHtmlRangeProcTable[srsHtmlTagKeyValue] := HtmlRangeTagKeyValueProc;
-  FHtmlRangeProcTable[srsHtmlTagKeyValueQuoted1] := HtmlRangeTagKeyValueQuoted1Proc;
-  FHtmlRangeProcTable[srsHtmlTagKeyValueQuoted2] := HtmlRangeTagKeyValueQuoted2Proc;
+  FMLRangeProcTable[srsMLText] := MLRangeTextProc;
+  FMLRangeProcTable[srsMLComment] := MLRangeCommentProc;
+  FMLRangeProcTable[srsMLCommentClose] := MLRangeCommentCloseProc;
+  FMLRangeProcTable[srsMLTag] := MLRangeTagProc;
+  FMLRangeProcTable[srsMLTagClose] := MLRangeTagCloseProc;
+  FMLRangeProcTable[srsMLTagDOCTYPE] := MLRangeTagDOCTYPEProc;
+  FMLRangeProcTable[srsMLTagCDATA] := MLRangeTagCDATAProc;
+  FMLRangeProcTable[srsMLTagKey] := MLRangeTagKeyProc;
+  FMLRangeProcTable[srsMLTagKeyEq] := MLRangeTagKeyEqProc;
+  FMLRangeProcTable[srsMLTagKeyValue] := MLRangeTagKeyValueProc;
+  FMLRangeProcTable[srsMLTagKeyValueQuoted1] := MLRangeTagKeyValueQuoted1Proc;
+  FMLRangeProcTable[srsMLTagKeyValueQuoted2] := MLRangeTagKeyValueQuoted2Proc;
 
-  pF := PSynWebIdentFuncTableFunc(@FHtmlTagIdentFuncTable);
-  for I := Low(FHtmlTagIdentFuncTable) to High(FHtmlTagIdentFuncTable) do
+  pF := PSynWebIdentFuncTableFunc(@FMLTagIdentFuncTable);
+  for I := Low(FMLTagIdentFuncTable) to High(FMLTagIdentFuncTable) do
   begin
-    pF^ := HtmlTagUndef;
+    pF^ := MLTagUndef;
     Inc(pF);
   end;
   {$I SynHighlighterWeb_TagsFuncTable.inc}
 
-  pF := PSynWebIdentFuncTableFunc(@FHtmlAttrIdentFuncTable);
-  for I := Low(FHtmlTagIdentFuncTable) to High(FHtmlAttrIdentFuncTable) do
+  pF := PSynWebIdentFuncTableFunc(@FMLAttrIdentFuncTable);
+  for I := Low(FMLTagIdentFuncTable) to High(FMLAttrIdentFuncTable) do
   begin
-    pF^ := HtmlAttrUndef;
+    pF^ := MLAttrUndef;
     Inc(pF);
   end;
   {$I SynHighlighterWeb_AttrsFuncTable.inc}
 
-  pF2 := PSynWebIdent2FuncTableFunc(@FHtmlSpecialIdentFuncTable);
-  for I := Low(FHtmlSpecialIdentFuncTable) to High(FHtmlSpecialIdentFuncTable) do
+  pF2 := PSynWebIdent2FuncTableFunc(@FMLSpecialIdentFuncTable);
+  for I := Low(FMLSpecialIdentFuncTable) to High(FMLSpecialIdentFuncTable) do
   begin
-    pF2^ := HtmlSpecialUndef;
+    pF2^ := MLSpecialUndef;
     Inc(pF2);
   end;
   {$I SynHighlighterWeb_SpecialFuncTable.inc}
 end;
 
-procedure TSynWebEngine.HtmlNext;
+procedure TSynWebEngine.MLNext;
 begin
   FInstance^.FTokenPos := FInstance^.FRun;
-  FHtmlRangeProcTable[HtmlGetRange];
+  FMLRangeProcTable[MLGetRange];
 end;
 
-function TSynWebEngine.HtmlGetRange: TSynWebHtmlRangeState;
+function TSynWebEngine.MLGetRange: TSynWebMLRangeState;
 begin
-  Result := TSynWebHtmlRangeState(GetRangeInt(4, 13));
+  Result := TSynWebMLRangeState(GetRangeInt(4, 13));
 end;
 
-procedure TSynWebEngine.HtmlSetRange(const ARange: TSynWebHtmlRangeState);
+procedure TSynWebEngine.MLSetRange(const ARange: TSynWebMLRangeState);
 begin
   SetRangeInt(4, 13, Longword(ARange));
 end;
 
-function TSynWebEngine.HtmlGetTag: Integer;
+function TSynWebEngine.MLGetTag: Integer;
 begin
   Result := GetRangeInt(7, 0);
 end;
 
-procedure TSynWebEngine.HtmlSetTag(const ATag: Integer);
+procedure TSynWebEngine.MLSetTag(const ATag: Integer);
 begin
   SetRangeInt(7, 0, Longword(ATag));
 end;
 
-function TSynWebEngine.HtmlCheckNull(ADo: Boolean = True): Boolean;
+function TSynWebEngine.MLCheckNull(ADo: Boolean = True): Boolean;
 begin
   if FInstance^.FLine[FInstance^.FRun] = #0 then
   begin
@@ -1978,18 +2254,18 @@ begin
     Result := False;
 end;
 
-procedure TSynWebEngine.HtmlSpaceProc;
+procedure TSynWebEngine.MLSpaceProc;
 begin
   repeat
     Inc(FInstance^.FRun);
   until not (FInstance^.FLine[FInstance^.FRun] in [#1..#32]);
-  FInstance^.FTokenID := stkHtmlSpace;
+  FInstance^.FTokenID := stkMLSpace;
 end;
 
-procedure TSynWebEngine.HtmlAmpersandProc;
+procedure TSynWebEngine.MLAmpersandProc;
 begin
   Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkHtmlEscape;
+  FInstance^.FTokenID := stkMLEscape;
   if FInstance^.FLine[FInstance^.FRun] = '#' then
   begin
     Inc(FInstance^.FRun);
@@ -1998,7 +2274,7 @@ begin
       Inc(FInstance^.FRun);
       // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9']) then
       if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 10) = 0 then
-        FInstance^.FTokenID := stkHtmlError
+        FInstance^.FTokenID := stkMLError
       else
         repeat
           Inc(FInstance^.FRun)
@@ -2006,7 +2282,7 @@ begin
         // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9']);
     end else
       if not (FInstance^.FLine[FInstance^.FRun] in ['0'..'9']) then
-        FInstance^.FTokenID := stkHtmlError
+        FInstance^.FTokenID := stkMLError
       else
         repeat
           Inc(FInstance^.FRun)
@@ -2014,24 +2290,24 @@ begin
   end else
     // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z'] then
     if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
-      FInstance^.FTokenID := stkHtmlError
+      FInstance^.FTokenID := stkMLError
     else
     begin
       repeat
         Inc(FInstance^.FRun)
       until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0;
       // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z'];
-      if HtmlSpecialCheck(FInstance^.FTokenPos + 1, FInstance^.FRun -
+      if MLSpecialCheck(FInstance^.FTokenPos + 1, FInstance^.FRun -
         FInstance^.FTokenPos - 1) = -1 then
-        FInstance^.FTokenID := stkHtmlError;
+        FInstance^.FTokenID := stkMLError;
     end;
   if FInstance^.FLine[FInstance^.FRun] = ';' then
     Inc(FInstance^.FRun)
   else
-    FInstance^.FTokenID := stkHtmlError;
+    FInstance^.FTokenID := stkMLError;
 end;
 
-procedure TSynWebEngine.HtmlBraceOpenProc;
+procedure TSynWebEngine.MLBraceOpenProc;
 begin
   if PhpCheckBegin then
     Exit;
@@ -2044,7 +2320,7 @@ begin
     end;
     '?':
     begin
-      if FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict then
+      if FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict then
         Inc(FInstance^.FRun);
       SetRangeBit(12, False);
     end;
@@ -2055,13 +2331,13 @@ begin
         (FInstance^.FLine[FInstance^.FRun + 1] = '-') then
       begin
         Inc(FInstance^.FRun, 2);
-        HtmlSetRange(srsHtmlComment);
+        MLSetRange(srsMLComment);
         if (FInstance^.FLine[FInstance^.FRun] = #0) or PhpCheckBegin(False) then
-          FInstance^.FTokenID := stkHtmlComment
+          FInstance^.FTokenID := stkMLComment
         else
-          HtmlRangeCommentProc;
+          MLRangeCommentProc;
       end else
-        if (FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict) and
+        if (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) and
           (FInstance^.FLine[FInstance^.FRun] = '[') and
           (FInstance^.FLine[FInstance^.FRun + 1] = 'C') and
           (FInstance^.FLine[FInstance^.FRun + 2] = 'D') and
@@ -2071,8 +2347,8 @@ begin
           (FInstance^.FLine[FInstance^.FRun + 6] = '[') then
         begin
           Inc(FInstance^.FRun, 7);
-          FInstance^.FTokenID := stkHtmlTag;
-          HtmlSetRange(srsHtmlTagCDATA);
+          FInstance^.FTokenID := stkMLTag;
+          MLSetRange(srsMLTagCDATA);
         end else
           if (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun]] =
             FInstance^.FHashTable['D']) and
@@ -2091,11 +2367,11 @@ begin
             // (not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z'])) then
             (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 7]] and (1 shl 0) = 0) then
           begin
-            FInstance^.FTokenID := stkHtmlTag;
+            FInstance^.FTokenID := stkMLTag;
             SetRangeInt(2, 7, 0);
-            HtmlSetRange(srsHtmlTagDOCTYPE);
+            MLSetRange(srsMLTagDOCTYPE);
           end else
-            FInstance^.FTokenID := stkHtmlError;
+            FInstance^.FTokenID := stkMLError;
       Exit;
     end;
     else
@@ -2104,43 +2380,43 @@ begin
   // if FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z'] then
   if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) <> 0 then
   begin
-    FInstance^.FTokenID := stkHtmlTag;
-    HtmlSetRange(srsHtmlTag);
+    FInstance^.FTokenID := stkMLTag;
+    MLSetRange(srsMLTag);
   end else
-    FInstance^.FTokenID := stkHtmlError;
+    FInstance^.FTokenID := stkMLError;
 end;
 
-procedure TSynWebEngine.HtmlErrorProc;
+procedure TSynWebEngine.MLErrorProc;
 begin
   Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkHtmlError;
+  FInstance^.FTokenID := stkMLError;
 end;
 
-procedure TSynWebEngine.HtmlRangeTextProc;
+procedure TSynWebEngine.MLRangeTextProc;
 begin
   case FInstance^.FLine[FInstance^.FRun] of
     #0:
       NullProc;
     #1..#32:
-      HtmlSpaceProc;
+      MLSpaceProc;
     '<':
-      HtmlBraceOpenProc;
+      MLBraceOpenProc;
     '>':
-      HtmlErrorProc;
+      MLErrorProc;
     '&':
-      HtmlAmpersandProc;
+      MLAmpersandProc;
     else
       repeat
         Inc(FInstance^.FRun);
       until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 6) <> 0;
       // until FInstance^.FLine[FInstance^.FRun] In [#0..#32, '<', '>', '&'];
-      FInstance^.FTokenID := stkHtmlText;
+      FInstance^.FTokenID := stkMLText;
   end;
 end;
 
-procedure TSynWebEngine.HtmlRangeCommentProc;
+procedure TSynWebEngine.MLRangeCommentProc;
 begin
-  if HtmlCheckNull or PhpCheckBegin then
+  if MLCheckNull or PhpCheckBegin then
     Exit;
   repeat
     // while not (FInstance^.FLine[FInstance^.FRun) in [#0, '-', '<']) do
@@ -2158,13 +2434,13 @@ begin
           if FInstance^.FLine[FInstance^.FRun] = '>' then
           begin
             Inc(FInstance^.FRun);
-            HtmlSetRange(srsHtmlText);
+            MLSetRange(srsMLText);
           end else
           begin
-            HtmlSetRange(srsHtmlCommentClose);
+            MLSetRange(srsMLCommentClose);
             if (FInstance^.FLine[FInstance^.FRun] <> #0) and not PhpCheckBegin(False) then
             begin
-              HtmlRangeCommentCloseProc;
+              MLRangeCommentCloseProc;
               Exit;
             end;
           end;
@@ -2178,12 +2454,12 @@ begin
           Inc(FInstance^.FRun);
     end;
   until False;
-  FInstance^.FTokenID := stkHtmlComment;
+  FInstance^.FTokenID := stkMLComment;
 end;
 
-procedure TSynWebEngine.HtmlRangeCommentCloseProc;
+procedure TSynWebEngine.MLRangeCommentCloseProc;
 begin
-  if HtmlCheckNull or PhpCheckBegin then
+  if MLCheckNull or PhpCheckBegin then
     Exit;
   repeat
     // while not (FInstance^.FLine[FInstance^.FRun) in [#0, '<', '>']) do
@@ -2195,7 +2471,7 @@ begin
       '>':
       begin
         Inc(FInstance^.FRun);
-        HtmlSetRange(srsHtmlText);
+        MLSetRange(srsMLText);
         Break;
       end;
       '<':
@@ -2205,60 +2481,60 @@ begin
           Inc(FInstance^.FRun);
     end;
   until False;
-  FInstance^.FTokenID := stkHtmlComment;
+  FInstance^.FTokenID := stkMLComment;
 end;
 
-procedure TSynWebEngine.HtmlRangeTagDOCTYPEProc;
+procedure TSynWebEngine.MLRangeTagDOCTYPEProc;
 begin
   case GetRangeInt(2, 7) of
     0:
     begin
       Inc(FInstance^.FRun, 7);
-      FInstance^.FTokenID := stkHtmlTagName;
+      FInstance^.FTokenID := stkMLTagName;
       SetRangeInt(2, 7, 1);
     end;
     1:
-      if not HtmlCheckNull and not PhpCheckBegin then
+      if not MLCheckNull and not PhpCheckBegin then
         case FInstance^.FLine[FInstance^.FRun] of
           #1..#32:
           begin
-            HtmlSpaceProc;
+            MLSpaceProc;
             Exit;
           end;
           '>':
           begin
             Inc(FInstance^.FRun);
-            FInstance^.FTokenID := stkHtmlTag;
+            FInstance^.FTokenID := stkMLTag;
             SetRangeInt(2, 7, 0);
-            HtmlSetRange(srsHtmlText);
+            MLSetRange(srsMLText);
             Exit;
           end;
           #39:
           begin
             Inc(FInstance^.FRun);
             if FInstance^.FLine[FInstance^.FRun] = #0 then
-              FInstance^.FTokenID := stkHtmlError
+              FInstance^.FTokenID := stkMLError
             else
             begin
               SetRangeInt(2, 7, 2);
               if PhpCheckBegin(False) then
-                FInstance^.FTokenID := stkHtmlTagKeyValueQuoted
+                FInstance^.FTokenID := stkMLTagKeyValueQuoted
               else
-                HtmlRangeTagDOCTYPEProc;
+                MLRangeTagDOCTYPEProc;
             end;
           end;
           '"':
           begin
             Inc(FInstance^.FRun);
             if FInstance^.FLine[FInstance^.FRun] = #0 then
-              FInstance^.FTokenID := stkHtmlError
+              FInstance^.FTokenID := stkMLError
             else
             begin
               SetRangeInt(2, 7, 3);
               if PhpCheckBegin(False) then
-                FInstance^.FTokenID := stkHtmlTagKeyValueQuoted
+                FInstance^.FTokenID := stkMLTagKeyValueQuoted
               else
-                HtmlRangeTagDOCTYPEProc;
+                MLRangeTagDOCTYPEProc;
             end;
           end;
           else
@@ -2266,18 +2542,18 @@ begin
             if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
             begin
               Inc(FInstance^.FRun);
-              FInstance^.FTokenID := stkHtmlError;
+              FInstance^.FTokenID := stkMLError;
               Exit;
             end;
             repeat
               Inc(FInstance^.FRun);
             until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0;
             // until not (FInstance^.FLine[FInstance^.FRun] In ['a'..'z', 'A'..'Z']);
-            FInstance^.FTokenID := stkHtmlTagKey;
+            FInstance^.FTokenID := stkMLTagKey;
         end;
     2:
     begin
-      if not HtmlCheckNull then
+      if not MLCheckNull then
         if PhpCheckBegin then
           Exit
         else
@@ -2288,20 +2564,20 @@ begin
             case FInstance^.FLine[FInstance^.FRun] of
               #0:
               begin
-                FInstance^.FTokenID := stkHtmlError;
+                FInstance^.FTokenID := stkMLError;
                 Break;
               end;
               '<':
                 if PhpCheckBegin(False) then
                 begin
-                  FInstance^.FTokenID := stkHtmlTagKeyValueQuoted;
+                  FInstance^.FTokenID := stkMLTagKeyValueQuoted;
                   Exit;
                 end else
                   Inc(FInstance^.FRun);
               #39:
               begin
                 Inc(FInstance^.FRun);
-                FInstance^.FTokenID := stkHtmlTagKeyValueQuoted;
+                FInstance^.FTokenID := stkMLTagKeyValueQuoted;
                 Break;
               end;
             end;
@@ -2310,7 +2586,7 @@ begin
     end;
     3:
     begin
-      if not HtmlCheckNull then
+      if not MLCheckNull then
         if PhpCheckBegin then
           Exit
         else
@@ -2321,20 +2597,20 @@ begin
             case FInstance^.FLine[FInstance^.FRun] of
               #0:
               begin
-                FInstance^.FTokenID := stkHtmlError;
+                FInstance^.FTokenID := stkMLError;
                 Break;
               end;
               '<':
                 if PhpCheckBegin(False) then
                 begin
-                  FInstance^.FTokenID := stkHtmlTagKeyValueQuoted;
+                  FInstance^.FTokenID := stkMLTagKeyValueQuoted;
                   Exit;
                 end else
                   Inc(FInstance^.FRun);
               '"':
               begin
                 Inc(FInstance^.FRun);
-                FInstance^.FTokenID := stkHtmlTagKeyValueQuoted;
+                FInstance^.FTokenID := stkMLTagKeyValueQuoted;
                 Break;
               end;
             end;
@@ -2344,13 +2620,13 @@ begin
   end;
 end;
 
-procedure TSynWebEngine.HtmlRangeTagCDATAProc;
+procedure TSynWebEngine.MLRangeTagCDATAProc;
 begin
-  if HtmlCheckNull or PhpCheckBegin then
+  if MLCheckNull or PhpCheckBegin then
     Exit;
   if FInstance^.FLine[FInstance^.FRun] in [#1..#32] then
   begin
-    HtmlSpaceProc;
+    MLSpaceProc;
     Exit;
   end else
     if (FInstance^.FLine[FInstance^.FRun] = ']') and
@@ -2358,8 +2634,8 @@ begin
       (FInstance^.FLine[FInstance^.FRun + 2] = '>') then
     begin
       Inc(FInstance^.FRun, 3);
-      FInstance^.FTokenID := stkHtmlTag;
-      HtmlSetRange(srsHtmlText);
+      FInstance^.FTokenID := stkMLTag;
+      MLSetRange(srsMLText);
     end else
     begin
       repeat
@@ -2375,11 +2651,11 @@ begin
               Break;
         end;
       until False;
-      FInstance^.FTokenID := stkHtmlText;
+      FInstance^.FTokenID := stkMLText;
     end;
 end;
 
-procedure TSynWebEngine.HtmlRangeTagProc;
+procedure TSynWebEngine.MLRangeTagProc;
 var
   ID: Integer;
 begin
@@ -2387,37 +2663,37 @@ begin
     Inc(FInstance^.FRun);
   until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 16) = 0;
   // until not (FInstance^.FLine[FInstance^.FRun] In ['a'..'z', 'A'..'Z', '_', '0'..'9']);
-  FInstance^.FTokenID := HtmlTagCheck;
-  ID := HtmlGetTag - 1;
+  FInstance^.FTokenID := MLTagCheck;
+  ID := MLGetTag - 1;
   if GetRangeBit(12) then
   begin
     if (ID <> -1) and (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) then
-      FInstance^.FTokenID := stkHtmlError;
-    HtmlSetRange(srsHtmlTagClose);
+      FInstance^.FTokenID := stkMLError;
+    MLSetRange(srsMLTagClose);
   end else
   begin
     if (ID <> -1) and ((FInstance^.FLine[FInstance^.FTokenPos - 1] = '?') xor
       (TSynWeb_TagsData[ID] and (1 shl 29) <> 0)) then
-      FInstance^.FTokenID := stkHtmlError;
-    HtmlSetRange(srsHtmlTagKey);
+      FInstance^.FTokenID := stkMLError;
+    MLSetRange(srsMLTagKey);
   end;
 end;
 
-procedure TSynWebEngine.HtmlRangeTagCloseProc;
+procedure TSynWebEngine.MLRangeTagCloseProc;
 begin
-  if HtmlCheckNull or PhpCheckBegin then
+  if MLCheckNull or PhpCheckBegin then
     Exit;
   case FInstance^.FLine[FInstance^.FRun] of
     #1..#32:
-      HtmlSpaceProc;
+      MLSpaceProc;
     '>':
     begin
       Inc(FInstance^.FRun);
-      FInstance^.FTokenID := stkHtmlTag;
-      HtmlSetRange(srsHtmlText);
+      FInstance^.FTokenID := stkMLTag;
+      MLSetRange(srsMLText);
     end;
     else
-      FInstance^.FTokenID := stkHtmlError;
+      FInstance^.FTokenID := stkMLError;
       repeat
         repeat
           Inc(FInstance^.FRun);
@@ -2431,65 +2707,65 @@ begin
   end;
 end;
 
-procedure TSynWebEngine.HtmlRangeTagKeyProc;
+procedure TSynWebEngine.MLRangeTagKeyProc;
 var
   ID: Integer;
 begin
-  if HtmlCheckNull or PhpCheckBegin then
+  if MLCheckNull or PhpCheckBegin then
     Exit;
-  ID := HtmlGetTag - 1;
+  ID := MLGetTag - 1;
   if (ID <> -1) and (TSynWeb_TagsData[ID] and (1 shl 29) <> 0) then
     if (FInstance^.FLine[FInstance^.FRun] = '?') and
       (FInstance^.FLine[FInstance^.FRun + 1] = '>') then
     begin
       Inc(FInstance^.FRun, 2);
-      FInstance^.FTokenID := stkHtmlTag;
-      HtmlSetRange(srsHtmlText);
+      FInstance^.FTokenID := stkMLTag;
+      MLSetRange(srsMLText);
       Exit;
     end else
       if FInstance^.FLine[FInstance^.FRun] = '>' then
       begin
         Inc(FInstance^.FRun);
-        FInstance^.FTokenID := stkHtmlError;
-        HtmlSetRange(srsHtmlText);
+        FInstance^.FTokenID := stkMLError;
+        MLSetRange(srsMLText);
         Exit;
       end;
   case FInstance^.FLine[FInstance^.FRun] of
     #1..#32:
-      HtmlSpaceProc;
+      MLSpaceProc;
     '/':
       if not GetRangeBit(12) and (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
-        (FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict) and
+        (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) and
         (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) then
       begin
         Inc(FInstance^.FRun, 2);
-        FInstance^.FTokenID := stkHtmlTag;
-        HtmlSetRange(srsHtmlText);
+        FInstance^.FTokenID := stkMLTag;
+        MLSetRange(srsMLText);
       end else
       begin
         Inc(FInstance^.FRun);
-        FInstance^.FTokenID := stkHtmlError;
+        FInstance^.FTokenID := stkMLError;
       end;
     '>':
     begin
       Inc(FInstance^.FRun);
-      FInstance^.FTokenID := stkHtmlTag;
+      FInstance^.FTokenID := stkMLTag;
       if (ID <> -1) and (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) and
-        (FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict) then
-        FInstance^.FTokenID := stkHtmlError
+        (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) then
+        FInstance^.FTokenID := stkMLError
       else
         if not GetRangeBit(12) and ((FInstance^.FRun < 2) or
           (FInstance^.FLine[FInstance^.FRun - 2] <> '/')) then
-          if (ID = HtmlTagID_Style) and FInstance^.FOptions.FCssEmbeded then
+          if (ID = MLTagID_Style) and FInstance^.FOptions.FCssEmbeded then
           begin
             SetHighlighterType(shtCss, True, True, True);
             Exit;
           end else
-            if (ID = HtmlTagID_Script) then
+            if (ID = MLTagID_Script) then
               if GetRangeBit(28) and FInstance^.FOptions.FPhpEmbeded then
               begin
                 SetRangeInt(17, 0, 0);
-                PhpBegin(spotHtml);
+                PhpBegin(spotML);
                 Exit;
               end else
                 if FInstance^.FOptions.FEsEmbeded then
@@ -2497,12 +2773,12 @@ begin
                   SetHighlighterType(shtEs, True, True, True);
                   Exit;
                 end;
-      HtmlSetRange(srsHtmlText);
+      MLSetRange(srsMLText);
     end;
     else
       // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']) then
       if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
-        HtmlErrorProc
+        MLErrorProc
       else
       begin
         repeat
@@ -2510,62 +2786,62 @@ begin
         until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) = 0;    
         // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', ':', '-']);
         if ID = -1 then
-          FInstance^.FTokenID := stkHtmlTagKeyUndef
+          FInstance^.FTokenID := stkMLTagKeyUndef
         else
         begin
-          FInstance^.FTokenID := HtmlAttrCheck;
-          if ID = HtmlTagID_Script then
-            SetRangeBit(27, FInstance^.FTokenLastID = HtmlAttrID_Language);
+          FInstance^.FTokenID := MLAttrCheck;
+          if ID = MLTagID_Script then
+            SetRangeBit(27, FInstance^.FTokenLastID = MLAttrID_Language);
         end;
       end;
-      HtmlSetRange(srsHtmlTagKeyEq);
+      MLSetRange(srsMLTagKeyEq);
   end;
 end;
 
-procedure TSynWebEngine.HtmlRangeTagKeyEqProc;
+procedure TSynWebEngine.MLRangeTagKeyEqProc;
 begin
-  if HtmlCheckNull or PhpCheckBegin then
+  if MLCheckNull or PhpCheckBegin then
     Exit;
   case FInstance^.FLine[FInstance^.FRun] of
     #1..#32:
-      HtmlSpaceProc;
+      MLSpaceProc;
     '=':
     begin
       Inc(FInstance^.FRun);
-      FInstance^.FTokenID := stkHtmlSymbol;
-      HtmlSetRange(srsHtmlTagKeyValue);
+      FInstance^.FTokenID := stkMLSymbol;
+      MLSetRange(srsMLTagKeyValue);
     end;
     else
-      HtmlSetRange(srsHtmlTagKey);
-      HtmlRangeTagKeyProc;
-      if FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict then
-        FInstance^.FTokenID := stkHtmlError;
+      MLSetRange(srsMLTagKey);
+      MLRangeTagKeyProc;
+      if FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict then
+        FInstance^.FTokenID := stkMLError;
   end;
 end;
 
-procedure TSynWebEngine.HtmlRangeTagKeyValueProc;
+procedure TSynWebEngine.MLRangeTagKeyValueProc;
 var
   ID: Integer;
 begin
-  if HtmlCheckNull or PhpCheckBegin then
+  if MLCheckNull or PhpCheckBegin then
     Exit;
   case FInstance^.FLine[FInstance^.FRun] of
     #1..#32:
-      HtmlSpaceProc;
+      MLSpaceProc;
     #39:
     begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = #0 then
       begin
-        HtmlSetRange(srsHtmlTagKey);
-        FInstance^.FTokenID := stkHtmlError;
+        MLSetRange(srsMLTagKey);
+        FInstance^.FTokenID := stkMLError;
       end else
       begin
-        HtmlSetRange(srsHtmlTagKeyValueQuoted1);
+        MLSetRange(srsMLTagKeyValueQuoted1);
         if PhpCheckBegin(False) then
-          FInstance^.FTokenID := stkHtmlTagKeyValueQuoted
+          FInstance^.FTokenID := stkMLTagKeyValueQuoted
         else
-          HtmlRangeTagKeyValueQuoted1Proc;
+          MLRangeTagKeyValueQuoted1Proc;
       end;
     end;
     '"':
@@ -2573,20 +2849,20 @@ begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = #0 then
       begin
-        HtmlSetRange(srsHtmlTagKey);
-        FInstance^.FTokenID := stkHtmlError;
+        MLSetRange(srsMLTagKey);
+        FInstance^.FTokenID := stkMLError;
       end else
       begin
-        HtmlSetRange(srsHtmlTagKeyValueQuoted2);
+        MLSetRange(srsMLTagKeyValueQuoted2);
         if PhpCheckBegin(False) then
-          FInstance^.FTokenID := stkHtmlTagKeyValueQuoted
+          FInstance^.FTokenID := stkMLTagKeyValueQuoted
         else
-          HtmlRangeTagKeyValueQuoted2Proc;
+          MLRangeTagKeyValueQuoted2Proc;
       end;
     end;
     else
       if (FInstance^.FLine[FInstance^.FRun] = '>') or
-        ((FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict) and
+        ((FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) and
         (FInstance^.FLine[FInstance^.FRun] = '/') and
         (FInstance^.FLine[FInstance^.FRun + 1] = '>')) then
       begin
@@ -2594,21 +2870,21 @@ begin
           Inc(FInstance^.FRun, 2)
         else
           Inc(FInstance^.FRun);
-        FInstance^.FTokenID := stkHtmlError;
+        FInstance^.FTokenID := stkMLError;
         if not GetRangeBit(12) and ((FInstance^.FRun = 0) or
           (FInstance^.FLine[FInstance^.FRun - 2] <> '/')) then
         begin
-          ID := HtmlGetTag - 1;
-          if (ID = HtmlTagID_Style) and FInstance^.FOptions.FCssEmbeded then
+          ID := MLGetTag - 1;
+          if (ID = MLTagID_Style) and FInstance^.FOptions.FCssEmbeded then
           begin
             SetHighlighterType(shtCss, True, True, True);
             Exit;
           end else
-            if (ID = HtmlTagID_Script) then
+            if (ID = MLTagID_Script) then
               if GetRangeBit(28) and FInstance^.FOptions.FPhpEmbeded then
               begin
                 SetRangeInt(17, 0, 0);
-                PhpBegin(spotHtml);
+                PhpBegin(spotML);
                 Exit;
               end else
                 if FInstance^.FOptions.FEsEmbeded then
@@ -2617,7 +2893,7 @@ begin
                   Exit;
                 end;
         end;
-        HtmlSetRange(srsHtmlText);
+        MLSetRange(srsMLText);
       end else
       begin
         repeat
@@ -2628,7 +2904,7 @@ begin
           case FInstance^.FLine[FInstance^.FRun] of
             '/':
               if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
-                (FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict) then
+                (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) then
                 Break;
             '<':
               if PhpCheckBegin(False) then
@@ -2639,20 +2915,20 @@ begin
               Break;
           end;
         until False;
-        if FInstance^.FOptions.FHtmlVersion >= shvXHtml10Strict then
-          FInstance^.FTokenID := stkHtmlError
+        if FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict then
+          FInstance^.FTokenID := stkMLError
         else
-          FInstance^.FTokenID := stkHtmlTagKeyValue;
+          FInstance^.FTokenID := stkMLTagKeyValue;
         if GetRangeBit(27) then
           SetRangeBit(28, UpperCase(GetToken) = 'PHP');
-        HtmlSetRange(srsHtmlTagKey);
+        MLSetRange(srsMLTagKey);
       end;
   end;
 end;
 
-procedure TSynWebEngine.HtmlRangeTagKeyValueQuoted1Proc;
+procedure TSynWebEngine.MLRangeTagKeyValueQuoted1Proc;
 begin
-  if not HtmlCheckNull then
+  if not MLCheckNull then
     if PhpCheckBegin then
       Exit
     else
@@ -2663,32 +2939,32 @@ begin
         case FInstance^.FLine[FInstance^.FRun] of
           #0:
           begin
-            FInstance^.FTokenID := stkHtmlError;
+            FInstance^.FTokenID := stkMLError;
             Break;
           end;
           '<':
             if PhpCheckBegin(False) then
             begin
-              FInstance^.FTokenID := stkHtmlTagKeyValueQuoted;
+              FInstance^.FTokenID := stkMLTagKeyValueQuoted;
               Exit;
             end else
               Inc(FInstance^.FRun);
           #39:
           begin
             Inc(FInstance^.FRun);
-            FInstance^.FTokenID := stkHtmlTagKeyValueQuoted;
+            FInstance^.FTokenID := stkMLTagKeyValueQuoted;
             if GetRangeBit(27) then
               SetRangeBit(28, UpperCase(GetToken) = #39'PHP'#39);
             Break;
           end;
         end;
       until False;
-  HtmlSetRange(srsHtmlTagKey);
+  MLSetRange(srsMLTagKey);
 end;
 
-procedure TSynWebEngine.HtmlRangeTagKeyValueQuoted2Proc;
+procedure TSynWebEngine.MLRangeTagKeyValueQuoted2Proc;
 begin
-  if not HtmlCheckNull then
+  if not MLCheckNull then
     if PhpCheckBegin then
       Exit
     else
@@ -2699,36 +2975,36 @@ begin
         case FInstance^.FLine[FInstance^.FRun] of
           #0:
           begin
-            FInstance^.FTokenID := stkHtmlError;
+            FInstance^.FTokenID := stkMLError;
             Break;
           end;
           '<':
             if PhpCheckBegin(False) then
             begin
-              FInstance^.FTokenID := stkHtmlTagKeyValueQuoted;
+              FInstance^.FTokenID := stkMLTagKeyValueQuoted;
               Exit;
             end else
               Inc(FInstance^.FRun);
           '"':
           begin
             Inc(FInstance^.FRun);
-            FInstance^.FTokenID := stkHtmlTagKeyValueQuoted;
+            FInstance^.FTokenID := stkMLTagKeyValueQuoted;
             if GetRangeBit(27) then
               SetRangeBit(28, UpperCase(GetToken) = '"PHP"');
             Break;
           end;
         end;
       until False;
-  HtmlSetRange(srsHtmlTagKey);
+  MLSetRange(srsMLTagKey);
 end;
 
-function TSynWebEngine.HtmlTagKeyComp(const ID: Integer): Boolean;
+function TSynWebEngine.MLTagKeyComp(const ID: Integer): Boolean;
 var
   I: Integer;
   Temp: PChar;
   aKey: String;
 begin
-  if TSynWeb_TagsData[ID] and (1 shl Longword(FInstance^.FOptions.FHtmlVersion)) = 0 then
+  if TSynWeb_TagsData[ID] and (1 shl Longword(FInstance^.FOptions.FMLVersion)) = 0 then
   begin
     Result := False;
     Exit;
@@ -2752,7 +3028,7 @@ begin
     Result := False;
 end;
 
-function TSynWebEngine.HtmlTagCheck: TSynWebTokenKind;
+function TSynWebEngine.MLTagCheck: TSynWebTokenKind;
 var
   HashKey: Longword;
 
@@ -2773,23 +3049,23 @@ begin
   FInstance^.FToIdent := @FInstance^.FLine[FInstance^.FTokenPos];
   KeyHash(FInstance^.FToIdent);
   FInstance^.FTokenLastID := -1;
-  if HashKey <= HtmlTagMaxKeyHash then
-    Result := FHtmlTagIdentFuncTable[HashKey]
+  if HashKey <= MLTagMaxKeyHash then
+    Result := FMLTagIdentFuncTable[HashKey]
   else
-    Result := stkHtmlTagNameUndef;
-  HtmlSetTag(FInstance^.FTokenLastID + 1);
+    Result := stkMLTagNameUndef;
+  MLSetTag(FInstance^.FTokenLastID + 1);
 end;
 
 {$I SynHighlighterWeb_TagsFunc.inc}
 
-function TSynWebEngine.HtmlAttrKeyComp(const ID: Integer): Boolean;
+function TSynWebEngine.MLAttrKeyComp(const ID: Integer): Boolean;
 var
   I, tag: Integer;
   Temp: PChar;
   aKey: String;
 begin
-  tag := HtmlGetTag - 1;
-  if (tag = -1) or (TSynWeb_AttrsData[ID][Longword(FInstance^.FOptions.FHtmlVersion)]
+  tag := MLGetTag - 1;
+  if (tag = -1) or (TSynWeb_AttrsData[ID][Longword(FInstance^.FOptions.FMLVersion)]
     [tag div 32] and (1 shl (tag mod 32)) = 0) then
   begin
     Result := False;
@@ -2814,7 +3090,7 @@ begin
     Result := False;
 end;
 
-function TSynWebEngine.HtmlAttrCheck: TSynWebTokenKind;
+function TSynWebEngine.MLAttrCheck: TSynWebTokenKind;
 var
   HashKey: Longword;
 
@@ -2835,15 +3111,15 @@ begin
   FInstance^.FToIdent := @FInstance^.FLine[FInstance^.FTokenPos];
   KeyHash(FInstance^.FToIdent);
   FInstance^.FTokenLastID := -1;
-  if HashKey <= HtmlAttrMaxKeyHash then
-    Result := FHtmlAttrIdentFuncTable[HashKey]
+  if HashKey <= MLAttrMaxKeyHash then
+    Result := FMLAttrIdentFuncTable[HashKey]
   else
-    Result := stkHtmlTagKeyUndef;
+    Result := stkMLTagKeyUndef;
 end;
 
 {$I SynHighlighterWeb_AttrsFunc.inc}
 
-function TSynWebEngine.HtmlSpecialKeyComp(const ID: Integer): Boolean;
+function TSynWebEngine.MLSpecialKeyComp(const ID: Integer): Boolean;
 var
   I: Integer;
   Temp: PChar;
@@ -2868,7 +3144,7 @@ begin
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialCheck(AStart, ALen: Integer): Integer;
+function TSynWebEngine.MLSpecialCheck(AStart, ALen: Integer): Integer;
 var
   HashKey: Longword;
 
@@ -2888,7 +3164,7 @@ var
 begin
   FInstance^.FToIdent := @FInstance^.FLine[AStart];
   KeyHash(FInstance^.FToIdent);
-  if (HashKey > HtmlSpecialMaxKeyHash) or not FHtmlSpecialIdentFuncTable[HashKey] then
+  if (HashKey > MLSpecialMaxKeyHash) or not FMLSpecialIdentFuncTable[HashKey] then
     FInstance^.FTokenLastID := -1;
   Result := FInstance^.FTokenLastID;
 end;
@@ -3077,12 +3353,12 @@ begin
         FInstance^.FHashTable['e']) and
         (TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 7]] and (1 shl 0) <> 0) and
         // (FInstance^.FLine[FInstance^.FRun+7] in [#0..#32, '>']) and
-        (FInstance^.FHighlighterMode = shmHtml) then
+        (FInstance^.FHighlighterMode = shmML) then
       begin
         Result := True;
         if ADo then
         begin
-          SetHighlighterType(shtHtml, True, False, False);
+          SetHighlighterType(shtML, True, False, False);
           Next;
         end;
       end else
@@ -3140,7 +3416,7 @@ begin
     (FInstance^.FLine[FInstance^.FRun + 3] = '-') then
   begin
     Inc(FInstance^.FRun, 4);
-    FInstance^.FTokenID := stkHtmlComment;
+    FInstance^.FTokenID := stkMLComment;
   end else
     CssErrorProc;
 end;
@@ -3357,7 +3633,7 @@ begin
       (FInstance^.FLine[FInstance^.FRun + 2] = '>') then
     begin
       Inc(FInstance^.FRun, 3);
-      FInstance^.FTokenID := stkHtmlComment;
+      FInstance^.FTokenID := stkMLComment;
     end else
       CssErrorProc;
 end;
@@ -3447,8 +3723,8 @@ procedure TSynWebEngine.CssIdentProc;
 begin
   if CssIdentStartProc then
   begin
-    if (HtmlTagCheck = stkHtmlTagName) and
-      (TSynWeb_TagsData[HtmlGetTag - 1] and (1 shl 30) = 0) then
+    if (MLTagCheck = stkMLTagName) and
+      (TSynWeb_TagsData[MLGetTag - 1] and (1 shl 30) = 0) then
       FInstance^.FTokenID := stkCssSelector
     else
       FInstance^.FTokenID := stkCssSelectorUndef;
@@ -5017,12 +5293,12 @@ begin
         FInstance^.FHashTable['t']) and
         (TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 8]] and (1 shl 0) <> 0) and                    
         // (FInstance^.FLine[FInstance^.FRun+8] in [#0..#32, '>']) and
-        (FInstance^.FHighlighterMode = shmHtml) then
+        (FInstance^.FHighlighterMode = shmML) then
       begin
         Result := True;
         if ADo then
         begin
-          SetHighlighterType(shtHtml, True, False, False);
+          SetHighlighterType(shtML, True, False, False);
           Next;
         end;
       end else
@@ -5338,7 +5614,7 @@ end;
 
 procedure TSynWebEngine.EsRangeString34Proc;
 begin
-  if not HtmlCheckNull then
+  if not MLCheckNull then
     if PhpCheckBegin then
       Exit
     else
@@ -5378,7 +5654,7 @@ end;
 
 procedure TSynWebEngine.EsRangeString39Proc;
 begin
-  if not HtmlCheckNull then
+  if not MLCheckNull then
     if PhpCheckBegin then
       Exit
     else
@@ -5563,7 +5839,7 @@ procedure TSynWebEngine.PhpCliNext;
 begin
   FInstance^.FTokenID := stkPhpInlineText;
   FInstance^.FTokenPos := FInstance^.FRun;
-  if HtmlCheckNull or PhpCheckBegin then
+  if MLCheckNull or PhpCheckBegin then
     Exit;
   repeat
     while not (FInstance^.FLine[FInstance^.FRun] in [#0, '<']) do
@@ -5636,12 +5912,12 @@ end;
 procedure TSynWebEngine.PhpBegin(ATagKind: TSynWebPhpOpenTag);
 begin
   SetHighlighterType(
-    TSynWebHighlighterType(Longword(FInstance^.FHighlighterType) + Longword(shtPhpInHtml)),
+    TSynWebHighlighterType(Longword(FInstance^.FHighlighterType) + Longword(shtPhpInML)),
     False,
     True,
-    ATagKind = spotHtml);
+    ATagKind = spotML);
   SetRangeInt(12, 17, 0);
-  if ATagKind = spotHtml then
+  if ATagKind = spotML then
     PhpSetRange(srsPhpDefault)
   else
   begin
@@ -5651,18 +5927,18 @@ begin
   end;
 end;
 
-procedure TSynWebEngine.PhpEnd(AHtmlTag: Boolean);
+procedure TSynWebEngine.PhpEnd(AMLTag: Boolean);
 begin
   SetRangeInt(12, 17, 0);
   if FInstance^.FLine[FInstance^.FRun] = #0 then
-    SetRangeInt(3, 29, Longword(FInstance^.FHighlighterType) - Longword(shtPhpInHtml))
+    SetRangeInt(3, 29, Longword(FInstance^.FHighlighterType) - Longword(shtPhpInML))
   else
   begin
     SetHighlighterType(
-      TSynWebHighlighterType(Longword(FInstance^.FHighlighterType) - Longword(shtPhpInHtml)),
-      AHtmlTag,
-      True, not AHtmlTag);
-    if AHtmlTag then
+      TSynWebHighlighterType(Longword(FInstance^.FHighlighterType) - Longword(shtPhpInML)),
+      AMLTag,
+      True, not AMLTag);
+    if AMLTag then
       Next;
   end;
 end;
@@ -5681,7 +5957,7 @@ begin
   if (FInstance^.FLine[FInstance^.FRun] = '>') and FInstance^.FOptions.FPhpEmbeded then
   begin
     Inc(FInstance^.FRun);
-    FInstance^.FTokenID := stkHtmlTag;
+    FInstance^.FTokenID := stkMLTag;
     PhpEnd(False);
   end else
     FInstance^.FTokenID := stkPhpSymbol;
@@ -5939,7 +6215,7 @@ begin
     Inc(FInstance^.FRun, 2);
     if FInstance^.FOptions.FPhpAspTags then
     begin
-      FInstance^.FTokenID := stkHtmlTag;
+      FInstance^.FTokenID := stkMLTag;
       PhpEnd(False);
     end else
       FInstance^.FTokenID := stkPhpError;
@@ -6303,7 +6579,7 @@ begin
     0:
     begin
       Inc(FInstance^.FRun, 2);
-      FInstance^.FTokenID := stkHtmlTag;
+      FInstance^.FTokenID := stkMLTag;
       SetRangeInt(3, 20, 1);
     end;
     1:
@@ -6703,7 +6979,7 @@ end;
 procedure TSynWebEngine.SetupHighlighterType(AClearBits: Boolean);
 begin
   case FInstance^.FHighlighterType of
-    shtHtml:
+    shtML:
       if FInstance^.FHighlighterMode = shmPhpCli then
       begin
         if AClearBits then
@@ -6716,10 +6992,10 @@ begin
       begin
         if AClearBits then
           SetRangeInt(17, 0, 0);
-        FInstance^.FSYN_ATTR_COMMENT := FHtmlCommentAttri;
-        FInstance^.FSYN_ATTR_STRING := FHtmlTagKeyValueQuotedAttri;
-        FInstance^.FSYN_ATTR_WHITESPACE := FHtmlWhitespaceAttri;
-        FInstance^.FNextProcTable := HtmlNext;
+        FInstance^.FSYN_ATTR_COMMENT := FMLCommentAttri;
+        FInstance^.FSYN_ATTR_STRING := FMLTagKeyValueQuotedAttri;
+        FInstance^.FSYN_ATTR_WHITESPACE := FMLWhitespaceAttri;
+        FInstance^.FNextProcTable := MLNext;
       end;
     shtCss:
     begin
@@ -6791,6 +7067,7 @@ initialization
 
 {$IFNDEF SYN_CPPB_1}
   RegisterPlaceableHighlighter(TSynWebHtmlSyn);
+  RegisterPlaceableHighlighter(TSynWebWmlSyn);
   RegisterPlaceableHighlighter(TSynWebPhpCliSyn);
   RegisterPlaceableHighlighter(TSynWebCssSyn);
   RegisterPlaceableHighlighter(TSynWebEsSyn);

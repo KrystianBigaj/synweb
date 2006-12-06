@@ -48,9 +48,10 @@ Contact: krystian.bigaj@gmail.com
 Homepage: http://flatdev.ovh.org
 -------------------------------------------------------------------------------}
 
-unit QSynHighlighterWebMisc;
+unit QSynTokenMatch;
 
 {$DEFINE SYN_CLX}
-{$DEFINE QSYNHIGHLIGHTERWEBMISC}
+{$DEFINE QSYNTOKENMATCH}
 
-{$I SynHighlighterWebMisc.pas}
+{$I SynTokenMatch.pas}
+

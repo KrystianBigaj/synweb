@@ -26,7 +26,7 @@ package SynWeb_R7;
 {$RUNONLY}
 {$IMPLICITBUILD ON}
 
-requires   
+requires
   SynEdit_R7,
   vcl,
   vclx;

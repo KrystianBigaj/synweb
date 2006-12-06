@@ -1,739 +1,739 @@
-function TSynWebEngine.HtmlSpecialUndef: Boolean;
+function TSynWebEngine.MLSpecialUndef: Boolean;
 begin
   Result:=False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc12: Boolean;
+function TSynWebEngine.MLSpecialFunc12: Boolean;
 begin
-  if  HtmlSpecialKeyComp(79) then
+  if  MLSpecialKeyComp(79) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc16: Boolean;
+function TSynWebEngine.MLSpecialFunc16: Boolean;
 begin
-  if  HtmlSpecialKeyComp(46) then
+  if  MLSpecialKeyComp(46) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc17: Boolean;
+function TSynWebEngine.MLSpecialFunc17: Boolean;
 begin
-  if  HtmlSpecialKeyComp(111) then
+  if  MLSpecialKeyComp(111) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc19: Boolean;
+function TSynWebEngine.MLSpecialFunc19: Boolean;
 begin
-  if  HtmlSpecialKeyComp(13) or
-      HtmlSpecialKeyComp(129) then
+  if  MLSpecialKeyComp(13) or
+      MLSpecialKeyComp(129) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc20: Boolean;
+function TSynWebEngine.MLSpecialFunc20: Boolean;
 begin
-  if  HtmlSpecialKeyComp(28) or
-      HtmlSpecialKeyComp(33) or
-      HtmlSpecialKeyComp(34) then
+  if  MLSpecialKeyComp(28) or
+      MLSpecialKeyComp(33) or
+      MLSpecialKeyComp(34) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc22: Boolean;
+function TSynWebEngine.MLSpecialFunc22: Boolean;
 begin
-  if  HtmlSpecialKeyComp(14) then
+  if  MLSpecialKeyComp(14) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc23: Boolean;
+function TSynWebEngine.MLSpecialFunc23: Boolean;
 begin
-  if  HtmlSpecialKeyComp(130) then
+  if  MLSpecialKeyComp(130) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc25: Boolean;
+function TSynWebEngine.MLSpecialFunc25: Boolean;
 begin
-  if  HtmlSpecialKeyComp(168) or
-      HtmlSpecialKeyComp(169) then
+  if  MLSpecialKeyComp(168) or
+      MLSpecialKeyComp(169) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc26: Boolean;
+function TSynWebEngine.MLSpecialFunc26: Boolean;
 begin
-  if  HtmlSpecialKeyComp(63) or
-      HtmlSpecialKeyComp(64) then
+  if  MLSpecialKeyComp(63) or
+      MLSpecialKeyComp(64) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc27: Boolean;
+function TSynWebEngine.MLSpecialFunc27: Boolean;
 begin
-  if  HtmlSpecialKeyComp(80) then
+  if  MLSpecialKeyComp(80) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc28: Boolean;
+function TSynWebEngine.MLSpecialFunc28: Boolean;
 begin
-  if  HtmlSpecialKeyComp(24) or
-      HtmlSpecialKeyComp(25) or
-      HtmlSpecialKeyComp(73) or
-      HtmlSpecialKeyComp(74) or
-      HtmlSpecialKeyComp(75) then
+  if  MLSpecialKeyComp(24) or
+      MLSpecialKeyComp(25) or
+      MLSpecialKeyComp(73) or
+      MLSpecialKeyComp(74) or
+      MLSpecialKeyComp(75) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc30: Boolean;
+function TSynWebEngine.MLSpecialFunc30: Boolean;
 begin
-  if  HtmlSpecialKeyComp(12) or
-      HtmlSpecialKeyComp(126) or
-      HtmlSpecialKeyComp(188) then
+  if  MLSpecialKeyComp(12) or
+      MLSpecialKeyComp(126) or
+      MLSpecialKeyComp(188) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc32: Boolean;
+function TSynWebEngine.MLSpecialFunc32: Boolean;
 begin
-  if  HtmlSpecialKeyComp(118) then
+  if  MLSpecialKeyComp(118) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc33: Boolean;
+function TSynWebEngine.MLSpecialFunc33: Boolean;
 begin
-  if  HtmlSpecialKeyComp(31) or
-      HtmlSpecialKeyComp(35) or
-      HtmlSpecialKeyComp(65) or
-      HtmlSpecialKeyComp(66) or
-      HtmlSpecialKeyComp(103) or
-      HtmlSpecialKeyComp(104) or
-      HtmlSpecialKeyComp(152) or
-      HtmlSpecialKeyComp(166) or
-      HtmlSpecialKeyComp(167) or
-      HtmlSpecialKeyComp(242) or
-      HtmlSpecialKeyComp(243) then
+  if  MLSpecialKeyComp(31) or
+      MLSpecialKeyComp(35) or
+      MLSpecialKeyComp(65) or
+      MLSpecialKeyComp(66) or
+      MLSpecialKeyComp(103) or
+      MLSpecialKeyComp(104) or
+      MLSpecialKeyComp(152) or
+      MLSpecialKeyComp(166) or
+      MLSpecialKeyComp(167) or
+      MLSpecialKeyComp(242) or
+      MLSpecialKeyComp(243) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc34: Boolean;
+function TSynWebEngine.MLSpecialFunc34: Boolean;
 begin
-  if  HtmlSpecialKeyComp(2) or
-      HtmlSpecialKeyComp(3) or
-      HtmlSpecialKeyComp(5) or
-      HtmlSpecialKeyComp(6) or
-      HtmlSpecialKeyComp(105) or
-      HtmlSpecialKeyComp(124) or
-      HtmlSpecialKeyComp(125) then
+  if  MLSpecialKeyComp(2) or
+      MLSpecialKeyComp(3) or
+      MLSpecialKeyComp(5) or
+      MLSpecialKeyComp(6) or
+      MLSpecialKeyComp(105) or
+      MLSpecialKeyComp(124) or
+      MLSpecialKeyComp(125) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc35: Boolean;
+function TSynWebEngine.MLSpecialFunc35: Boolean;
 begin
-  if  HtmlSpecialKeyComp(77) or
-      HtmlSpecialKeyComp(78) or
-      HtmlSpecialKeyComp(92) or
-      HtmlSpecialKeyComp(119) or
-      HtmlSpecialKeyComp(136) or
-      HtmlSpecialKeyComp(137) or
-      HtmlSpecialKeyComp(180) then
+  if  MLSpecialKeyComp(77) or
+      MLSpecialKeyComp(78) or
+      MLSpecialKeyComp(92) or
+      MLSpecialKeyComp(119) or
+      MLSpecialKeyComp(136) or
+      MLSpecialKeyComp(137) or
+      MLSpecialKeyComp(180) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc36: Boolean;
+function TSynWebEngine.MLSpecialFunc36: Boolean;
 begin
-  if  HtmlSpecialKeyComp(29) or
-      HtmlSpecialKeyComp(30) or
-      HtmlSpecialKeyComp(162) or
-      HtmlSpecialKeyComp(187) then
+  if  MLSpecialKeyComp(29) or
+      MLSpecialKeyComp(30) or
+      MLSpecialKeyComp(162) or
+      MLSpecialKeyComp(187) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc38: Boolean;
+function TSynWebEngine.MLSpecialFunc38: Boolean;
 begin
-  if  HtmlSpecialKeyComp(10) or
-      HtmlSpecialKeyComp(11) or
-      HtmlSpecialKeyComp(53) or
-      HtmlSpecialKeyComp(54) then
+  if  MLSpecialKeyComp(10) or
+      MLSpecialKeyComp(11) or
+      MLSpecialKeyComp(53) or
+      MLSpecialKeyComp(54) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc39: Boolean;
+function TSynWebEngine.MLSpecialFunc39: Boolean;
 begin
-  if  HtmlSpecialKeyComp(37) then
+  if  MLSpecialKeyComp(37) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc40: Boolean;
+function TSynWebEngine.MLSpecialFunc40: Boolean;
 begin
-  if  HtmlSpecialKeyComp(40) or
-      HtmlSpecialKeyComp(181) then
+  if  MLSpecialKeyComp(40) or
+      MLSpecialKeyComp(181) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc41: Boolean;
+function TSynWebEngine.MLSpecialFunc41: Boolean;
 begin
-  if  HtmlSpecialKeyComp(44) or
-      HtmlSpecialKeyComp(45) or
-      HtmlSpecialKeyComp(71) or
-      HtmlSpecialKeyComp(109) or
-      HtmlSpecialKeyComp(147) or
-      HtmlSpecialKeyComp(148) or
-      HtmlSpecialKeyComp(190) or
-      HtmlSpecialKeyComp(191) or
-      HtmlSpecialKeyComp(204) then
+  if  MLSpecialKeyComp(44) or
+      MLSpecialKeyComp(45) or
+      MLSpecialKeyComp(71) or
+      MLSpecialKeyComp(109) or
+      MLSpecialKeyComp(147) or
+      MLSpecialKeyComp(148) or
+      MLSpecialKeyComp(190) or
+      MLSpecialKeyComp(191) or
+      MLSpecialKeyComp(204) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc42: Boolean;
+function TSynWebEngine.MLSpecialFunc42: Boolean;
 begin
-  if  HtmlSpecialKeyComp(32) or
-      HtmlSpecialKeyComp(42) or
-      HtmlSpecialKeyComp(43) or
-      HtmlSpecialKeyComp(47) or
-      HtmlSpecialKeyComp(48) or
-      HtmlSpecialKeyComp(87) or
-      HtmlSpecialKeyComp(88) or
-      HtmlSpecialKeyComp(206) or
-      HtmlSpecialKeyComp(215) or
-      HtmlSpecialKeyComp(216) then
+  if  MLSpecialKeyComp(32) or
+      MLSpecialKeyComp(42) or
+      MLSpecialKeyComp(43) or
+      MLSpecialKeyComp(47) or
+      MLSpecialKeyComp(48) or
+      MLSpecialKeyComp(87) or
+      MLSpecialKeyComp(88) or
+      MLSpecialKeyComp(206) or
+      MLSpecialKeyComp(215) or
+      MLSpecialKeyComp(216) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc43: Boolean;
+function TSynWebEngine.MLSpecialFunc43: Boolean;
 begin
-  if  HtmlSpecialKeyComp(94) or
-      HtmlSpecialKeyComp(115) or
-      HtmlSpecialKeyComp(153) or
-      HtmlSpecialKeyComp(192) then
+  if  MLSpecialKeyComp(94) or
+      MLSpecialKeyComp(115) or
+      MLSpecialKeyComp(153) or
+      MLSpecialKeyComp(192) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc44: Boolean;
+function TSynWebEngine.MLSpecialFunc44: Boolean;
 begin
-  if  HtmlSpecialKeyComp(177) or
-      HtmlSpecialKeyComp(178) or
-      HtmlSpecialKeyComp(246) then
+  if  MLSpecialKeyComp(177) or
+      MLSpecialKeyComp(178) or
+      MLSpecialKeyComp(246) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc45: Boolean;
+function TSynWebEngine.MLSpecialFunc45: Boolean;
 begin
-  if  HtmlSpecialKeyComp(81) or
-      HtmlSpecialKeyComp(82) or
-      HtmlSpecialKeyComp(95) or
-      HtmlSpecialKeyComp(96) or
-      HtmlSpecialKeyComp(101) or
-      HtmlSpecialKeyComp(102) or
-      HtmlSpecialKeyComp(120) then
+  if  MLSpecialKeyComp(81) or
+      MLSpecialKeyComp(82) or
+      MLSpecialKeyComp(95) or
+      MLSpecialKeyComp(96) or
+      MLSpecialKeyComp(101) or
+      MLSpecialKeyComp(102) or
+      MLSpecialKeyComp(120) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc46: Boolean;
+function TSynWebEngine.MLSpecialFunc46: Boolean;
 begin
-  if  HtmlSpecialKeyComp(49) or
-      HtmlSpecialKeyComp(128) or
-      HtmlSpecialKeyComp(235) then
+  if  MLSpecialKeyComp(49) or
+      MLSpecialKeyComp(128) or
+      MLSpecialKeyComp(235) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc47: Boolean;
+function TSynWebEngine.MLSpecialFunc47: Boolean;
 begin
-  if  HtmlSpecialKeyComp(21) or
-      HtmlSpecialKeyComp(22) or
-      HtmlSpecialKeyComp(27) or
-      HtmlSpecialKeyComp(170) or
-      HtmlSpecialKeyComp(185) or
-      HtmlSpecialKeyComp(199) or
-      HtmlSpecialKeyComp(207) then
+  if  MLSpecialKeyComp(21) or
+      MLSpecialKeyComp(22) or
+      MLSpecialKeyComp(27) or
+      MLSpecialKeyComp(170) or
+      MLSpecialKeyComp(185) or
+      MLSpecialKeyComp(199) or
+      MLSpecialKeyComp(207) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc48: Boolean;
+function TSynWebEngine.MLSpecialFunc48: Boolean;
 begin
-  if  HtmlSpecialKeyComp(140) or
-      HtmlSpecialKeyComp(141) or
-      HtmlSpecialKeyComp(142) or
-      HtmlSpecialKeyComp(143) or
-      HtmlSpecialKeyComp(226) then
+  if  MLSpecialKeyComp(140) or
+      MLSpecialKeyComp(141) or
+      MLSpecialKeyComp(142) or
+      MLSpecialKeyComp(143) or
+      MLSpecialKeyComp(226) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc49: Boolean;
+function TSynWebEngine.MLSpecialFunc49: Boolean;
 begin
-  if  HtmlSpecialKeyComp(16) or
-      HtmlSpecialKeyComp(17) or
-      HtmlSpecialKeyComp(107) or
-      HtmlSpecialKeyComp(108) or
-      HtmlSpecialKeyComp(131) or
-      HtmlSpecialKeyComp(201) or
-      HtmlSpecialKeyComp(202) then
+  if  MLSpecialKeyComp(16) or
+      MLSpecialKeyComp(17) or
+      MLSpecialKeyComp(107) or
+      MLSpecialKeyComp(108) or
+      MLSpecialKeyComp(131) or
+      MLSpecialKeyComp(201) or
+      MLSpecialKeyComp(202) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc50: Boolean;
+function TSynWebEngine.MLSpecialFunc50: Boolean;
 begin
-  if  HtmlSpecialKeyComp(4) or
-      HtmlSpecialKeyComp(154) or
-      HtmlSpecialKeyComp(224) then
+  if  MLSpecialKeyComp(4) or
+      MLSpecialKeyComp(154) or
+      MLSpecialKeyComp(224) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc51: Boolean;
+function TSynWebEngine.MLSpecialFunc51: Boolean;
 begin
-  if  HtmlSpecialKeyComp(0) or
-      HtmlSpecialKeyComp(1) or
-      HtmlSpecialKeyComp(15) or
-      HtmlSpecialKeyComp(19) or
-      HtmlSpecialKeyComp(20) or
-      HtmlSpecialKeyComp(67) or
-      HtmlSpecialKeyComp(68) or
-      HtmlSpecialKeyComp(98) or
-      HtmlSpecialKeyComp(127) then
+  if  MLSpecialKeyComp(0) or
+      MLSpecialKeyComp(1) or
+      MLSpecialKeyComp(15) or
+      MLSpecialKeyComp(19) or
+      MLSpecialKeyComp(20) or
+      MLSpecialKeyComp(67) or
+      MLSpecialKeyComp(68) or
+      MLSpecialKeyComp(98) or
+      MLSpecialKeyComp(127) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc52: Boolean;
+function TSynWebEngine.MLSpecialFunc52: Boolean;
 begin
-  if  HtmlSpecialKeyComp(93) or
-      HtmlSpecialKeyComp(200) or
-      HtmlSpecialKeyComp(249) or
-      HtmlSpecialKeyComp(250) then
+  if  MLSpecialKeyComp(93) or
+      MLSpecialKeyComp(200) or
+      MLSpecialKeyComp(249) or
+      MLSpecialKeyComp(250) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc53: Boolean;
+function TSynWebEngine.MLSpecialFunc53: Boolean;
 begin
-  if  HtmlSpecialKeyComp(50) or
-      HtmlSpecialKeyComp(58) or
-      HtmlSpecialKeyComp(89) or
-      HtmlSpecialKeyComp(114) or
-      HtmlSpecialKeyComp(175) or
-      HtmlSpecialKeyComp(208) then
+  if  MLSpecialKeyComp(50) or
+      MLSpecialKeyComp(58) or
+      MLSpecialKeyComp(89) or
+      MLSpecialKeyComp(114) or
+      MLSpecialKeyComp(175) or
+      MLSpecialKeyComp(208) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc54: Boolean;
+function TSynWebEngine.MLSpecialFunc54: Boolean;
 begin
-  if  HtmlSpecialKeyComp(7) or
-      HtmlSpecialKeyComp(8) or
-      HtmlSpecialKeyComp(59) or
-      HtmlSpecialKeyComp(218) or
-      HtmlSpecialKeyComp(219) or
-      HtmlSpecialKeyComp(231) or
-      HtmlSpecialKeyComp(232) then
+  if  MLSpecialKeyComp(7) or
+      MLSpecialKeyComp(8) or
+      MLSpecialKeyComp(59) or
+      MLSpecialKeyComp(218) or
+      MLSpecialKeyComp(219) or
+      MLSpecialKeyComp(231) or
+      MLSpecialKeyComp(232) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc55: Boolean;
+function TSynWebEngine.MLSpecialFunc55: Boolean;
 begin
-  if  HtmlSpecialKeyComp(51) or
-      HtmlSpecialKeyComp(52) or
-      HtmlSpecialKeyComp(99) or
-      HtmlSpecialKeyComp(100) or
-      HtmlSpecialKeyComp(146) or
-      HtmlSpecialKeyComp(163) or
-      HtmlSpecialKeyComp(165) or
-      HtmlSpecialKeyComp(183) or
-      HtmlSpecialKeyComp(184) or
-      HtmlSpecialKeyComp(203) then
+  if  MLSpecialKeyComp(51) or
+      MLSpecialKeyComp(52) or
+      MLSpecialKeyComp(99) or
+      MLSpecialKeyComp(100) or
+      MLSpecialKeyComp(146) or
+      MLSpecialKeyComp(163) or
+      MLSpecialKeyComp(165) or
+      MLSpecialKeyComp(183) or
+      MLSpecialKeyComp(184) or
+      MLSpecialKeyComp(203) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc56: Boolean;
+function TSynWebEngine.MLSpecialFunc56: Boolean;
 begin
-  if  HtmlSpecialKeyComp(76) or
-      HtmlSpecialKeyComp(133) or
-      HtmlSpecialKeyComp(209) or
-      HtmlSpecialKeyComp(210) or
-      HtmlSpecialKeyComp(211) or
-      HtmlSpecialKeyComp(212) or
-      HtmlSpecialKeyComp(217) then
+  if  MLSpecialKeyComp(76) or
+      MLSpecialKeyComp(133) or
+      MLSpecialKeyComp(209) or
+      MLSpecialKeyComp(210) or
+      MLSpecialKeyComp(211) or
+      MLSpecialKeyComp(212) or
+      MLSpecialKeyComp(217) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc57: Boolean;
+function TSynWebEngine.MLSpecialFunc57: Boolean;
 begin
-  if  HtmlSpecialKeyComp(36) then
+  if  MLSpecialKeyComp(36) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc58: Boolean;
+function TSynWebEngine.MLSpecialFunc58: Boolean;
 begin
-  if  HtmlSpecialKeyComp(39) or
-      HtmlSpecialKeyComp(55) or
-      HtmlSpecialKeyComp(56) or
-      HtmlSpecialKeyComp(121) or
-      HtmlSpecialKeyComp(198) or
-      HtmlSpecialKeyComp(229) or
-      HtmlSpecialKeyComp(230) then
+  if  MLSpecialKeyComp(39) or
+      MLSpecialKeyComp(55) or
+      MLSpecialKeyComp(56) or
+      MLSpecialKeyComp(121) or
+      MLSpecialKeyComp(198) or
+      MLSpecialKeyComp(229) or
+      MLSpecialKeyComp(230) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc59: Boolean;
+function TSynWebEngine.MLSpecialFunc59: Boolean;
 begin
-  if  HtmlSpecialKeyComp(23) or
-      HtmlSpecialKeyComp(38) or
-      HtmlSpecialKeyComp(69) or
-      HtmlSpecialKeyComp(85) or
-      HtmlSpecialKeyComp(86) or
-      HtmlSpecialKeyComp(251) then
+  if  MLSpecialKeyComp(23) or
+      MLSpecialKeyComp(38) or
+      MLSpecialKeyComp(69) or
+      MLSpecialKeyComp(85) or
+      MLSpecialKeyComp(86) or
+      MLSpecialKeyComp(251) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc61: Boolean;
+function TSynWebEngine.MLSpecialFunc61: Boolean;
 begin
-  if  HtmlSpecialKeyComp(160) or
-      HtmlSpecialKeyComp(161) or
-      HtmlSpecialKeyComp(173) or
-      HtmlSpecialKeyComp(174) or
-      HtmlSpecialKeyComp(213) then
+  if  MLSpecialKeyComp(160) or
+      MLSpecialKeyComp(161) or
+      MLSpecialKeyComp(173) or
+      MLSpecialKeyComp(174) or
+      MLSpecialKeyComp(213) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc62: Boolean;
+function TSynWebEngine.MLSpecialFunc62: Boolean;
 begin
-  if  HtmlSpecialKeyComp(84) or
-      HtmlSpecialKeyComp(90) or
-      HtmlSpecialKeyComp(91) then
+  if  MLSpecialKeyComp(84) or
+      MLSpecialKeyComp(90) or
+      MLSpecialKeyComp(91) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc63: Boolean;
+function TSynWebEngine.MLSpecialFunc63: Boolean;
 begin
-  if  HtmlSpecialKeyComp(26) then
+  if  MLSpecialKeyComp(26) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc64: Boolean;
+function TSynWebEngine.MLSpecialFunc64: Boolean;
 begin
-  if  HtmlSpecialKeyComp(72) or
-      HtmlSpecialKeyComp(134) or
-      HtmlSpecialKeyComp(135) or
-      HtmlSpecialKeyComp(205) then
+  if  MLSpecialKeyComp(72) or
+      MLSpecialKeyComp(134) or
+      MLSpecialKeyComp(135) or
+      MLSpecialKeyComp(205) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc65: Boolean;
+function TSynWebEngine.MLSpecialFunc65: Boolean;
 begin
-  if  HtmlSpecialKeyComp(122) or
-      HtmlSpecialKeyComp(138) or
-      HtmlSpecialKeyComp(139) or
-      HtmlSpecialKeyComp(157) or
-      HtmlSpecialKeyComp(158) or
-      HtmlSpecialKeyComp(176) then
+  if  MLSpecialKeyComp(122) or
+      MLSpecialKeyComp(138) or
+      MLSpecialKeyComp(139) or
+      MLSpecialKeyComp(157) or
+      MLSpecialKeyComp(158) or
+      MLSpecialKeyComp(176) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc66: Boolean;
+function TSynWebEngine.MLSpecialFunc66: Boolean;
 begin
-  if  HtmlSpecialKeyComp(106) or
-      HtmlSpecialKeyComp(225) then
+  if  MLSpecialKeyComp(106) or
+      MLSpecialKeyComp(225) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc67: Boolean;
+function TSynWebEngine.MLSpecialFunc67: Boolean;
 begin
-  if  HtmlSpecialKeyComp(239) or
-      HtmlSpecialKeyComp(240) then
+  if  MLSpecialKeyComp(239) or
+      MLSpecialKeyComp(240) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc68: Boolean;
+function TSynWebEngine.MLSpecialFunc68: Boolean;
 begin
-  if  HtmlSpecialKeyComp(144) or
-      HtmlSpecialKeyComp(145) then
+  if  MLSpecialKeyComp(144) or
+      MLSpecialKeyComp(145) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc69: Boolean;
+function TSynWebEngine.MLSpecialFunc69: Boolean;
 begin
-  if  HtmlSpecialKeyComp(110) then
+  if  MLSpecialKeyComp(110) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc70: Boolean;
+function TSynWebEngine.MLSpecialFunc70: Boolean;
 begin
-  if  HtmlSpecialKeyComp(172) or
-      HtmlSpecialKeyComp(196) or
-      HtmlSpecialKeyComp(197) then
+  if  MLSpecialKeyComp(172) or
+      MLSpecialKeyComp(196) or
+      MLSpecialKeyComp(197) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc71: Boolean;
+function TSynWebEngine.MLSpecialFunc71: Boolean;
 begin
-  if  HtmlSpecialKeyComp(83) or
-      HtmlSpecialKeyComp(227) or
-      HtmlSpecialKeyComp(228) or
-      HtmlSpecialKeyComp(247) or
-      HtmlSpecialKeyComp(248) then
+  if  MLSpecialKeyComp(83) or
+      MLSpecialKeyComp(227) or
+      MLSpecialKeyComp(228) or
+      MLSpecialKeyComp(247) or
+      MLSpecialKeyComp(248) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc72: Boolean;
+function TSynWebEngine.MLSpecialFunc72: Boolean;
 begin
-  if  HtmlSpecialKeyComp(132) or
-      HtmlSpecialKeyComp(182) then
+  if  MLSpecialKeyComp(132) or
+      MLSpecialKeyComp(182) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc73: Boolean;
+function TSynWebEngine.MLSpecialFunc73: Boolean;
 begin
-  if  HtmlSpecialKeyComp(164) or
-      HtmlSpecialKeyComp(179) or
-      HtmlSpecialKeyComp(214) or
-      HtmlSpecialKeyComp(236) or
-      HtmlSpecialKeyComp(252) then
+  if  MLSpecialKeyComp(164) or
+      MLSpecialKeyComp(179) or
+      MLSpecialKeyComp(214) or
+      MLSpecialKeyComp(236) or
+      MLSpecialKeyComp(252) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc74: Boolean;
+function TSynWebEngine.MLSpecialFunc74: Boolean;
 begin
-  if  HtmlSpecialKeyComp(18) or
-      HtmlSpecialKeyComp(62) or
-      HtmlSpecialKeyComp(155) or
-      HtmlSpecialKeyComp(156) or
-      HtmlSpecialKeyComp(195) or
-      HtmlSpecialKeyComp(233) or
-      HtmlSpecialKeyComp(234) then
+  if  MLSpecialKeyComp(18) or
+      MLSpecialKeyComp(62) or
+      MLSpecialKeyComp(155) or
+      MLSpecialKeyComp(156) or
+      MLSpecialKeyComp(195) or
+      MLSpecialKeyComp(233) or
+      MLSpecialKeyComp(234) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc75: Boolean;
+function TSynWebEngine.MLSpecialFunc75: Boolean;
 begin
-  if  HtmlSpecialKeyComp(186) or
-      HtmlSpecialKeyComp(222) or
-      HtmlSpecialKeyComp(223) or
-      HtmlSpecialKeyComp(244) or
-      HtmlSpecialKeyComp(245) then
+  if  MLSpecialKeyComp(186) or
+      MLSpecialKeyComp(222) or
+      MLSpecialKeyComp(223) or
+      MLSpecialKeyComp(244) or
+      MLSpecialKeyComp(245) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc76: Boolean;
+function TSynWebEngine.MLSpecialFunc76: Boolean;
 begin
-  if  HtmlSpecialKeyComp(123) or
-      HtmlSpecialKeyComp(241) then
+  if  MLSpecialKeyComp(123) or
+      MLSpecialKeyComp(241) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc77: Boolean;
+function TSynWebEngine.MLSpecialFunc77: Boolean;
 begin
-  if  HtmlSpecialKeyComp(70) then
+  if  MLSpecialKeyComp(70) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc78: Boolean;
+function TSynWebEngine.MLSpecialFunc78: Boolean;
 begin
-  if  HtmlSpecialKeyComp(112) then
+  if  MLSpecialKeyComp(112) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc79: Boolean;
+function TSynWebEngine.MLSpecialFunc79: Boolean;
 begin
-  if  HtmlSpecialKeyComp(41) or
-      HtmlSpecialKeyComp(57) then
+  if  MLSpecialKeyComp(41) or
+      MLSpecialKeyComp(57) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc81: Boolean;
+function TSynWebEngine.MLSpecialFunc81: Boolean;
 begin
-  if  HtmlSpecialKeyComp(9) or
-      HtmlSpecialKeyComp(159) then
+  if  MLSpecialKeyComp(9) or
+      MLSpecialKeyComp(159) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc83: Boolean;
+function TSynWebEngine.MLSpecialFunc83: Boolean;
 begin
-  if  HtmlSpecialKeyComp(151) then
+  if  MLSpecialKeyComp(151) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc84: Boolean;
+function TSynWebEngine.MLSpecialFunc84: Boolean;
 begin
-  if  HtmlSpecialKeyComp(117) or
-      HtmlSpecialKeyComp(189) then
+  if  MLSpecialKeyComp(117) or
+      MLSpecialKeyComp(189) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc85: Boolean;
+function TSynWebEngine.MLSpecialFunc85: Boolean;
 begin
-  if  HtmlSpecialKeyComp(116) then
+  if  MLSpecialKeyComp(116) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc86: Boolean;
+function TSynWebEngine.MLSpecialFunc86: Boolean;
 begin
-  if  HtmlSpecialKeyComp(221) then
+  if  MLSpecialKeyComp(221) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc87: Boolean;
+function TSynWebEngine.MLSpecialFunc87: Boolean;
 begin
-  if  HtmlSpecialKeyComp(149) or
-      HtmlSpecialKeyComp(150) then
+  if  MLSpecialKeyComp(149) or
+      MLSpecialKeyComp(150) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc90: Boolean;
+function TSynWebEngine.MLSpecialFunc90: Boolean;
 begin
-  if  HtmlSpecialKeyComp(60) or
-      HtmlSpecialKeyComp(61) or
-      HtmlSpecialKeyComp(113) or
-      HtmlSpecialKeyComp(194) then
+  if  MLSpecialKeyComp(60) or
+      MLSpecialKeyComp(61) or
+      MLSpecialKeyComp(113) or
+      MLSpecialKeyComp(194) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc91: Boolean;
+function TSynWebEngine.MLSpecialFunc91: Boolean;
 begin
-  if  HtmlSpecialKeyComp(97) or
-      HtmlSpecialKeyComp(193) then
+  if  MLSpecialKeyComp(97) or
+      MLSpecialKeyComp(193) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc95: Boolean;
+function TSynWebEngine.MLSpecialFunc95: Boolean;
 begin
-  if  HtmlSpecialKeyComp(171) then
+  if  MLSpecialKeyComp(171) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc106: Boolean;
+function TSynWebEngine.MLSpecialFunc106: Boolean;
 begin
-  if  HtmlSpecialKeyComp(237) or
-      HtmlSpecialKeyComp(238) then
+  if  MLSpecialKeyComp(237) or
+      MLSpecialKeyComp(238) then
     Result := True
   else
     Result := False;
 end;
 
-function TSynWebEngine.HtmlSpecialFunc111: Boolean;
+function TSynWebEngine.MLSpecialFunc111: Boolean;
 begin
-  if  HtmlSpecialKeyComp(220) then
+  if  MLSpecialKeyComp(220) then
     Result := True
   else
     Result := False;

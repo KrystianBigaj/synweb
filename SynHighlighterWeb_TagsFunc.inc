@@ -1,509 +1,579 @@
-function TSynWebEngine.HtmlTagUndef: TSynWebTokenKind;
+function TSynWebEngine.MLTagUndef: TSynWebTokenKind;
 begin
-  Result:=stkHtmlTagNameUndef;
+  Result:=stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc1: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc1: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(0) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(0) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc2: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc2: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(6) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(8) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc8: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc8: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(21) or
-      HtmlTagKeyComp(34) or
-      HtmlTagKeyComp(35) or
-      HtmlTagKeyComp(36) or
-      HtmlTagKeyComp(37) or
-      HtmlTagKeyComp(38) or
-      HtmlTagKeyComp(39) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(24) or
+      MLTagKeyComp(39) or
+      MLTagKeyComp(40) or
+      MLTagKeyComp(41) or
+      MLTagKeyComp(42) or
+      MLTagKeyComp(43) or
+      MLTagKeyComp(44) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc9: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc9: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(43) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(48) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc16: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc16: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(26) or
-      HtmlTagKeyComp(63) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(29) or
+      MLTagKeyComp(70) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc17: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc17: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(49) or
-      HtmlTagKeyComp(66) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(54) or
+      MLTagKeyComp(75) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc18: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc18: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(10) or
-      HtmlTagKeyComp(28) or
-      HtmlTagKeyComp(40) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(12) or
+      MLTagKeyComp(32) or
+      MLTagKeyComp(45) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc19: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc19: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(67) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(30) or
+      MLTagKeyComp(77) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc20: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc20: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(13) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(15) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc21: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc21: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(9) or
-      HtmlTagKeyComp(22) or
-      HtmlTagKeyComp(52) or
-      HtmlTagKeyComp(88) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(11) or
+      MLTagKeyComp(25) or
+      MLTagKeyComp(57) or
+      MLTagKeyComp(101) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc23: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc22: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(1) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(38) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc24: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc23: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(23) or
-      HtmlTagKeyComp(27) or
-      HtmlTagKeyComp(80) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(1) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc25: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc24: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(5) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(26) or
+      MLTagKeyComp(31) or
+      MLTagKeyComp(91) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc26: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc25: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(41) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(7) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc27: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc26: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(7) or
-      HtmlTagKeyComp(18) or
-      HtmlTagKeyComp(60) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(18) or
+      MLTagKeyComp(46) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc28: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc27: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(83) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(9) or
+      MLTagKeyComp(21) or
+      MLTagKeyComp(66) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc29: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc28: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(45) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(95) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc30: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc29: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(19) or
-      HtmlTagKeyComp(54) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(50) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc31: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc30: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(24) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(22) or
+      MLTagKeyComp(59) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc32: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc31: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(50) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(27) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc33: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc32: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(89) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(55) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc35: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc33: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(25) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(102) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc37: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc35: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(17) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(28) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc38: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc37: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(84) or
-      HtmlTagKeyComp(86) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(20) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc39: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc38: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(56) or
-      HtmlTagKeyComp(65) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(96) or
+      MLTagKeyComp(99) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc40: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc39: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(78) or
-      HtmlTagKeyComp(87) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(61) or
+      MLTagKeyComp(73) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc41: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc40: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(90) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(89) or
+      MLTagKeyComp(100) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc42: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc41: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(47) or
-      HtmlTagKeyComp(76) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(103) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc43: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc42: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(32) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(52) or
+      MLTagKeyComp(87) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc46: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc43: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(12) or
-      HtmlTagKeyComp(53) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(36) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc47: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc46: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(51) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(14) or
+      MLTagKeyComp(58) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc49: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc47: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(64) or
-      HtmlTagKeyComp(68) or
-      HtmlTagKeyComp(91) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(56) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc50: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc48: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(72) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(104) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc52: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc49: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(31) or
-      HtmlTagKeyComp(44) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(71) or
+      MLTagKeyComp(78) or
+      MLTagKeyComp(105) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc53: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc50: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(42) or
-      HtmlTagKeyComp(55) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(2) or
+      MLTagKeyComp(83) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc55: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc52: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(30) or
-      HtmlTagKeyComp(59) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(35) or
+      MLTagKeyComp(49) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc56: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc53: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(77) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(47) or
+      MLTagKeyComp(60) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc57: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc55: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(71) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(34) or
+      MLTagKeyComp(65) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc64: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc56: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(70) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(88) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc65: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc57: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(16) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(82) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc66: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc59: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(79) or
-      HtmlTagKeyComp(85) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(5) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc70: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc60: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(3) or
-      HtmlTagKeyComp(4) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(63) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc76: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc61: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(82) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(74) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc78: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc64: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(15) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(80) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc80: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc65: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(29) or
-      HtmlTagKeyComp(46) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(19) or
+      MLTagKeyComp(97) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc81: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc66: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(75) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(90) or
+      MLTagKeyComp(98) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc82: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc70: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(8) or
-      HtmlTagKeyComp(73) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(4) or
+      MLTagKeyComp(6) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc84: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc76: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(48) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(94) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc85: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc78: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(69) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(17) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc87: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc79: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(33) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(76) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc89: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc80: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(2) or
-      HtmlTagKeyComp(62) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(33) or
+      MLTagKeyComp(51) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc91: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc81: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(57) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(86) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc92: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc82: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(14) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(10) or
+      MLTagKeyComp(84) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc93: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc84: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(74) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(53) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc94: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc85: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(81) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(79) or
+      MLTagKeyComp(81) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc107: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc87: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(20) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(37) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc114: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc89: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(58) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(3) or
+      MLTagKeyComp(69) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc121: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc91: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(11) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(62) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
 end;
 
-function TSynWebEngine.HtmlTagFunc128: TSynWebTokenKind;
+function TSynWebEngine.MLTagFunc92: TSynWebTokenKind;
 begin
-  if  HtmlTagKeyComp(61) then
-    Result := stkHtmlTagName
+  if  MLTagKeyComp(16) or
+      MLTagKeyComp(92) then
+    Result := stkMLTagName
   else
-    Result := stkHtmlTagNameUndef;
+    Result := stkMLTagNameUndef;
+end;
+
+function TSynWebEngine.MLTagFunc93: TSynWebTokenKind;
+begin
+  if  MLTagKeyComp(85) then
+    Result := stkMLTagName
+  else
+    Result := stkMLTagNameUndef;
+end;
+
+function TSynWebEngine.MLTagFunc94: TSynWebTokenKind;
+begin
+  if  MLTagKeyComp(93) then
+    Result := stkMLTagName
+  else
+    Result := stkMLTagNameUndef;
+end;
+
+function TSynWebEngine.MLTagFunc95: TSynWebTokenKind;
+begin
+  if  MLTagKeyComp(67) then
+    Result := stkMLTagName
+  else
+    Result := stkMLTagNameUndef;
+end;
+
+function TSynWebEngine.MLTagFunc106: TSynWebTokenKind;
+begin
+  if  MLTagKeyComp(72) then
+    Result := stkMLTagName
+  else
+    Result := stkMLTagNameUndef;
+end;
+
+function TSynWebEngine.MLTagFunc107: TSynWebTokenKind;
+begin
+  if  MLTagKeyComp(23) then
+    Result := stkMLTagName
+  else
+    Result := stkMLTagNameUndef;
+end;
+
+function TSynWebEngine.MLTagFunc114: TSynWebTokenKind;
+begin
+  if  MLTagKeyComp(64) then
+    Result := stkMLTagName
+  else
+    Result := stkMLTagNameUndef;
+end;
+
+function TSynWebEngine.MLTagFunc121: TSynWebTokenKind;
+begin
+  if  MLTagKeyComp(13) then
+    Result := stkMLTagName
+  else
+    Result := stkMLTagNameUndef;
+end;
+
+function TSynWebEngine.MLTagFunc128: TSynWebTokenKind;
+begin
+  if  MLTagKeyComp(68) then
+    Result := stkMLTagName
+  else
+    Result := stkMLTagNameUndef;
 end;
