@@ -1,6 +1,0 @@
-SynEdit.inc
-SynWeb.inc
-SynHighlighterWeb.pas
-SynHighlighterWebData.pas
-SynTokenMatch.pas
-SynHighlighterWebMisc.pas

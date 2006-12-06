@@ -1,9 +1,0 @@
-..\SynHighlighterWeb.pas
-..\SynHighlighterWebData.pas
-..\SynHighlighterWebMisc.pas
-..\QSynHighlighterWeb.pas
-..\QSynHighlighterWebData.pas
-..\QSynHighlighterWebMisc.pas
-..\SynTokenMatch.pas
-..\QSynTokenMatch.pas
-..\SynWeb.inc
