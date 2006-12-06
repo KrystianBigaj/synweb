@@ -39,7 +39,6 @@ type
     XHtml10Strict1: TMenuItem;
     XHtml10Transitional1: TMenuItem;
     XHtml10Frameset1: TMenuItem;
-    XHtml111: TMenuItem;
     N1: TMenuItem;
     None1: TMenuItem;
     ComboBox1: TComboBox;
@@ -69,6 +68,10 @@ type
     Button24: TButton;
     CheckBox3: TCheckBox;
     isEXT: TMenuItem;
+    Wml111: TMenuItem;
+    Wml121: TMenuItem;
+    Wml131: TMenuItem;
+    Wml201: TMenuItem;
     procedure Button9Click(Sender: TObject);
     procedure Button10Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
@@ -341,9 +344,14 @@ begin
   XHtml10Strict1.Enabled:=pn<>nil;
   XHtml10Transitional1.Enabled:=pn<>nil;
   XHtml10Frameset1.Enabled:=pn<>nil;
-  XHtml111.Enabled:=pn<>nil;
   XHtml10TransitionalDEPRECATED1.Enabled:=pn<>nil;
   XHtml10FramesetlDEPRECATED1.Enabled:=pn<>nil;
+
+  Wml111.Enabled := pn <> nil;
+  Wml121.Enabled := pn <> nil;
+  Wml131.Enabled := pn <> nil;
+  Wml201.Enabled := pn <> nil;
+
   isEXT.Enabled:=pn<>nil;
   isEXT.Visible:=pn.Level=0;
   NoCLASS1.Enabled:=pn<>nil;
@@ -365,7 +373,10 @@ begin
   XHtml10Strict1.Checked:=nGetBit(pn,3);
   XHtml10Transitional1.Checked:=nGetBit(pn,4);
   XHtml10Frameset1.Checked:=nGetBit(pn,5);
-  XHtml111.Checked:=nGetBit(pn,6);
+  Wml111.Checked:=nGetBit(pn,6);
+  Wml121.Checked:=nGetBit(pn,7);
+  Wml131.Checked:=nGetBit(pn,8);
+  Wml201.Checked:=nGetBit(pn,9);
   XHtml10TransitionalDEPRECATED1.Checked:=nGetBit(pn,16);
   XHtml10FramesetlDEPRECATED1.Checked:=nGetBit(pn,17);
   isEXT.Checked:=nGetBit(pn, 29);

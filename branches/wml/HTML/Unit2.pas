@@ -238,12 +238,12 @@ begin
       x:=KeyHash(s[i]);
   s1.Insert(0,'');          
   if Form1.CheckBox3.Checked then
-    s1.Insert(0,Format('  HtmlSpecialMaxKeyHash = %d;',[x]))
+    s1.Insert(0,Format('  MLSpecialMaxKeyHash = %d;',[x]))
   else
-  begin
-    s1.Insert(0,Format('  HtmlTagMaxKeyHash = %d;',[x]));
-    s1.Insert(0,Format('  HtmlTagID_Style = %d;',[s.IndexOf('style')]));
-    s1.Insert(0,Format('  HtmlTagID_Script = %d;',[s.IndexOf('script')]));
+  begin                   
+    s1.Insert(0,Format('  MLTagMaxKeyHash = %d;',[x]));
+    s1.Insert(0,Format('  MLTagID_Style = %d;',[s.IndexOf('style')]));
+    s1.Insert(0,Format('  MLTagID_Script = %d;',[s.IndexOf('script')]));
   end;
 
   s2[s2.Count-1]:=Copy(s2[s2.Count-1],1,Length(s2[s2.Count-1])-2);
@@ -263,15 +263,15 @@ begin
                   
   if Form1.CheckBox3.Checked then
     GenerateInc(s,'Boolean', 'True', 'False',
-      'HtmlSpecialFunc', 'HtmlSpecialUndef',
-      'FHtmlSpecialIdentFuncTable', 'HtmlSpecialKeyComp',
+      'MLSpecialFunc', 'MLSpecialUndef',
+      'FMLSpecialIdentFuncTable', 'MLSpecialKeyComp',
       appdir+'..\SynHighlighterWeb_SpecialFunc.inc',
       appdir+'..\SynHighlighterWeb_SpecialFuncList.inc',
       appdir+'..\SynHighlighterWeb_SpecialFuncTable.inc')
   else
-    GenerateInc(s,'TSynWebTokenKind', 'stkHtmlTagName', 'stkHtmlTagNameUndef',
-      'HtmlTagFunc', 'HtmlTagUndef',
-      'FHtmlTagIdentFuncTable', 'HtmlTagKeyComp',
+    GenerateInc(s,'TSynWebTokenKind', 'stkMLTagName', 'stkMLTagNameUndef',
+      'MLTagFunc', 'MLTagUndef',
+      'FMLTagIdentFuncTable', 'MLTagKeyComp',
       appdir+'..\SynHighlighterWeb_TagsFunc.inc',
       appdir+'..\SynHighlighterWeb_TagsFuncList.inc',
       appdir+'..\SynHighlighterWeb_TagsFuncTable.inc');
@@ -386,8 +386,8 @@ begin
     if KeyHash(sl[i])>x then
       x:=KeyHash(sl[i]);
   s1.Insert(0,'');
-  s1.Insert(0,Format('  HtmlAttrMaxKeyHash = %d;',[x]));
-  s1.Insert(0,Format('  HtmlAttrID_Language = %d;',[sl.IndexOf('language')]));
+  s1.Insert(0,Format('  MLAttrMaxKeyHash = %d;',[x]));
+  s1.Insert(0,Format('  MLAttrID_Language = %d;',[sl.IndexOf('language')]));
 
 
   s2.Insert(0,format('  TSynWeb_AttrsData:array[0..%d] of array[0..%d] of array[0..%d] of Longword=(',[sl.Count-1,6-1,3-1]));
@@ -399,9 +399,9 @@ begin
 
   SetLength(p,0);
 
-  GenerateInc(sl,'TSynWebTokenKind', 'stkHtmlTagKey', 'stkHtmlTagKeyUndef',
-    'HtmlAttrFunc', 'HtmlAttrUndef',
-    'FHtmlAttrIdentFuncTable', 'HtmlAttrKeyComp',
+  GenerateInc(sl,'TSynWebTokenKind', 'stkMLTagKey', 'stkMLTagKeyUndef',
+    'MLAttrFunc', 'MLAttrUndef',
+    'FMLAttrIdentFuncTable', 'MLAttrKeyComp',
     appdir+'..\SynHighlighterWeb_AttrsFunc.inc',
     appdir+'..\SynHighlighterWeb_AttrsFuncList.inc',
     appdir+'..\SynHighlighterWeb_AttrsFuncTable.inc');

@@ -1,3 +1,41 @@
+{-------------------------------------------------------------------------------
+SynWeb
+Copyright (C) 2006  Krystian Bigaj
+
+*** MPL
+The contents of this file are subject to the Mozilla Public License
+Version 1.1 (the "License"); you may not use this file except in compliance
+with the License. You may obtain a copy of the License at
+http://www.mozilla.org/MPL/
+
+Software distributed under the License is distributed on an "AS IS" basis,
+WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
+the specific language governing rights and limitations under the License.
+***
+
+*** LGPL
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+***
+
+You may retrieve the latest version of this file at the SynEdit home page,
+located at http://sourceforge.net/projects/synweb
+
+Contact: krystian.bigaj@gmail.com
+Homepage: http://flatdev.ovh.org      
+-------------------------------------------------------------------------------}
+
 {$IFNDEF QSYNHIGHLIGHTERWEBDATA}
 unit SynHighlighterWebData;
 {$ENDIF}
@@ -19,20 +57,20 @@ type
   TSynWebHashTable = array[#0..#255] of Longword;
 
   TSynWebHighlighterType = (
-    shtHtml, shtCss, shtEs, shtPhpInHtml, shtPhpInCss, shtPhpInEs
+    shtML, shtCss, shtEs, shtPhpInML, shtPhpInCss, shtPhpInEs
     );
 
   TSynWebHighlighterTypes = set of TSynWebHighlighterType;
 
   TSynWebHighlighterMode = (
-    shmHtml, shmCss, shmEs, shmPhpCli
+    shmML, shmCss, shmEs, shmPhpCli
     );
 
   TSynWebTokenKind = (
-    // Html
-    stkHtmlSpace, stkHtmlText, stkHtmlEscape, stkHtmlComment, stkHtmlSymbol,
-    stkHtmlTag, stkHtmlTagName, stkHtmlTagNameUndef, stkHtmlTagKey,
-    stkHtmlTagKeyUndef, stkHtmlTagKeyValue, stkHtmlTagKeyValueQuoted, stkHtmlError,
+    // ML
+    stkMLSpace, stkMLText, stkMLEscape, stkMLComment, stkMLSymbol,
+    stkMLTag, stkMLTagName, stkMLTagNameUndef, stkMLTagKey,
+    stkMLTagKeyUndef, stkMLTagKeyValue, stkMLTagKeyValueQuoted, stkMLError,
     // Css
     stkCssSpace, stkCssSelector, stkCssSelectorUndef, stkCssSelectorClass,
     stkCssSelectorId, stkCssSpecial, stkCssComment, stkCssProp, stkCssPropUndef,
@@ -60,15 +98,21 @@ type
   TSynWebTokenAttributeTable = array[Low(TSynWebTokenKind)..High(TSynWebTokenKind)] of
     TSynHighlighterAttributes;
 
-// Html ------------------------------------------------------------------------
+// ML --------------------------------------------------------------------------
 type
   TSynWebHtmlVersion = (shvHtml401Strict, shvHtml401Transitional, shvHtml401Frameset,
     shvXHtml10Strict, shvXHtml10Transitional, shvXHtml10Frameset);
 
-  TSynWebHtmlRangeState = (srsHtmlText, srsHtmlComment, srsHtmlCommentClose, srsHtmlTag,
-    srsHtmlTagClose, srsHtmlTagDOCTYPE, srsHtmlTagCDATA, srsHtmlTagKey,
-    srsHtmlTagKeyEq, srsHtmlTagKeyValue, srsHtmlTagKeyValueQuoted1,
-    srsHtmlTagKeyValueQuoted2);
+  TSynWebWmlVersion = (swvWml11, swvWml12, swvWml13, swvWml20);
+
+  TSynWebMLVersion = (smlhvHtml401Strict, smlhvHtml401Transitional, smlhvHtml401Frameset,
+    smlhvXHtml10Strict, smlhvXHtml10Transitional, smlhvXHtml10Frameset,
+    smlwvWml11, smlwvWml12, smlwvWml13, smlwvWml20);
+
+  TSynWebMLRangeState = (srsMLText, srsMLComment, srsMLCommentClose, srsMLTag,
+    srsMLTagClose, srsMLTagDOCTYPE, srsMLTagCDATA, srsMLTagKey,
+    srsMLTagKeyEq, srsMLTagKeyValue, srsMLTagKeyValueQuoted1,
+    srsMLTagKeyValueQuoted2);
 
 const
   TSynWebHtmlVersionStr: array[Low(TSynWebHtmlVersion)..High(TSynWebHtmlVersion)] of String = (
@@ -78,6 +122,13 @@ const
     'XHtml 1.0 Strict',
     'XHtml 1.0 Transitional',
     'XHtml 1.0 Frameset'
+    );
+
+  TSynWebWMLVersionStr: array[Low(TSynWebWMLVersion)..High(TSynWebWMLVersion)] of String = (
+    'Wml 1.1',
+    'Wml 1.2',
+    'Wml 1.3',
+    'Wml 2.0'
     );
 
 // Css -------------------------------------------------------------------------
@@ -120,7 +171,7 @@ type
     srsPhpStringShell, srsPhpHeredoc
     );
 
-  TSynWebPhpOpenTag = (spotPhp, spotPhpShort, spotHtml, spotASP);
+  TSynWebPhpOpenTag = (spotPhp, spotPhpShort, spotML, spotASP);
   TSynWebPhpOpenTags = set of TSynWebPhpOpenTag;
 
 const
@@ -128,7 +179,7 @@ const
 {$I SynHighlighterWeb_PhpVersion.inc}
     );
 
-// Html ------------------------------------------------------------------------
+// ML --------------------------------------------------------------------------
 const
   {$I SynHighlighterWeb_Tags.inc}
 

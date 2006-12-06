@@ -556,9 +556,24 @@ object Form1: TForm1
     object N3: TMenuItem
       Caption = '-'
     end
-    object XHtml111: TMenuItem
+    object Wml111: TMenuItem
       Tag = 6
-      Caption = 'XHtml 1.1'
+      Caption = 'Wml 1.1'
+      OnClick = Html401Strict1Click
+    end
+    object Wml121: TMenuItem
+      Tag = 7
+      Caption = 'Wml 1.2'
+      OnClick = Html401Strict1Click
+    end
+    object Wml131: TMenuItem
+      Tag = 8
+      Caption = 'Wml 1.3'
+      OnClick = Html401Strict1Click
+    end
+    object Wml201: TMenuItem
+      Tag = 9
+      Caption = 'Wml 2.0'
       OnClick = Html401Strict1Click
     end
     object N4: TMenuItem

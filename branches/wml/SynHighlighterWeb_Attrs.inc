@@ -1,5 +1,5 @@
-  HtmlAttrID_Language = 59;
-  HtmlAttrMaxKeyHash = 162;
+  MLAttrID_Language = 59;
+  MLAttrMaxKeyHash = 162;
 
   TSynWeb_Attrs:array[0..127] of String=(
     'abbr', 'accept', 'accept-charset', 'accesskey', 'action', 'align', 'alink', 

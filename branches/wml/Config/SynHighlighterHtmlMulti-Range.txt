@@ -1,3 +1,5 @@
+Notice: This file wasn't updated form some time, so it could be DEPRECATED!
+
 -------------------
 --- Highlighter ---
 -------------------
