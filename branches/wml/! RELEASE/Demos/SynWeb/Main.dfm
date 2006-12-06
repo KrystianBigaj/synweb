@@ -233,7 +233,7 @@ object Form1: TForm1
   end
   object SynWebEngine1: TSynWebEngine
     Options.HtmlVersion = shvXHtml10Transitional
-    Options.WmlVersion = swvWml20
+    Options.WmlVersion = swvWml13
     Options.CssVersion = scvCss21
     Options.PhpVersion = spvPhp5
     Options.PhpShortOpenTag = True
@@ -312,7 +312,7 @@ object Form1: TForm1
   object SynWebWmlSyn1: TSynWebWmlSyn
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
-    Options.WmlVersion = swvWml20
+    Options.WmlVersion = swvWml13
     Options.PhpVersion = spvPhp5
     Options.PhpShortOpenTag = True
     Options.PhpAspTags = False

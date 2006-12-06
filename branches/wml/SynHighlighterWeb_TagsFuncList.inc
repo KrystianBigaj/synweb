@@ -9,6 +9,7 @@
     function MLTagFunc19: TSynWebTokenKind;
     function MLTagFunc20: TSynWebTokenKind;
     function MLTagFunc21: TSynWebTokenKind;
+    function MLTagFunc22: TSynWebTokenKind;
     function MLTagFunc23: TSynWebTokenKind;
     function MLTagFunc24: TSynWebTokenKind;
     function MLTagFunc25: TSynWebTokenKind;
@@ -30,6 +31,7 @@
     function MLTagFunc43: TSynWebTokenKind;
     function MLTagFunc46: TSynWebTokenKind;
     function MLTagFunc47: TSynWebTokenKind;
+    function MLTagFunc48: TSynWebTokenKind;
     function MLTagFunc49: TSynWebTokenKind;
     function MLTagFunc50: TSynWebTokenKind;
     function MLTagFunc52: TSynWebTokenKind;
@@ -37,12 +39,16 @@
     function MLTagFunc55: TSynWebTokenKind;
     function MLTagFunc56: TSynWebTokenKind;
     function MLTagFunc57: TSynWebTokenKind;
+    function MLTagFunc59: TSynWebTokenKind;
+    function MLTagFunc60: TSynWebTokenKind;
+    function MLTagFunc61: TSynWebTokenKind;
     function MLTagFunc64: TSynWebTokenKind;
     function MLTagFunc65: TSynWebTokenKind;
     function MLTagFunc66: TSynWebTokenKind;
     function MLTagFunc70: TSynWebTokenKind;
     function MLTagFunc76: TSynWebTokenKind;
     function MLTagFunc78: TSynWebTokenKind;
+    function MLTagFunc79: TSynWebTokenKind;
     function MLTagFunc80: TSynWebTokenKind;
     function MLTagFunc81: TSynWebTokenKind;
     function MLTagFunc82: TSynWebTokenKind;
@@ -54,6 +60,8 @@
     function MLTagFunc92: TSynWebTokenKind;
     function MLTagFunc93: TSynWebTokenKind;
     function MLTagFunc94: TSynWebTokenKind;
+    function MLTagFunc95: TSynWebTokenKind;
+    function MLTagFunc106: TSynWebTokenKind;
     function MLTagFunc107: TSynWebTokenKind;
     function MLTagFunc114: TSynWebTokenKind;
     function MLTagFunc121: TSynWebTokenKind;

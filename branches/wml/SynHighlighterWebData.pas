@@ -115,7 +115,7 @@ type
   TSynWebHtmlVersion = (shvHtml401Strict, shvHtml401Transitional, shvHtml401Frameset,
     shvXHtml10Strict, shvXHtml10Transitional, shvXHtml10Frameset);
 
-  TSynWebWmlVersion = (swvWml11, swvWml12, swvWml13, swvWml20);
+  TSynWebWmlVersion = (swvWml11, swvWml12, swvWml13);
 
   TSynWebMLVersion = (smlhvHtml401Strict, smlhvHtml401Transitional, smlhvHtml401Frameset,
     smlhvXHtml10Strict, smlhvXHtml10Transitional, smlhvXHtml10Frameset,
@@ -139,8 +139,7 @@ const
   TSynWebWMLVersionStr: array[Low(TSynWebWMLVersion)..High(TSynWebWMLVersion)] of String = (
     'Wml 1.1',
     'Wml 1.2',
-    'Wml 1.3',
-    'Wml 2.0'
+    'Wml 1.3'
     );
 
 // Css -------------------------------------------------------------------------

@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 415
-  Top = 8
+  Left = 390
+  Top = 138
   BorderStyle = bsSingle
   Caption = 'SynHighlighterWeb - Html Data/Export v1.0b '#169'2005 FlatDev'
-  ClientHeight = 703
+  ClientHeight = 705
   ClientWidth = 569
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,22 +18,50 @@ object Form1: TForm1
   OnShow = FormShow
   DesignSize = (
     569
-    703)
+    705)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 208
-    Top = 687
+    Top = 689
     Width = 15
     Height = 13
     Anchors = [akLeft, akBottom]
     Caption = '0 0'
   end
-  object TreeView1: TTreeView
+  object Label2: TLabel
     Left = 4
     Top = 4
+    Width = 60
+    Height = 13
+    Caption = 'if(is_bit_set('
+  end
+  object Label3: TLabel
+    Left = 100
+    Top = 4
+    Width = 29
+    Height = 13
+    Caption = ') then'
+  end
+  object Label4: TLabel
+    Left = 184
+    Top = 4
+    Width = 22
+    Height = 13
+    Caption = '_bit('
+  end
+  object Label5: TLabel
+    Left = 244
+    Top = 4
+    Width = 4
+    Height = 13
+    Caption = ')'
+  end
+  object TreeView1: TTreeView
+    Left = 4
+    Top = 24
     Width = 272
-    Height = 662
+    Height = 644
     Anchors = [akLeft, akTop, akRight, akBottom]
     Indent = 19
     PopupMenu = PopupMenu1
@@ -273,7 +301,7 @@ object Form1: TForm1
   end
   object Button11: TButton
     Left = 204
-    Top = 669
+    Top = 671
     Width = 45
     Height = 17
     Anchors = [akLeft, akBottom]
@@ -283,7 +311,7 @@ object Form1: TForm1
   end
   object Button12: TButton
     Left = 252
-    Top = 669
+    Top = 671
     Width = 57
     Height = 33
     Anchors = [akLeft, akBottom]
@@ -313,7 +341,7 @@ object Form1: TForm1
   end
   object ComboBox1: TComboBox
     Left = 4
-    Top = 673
+    Top = 675
     Width = 197
     Height = 21
     Style = csDropDownList
@@ -327,11 +355,14 @@ object Form1: TForm1
       'XHtml 1.0 Strict'
       'XHtml 1.0 Transitional'
       'XHtml 1.0 Frameset'
-      'XHtml 1.1')
+      'WML 1.1'
+      'WML 1.2'
+      'WML 1.3'
+      'WML 2.0')
   end
   object Button15: TButton
     Left = 324
-    Top = 669
+    Top = 671
     Width = 237
     Height = 17
     Anchors = [akLeft, akBottom]
@@ -372,7 +403,7 @@ object Form1: TForm1
   end
   object Button17: TButton
     Left = 324
-    Top = 685
+    Top = 687
     Width = 237
     Height = 17
     Anchors = [akLeft, akBottom]
@@ -382,7 +413,7 @@ object Form1: TForm1
   end
   object CheckBox1: TCheckBox
     Left = 308
-    Top = 669
+    Top = 671
     Width = 13
     Height = 33
     Anchors = [akLeft, akBottom]
@@ -474,8 +505,8 @@ object Form1: TForm1
     OnClick = Button22Click
   end
   object CheckBox2: TCheckBox
-    Left = 284
-    Top = 612
+    Left = 280
+    Top = 616
     Width = 133
     Height = 17
     Anchors = [akTop, akRight]
@@ -500,6 +531,45 @@ object Form1: TForm1
     Anchors = [akTop, akRight]
     Caption = 'Special: AmpList'
     TabOrder = 37
+  end
+  object Edit2: TEdit
+    Left = 64
+    Top = 0
+    Width = 33
+    Height = 21
+    TabOrder = 38
+    Text = '0'
+  end
+  object Edit3: TEdit
+    Left = 208
+    Top = 0
+    Width = 33
+    Height = 21
+    TabOrder = 39
+    Text = '0'
+  end
+  object Button23: TButton
+    Left = 248
+    Top = 0
+    Width = 29
+    Height = 21
+    Caption = 'run'
+    TabOrder = 40
+    OnClick = Button23Click
+  end
+  object ComboBox2: TComboBox
+    Left = 132
+    Top = 0
+    Width = 49
+    Height = 21
+    Style = csDropDownList
+    ItemHeight = 13
+    ItemIndex = 1
+    TabOrder = 41
+    Text = 'set'
+    Items.Strings = (
+      'unset'
+      'set')
   end
   object OpenDialog1: TOpenDialog
     Left = 360
@@ -569,11 +639,6 @@ object Form1: TForm1
     object Wml131: TMenuItem
       Tag = 8
       Caption = 'Wml 1.3'
-      OnClick = Html401Strict1Click
-    end
-    object Wml201: TMenuItem
-      Tag = 9
-      Caption = 'Wml 2.0'
       OnClick = Html401Strict1Click
     end
     object N4: TMenuItem

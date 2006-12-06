@@ -71,7 +71,14 @@ type
     Wml111: TMenuItem;
     Wml121: TMenuItem;
     Wml131: TMenuItem;
-    Wml201: TMenuItem;
+    Label2: TLabel;
+    Edit2: TEdit;
+    Label3: TLabel;
+    Edit3: TEdit;
+    Button23: TButton;
+    ComboBox2: TComboBox;
+    Label4: TLabel;
+    Label5: TLabel;
     procedure Button9Click(Sender: TObject);
     procedure Button10Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
@@ -101,6 +108,7 @@ type
     procedure Button22Click(Sender: TObject);
     procedure Button24Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure Button23Click(Sender: TObject);
   private
     pn:TTreeNode;
   public
@@ -350,7 +358,6 @@ begin
   Wml111.Enabled := pn <> nil;
   Wml121.Enabled := pn <> nil;
   Wml131.Enabled := pn <> nil;
-  Wml201.Enabled := pn <> nil;
 
   isEXT.Enabled:=pn<>nil;
   isEXT.Visible:=pn.Level=0;
@@ -376,7 +383,6 @@ begin
   Wml111.Checked:=nGetBit(pn,6);
   Wml121.Checked:=nGetBit(pn,7);
   Wml131.Checked:=nGetBit(pn,8);
-  Wml201.Checked:=nGetBit(pn,9);
   XHtml10TransitionalDEPRECATED1.Checked:=nGetBit(pn,16);
   XHtml10FramesetlDEPRECATED1.Checked:=nGetBit(pn,17);
   isEXT.Checked:=nGetBit(pn, 29);
@@ -569,7 +575,7 @@ end;
 procedure TForm1.Button24Click(Sender: TObject);
 var
   r:TRegExpr;
-begin            
+begin
   r:=TRegExpr.Create;
   r.Expression:='<!ENTITY ([a-zA-Z0-9]+)';
   while Memo7.Lines.Count>0 do
@@ -616,6 +622,28 @@ begin
     Button14Click(nil);
     Button18Click(nil);
     Close;
+  end;
+end;
+
+procedure TForm1.Button23Click(Sender: TObject);
+var
+  i,b1,b2:Integer;
+begin
+  b1 := StrToInt(Edit2.Text);
+  b2 := StrToInt(Edit3.Text);
+  case ComboBox2.ItemIndex of
+  0:
+    begin
+      for i:=0 to TreeView1.Items.Count-1 do
+        if nGetBit(TreeView1.Items[i],b1) then
+          nClearBit(TreeView1.Items[i],b2);
+    end;
+  1:
+    begin
+      for i:=0 to TreeView1.Items.Count-1 do
+        if nGetBit(TreeView1.Items[i],b1) then
+          nSetBit(TreeView1.Items[i],b2);
+    end;
   end;
 end;
 

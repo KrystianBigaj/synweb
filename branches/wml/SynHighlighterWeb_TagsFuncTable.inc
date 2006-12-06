@@ -8,6 +8,7 @@
   FMLTagIdentFuncTable[19]:=MLTagFunc19;
   FMLTagIdentFuncTable[20]:=MLTagFunc20;
   FMLTagIdentFuncTable[21]:=MLTagFunc21;
+  FMLTagIdentFuncTable[22]:=MLTagFunc22;
   FMLTagIdentFuncTable[23]:=MLTagFunc23;
   FMLTagIdentFuncTable[24]:=MLTagFunc24;
   FMLTagIdentFuncTable[25]:=MLTagFunc25;
@@ -29,6 +30,7 @@
   FMLTagIdentFuncTable[43]:=MLTagFunc43;
   FMLTagIdentFuncTable[46]:=MLTagFunc46;
   FMLTagIdentFuncTable[47]:=MLTagFunc47;
+  FMLTagIdentFuncTable[48]:=MLTagFunc48;
   FMLTagIdentFuncTable[49]:=MLTagFunc49;
   FMLTagIdentFuncTable[50]:=MLTagFunc50;
   FMLTagIdentFuncTable[52]:=MLTagFunc52;
@@ -36,12 +38,16 @@
   FMLTagIdentFuncTable[55]:=MLTagFunc55;
   FMLTagIdentFuncTable[56]:=MLTagFunc56;
   FMLTagIdentFuncTable[57]:=MLTagFunc57;
+  FMLTagIdentFuncTable[59]:=MLTagFunc59;
+  FMLTagIdentFuncTable[60]:=MLTagFunc60;
+  FMLTagIdentFuncTable[61]:=MLTagFunc61;
   FMLTagIdentFuncTable[64]:=MLTagFunc64;
   FMLTagIdentFuncTable[65]:=MLTagFunc65;
   FMLTagIdentFuncTable[66]:=MLTagFunc66;
   FMLTagIdentFuncTable[70]:=MLTagFunc70;
   FMLTagIdentFuncTable[76]:=MLTagFunc76;
   FMLTagIdentFuncTable[78]:=MLTagFunc78;
+  FMLTagIdentFuncTable[79]:=MLTagFunc79;
   FMLTagIdentFuncTable[80]:=MLTagFunc80;
   FMLTagIdentFuncTable[81]:=MLTagFunc81;
   FMLTagIdentFuncTable[82]:=MLTagFunc82;
@@ -53,6 +59,8 @@
   FMLTagIdentFuncTable[92]:=MLTagFunc92;
   FMLTagIdentFuncTable[93]:=MLTagFunc93;
   FMLTagIdentFuncTable[94]:=MLTagFunc94;
+  FMLTagIdentFuncTable[95]:=MLTagFunc95;
+  FMLTagIdentFuncTable[106]:=MLTagFunc106;
   FMLTagIdentFuncTable[107]:=MLTagFunc107;
   FMLTagIdentFuncTable[114]:=MLTagFunc114;
   FMLTagIdentFuncTable[121]:=MLTagFunc121;

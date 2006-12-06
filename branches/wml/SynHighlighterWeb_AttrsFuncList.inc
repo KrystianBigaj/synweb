@@ -14,6 +14,7 @@
     function MLAttrFunc38: TSynWebTokenKind;
     function MLAttrFunc39: TSynWebTokenKind;
     function MLAttrFunc40: TSynWebTokenKind;
+    function MLAttrFunc42: TSynWebTokenKind;
     function MLAttrFunc43: TSynWebTokenKind;
     function MLAttrFunc45: TSynWebTokenKind;
     function MLAttrFunc46: TSynWebTokenKind;
@@ -39,6 +40,7 @@
     function MLAttrFunc67: TSynWebTokenKind;
     function MLAttrFunc68: TSynWebTokenKind;
     function MLAttrFunc69: TSynWebTokenKind;
+    function MLAttrFunc70: TSynWebTokenKind;
     function MLAttrFunc71: TSynWebTokenKind;
     function MLAttrFunc72: TSynWebTokenKind;
     function MLAttrFunc73: TSynWebTokenKind;
@@ -50,6 +52,7 @@
     function MLAttrFunc80: TSynWebTokenKind;
     function MLAttrFunc81: TSynWebTokenKind;
     function MLAttrFunc82: TSynWebTokenKind;
+    function MLAttrFunc83: TSynWebTokenKind;
     function MLAttrFunc85: TSynWebTokenKind;
     function MLAttrFunc87: TSynWebTokenKind;
     function MLAttrFunc88: TSynWebTokenKind;
@@ -57,6 +60,7 @@
     function MLAttrFunc93: TSynWebTokenKind;
     function MLAttrFunc94: TSynWebTokenKind;
     function MLAttrFunc96: TSynWebTokenKind;
+    function MLAttrFunc97: TSynWebTokenKind;
     function MLAttrFunc98: TSynWebTokenKind;
     function MLAttrFunc101: TSynWebTokenKind;
     function MLAttrFunc102: TSynWebTokenKind;
@@ -71,11 +75,15 @@
     function MLAttrFunc111: TSynWebTokenKind;
     function MLAttrFunc113: TSynWebTokenKind;
     function MLAttrFunc114: TSynWebTokenKind;
+    function MLAttrFunc117: TSynWebTokenKind;
     function MLAttrFunc119: TSynWebTokenKind;
     function MLAttrFunc126: TSynWebTokenKind;
     function MLAttrFunc127: TSynWebTokenKind;
     function MLAttrFunc139: TSynWebTokenKind;
+    function MLAttrFunc143: TSynWebTokenKind;
     function MLAttrFunc147: TSynWebTokenKind;
+    function MLAttrFunc154: TSynWebTokenKind;
     function MLAttrFunc157: TSynWebTokenKind;
     function MLAttrFunc158: TSynWebTokenKind;
     function MLAttrFunc162: TSynWebTokenKind;
+    function MLAttrFunc176: TSynWebTokenKind;

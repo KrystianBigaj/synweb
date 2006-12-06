@@ -882,7 +882,7 @@ begin
   FUseEngineOptions := False;
 
   FOptions^.FHtmlVersion := shvXHtml10Transitional;
-  FOptions^.FWmlVersion := swvWml20;
+  FOptions^.FWmlVersion := swvWml13;
   FOptions^.FCssVersion := scvCss21;
   FOptions^.FPhpVersion := spvPhp5;
   FOptions^.FPhpShortOpenTag := True;
@@ -7067,6 +7067,7 @@ initialization
 
 {$IFNDEF SYN_CPPB_1}
   RegisterPlaceableHighlighter(TSynWebHtmlSyn);
+  RegisterPlaceableHighlighter(TSynWebWmlSyn);
   RegisterPlaceableHighlighter(TSynWebPhpCliSyn);
   RegisterPlaceableHighlighter(TSynWebCssSyn);
   RegisterPlaceableHighlighter(TSynWebEsSyn);

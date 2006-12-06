@@ -321,7 +321,7 @@ begin
     n1:=n1.GetNextChild(n1);
   end;
   sl.Sort;
-  SetLength(p,sl.Count*3*6);
+  SetLength(p,sl.Count*3*9);
 
   n1:=form1.TreeView1.Items.GetFirstNode;
   while n1<>nil do
@@ -330,16 +330,16 @@ begin
     while n2<>nil do
     begin
       x:=sl.IndexOf(n2.Text);
-      j:=3*6*x+Longword(n1.Index div 32);
+      j:=3*9*x+Longword(n1.Index div 32);
       l:=1 shl Longword(n1.Index mod 32);
-      for i:=0 to 5 do
+      for i:=0 to 8 do
         if Form1.nGetBit(n1,i) and Form1.nGetBit(n2,i) then
           p[j+3*i]:=p[j+3*i] or l;
       n2:=n2.GetNextChild(n2);
     end;
     n1:=n1.GetNextChild(n1);
   end;
-        
+
   ss1:='    ';
   for i:=0 to sl.Count-1 do
   begin
@@ -353,7 +353,7 @@ begin
     ss1:=Format('%s''%s'', ',[ss1,sl[i]]);
 
     //s2.Add(Format('    //%4.d: %s',[i,sl[i]]));
-    for j:=0 to 5 do
+    for j:=0 to 8 do
     begin
       if j=0 then
         s:='  (('
@@ -361,10 +361,10 @@ begin
         s:='   (';
       for k:=0 to 3-1 do
         if k=2 then
-          s:=s+Format('$%s',[IntToHex(p[3*6*i+3*j+k],8)])
+          s:=s+Format('$%s',[IntToHex(p[3*9*i+3*j+k],8)])
         else
-          s:=s+Format('$%s, ',[IntToHex(p[3*6*i+3*j+k],8)]);
-      if j=5 then
+          s:=s+Format('$%s, ',[IntToHex(p[3*9*i+3*j+k],8)]);
+      if j=8 then
       begin
         if i=sl.Count-1 then
           s:=s+'))'
@@ -390,7 +390,7 @@ begin
   s1.Insert(0,Format('  MLAttrID_Language = %d;',[sl.IndexOf('language')]));
 
 
-  s2.Insert(0,format('  TSynWeb_AttrsData:array[0..%d] of array[0..%d] of array[0..%d] of Longword=(',[sl.Count-1,6-1,3-1]));
+  s2.Insert(0,format('  TSynWeb_AttrsData:array[0..%d] of array[0..%d] of array[0..%d] of Longword=(',[sl.Count-1,9-1,3-1]));
   s2.Add('    );');
 
   s1.Add('');
