@@ -152,9 +152,11 @@ type
     procedure SetEngineOptions(AEngine: PSynWebOptions);
     procedure DoOnChange;
     procedure UpdateOptions;
-  protected              
+  protected
     procedure AssignTo(Dest: TPersistent); override;
     procedure UpdateMLOption; virtual;
+    function CanUseEngineOptions: Boolean;
+
     property HtmlVersion: TSynWebHtmlVersion read GetHtmlVersion write SetHtmlVersion;
     property WmlVersion: TSynWebWmlVersion read GetWmlVersion write SetWmlVersion;
     property CssVersion: TSynWebCssVersion read GetCssVersion write SetCssVersion;
@@ -886,7 +888,7 @@ end;
 
 procedure TSynWebOptionsBase.SetHtmlVersion(const Value: TSynWebHtmlVersion);
 begin
-  if FUseEngineOptions then
+  if CanUseEngineOptions then
     Exit;
   FOptions^.FHtmlVersion := Value;
   UpdateMLOption;
@@ -900,7 +902,7 @@ end;
 
 procedure TSynWebOptionsBase.SetWmlVersion(const Value: TSynWebWmlVersion);
 begin
-  if FUseEngineOptions then
+  if CanUseEngineOptions then
     Exit;
   FOptions^.FWmlVersion := Value;
   UpdateMLOption;
@@ -914,7 +916,7 @@ end;
 
 procedure TSynWebOptionsBase.SetCssVersion(const Value: TSynWebCssVersion);
 begin
-  if FUseEngineOptions then
+  if CanUseEngineOptions then
     Exit;
   FOptions^.FCssVersion := Value;
   DoOnChange;
@@ -927,7 +929,7 @@ end;
 
 procedure TSynWebOptionsBase.SetPhpVersion(const Value: TSynWebPhpVersion);
 begin
-  if FUseEngineOptions then
+  if CanUseEngineOptions then
     Exit;
   FOptions^.FPhpVersion := Value;
   DoOnChange;
@@ -940,7 +942,7 @@ end;
 
 procedure TSynWebOptionsBase.SetPhpAspTags(const Value: Boolean);
 begin
-  if FUseEngineOptions then
+  if CanUseEngineOptions then
     Exit;
   FOptions^.FPhpAspTags := Value;
   DoOnChange;
@@ -953,7 +955,7 @@ end;
 
 procedure TSynWebOptionsBase.SetPhpShortOpenTag(const Value: Boolean);
 begin
-  if FUseEngineOptions then
+  if CanUseEngineOptions then
     Exit;
   FOptions^.FPhpShortOpenTag := Value;
   DoOnChange;
@@ -994,7 +996,7 @@ end;
 
 procedure TSynWebOptionsBase.SetUseEngineOptions(const Value: Boolean);
 begin
-  if (FUseEngineOptions = Value) or (FEngineOptions = nil) then
+  if FUseEngineOptions = Value then
     Exit;
   FUseEngineOptions := Value;
   UpdateOptions;
@@ -1006,14 +1008,11 @@ begin
   if AEngine = FEngineOptions then
     Exit;
   FEngineOptions := AEngine;
-  if FEngineOptions = nil then
-    FUseEngineOptions := False
-  else
-    if FUseEngineOptions and (AEngine <> nil) then
-    begin
-      UpdateOptions;
-      DoOnChange;
-    end;
+  if CanUseEngineOptions then // todo: FUseEngineOptions and (AEngine <> nil) ?
+  begin
+    UpdateOptions;
+    DoOnChange;
+  end;
 end;
 
 procedure TSynWebOptionsBase.DoOnChange;
@@ -1024,7 +1023,7 @@ end;
 
 procedure TSynWebOptionsBase.UpdateOptions;
 begin
-  if FUseEngineOptions and (FEngineOptions <> nil) then
+  if CanUseEngineOptions then
   begin
     FOptions^.FHtmlVersion := FEngineOptions^.FHtmlVersion;
     FOptions^.FWmlVersion := FEngineOptions^.FWmlVersion;
@@ -1039,6 +1038,11 @@ end;
 procedure TSynWebOptionsBase.UpdateMLOption;
 begin
   //
+end;
+
+function TSynWebOptionsBase.CanUseEngineOptions: Boolean;
+begin
+  Result := FUseEngineOptions and (FEngineOptions <> nil);
 end;
 
 procedure TSynWebOptionsBase.AssignTo(Dest: TPersistent);
@@ -1136,13 +1140,13 @@ begin
   if FEngine <> nil then
     FEngine.RemoveFromNotifyList(Self);
   FEngine := Value;
-  if FEngine <> nil then
+  if FEngine = nil then
+    FOptions.SetEngineOptions(nil)
+  else
   begin
     FEngine.AddToNotifyList(Self);
     FOptions.SetEngineOptions(@FEngine.FEngineOptions);
-  end
-  else
-    FOptions.SetEngineOptions(nil);
+  end;
 end;
 
 {$IFDEF UNISYNEDIT}
@@ -1694,7 +1698,7 @@ end;
 
 class function TSynWebEsSyn.GetLanguageName: String;
 begin
-  Result := 'TSynWeb: ES (+PHP)';
+  Result := 'TSynWeb: JS/ES (+PHP)';
 end;
 
 {$IFDEF UNISYNEDIT}
@@ -1848,7 +1852,7 @@ begin
   FAttributes.Duplicates := dupError;
   FAttributes.Sorted := True;
 
-  // ML
+  // Markup Language
   MLMakeMethodTables;
 
   FMLWhitespaceAttri := CreateAttrib('ML: Whitespace');
