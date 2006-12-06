@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 368
-  Top = 140
-  Width = 788
+  Left = 291
+  Top = 172
+  Width = 908
   Height = 499
   Caption = 'Form1'
   Color = clBtnFace
@@ -18,7 +18,7 @@ object Form1: TForm1
   object SynEdit1: TSynEdit
     Left = 0
     Top = 45
-    Width = 780
+    Width = 900
     Height = 427
     Align = alClient
     ActiveLineColor = 16448250
@@ -35,18 +35,20 @@ object Form1: TForm1
     Gutter.Font.Style = []
     Highlighter = SynWebHtmlSyn1
     Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoDropFiles, eoEnhanceEndKey, eoGroupUndo, eoRightMouseMovesCursor, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabIndent, eoTabsToSpaces, eoTrimTrailingSpaces]
-    OnDropFiles = SynEdit1DropFiles
     OnStatusChange = SynEdit1StatusChange
     OnPaintTransient = SynEdit1PaintTransient
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 780
+    Width = 900
     Height = 45
     Align = alTop
     BevelOuter = bvLowered
     TabOrder = 1
+    DesignSize = (
+      900
+      45)
     object Label1: TLabel
       Left = 4
       Top = 24
@@ -69,7 +71,7 @@ object Form1: TForm1
       Caption = 'PHPVersion'
     end
     object Label4: TLabel
-      Left = 658
+      Left = 778
       Top = 4
       Width = 83
       Height = 13
@@ -88,6 +90,13 @@ object Form1: TForm1
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 524
+      Top = 24
+      Width = 58
+      Height = 13
+      Caption = 'WMLVersion'
     end
     object CheckBox1: TCheckBox
       Left = 4
@@ -130,7 +139,7 @@ object Form1: TForm1
       OnClick = Button1Click
     end
     object Button2: TButton
-      Left = 754
+      Left = 874
       Top = 2
       Width = 25
       Height = 17
@@ -159,7 +168,7 @@ object Form1: TForm1
       OnChange = ComboBox3Change
     end
     object ComboBox4: TComboBox
-      Left = 614
+      Left = 734
       Top = 20
       Width = 165
       Height = 21
@@ -172,7 +181,8 @@ object Form1: TForm1
         'HTM (+PHP, +CSS, +ES)'
         'CSS'
         'JS'
-        'PHP-Cli')
+        'PHP-Cli'
+        'WML (+PHP)')
     end
     object CheckBox3: TCheckBox
       Left = 296
@@ -195,7 +205,7 @@ object Form1: TForm1
       OnClick = CheckBox4Click
     end
     object Button3: TButton
-      Left = 572
+      Left = 692
       Top = 24
       Width = 41
       Height = 17
@@ -210,33 +220,75 @@ object Form1: TForm1
       TabOrder = 10
       OnClick = Button3Click
     end
+    object ComboBox5: TComboBox
+      Left = 592
+      Top = 20
+      Width = 77
+      Height = 21
+      Style = csDropDownList
+      ItemHeight = 13
+      TabOrder = 11
+      OnChange = ComboBox5Change
+    end
   end
   object SynWebEngine1: TSynWebEngine
+    Options.HtmlVersion = shvXHtml10Transitional
+    Options.WmlVersion = swvWml20
+    Options.CssVersion = scvCss21
+    Options.PhpVersion = spvPhp5
+    Options.PhpShortOpenTag = True
+    Options.PhpAspTags = False
+    CssValAttri.Background = clMenu
     Left = 48
     Top = 228
   end
   object SynWebHtmlSyn1: TSynWebHtmlSyn
-    ActiveSwitchHighlighter = False
+    ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
+    Options.HtmlVersion = shvXHtml10Transitional
+    Options.CssVersion = scvCss21
+    Options.PhpVersion = spvPhp5
+    Options.PhpShortOpenTag = True
+    Options.PhpAspTags = False
+    Options.CssEmbeded = True
+    Options.PhpEmbeded = True
+    Options.EsEmbeded = True
+    Options.UseEngineOptions = True
     Left = 48
     Top = 260
   end
   object SynWebCSSSyn1: TSynWebCssSyn
-    ActiveSwitchHighlighter = False
+    ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
+    Options.HtmlVersion = shvXHtml10Transitional
+    Options.CssVersion = scvCss21
+    Options.PhpVersion = spvPhp5
+    Options.PhpShortOpenTag = True
+    Options.PhpAspTags = False
+    Options.PhpEmbeded = True
+    Options.UseEngineOptions = True
     Left = 112
     Top = 260
   end
   object SynWebESSyn1: TSynWebEsSyn
-    ActiveSwitchHighlighter = False
+    ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
+    Options.PhpVersion = spvPhp5
+    Options.PhpShortOpenTag = True
+    Options.PhpAspTags = False
+    Options.PhpEmbeded = True
+    Options.UseEngineOptions = True
     Left = 144
     Top = 260
   end
   object SynWebPHPCliSyn1: TSynWebPhpCliSyn
-    ActiveSwitchHighlighter = False
+    ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
-    Left = 80
+    Options.PhpVersion = spvPhp5
+    Options.PhpShortOpenTag = True
+    Options.PhpAspTags = False
+    Options.UseEngineOptions = True
+    Left = 176
     Top = 260
   end
   object SynExporterHTML1: TSynExporterHTML
@@ -251,11 +303,22 @@ object Form1: TForm1
     UseBackground = False
     Left = 20
     Top = 96
-    TitleW = 'Untitled'
   end
   object SynEditOptionsDialog1: TSynEditOptionsDialog
     UseExtendedStrings = False
     Left = 20
     Top = 128
+  end
+  object SynWebWmlSyn1: TSynWebWmlSyn
+    ActiveHighlighterSwitch = False
+    Engine = SynWebEngine1
+    Options.WmlVersion = swvWml20
+    Options.PhpVersion = spvPhp5
+    Options.PhpShortOpenTag = True
+    Options.PhpAspTags = False
+    Options.PhpEmbeded = True
+    Options.UseEngineOptions = True
+    Left = 80
+    Top = 260
   end
 end

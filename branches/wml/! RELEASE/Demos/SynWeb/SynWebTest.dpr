@@ -5,11 +5,7 @@ program SynWebTest;
 
 uses
   Forms,
-  Main in 'Main.pas' {Form1},
-  SynHighlighterWeb in '..\SynHighlighterWeb.pas',
-  SynHighlighterWebData in '..\SynHighlighterWebData.pas',
-  SynHighlighterWebMisc in '..\SynHighlighterWebMisc.pas',
-  SynTokenMatch in '..\..\SynTokenMatch\SynTokenMatch.pas';
+  Main in 'Main.pas' {Form1};
 
 {$R *.res}
 
