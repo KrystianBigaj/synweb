@@ -1,5 +1,5 @@
 ----------------------------------------
-- TSynWeb v1.2.75 Unicode/ANSI
+- TSynWeb v1.2.76 Unicode/ANSI
 ----------------------------------------
 
 Features:
@@ -26,13 +26,13 @@ Features:
 ----------------------------------------
 
 1. Install SynEdit/UniSynEdit first.
-(If you installed SynWeb previously with modifying SynEdit release files,
+(If you installed SynWeb previously with modifying SynEdit release files (before v1.2.76),
 then recompile SynEdit with original release)
 
 2. SynWeb is configured to work by default with Unicode version of SynEdit (UniSynEdit - http://mh-nexus.de/unisynedit.htm)
 If you want use SynWeb with ANSI version of SynEdit (http://synedit.sourceforge.net)
-then open file "\SynWeb\Source\SynWeb.inc" and comment (or delete) line:
-  {$DEFINE UNISYNEDIT}  // Enable SynWeb Unicode version
+then open file "Source\SynWeb.inc" and comment (or delete) line:
+  {$DEFINE UNISYNEDIT}  // Enable SynWeb Unicode version ...
 
 3. Add path to "\SynWeb\Source" in Library Path.
 Open from Delphi menu "Tools/Enviroment Options..."
@@ -77,3 +77,4 @@ Author: Krystian Bigaj
 Email: krystian.bigaj@gmail.com
 Homepage: http://flatdev.ovh.org
 Project page: http://sourceforge.net/projects/synweb
+License: LGPL or MPL							

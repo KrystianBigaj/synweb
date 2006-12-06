@@ -1,5 +1,7 @@
 program HTML;
 
+{%ToDo 'HTML.todo'}
+
 uses
   Forms,
   Unit1 in 'Unit1.pas' {Form1},

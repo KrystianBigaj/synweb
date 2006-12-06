@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, SynEdit, SynHighlighterWeb, StdCtrls, SynEditHighlighter,
   ExtCtrls, SynEditOptionsDialog, SynEditExport, SynExportHTML, SynTokenMatch,
-  SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes, SynUnicode,
+  SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes,
   SynEditTextBuffer;
 
 type
@@ -36,6 +36,9 @@ type
     SynExporterHTML1: TSynExporterHTML;
     SynEditOptionsDialog1: TSynEditOptionsDialog;
     Button3: TButton;
+    SynWebWmlSyn1: TSynWebWmlSyn;
+    Label6: TLabel;
+    ComboBox5: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -52,9 +55,8 @@ type
     procedure SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
       TransientType: TTransientType);
     procedure CheckBox2Click(Sender: TObject);
-    procedure SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
-      AFiles: TWideStrings);
     procedure Button3Click(Sender: TObject);
+    procedure ComboBox5Change(Sender: TObject);
   private
     FPaintUpdating: Boolean;
   public
@@ -70,24 +72,28 @@ implementation
 
 procedure TForm1.FormCreate(Sender: TObject);
 var
-  s:String;
-  i:TSynWebHtmlVersion;
-  j:TSynWebCssVersion;
-  k:TSynWebPhpVersion;
+  s: String;
+  i: TSynWebHtmlVersion;
+  j: TSynWebCssVersion;
+  k: TSynWebPhpVersion;
+  w: TSynWebWmlVersion;
 begin
   FPaintUpdating := False;
-  SynEdit1.Lines.SaveUnicode:=True;
   for i:=Low(TSynWebHtmlVersion) to High(TSynWebHtmlVersion) do
     ComboBox1.Items.Add(TSynWebHtmlVersionStr[i]);
-  ComboBox1.ItemIndex:=Integer(shvXHtml10Transitional);
+  ComboBox1.ItemIndex:=Integer(SynWebEngine1.Options.HtmlVersion);
 
   for j:=Low(TSynWebCssVersion) to High(TSynWebCssVersion) do
     ComboBox2.Items.Add(TSynWebCssVersionStr[j]);
-  ComboBox2.ItemIndex:=Integer(scvCss21);
+  ComboBox2.ItemIndex:=Integer(SynWebEngine1.Options.CssVersion);
 
   for k:=Low(TSynWebPhpVersion) to High(TSynWebPhpVersion) do
     ComboBox3.Items.Add(TSynWebPhpVersionStr[k]);
-  ComboBox3.ItemIndex:=Integer(spvPHP5);
+  ComboBox3.ItemIndex:=Integer(SynWebEngine1.Options.PhpVersion);
+
+  for w:=Low(TSynWebWmlVersion) to High(TSynWebWmlVersion) do
+    ComboBox5.Items.Add(TSynWebWmlVersionStr[w]);
+  ComboBox5.ItemIndex:=Integer(SynWebEngine1.Options.WmlVersion);
 
   ComboBox4.ItemIndex := 0;
 
@@ -154,6 +160,8 @@ begin
     SynEdit1.Highlighter:=SynWebESSyn1;
   3:
     SynEdit1.Highlighter:=SynWebPHPCliSyn1;
+  4:
+    SynEdit1.Highlighter:=SynWebWmlSyn1;
   end;
 end;
 
@@ -177,13 +185,13 @@ begin
     begin           
       t:=SynWebUpdateActiveHighlighter(SynEdit1, TSynWebBase(SynEdit1.Highlighter));
       Label5.Caption:='';
-      if shtHtml in t then
-        Label5.Caption:=Label5.Caption+'HTML,';
+      if shtML in t then
+        Label5.Caption:=Label5.Caption+'HTML/WML,';
       if shtCss in t then       
         Label5.Caption:=Label5.Caption+'CSS,';
       if shtES in t then          
         Label5.Caption:=Label5.Caption+'JS,';
-      if t-[shtPhpInHtml, shtPhpInCss, shtPhpInES]<>t then
+      if t-[shtPhpInML, shtPhpInCss, shtPhpInES]<>t then
         Label5.Caption:=Label5.Caption+'PHP,';
     end;
   with SynEdit1, SynWebHtmlSyn1 do
@@ -213,13 +221,13 @@ const
     (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(stkPhpSymbol)),
     (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(stkPhpSymbol)),
     (OpenToken: '{'; CloseToken: '}'; TokenKind: Integer(stkPhpSymbol)),
-    (OpenToken: '<'; CloseToken: '>'; TokenKind: Integer(stkHtmlTag)),
-    (OpenToken: '<'; CloseToken: '/>'; TokenKind: Integer(stkHtmlTag)),
-    (OpenToken: '</'; CloseToken: '>'; TokenKind: Integer(stkHtmlTag)),
-    (OpenToken: '<!'; CloseToken: '>'; TokenKind: Integer(stkHtmlTag)),
-    (OpenToken: '<![cdata['; CloseToken: ']]>'; TokenKind: Integer(stkHtmlTag)),
-    (OpenToken: '<?'; CloseToken: '?>'; TokenKind: Integer(stkHtmlTag)),
-    (OpenToken: '<%'; CloseToken: '%>'; TokenKind: Integer(stkHtmlTag)));
+    (OpenToken: '<'; CloseToken: '>'; TokenKind: Integer(stkMLTag)),
+    (OpenToken: '<'; CloseToken: '/>'; TokenKind: Integer(stkMLTag)),
+    (OpenToken: '</'; CloseToken: '>'; TokenKind: Integer(stkMLTag)),
+    (OpenToken: '<!'; CloseToken: '>'; TokenKind: Integer(stkMLTag)),
+    (OpenToken: '<![cdata['; CloseToken: ']]>'; TokenKind: Integer(stkMLTag)),
+    (OpenToken: '<?'; CloseToken: '?>'; TokenKind: Integer(stkMLTag)),
+    (OpenToken: '<%'; CloseToken: '%>'; TokenKind: Integer(stkMLTag)));
 var
   Editor : TSynEdit;  
   Pix: TPoint;      
@@ -283,18 +291,11 @@ end;
 
 procedure TForm1.CheckBox2Click(Sender: TObject);
 begin
-  TSynWebBase(SynEdit1.Highlighter).ActiveSwitchHighlighter:=CheckBox2.Checked;
+  TSynWebBase(SynEdit1.Highlighter).ActiveHighlighterSwitch:=CheckBox2.Checked;
   if CheckBox2.Checked then
     SynEdit1StatusChange(SynEdit1,[scCaretX, scCaretY]);
   //else
     SynEdit1.Repaint;
-end;
-
-procedure TForm1.SynEdit1DropFiles(Sender: TObject; X, Y: Integer;
-  AFiles: TWideStrings);
-begin
-  if (AFiles.Count>0) and (FileExists(AFiles[0])) then
-    SynEdit1.Lines.LoadFromFile(AFiles[0]);
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);
@@ -308,7 +309,14 @@ begin
     SynEdit1.Text := TSynWebEsSyn.SynWebSample;
   3:
     SynEdit1.Text := TSynWebPhpCliSyn.SynWebSample;
+  4:
+    SynEdit1.Text := TSynWebWmlSyn.SynWebSample;
   end;
+end;
+
+procedure TForm1.ComboBox5Change(Sender: TObject);
+begin
+  SynWebEngine1.Options.WmlVersion:=TSynWebWmlVersion(ComboBox5.ItemIndex);
 end;
 
 end.
