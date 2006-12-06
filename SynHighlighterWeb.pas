@@ -1020,7 +1020,7 @@ begin
   if AEngine = FEngineOptions then
     Exit;
   FEngineOptions := AEngine;
-  if CanUseEngineOptions then // todo: FUseEngineOptions and (AEngine <> nil) ?
+  if CanUseEngineOptions then 
   begin
     UpdateOptions;
     DoOnChange;
@@ -1460,63 +1460,63 @@ begin
     '<head>'#13#10 +
     '  <title><!-- comment > -- >TSynWeb<!-- space after two ''-'' allowed --></title>'#13#10 +
     '<style type="text/css">'#13#10 +
-    ''#13#10 +
+    #13#10 +
     TSynWebCssSyn.SynWebSample +
-    ''#13#10 +
+    #13#10 +
     '<?php // php works also in css ?>'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '/* <?php // in comments ?> */'#13#10 +
-    ''#13#10 +
+    #13#10 +
     'span {'#13#10 +
     '  background-image: url("<?= $secure ? ''https://'' : ''http://'''#13#10 +
     '  // php in css-string ?>www.example.com/img.png"); }'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '</style>'#13#10 +
     '  '#13#10 +
     '</head>'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '<body>'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '<![CDATA['#13#10 +
     '  <a href="test"> CDATA Support </a> Warning! CDATA supported only in XHTML'#13#10 +
     '    <?php // no html highlight in CDATA,everything goes here as plain texte, except PHP of course ?>'#13#10 +
     ']]>'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '&amp; &copy;'#13#10 +
     '&earth; &copy <!-- invalid amp-tags, ''earth'' not supported and '';'' missed -->'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '<script language="php">  // php long open tag (html)'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '$b = ''ple'';'#13#10 +
     '$a = <<< my_custom_heredoc'#13#10 +
     'exam$b'#13#10 +
     'my_custom_heredoc;'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '</script>'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '<a href="http://www.<?= $a; ?>.com">Example.com</a>'#13#10 +
     '<br />'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '<div href="whoops" style="someDiv">'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '</div>'#13#10 +
-    ''#13#10 +
+    #13#10 +
     TSynWebPhpCliSyn.SynWebSample +
-    ''#13#10 +
+    #13#10 +
     '<script type="text/javascript" language="javascript">'#13#10 +
-    ''#13#10 +
+    #13#10 +
     TSynWebEsSyn.SynWebSample +
-    ''#13#10 +
+    #13#10 +
     '// comm<?php'#13#10 +
     '?>'#13#10 +
     'ent'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '/* comment <?= ''2''; ?> */'#13#10 +
-    ''#13#10 +
+    #13#10 +
     'new s = "test <?= ''3''; ?>";'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '</script>'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '</body>'#13#10 +
     '</html>'#13#10;
 end;
@@ -1559,38 +1559,38 @@ begin
     '<head>'#13#10 +
     '  <title><!-- comment > -- >TSynWeb<!-- space after two ''-'' allowed --></title>'#13#10 +
     '<style type="text/css">'#13#10 +
-    ''#13#10 +
+    #13#10 +
     TSynWebCssSyn.SynWebSample +
-    ''#13#10 +
+    #13#10 +
     '<?php // php works also in css ?>'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '/* <?php // in comments ?> */'#13#10 +
-    ''#13#10 +
+    #13#10 +
     'span {'#13#10 +
-    '  background-image: url("<?= $secure ? ''https://'' : ''http://'''#13#10 +
+    '  background-image: url("<?= $secure ? ''https://'' : ''http://'#13#10 +
     '  // php in css-string ?>www.example.com/img.png"); }'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '</style>'#13#10 +
     '  '#13#10 +
     '</head>'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '<body>'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '<![CDATA['#13#10 +
     '  <a href="test"> CDATA Support </a> Warning! CDATA supported only in XHTML'#13#10 +
     '    <?php // no html highlight in CDATA,everything goes here as plain texte, except PHP of course ?>'#13#10 +
     ']]>'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '&amp; &copy;'#13#10 +
     '&earth; &copy <!-- invalid amp-tags, ''earth'' not supported and '';'' missed -->'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '<script language="php">  // php long open tag (html)'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '$b = ''ple'';'#13#10 +
     '$a = <<< my_custom_heredoc'#13#10 +
     'exam$b'#13#10 +
     'my_custom_heredoc;'#13#10 +
-    ''#13#10 +
+    #13#10 +
     '</script>'#13#10 +
     ''#13#10 +
     '<a href="http://www.<?= $a; ?>.com">Example.com</a>'#13#10 +

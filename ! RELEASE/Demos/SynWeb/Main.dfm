@@ -238,7 +238,6 @@ object Form1: TForm1
     Options.PhpVersion = spvPhp5
     Options.PhpShortOpenTag = True
     Options.PhpAspTags = False
-    CssValAttri.Background = clMenu
     Left = 48
     Top = 228
   end

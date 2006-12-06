@@ -4,11 +4,12 @@
 
 Features:
 - support for embedded:
-  - PHP, CSS, JS in HTML
+  - PHP, CSS, JS in MarkupLanguage (HTML, WML)
   - PHP in CSS, JS
-- support for UniSynEdit
+- support for Unicode version of SynEdit
 - full validation for tags (also checks for valid '/>' or '/') and its attributes for HTML across difference versions (for XHTML - case sensitive)
 - values in tags without quotation are also highlighted as ValueAttrib (only in HTML, in XHTML is highlighted as error because, XHTML doesn't allow for unquoted values)
+- support for WML 1.1/1.2/1.3
 - in CSS validation for tags (you can set also HTML version)
 - validation for Ampersand tags (eg. &amp;, &copy;)
 - almost FULL validation for CSS across CSS1 and CSS2.1
@@ -77,4 +78,5 @@ Author: Krystian Bigaj
 Email: krystian.bigaj@gmail.com
 Homepage: http://flatdev.ovh.org
 Project page: http://sourceforge.net/projects/synweb
-License: LGPL or MPL							
+License: LGPL or MPL
+							
