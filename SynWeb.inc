@@ -2,7 +2,7 @@
 // *** User configuration section --------------------------------------------------- ***
 // **************************************************************************************
 
-{.$DEFINE UNISYNEDIT}    // Enable SynWeb Unicode version. Comment/delete this line
+{$DEFINE UNISYNEDIT}     // Enable SynWeb Unicode version. Comment/delete this line
                          // to switch SynWeb into ANSI-Version
 
 {$DEFINE SYNWEB_FIXNULL} // Fix lines containing #0 character (#0 goes into #32).
