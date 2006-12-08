@@ -1,0 +1,40 @@
+package SynWeb_R7;
+
+{$R *.res}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'SynWeb component suite runtime'}
+{$RUNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  SynEdit_R7,
+  vcl,
+  vclx;
+
+contains
+  SynHighlighterWeb in '..\Source\SynHighlighterWeb.pas',
+  SynHighlighterWebData in '..\Source\SynHighlighterWebData.pas',
+  SynHighlighterWebMisc in '..\Source\SynHighlighterWebMisc.pas',
+  SynTokenMatch in '..\Source\SynTokenMatch.pas';
+
+end.

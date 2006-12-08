@@ -1,0 +1,15 @@
+Known Issues:
+- TSynWeb support only single line SetLine (don't use more than one line).
+  This shouldn't be ANY problem, as the function name is SetLine (not SetText)
+
+- Doesn't support #13#10, #10 or #13 as new line. Always use #0 as line break.
+
+- Php: Doesn't support multi-line encapsuled strings in String, only single line:
+  eg. "somestring {$a["some array{$b['key'].... <- only single line encapsuled values
+
+- 'language' attrib in 'script' tag (strict version of HTML/XHTML)
+  Strict version doesn't allow 'language' attrib, so code between:
+  <script language="php">
+  ...
+  </script>
+  will NOT be highlighted as PHP, but ECMAScript/JavaScript!
