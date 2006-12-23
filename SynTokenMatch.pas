@@ -105,10 +105,10 @@ type
   +2 : Open and close token found
 }
 
-function SynEditGetMatchingToken(ASynEdit: TSynEdit; APoint: TBufferCoord;
+function SynEditGetMatchingToken(ASynEdit: TCustomSynEdit.; APoint: TBufferCoord;
   const ATokens: array of TSynTokenMatch; var AMatch: TSynTokenMatched): Integer;
 
-function SynEditGetMatchingTokenEx(ASynEdit: TSynEdit; APoint: TBufferCoord;
+function SynEditGetMatchingTokenEx(ASynEdit: TCustomSynEdit.; APoint: TBufferCoord;
   const ATokens: array of TSynTokenMatch; var AMatch: TSynTokenMatched): Integer;
 
 implementation
@@ -130,7 +130,7 @@ var
   FMatchStack: array of TSynTokenBuf;
   FMatchOpenDup, FMatchCloseDup: array of Integer;
 
-function SynEditGetMatchingToken(ASynEdit: TSynEdit; APoint: TBufferCoord;
+function SynEditGetMatchingToken(ASynEdit: TCustomSynEdit.; APoint: TBufferCoord;
   const ATokens: array of TSynTokenMatch; var AMatch: TSynTokenMatched): Integer;
 var
   TokenMatch: PSynTokenMatch;
@@ -351,7 +351,7 @@ begin
   end;
 end;
 
-function SynEditGetMatchingTokenEx(ASynEdit: TSynEdit; APoint: TBufferCoord;
+function SynEditGetMatchingTokenEx(ASynEdit: TCustomSynEdit; APoint: TBufferCoord;
   const ATokens: array of TSynTokenMatch; var AMatch: TSynTokenMatched): Integer;
 begin
   Result := SynEditGetMatchingToken(ASynEdit, APoint, ATokens, AMatch);

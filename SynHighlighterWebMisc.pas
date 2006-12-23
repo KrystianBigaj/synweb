@@ -91,13 +91,13 @@ type
   +2 : Open and close token found
 }
 
-function SynEditGetMatchingTag(ASynEdit: TSynEdit; APoint: TBufferCoord;
+function SynEditGetMatchingTag(ASynEdit: TCustomSynEdit.; APoint: TBufferCoord;
   var AMatch: TSynTokenMatched): Integer;
 
-function SynEditGetMatchingTagEx(ASynEdit: TSynEdit; APoint: TBufferCoord;
+function SynEditGetMatchingTagEx(ASynEdit: TCustomSynEdit.; APoint: TBufferCoord;
   var AMatch: TSynTokenMatched): Integer;
 
-function SynWebUpdateActiveHighlighter(ASynEdit: TSynEdit;
+function SynWebUpdateActiveHighlighter(ASynEdit: TCustomSynEdit.;
   ASynWeb: TSynWebBase): TSynWebHighlighterTypes;
   
 implementation
@@ -118,7 +118,7 @@ type
 var
   FMatchStack: array of TSynTokenBuf;
 
-function SynEditGetMatchingTag(ASynEdit: TSynEdit; APoint: TBufferCoord;
+function SynEditGetMatchingTag(ASynEdit: TCustomSynEdit.; APoint: TBufferCoord;
   var AMatch: TSynTokenMatched): Integer;
 var
   TagID: Integer;
@@ -340,7 +340,7 @@ begin
   end;
 end;
 
-function SynEditGetMatchingTagEx(ASynEdit: TSynEdit; APoint: TBufferCoord;
+function SynEditGetMatchingTagEx(ASynEdit: TCustomSynEdit.; APoint: TBufferCoord;
   var AMatch: TSynTokenMatched): Integer;
 begin
   Result := SynEditGetMatchingTag(ASynEdit, APoint, AMatch);
@@ -351,7 +351,7 @@ begin
   end;
 end;
 
-function SynWebUpdateActiveHighlighter(ASynEdit: TSynEdit;
+function SynWebUpdateActiveHighlighter(ASynEdit: TCustomSynEdit.;
   ASynWeb: TSynWebBase): TSynWebHighlighterTypes;
 begin
   with ASynEdit,ASynWeb do
