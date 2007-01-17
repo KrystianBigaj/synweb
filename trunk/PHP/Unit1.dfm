@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 439
   Top = 84
-  Width = 472
-  Height = 655
   Caption = 'SynHighlighterWeb - Php Data/Export v1.0b '#169'2005 FlatDev'
+  ClientHeight = 628
+  ClientWidth = 464
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

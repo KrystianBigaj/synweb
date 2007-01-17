@@ -422,7 +422,7 @@ var
   n: TTreeNode;
   i, x, t: Integer;
   s, s1, s2: TStringList;
-  ss1, ss2: string;
+  ss1, ss2, ss3: string;
 begin
   Button12Click(nil);
   s := TStringList.Create;
@@ -436,6 +436,7 @@ begin
   t := 0;
   ss1 := '    ';
   ss2 := '    ';
+  ss3 := '';
   while n <> nil do
   begin
     if nGetBit(n, keyword1.Tag) or nGetBit(n, function1.Tag) then
@@ -458,6 +459,7 @@ begin
         ss2 := '    ';
       end;
       ss2 := Format('%s$%s, ', [ss2, IntToHex(Longword(n.Data), 8)]);
+
       inc(t);
     end;
     n := n.GetNextChild(n);
@@ -475,6 +477,13 @@ begin
   for i := 1 to s.Count - 1 do
     if KeyHash(s[i]) > x then
       x := KeyHash(s[i]);
+                  
+  s1.Insert(0, '');
+
+  for i := s.Count - 1 downto 0 do
+    if (Longword(s.Objects[i]) and $0F) = $01 then
+      s1.Insert(0, Format('  PhpKeyID_%s = %d;', [s[i], i]));
+
   s1.Insert(0, '');
 
   s1.Insert(0, Format('  PhpKeywordsMaxKeyHash = %d;', [x]));
