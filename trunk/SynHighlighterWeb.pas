@@ -6222,7 +6222,10 @@ begin
     Inc(FInstance^.FRun);
     FInstance^.FTokenID := stkPhpSymbol;
   end else
-    PhpNumberProc;
+    if FInstance^.FLine[FInstance^.FRun] in ['0'..'9'] then
+      PhpNumberProc
+    else
+      FInstance^.FTokenID := stkPhpSymbol;
 end;
 
 procedure TSynWebEngine.PhpSymbolProc;
