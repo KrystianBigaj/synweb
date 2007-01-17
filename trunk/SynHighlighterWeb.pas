@@ -307,7 +307,8 @@ type
     function GetTokenKind: Integer; override;
     function GetRange: Pointer; override;
     function GetEol: Boolean; override;
-    function GetHighlighterType: TSynWebHighlighterType;
+    function GetHighlighterType: TSynWebHighlighterType;  
+    function PhpGetKeywordId: Integer;
     procedure SetRange(Value: Pointer); override;
 {$IFNDEF UNISYNEDIT}
     procedure SetLine(NewValue: String; LineNumber: Integer); override;
@@ -1307,6 +1308,14 @@ end;
 function TSynWebBase.GetHighlighterType: TSynWebHighlighterType;
 begin
   Result := FInstance.FHighlighterType;
+end;
+
+function TSynWebBase.PhpGetKeywordId: Integer;
+begin
+  if FInstance.FTokenID <> stkPhpKeyword then
+    Result := -1
+  else
+    Result := FInstance.FTokenLastID;  
 end;
 
 procedure TSynWebBase.SetRange(Value: Pointer);
