@@ -5214,12 +5214,12 @@ end;
 
 function TSynWebEngine.EsGetRange: TSynWebEsRangeState;
 begin
-  Result := TSynWebEsRangeState(GetRangeInt(2, 15));
+  Result := TSynWebEsRangeState(GetRangeInt(3, 14));
 end;
 
 procedure TSynWebEngine.EsSetRange(const ARange: TSynWebEsRangeState);
 begin
-  SetRangeInt(2, 15, Longword(ARange));
+  SetRangeInt(3, 14, Longword(ARange));
 end;
 
 function TSynWebEngine.EsCheckNull(ADo: Boolean = True): Boolean;
