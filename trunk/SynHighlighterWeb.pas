@@ -3094,7 +3094,7 @@ begin
   begin
     for i := 1 to FInstance^.FStringLen do
     begin
-      if FInstance^.FHashTable[Temp^] <> FInstance^.FHashTable[aKey[i]] then
+      if TSynWebInsensitiveHashTableTemp^] <> TSynWebInsensitiveHashTable[aKey[i]] then
       begin
         Result := False;
         Exit;
@@ -3119,7 +3119,7 @@ var
     FInstance^.FStringLen := ALen;
     for i := 0 to ALen - 1 do
     begin
-      Inc(HashKey, FInstance^.FHashTable[ToHash^]);
+      Inc(HashKey, TSynWebInsensitiveHashTable[ToHash^]);
       Inc(ToHash);
     end;
   end;
