@@ -5,7 +5,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc14: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(272) then
+  if  PhpFunctionComp(273) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
@@ -13,7 +13,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc15: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(41) then
+  if  PhpKeywordComp(42) then
     Result := stkPhpKeyword
   else
     Result := stkPhpIdentifier;
@@ -38,7 +38,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc18: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(18) then
+  if  PhpKeywordComp(19) then
     Result := stkPhpKeyword
   else
     Result := stkPhpIdentifier;
@@ -47,7 +47,7 @@ end;
 function TSynWebEngine.PhpKeywordFunc19: TSynWebTokenKind;
 begin
   if  PhpKeywordComp(6) or
-      PhpKeywordComp(19) then
+      PhpKeywordComp(20) then
     Result := stkPhpKeyword
   else
     Result := stkPhpIdentifier;
@@ -63,7 +63,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc22: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(93) then
+  if  PhpFunctionComp(94) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
@@ -79,7 +79,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc24: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(486) then
+  if  PhpFunctionComp(487) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
@@ -106,8 +106,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc29: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(346) or
-      PhpFunctionComp(355) or
+  if  PhpFunctionComp(347) or
+      PhpFunctionComp(356) or
       PhpFunctionComp(2088) or
       PhpFunctionComp(2192) then
     Result := stkPhpFunction
@@ -117,7 +117,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc30: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(547) then
+  if  PhpFunctionComp(548) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
@@ -125,7 +125,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc31: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(20) then
+  if  PhpKeywordComp(21) then
     Result := stkPhpKeyword
   else
     if  PhpFunctionComp(791) or
@@ -150,7 +150,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc33: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(54) then
+  if  PhpKeywordComp(55) then
     Result := stkPhpKeyword
   else
     if  PhpFunctionComp(2255) then
@@ -185,8 +185,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc36: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(255) or
-      PhpFunctionComp(256) or
+  if  PhpFunctionComp(256) or
+      PhpFunctionComp(257) or
       PhpFunctionComp(1434) or
       PhpFunctionComp(1508) or
       PhpFunctionComp(2287) or
@@ -201,10 +201,10 @@ begin
   if  PhpKeywordComp(9) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(275) or
-        PhpFunctionComp(297) or
-        PhpFunctionComp(406) or
-        PhpFunctionComp(772) or
+    if  PhpFunctionComp(276) or
+        PhpFunctionComp(298) or
+        PhpFunctionComp(407) or
+        PhpFunctionComp(773) or
         PhpFunctionComp(1111) or
         PhpFunctionComp(3322) or
         PhpFunctionComp(3899) then
@@ -215,10 +215,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc38: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(27) then
+  if  PhpKeywordComp(28) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(94) or
+    if  PhpFunctionComp(95) or
         PhpFunctionComp(1270) or
         PhpFunctionComp(2308) then
       Result := stkPhpFunction
@@ -228,7 +228,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc39: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(37) then
+  if  PhpKeywordComp(38) then
     Result := stkPhpKeyword
   else
     if  PhpFunctionComp(779) or
@@ -242,10 +242,10 @@ end;
 function TSynWebEngine.PhpKeywordFunc40: TSynWebTokenKind;
 begin
   if  PhpKeywordComp(3) or
-      PhpKeywordComp(30) then
+      PhpKeywordComp(31) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(274) then
+    if  PhpFunctionComp(275) then
       Result := stkPhpFunction
     else
       Result := stkPhpIdentifier;
@@ -253,11 +253,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc41: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(21) or
-      PhpKeywordComp(71) then
+  if  PhpKeywordComp(22) or
+      PhpKeywordComp(72) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(97) or
+    if  PhpFunctionComp(98) or
         PhpFunctionComp(1236) or
         PhpFunctionComp(1518) or
         PhpFunctionComp(2143) then
@@ -268,11 +268,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc42: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(35) or
-      PhpKeywordComp(50) then
+  if  PhpKeywordComp(36) or
+      PhpKeywordComp(51) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(349) or
+    if  PhpFunctionComp(350) or
         PhpFunctionComp(2152) or
         PhpFunctionComp(4111) then
       Result := stkPhpFunction
@@ -282,13 +282,13 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc43: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(34) or
-      PhpKeywordComp(46) then
+  if  PhpKeywordComp(35) or
+      PhpKeywordComp(47) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(250) or
-        PhpFunctionComp(353) or
-        PhpFunctionComp(638) or
+    if  PhpFunctionComp(251) or
+        PhpFunctionComp(354) or
+        PhpFunctionComp(639) or
         PhpFunctionComp(776) or
         PhpFunctionComp(4756) then
       Result := stkPhpFunction
@@ -298,7 +298,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc44: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(257) or
+  if  PhpFunctionComp(258) or
       PhpFunctionComp(1093) then
     Result := stkPhpFunction
   else
@@ -307,11 +307,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc45: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(70) then
+  if  PhpKeywordComp(71) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(292) or
-        PhpFunctionComp(407) or
+    if  PhpFunctionComp(293) or
+        PhpFunctionComp(408) or
         PhpFunctionComp(1124) or
         PhpFunctionComp(1438) or
         PhpFunctionComp(3900) then
@@ -322,7 +322,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc46: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(95) or
+  if  PhpFunctionComp(96) or
       PhpFunctionComp(1341) or
       PhpFunctionComp(1912) or
       PhpFunctionComp(1913) or
@@ -336,7 +336,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc47: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(294) or
+  if  PhpFunctionComp(295) or
       PhpFunctionComp(778) or
       PhpFunctionComp(1267) or
       PhpFunctionComp(4793) then
@@ -360,11 +360,11 @@ end;
 function TSynWebEngine.PhpKeywordFunc49: TSynWebTokenKind;
 begin
   if  PhpKeywordComp(14) or
-      PhpKeywordComp(40) then
+      PhpKeywordComp(41) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(676) or
-        PhpFunctionComp(773) or
+    if  PhpFunctionComp(677) or
+        PhpFunctionComp(774) or
         PhpFunctionComp(1340) or
         PhpFunctionComp(1525) or
         PhpFunctionComp(2521) or
@@ -376,8 +376,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc50: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(347) or
-      PhpFunctionComp(774) or
+  if  PhpFunctionComp(348) or
+      PhpFunctionComp(775) or
       PhpFunctionComp(1435) or
       PhpFunctionComp(1448) or
       PhpFunctionComp(1588) or
@@ -394,9 +394,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc51: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(251) or
-      PhpFunctionComp(276) or
-      PhpFunctionComp(412) or
+  if  PhpFunctionComp(252) or
+      PhpFunctionComp(277) or
+      PhpFunctionComp(413) or
       PhpFunctionComp(780) then
     Result := stkPhpFunction
   else
@@ -405,9 +405,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc52: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(200) or
-      PhpFunctionComp(273) or
-      PhpFunctionComp(352) or
+  if  PhpFunctionComp(201) or
+      PhpFunctionComp(274) or
+      PhpFunctionComp(353) or
       PhpFunctionComp(1345) or
       PhpFunctionComp(2137) or
       PhpFunctionComp(3063) then
@@ -428,10 +428,10 @@ function TSynWebEngine.PhpKeywordFunc54: TSynWebTokenKind;
 begin
   if  PhpKeywordComp(0) or
       PhpKeywordComp(13) or
-      PhpKeywordComp(36) then
+      PhpKeywordComp(37) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(369) or
+    if  PhpFunctionComp(370) or
         PhpFunctionComp(3687) then
       Result := stkPhpFunction
     else
@@ -440,7 +440,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc55: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(52) then
+  if  PhpKeywordComp(53) then
     Result := stkPhpKeyword
   else
     if  PhpFunctionComp(1344) or
@@ -455,11 +455,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc56: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(22) or
-      PhpKeywordComp(38) then
+  if  PhpKeywordComp(23) or
+      PhpKeywordComp(39) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(334) or
+    if  PhpFunctionComp(335) or
         PhpFunctionComp(785) or
         PhpFunctionComp(1272) or
         PhpFunctionComp(3936) or
@@ -471,12 +471,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc57: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(72) or
-      PhpKeywordComp(73) then
+  if  PhpKeywordComp(73) or
+      PhpKeywordComp(74) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(683) or
-        PhpFunctionComp(761) or
+    if  PhpFunctionComp(684) or
+        PhpFunctionComp(762) or
         PhpFunctionComp(1215) or
         PhpFunctionComp(1238) or
         PhpFunctionComp(1860) or
@@ -491,10 +491,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc58: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(32) then
+  if  PhpKeywordComp(33) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(674) or
+    if  PhpFunctionComp(675) or
         PhpFunctionComp(1126) or
         PhpFunctionComp(1437) or
         PhpFunctionComp(1801) then
@@ -505,12 +505,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc59: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(51) then
+  if  PhpKeywordComp(52) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(101) or
-        PhpFunctionComp(290) or
-        PhpFunctionComp(405) or
+    if  PhpFunctionComp(102) or
+        PhpFunctionComp(291) or
+        PhpFunctionComp(406) or
         PhpFunctionComp(2092) or
         PhpFunctionComp(2252) or
         PhpFunctionComp(2418) or
@@ -523,13 +523,13 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc60: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(49) then
+  if  PhpKeywordComp(50) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(271) or
-        PhpFunctionComp(337) or
-        PhpFunctionComp(350) or
-        PhpFunctionComp(630) or
+    if  PhpFunctionComp(272) or
+        PhpFunctionComp(338) or
+        PhpFunctionComp(351) or
+        PhpFunctionComp(631) or
         PhpFunctionComp(1198) or
         PhpFunctionComp(1523) or
         PhpFunctionComp(2094) or
@@ -546,8 +546,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc61: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(673) or
-      PhpFunctionComp(704) or
+  if  PhpFunctionComp(674) or
+      PhpFunctionComp(705) or
       PhpFunctionComp(1512) or
       PhpFunctionComp(2182) or
       PhpFunctionComp(2239) or
@@ -560,12 +560,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc62: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(25) then
+  if  PhpKeywordComp(26) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(194) or
-        PhpFunctionComp(295) or
-        PhpFunctionComp(698) or
+    if  PhpFunctionComp(195) or
+        PhpFunctionComp(296) or
+        PhpFunctionComp(699) or
         PhpFunctionComp(1410) or
         PhpFunctionComp(1411) or
         PhpFunctionComp(1458) or
@@ -583,13 +583,13 @@ end;
 function TSynWebEngine.PhpKeywordFunc63: TSynWebTokenKind;
 begin
   if  PhpKeywordComp(7) or
-      PhpKeywordComp(59) or
-      PhpKeywordComp(68) then
+      PhpKeywordComp(60) or
+      PhpKeywordComp(69) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(269) or
-        PhpFunctionComp(354) or
-        PhpFunctionComp(389) or
+    if  PhpFunctionComp(270) or
+        PhpFunctionComp(355) or
+        PhpFunctionComp(390) or
         PhpFunctionComp(1220) or
         PhpFunctionComp(1524) or
         PhpFunctionComp(1771) or
@@ -604,10 +604,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc64: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(67) then
+  if  PhpKeywordComp(68) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(557) or
+    if  PhpFunctionComp(558) or
         PhpFunctionComp(792) or
         PhpFunctionComp(2042) or
         PhpFunctionComp(4520) then
@@ -621,8 +621,8 @@ begin
   if  PhpKeywordComp(4) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(338) or
-        PhpFunctionComp(672) or
+    if  PhpFunctionComp(339) or
+        PhpFunctionComp(673) or
         PhpFunctionComp(1206) or
         PhpFunctionComp(1271) or
         PhpFunctionComp(1504) or
@@ -640,8 +640,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc66: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(482) or
-      PhpFunctionComp(700) or
+  if  PhpFunctionComp(483) or
+      PhpFunctionComp(701) or
       PhpFunctionComp(1217) or
       PhpFunctionComp(1268) or
       PhpFunctionComp(1269) or
@@ -661,8 +661,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc67: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(681) or
-      PhpFunctionComp(686) or
+  if  PhpFunctionComp(682) or
+      PhpFunctionComp(687) or
       PhpFunctionComp(1442) or
       PhpFunctionComp(3942) or
       PhpFunctionComp(4799) then
@@ -673,11 +673,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc68: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(43) then
+  if  PhpKeywordComp(44) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(423) or
-        PhpFunctionComp(687) or
+    if  PhpFunctionComp(424) or
+        PhpFunctionComp(688) or
         PhpFunctionComp(786) or
         PhpFunctionComp(1202) or
         PhpFunctionComp(1441) or
@@ -693,28 +693,30 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc69: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(382) or
-      PhpFunctionComp(415) or
-      PhpFunctionComp(444) or
-      PhpFunctionComp(708) or
-      PhpFunctionComp(775) or
-      PhpFunctionComp(1064) or
-      PhpFunctionComp(1459) or
-      PhpFunctionComp(1957) or
-      PhpFunctionComp(2527) or
-      PhpFunctionComp(3097) or
-      PhpFunctionComp(3168) or
-      PhpFunctionComp(3603) or
-      PhpFunctionComp(4022) or
-      PhpFunctionComp(5056) then
-    Result := stkPhpFunction
+  if  PhpKeywordComp(18) then
+    Result := stkPhpKeyword
   else
-    Result := stkPhpIdentifier;
+    if  PhpFunctionComp(383) or
+        PhpFunctionComp(416) or
+        PhpFunctionComp(445) or
+        PhpFunctionComp(709) or
+        PhpFunctionComp(1064) or
+        PhpFunctionComp(1459) or
+        PhpFunctionComp(1957) or
+        PhpFunctionComp(2527) or
+        PhpFunctionComp(3097) or
+        PhpFunctionComp(3168) or
+        PhpFunctionComp(3603) or
+        PhpFunctionComp(4022) or
+        PhpFunctionComp(5056) then
+      Result := stkPhpFunction
+    else
+      Result := stkPhpIdentifier;
 end;
 
 function TSynWebEngine.PhpKeywordFunc70: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(702) or
+  if  PhpFunctionComp(703) or
       PhpFunctionComp(1136) or
       PhpFunctionComp(1201) or
       PhpFunctionComp(1950) or
@@ -729,12 +731,12 @@ end;
 function TSynWebEngine.PhpKeywordFunc71: TSynWebTokenKind;
 begin
   if  PhpKeywordComp(15) or
-      PhpKeywordComp(24) then
+      PhpKeywordComp(25) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(150) or
-        PhpFunctionComp(193) or
-        PhpFunctionComp(396) or
+    if  PhpFunctionComp(151) or
+        PhpFunctionComp(194) or
+        PhpFunctionComp(397) or
         PhpFunctionComp(2067) or
         PhpFunctionComp(2571) or
         PhpFunctionComp(3310) or
@@ -748,11 +750,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc72: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(48) or
-      PhpKeywordComp(63) then
+  if  PhpKeywordComp(49) or
+      PhpKeywordComp(64) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(577) or
+    if  PhpFunctionComp(578) or
         PhpFunctionComp(1235) or
         PhpFunctionComp(1522) or
         PhpFunctionComp(1922) or
@@ -770,11 +772,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc73: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(252) or
-      PhpFunctionComp(270) or
-      PhpFunctionComp(408) or
-      PhpFunctionComp(685) or
-      PhpFunctionComp(701) or
+  if  PhpFunctionComp(253) or
+      PhpFunctionComp(271) or
+      PhpFunctionComp(409) or
+      PhpFunctionComp(686) or
+      PhpFunctionComp(702) or
       PhpFunctionComp(1412) or
       PhpFunctionComp(1466) or
       PhpFunctionComp(1467) or
@@ -794,7 +796,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc74: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(100) or
+  if  PhpFunctionComp(101) or
       PhpFunctionComp(1131) or
       PhpFunctionComp(1356) or
       PhpFunctionComp(1638) or
@@ -819,9 +821,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc75: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(436) or
-      PhpFunctionComp(552) or
-      PhpFunctionComp(646) or
+  if  PhpFunctionComp(437) or
+      PhpFunctionComp(553) or
+      PhpFunctionComp(647) or
       PhpFunctionComp(1528) or
       PhpFunctionComp(1632) or
       PhpFunctionComp(1750) or
@@ -836,7 +838,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc76: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(442) or
+  if  PhpFunctionComp(443) or
       PhpFunctionComp(1239) or
       PhpFunctionComp(1454) or
       PhpFunctionComp(1724) or
@@ -858,11 +860,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc77: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(56) then
+  if  PhpKeywordComp(57) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(339) or
-        PhpFunctionComp(340) or
+    if  PhpFunctionComp(340) or
+        PhpFunctionComp(341) or
         PhpFunctionComp(1222) or
         PhpFunctionComp(1653) or
         PhpFunctionComp(2054) or
@@ -878,8 +880,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc78: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(333) or
-      PhpFunctionComp(603) or
+  if  PhpFunctionComp(334) or
+      PhpFunctionComp(604) or
       PhpFunctionComp(784) or
       PhpFunctionComp(1473) or
       PhpFunctionComp(1511) or
@@ -902,19 +904,19 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc79: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(23) or
-      PhpKeywordComp(26) or
-      PhpKeywordComp(69) then
+  if  PhpKeywordComp(24) or
+      PhpKeywordComp(27) or
+      PhpKeywordComp(70) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(191) or
-        PhpFunctionComp(293) or
-        PhpFunctionComp(356) or
-        PhpFunctionComp(414) or
-        PhpFunctionComp(432) or
-        PhpFunctionComp(626) or
-        PhpFunctionComp(633) or
-        PhpFunctionComp(709) or
+    if  PhpFunctionComp(192) or
+        PhpFunctionComp(294) or
+        PhpFunctionComp(357) or
+        PhpFunctionComp(415) or
+        PhpFunctionComp(433) or
+        PhpFunctionComp(627) or
+        PhpFunctionComp(634) or
+        PhpFunctionComp(710) or
         PhpFunctionComp(1247) or
         PhpFunctionComp(1353) or
         PhpFunctionComp(1503) or
@@ -928,12 +930,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc80: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(29) then
+  if  PhpKeywordComp(30) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(636) or
-        PhpFunctionComp(664) or
-        PhpFunctionComp(768) or
+    if  PhpFunctionComp(637) or
+        PhpFunctionComp(665) or
+        PhpFunctionComp(769) or
         PhpFunctionComp(1061) or
         PhpFunctionComp(1209) or
         PhpFunctionComp(1244) or
@@ -947,10 +949,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc81: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(47) then
+  if  PhpKeywordComp(48) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(697) or
+    if  PhpFunctionComp(698) or
         PhpFunctionComp(1125) or
         PhpFunctionComp(1251) or
         PhpFunctionComp(1384) or
@@ -969,13 +971,13 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc82: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(65) then
+  if  PhpKeywordComp(66) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(253) or
-        PhpFunctionComp(336) or
-        PhpFunctionComp(488) or
-        PhpFunctionComp(649) or
+    if  PhpFunctionComp(254) or
+        PhpFunctionComp(337) or
+        PhpFunctionComp(489) or
+        PhpFunctionComp(650) or
         PhpFunctionComp(782) or
         PhpFunctionComp(1237) or
         PhpFunctionComp(1245) or
@@ -999,10 +1001,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc83: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(158) or
-      PhpFunctionComp(416) or
-      PhpFunctionComp(690) or
-      PhpFunctionComp(710) or
+  if  PhpFunctionComp(159) or
+      PhpFunctionComp(417) or
+      PhpFunctionComp(691) or
+      PhpFunctionComp(711) or
       PhpFunctionComp(783) or
       PhpFunctionComp(1423) or
       PhpFunctionComp(1506) or
@@ -1029,13 +1031,13 @@ end;
 function TSynWebEngine.PhpKeywordFunc84: TSynWebTokenKind;
 begin
   if  PhpKeywordComp(5) or
-      PhpKeywordComp(66) then
+      PhpKeywordComp(67) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(190) or
-        PhpFunctionComp(226) or
-        PhpFunctionComp(628) or
-        PhpFunctionComp(757) or
+    if  PhpFunctionComp(191) or
+        PhpFunctionComp(227) or
+        PhpFunctionComp(629) or
+        PhpFunctionComp(758) or
         PhpFunctionComp(1348) or
         PhpFunctionComp(1370) or
         PhpFunctionComp(1720) or
@@ -1055,9 +1057,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc85: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(370) or
-      PhpFunctionComp(659) or
-      PhpFunctionComp(689) or
+  if  PhpFunctionComp(371) or
+      PhpFunctionComp(660) or
+      PhpFunctionComp(690) or
       PhpFunctionComp(1346) or
       PhpFunctionComp(1349) or
       PhpFunctionComp(1369) or
@@ -1101,7 +1103,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc87: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(64) then
+  if  PhpKeywordComp(65) then
     Result := stkPhpKeyword
   else
     if  PhpFunctionComp(1885) or
@@ -1123,11 +1125,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc88: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(164) or
-      PhpFunctionComp(207) or
-      PhpFunctionComp(371) or
-      PhpFunctionComp(548) or
-      PhpFunctionComp(678) or
+  if  PhpFunctionComp(165) or
+      PhpFunctionComp(208) or
+      PhpFunctionComp(372) or
+      PhpFunctionComp(549) or
+      PhpFunctionComp(679) or
       PhpFunctionComp(787) or
       PhpFunctionComp(1443) or
       PhpFunctionComp(1451) or
@@ -1156,7 +1158,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc89: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(639) or
+  if  PhpFunctionComp(640) or
       PhpFunctionComp(1060) or
       PhpFunctionComp(1137) or
       PhpFunctionComp(1266) or
@@ -1184,8 +1186,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc90: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(581) or
-      PhpFunctionComp(647) or
+  if  PhpFunctionComp(582) or
+      PhpFunctionComp(648) or
       PhpFunctionComp(1205) or
       PhpFunctionComp(1364) or
       PhpFunctionComp(1419) or
@@ -1211,13 +1213,13 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc91: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(33) or
-      PhpKeywordComp(57) then
+  if  PhpKeywordComp(34) or
+      PhpKeywordComp(58) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(249) or
-        PhpFunctionComp(291) or
-        PhpFunctionComp(504) or
+    if  PhpFunctionComp(250) or
+        PhpFunctionComp(292) or
+        PhpFunctionComp(505) or
         PhpFunctionComp(1063) or
         PhpFunctionComp(1128) or
         PhpFunctionComp(1258) or
@@ -1243,9 +1245,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc92: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(99) or
-      PhpFunctionComp(558) or
-      PhpFunctionComp(679) or
+  if  PhpFunctionComp(100) or
+      PhpFunctionComp(559) or
+      PhpFunctionComp(680) or
       PhpFunctionComp(1224) or
       PhpFunctionComp(1248) or
       PhpFunctionComp(1359) or
@@ -1274,11 +1276,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc93: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(60) then
+  if  PhpKeywordComp(61) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(222) or
-        PhpFunctionComp(642) or
+    if  PhpFunctionComp(223) or
+        PhpFunctionComp(643) or
         PhpFunctionComp(1210) or
         PhpFunctionComp(1352) or
         PhpFunctionComp(1474) or
@@ -1306,7 +1308,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc94: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(476) or
+  if  PhpFunctionComp(477) or
       PhpFunctionComp(1546) or
       PhpFunctionComp(1880) or
       PhpFunctionComp(2269) or
@@ -1326,7 +1328,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc95: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(96) or
+  if  PhpFunctionComp(97) or
       PhpFunctionComp(1092) or
       PhpFunctionComp(1375) or
       PhpFunctionComp(1634) or
@@ -1351,11 +1353,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc96: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(62) then
+  if  PhpKeywordComp(63) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(395) or
-        PhpFunctionComp(658) or
+    if  PhpFunctionComp(396) or
+        PhpFunctionComp(659) or
         PhpFunctionComp(1260) or
         PhpFunctionComp(1350) or
         PhpFunctionComp(1362) or
@@ -1376,8 +1378,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc97: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(196) or
-      PhpFunctionComp(197) or
+  if  PhpFunctionComp(197) or
+      PhpFunctionComp(198) or
       PhpFunctionComp(1360) or
       PhpFunctionComp(2068) or
       PhpFunctionComp(2191) or
@@ -1406,9 +1408,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc98: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(318) or
-      PhpFunctionComp(330) or
-      PhpFunctionComp(480) or
+  if  PhpFunctionComp(319) or
+      PhpFunctionComp(331) or
+      PhpFunctionComp(481) or
       PhpFunctionComp(1058) or
       PhpFunctionComp(1118) or
       PhpFunctionComp(1259) or
@@ -1433,8 +1435,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc99: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(134) or
-      PhpFunctionComp(517) or
+  if  PhpFunctionComp(135) or
+      PhpFunctionComp(518) or
       PhpFunctionComp(1089) or
       PhpFunctionComp(1211) or
       PhpFunctionComp(1358) or
@@ -1458,7 +1460,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc100: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(230) or
+  if  PhpFunctionComp(231) or
       PhpFunctionComp(1101) or
       PhpFunctionComp(1264) or
       PhpFunctionComp(1367) or
@@ -1482,9 +1484,9 @@ begin
   if  PhpKeywordComp(16) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(553) or
-        PhpFunctionComp(663) or
-        PhpFunctionComp(758) or
+    if  PhpFunctionComp(554) or
+        PhpFunctionComp(664) or
+        PhpFunctionComp(759) or
         PhpFunctionComp(1323) or
         PhpFunctionComp(1376) or
         PhpFunctionComp(1431) or
@@ -1516,13 +1518,13 @@ end;
 function TSynWebEngine.PhpKeywordFunc102: TSynWebTokenKind;
 begin
   if  PhpKeywordComp(2) or
-      PhpKeywordComp(39) then
+      PhpKeywordComp(40) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(212) or
-        PhpFunctionComp(331) or
-        PhpFunctionComp(550) or
-        PhpFunctionComp(765) or
+    if  PhpFunctionComp(213) or
+        PhpFunctionComp(332) or
+        PhpFunctionComp(551) or
+        PhpFunctionComp(766) or
         PhpFunctionComp(1380) or
         PhpFunctionComp(1810) or
         PhpFunctionComp(1862) or
@@ -1551,12 +1553,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc103: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(351) or
-      PhpFunctionComp(632) or
-      PhpFunctionComp(643) or
-      PhpFunctionComp(675) or
-      PhpFunctionComp(688) or
-      PhpFunctionComp(769) or
+  if  PhpFunctionComp(352) or
+      PhpFunctionComp(633) or
+      PhpFunctionComp(644) or
+      PhpFunctionComp(676) or
+      PhpFunctionComp(689) or
+      PhpFunctionComp(770) or
       PhpFunctionComp(790) or
       PhpFunctionComp(1250) or
       PhpFunctionComp(1336) or
@@ -1594,13 +1596,13 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc104: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(429) or
-      PhpFunctionComp(582) or
-      PhpFunctionComp(644) or
-      PhpFunctionComp(706) or
-      PhpFunctionComp(711) or
-      PhpFunctionComp(759) or
+  if  PhpFunctionComp(430) or
+      PhpFunctionComp(583) or
+      PhpFunctionComp(645) or
+      PhpFunctionComp(707) or
+      PhpFunctionComp(712) or
       PhpFunctionComp(760) or
+      PhpFunctionComp(761) or
       PhpFunctionComp(1094) or
       PhpFunctionComp(1262) or
       PhpFunctionComp(1297) or
@@ -1635,12 +1637,12 @@ end;
 function TSynWebEngine.PhpKeywordFunc105: TSynWebTokenKind;
 begin
   if  PhpKeywordComp(12) or
-      PhpKeywordComp(28) or
-      PhpKeywordComp(44) then
+      PhpKeywordComp(29) or
+      PhpKeywordComp(45) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(464) or
-        PhpFunctionComp(641) or
+    if  PhpFunctionComp(465) or
+        PhpFunctionComp(642) or
         PhpFunctionComp(781) or
         PhpFunctionComp(1122) or
         PhpFunctionComp(1129) or
@@ -1674,14 +1676,14 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc106: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(45) or
-      PhpKeywordComp(58) then
+  if  PhpKeywordComp(46) or
+      PhpKeywordComp(59) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(214) or
-        PhpFunctionComp(403) or
-        PhpFunctionComp(506) or
-        PhpFunctionComp(651) or
+    if  PhpFunctionComp(215) or
+        PhpFunctionComp(404) or
+        PhpFunctionComp(507) or
+        PhpFunctionComp(652) or
         PhpFunctionComp(798) or
         PhpFunctionComp(1444) or
         PhpFunctionComp(1455) or
@@ -1708,11 +1710,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc107: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(162) or
-      PhpFunctionComp(386) or
-      PhpFunctionComp(490) or
-      PhpFunctionComp(551) or
-      PhpFunctionComp(717) or
+  if  PhpFunctionComp(163) or
+      PhpFunctionComp(387) or
+      PhpFunctionComp(491) or
+      PhpFunctionComp(552) or
+      PhpFunctionComp(718) or
       PhpFunctionComp(1249) or
       PhpFunctionComp(1275) or
       PhpFunctionComp(1426) or
@@ -1749,10 +1751,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc108: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(440) or
-      PhpFunctionComp(500) or
-      PhpFunctionComp(650) or
-      PhpFunctionComp(766) or
+  if  PhpFunctionComp(441) or
+      PhpFunctionComp(501) or
+      PhpFunctionComp(651) or
+      PhpFunctionComp(767) or
       PhpFunctionComp(1095) or
       PhpFunctionComp(1105) or
       PhpFunctionComp(1261) or
@@ -1780,9 +1782,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc109: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(238) or
-      PhpFunctionComp(656) or
-      PhpFunctionComp(748) or
+  if  PhpFunctionComp(239) or
+      PhpFunctionComp(657) or
+      PhpFunctionComp(749) or
       PhpFunctionComp(939) or
       PhpFunctionComp(1152) or
       PhpFunctionComp(1213) or
@@ -1816,9 +1818,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc110: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(227) or
-      PhpFunctionComp(247) or
-      PhpFunctionComp(434) or
+  if  PhpFunctionComp(228) or
+      PhpFunctionComp(248) or
+      PhpFunctionComp(435) or
       PhpFunctionComp(1017) or
       PhpFunctionComp(1109) or
       PhpFunctionComp(1145) or
@@ -1850,16 +1852,16 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc111: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(31) then
+  if  PhpKeywordComp(32) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(126) or
-        PhpFunctionComp(223) or
-        PhpFunctionComp(235) or
-        PhpFunctionComp(425) or
-        PhpFunctionComp(575) or
-        PhpFunctionComp(640) or
-        PhpFunctionComp(682) or
+    if  PhpFunctionComp(127) or
+        PhpFunctionComp(224) or
+        PhpFunctionComp(236) or
+        PhpFunctionComp(426) or
+        PhpFunctionComp(576) or
+        PhpFunctionComp(641) or
+        PhpFunctionComp(683) or
         PhpFunctionComp(1228) or
         PhpFunctionComp(1468) or
         PhpFunctionComp(1731) or
@@ -1887,9 +1889,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc112: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(388) or
-      PhpFunctionComp(465) or
-      PhpFunctionComp(654) or
+  if  PhpFunctionComp(389) or
+      PhpFunctionComp(466) or
+      PhpFunctionComp(655) or
       PhpFunctionComp(1691) or
       PhpFunctionComp(1693) or
       PhpFunctionComp(1992) or
@@ -1909,9 +1911,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc113: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(319) or
-      PhpFunctionComp(497) or
-      PhpFunctionComp(629) or
+  if  PhpFunctionComp(320) or
+      PhpFunctionComp(498) or
+      PhpFunctionComp(630) or
       PhpFunctionComp(1797) or
       PhpFunctionComp(1802) or
       PhpFunctionComp(1899) or
@@ -1938,9 +1940,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc114: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(314) or
-      PhpFunctionComp(524) or
-      PhpFunctionComp(578) or
+  if  PhpFunctionComp(315) or
+      PhpFunctionComp(525) or
+      PhpFunctionComp(579) or
       PhpFunctionComp(1150) or
       PhpFunctionComp(1452) or
       PhpFunctionComp(1497) or
@@ -1972,9 +1974,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc115: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(142) or
-      PhpFunctionComp(530) or
-      PhpFunctionComp(703) or
+  if  PhpFunctionComp(143) or
+      PhpFunctionComp(531) or
+      PhpFunctionComp(704) or
       PhpFunctionComp(1156) or
       PhpFunctionComp(1184) or
       PhpFunctionComp(1365) or
@@ -2003,12 +2005,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc116: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(141) or
-      PhpFunctionComp(237) or
-      PhpFunctionComp(431) or
-      PhpFunctionComp(583) or
-      PhpFunctionComp(712) or
-      PhpFunctionComp(764) or
+  if  PhpFunctionComp(142) or
+      PhpFunctionComp(238) or
+      PhpFunctionComp(432) or
+      PhpFunctionComp(584) or
+      PhpFunctionComp(713) or
+      PhpFunctionComp(765) or
       PhpFunctionComp(1185) or
       PhpFunctionComp(1331) or
       PhpFunctionComp(1351) or
@@ -2040,11 +2042,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc117: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(75) or
-      PhpFunctionComp(108) or
-      PhpFunctionComp(233) or
-      PhpFunctionComp(479) or
-      PhpFunctionComp(536) or
+  if  PhpFunctionComp(76) or
+      PhpFunctionComp(109) or
+      PhpFunctionComp(234) or
+      PhpFunctionComp(480) or
+      PhpFunctionComp(537) or
       PhpFunctionComp(1059) or
       PhpFunctionComp(1200) or
       PhpFunctionComp(1409) or
@@ -2082,8 +2084,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc118: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(492) or
-      PhpFunctionComp(725) or
+  if  PhpFunctionComp(493) or
+      PhpFunctionComp(726) or
       PhpFunctionComp(1104) or
       PhpFunctionComp(1279) or
       PhpFunctionComp(1405) or
@@ -2117,12 +2119,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc119: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(189) or
-      PhpFunctionComp(231) or
-      PhpFunctionComp(313) or
-      PhpFunctionComp(368) or
-      PhpFunctionComp(430) or
-      PhpFunctionComp(493) or
+  if  PhpFunctionComp(190) or
+      PhpFunctionComp(232) or
+      PhpFunctionComp(314) or
+      PhpFunctionComp(369) or
+      PhpFunctionComp(431) or
+      PhpFunctionComp(494) or
       PhpFunctionComp(796) or
       PhpFunctionComp(955) or
       PhpFunctionComp(1208) or
@@ -2152,10 +2154,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc120: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(204) or
-      PhpFunctionComp(604) or
-      PhpFunctionComp(677) or
-      PhpFunctionComp(684) or
+  if  PhpFunctionComp(205) or
+      PhpFunctionComp(605) or
+      PhpFunctionComp(678) or
+      PhpFunctionComp(685) or
       PhpFunctionComp(1519) or
       PhpFunctionComp(1526) or
       PhpFunctionComp(1718) or
@@ -2189,10 +2191,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc121: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(130) or
-      PhpFunctionComp(280) or
-      PhpFunctionComp(422) or
-      PhpFunctionComp(596) or
+  if  PhpFunctionComp(131) or
+      PhpFunctionComp(281) or
+      PhpFunctionComp(423) or
+      PhpFunctionComp(597) or
       PhpFunctionComp(793) or
       PhpFunctionComp(1232) or
       PhpFunctionComp(1363) or
@@ -2226,12 +2228,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc122: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(199) or
-      PhpFunctionComp(409) or
-      PhpFunctionComp(438) or
-      PhpFunctionComp(485) or
-      PhpFunctionComp(747) or
-      PhpFunctionComp(767) or
+  if  PhpFunctionComp(200) or
+      PhpFunctionComp(410) or
+      PhpFunctionComp(439) or
+      PhpFunctionComp(486) or
+      PhpFunctionComp(748) or
+      PhpFunctionComp(768) or
       PhpFunctionComp(1151) or
       PhpFunctionComp(1760) or
       PhpFunctionComp(1768) or
@@ -2278,9 +2280,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc123: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(221) or
-      PhpFunctionComp(594) or
-      PhpFunctionComp(707) or
+  if  PhpFunctionComp(222) or
+      PhpFunctionComp(595) or
+      PhpFunctionComp(708) or
       PhpFunctionComp(1066) or
       PhpFunctionComp(1166) or
       PhpFunctionComp(1607) or
@@ -2319,15 +2321,15 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc124: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(205) or
-      PhpFunctionComp(268) or
-      PhpFunctionComp(383) or
-      PhpFunctionComp(466) or
-      PhpFunctionComp(502) or
-      PhpFunctionComp(525) or
-      PhpFunctionComp(580) or
-      PhpFunctionComp(680) or
-      PhpFunctionComp(729) or
+  if  PhpFunctionComp(206) or
+      PhpFunctionComp(269) or
+      PhpFunctionComp(384) or
+      PhpFunctionComp(467) or
+      PhpFunctionComp(503) or
+      PhpFunctionComp(526) or
+      PhpFunctionComp(581) or
+      PhpFunctionComp(681) or
+      PhpFunctionComp(730) or
       PhpFunctionComp(1446) or
       PhpFunctionComp(1453) or
       PhpFunctionComp(1582) or
@@ -2361,10 +2363,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc125: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(140) or
-      PhpFunctionComp(234) or
-      PhpFunctionComp(277) or
-      PhpFunctionComp(454) or
+  if  PhpFunctionComp(141) or
+      PhpFunctionComp(235) or
+      PhpFunctionComp(278) or
+      PhpFunctionComp(455) or
       PhpFunctionComp(1098) or
       PhpFunctionComp(1167) or
       PhpFunctionComp(1819) or
@@ -2402,18 +2404,18 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc126: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(42) then
+  if  PhpKeywordComp(43) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(131) or
-        PhpFunctionComp(260) or
-        PhpFunctionComp(332) or
-        PhpFunctionComp(345) or
-        PhpFunctionComp(348) or
-        PhpFunctionComp(483) or
-        PhpFunctionComp(634) or
-        PhpFunctionComp(693) or
-        PhpFunctionComp(726) or
+    if  PhpFunctionComp(132) or
+        PhpFunctionComp(261) or
+        PhpFunctionComp(333) or
+        PhpFunctionComp(346) or
+        PhpFunctionComp(349) or
+        PhpFunctionComp(484) or
+        PhpFunctionComp(635) or
+        PhpFunctionComp(694) or
+        PhpFunctionComp(727) or
         PhpFunctionComp(1157) or
         PhpFunctionComp(1188) or
         PhpFunctionComp(1416) or
@@ -2446,9 +2448,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc127: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(148) or
-      PhpFunctionComp(229) or
-      PhpFunctionComp(236) or
+  if  PhpFunctionComp(149) or
+      PhpFunctionComp(230) or
+      PhpFunctionComp(237) or
       PhpFunctionComp(1785) or
       PhpFunctionComp(1966) or
       PhpFunctionComp(2079) or
@@ -2479,18 +2481,18 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc128: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(112) or
-      PhpFunctionComp(202) or
-      PhpFunctionComp(393) or
-      PhpFunctionComp(417) or
-      PhpFunctionComp(449) or
-      PhpFunctionComp(503) or
-      PhpFunctionComp(549) or
-      PhpFunctionComp(600) or
-      PhpFunctionComp(602) or
-      PhpFunctionComp(713) or
-      PhpFunctionComp(750) or
-      PhpFunctionComp(763) or
+  if  PhpFunctionComp(113) or
+      PhpFunctionComp(203) or
+      PhpFunctionComp(394) or
+      PhpFunctionComp(418) or
+      PhpFunctionComp(450) or
+      PhpFunctionComp(504) or
+      PhpFunctionComp(550) or
+      PhpFunctionComp(601) or
+      PhpFunctionComp(603) or
+      PhpFunctionComp(714) or
+      PhpFunctionComp(751) or
+      PhpFunctionComp(764) or
       PhpFunctionComp(1241) or
       PhpFunctionComp(1273) or
       PhpFunctionComp(1290) or
@@ -2513,10 +2515,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc129: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(209) or
-      PhpFunctionComp(437) or
-      PhpFunctionComp(563) or
-      PhpFunctionComp(657) or
+  if  PhpFunctionComp(210) or
+      PhpFunctionComp(438) or
+      PhpFunctionComp(564) or
+      PhpFunctionComp(658) or
       PhpFunctionComp(1146) or
       PhpFunctionComp(1195) or
       PhpFunctionComp(1757) or
@@ -2544,14 +2546,14 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc130: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(61) then
+  if  PhpKeywordComp(62) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(303) or
-        PhpFunctionComp(489) or
-        PhpFunctionComp(505) or
-        PhpFunctionComp(561) or
-        PhpFunctionComp(662) or
+    if  PhpFunctionComp(304) or
+        PhpFunctionComp(490) or
+        PhpFunctionComp(506) or
+        PhpFunctionComp(562) or
+        PhpFunctionComp(663) or
         PhpFunctionComp(789) or
         PhpFunctionComp(797) or
         PhpFunctionComp(1147) or
@@ -2589,8 +2591,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc131: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(118) or
-      PhpFunctionComp(312) or
+  if  PhpFunctionComp(119) or
+      PhpFunctionComp(313) or
       PhpFunctionComp(1082) or
       PhpFunctionComp(1097) or
       PhpFunctionComp(1223) or
@@ -2629,11 +2631,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc132: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(76) or
-      PhpFunctionComp(198) or
-      PhpFunctionComp(544) or
-      PhpFunctionComp(565) or
-      PhpFunctionComp(705) or
+  if  PhpFunctionComp(77) or
+      PhpFunctionComp(199) or
+      PhpFunctionComp(545) or
+      PhpFunctionComp(566) or
+      PhpFunctionComp(706) or
       PhpFunctionComp(799) or
       PhpFunctionComp(802) or
       PhpFunctionComp(1003) or
@@ -2671,13 +2673,13 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc133: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(53) then
+  if  PhpKeywordComp(54) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(213) or
-        PhpFunctionComp(357) or
-        PhpFunctionComp(421) or
-        PhpFunctionComp(469) or
+    if  PhpFunctionComp(214) or
+        PhpFunctionComp(358) or
+        PhpFunctionComp(422) or
+        PhpFunctionComp(470) or
         PhpFunctionComp(1292) or
         PhpFunctionComp(1672) or
         PhpFunctionComp(1717) or
@@ -2702,9 +2704,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc134: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(411) or
-      PhpFunctionComp(695) or
-      PhpFunctionComp(714) or
+  if  PhpFunctionComp(412) or
+      PhpFunctionComp(696) or
+      PhpFunctionComp(715) or
       PhpFunctionComp(1161) or
       PhpFunctionComp(1745) or
       PhpFunctionComp(2141) or
@@ -2735,16 +2737,16 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc135: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(80) or
-      PhpFunctionComp(146) or
-      PhpFunctionComp(304) or
-      PhpFunctionComp(341) or
-      PhpFunctionComp(413) or
-      PhpFunctionComp(598) or
-      PhpFunctionComp(601) or
-      PhpFunctionComp(653) or
-      PhpFunctionComp(730) or
-      PhpFunctionComp(743) or
+  if  PhpFunctionComp(81) or
+      PhpFunctionComp(147) or
+      PhpFunctionComp(305) or
+      PhpFunctionComp(342) or
+      PhpFunctionComp(414) or
+      PhpFunctionComp(599) or
+      PhpFunctionComp(602) or
+      PhpFunctionComp(654) or
+      PhpFunctionComp(731) or
+      PhpFunctionComp(744) or
       PhpFunctionComp(928) or
       PhpFunctionComp(1106) or
       PhpFunctionComp(1298) or
@@ -2770,14 +2772,14 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc136: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(117) or
-      PhpFunctionComp(328) or
-      PhpFunctionComp(379) or
-      PhpFunctionComp(387) or
-      PhpFunctionComp(491) or
-      PhpFunctionComp(538) or
-      PhpFunctionComp(573) or
-      PhpFunctionComp(627) or
+  if  PhpFunctionComp(118) or
+      PhpFunctionComp(329) or
+      PhpFunctionComp(380) or
+      PhpFunctionComp(388) or
+      PhpFunctionComp(492) or
+      PhpFunctionComp(539) or
+      PhpFunctionComp(574) or
+      PhpFunctionComp(628) or
       PhpFunctionComp(1049) or
       PhpFunctionComp(1334) or
       PhpFunctionComp(1761) or
@@ -2810,11 +2812,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc137: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(439) or
-      PhpFunctionComp(539) or
-      PhpFunctionComp(545) or
-      PhpFunctionComp(665) or
-      PhpFunctionComp(728) or
+  if  PhpFunctionComp(440) or
+      PhpFunctionComp(540) or
+      PhpFunctionComp(546) or
+      PhpFunctionComp(666) or
+      PhpFunctionComp(729) or
       PhpFunctionComp(1029) or
       PhpFunctionComp(1120) or
       PhpFunctionComp(1165) or
@@ -2872,10 +2874,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc139: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(461) or
-      PhpFunctionComp(481) or
-      PhpFunctionComp(579) or
-      PhpFunctionComp(666) or
+  if  PhpFunctionComp(462) or
+      PhpFunctionComp(482) or
+      PhpFunctionComp(580) or
+      PhpFunctionComp(667) or
       PhpFunctionComp(1148) or
       PhpFunctionComp(1265) or
       PhpFunctionComp(1324) or
@@ -2917,13 +2919,13 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc140: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(78) or
-      PhpFunctionComp(426) or
-      PhpFunctionComp(531) or
-      PhpFunctionComp(595) or
-      PhpFunctionComp(599) or
-      PhpFunctionComp(652) or
-      PhpFunctionComp(719) or
+  if  PhpFunctionComp(79) or
+      PhpFunctionComp(427) or
+      PhpFunctionComp(532) or
+      PhpFunctionComp(596) or
+      PhpFunctionComp(600) or
+      PhpFunctionComp(653) or
+      PhpFunctionComp(720) or
       PhpFunctionComp(1023) or
       PhpFunctionComp(1149) or
       PhpFunctionComp(1193) or
@@ -2956,12 +2958,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc141: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(147) or
-      PhpFunctionComp(519) or
-      PhpFunctionComp(569) or
-      PhpFunctionComp(576) or
-      PhpFunctionComp(585) or
-      PhpFunctionComp(754) or
+  if  PhpFunctionComp(148) or
+      PhpFunctionComp(520) or
+      PhpFunctionComp(570) or
+      PhpFunctionComp(577) or
+      PhpFunctionComp(586) or
+      PhpFunctionComp(755) or
       PhpFunctionComp(1175) or
       PhpFunctionComp(1219) or
       PhpFunctionComp(1314) or
@@ -2996,12 +2998,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc142: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(119) or
-      PhpFunctionComp(128) or
-      PhpFunctionComp(494) or
-      PhpFunctionComp(499) or
-      PhpFunctionComp(715) or
-      PhpFunctionComp(738) or
+  if  PhpFunctionComp(120) or
+      PhpFunctionComp(129) or
+      PhpFunctionComp(495) or
+      PhpFunctionComp(500) or
+      PhpFunctionComp(716) or
+      PhpFunctionComp(739) or
       PhpFunctionComp(1046) or
       PhpFunctionComp(1183) or
       PhpFunctionComp(1554) or
@@ -3038,11 +3040,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc143: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(132) or
-      PhpFunctionComp(246) or
-      PhpFunctionComp(443) or
-      PhpFunctionComp(477) or
-      PhpFunctionComp(496) or
+  if  PhpFunctionComp(133) or
+      PhpFunctionComp(247) or
+      PhpFunctionComp(444) or
+      PhpFunctionComp(478) or
+      PhpFunctionComp(497) or
       PhpFunctionComp(1065) or
       PhpFunctionComp(1108) or
       PhpFunctionComp(1500) or
@@ -3078,10 +3080,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc144: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(120) or
-      PhpFunctionComp(587) or
-      PhpFunctionComp(716) or
-      PhpFunctionComp(732) or
+  if  PhpFunctionComp(121) or
+      PhpFunctionComp(588) or
+      PhpFunctionComp(717) or
+      PhpFunctionComp(733) or
       PhpFunctionComp(1034) or
       PhpFunctionComp(1123) or
       PhpFunctionComp(1371) or
@@ -3111,12 +3113,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc145: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(208) or
-      PhpFunctionComp(329) or
-      PhpFunctionComp(498) or
-      PhpFunctionComp(605) or
-      PhpFunctionComp(668) or
-      PhpFunctionComp(691) or
+  if  PhpFunctionComp(209) or
+      PhpFunctionComp(330) or
+      PhpFunctionComp(499) or
+      PhpFunctionComp(606) or
+      PhpFunctionComp(669) or
+      PhpFunctionComp(692) or
       PhpFunctionComp(1007) or
       PhpFunctionComp(1117) or
       PhpFunctionComp(1400) or
@@ -3154,12 +3156,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc146: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(113) or
-      PhpFunctionComp(133) or
-      PhpFunctionComp(325) or
-      PhpFunctionComp(495) or
-      PhpFunctionComp(541) or
-      PhpFunctionComp(718) or
+  if  PhpFunctionComp(114) or
+      PhpFunctionComp(134) or
+      PhpFunctionComp(326) or
+      PhpFunctionComp(496) or
+      PhpFunctionComp(542) or
+      PhpFunctionComp(719) or
       PhpFunctionComp(1021) or
       PhpFunctionComp(1100) or
       PhpFunctionComp(1142) or
@@ -3196,11 +3198,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc147: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(127) or
-      PhpFunctionComp(300) or
-      PhpFunctionComp(360) or
-      PhpFunctionComp(522) or
-      PhpFunctionComp(723) or
+  if  PhpFunctionComp(128) or
+      PhpFunctionComp(301) or
+      PhpFunctionComp(361) or
+      PhpFunctionComp(523) or
+      PhpFunctionComp(724) or
       PhpFunctionComp(1067) or
       PhpFunctionComp(1144) or
       PhpFunctionComp(1406) or
@@ -3237,11 +3239,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc148: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(98) or
-      PhpFunctionComp(157) or
-      PhpFunctionComp(327) or
-      PhpFunctionComp(692) or
-      PhpFunctionComp(740) or
+  if  PhpFunctionComp(99) or
+      PhpFunctionComp(158) or
+      PhpFunctionComp(328) or
+      PhpFunctionComp(693) or
+      PhpFunctionComp(741) or
       PhpFunctionComp(1018) or
       PhpFunctionComp(1154) or
       PhpFunctionComp(1212) or
@@ -3279,9 +3281,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc149: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(377) or
-      PhpFunctionComp(515) or
-      PhpFunctionComp(721) or
+  if  PhpFunctionComp(378) or
+      PhpFunctionComp(516) or
+      PhpFunctionComp(722) or
       PhpFunctionComp(1135) or
       PhpFunctionComp(1203) or
       PhpFunctionComp(1291) or
@@ -3319,13 +3321,13 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc150: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(211) or
-      PhpFunctionComp(244) or
-      PhpFunctionComp(358) or
-      PhpFunctionComp(384) or
-      PhpFunctionComp(534) or
-      PhpFunctionComp(648) or
-      PhpFunctionComp(727) or
+  if  PhpFunctionComp(212) or
+      PhpFunctionComp(245) or
+      PhpFunctionComp(359) or
+      PhpFunctionComp(385) or
+      PhpFunctionComp(535) or
+      PhpFunctionComp(649) or
+      PhpFunctionComp(728) or
       PhpFunctionComp(1024) or
       PhpFunctionComp(1027) or
       PhpFunctionComp(1214) or
@@ -3362,7 +3364,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc151: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(143) or
+  if  PhpFunctionComp(144) or
       PhpFunctionComp(1173) or
       PhpFunctionComp(1186) or
       PhpFunctionComp(1777) or
@@ -3386,11 +3388,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc152: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(129) or
-      PhpFunctionComp(380) or
-      PhpFunctionComp(390) or
-      PhpFunctionComp(669) or
-      PhpFunctionComp(737) or
+  if  PhpFunctionComp(130) or
+      PhpFunctionComp(381) or
+      PhpFunctionComp(391) or
+      PhpFunctionComp(670) or
+      PhpFunctionComp(738) or
       PhpFunctionComp(968) or
       PhpFunctionComp(1030) or
       PhpFunctionComp(1035) or
@@ -3431,13 +3433,13 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc153: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(123) or
-      PhpFunctionComp(124) or
-      PhpFunctionComp(394) or
-      PhpFunctionComp(447) or
-      PhpFunctionComp(456) or
-      PhpFunctionComp(554) or
-      PhpFunctionComp(591) or
+  if  PhpFunctionComp(124) or
+      PhpFunctionComp(125) or
+      PhpFunctionComp(395) or
+      PhpFunctionComp(448) or
+      PhpFunctionComp(457) or
+      PhpFunctionComp(555) or
+      PhpFunctionComp(592) or
       PhpFunctionComp(1163) or
       PhpFunctionComp(1207) or
       PhpFunctionComp(1218) or
@@ -3468,13 +3470,13 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc154: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(90) or
-      PhpFunctionComp(121) or
-      PhpFunctionComp(298) or
-      PhpFunctionComp(311) or
-      PhpFunctionComp(487) or
-      PhpFunctionComp(699) or
-      PhpFunctionComp(771) or
+  if  PhpFunctionComp(91) or
+      PhpFunctionComp(122) or
+      PhpFunctionComp(299) or
+      PhpFunctionComp(312) or
+      PhpFunctionComp(488) or
+      PhpFunctionComp(700) or
+      PhpFunctionComp(772) or
       PhpFunctionComp(788) or
       PhpFunctionComp(1031) or
       PhpFunctionComp(1164) or
@@ -3511,10 +3513,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc155: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(151) or
-      PhpFunctionComp(160) or
-      PhpFunctionComp(232) or
-      PhpFunctionComp(731) or
+  if  PhpFunctionComp(152) or
+      PhpFunctionComp(161) or
+      PhpFunctionComp(233) or
+      PhpFunctionComp(732) or
       PhpFunctionComp(794) or
       PhpFunctionComp(951) or
       PhpFunctionComp(1160) or
@@ -3552,11 +3554,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc156: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(258) or
-      PhpFunctionComp(343) or
-      PhpFunctionComp(424) or
-      PhpFunctionComp(516) or
-      PhpFunctionComp(564) or
+  if  PhpFunctionComp(259) or
+      PhpFunctionComp(344) or
+      PhpFunctionComp(425) or
+      PhpFunctionComp(517) or
+      PhpFunctionComp(565) or
       PhpFunctionComp(1069) or
       PhpFunctionComp(1134) or
       PhpFunctionComp(1428) or
@@ -3590,8 +3592,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc157: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(501) or
-      PhpFunctionComp(523) or
+  if  PhpFunctionComp(502) or
+      PhpFunctionComp(524) or
       PhpFunctionComp(880) or
       PhpFunctionComp(1143) or
       PhpFunctionComp(1317) or
@@ -3630,9 +3632,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc158: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(135) or
-      PhpFunctionComp(335) or
-      PhpFunctionComp(428) or
+  if  PhpFunctionComp(136) or
+      PhpFunctionComp(336) or
+      PhpFunctionComp(429) or
       PhpFunctionComp(907) or
       PhpFunctionComp(988) or
       PhpFunctionComp(1170) or
@@ -3669,8 +3671,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc159: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(77) or
-      PhpFunctionComp(278) or
+  if  PhpFunctionComp(78) or
+      PhpFunctionComp(279) or
       PhpFunctionComp(823) or
       PhpFunctionComp(925) or
       PhpFunctionComp(1028) or
@@ -3710,10 +3712,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc160: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(228) or
-      PhpFunctionComp(245) or
-      PhpFunctionComp(532) or
-      PhpFunctionComp(610) or
+  if  PhpFunctionComp(229) or
+      PhpFunctionComp(246) or
+      PhpFunctionComp(533) or
+      PhpFunctionComp(611) or
       PhpFunctionComp(1062) or
       PhpFunctionComp(1229) or
       PhpFunctionComp(1407) or
@@ -3758,15 +3760,15 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc161: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(84) or
-      PhpFunctionComp(107) or
-      PhpFunctionComp(262) or
-      PhpFunctionComp(323) or
-      PhpFunctionComp(410) or
-      PhpFunctionComp(470) or
-      PhpFunctionComp(543) or
-      PhpFunctionComp(597) or
-      PhpFunctionComp(696) or
+  if  PhpFunctionComp(85) or
+      PhpFunctionComp(108) or
+      PhpFunctionComp(263) or
+      PhpFunctionComp(324) or
+      PhpFunctionComp(411) or
+      PhpFunctionComp(471) or
+      PhpFunctionComp(544) or
+      PhpFunctionComp(598) or
+      PhpFunctionComp(697) or
       PhpFunctionComp(1033) or
       PhpFunctionComp(1159) or
       PhpFunctionComp(1197) or
@@ -3801,9 +3803,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc162: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(89) or
-      PhpFunctionComp(305) or
-      PhpFunctionComp(559) or
+  if  PhpFunctionComp(90) or
+      PhpFunctionComp(306) or
+      PhpFunctionComp(560) or
       PhpFunctionComp(879) or
       PhpFunctionComp(1130) or
       PhpFunctionComp(1155) or
@@ -3842,11 +3844,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc163: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(91) or
-      PhpFunctionComp(316) or
-      PhpFunctionComp(321) or
-      PhpFunctionComp(467) or
-      PhpFunctionComp(473) or
+  if  PhpFunctionComp(92) or
+      PhpFunctionComp(317) or
+      PhpFunctionComp(322) or
+      PhpFunctionComp(468) or
+      PhpFunctionComp(474) or
       PhpFunctionComp(800) or
       PhpFunctionComp(1053) or
       PhpFunctionComp(1357) or
@@ -3874,9 +3876,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc164: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(435) or
-      PhpFunctionComp(520) or
-      PhpFunctionComp(655) or
+  if  PhpFunctionComp(436) or
+      PhpFunctionComp(521) or
+      PhpFunctionComp(656) or
       PhpFunctionComp(1478) or
       PhpFunctionComp(1535) or
       PhpFunctionComp(1753) or
@@ -3905,7 +3907,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc165: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(635) or
+  if  PhpFunctionComp(636) or
       PhpFunctionComp(1319) or
       PhpFunctionComp(1749) or
       PhpFunctionComp(1976) or
@@ -3933,14 +3935,14 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc166: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(210) or
-      PhpFunctionComp(239) or
-      PhpFunctionComp(301) or
-      PhpFunctionComp(391) or
-      PhpFunctionComp(509) or
-      PhpFunctionComp(637) or
-      PhpFunctionComp(660) or
-      PhpFunctionComp(762) or
+  if  PhpFunctionComp(211) or
+      PhpFunctionComp(240) or
+      PhpFunctionComp(302) or
+      PhpFunctionComp(392) or
+      PhpFunctionComp(510) or
+      PhpFunctionComp(638) or
+      PhpFunctionComp(661) or
+      PhpFunctionComp(763) or
       PhpFunctionComp(895) or
       PhpFunctionComp(940) or
       PhpFunctionComp(1083) or
@@ -3978,9 +3980,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc167: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(114) or
-      PhpFunctionComp(302) or
-      PhpFunctionComp(310) or
+  if  PhpFunctionComp(115) or
+      PhpFunctionComp(303) or
+      PhpFunctionComp(311) or
       PhpFunctionComp(1539) or
       PhpFunctionComp(1764) or
       PhpFunctionComp(1828) or
@@ -4008,14 +4010,14 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc168: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(87) or
-      PhpFunctionComp(161) or
-      PhpFunctionComp(261) or
-      PhpFunctionComp(363) or
-      PhpFunctionComp(542) or
-      PhpFunctionComp(586) or
-      PhpFunctionComp(667) or
-      PhpFunctionComp(671) or
+  if  PhpFunctionComp(88) or
+      PhpFunctionComp(162) or
+      PhpFunctionComp(262) or
+      PhpFunctionComp(364) or
+      PhpFunctionComp(543) or
+      PhpFunctionComp(587) or
+      PhpFunctionComp(668) or
+      PhpFunctionComp(672) or
       PhpFunctionComp(913) or
       PhpFunctionComp(1037) or
       PhpFunctionComp(1044) or
@@ -4051,7 +4053,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc169: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(104) or
+  if  PhpFunctionComp(105) or
       PhpFunctionComp(1110) or
       PhpFunctionComp(1541) or
       PhpFunctionComp(1781) or
@@ -4085,11 +4087,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc170: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(81) or
-      PhpFunctionComp(139) or
-      PhpFunctionComp(203) or
-      PhpFunctionComp(734) or
+  if  PhpFunctionComp(82) or
+      PhpFunctionComp(140) or
+      PhpFunctionComp(204) or
       PhpFunctionComp(735) or
+      PhpFunctionComp(736) or
       PhpFunctionComp(801) or
       PhpFunctionComp(1121) or
       PhpFunctionComp(1389) or
@@ -4127,8 +4129,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc171: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(570) or
-      PhpFunctionComp(744) or
+  if  PhpFunctionComp(571) or
+      PhpFunctionComp(745) or
       PhpFunctionComp(1176) or
       PhpFunctionComp(1181) or
       PhpFunctionComp(1378) or
@@ -4174,10 +4176,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc172: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(163) or
-      PhpFunctionComp(446) or
-      PhpFunctionComp(533) or
-      PhpFunctionComp(749) or
+  if  PhpFunctionComp(164) or
+      PhpFunctionComp(447) or
+      PhpFunctionComp(534) or
+      PhpFunctionComp(750) or
       PhpFunctionComp(1102) or
       PhpFunctionComp(1648) or
       PhpFunctionComp(2008) or
@@ -4207,12 +4209,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc173: TSynWebTokenKind;
 begin
-  if  PhpKeywordComp(55) then
+  if  PhpKeywordComp(56) then
     Result := stkPhpKeyword
   else
-    if  PhpFunctionComp(324) or
-        PhpFunctionComp(742) or
-        PhpFunctionComp(753) or
+    if  PhpFunctionComp(325) or
+        PhpFunctionComp(743) or
+        PhpFunctionComp(754) or
         PhpFunctionComp(908) or
         PhpFunctionComp(942) or
         PhpFunctionComp(1702) or
@@ -4247,9 +4249,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc174: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(109) or
-      PhpFunctionComp(745) or
-      PhpFunctionComp(755) or
+  if  PhpFunctionComp(110) or
+      PhpFunctionComp(746) or
+      PhpFunctionComp(756) or
       PhpFunctionComp(831) or
       PhpFunctionComp(889) or
       PhpFunctionComp(1231) or
@@ -4279,8 +4281,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc175: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(159) or
-      PhpFunctionComp(741) or
+  if  PhpFunctionComp(160) or
+      PhpFunctionComp(742) or
       PhpFunctionComp(1177) or
       PhpFunctionComp(1301) or
       PhpFunctionComp(1337) or
@@ -4304,12 +4306,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc176: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(215) or
-      PhpFunctionComp(540) or
-      PhpFunctionComp(546) or
-      PhpFunctionComp(562) or
-      PhpFunctionComp(572) or
-      PhpFunctionComp(608) or
+  if  PhpFunctionComp(216) or
+      PhpFunctionComp(541) or
+      PhpFunctionComp(547) or
+      PhpFunctionComp(563) or
+      PhpFunctionComp(573) or
+      PhpFunctionComp(609) or
       PhpFunctionComp(912) or
       PhpFunctionComp(1424) or
       PhpFunctionComp(1507) or
@@ -4341,12 +4343,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc177: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(79) or
-      PhpFunctionComp(195) or
-      PhpFunctionComp(306) or
-      PhpFunctionComp(401) or
-      PhpFunctionComp(441) or
-      PhpFunctionComp(471) or
+  if  PhpFunctionComp(80) or
+      PhpFunctionComp(196) or
+      PhpFunctionComp(307) or
+      PhpFunctionComp(402) or
+      PhpFunctionComp(442) or
+      PhpFunctionComp(472) or
       PhpFunctionComp(897) or
       PhpFunctionComp(931) or
       PhpFunctionComp(950) or
@@ -4382,8 +4384,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc178: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(385) or
-      PhpFunctionComp(739) or
+  if  PhpFunctionComp(386) or
+      PhpFunctionComp(740) or
       PhpFunctionComp(882) or
       PhpFunctionComp(1009) or
       PhpFunctionComp(1042) or
@@ -4423,9 +4425,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc179: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(116) or
-      PhpFunctionComp(265) or
-      PhpFunctionComp(613) or
+  if  PhpFunctionComp(117) or
+      PhpFunctionComp(266) or
+      PhpFunctionComp(614) or
       PhpFunctionComp(1180) or
       PhpFunctionComp(1284) or
       PhpFunctionComp(1517) or
@@ -4458,9 +4460,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc180: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(359) or
-      PhpFunctionComp(478) or
-      PhpFunctionComp(770) or
+  if  PhpFunctionComp(360) or
+      PhpFunctionComp(479) or
+      PhpFunctionComp(771) or
       PhpFunctionComp(985) or
       PhpFunctionComp(1055) or
       PhpFunctionComp(1716) or
@@ -4496,10 +4498,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc181: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(105) or
-      PhpFunctionComp(149) or
-      PhpFunctionComp(512) or
-      PhpFunctionComp(518) or
+  if  PhpFunctionComp(106) or
+      PhpFunctionComp(150) or
+      PhpFunctionComp(513) or
+      PhpFunctionComp(519) or
       PhpFunctionComp(993) or
       PhpFunctionComp(1140) or
       PhpFunctionComp(1255) or
@@ -4531,10 +4533,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc182: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(74) or
-      PhpFunctionComp(122) or
-      PhpFunctionComp(322) or
-      PhpFunctionComp(507) or
+  if  PhpFunctionComp(75) or
+      PhpFunctionComp(123) or
+      PhpFunctionComp(323) or
+      PhpFunctionComp(508) or
       PhpFunctionComp(1115) or
       PhpFunctionComp(1338) or
       PhpFunctionComp(1530) or
@@ -4565,9 +4567,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc183: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(125) or
-      PhpFunctionComp(508) or
-      PhpFunctionComp(592) or
+  if  PhpFunctionComp(126) or
+      PhpFunctionComp(509) or
+      PhpFunctionComp(593) or
       PhpFunctionComp(893) or
       PhpFunctionComp(1008) or
       PhpFunctionComp(1162) or
@@ -4641,10 +4643,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc185: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(82) or
-      PhpFunctionComp(92) or
-      PhpFunctionComp(115) or
-      PhpFunctionComp(752) or
+  if  PhpFunctionComp(83) or
+      PhpFunctionComp(93) or
+      PhpFunctionComp(116) or
+      PhpFunctionComp(753) or
       PhpFunctionComp(983) or
       PhpFunctionComp(1047) or
       PhpFunctionComp(1171) or
@@ -4681,9 +4683,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc186: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(445) or
-      PhpFunctionComp(722) or
-      PhpFunctionComp(733) or
+  if  PhpFunctionComp(446) or
+      PhpFunctionComp(723) or
+      PhpFunctionComp(734) or
       PhpFunctionComp(1076) or
       PhpFunctionComp(1141) or
       PhpFunctionComp(1844) or
@@ -4718,8 +4720,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc187: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(240) or
-      PhpFunctionComp(645) or
+  if  PhpFunctionComp(241) or
+      PhpFunctionComp(646) or
       PhpFunctionComp(905) or
       PhpFunctionComp(953) or
       PhpFunctionComp(1103) or
@@ -4753,11 +4755,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc188: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(192) or
-      PhpFunctionComp(309) or
-      PhpFunctionComp(381) or
-      PhpFunctionComp(528) or
-      PhpFunctionComp(584) or
+  if  PhpFunctionComp(193) or
+      PhpFunctionComp(310) or
+      PhpFunctionComp(382) or
+      PhpFunctionComp(529) or
+      PhpFunctionComp(585) or
       PhpFunctionComp(904) or
       PhpFunctionComp(1403) or
       PhpFunctionComp(1779) or
@@ -4790,10 +4792,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc189: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(88) or
-      PhpFunctionComp(264) or
-      PhpFunctionComp(484) or
-      PhpFunctionComp(612) or
+  if  PhpFunctionComp(89) or
+      PhpFunctionComp(265) or
+      PhpFunctionComp(485) or
+      PhpFunctionComp(613) or
       PhpFunctionComp(1022) or
       PhpFunctionComp(1536) or
       PhpFunctionComp(1564) or
@@ -4818,9 +4820,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc190: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(254) or
-      PhpFunctionComp(315) or
-      PhpFunctionComp(451) or
+  if  PhpFunctionComp(255) or
+      PhpFunctionComp(316) or
+      PhpFunctionComp(452) or
       PhpFunctionComp(877) or
       PhpFunctionComp(1252) or
       PhpFunctionComp(1278) or
@@ -4851,8 +4853,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc191: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(611) or
-      PhpFunctionComp(670) or
+  if  PhpFunctionComp(612) or
+      PhpFunctionComp(671) or
       PhpFunctionComp(883) or
       PhpFunctionComp(885) or
       PhpFunctionComp(923) or
@@ -4879,8 +4881,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc192: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(177) or
-      PhpFunctionComp(458) or
+  if  PhpFunctionComp(178) or
+      PhpFunctionComp(459) or
       PhpFunctionComp(888) or
       PhpFunctionComp(960) or
       PhpFunctionComp(1086) or
@@ -4909,12 +4911,12 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc193: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(453) or
-      PhpFunctionComp(460) or
-      PhpFunctionComp(514) or
-      PhpFunctionComp(535) or
-      PhpFunctionComp(720) or
-      PhpFunctionComp(724) or
+  if  PhpFunctionComp(454) or
+      PhpFunctionComp(461) or
+      PhpFunctionComp(515) or
+      PhpFunctionComp(536) or
+      PhpFunctionComp(721) or
+      PhpFunctionComp(725) or
       PhpFunctionComp(973) or
       PhpFunctionComp(1005) or
       PhpFunctionComp(1676) or
@@ -4945,7 +4947,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc194: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(144) or
+  if  PhpFunctionComp(145) or
       PhpFunctionComp(954) or
       PhpFunctionComp(1391) or
       PhpFunctionComp(1635) or
@@ -4980,7 +4982,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc195: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(574) or
+  if  PhpFunctionComp(575) or
       PhpFunctionComp(932) or
       PhpFunctionComp(1068) or
       PhpFunctionComp(1302) or
@@ -5035,9 +5037,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc197: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(241) or
-      PhpFunctionComp(326) or
-      PhpFunctionComp(606) or
+  if  PhpFunctionComp(242) or
+      PhpFunctionComp(327) or
+      PhpFunctionComp(607) or
       PhpFunctionComp(970) or
       PhpFunctionComp(974) or
       PhpFunctionComp(1036) or
@@ -5068,8 +5070,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc198: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(342) or
-      PhpFunctionComp(455) or
+  if  PhpFunctionComp(343) or
+      PhpFunctionComp(456) or
       PhpFunctionComp(941) or
       PhpFunctionComp(1383) or
       PhpFunctionComp(1540) or
@@ -5104,8 +5106,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc199: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(170) or
-      PhpFunctionComp(420) or
+  if  PhpFunctionComp(171) or
+      PhpFunctionComp(421) or
       PhpFunctionComp(1072) or
       PhpFunctionComp(1088) or
       PhpFunctionComp(1243) or
@@ -5136,9 +5138,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc200: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(220) or
-      PhpFunctionComp(284) or
-      PhpFunctionComp(433) or
+  if  PhpFunctionComp(221) or
+      PhpFunctionComp(285) or
+      PhpFunctionComp(434) or
       PhpFunctionComp(1395) or
       PhpFunctionComp(1593) or
       PhpFunctionComp(1598) or
@@ -5166,11 +5168,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc201: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(102) or
-      PhpFunctionComp(136) or
-      PhpFunctionComp(448) or
-      PhpFunctionComp(472) or
-      PhpFunctionComp(511) or
+  if  PhpFunctionComp(103) or
+      PhpFunctionComp(137) or
+      PhpFunctionComp(449) or
+      PhpFunctionComp(473) or
+      PhpFunctionComp(512) or
       PhpFunctionComp(837) or
       PhpFunctionComp(911) or
       PhpFunctionComp(1544) or
@@ -5198,8 +5200,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc202: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(463) or
-      PhpFunctionComp(474) or
+  if  PhpFunctionComp(464) or
+      PhpFunctionComp(475) or
       PhpFunctionComp(934) or
       PhpFunctionComp(1296) or
       PhpFunctionComp(1312) or
@@ -5227,7 +5229,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc203: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(259) or
+  if  PhpFunctionComp(260) or
       PhpFunctionComp(896) or
       PhpFunctionComp(1316) or
       PhpFunctionComp(1318) or
@@ -5257,8 +5259,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc204: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(187) or
-      PhpFunctionComp(560) or
+  if  PhpFunctionComp(188) or
+      PhpFunctionComp(561) or
       PhpFunctionComp(1074) or
       PhpFunctionComp(1394) or
       PhpFunctionComp(1673) or
@@ -5288,7 +5290,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc205: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(188) or
+  if  PhpFunctionComp(189) or
       PhpFunctionComp(956) or
       PhpFunctionComp(1138) or
       PhpFunctionComp(1627) or
@@ -5321,11 +5323,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc206: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(83) or
-      PhpFunctionComp(263) or
-      PhpFunctionComp(279) or
-      PhpFunctionComp(373) or
-      PhpFunctionComp(631) or
+  if  PhpFunctionComp(84) or
+      PhpFunctionComp(264) or
+      PhpFunctionComp(280) or
+      PhpFunctionComp(374) or
+      PhpFunctionComp(632) or
       PhpFunctionComp(886) or
       PhpFunctionComp(1476) or
       PhpFunctionComp(1577) or
@@ -5347,7 +5349,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc207: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(751) or
+  if  PhpFunctionComp(752) or
       PhpFunctionComp(967) or
       PhpFunctionComp(1026) or
       PhpFunctionComp(1084) or
@@ -5374,7 +5376,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc208: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(661) or
+  if  PhpFunctionComp(662) or
       PhpFunctionComp(826) or
       PhpFunctionComp(1116) or
       PhpFunctionComp(1767) or
@@ -5399,9 +5401,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc209: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(288) or
-      PhpFunctionComp(521) or
-      PhpFunctionComp(756) or
+  if  PhpFunctionComp(289) or
+      PhpFunctionComp(522) or
+      PhpFunctionComp(757) or
       PhpFunctionComp(1019) or
       PhpFunctionComp(2242) or
       PhpFunctionComp(2260) or
@@ -5423,7 +5425,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc210: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(225) or
+  if  PhpFunctionComp(226) or
       PhpFunctionComp(1257) or
       PhpFunctionComp(2290) or
       PhpFunctionComp(2891) or
@@ -5447,7 +5449,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc211: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(374) or
+  if  PhpFunctionComp(375) or
       PhpFunctionComp(957) or
       PhpFunctionComp(1020) or
       PhpFunctionComp(1488) or
@@ -5479,9 +5481,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc212: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(154) or
-      PhpFunctionComp(402) or
-      PhpFunctionComp(468) or
+  if  PhpFunctionComp(155) or
+      PhpFunctionComp(403) or
+      PhpFunctionComp(469) or
       PhpFunctionComp(804) or
       PhpFunctionComp(824) or
       PhpFunctionComp(1626) or
@@ -5506,8 +5508,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc213: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(145) or
-      PhpFunctionComp(529) or
+  if  PhpFunctionComp(146) or
+      PhpFunctionComp(530) or
       PhpFunctionComp(1970) or
       PhpFunctionComp(2568) or
       PhpFunctionComp(2703) or
@@ -5531,10 +5533,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc214: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(317) or
-      PhpFunctionComp(452) or
-      PhpFunctionComp(537) or
-      PhpFunctionComp(625) or
+  if  PhpFunctionComp(318) or
+      PhpFunctionComp(453) or
+      PhpFunctionComp(538) or
+      PhpFunctionComp(626) or
       PhpFunctionComp(1178) or
       PhpFunctionComp(1307) or
       PhpFunctionComp(1654) or
@@ -5557,8 +5559,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc215: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(367) or
-      PhpFunctionComp(607) or
+  if  PhpFunctionComp(368) or
+      PhpFunctionComp(608) or
       PhpFunctionComp(977) or
       PhpFunctionComp(1050) or
       PhpFunctionComp(1191) or
@@ -5582,11 +5584,11 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc216: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(180) or
-      PhpFunctionComp(206) or
-      PhpFunctionComp(419) or
-      PhpFunctionComp(616) or
-      PhpFunctionComp(618) or
+  if  PhpFunctionComp(181) or
+      PhpFunctionComp(207) or
+      PhpFunctionComp(420) or
+      PhpFunctionComp(617) or
+      PhpFunctionComp(619) or
       PhpFunctionComp(910) or
       PhpFunctionComp(1056) or
       PhpFunctionComp(1425) or
@@ -5614,8 +5616,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc217: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(217) or
-      PhpFunctionComp(399) or
+  if  PhpFunctionComp(218) or
+      PhpFunctionComp(400) or
       PhpFunctionComp(803) or
       PhpFunctionComp(978) or
       PhpFunctionComp(1051) or
@@ -5643,9 +5645,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc218: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(362) or
-      PhpFunctionComp(364) or
-      PhpFunctionComp(392) or
+  if  PhpFunctionComp(363) or
+      PhpFunctionComp(365) or
+      PhpFunctionComp(393) or
       PhpFunctionComp(1533) or
       PhpFunctionComp(2049) or
       PhpFunctionComp(2783) or
@@ -5668,7 +5670,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc219: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(344) or
+  if  PhpFunctionComp(345) or
       PhpFunctionComp(838) or
       PhpFunctionComp(952) or
       PhpFunctionComp(1114) or
@@ -5695,9 +5697,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc220: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(103) or
-      PhpFunctionComp(137) or
-      PhpFunctionComp(614) or
+  if  PhpFunctionComp(104) or
+      PhpFunctionComp(138) or
+      PhpFunctionComp(615) or
       PhpFunctionComp(1397) or
       PhpFunctionComp(1495) or
       PhpFunctionComp(1671) or
@@ -5746,10 +5748,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc222: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(165) or
-      PhpFunctionComp(171) or
-      PhpFunctionComp(281) or
-      PhpFunctionComp(307) or
+  if  PhpFunctionComp(166) or
+      PhpFunctionComp(172) or
+      PhpFunctionComp(282) or
+      PhpFunctionComp(308) or
       PhpFunctionComp(1139) or
       PhpFunctionComp(2699) or
       PhpFunctionComp(2759) or
@@ -5769,8 +5771,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc223: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(267) or
-      PhpFunctionComp(299) or
+  if  PhpFunctionComp(268) or
+      PhpFunctionComp(300) or
       PhpFunctionComp(834) or
       PhpFunctionComp(1576) or
       PhpFunctionComp(2498) or
@@ -5787,9 +5789,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc224: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(266) or
-      PhpFunctionComp(615) or
-      PhpFunctionComp(736) or
+  if  PhpFunctionComp(267) or
+      PhpFunctionComp(616) or
+      PhpFunctionComp(737) or
       PhpFunctionComp(989) or
       PhpFunctionComp(1153) or
       PhpFunctionComp(1868) or
@@ -5821,9 +5823,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc225: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(296) or
-      PhpFunctionComp(365) or
-      PhpFunctionComp(372) or
+  if  PhpFunctionComp(297) or
+      PhpFunctionComp(366) or
+      PhpFunctionComp(373) or
       PhpFunctionComp(2497) or
       PhpFunctionComp(2713) or
       PhpFunctionComp(2735) or
@@ -5839,8 +5841,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc226: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(138) or
-      PhpFunctionComp(320) or
+  if  PhpFunctionComp(139) or
+      PhpFunctionComp(321) or
       PhpFunctionComp(1892) or
       PhpFunctionComp(1968) or
       PhpFunctionComp(2024) or
@@ -5859,7 +5861,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc227: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(457) or
+  if  PhpFunctionComp(458) or
       PhpFunctionComp(832) or
       PhpFunctionComp(903) or
       PhpFunctionComp(961) or
@@ -5922,8 +5924,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc230: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(248) or
-      PhpFunctionComp(404) or
+  if  PhpFunctionComp(249) or
+      PhpFunctionComp(405) or
       PhpFunctionComp(2196) or
       PhpFunctionComp(3013) or
       PhpFunctionComp(3055) or
@@ -5940,8 +5942,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc231: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(224) or
-      PhpFunctionComp(378) or
+  if  PhpFunctionComp(225) or
+      PhpFunctionComp(379) or
       PhpFunctionComp(1618) or
       PhpFunctionComp(2667) or
       PhpFunctionComp(3345) or
@@ -5958,7 +5960,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc232: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(568) or
+  if  PhpFunctionComp(569) or
       PhpFunctionComp(890) or
       PhpFunctionComp(1132) or
       PhpFunctionComp(1299) or
@@ -5980,7 +5982,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc233: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(216) or
+  if  PhpFunctionComp(217) or
       PhpFunctionComp(884) or
       PhpFunctionComp(976) or
       PhpFunctionComp(2457) or
@@ -5999,8 +6001,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc234: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(85) or
-      PhpFunctionComp(567) or
+  if  PhpFunctionComp(86) or
+      PhpFunctionComp(568) or
       PhpFunctionComp(1192) or
       PhpFunctionComp(1557) or
       PhpFunctionComp(1657) or
@@ -6024,7 +6026,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc235: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(620) or
+  if  PhpFunctionComp(621) or
       PhpFunctionComp(906) or
       PhpFunctionComp(1283) or
       PhpFunctionComp(1332) or
@@ -6040,7 +6042,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc236: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(459) or
+  if  PhpFunctionComp(460) or
       PhpFunctionComp(1119) or
       PhpFunctionComp(1480) or
       PhpFunctionComp(1833) or
@@ -6065,8 +6067,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc237: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(366) or
-      PhpFunctionComp(397) or
+  if  PhpFunctionComp(367) or
+      PhpFunctionComp(398) or
       PhpFunctionComp(1687) or
       PhpFunctionComp(1709) or
       PhpFunctionComp(1840) or
@@ -6082,9 +6084,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc238: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(219) or
-      PhpFunctionComp(555) or
-      PhpFunctionComp(694) or
+  if  PhpFunctionComp(220) or
+      PhpFunctionComp(556) or
+      PhpFunctionComp(695) or
       PhpFunctionComp(892) or
       PhpFunctionComp(916) or
       PhpFunctionComp(984) or
@@ -6105,7 +6107,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc239: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(609) or
+  if  PhpFunctionComp(610) or
       PhpFunctionComp(1305) or
       PhpFunctionComp(1644) or
       PhpFunctionComp(1645) or
@@ -6145,7 +6147,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc241: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(86) or
+  if  PhpFunctionComp(87) or
       PhpFunctionComp(930) or
       PhpFunctionComp(992) or
       PhpFunctionComp(1043) or
@@ -6169,8 +6171,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc242: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(111) or
-      PhpFunctionComp(152) or
+  if  PhpFunctionComp(112) or
+      PhpFunctionComp(153) or
       PhpFunctionComp(962) or
       PhpFunctionComp(1856) or
       PhpFunctionComp(2367) or
@@ -6206,8 +6208,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc244: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(400) or
-      PhpFunctionComp(590) or
+  if  PhpFunctionComp(401) or
+      PhpFunctionComp(591) or
       PhpFunctionComp(825) or
       PhpFunctionComp(887) or
       PhpFunctionComp(969) or
@@ -6244,8 +6246,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc246: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(178) or
-      PhpFunctionComp(589) or
+  if  PhpFunctionComp(179) or
+      PhpFunctionComp(590) or
       PhpFunctionComp(805) or
       PhpFunctionComp(869) or
       PhpFunctionComp(902) or
@@ -6268,10 +6270,10 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc247: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(110) or
-      PhpFunctionComp(174) or
-      PhpFunctionComp(285) or
-      PhpFunctionComp(619) or
+  if  PhpFunctionComp(111) or
+      PhpFunctionComp(175) or
+      PhpFunctionComp(286) or
+      PhpFunctionComp(620) or
       PhpFunctionComp(958) or
       PhpFunctionComp(1306) or
       PhpFunctionComp(1310) or
@@ -6301,9 +6303,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc249: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(361) or
-      PhpFunctionComp(566) or
-      PhpFunctionComp(617) or
+  if  PhpFunctionComp(362) or
+      PhpFunctionComp(567) or
+      PhpFunctionComp(618) or
       PhpFunctionComp(926) or
       PhpFunctionComp(1849) or
       PhpFunctionComp(2492) or
@@ -6321,8 +6323,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc250: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(308) or
-      PhpFunctionComp(556) or
+  if  PhpFunctionComp(309) or
+      PhpFunctionComp(557) or
       PhpFunctionComp(835) or
       PhpFunctionComp(857) or
       PhpFunctionComp(1295) or
@@ -6340,8 +6342,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc251: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(475) or
-      PhpFunctionComp(513) or
+  if  PhpFunctionComp(476) or
+      PhpFunctionComp(514) or
       PhpFunctionComp(1010) or
       PhpFunctionComp(1285) or
       PhpFunctionComp(1286) or
@@ -6360,7 +6362,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc252: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(510) or
+  if  PhpFunctionComp(511) or
       PhpFunctionComp(1085) or
       PhpFunctionComp(1642) or
       PhpFunctionComp(2058) or
@@ -6381,7 +6383,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc253: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(450) or
+  if  PhpFunctionComp(451) or
       PhpFunctionComp(814) or
       PhpFunctionComp(870) or
       PhpFunctionComp(1658) or
@@ -6404,9 +6406,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc254: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(106) or
-      PhpFunctionComp(218) or
-      PhpFunctionComp(242) or
+  if  PhpFunctionComp(107) or
+      PhpFunctionComp(219) or
+      PhpFunctionComp(243) or
       PhpFunctionComp(851) or
       PhpFunctionComp(959) or
       PhpFunctionComp(971) or
@@ -6427,9 +6429,9 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc255: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(166) or
-      PhpFunctionComp(172) or
-      PhpFunctionComp(418) or
+  if  PhpFunctionComp(167) or
+      PhpFunctionComp(173) or
+      PhpFunctionComp(419) or
       PhpFunctionComp(966) or
       PhpFunctionComp(995) or
       PhpFunctionComp(1326) or
@@ -6462,7 +6464,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc257: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(153) or
+  if  PhpFunctionComp(154) or
       PhpFunctionComp(1614) or
       PhpFunctionComp(1690) or
       PhpFunctionComp(2778) or
@@ -6534,8 +6536,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc261: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(375) or
-      PhpFunctionComp(588) or
+  if  PhpFunctionComp(376) or
+      PhpFunctionComp(589) or
       PhpFunctionComp(1551) or
       PhpFunctionComp(1592) or
       PhpFunctionComp(1595) or
@@ -6553,7 +6555,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc262: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(167) or
+  if  PhpFunctionComp(168) or
       PhpFunctionComp(812) or
       PhpFunctionComp(919) or
       PhpFunctionComp(922) or
@@ -6585,7 +6587,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc264: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(527) or
+  if  PhpFunctionComp(528) or
       PhpFunctionComp(943) or
       PhpFunctionComp(2931) or
       PhpFunctionComp(3287) or
@@ -6617,8 +6619,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc266: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(186) or
-      PhpFunctionComp(376) or
+  if  PhpFunctionComp(187) or
+      PhpFunctionComp(377) or
       PhpFunctionComp(862) or
       PhpFunctionComp(1073) or
       PhpFunctionComp(1838) or
@@ -6657,7 +6659,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc269: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(462) or
+  if  PhpFunctionComp(463) or
       PhpFunctionComp(915) or
       PhpFunctionComp(929) or
       PhpFunctionComp(3838) or
@@ -6671,8 +6673,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc270: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(286) or
-      PhpFunctionComp(624) or
+  if  PhpFunctionComp(287) or
+      PhpFunctionComp(625) or
       PhpFunctionComp(933) or
       PhpFunctionComp(2807) or
       PhpFunctionComp(3250) or
@@ -6703,7 +6705,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc272: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(623) or
+  if  PhpFunctionComp(624) or
       PhpFunctionComp(924) or
       PhpFunctionComp(990) or
       PhpFunctionComp(1315) or
@@ -6732,8 +6734,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc274: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(282) or
-      PhpFunctionComp(746) or
+  if  PhpFunctionComp(283) or
+      PhpFunctionComp(747) or
       PhpFunctionComp(2305) or
       PhpFunctionComp(2733) or
       PhpFunctionComp(3994) or
@@ -6747,7 +6749,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc275: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(243) or
+  if  PhpFunctionComp(244) or
       PhpFunctionComp(1077) or
       PhpFunctionComp(1531) or
       PhpFunctionComp(2996) or
@@ -6760,8 +6762,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc276: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(571) or
-      PhpFunctionComp(621) or
+  if  PhpFunctionComp(572) or
+      PhpFunctionComp(622) or
       PhpFunctionComp(948) or
       PhpFunctionComp(994) or
       PhpFunctionComp(1944) or
@@ -6775,7 +6777,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc277: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(176) or
+  if  PhpFunctionComp(177) or
       PhpFunctionComp(2508) or
       PhpFunctionComp(2973) or
       PhpFunctionComp(3962) or
@@ -6816,7 +6818,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc280: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(622) or
+  if  PhpFunctionComp(623) or
       PhpFunctionComp(2825) or
       PhpFunctionComp(3281) or
       PhpFunctionComp(3999) or
@@ -6829,8 +6831,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc281: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(173) or
-      PhpFunctionComp(283) or
+  if  PhpFunctionComp(174) or
+      PhpFunctionComp(284) or
       PhpFunctionComp(4564) or
       PhpFunctionComp(4843) or
       PhpFunctionComp(5014) or
@@ -6875,7 +6877,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc285: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(201) or
+  if  PhpFunctionComp(202) or
       PhpFunctionComp(891) or
       PhpFunctionComp(997) or
       PhpFunctionComp(2013) or
@@ -6917,7 +6919,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc288: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(593) or
+  if  PhpFunctionComp(594) or
       PhpFunctionComp(2069) or
       PhpFunctionComp(2393) or
       PhpFunctionComp(3059) or
@@ -6944,7 +6946,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc290: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(526) or
+  if  PhpFunctionComp(527) or
       PhpFunctionComp(807) or
       PhpFunctionComp(1087) or
       PhpFunctionComp(2466) or
@@ -7007,7 +7009,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc295: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(179) or
+  if  PhpFunctionComp(180) or
       PhpFunctionComp(809) or
       PhpFunctionComp(898) or
       PhpFunctionComp(899) or
@@ -7020,7 +7022,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc296: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(169) or
+  if  PhpFunctionComp(170) or
       PhpFunctionComp(935) or
       PhpFunctionComp(2817) or
       PhpFunctionComp(4435) then
@@ -7039,7 +7041,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc298: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(398) or
+  if  PhpFunctionComp(399) or
       PhpFunctionComp(876) or
       PhpFunctionComp(1000) or
       PhpFunctionComp(1537) or
@@ -7052,8 +7054,8 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc299: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(155) or
-      PhpFunctionComp(427) or
+  if  PhpFunctionComp(156) or
+      PhpFunctionComp(428) or
       PhpFunctionComp(865) or
       PhpFunctionComp(873) or
       PhpFunctionComp(1227) or
@@ -7071,7 +7073,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc300: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(181) or
+  if  PhpFunctionComp(182) or
       PhpFunctionComp(859) or
       PhpFunctionComp(1620) or
       PhpFunctionComp(5047) then
@@ -7113,7 +7115,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc305: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(289) or
+  if  PhpFunctionComp(290) or
       PhpFunctionComp(1714) or
       PhpFunctionComp(3269) or
       PhpFunctionComp(4173) then
@@ -7207,7 +7209,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc314: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(156) or
+  if  PhpFunctionComp(157) or
       PhpFunctionComp(828) or
       PhpFunctionComp(949) then
     Result := stkPhpFunction
@@ -7284,7 +7286,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc323: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(175) or
+  if  PhpFunctionComp(176) or
       PhpFunctionComp(1550) or
       PhpFunctionComp(1662) or
       PhpFunctionComp(4165) or
@@ -7389,7 +7391,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc334: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(185) or
+  if  PhpFunctionComp(186) or
       PhpFunctionComp(846) or
       PhpFunctionComp(1294) or
       PhpFunctionComp(2511) or
@@ -7431,7 +7433,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc338: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(182) or
+  if  PhpFunctionComp(183) or
       PhpFunctionComp(845) or
       PhpFunctionComp(860) or
       PhpFunctionComp(3324) or
@@ -7475,7 +7477,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc343: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(183) then
+  if  PhpFunctionComp(184) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
@@ -7517,7 +7519,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc348: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(168) then
+  if  PhpFunctionComp(169) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
@@ -7583,7 +7585,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc359: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(184) then
+  if  PhpFunctionComp(185) then
     Result := stkPhpFunction
   else
     Result := stkPhpIdentifier;
@@ -7642,7 +7644,7 @@ end;
 
 function TSynWebEngine.PhpKeywordFunc373: TSynWebTokenKind;
 begin
-  if  PhpFunctionComp(287) or
+  if  PhpFunctionComp(288) or
       PhpFunctionComp(821) then
     Result := stkPhpFunction
   else
