@@ -2259,8 +2259,8 @@ begin
     begin
       repeat
         Inc(FInstance^.FRun)
-      until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0;
-      // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z'];
+      until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 16) = 0;
+      // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', '0'..'9'];
       if MLSpecialCheck(FInstance^.FTokenPos + 1, FInstance^.FRun -
         FInstance^.FTokenPos - 1) = -1 then
         FInstance^.FTokenID := stkMLError;
