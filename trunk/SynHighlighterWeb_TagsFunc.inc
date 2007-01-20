@@ -21,13 +21,7 @@ end;
 
 function TSynWebEngine.MLTagFunc8: TSynWebTokenKind;
 begin
-  if  MLTagKeyComp(24) or
-      MLTagKeyComp(39) or
-      MLTagKeyComp(40) or
-      MLTagKeyComp(41) or
-      MLTagKeyComp(42) or
-      MLTagKeyComp(43) or
-      MLTagKeyComp(44) then
+  if  MLTagKeyComp(24) then
     Result := stkMLTagName
   else
     Result := stkMLTagNameUndef;
@@ -207,9 +201,18 @@ begin
     Result := stkMLTagNameUndef;
 end;
 
+function TSynWebEngine.MLTagFunc36: TSynWebTokenKind;
+begin
+  if  MLTagKeyComp(39) then
+    Result := stkMLTagName
+  else
+    Result := stkMLTagNameUndef;
+end;
+
 function TSynWebEngine.MLTagFunc37: TSynWebTokenKind;
 begin
-  if  MLTagKeyComp(20) then
+  if  MLTagKeyComp(20) or
+      MLTagKeyComp(40) then
     Result := stkMLTagName
   else
     Result := stkMLTagNameUndef;
@@ -217,7 +220,8 @@ end;
 
 function TSynWebEngine.MLTagFunc38: TSynWebTokenKind;
 begin
-  if  MLTagKeyComp(96) or
+  if  MLTagKeyComp(41) or
+      MLTagKeyComp(96) or
       MLTagKeyComp(99) then
     Result := stkMLTagName
   else
@@ -226,7 +230,8 @@ end;
 
 function TSynWebEngine.MLTagFunc39: TSynWebTokenKind;
 begin
-  if  MLTagKeyComp(61) or
+  if  MLTagKeyComp(42) or
+      MLTagKeyComp(61) or
       MLTagKeyComp(73) then
     Result := stkMLTagName
   else
@@ -235,7 +240,8 @@ end;
 
 function TSynWebEngine.MLTagFunc40: TSynWebTokenKind;
 begin
-  if  MLTagKeyComp(89) or
+  if  MLTagKeyComp(43) or
+      MLTagKeyComp(89) or
       MLTagKeyComp(100) then
     Result := stkMLTagName
   else
@@ -244,7 +250,8 @@ end;
 
 function TSynWebEngine.MLTagFunc41: TSynWebTokenKind;
 begin
-  if  MLTagKeyComp(103) then
+  if  MLTagKeyComp(44) or
+      MLTagKeyComp(103) then
     Result := stkMLTagName
   else
     Result := stkMLTagNameUndef;

@@ -1,4 +1,4 @@
-  PhpKeywordsMaxKeyHash = 560;
+  PhpKeywordsMaxKeyHash = 671;
 
   PhpKeyID___CLASS__ = 0;
   PhpKeyID___FILE__ = 1;

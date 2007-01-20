@@ -7,9 +7,6 @@ uses
   Dialogs, ComCtrls, StdCtrls, Menus, IniFiles32, clipbrd, ExtCtrls, RegExpr,
   SynHighlighterCpp;
 
-var
-  mKeyHashTable: array[#0..#255] of Integer;
-
 type
   TLexKeys = class
   public
@@ -104,7 +101,6 @@ type
     pn: TTreeNode;
     KeyList: TList;
     appdir: string;
-    procedure MakeHashTable;
     procedure ClearLists;
   public
     function KeyHash(ToHash: string): Integer;
@@ -988,28 +984,18 @@ begin
     ShowMessage(IntToStr(mx));
 end;
 
+type
+  TSynWebHashTable = array[#0..#255] of Longword;
+const
+{$I ../SynHighlighterWeb_Tables.inc}
+
 function TForm1.KeyHash(ToHash: string): Integer;
 var
   I: Integer;
 begin
   Result := 0;
   for I := 1 to Length(ToHash) do
-    inc(Result, mKeyHashTable[ToHash[I]]);
-end;
-
-procedure TForm1.MakeHashTable;
-var
-  I, J: Char;
-begin
-  for I := #0 to #255 do
-  begin
-    J := UpperCase(I)[1];
-    case I in ['A'..'Z', 'a'..'z', ':', '-'] of
-      True: mKeyHashTable[I] := Ord(J) - 64;
-    else
-      mKeyHashTable[I] := 0;
-    end;
-  end;
+    inc(Result, TSynWebIdentHashTable[ToHash[I]]);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -1017,7 +1003,6 @@ begin
   if ParamCount = 1 then
     Left := Screen.Width;
   appdir := ExtractFilePath(Application.ExeName);
-  MakeHashTable;
   KeyList := TList.Create;
 end;
 

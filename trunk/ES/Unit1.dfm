@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 575
   Top = 43
-  Width = 449
-  Height = 623
   Caption = 'SynHighlighterWeb - ECMAScript Data/Export v1.0b '#169'2005 FlatDev'
+  ClientHeight = 596
+  ClientWidth = 441
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

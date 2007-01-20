@@ -6,9 +6,6 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, ComCtrls;
 
-var
-  mKeyHashTable: array[#0..#255] of Integer;
-
 type
   TLexKeys = Class
   public
@@ -55,7 +52,6 @@ type
   private
     KeyList: TList;
     appdir:String;
-    procedure MakeHashTable;
     procedure ClearLists;
   public
     function KeyHash(ToHash: String): Integer;
@@ -236,7 +232,7 @@ begin
   for i:=1 to s.Count-1 do
     if KeyHash(s[i])>x then
       x:=KeyHash(s[i]);
-  s1.Insert(0,'');          
+  s1.Insert(0,'');
   if Form1.CheckBox3.Checked then
     s1.Insert(0,Format('  MLSpecialMaxKeyHash = %d;',[x]))
   else
@@ -416,7 +412,6 @@ begin
   if ParamCount=1 then
     Left:=Screen.Width;  
   appdir:=ExtractFilePath(Application.ExeName);
-  MakeHashTable;
   KeyList:=TList.Create;
 end;
 
@@ -425,20 +420,10 @@ begin
   KeyList.Free;
 end;
 
-procedure TForm2.MakeHashTable;
-var
-  I, J: Char;
-begin
-  for I := #0 to #255 do
-  begin
-    J := UpperCase(I)[1];
-    Case I in ['A'..'Z', 'a'..'z', ':', '-'] of
-      True: mKeyHashTable[I] := Ord(J) - 64;
-    else
-      mKeyHashTable[I] := 0;
-    end;
-  end;
-end;
+type
+  TSynWebHashTable = array[#0..#255] of Longword;
+const
+{$I ../SynHighlighterWeb_Tables.inc}
 
 function TForm2.KeyHash(ToHash: String): Integer;
 var
@@ -446,7 +431,7 @@ var
 begin
   Result := 0;
   for I := 1 to Length(ToHash) do
-    inc(Result, mKeyHashTable[ToHash[I]]);
+    inc(Result, TSynWebIdentHashTable[ToHash[I]]);
 end;
 
 procedure TForm2.ClearLists;

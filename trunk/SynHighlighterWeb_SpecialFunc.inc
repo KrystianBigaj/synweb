@@ -91,10 +91,7 @@ end;
 function TSynWebEngine.MLSpecialFunc28: Boolean;
 begin
   if  MLSpecialKeyComp(24) or
-      MLSpecialKeyComp(25) or
-      MLSpecialKeyComp(73) or
-      MLSpecialKeyComp(74) or
-      MLSpecialKeyComp(75) then
+      MLSpecialKeyComp(25) then
     Result := True
   else
     Result := False;
@@ -406,11 +403,7 @@ function TSynWebEngine.MLSpecialFunc56: Boolean;
 begin
   if  MLSpecialKeyComp(76) or
       MLSpecialKeyComp(133) or
-      MLSpecialKeyComp(209) or
-      MLSpecialKeyComp(210) or
-      MLSpecialKeyComp(211) or
-      MLSpecialKeyComp(212) or
-      MLSpecialKeyComp(217) then
+      MLSpecialKeyComp(209) then
     Result := True
   else
     Result := False;
@@ -663,7 +656,8 @@ end;
 function TSynWebEngine.MLSpecialFunc84: Boolean;
 begin
   if  MLSpecialKeyComp(117) or
-      MLSpecialKeyComp(189) then
+      MLSpecialKeyComp(189) or
+      MLSpecialKeyComp(210) then
     Result := True
   else
     Result := False;
@@ -671,7 +665,9 @@ end;
 
 function TSynWebEngine.MLSpecialFunc85: Boolean;
 begin
-  if  MLSpecialKeyComp(116) then
+  if  MLSpecialKeyComp(73) or
+      MLSpecialKeyComp(116) or
+      MLSpecialKeyComp(211) then
     Result := True
   else
     Result := False;
@@ -679,7 +675,8 @@ end;
 
 function TSynWebEngine.MLSpecialFunc86: Boolean;
 begin
-  if  MLSpecialKeyComp(221) then
+  if  MLSpecialKeyComp(212) or
+      MLSpecialKeyComp(221) then
     Result := True
   else
     Result := False;
@@ -687,8 +684,18 @@ end;
 
 function TSynWebEngine.MLSpecialFunc87: Boolean;
 begin
-  if  MLSpecialKeyComp(149) or
-      MLSpecialKeyComp(150) then
+  if  MLSpecialKeyComp(74) or
+      MLSpecialKeyComp(149) or
+      MLSpecialKeyComp(150) or
+      MLSpecialKeyComp(217) then
+    Result := True
+  else
+    Result := False;
+end;
+
+function TSynWebEngine.MLSpecialFunc89: Boolean;
+begin
+  if  MLSpecialKeyComp(75) then
     Result := True
   else
     Result := False;

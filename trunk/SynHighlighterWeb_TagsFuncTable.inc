@@ -21,6 +21,7 @@
   FMLTagIdentFuncTable[32]:=MLTagFunc32;
   FMLTagIdentFuncTable[33]:=MLTagFunc33;
   FMLTagIdentFuncTable[35]:=MLTagFunc35;
+  FMLTagIdentFuncTable[36]:=MLTagFunc36;
   FMLTagIdentFuncTable[37]:=MLTagFunc37;
   FMLTagIdentFuncTable[38]:=MLTagFunc38;
   FMLTagIdentFuncTable[39]:=MLTagFunc39;

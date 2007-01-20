@@ -420,8 +420,7 @@ end;
 
 function TSynWebEngine.MLAttrFunc77: TSynWebTokenKind;
 begin
-  if  MLAttrKeyComp(39) or
-      MLAttrKeyComp(144) then
+  if  MLAttrKeyComp(39) then
     Result := stkMLTagKey
   else
     Result := stkMLTagKeyUndef;
@@ -490,8 +489,7 @@ end;
 function TSynWebEngine.MLAttrFunc87: TSynWebTokenKind;
 begin
   if  MLAttrKeyComp(14) or
-      MLAttrKeyComp(83) or
-      MLAttrKeyComp(145) then
+      MLAttrKeyComp(83) then
     Result := stkMLTagKey
   else
     Result := stkMLTagKeyUndef;
@@ -553,8 +551,7 @@ end;
 
 function TSynWebEngine.MLAttrFunc98: TSynWebTokenKind;
 begin
-  if  MLAttrKeyComp(13) or
-      MLAttrKeyComp(111) then
+  if  MLAttrKeyComp(111) then
     Result := stkMLTagKey
   else
     Result := stkMLTagKeyUndef;
@@ -572,14 +569,6 @@ function TSynWebEngine.MLAttrFunc102: TSynWebTokenKind;
 begin
   if  MLAttrKeyComp(107) or
       MLAttrKeyComp(140) then
-    Result := stkMLTagKey
-  else
-    Result := stkMLTagKeyUndef;
-end;
-
-function TSynWebEngine.MLAttrFunc103: TSynWebTokenKind;
-begin
-  if  MLAttrKeyComp(2) then
     Result := stkMLTagKey
   else
     Result := stkMLTagKeyUndef;
@@ -677,8 +666,15 @@ end;
 function TSynWebEngine.MLAttrFunc119: TSynWebTokenKind;
 begin
   if  MLAttrKeyComp(36) or
-      MLAttrKeyComp(60) or
       MLAttrKeyComp(71) then
+    Result := stkMLTagKey
+  else
+    Result := stkMLTagKeyUndef;
+end;
+
+function TSynWebEngine.MLAttrFunc122: TSynWebTokenKind;
+begin
+  if  MLAttrKeyComp(144) then
     Result := stkMLTagKey
   else
     Result := stkMLTagKeyUndef;
@@ -696,6 +692,14 @@ end;
 function TSynWebEngine.MLAttrFunc127: TSynWebTokenKind;
 begin
   if  MLAttrKeyComp(139) then
+    Result := stkMLTagKey
+  else
+    Result := stkMLTagKeyUndef;
+end;
+
+function TSynWebEngine.MLAttrFunc132: TSynWebTokenKind;
+begin
+  if  MLAttrKeyComp(145) then
     Result := stkMLTagKey
   else
     Result := stkMLTagKeyUndef;
@@ -733,6 +737,14 @@ begin
     Result := stkMLTagKeyUndef;
 end;
 
+function TSynWebEngine.MLAttrFunc155: TSynWebTokenKind;
+begin
+  if  MLAttrKeyComp(13) then
+    Result := stkMLTagKey
+  else
+    Result := stkMLTagKeyUndef;
+end;
+
 function TSynWebEngine.MLAttrFunc157: TSynWebTokenKind;
 begin
   if  MLAttrKeyComp(97) then
@@ -750,6 +762,14 @@ begin
     Result := stkMLTagKeyUndef;
 end;
 
+function TSynWebEngine.MLAttrFunc160: TSynWebTokenKind;
+begin
+  if  MLAttrKeyComp(2) then
+    Result := stkMLTagKey
+  else
+    Result := stkMLTagKeyUndef;
+end;
+
 function TSynWebEngine.MLAttrFunc162: TSynWebTokenKind;
 begin
   if  MLAttrKeyComp(99) then
@@ -760,7 +780,8 @@ end;
 
 function TSynWebEngine.MLAttrFunc176: TSynWebTokenKind;
 begin
-  if  MLAttrKeyComp(90) then
+  if  MLAttrKeyComp(60) or
+      MLAttrKeyComp(90) then
     Result := stkMLTagKey
   else
     Result := stkMLTagKeyUndef;

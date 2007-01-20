@@ -62,6 +62,7 @@
   FMLSpecialIdentFuncTable[85]:=MLSpecialFunc85;
   FMLSpecialIdentFuncTable[86]:=MLSpecialFunc86;
   FMLSpecialIdentFuncTable[87]:=MLSpecialFunc87;
+  FMLSpecialIdentFuncTable[89]:=MLSpecialFunc89;
   FMLSpecialIdentFuncTable[90]:=MLSpecialFunc90;
   FMLSpecialIdentFuncTable[91]:=MLSpecialFunc91;
   FMLSpecialIdentFuncTable[95]:=MLSpecialFunc95;

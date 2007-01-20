@@ -72,8 +72,7 @@ end;
 
 function TSynWebEngine.CssValFunc37: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(112) or
-      CssValKeyComp(189) then
+  if  CssValKeyComp(112) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -177,8 +176,7 @@ function TSynWebEngine.CssValFunc48: TSynWebTokenKind;
 begin
   if  CssValKeyComp(13) or
       CssValKeyComp(51) or
-      CssValKeyComp(103) or
-      CssValKeyComp(190) then
+      CssValKeyComp(103) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -186,8 +184,7 @@ end;
 
 function TSynWebEngine.CssValFunc49: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(46) or
-      CssValKeyComp(55) then
+  if  CssValKeyComp(55) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -211,8 +208,7 @@ begin
       CssValKeyComp(174) or
       CssValKeyComp(175) or
       CssValKeyComp(176) or
-      CssValKeyComp(183) or
-      CssValKeyComp(188) then
+      CssValKeyComp(183) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -229,7 +225,6 @@ end;
 function TSynWebEngine.CssValFunc53: TSynWebTokenKind;
 begin
   if  CssValKeyComp(94) or
-      CssValKeyComp(163) or
       CssValKeyComp(185) then
     Result := stkCssVal
   else
@@ -247,8 +242,7 @@ end;
 function TSynWebEngine.CssValFunc55: TSynWebTokenKind;
 begin
   if  CssValKeyComp(61) or
-      CssValKeyComp(99) or
-      CssValKeyComp(192) then
+      CssValKeyComp(99) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -267,10 +261,8 @@ function TSynWebEngine.CssValFunc57: TSynWebTokenKind;
 begin
   if  CssValKeyComp(6) or
       CssValKeyComp(10) or
-      CssValKeyComp(136) or
       CssValKeyComp(141) or
-      CssValKeyComp(147) or
-      CssValKeyComp(191) then
+      CssValKeyComp(147) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -290,7 +282,6 @@ function TSynWebEngine.CssValFunc60: TSynWebTokenKind;
 begin
   if  CssValKeyComp(68) or
       CssValKeyComp(114) or
-      CssValKeyComp(120) or
       CssValKeyComp(151) then
     Result := stkCssVal
   else
@@ -299,8 +290,7 @@ end;
 
 function TSynWebEngine.CssValFunc61: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(73) or
-      CssValKeyComp(75) then
+  if  CssValKeyComp(73) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -309,8 +299,7 @@ end;
 function TSynWebEngine.CssValFunc62: TSynWebTokenKind;
 begin
   if  CssValKeyComp(100) or
-      CssValKeyComp(132) or
-      CssValKeyComp(194) then
+      CssValKeyComp(132) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -331,8 +320,7 @@ begin
       CssValKeyComp(93) or
       CssValKeyComp(127) or
       CssValKeyComp(142) or
-      CssValKeyComp(186) or
-      CssValKeyComp(195) then
+      CssValKeyComp(186) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -351,9 +339,7 @@ end;
 function TSynWebEngine.CssValFunc68: TSynWebTokenKind;
 begin
   if  CssValKeyComp(39) or
-      CssValKeyComp(41) or
-      CssValKeyComp(44) or
-      CssValKeyComp(47) then
+      CssValKeyComp(41) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -370,26 +356,9 @@ begin
     Result := stkCssValUndef;
 end;
 
-function TSynWebEngine.CssValFunc70: TSynWebTokenKind;
-begin
-  if  CssValKeyComp(128) then
-    Result := stkCssVal
-  else
-    Result := stkCssValUndef;
-end;
-
-function TSynWebEngine.CssValFunc71: TSynWebTokenKind;
-begin
-  if  CssValKeyComp(129) then
-    Result := stkCssVal
-  else
-    Result := stkCssValUndef;
-end;
-
 function TSynWebEngine.CssValFunc72: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(156) or
-      CssValKeyComp(196) then
+  if  CssValKeyComp(156) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -404,18 +373,9 @@ begin
     Result := stkCssValUndef;
 end;
 
-function TSynWebEngine.CssValFunc74: TSynWebTokenKind;
-begin
-  if  CssValKeyComp(193) then
-    Result := stkCssVal
-  else
-    Result := stkCssValUndef;
-end;
-
 function TSynWebEngine.CssValFunc75: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(4) or
-      CssValKeyComp(105) then
+  if  CssValKeyComp(4) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -430,20 +390,9 @@ begin
     Result := stkCssValUndef;
 end;
 
-function TSynWebEngine.CssValFunc77: TSynWebTokenKind;
-begin
-  if  CssValKeyComp(108) or
-      CssValKeyComp(148) or
-      CssValKeyComp(168) then
-    Result := stkCssVal
-  else
-    Result := stkCssValUndef;
-end;
-
 function TSynWebEngine.CssValFunc78: TSynWebTokenKind;
 begin
   if  CssValKeyComp(21) or
-      CssValKeyComp(121) or
       CssValKeyComp(184) then
     Result := stkCssVal
   else
@@ -463,8 +412,7 @@ end;
 
 function TSynWebEngine.CssValFunc80: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(133) or
-      CssValKeyComp(150) then
+  if  CssValKeyComp(150) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -482,9 +430,7 @@ end;
 
 function TSynWebEngine.CssValFunc82: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(56) or
-      CssValKeyComp(101) or
-      CssValKeyComp(155) then
+  if  CssValKeyComp(56) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -494,14 +440,6 @@ function TSynWebEngine.CssValFunc83: TSynWebTokenKind;
 begin
   if  CssValKeyComp(29) or
       CssValKeyComp(63) then
-    Result := stkCssVal
-  else
-    Result := stkCssValUndef;
-end;
-
-function TSynWebEngine.CssValFunc84: TSynWebTokenKind;
-begin
-  if  CssValKeyComp(66) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -519,9 +457,7 @@ end;
 
 function TSynWebEngine.CssValFunc86: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(45) or
-      CssValKeyComp(187) or
-      CssValKeyComp(197) then
+  if  CssValKeyComp(45) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -529,9 +465,7 @@ end;
 
 function TSynWebEngine.CssValFunc87: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(65) or
-      CssValKeyComp(107) or
-      CssValKeyComp(140) then
+  if  CssValKeyComp(107) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -540,25 +474,7 @@ end;
 function TSynWebEngine.CssValFunc88: TSynWebTokenKind;
 begin
   if  CssValKeyComp(69) or
-      CssValKeyComp(81) or
       CssValKeyComp(123) then
-    Result := stkCssVal
-  else
-    Result := stkCssValUndef;
-end;
-
-function TSynWebEngine.CssValFunc89: TSynWebTokenKind;
-begin
-  if  CssValKeyComp(23) then
-    Result := stkCssVal
-  else
-    Result := stkCssValUndef;
-end;
-
-function TSynWebEngine.CssValFunc91: TSynWebTokenKind;
-begin
-  if  CssValKeyComp(95) or
-      CssValKeyComp(137) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -566,8 +482,7 @@ end;
 
 function TSynWebEngine.CssValFunc92: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(85) or
-      CssValKeyComp(126) or
+  if  CssValKeyComp(126) or
       CssValKeyComp(146) or
       CssValKeyComp(198) then
     Result := stkCssVal
@@ -583,10 +498,17 @@ begin
     Result := stkCssValUndef;
 end;
 
+function TSynWebEngine.CssValFunc94: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(189) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
 function TSynWebEngine.CssValFunc95: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(1) or
-      CssValKeyComp(179) then
+  if  CssValKeyComp(1) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -609,20 +531,9 @@ begin
     Result := stkCssValUndef;
 end;
 
-function TSynWebEngine.CssValFunc99: TSynWebTokenKind;
-begin
-  if  CssValKeyComp(162) or
-      CssValKeyComp(164) then
-    Result := stkCssVal
-  else
-    Result := stkCssValUndef;
-end;
-
 function TSynWebEngine.CssValFunc100: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(87) or
-      CssValKeyComp(109) or
-      CssValKeyComp(115) or
+  if  CssValKeyComp(115) or
       CssValKeyComp(117) then
     Result := stkCssVal
   else
@@ -631,11 +542,8 @@ end;
 
 function TSynWebEngine.CssValFunc101: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(11) or
-      CssValKeyComp(86) or
-      CssValKeyComp(98) or
-      CssValKeyComp(153) or
-      CssValKeyComp(173) then
+  if  CssValKeyComp(86) or
+      CssValKeyComp(98) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -644,7 +552,6 @@ end;
 function TSynWebEngine.CssValFunc102: TSynWebTokenKind;
 begin
   if  CssValKeyComp(20) or
-      CssValKeyComp(157) or
       CssValKeyComp(178) then
     Result := stkCssVal
   else
@@ -661,7 +568,15 @@ end;
 
 function TSynWebEngine.CssValFunc105: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(160) then
+  if  CssValKeyComp(190) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc106: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(46) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -669,16 +584,8 @@ end;
 
 function TSynWebEngine.CssValFunc108: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(24) or
-      CssValKeyComp(76) then
-    Result := stkCssVal
-  else
-    Result := stkCssValUndef;
-end;
-
-function TSynWebEngine.CssValFunc109: TSynWebTokenKind;
-begin
-  if  CssValKeyComp(113) then
+  if  CssValKeyComp(76) or
+      CssValKeyComp(188) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -688,16 +595,24 @@ function TSynWebEngine.CssValFunc110: TSynWebTokenKind;
 begin
   if  CssValKeyComp(33) or
       CssValKeyComp(71) or
-      CssValKeyComp(88) then
+      CssValKeyComp(163) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
 end;
 
-function TSynWebEngine.CssValFunc113: TSynWebTokenKind;
+function TSynWebEngine.CssValFunc112: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(27) or
-      CssValKeyComp(181) then
+  if  CssValKeyComp(192) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc114: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(136) or
+      CssValKeyComp(191) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -705,16 +620,7 @@ end;
 
 function TSynWebEngine.CssValFunc115: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(32) or
-      CssValKeyComp(89) then
-    Result := stkCssVal
-  else
-    Result := stkCssValUndef;
-end;
-
-function TSynWebEngine.CssValFunc116: TSynWebTokenKind;
-begin
-  if  CssValKeyComp(149) then
+  if  CssValKeyComp(32) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -722,7 +628,8 @@ end;
 
 function TSynWebEngine.CssValFunc117: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(122) then
+  if  CssValKeyComp(120) or
+      CssValKeyComp(122) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -730,8 +637,7 @@ end;
 
 function TSynWebEngine.CssValFunc118: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(80) or
-      CssValKeyComp(182) then
+  if  CssValKeyComp(75) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -739,23 +645,15 @@ end;
 
 function TSynWebEngine.CssValFunc119: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(104) then
+  if  CssValKeyComp(194) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
 end;
 
-function TSynWebEngine.CssValFunc120: TSynWebTokenKind;
+function TSynWebEngine.CssValFunc122: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(167) then
-    Result := stkCssVal
-  else
-    Result := stkCssValUndef;
-end;
-
-function TSynWebEngine.CssValFunc123: TSynWebTokenKind;
-begin
-  if  CssValKeyComp(102) then
+  if  CssValKeyComp(195) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -763,7 +661,8 @@ end;
 
 function TSynWebEngine.CssValFunc125: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(37) then
+  if  CssValKeyComp(44) or
+      CssValKeyComp(47) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -771,7 +670,50 @@ end;
 
 function TSynWebEngine.CssValFunc127: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(134) then
+  if  CssValKeyComp(128) or
+      CssValKeyComp(134) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc128: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(129) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc129: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(196) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc131: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(193) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc132: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(105) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc134: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(108) or
+      CssValKeyComp(148) or
+      CssValKeyComp(168) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -779,8 +721,58 @@ end;
 
 function TSynWebEngine.CssValFunc135: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(169) or
-      CssValKeyComp(172) then
+  if  CssValKeyComp(121) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc137: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(133) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc139: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(101) or
+      CssValKeyComp(155) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc141: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(66) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc143: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(187) or
+      CssValKeyComp(197) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc144: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(65) or
+      CssValKeyComp(140) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc145: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(81) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -788,7 +780,25 @@ end;
 
 function TSynWebEngine.CssValFunc146: TSynWebTokenKind;
 begin
-  if  CssValKeyComp(177) then
+  if  CssValKeyComp(23) or
+      CssValKeyComp(177) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc148: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(95) or
+      CssValKeyComp(137) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc149: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(85) then
     Result := stkCssVal
   else
     Result := stkCssValUndef;
@@ -802,7 +812,165 @@ begin
     Result := stkCssValUndef;
 end;
 
+function TSynWebEngine.CssValFunc152: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(179) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc156: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(162) or
+      CssValKeyComp(164) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
 function TSynWebEngine.CssValFunc157: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(87) or
+      CssValKeyComp(109) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc158: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(11) or
+      CssValKeyComp(153) or
+      CssValKeyComp(173) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc159: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(157) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc162: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(160) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc165: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(24) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc166: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(113) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc167: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(88) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc170: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(27) or
+      CssValKeyComp(181) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc172: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(89) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc173: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(149) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc175: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(80) or
+      CssValKeyComp(182) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc192: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(172) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc233: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(104) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc234: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(167) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc237: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(102) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc239: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(37) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc249: TSynWebTokenKind;
+begin
+  if  CssValKeyComp(169) then
+    Result := stkCssVal
+  else
+    Result := stkCssValUndef;
+end;
+
+function TSynWebEngine.CssValFunc271: TSynWebTokenKind;
 begin
   if  CssValKeyComp(165) then
     Result := stkCssVal
@@ -810,7 +978,7 @@ begin
     Result := stkCssValUndef;
 end;
 
-function TSynWebEngine.CssValFunc158: TSynWebTokenKind;
+function TSynWebEngine.CssValFunc272: TSynWebTokenKind;
 begin
   if  CssValKeyComp(166) then
     Result := stkCssVal

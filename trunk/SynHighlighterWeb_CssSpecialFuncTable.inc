@@ -29,9 +29,10 @@
   FCssSpecialIdentFuncTable[77]:=CssSpecialFunc77;
   FCssSpecialIdentFuncTable[82]:=CssSpecialFunc82;
   FCssSpecialIdentFuncTable[88]:=CssSpecialFunc88;
-  FCssSpecialIdentFuncTable[89]:=CssSpecialFunc89;
   FCssSpecialIdentFuncTable[91]:=CssSpecialFunc91;
-  FCssSpecialIdentFuncTable[93]:=CssSpecialFunc93;
+  FCssSpecialIdentFuncTable[108]:=CssSpecialFunc108;
   FCssSpecialIdentFuncTable[125]:=CssSpecialFunc125;
   FCssSpecialIdentFuncTable[126]:=CssSpecialFunc126;
-  FCssSpecialIdentFuncTable[133]:=CssSpecialFunc133;
+  FCssSpecialIdentFuncTable[146]:=CssSpecialFunc146;
+  FCssSpecialIdentFuncTable[150]:=CssSpecialFunc150;
+  FCssSpecialIdentFuncTable[190]:=CssSpecialFunc190;

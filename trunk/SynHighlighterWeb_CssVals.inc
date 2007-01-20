@@ -1,4 +1,4 @@
-  CssValMaxKeyHash = 158;
+  CssValMaxKeyHash = 272;
   CssValID_Rgb = 130;
   CssValID_Url = 183;
   CssValID_Rect = 124;
