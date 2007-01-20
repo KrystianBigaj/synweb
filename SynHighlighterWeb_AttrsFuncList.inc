@@ -64,7 +64,6 @@
     function MLAttrFunc98: TSynWebTokenKind;
     function MLAttrFunc101: TSynWebTokenKind;
     function MLAttrFunc102: TSynWebTokenKind;
-    function MLAttrFunc103: TSynWebTokenKind;
     function MLAttrFunc104: TSynWebTokenKind;
     function MLAttrFunc105: TSynWebTokenKind;
     function MLAttrFunc106: TSynWebTokenKind;
@@ -77,13 +76,17 @@
     function MLAttrFunc114: TSynWebTokenKind;
     function MLAttrFunc117: TSynWebTokenKind;
     function MLAttrFunc119: TSynWebTokenKind;
+    function MLAttrFunc122: TSynWebTokenKind;
     function MLAttrFunc126: TSynWebTokenKind;
     function MLAttrFunc127: TSynWebTokenKind;
+    function MLAttrFunc132: TSynWebTokenKind;
     function MLAttrFunc139: TSynWebTokenKind;
     function MLAttrFunc143: TSynWebTokenKind;
     function MLAttrFunc147: TSynWebTokenKind;
     function MLAttrFunc154: TSynWebTokenKind;
+    function MLAttrFunc155: TSynWebTokenKind;
     function MLAttrFunc157: TSynWebTokenKind;
     function MLAttrFunc158: TSynWebTokenKind;
+    function MLAttrFunc160: TSynWebTokenKind;
     function MLAttrFunc162: TSynWebTokenKind;
     function MLAttrFunc176: TSynWebTokenKind;

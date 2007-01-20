@@ -664,7 +664,6 @@ type
     procedure EsRangeString39Proc;
 
     function EsKeywordComp(const ID: Integer): Boolean;
-
     function EsIdentCheck: TSynWebTokenKind;
     {$I SynHighlighterWeb_EsKeywordsFuncList.inc}
 
@@ -3004,7 +3003,7 @@ var
     FInstance^.FStringLen := FInstance^.FRun - FInstance^.FTokenPos;
     for i := 0 to FInstance^.FStringLen - 1 do
     begin
-      Inc(HashKey, FInstance^.FHashTable[ToHash^]);
+      Inc(HashKey, TSynWebIdentHashTable[ToHash^]);
       Inc(ToHash);
     end;
   end;
@@ -3066,7 +3065,7 @@ var
     FInstance^.FStringLen := FInstance^.FRun - FInstance^.FTokenPos;
     for i := 0 to FInstance^.FStringLen - 1 do
     begin
-      Inc(HashKey, FInstance^.FHashTable[ToHash^]);
+      Inc(HashKey, TSynWebIdentHashTable[ToHash^]);
       Inc(ToHash);
     end;
   end;
@@ -3095,7 +3094,7 @@ begin
   begin
     for i := 1 to FInstance^.FStringLen do
     begin
-      if TSynWebInsensitiveHashTable[Temp^] <> TSynWebInsensitiveHashTable[aKey[i]] then
+      if Temp^ <> aKey[i] then
       begin
         Result := False;
         Exit;
@@ -3120,7 +3119,7 @@ var
     FInstance^.FStringLen := ALen;
     for i := 0 to ALen - 1 do
     begin
-      Inc(HashKey, TSynWebInsensitiveHashTable[ToHash^]);
+      Inc(HashKey, TSynWebIdentHashTable[ToHash^]);
       Inc(ToHash);
     end;
   end;
@@ -4996,7 +4995,7 @@ var
     FInstance^.FStringLen := FInstance^.FRun - FInstance^.FTokenPos;
     for i := 0 to FInstance^.FStringLen - 1 do
     begin
-      Inc(HashKey, TSynWebInsensitiveHashTable[ToHash^]);
+      Inc(HashKey, TSynWebIdentHashTable[ToHash^]);
       Inc(ToHash);
     end;
   end;
@@ -5071,7 +5070,7 @@ var
     FInstance^.FStringLen := FInstance^.FRun - FInstance^.FTokenPos;
     for i := 0 to FInstance^.FStringLen - 1 do
     begin
-      Inc(HashKey, TSynWebInsensitiveHashTable[ToHash^]);
+      Inc(HashKey, TSynWebIdentHashTable[ToHash^]);
       Inc(ToHash);
     end;
   end;
@@ -5139,7 +5138,7 @@ var
     FInstance^.FStringLen := ALen;
     for i := 0 to ALen - 1 do
     begin
-      Inc(HashKey, TSynWebInsensitiveHashTable[ToHash^]);
+      Inc(HashKey, TSynWebIdentHashTable[ToHash^]);
       Inc(ToHash);
     end;
   end;
@@ -5693,7 +5692,7 @@ var
     FInstance^.FStringLen := FInstance^.FRun - FInstance^.FTokenPos;
     for i := 0 to FInstance^.FStringLen - 1 do
     begin
-      Inc(HashKey, TSynWebInsensitiveHashTable[ToHash^]);
+      Inc(HashKey, TSynWebIdentHashTable[ToHash^]);
       Inc(ToHash);
     end;
   end;
@@ -6812,7 +6811,7 @@ var
     FInstance^.FStringLen := FInstance^.FRun - FInstance^.FTokenPos;
     for i := 0 to FInstance^.FStringLen - 1 do
     begin
-      Inc(HashKey, TSynWebInsensitiveHashTable[ToHash^]);
+      Inc(HashKey, TSynWebIdentHashTable[ToHash^]);
       Inc(ToHash);
     end;
   end;

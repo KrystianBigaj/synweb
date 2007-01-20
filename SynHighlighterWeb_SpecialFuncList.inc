@@ -63,6 +63,7 @@
     function MLSpecialFunc85: Boolean;
     function MLSpecialFunc86: Boolean;
     function MLSpecialFunc87: Boolean;
+    function MLSpecialFunc89: Boolean;
     function MLSpecialFunc90: Boolean;
     function MLSpecialFunc91: Boolean;
     function MLSpecialFunc95: Boolean;

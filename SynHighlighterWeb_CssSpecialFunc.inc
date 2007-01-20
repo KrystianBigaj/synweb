@@ -148,7 +148,6 @@ end;
 function TSynWebEngine.CssSpecialFunc51: Boolean;
 begin
   if  CssSpecialKeyComp(4) or
-      CssSpecialKeyComp(17) or
       CssSpecialKeyComp(45) then
     Result := True
   else
@@ -261,14 +260,6 @@ begin
     Result := False;
 end;
 
-function TSynWebEngine.CssSpecialFunc89: Boolean;
-begin
-  if  CssSpecialKeyComp(13) then
-    Result := True
-  else
-    Result := False;
-end;
-
 function TSynWebEngine.CssSpecialFunc91: Boolean;
 begin
   if  CssSpecialKeyComp(22) then
@@ -277,9 +268,9 @@ begin
     Result := False;
 end;
 
-function TSynWebEngine.CssSpecialFunc93: Boolean;
+function TSynWebEngine.CssSpecialFunc108: Boolean;
 begin
-  if  CssSpecialKeyComp(15) then
+  if  CssSpecialKeyComp(17) then
     Result := True
   else
     Result := False;
@@ -301,7 +292,23 @@ begin
     Result := False;
 end;
 
-function TSynWebEngine.CssSpecialFunc133: Boolean;
+function TSynWebEngine.CssSpecialFunc146: Boolean;
+begin
+  if  CssSpecialKeyComp(13) then
+    Result := True
+  else
+    Result := False;
+end;
+
+function TSynWebEngine.CssSpecialFunc150: Boolean;
+begin
+  if  CssSpecialKeyComp(15) then
+    Result := True
+  else
+    Result := False;
+end;
+
+function TSynWebEngine.CssSpecialFunc190: Boolean;
 begin
   if  CssSpecialKeyComp(14) then
     Result := True

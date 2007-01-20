@@ -30,9 +30,10 @@
     function CssSpecialFunc77: Boolean;
     function CssSpecialFunc82: Boolean;
     function CssSpecialFunc88: Boolean;
-    function CssSpecialFunc89: Boolean;
     function CssSpecialFunc91: Boolean;
-    function CssSpecialFunc93: Boolean;
+    function CssSpecialFunc108: Boolean;
     function CssSpecialFunc125: Boolean;
     function CssSpecialFunc126: Boolean;
-    function CssSpecialFunc133: Boolean;
+    function CssSpecialFunc146: Boolean;
+    function CssSpecialFunc150: Boolean;
+    function CssSpecialFunc190: Boolean;

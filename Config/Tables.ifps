@@ -1,7 +1,7 @@
 type
   THashTable=array[0..255] of Integer;
 var
-  fInsensitiveHashTable, fSensitiveHashTable: THashTable;
+  fInsensitiveHashTable, fSensitiveHashTable, fHashTable: THashTable;
   fIdentTable: array[0..255] of Longword;
   fIdentTable2: array[0..255] of Longword;
 
@@ -145,19 +145,44 @@ begin
 
 // -----------------------------------------------------------------------------
 
-    J:=UpCase(chr(ord(I)));
-    if check(chr(ord(i)),'[A]-[Z] [a]-[z] [:] [-]') then
-      fInsensitiveHashTable[I]:=Ord(J) - 64
-    else
-      fInsensitiveHashTable[I]:=0;
 
-    if check(chr(ord(i)), '[a]-[z] [:] [-]') then
-      fSensitiveHashTable[I]:=Ord(J) - 64
+    // RECOMPILE HTML/CSS/ES/PHP and export ALL after any change in FHashTable
+    J:=UpCase(chr(ord(I)));
+    if check(j, '[A]-[Z]') then
+      FHashTable[I] := Ord(J)-64
     else
-      if check(chr(ord(i)), '[A]-[Z]') then
-        fSensitiveHashTable[I]:=Ord(LoCase(chr(ord(i)))) - 64
+      case j of
+      '0':
+        FHashTable[I] := 27;
+      '1':
+        FHashTable[I] := 28;
+      '2':
+        FHashTable[I] := 29;
+      '3':
+        FHashTable[I] := 30;
+      '4':
+        FHashTable[I] := 31;
+      '5':
+        FHashTable[I] := 32;
+      '6':
+        FHashTable[I] := 33;
+      '7':
+        FHashTable[I] := 34;
+      '8':
+        FHashTable[I] := 35;
+      '9':
+        FHashTable[I] := 36;
+      '_':
+        FHashTable[I] := 37;
+      '-':
+        FHashTable[I] := 38;
+      ':':
+        FHashTable[I] := 39;
       else
-        fSensitiveHashTable[I]:=0;  
+        FHashTable[I] := 0;
+      end
+    fInsensitiveHashTable[I]:=Ord(J);
+    fSensitiveHashTable[I]:=Ord(I);
   end;
   s:='  TSynWebIdentTable: array[#$00..#$FF] of Longword=('#13#10'    ';
   i:=0;
@@ -175,6 +200,17 @@ begin
   while i<=255 do 
   begin
     s:=s+'$'+IntToHex(fIdentTable2[I],8)+ismax(i,255,');',', ');
+    i:=i+1;
+    if i mod 4=0 then
+      s:=TrimRight(s)+#13#10+'    ';
+  end;
+  s:=trimRight(s)+#13#10#13#10;
+  
+  s:=s+'  TSynWebIdentHashTable: TSynWebHashTable=('#13#10'    ';
+  i:=0;
+  while i<=255 do 
+  begin
+    s:=s+'$'+IntToHex(FHashTable[I],8)+ismax(i,255,');',', ');
     i:=i+1;
     if i mod 4=0 then
       s:=TrimRight(s)+#13#10+'    ';

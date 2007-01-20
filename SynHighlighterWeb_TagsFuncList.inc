@@ -22,6 +22,7 @@
     function MLTagFunc32: TSynWebTokenKind;
     function MLTagFunc33: TSynWebTokenKind;
     function MLTagFunc35: TSynWebTokenKind;
+    function MLTagFunc36: TSynWebTokenKind;
     function MLTagFunc37: TSynWebTokenKind;
     function MLTagFunc38: TSynWebTokenKind;
     function MLTagFunc39: TSynWebTokenKind;
