@@ -3095,7 +3095,7 @@ begin
   begin
     for i := 1 to FInstance^.FStringLen do
     begin
-      if TSynWebInsensitiveHashTableTemp^] <> TSynWebInsensitiveHashTable[aKey[i]] then
+      if TSynWebInsensitiveHashTable[Temp^] <> TSynWebInsensitiveHashTable[aKey[i]] then
       begin
         Result := False;
         Exit;
@@ -5764,7 +5764,7 @@ begin
         FPhpProcTable[c] := PhpDotProc;
       '{', '}', '[', ']', '(', ')', '~', ',', ';':
         FPhpProcTable[c] := PhpSymbolProc;
-      ':'
+      ':':
         FPhpProcTable[c] := PhpSymbolProc2;
       '$':
         FPhpProcTable[c] := PhpVarProc;
