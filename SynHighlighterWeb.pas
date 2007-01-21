@@ -47,7 +47,7 @@ located at http://sourceforge.net/projects/synweb
 Contact: krystian.bigaj@gmail.com
 Homepage: http://flatdev.ovh.org
 
-Known Issues:
+Known limitations:
 - SynWeb highlighters support only single line SetLine (don't use more than one line).
 - Doesn't support #13#10, #10 or #13 as new line. Always use #0 as line break.
 - Php: Doesn't support multi-line encapsuled strings in String, only single line:
@@ -309,6 +309,7 @@ type
     function GetEol: Boolean; override;
     function GetHighlighterType: TSynWebHighlighterType;  
     function PhpGetKeywordId: Integer;
+    function PhpGetRange: TSynWebPhpRangeState;
     procedure SetRange(Value: Pointer); override;
 {$IFNDEF UNISYNEDIT}
     procedure SetLine(NewValue: String; LineNumber: Integer); override;
@@ -1316,6 +1317,14 @@ begin
     Result := -1
   else
     Result := FInstance.FTokenLastID;  
+end;
+
+function TSynWebBase.PhpGetRange: TSynWebPhpRangeState;
+begin
+  if FEngine = nil then
+    Result := srsPhpDefault
+  else
+    Result := FEngine.PhpGetRange;
 end;
 
 procedure TSynWebBase.SetRange(Value: Pointer);
@@ -6030,7 +6039,10 @@ end;
 procedure TSynWebEngine.PhpAtSymbolProc;
 begin
   Inc(FInstance^.FRun);
+  if FInstance^.FLine[FInstance^.FRun] = '@' then
+    Inc(FInstance^.FRun);
   FInstance^.FTokenID := stkPhpKeyword;
+  FInstance^.FTokenLastID := -1;
 end;
 
 procedure TSynWebEngine.PhpEqualProc;
@@ -6262,6 +6274,7 @@ begin
     FInstance^.FTokenID := stkPhpKeyword
   else
     FInstance^.FTokenID := stkPhpError;
+  FInstance^.FTokenLastID := -1;
 end;
 
 procedure TSynWebEngine.PhpIdentProc;
@@ -6565,11 +6578,13 @@ begin
         SetRangeBit(19, False);
         Inc(FInstance^.FRun, 3);
         FInstance^.FTokenID := stkPhpKeyword;
+        FInstance^.FTokenLastID := -1;
       end else
         if (FInstance^.FLine[FInstance^.FRun] = '=') and (FInstance^.FOptions.FPhpShortOpenTag) then
         begin
           Inc(FInstance^.FRun);
           FInstance^.FTokenID := stkPhpKeyword;
+          FInstance^.FTokenLastID := -1;
         end else
           PhpRangeDefaultProc;
     end;
@@ -6594,6 +6609,7 @@ begin
         Exit;
       end;
       FInstance^.FTokenID := stkPhpKeyword;
+      FInstance^.FTokenLastID := -1;
       PhpSetRange(srsPhpHeredoc);
       s := GetToken;
       i := FPhpHereDocList.IndexOf(s);
@@ -6702,6 +6718,7 @@ begin
         (not GetRangeBit(25) and (GetRangeInt(8, 17) = GetCrc8String(GetToken))) then
       begin
         FInstance^.FTokenID := stkPhpKeyword;
+        FInstance^.FTokenLastID := -1;
         PhpSetRange(srsPhpDefault);
         Exit;
       end;
