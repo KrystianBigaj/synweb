@@ -6048,11 +6048,15 @@ end;
 procedure TSynWebEngine.PhpEqualProc;
 begin
   Inc(FInstance^.FRun);
-  if FInstance^.FLine[FInstance^.FRun] = '=' then
-  begin
-    Inc(FInstance^.FRun);
-    if FInstance^.FLine[FInstance^.FRun] = '=' then
+  case FInstance^.FLine[FInstance^.FRun] of
+  '=':
+    begin
       Inc(FInstance^.FRun);
+      if FInstance^.FLine[FInstance^.FRun] = '=' then
+        Inc(FInstance^.FRun);
+    end;
+  '>':
+    Inc(FInstance^.FRun);
   end;
   FInstance^.FTokenID := stkPhpSymbol;
 end;
@@ -6061,9 +6065,9 @@ procedure TSynWebEngine.PhpGreaterProc;
 begin
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
-    '=':
-      Inc(FInstance^.FRun);
-    '>':
+  '=':
+    Inc(FInstance^.FRun);
+  '>':
     begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = '=' then
