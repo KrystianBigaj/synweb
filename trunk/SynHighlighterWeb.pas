@@ -700,8 +700,8 @@ type
     procedure PhpHashProc;
     procedure PhpNotProc;
     procedure PhpDotProc;
+    procedure PhpColonProc;
     procedure PhpSymbolProc;
-    procedure PhpSymbolProc2;
     procedure PhpVarProc;
     procedure PhpIdentProc;
     procedure PhpErrorProc;
@@ -5770,10 +5770,10 @@ begin
         FPhpProcTable[c] := PhpNotProc;
       '.':
         FPhpProcTable[c] := PhpDotProc;
+      ':':
+        FPhpProcTable[c] := PhpColonProc;
       '{', '}', '[', ']', '(', ')', '~', ',', ';':
         FPhpProcTable[c] := PhpSymbolProc;
-      ':':
-        FPhpProcTable[c] := PhpSymbolProc2;
       '$':
         FPhpProcTable[c] := PhpVarProc;
       'a'..'z', 'A'..'Z', '_', #$7F..#$FF:
@@ -6254,17 +6254,17 @@ begin
       FInstance^.FTokenID := stkPhpSymbol;
 end;
 
-procedure TSynWebEngine.PhpSymbolProc;
+procedure TSynWebEngine.PhpColonProc;
 begin
   Inc(FInstance^.FRun);
+  if FInstance^.FLine[FInstance^.FRun] = ':' then
+    Inc(FInstance^.FRun);
   FInstance^.FTokenID := stkPhpSymbol;
 end;
 
-procedure TSynWebEngine.PhpSymbolProc2;
+procedure TSynWebEngine.PhpSymbolProc;
 begin
   Inc(FInstance^.FRun);
-  if FInstance^.FLine[FInstance^.FRun] = ':' then   
-    Inc(FInstance^.FRun);         
   FInstance^.FTokenID := stkPhpSymbol;
 end;
 
