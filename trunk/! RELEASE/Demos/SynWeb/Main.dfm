@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 291
   Top = 172
-  Width = 908
-  Height = 499
   Caption = 'Form1'
+  ClientHeight = 472
+  ClientWidth = 900
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -302,6 +302,7 @@ object Form1: TForm1
     UseBackground = False
     Left = 20
     Top = 96
+    TitleW = 'Untitled'
   end
   object SynEditOptionsDialog1: TSynEditOptionsDialog
     UseExtendedStrings = False

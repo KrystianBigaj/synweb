@@ -180,20 +180,20 @@ procedure TForm1.SynEdit1StatusChange(Sender: TObject;
 var
   t:TSynWebHighlighterTypes;
 begin
-  if CheckBox2.Checked then
-    if Changes-[scCaretX, scCaretY]<>Changes then
-    begin           
-      t:=SynWebUpdateActiveHighlighter(SynEdit1, TSynWebBase(SynEdit1.Highlighter));
-      Label5.Caption:='';
-      if shtML in t then
-        Label5.Caption:=Label5.Caption+'HTML/WML,';
-      if shtCss in t then       
-        Label5.Caption:=Label5.Caption+'CSS,';
-      if shtES in t then          
-        Label5.Caption:=Label5.Caption+'JS,';
-      if t-[shtPhpInML, shtPhpInCss, shtPhpInES]<>t then
-        Label5.Caption:=Label5.Caption+'PHP,';
-    end;
+  if Changes-[scCaretX, scCaretY]<>Changes then
+  begin
+    SynWebUpdateActiveHighlighter(SynEdit1, TSynWebBase(SynEdit1.Highlighter));
+    t := TSynWebBase(SynEdit1.Highlighter).CurrentHighlighters;
+    Label5.Caption:='';
+    if shtML in t then
+      Label5.Caption:=Label5.Caption+'HTML/WML,';
+    if shtCss in t then
+      Label5.Caption:=Label5.Caption+'CSS,';
+    if shtES in t then
+      Label5.Caption:=Label5.Caption+'JS,';
+    if t-[shtPhpInML, shtPhpInCss, shtPhpInES]<>t then
+      Label5.Caption:=Label5.Caption+'PHP,';
+  end;
   with SynEdit1, SynWebHtmlSyn1 do
   begin
     if SynEdit1.CaretY = 1 then

@@ -264,11 +264,12 @@ type
     FInstance: TSynWebInstance;
     FEngine: TSynWebEngine;
     FActiveHighlighter: Boolean;
-    FActiveHighlighters: TSynWebHighlighterTypes;	
+    FActiveHighlighters, FCurrentHighlighters: TSynWebHighlighterTypes;	
     FOptions: TSynWebOptionsBase;
     procedure SetupActiveHighlighter; virtual; abstract;
     procedure SetActiveHighlighter(const Value: Boolean);
     function GetActiveHighlighters: TSynWebHighlighterTypes;
+    function GetCurrentHighlighters: TSynWebHighlighterTypes;
     procedure SetEngine(const Value: TSynWebEngine);
   protected
 {$IFDEF UNISYNEDIT}
@@ -323,6 +324,7 @@ type
       ACaretX, ACaretY: Integer): Boolean;
 {$ENDIF}
     property ActiveHighlighters: TSynWebHighlighterTypes read GetActiveHighlighters;
+    property CurrentHighlighters: TSynWebHighlighterTypes read GetCurrentHighlighters;
   published
     property ActiveHighlighterSwitch: Boolean
       read FActiveHighlighter write SetActiveHighlighter;
@@ -1149,6 +1151,11 @@ begin
   Result := FActiveHighlighters;
 end;
 
+function TSynWebBase.GetCurrentHighlighters: TSynWebHighlighterTypes;
+begin
+  Result := FCurrentHighlighters;
+end;
+
 procedure TSynWebBase.SetEngine(const Value: TSynWebEngine);
 begin
   if FEngine <> nil then
@@ -1392,10 +1399,12 @@ begin
     else
       ActiveHL := lHinghlighter;
   if ActiveHL >= shtPhpInML then
-    FActiveHighlighters := [shtPhpInML, shtPhpInCss, shtPhpInEs]
+    FCurrentHighlighters := [shtPhpInML, shtPhpInCss, shtPhpInEs]
   else
-    FActiveHighlighters := [ActiveHL];
-  Result := f <> FActiveHighlighters;
+    FCurrentHighlighters := [ActiveHL];
+  Result := f <> FCurrentHighlighters;
+  if FActiveHighlighter then
+    FActiveHighlighters := FCurrentHighlighters;
 end;
 
 { TSynWebMLSyn }
