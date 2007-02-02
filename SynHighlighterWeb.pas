@@ -1370,10 +1370,6 @@ var
   lPos, lLen: Integer;
   lHinghlighter, ActiveHL: TSynWebHighlighterType;
 begin
-  Result := True;
-  if not FActiveHighlighter or not (FInstance.FOptions.FPhpEmbeded or FInstance.FOptions.FCssEmbeded or
-    FInstance.FOptions.FEsEmbeded) then
-    Exit;
   f := FActiveHighlighters;
   Dec(ACaretX);
   SetRange(ARange);

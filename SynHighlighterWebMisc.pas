@@ -351,7 +351,8 @@ begin
   begin
     if UpdateActiveHighlighter(TSynEditStringList(Lines).Ranges[CaretY-2],
        Lines[CaretY-1], CaretX, CaretY) then
-      Repaint;
+      if ActiveHighlighterSwitch then
+        Repaint;
     Result := ASynWeb.ActiveHighlighters;
   end;
 end;
