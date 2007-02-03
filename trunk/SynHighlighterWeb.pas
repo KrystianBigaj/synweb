@@ -6279,7 +6279,8 @@ begin
   if FInstance^.FLine[FInstance^.FRun] = '$' then
     Inc(FInstance^.FRun);
   // if FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', #$7F..#$FF] then
-  if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 28) <> 0 then
+  if (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 28) <> 0)
+    or (FInstance^.FLine[FInstance^.FRun] = '{') then
     FInstance^.FTokenID := stkPhpKeyword
   else
     FInstance^.FTokenID := stkPhpError;
