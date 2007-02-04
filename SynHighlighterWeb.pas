@@ -7030,14 +7030,23 @@ end;
 procedure TSynWebEngine.SetLine(NewValue: String; LineNumber: Integer);
 {$IFDEF SYNWEB_FIXNULL}
 var
+  s, e: PChar;
   i:Integer;
 {$ENDIF}
 begin
   FInstance^.FLineRef := NewValue;
 {$IFDEF SYNWEB_FIXNULL}
-  for i:=1 to Length(FInstance^.FLineRef) do
-    if FInstance^.FLineRef[i]=#0 then
-      FInstance^.FLineRef[i]:=' ';
+  i := Length(FInstance^.FLineRef);
+  if i > 0  then
+  begin
+    s := @FInstance^.FLineRef[1];
+    e := s + i;
+    repeat
+      if s^ = #0 then
+        s^ := #32;
+      Inc(s);
+    until s = e;
+  end;
 {$ENDIF}
   FInstance^.FLine := PChar(FInstance^.FLineRef);
   FInstance^.FRun := 0;
