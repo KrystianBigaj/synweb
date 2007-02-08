@@ -211,6 +211,58 @@ const
 
 // Php -------------------------------------------------------------------------
 const
+  PhpSymbolID_Question                  = 0;          // ?
+  PhpSymbolID_BitwiseAnd                = 1;          // &
+  PhpSymbolID_BitwiseAndAssign          = 2;          // &=
+  PhpSymbolID_LogicAnd                  = 3;          // &&
+  PhpSymbolID_BitwiseOR                 = 4;          // |
+  PhpSymbolID_BitwiseOrAssign           = 5;          // |=
+  PhpSymbolID_LogicOr                   = 6;          // ||
+  PhpSymbolID_Assign                    = 7;          // =
+  PhpSymbolID_Equal                     = 8;          // ==
+  PhpSymbolID_Identical                 = 9;          // ==
+  PhpSymbolID_Arrow                     = 10;         // =>
+  PhpSymbolID_Greater                   = 11;         // >
+  PhpSymbolID_GreaterEqual              = 12;         // >=
+  PhpSymbolID_ShiftRight                = 13;         // >>
+  PhpSymbolID_ShiftRightAssign          = 14;         // >>=
+  PhpSymbolID_Lower                     = 15;         // <
+  PhpSymbolID_LowerEqual                = 16;         // <=
+  PhpSymbolID_ShiftLeft                 = 17;         // <<
+  PhpSymbolID_ShiftLeftAssign           = 18;         // <<=
+  PhpSymbolID_Heredoc                   = 19;         // <<<
+  PhpSymbolID_Add                       = 20;         // +
+  PhpSymbolID_AddAssign                 = 21;         // +=
+  PhpSymbolID_Increment                 = 22;         // ++
+  PhpSymbolID_Dec                       = 23;         // -
+  PhpSymbolID_DecAssign                 = 24;         // -=
+  PhpSymbolID_Decrement                 = 25;         // --
+  PhpSymbolID_ObjectMethod              = 26;         // ->
+  PhpSymbolID_Mul                       = 27;         // *
+  PhpSymbolID_MulAssign                 = 28;         // *=
+  PhpSymbolID_Div                       = 29;         // /
+  PhpSymbolID_DivAssign                 = 30;         // /=
+  PhpSymbolID_Mod                       = 31;         // %
+  PhpSymbolID_ModAssign                 = 32;         // %=
+  PhpSymbolID_Xor                       = 33;         // ^
+  PhpSymbolID_XorAssign                 = 34;         // ^=
+  PhpSymbolID_Not                       = 35;         // !
+  PhpSymbolID_NotEqual                  = 36;         // !=
+  PhpSymbolID_NotIdentical              = 37;         // !==
+  PhpSymbolID_Concat                    = 38;         // .
+  PhpSymbolID_ConcatAssign              = 39;         // .=
+  PhpSymbolID_Colon                     = 40;         // :
+  PhpSymbolID_ClassMethod               = 41;         // ::
+  PhpSymbolID_ParentheseOpen            = 42;         // (
+  PhpSymbolID_ParentheseClose           = 43;         // )
+  PhpSymbolID_BoxBracketOpen            = 44;         // [
+  PhpSymbolID_BoxBracketClose           = 45;         // ]
+  PhpSymbolID_BraceOpen                 = 46;         // {
+  PhpSymbolID_BraceClose                = 47;         // }
+  PhpSymbolID_Tilde                     = 48;         // ~
+  PhpSymbolID_Comma                     = 49;         // ,
+  PhpSymbolID_SemiColon                 = 50;         // ;
+
 {$I SynHighlighterWeb_PhpKeywords.inc}
 
 // Global ----------------------------------------------------------------------

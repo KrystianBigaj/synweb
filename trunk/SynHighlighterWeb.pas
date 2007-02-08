@@ -118,6 +118,7 @@ type
     FTokenPos: Integer;
     FTokenID: TSynWebTokenKind;
     FStringLen, FStringLenClean: Integer;
+    FTokenLastSymbolId: Integer;
     FToIdent: PChar;
     FHashTable: TSynWebHashTable;
     FNextClearBits: Boolean;
@@ -310,6 +311,8 @@ type
     function GetEol: Boolean; override;
     function GetHighlighterType: TSynWebHighlighterType;  
     function PhpGetKeywordId: Integer;
+    function PhpGetFunctionId: Integer;
+    function PhpGetSymbolId: Integer;
     function PhpGetRange: TSynWebPhpRangeState;
     procedure SetRange(Value: Pointer); override;
 {$IFNDEF UNISYNEDIT}
@@ -676,6 +679,7 @@ type
     procedure PhpCliNext;
     function PhpGetRange: TSynWebPhpRangeState;
     procedure PhpSetRange(const ARange: TSynWebPhpRangeState);
+    procedure PhpSetSymbolId(ASymbolId: Integer);
 
     function PhpCheckBegin(ABegin: Boolean = True): Boolean;
     procedure PhpBegin(ATagKind: TSynWebPhpOpenTag);
@@ -696,14 +700,25 @@ type
     procedure PhpLowerProc;
     procedure PhpPlusProc;
     procedure PhpMinusProc;
-    procedure PhpMulDivModXorProc;
+    procedure PhpMulProc;
+    procedure PhpDivProc;
+    procedure PhpModProc;
+    procedure PhpXorProc;
     procedure PhpSlashProc;
     procedure PhpPercentProc;
     procedure PhpHashProc;
     procedure PhpNotProc;
     procedure PhpDotProc;
     procedure PhpColonProc;
-    procedure PhpSymbolProc;
+    procedure PhpParentheseOpenProc;
+    procedure PhpParentheseCloseProc;
+    procedure PhpBoxBracketOpenProc;
+    procedure PhpBoxBracketCloseProc;
+    procedure PhpBraceOpenProc;
+    procedure PhpBraceCloseProc;
+    procedure PhpTildeProc;
+    procedure PhpCommaProc;
+    procedure PhpSemiColonProc;
     procedure PhpVarProc;
     procedure PhpIdentProc;
     procedure PhpErrorProc;
@@ -1235,30 +1250,30 @@ begin
     Result := nil
   else
     case Index of
-      // SYN_ATTR_IDENTIFIER: ??
-      // SYN_ATTR_KEYWORD: ??
-      // SYN_ATTR_SYMBOL: ??
-      SYN_ATTR_WHITESPACE:
+    // SYN_ATTR_IDENTIFIER: ??
+    // SYN_ATTR_KEYWORD: ??
+    // SYN_ATTR_SYMBOL: ??
+    SYN_ATTR_WHITESPACE:
       begin
         Result := FInstance.fSYN_ATTR_WHITEsPACE;
         if not Enabled then
           case FInstance.FHighlighterMode of
-            shmML:
-              Result := fEngine.FMLWhitespaceAttri;
-            shmCss:
-              Result := fEngine.FCssWhitespaceAttri;
-            shmEs:
-              Result := fEngine.FEsWhitespaceAttri;
-            shmPhpCli:
-              Result := fEngine.FPhpInlineTextAttri;
+          shmML:
+            Result := fEngine.FMLWhitespaceAttri;
+          shmCss:
+            Result := fEngine.FCssWhitespaceAttri;
+          shmEs:
+            Result := fEngine.FEsWhitespaceAttri;
+          shmPhpCli:
+            Result := fEngine.FPhpInlineTextAttri;
           end;
       end;
-      SYN_ATTR_COMMENT:
-        Result := FInstance.fSYN_ATTR_COMMENT;
-      SYN_ATTR_STRING:
-        Result := FInstance.fSYN_ATTR_STRING;
-      else
-        Result := nil;
+    SYN_ATTR_COMMENT:
+      Result := FInstance.fSYN_ATTR_COMMENT;
+    SYN_ATTR_STRING:
+      Result := FInstance.fSYN_ATTR_STRING;
+    else // case
+      Result := nil;
     end;
 end;
 
@@ -1323,7 +1338,23 @@ begin
   if FInstance.FTokenID <> stkPhpKeyword then
     Result := -1
   else
-    Result := FInstance.FTokenLastID;  
+    Result := FInstance.FTokenLastID;
+end;
+
+function TSynWebBase.PhpGetFunctionId: Integer;
+begin
+  if FInstance.FTokenID <> stkPhpFunction then
+    Result := -1
+  else
+    Result := FInstance.FTokenLastID;
+end;
+
+function TSynWebBase.PhpGetSymbolId: Integer;
+begin
+  if FInstance.FTokenID <> stkPhpSymbol then
+    Result := -1
+  else
+    Result := FInstance.FTokenLastSymbolId;
 end;
 
 function TSynWebBase.PhpGetRange: TSynWebPhpRangeState;
@@ -2290,18 +2321,18 @@ begin
     Exit;
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
-    '/':
+  '/':
     begin
       Inc(FInstance^.FRun);
       SetRangeBit(12, True);
     end;
-    '?':
+  '?':
     begin
       if FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict then
         Inc(FInstance^.FRun);
       SetRangeBit(12, False);
     end;
-    '!':
+  '!':
     begin
       Inc(FInstance^.FRun);
       if (FInstance^.FLine[FInstance^.FRun] = '-') and
@@ -2351,8 +2382,8 @@ begin
             FInstance^.FTokenID := stkMLError;
       Exit;
     end;
-    else
-      SetRangeBit(12, False);
+  else // case
+    SetRangeBit(12, False);
   end;
   // if FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z'] then
   if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) <> 0 then
@@ -2372,22 +2403,22 @@ end;
 procedure TSynWebEngine.MLRangeTextProc;
 begin
   case FInstance^.FLine[FInstance^.FRun] of
-    #0:
-      NullProc;
-    #1..#32:
-      MLSpaceProc;
-    '<':
-      MLBraceOpenProc;
-    '>':
-      MLErrorProc;
-    '&':
-      MLAmpersandProc;
-    else
-      repeat
-        Inc(FInstance^.FRun);
-      until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 6) <> 0;
-      // until FInstance^.FLine[FInstance^.FRun] In [#0..#32, '<', '>', '&'];
-      FInstance^.FTokenID := stkMLText;
+  #0:
+    NullProc;
+  #1..#32:
+    MLSpaceProc;
+  '<':
+    MLBraceOpenProc;
+  '>':
+    MLErrorProc;
+  '&':
+    MLAmpersandProc;
+  else // case
+    repeat
+      Inc(FInstance^.FRun);
+    until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 6) <> 0;
+    // until FInstance^.FLine[FInstance^.FRun] In [#0..#32, '<', '>', '&'];
+    FInstance^.FTokenID := stkMLText;
   end;
 end;
 
@@ -2400,9 +2431,9 @@ begin
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 19) = 0 do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
-      #0:
-        Break;
-      '-':
+    #0:
+      Break;
+    '-':
       begin
         Inc(FInstance^.FRun);
         if FInstance^.FLine[FInstance^.FRun] = '-' then
@@ -2424,11 +2455,11 @@ begin
           Break;
         end;
       end;
-      '<':
-        if PhpCheckBegin(False) then
-          Break
-        else
-          Inc(FInstance^.FRun);
+    '<':
+      if PhpCheckBegin(False) then
+        Break
+      else
+        Inc(FInstance^.FRun);
     end;
   until False;
   FInstance^.FTokenID := stkMLComment;
@@ -2443,19 +2474,19 @@ begin
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 20) = 0 do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
-      #0:
-        Break;
-      '>':
+    #0:
+      Break;
+    '>':
       begin
         Inc(FInstance^.FRun);
         MLSetRange(srsMLText);
         Break;
       end;
-      '<':
-        if PhpCheckBegin(False) then
-          Break
-        else
-          Inc(FInstance^.FRun);
+    '<':
+      if PhpCheckBegin(False) then
+        Break
+      else
+        Inc(FInstance^.FRun);
     end;
   until False;
   FInstance^.FTokenID := stkMLComment;
@@ -2464,71 +2495,71 @@ end;
 procedure TSynWebEngine.MLRangeTagDOCTYPEProc;
 begin
   case GetRangeInt(2, 7) of
-    0:
+  0:
     begin
       Inc(FInstance^.FRun, 7);
       FInstance^.FTokenID := stkMLTagName;
       SetRangeInt(2, 7, 1);
     end;
-    1:
-      if not MLCheckNull and not PhpCheckBegin then
-        case FInstance^.FLine[FInstance^.FRun] of
-          #1..#32:
-          begin
-            MLSpaceProc;
-            Exit;
-          end;
-          '>':
-          begin
-            Inc(FInstance^.FRun);
-            FInstance^.FTokenID := stkMLTag;
-            SetRangeInt(2, 7, 0);
-            MLSetRange(srsMLText);
-            Exit;
-          end;
-          #39:
-          begin
-            Inc(FInstance^.FRun);
-            if FInstance^.FLine[FInstance^.FRun] = #0 then
-              FInstance^.FTokenID := stkMLError
-            else
-            begin
-              SetRangeInt(2, 7, 2);
-              if PhpCheckBegin(False) then
-                FInstance^.FTokenID := stkMLTagKeyValueQuoted
-              else
-                MLRangeTagDOCTYPEProc;
-            end;
-          end;
-          '"':
-          begin
-            Inc(FInstance^.FRun);
-            if FInstance^.FLine[FInstance^.FRun] = #0 then
-              FInstance^.FTokenID := stkMLError
-            else
-            begin
-              SetRangeInt(2, 7, 3);
-              if PhpCheckBegin(False) then
-                FInstance^.FTokenID := stkMLTagKeyValueQuoted
-              else
-                MLRangeTagDOCTYPEProc;
-            end;
-          end;
-          else
-            // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']) then
-            if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
-            begin
-              Inc(FInstance^.FRun);
-              FInstance^.FTokenID := stkMLError;
-              Exit;
-            end;
-            repeat
-              Inc(FInstance^.FRun);
-            until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0;
-            // until not (FInstance^.FLine[FInstance^.FRun] In ['a'..'z', 'A'..'Z']);
-            FInstance^.FTokenID := stkMLTagKey;
+  1:
+    if not MLCheckNull and not PhpCheckBegin then
+      case FInstance^.FLine[FInstance^.FRun] of
+      #1..#32:
+        begin
+          MLSpaceProc;
+          Exit;
         end;
-    2:
+      '>':
+        begin
+          Inc(FInstance^.FRun);
+          FInstance^.FTokenID := stkMLTag;
+          SetRangeInt(2, 7, 0);
+          MLSetRange(srsMLText);
+          Exit;
+        end;
+      #39:
+        begin
+          Inc(FInstance^.FRun);
+          if FInstance^.FLine[FInstance^.FRun] = #0 then
+            FInstance^.FTokenID := stkMLError
+          else
+          begin
+            SetRangeInt(2, 7, 2);
+            if PhpCheckBegin(False) then
+              FInstance^.FTokenID := stkMLTagKeyValueQuoted
+            else
+              MLRangeTagDOCTYPEProc;
+          end;
+        end;
+      '"':
+        begin
+          Inc(FInstance^.FRun);
+          if FInstance^.FLine[FInstance^.FRun] = #0 then
+            FInstance^.FTokenID := stkMLError
+          else
+          begin
+            SetRangeInt(2, 7, 3);
+            if PhpCheckBegin(False) then
+              FInstance^.FTokenID := stkMLTagKeyValueQuoted
+            else
+              MLRangeTagDOCTYPEProc;
+          end;
+        end;
+      else // case
+        // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']) then
+        if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
+        begin
+          Inc(FInstance^.FRun);
+          FInstance^.FTokenID := stkMLError;
+          Exit;
+        end;
+        repeat
+          Inc(FInstance^.FRun);
+        until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0;
+        // until not (FInstance^.FLine[FInstance^.FRun] In ['a'..'z', 'A'..'Z']);
+        FInstance^.FTokenID := stkMLTagKey;
+      end;
+  2:
     begin
       if not MLCheckNull then
         if PhpCheckBegin then
@@ -2539,19 +2570,19 @@ begin
             while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 21) = 0 do
               Inc(FInstance^.FRun);
             case FInstance^.FLine[FInstance^.FRun] of
-              #0:
+            #0:
               begin
                 FInstance^.FTokenID := stkMLError;
                 Break;
               end;
-              '<':
-                if PhpCheckBegin(False) then
-                begin
-                  FInstance^.FTokenID := stkMLTagKeyValueQuoted;
-                  Exit;
-                end else
-                  Inc(FInstance^.FRun);
-              #39:
+            '<':
+              if PhpCheckBegin(False) then
+              begin
+                FInstance^.FTokenID := stkMLTagKeyValueQuoted;
+                Exit;
+              end else
+                Inc(FInstance^.FRun);
+            #39:
               begin
                 Inc(FInstance^.FRun);
                 FInstance^.FTokenID := stkMLTagKeyValueQuoted;
@@ -2561,7 +2592,7 @@ begin
           until False;
       SetRangeInt(2, 7, 1);
     end;
-    3:
+  3:
     begin
       if not MLCheckNull then
         if PhpCheckBegin then
@@ -2572,19 +2603,19 @@ begin
             while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 22) = 0 do
               Inc(FInstance^.FRun);
             case FInstance^.FLine[FInstance^.FRun] of
-              #0:
+            #0:
               begin
                 FInstance^.FTokenID := stkMLError;
                 Break;
               end;
-              '<':
-                if PhpCheckBegin(False) then
-                begin
-                  FInstance^.FTokenID := stkMLTagKeyValueQuoted;
-                  Exit;
-                end else
-                  Inc(FInstance^.FRun);
-              '"':
+            '<':
+              if PhpCheckBegin(False) then
+              begin
+                FInstance^.FTokenID := stkMLTagKeyValueQuoted;
+                Exit;
+              end else
+                Inc(FInstance^.FRun);
+            '"':
               begin
                 Inc(FInstance^.FRun);
                 FInstance^.FTokenID := stkMLTagKeyValueQuoted;
@@ -2621,11 +2652,11 @@ begin
         until TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun]] and (1 shl 1) <> 0;
         // until FInstance^.FLine[FInstance^.FRun] in [#0..#32, '<', ']'];
         case FInstance^.FLine[FInstance^.FRun] of
-          #0..#32, ']':
+        #0..#32, ']':
+          Break;
+        '<':
+          if PhpCheckBegin(False) then
             Break;
-          '<':
-            if PhpCheckBegin(False) then
-              Break;
         end;
       until False;
       FInstance^.FTokenID := stkMLText;
@@ -2661,26 +2692,26 @@ begin
   if MLCheckNull or PhpCheckBegin then
     Exit;
   case FInstance^.FLine[FInstance^.FRun] of
-    #1..#32:
-      MLSpaceProc;
-    '>':
+  #1..#32:
+    MLSpaceProc;
+  '>':
     begin
       Inc(FInstance^.FRun);
       FInstance^.FTokenID := stkMLTag;
       MLSetRange(srsMLText);
     end;
-    else
-      FInstance^.FTokenID := stkMLError;
+  else // case
+    FInstance^.FTokenID := stkMLError;
+    repeat
       repeat
-        repeat
-          Inc(FInstance^.FRun);
-        until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 1) <> 0;
-        // until not (FInstance^.FLine[FInstance^.FRun] In [#0..#32, '<', '>']) do
-        if (FInstance^.FLine[FInstance^.FRun] = '<') and not PhpCheckBegin(False) then
-          Continue
-        else
-          Break;
-      until False;
+        Inc(FInstance^.FRun);
+      until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 1) <> 0;
+      // until not (FInstance^.FLine[FInstance^.FRun] In [#0..#32, '<', '>']) do
+      if (FInstance^.FLine[FInstance^.FRun] = '<') and not PhpCheckBegin(False) then
+        Continue
+      else
+        Break;
+    until False;
   end;
 end;
 
@@ -2708,22 +2739,22 @@ begin
         Exit;
       end;
   case FInstance^.FLine[FInstance^.FRun] of
-    #1..#32:
-      MLSpaceProc;
-    '/':
-      if not GetRangeBit(12) and (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
-        (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) and
-        (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) then
-      begin
-        Inc(FInstance^.FRun, 2);
-        FInstance^.FTokenID := stkMLTag;
-        MLSetRange(srsMLText);
-      end else
-      begin
-        Inc(FInstance^.FRun);
-        FInstance^.FTokenID := stkMLError;
-      end;
-    '>':
+  #1..#32:
+    MLSpaceProc;
+  '/':
+    if not GetRangeBit(12) and (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
+      (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) and
+      (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) then
+    begin
+      Inc(FInstance^.FRun, 2);
+      FInstance^.FTokenID := stkMLTag;
+      MLSetRange(srsMLText);
+    end else
+    begin
+      Inc(FInstance^.FRun);
+      FInstance^.FTokenID := stkMLError;
+    end;
+  '>':
     begin
       Inc(FInstance^.FRun);
       FInstance^.FTokenID := stkMLTag;
@@ -2752,26 +2783,26 @@ begin
                 end;
       MLSetRange(srsMLText);
     end;
+  else // case
+    // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']) then
+    if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
+      MLErrorProc
     else
-      // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']) then
-      if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
-        MLErrorProc
+    begin
+      repeat
+        Inc(FInstance^.FRun);
+      until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) = 0;
+      // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', ':', '-']);
+      if ID = -1 then
+        FInstance^.FTokenID := stkMLTagKeyUndef
       else
       begin
-        repeat
-          Inc(FInstance^.FRun);
-        until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) = 0;    
-        // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', ':', '-']);
-        if ID = -1 then
-          FInstance^.FTokenID := stkMLTagKeyUndef
-        else
-        begin
-          FInstance^.FTokenID := MLAttrCheck;
-          if ID = MLTagID_Script then
-            SetRangeBit(27, FInstance^.FTokenLastID = MLAttrID_Language);
-        end;
+        FInstance^.FTokenID := MLAttrCheck;
+        if ID = MLTagID_Script then
+          SetRangeBit(27, FInstance^.FTokenLastID = MLAttrID_Language);
       end;
-      MLSetRange(srsMLTagKeyEq);
+    end;
+    MLSetRange(srsMLTagKeyEq);
   end;
 end;
 
@@ -2780,19 +2811,19 @@ begin
   if MLCheckNull or PhpCheckBegin then
     Exit;
   case FInstance^.FLine[FInstance^.FRun] of
-    #1..#32:
-      MLSpaceProc;
-    '=':
+  #1..#32:
+    MLSpaceProc;
+  '=':
     begin
       Inc(FInstance^.FRun);
       FInstance^.FTokenID := stkMLSymbol;
       MLSetRange(srsMLTagKeyValue);
     end;
-    else
-      MLSetRange(srsMLTagKey);
-      MLRangeTagKeyProc;
-      if FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict then
-        FInstance^.FTokenID := stkMLError;
+  else // case
+    MLSetRange(srsMLTagKey);
+    MLRangeTagKeyProc;
+    if FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict then
+      FInstance^.FTokenID := stkMLError;
   end;
 end;
 
@@ -2803,9 +2834,9 @@ begin
   if MLCheckNull or PhpCheckBegin then
     Exit;
   case FInstance^.FLine[FInstance^.FRun] of
-    #1..#32:
-      MLSpaceProc;
-    #39:
+  #1..#32:
+    MLSpaceProc;
+  #39:
     begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = #0 then
@@ -2821,7 +2852,7 @@ begin
           MLRangeTagKeyValueQuoted1Proc;
       end;
     end;
-    '"':
+  '"':
     begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = #0 then
@@ -2837,69 +2868,69 @@ begin
           MLRangeTagKeyValueQuoted2Proc;
       end;
     end;
-    else
-      if (FInstance^.FLine[FInstance^.FRun] = '>') or
-        ((FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) and
-        (FInstance^.FLine[FInstance^.FRun] = '/') and
-        (FInstance^.FLine[FInstance^.FRun + 1] = '>')) then
+  else // case
+    if (FInstance^.FLine[FInstance^.FRun] = '>') or
+      ((FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) and
+      (FInstance^.FLine[FInstance^.FRun] = '/') and
+      (FInstance^.FLine[FInstance^.FRun + 1] = '>')) then
+    begin
+      if FInstance^.FLine[FInstance^.FRun] = '/' then
+        Inc(FInstance^.FRun, 2)
+      else
+        Inc(FInstance^.FRun);
+      FInstance^.FTokenID := stkMLError;
+      if not GetRangeBit(12) and ((FInstance^.FRun = 0) or
+        (FInstance^.FLine[FInstance^.FRun - 2] <> '/')) then
       begin
-        if FInstance^.FLine[FInstance^.FRun] = '/' then
-          Inc(FInstance^.FRun, 2)
-        else
-          Inc(FInstance^.FRun);
-        FInstance^.FTokenID := stkMLError;
-        if not GetRangeBit(12) and ((FInstance^.FRun = 0) or
-          (FInstance^.FLine[FInstance^.FRun - 2] <> '/')) then
+        ID := MLGetTag - 1;
+        if (ID = MLTagID_Style) and FInstance^.FOptions.FCssEmbeded then
         begin
-          ID := MLGetTag - 1;
-          if (ID = MLTagID_Style) and FInstance^.FOptions.FCssEmbeded then
-          begin
-            SetHighlighterType(shtCss, True, True, True);
-            Exit;
-          end else
-            if (ID = MLTagID_Script) then
-              if GetRangeBit(28) and FInstance^.FOptions.FPhpEmbeded then
+          SetHighlighterType(shtCss, True, True, True);
+          Exit;
+        end else
+          if (ID = MLTagID_Script) then
+            if GetRangeBit(28) and FInstance^.FOptions.FPhpEmbeded then
+            begin
+              SetRangeInt(17, 0, 0);
+              PhpBegin(spotML);
+              Exit;
+            end else
+              if FInstance^.FOptions.FEsEmbeded then
               begin
-                SetRangeInt(17, 0, 0);
-                PhpBegin(spotML);
+                SetHighlighterType(shtEs, True, True, True);
                 Exit;
-              end else
-                if FInstance^.FOptions.FEsEmbeded then
-                begin
-                  SetHighlighterType(shtEs, True, True, True);
-                  Exit;
-                end;
-        end;
-        MLSetRange(srsMLText);
-      end else
-      begin
-        repeat
-          repeat
-            Inc(FInstance^.FRun);
-          until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 23) <> 0;
-          // until FInstance^.FLine[FInstance^.FRun] in [#0..#32, '<', '>', '/'];
-          case FInstance^.FLine[FInstance^.FRun] of
-            '/':
-              if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
-                (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) then
-                Break;
-            '<':
-              if PhpCheckBegin(False) then
-                Break
-              else
-                Inc(FInstance^.FRun);
-            else
-              Break;
-          end;
-        until False;
-        if FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict then
-          FInstance^.FTokenID := stkMLError
-        else
-          FInstance^.FTokenID := stkMLTagKeyValue;
-        if GetRangeBit(27) then
-          SetRangeBit(28, UpperCase(GetToken) = 'PHP');
-        MLSetRange(srsMLTagKey);
+              end;
       end;
+      MLSetRange(srsMLText);
+    end else
+    begin
+      repeat
+        repeat
+          Inc(FInstance^.FRun);
+        until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 23) <> 0;
+        // until FInstance^.FLine[FInstance^.FRun] in [#0..#32, '<', '>', '/'];
+        case FInstance^.FLine[FInstance^.FRun] of
+        '/':
+          if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
+            (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) then
+            Break;
+        '<':
+          if PhpCheckBegin(False) then
+            Break
+          else
+            Inc(FInstance^.FRun);
+        else // case
+          Break;
+        end;
+      until False;
+      if FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict then
+        FInstance^.FTokenID := stkMLError
+      else
+        FInstance^.FTokenID := stkMLTagKeyValue;
+      if GetRangeBit(27) then
+        SetRangeBit(28, UpperCase(GetToken) = 'PHP');
+      MLSetRange(srsMLTagKey);
+    end;
   end;
 end;
 
@@ -2914,19 +2945,19 @@ begin
         while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 21) = 0 do
           Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun] of
-          #0:
+        #0:
           begin
             FInstance^.FTokenID := stkMLError;
             Break;
           end;
-          '<':
-            if PhpCheckBegin(False) then
-            begin
-              FInstance^.FTokenID := stkMLTagKeyValueQuoted;
-              Exit;
-            end else
-              Inc(FInstance^.FRun);
-          #39:
+        '<':
+          if PhpCheckBegin(False) then
+          begin
+            FInstance^.FTokenID := stkMLTagKeyValueQuoted;
+            Exit;
+          end else
+            Inc(FInstance^.FRun);
+        #39:
           begin
             Inc(FInstance^.FRun);
             FInstance^.FTokenID := stkMLTagKeyValueQuoted;
@@ -2950,19 +2981,19 @@ begin
         while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 22) = 0 do
           Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun] of
-          #0:
+        #0:
           begin
             FInstance^.FTokenID := stkMLError;
             Break;
           end;
-          '<':
-            if PhpCheckBegin(False) then
-            begin
-              FInstance^.FTokenID := stkMLTagKeyValueQuoted;
-              Exit;
-            end else
-              Inc(FInstance^.FRun);
-          '"':
+        '<':
+          if PhpCheckBegin(False) then
+          begin
+            FInstance^.FTokenID := stkMLTagKeyValueQuoted;
+            Exit;
+          end else
+            Inc(FInstance^.FRun);
+        '"':
           begin
             Inc(FInstance^.FRun);
             FInstance^.FTokenID := stkMLTagKeyValueQuoted;
@@ -3159,48 +3190,48 @@ var
 begin
   for c := #0 to #255 do
     case c of
-      #0:
-        FCssProcTable[c] := NullProc;
-      #1..#32:
-        FCssProcTable[c] := CssSpaceProc;
-      '@':
-        FCssProcTable[c] := CssAtKeywordProc;
-      '/':
-        FCssProcTable[c] := CssSlashProc;
-      '<':
-        FCssProcTable[c] := CssBraceOpenProc;
-      '{':
-        FCssProcTable[c] := CssCurlyBraceOpenProc;
-      '}':
-        FCssProcTable[c] := CssCurlyBraceCloseProc;
-      '*', '>':
-        FCssProcTable[c] := CssChildAnySelectorProc;
-      '[':
-        FCssProcTable[c] := CssAttribProc;
-      '#':
-        FCssProcTable[c] := CssHashProc;
-      '.':
-        FCssProcTable[c] := CssDotProc;
-      ',':
-        FCssProcTable[c] := CssCommaProc;
-      ':':
-        FCssProcTable[c] := CssColonProc;
-      ';':
-        FCssProcTable[c] := CssSemiColonProc;
-      '!':
-        FCssProcTable[c] := CssExclamationProc;
-      #39, '"':
-        FCssProcTable[c] := CssStringProc;
-      '+':
-        FCssProcTable[c] := CssPlusProc;
-      '-':
-        FCssProcTable[c] := CssMinusProc;
-      '0'..'9':
-        FCssProcTable[c] := CssNumberProc;
-      'a'..'z', 'A'..'Z', '\':
-        FCssProcTable[c] := CssIdentProc;
-      else
-        FCssProcTable[c] := CssErrorProc;
+    #0:
+      FCssProcTable[c] := NullProc;
+    #1..#32:
+      FCssProcTable[c] := CssSpaceProc;
+    '@':
+      FCssProcTable[c] := CssAtKeywordProc;
+    '/':
+      FCssProcTable[c] := CssSlashProc;
+    '<':
+      FCssProcTable[c] := CssBraceOpenProc;
+    '{':
+      FCssProcTable[c] := CssCurlyBraceOpenProc;
+    '}':
+      FCssProcTable[c] := CssCurlyBraceCloseProc;
+    '*', '>':
+      FCssProcTable[c] := CssChildAnySelectorProc;
+    '[':
+      FCssProcTable[c] := CssAttribProc;
+    '#':
+      FCssProcTable[c] := CssHashProc;
+    '.':
+      FCssProcTable[c] := CssDotProc;
+    ',':
+      FCssProcTable[c] := CssCommaProc;
+    ':':
+      FCssProcTable[c] := CssColonProc;
+    ';':
+      FCssProcTable[c] := CssSemiColonProc;
+    '!':
+      FCssProcTable[c] := CssExclamationProc;
+    #39, '"':
+      FCssProcTable[c] := CssStringProc;
+    '+':
+      FCssProcTable[c] := CssPlusProc;
+    '-':
+      FCssProcTable[c] := CssMinusProc;
+    '0'..'9':
+      FCssProcTable[c] := CssNumberProc;
+    'a'..'z', 'A'..'Z', '\':
+      FCssProcTable[c] := CssIdentProc;
+    else // case
+      FCssProcTable[c] := CssErrorProc;
     end;
 
   FCssRangeProcTable[srsCssRuleset] := CssRangeRulesetProc;
@@ -3310,38 +3341,38 @@ end;
 function TSynWebEngine.CssCheckNull(ADo: Boolean = True): Boolean;
 begin
   case FInstance^.FLine[FInstance^.FRun] of
-    #0:
+  #0:
     begin
       Result := True;
       if ADo then
         NullProc;
     end;
-    '<':
-      if (FInstance^.FLine[FInstance^.FRun + 1] = '/') and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 2]] =
-        FInstance^.FHashTable['s']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 3]] =
-        FInstance^.FHashTable['t']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 4]] =
-        FInstance^.FHashTable['y']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 5]] =
-        FInstance^.FHashTable['l']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 6]] =
-        FInstance^.FHashTable['e']) and
-        (TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 7]] and (1 shl 0) <> 0) and
-        // (FInstance^.FLine[FInstance^.FRun+7] in [#0..#32, '>']) and
-        (FInstance^.FHighlighterMode = shmML) then
+  '<':
+    if (FInstance^.FLine[FInstance^.FRun + 1] = '/') and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 2]] =
+      FInstance^.FHashTable['s']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 3]] =
+      FInstance^.FHashTable['t']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 4]] =
+      FInstance^.FHashTable['y']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 5]] =
+      FInstance^.FHashTable['l']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 6]] =
+      FInstance^.FHashTable['e']) and
+      (TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 7]] and (1 shl 0) <> 0) and
+      // (FInstance^.FLine[FInstance^.FRun+7] in [#0..#32, '>']) and
+      (FInstance^.FHighlighterMode = shmML) then
+    begin
+      Result := True;
+      if ADo then
       begin
-        Result := True;
-        if ADo then
-        begin
-          SetHighlighterType(shtML, True, False, False);
-          Next;
-        end;
-      end else
-        Result := False;
-    else
+        SetHighlighterType(shtML, True, False, False);
+        Next;
+      end;
+    end else
       Result := False;
+  else // case
+    Result := False;
   end;
 end;
 
@@ -3766,13 +3797,13 @@ begin
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and AShl = 0 do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
-      #39, '"':
+    #39, '"':
       begin
         Inc(FInstance^.FRun);
         FInstance^.FTokenID := stkCssValString;
         Exit;
       end;
-      '\':
+    '\':
       begin
         Inc(FInstance^.FRun);
         if FInstance^.FLine[FInstance^.FRun] = #0 then
@@ -3791,19 +3822,19 @@ begin
           if not CssCheckNull(False) and not PhpCheckBegin(False) then
             Inc(FInstance^.FRun);
       end;
-      else
-        if CssCheckNull(False) then
+    else // case
+      if CssCheckNull(False) then
+      begin
+        FInstance^.FTokenID := stkCssError;
+        Exit;
+      end else
+        if PhpCheckBegin(False) then
         begin
-          FInstance^.FTokenID := stkCssError;
+          FInstance^.FTokenID := stkCssValString;
+          Result := False;
           Exit;
         end else
-          if PhpCheckBegin(False) then
-          begin
-            FInstance^.FTokenID := stkCssValString;
-            Result := False;
-            Exit;
-          end else
-            Inc(FInstance^.FRun);
+          Inc(FInstance^.FRun);
     end;
   until False;
 end;
@@ -3866,76 +3897,76 @@ procedure TSynWebEngine.CssRangeSelectorAttribProc;
 
 begin
   case GetRangeInt(3, 8) of
-    0:
-      if CssNotWhitespace then
+  0:
+    if CssNotWhitespace then
+      if CssIdentStartProc then
+      begin
+        FInstance^.FTokenID := stkCssVal;
+        SetRangeInt(3, 8, 1);
+      end else
+        DoError;
+  1:
+    if CssNotWhitespace then
+      case FInstance^.FLine[FInstance^.FRun] of
+      '=':
+        begin
+          CssSymbolProc;
+          SetRangeInt(3, 8, 2);
+        end;
+      '|', '~':
+        begin
+          SetRangeInt(3, 8, 2);
+          if FInstance^.FLine[FInstance^.FRun + 1] = '=' then
+          begin
+            Inc(FInstance^.FRun, 2);
+            FInstance^.FTokenID := stkCssSymbol;
+          end else
+            CssErrorProc;
+        end;
+      ']':
+          DoEndAttrib;
+      else // case
+        DoError;
+      end;
+  2:
+    if CssNotWhitespace then
+      case FInstance^.FLine[FInstance^.FRun] of
+      #39:
+        begin
+          Inc(FInstance^.FRun);
+          if CssCustomStringProc(TSynWebCssString39, False) then
+            SetRangeInt(3, 8, 5)
+          else
+            SetRangeInt(3, 8, 3);
+        end;
+      '"':
+        begin
+          Inc(FInstance^.FRun);
+          if CssCustomStringProc(TSynWebCssString34, False) then
+            SetRangeInt(3, 8, 5)
+          else
+            SetRangeInt(3, 8, 4);
+        end;
+      else // case
         if CssIdentStartProc then
         begin
-          FInstance^.FTokenID := stkCssVal;
-          SetRangeInt(3, 8, 1);
+          FInstance^.FTokenID := stkCssValString;
+          SetRangeInt(3, 8, 5);
         end else
           DoError;
-    1:
-      if CssNotWhitespace then
-        case FInstance^.FLine[FInstance^.FRun] of
-          '=':
-          begin
-            CssSymbolProc;
-            SetRangeInt(3, 8, 2);
-          end;
-          '|', '~':
-          begin
-            SetRangeInt(3, 8, 2);
-            if FInstance^.FLine[FInstance^.FRun + 1] = '=' then
-            begin
-              Inc(FInstance^.FRun, 2);
-              FInstance^.FTokenID := stkCssSymbol;
-            end else
-              CssErrorProc;
-          end;
-          ']':
-            DoEndAttrib;
-          else
-            DoError;
-        end;
-    2:
-      if CssNotWhitespace then
-        case FInstance^.FLine[FInstance^.FRun] of
-          #39:
-          begin
-            Inc(FInstance^.FRun);
-            if CssCustomStringProc(TSynWebCssString39, False) then
-              SetRangeInt(3, 8, 5)
-            else
-              SetRangeInt(3, 8, 3);
-          end;
-          '"':
-          begin
-            Inc(FInstance^.FRun);
-            if CssCustomStringProc(TSynWebCssString34, False) then
-              SetRangeInt(3, 8, 5)
-            else
-              SetRangeInt(3, 8, 4);
-          end;
-          else
-            if CssIdentStartProc then
-            begin
-              FInstance^.FTokenID := stkCssValString;
-              SetRangeInt(3, 8, 5);
-            end else
-              DoError;
-        end;
-    3:
-      if CssCustomStringProc(TSynWebCssString39) then
-        SetRangeInt(3, 8, 5);
-    4:
-      if CssCustomStringProc(TSynWebCssString34) then
-        SetRangeInt(3, 8, 5);
-    5:
-      if CssNotWhitespace then
-        if FInstance^.FLine[FInstance^.FRun] = ']' then
-          DoEndAttrib
-        else
-          DoError;
+      end;
+  3:
+    if CssCustomStringProc(TSynWebCssString39) then
+      SetRangeInt(3, 8, 5);
+  4:
+    if CssCustomStringProc(TSynWebCssString34) then
+      SetRangeInt(3, 8, 5);
+  5:
+    if CssNotWhitespace then
+      if FInstance^.FLine[FInstance^.FRun] = ']' then
+        DoEndAttrib
+      else
+        DoError;
   end;
 end;
 
@@ -3978,14 +4009,14 @@ begin
     end else
       if CssNotWhitespace then
         case FInstance^.FLine[FInstance^.FRun] of
-          ',':
-            if GetRangeBit(8) then
-            begin
-              SetRangeBit(8, False);
-              CssSymbolProc;
-            end else
-              CssErrorProc;
-          ')':
+        ',':
+          if GetRangeBit(8) then
+          begin
+            SetRangeBit(8, False);
+            CssSymbolProc;
+          end else
+            CssErrorProc;
+        ')':
           begin
             if GetRangeBit(8) then
               CssSymbolProc
@@ -3993,20 +4024,20 @@ begin
               CssErrorProc;
             CssSetRange(srsCssRuleset);
           end;
-          else
-            if CssIdentStartProc then
-              if GetRangeBit(8) then
-                FInstance^.FTokenID := stkCssError
-              else
-              begin
-                FInstance^.FTokenID := stkCssVal;
-                SetRangeBit(8, True);
-              end else
+        else // case
+          if CssIdentStartProc then
+            if GetRangeBit(8) then
+              FInstance^.FTokenID := stkCssError
+            else
             begin
-              CssSetRange(srsCssRuleset);
-              FCssProcTable[FInstance^.FLine[FInstance^.FRun]];
-              FInstance^.FTokenID := stkCssError;
-            end;
+              FInstance^.FTokenID := stkCssVal;
+              SetRangeBit(8, True);
+            end else
+          begin
+            CssSetRange(srsCssRuleset);
+            FCssProcTable[FInstance^.FLine[FInstance^.FRun]];
+            FInstance^.FTokenID := stkCssError;
+          end;
         end;
 end;
 
@@ -4046,144 +4077,144 @@ var
 
   begin
     case GetRangeInt(4, 4) of
-      0:
-        if CssNotWhitespace then
-          case FInstance^.FLine[FInstance^.FRun] of
-            #39:
-            begin
-              Inc(FInstance^.FRun);
-              if CssCustomStringProc(TSynWebCssString39, False) then
-                SetRangeInt(4, 4, 8)
-              else
-                SetRangeInt(4, 4, 1);
-            end;
-            '"':
-            begin
-              Inc(FInstance^.FRun);
-              if CssCustomStringProc(TSynWebCssString34, False) then
-                SetRangeInt(4, 4, 8)
-              else
-                SetRangeInt(4, 4, 2);
-            end;
-            else
-              if not CssIdentStartProc then
-                DoError
-              else
-                if (CssSpecialCheck(FInstance^.FTokenPos, FInstance^.FRun -
-                  FInstance^.FTokenPos) = CssSpecialID_Url) and
-                  (FInstance^.FLine[FInstance^.FRun] = '(') then
-                begin
-                  FInstance^.FTokenID := stkCssVal;
-                  SetRangeInt(4, 4, 3);
-                end else
-                begin
-                  FInstance^.FTokenID := stkCssValUndef;
-                  SetRangeInt(4, 4, 8);
-                end;
-          end;
-      1:
-        if CssCustomStringProc(TSynWebCssString39) then
-          SetRangeInt(4, 4, 8);
-      2:
-        if CssCustomStringProc(TSynWebCssString34) then
-          SetRangeInt(4, 4, 8);
-      3:
-        if FInstance^.FLine[FInstance^.FRun + 1] = #0 then
-          DoError
-        else
-        begin
-          CssSymbolProc;
-          SetRangeInt(4, 4, 4);
-        end;
-      4:
+    0:
+      if CssNotWhitespace then
         case FInstance^.FLine[FInstance^.FRun] of
-          #39:
+        #39:
           begin
             Inc(FInstance^.FRun);
             if CssCustomStringProc(TSynWebCssString39, False) then
-              SetRangeInt(4, 4, 7)
+              SetRangeInt(4, 4, 8)
             else
-              SetRangeInt(4, 4, 5);
+              SetRangeInt(4, 4, 1);
           end;
-          '"':
+        '"':
           begin
             Inc(FInstance^.FRun);
             if CssCustomStringProc(TSynWebCssString34, False) then
-              SetRangeInt(4, 4, 7)
+              SetRangeInt(4, 4, 8)
             else
-              SetRangeInt(4, 4, 6);
+              SetRangeInt(4, 4, 2);
           end;
-          #1..#32:
-            CssSpaceProc;
+        else // case
+          if not CssIdentStartProc then
+            DoError
           else
-            if (FInstance^.FLine[FInstance^.FRun] = '/') and
-              (FInstance^.FLine[FInstance^.FRun + 1] = '*') then
-              CssSlashProc
-            else
+            if (CssSpecialCheck(FInstance^.FTokenPos, FInstance^.FRun -
+              FInstance^.FTokenPos) = CssSpecialID_Url) and
+              (FInstance^.FLine[FInstance^.FRun] = '(') then
             begin
-              if CssCheckNull or PhpCheckBegin then
-                Exit;
-              repeat
-                // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
-                while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
-                  (1 shl 14) = 0 do
-                  Inc(FInstance^.FRun);
-                case FInstance^.FLine[FInstance^.FRun] of
-                  '\':
-                  begin
-                    Inc(FInstance^.FRun);
-                    if FInstance^.FLine[FInstance^.FRun] <> #0 then
-                      Inc(FInstance^.FRun)
-                    else
-                      Break;
-                  end;
-                  '<':
-                    if CssCheckNull(False) or PhpCheckBegin(False) then
-                      Break
-                    else
-                      Inc(FInstance^.FRun);
-                  else
-                    Break;
-                end;
-              until False;
-              FInstance^.FTokenID := stkCssValString;
-              SetRangeInt(4, 4, 7);
+              FInstance^.FTokenID := stkCssVal;
+              SetRangeInt(4, 4, 3);
+            end else
+            begin
+              FInstance^.FTokenID := stkCssValUndef;
+              SetRangeInt(4, 4, 8);
             end;
         end;
-      5:
-        if CssCustomStringProc(TSynWebCssString39) then
+    1:
+      if CssCustomStringProc(TSynWebCssString39) then
+        SetRangeInt(4, 4, 8);
+    2:
+      if CssCustomStringProc(TSynWebCssString34) then
+        SetRangeInt(4, 4, 8);
+    3:
+      if FInstance^.FLine[FInstance^.FRun + 1] = #0 then
+        DoError
+      else
+      begin
+        CssSymbolProc;
+        SetRangeInt(4, 4, 4);
+      end;
+    4:
+      case FInstance^.FLine[FInstance^.FRun] of
+      #39:
+        begin
+          Inc(FInstance^.FRun);
+          if CssCustomStringProc(TSynWebCssString39, False) then
+            SetRangeInt(4, 4, 7)
+          else
+            SetRangeInt(4, 4, 5);
+        end;
+      '"':
+        begin
+          Inc(FInstance^.FRun);
+          if CssCustomStringProc(TSynWebCssString34, False) then
+            SetRangeInt(4, 4, 7)
+          else
+            SetRangeInt(4, 4, 6);
+        end;
+      #1..#32:
+        CssSpaceProc;
+      else // case
+        if (FInstance^.FLine[FInstance^.FRun] = '/') and
+          (FInstance^.FLine[FInstance^.FRun + 1] = '*') then
+          CssSlashProc
+        else
+        begin
+          if CssCheckNull or PhpCheckBegin then
+            Exit;
+          repeat
+            // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
+            while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
+              (1 shl 14) = 0 do
+              Inc(FInstance^.FRun);
+            case FInstance^.FLine[FInstance^.FRun] of
+             '\':
+              begin
+                Inc(FInstance^.FRun);
+                if FInstance^.FLine[FInstance^.FRun] <> #0 then
+                  Inc(FInstance^.FRun)
+                else
+                  Break;
+              end;
+            '<':
+              if CssCheckNull(False) or PhpCheckBegin(False) then
+                Break
+              else
+                Inc(FInstance^.FRun);
+            else // case
+              Break;
+            end;
+          until False;
+          FInstance^.FTokenID := stkCssValString;
           SetRangeInt(4, 4, 7);
-      6:
-        if CssCustomStringProc(TSynWebCssString34) then
-          SetRangeInt(4, 4, 7);
-      7:
-        if CssNotWhitespace then
-          if FInstance^.FLine[FInstance^.FRun] = ')' then
+        end;
+      end;
+    5:
+      if CssCustomStringProc(TSynWebCssString39) then
+        SetRangeInt(4, 4, 7);
+    6:
+      if CssCustomStringProc(TSynWebCssString34) then
+        SetRangeInt(4, 4, 7);
+    7:
+      if CssNotWhitespace then
+        if FInstance^.FLine[FInstance^.FRun] = ')' then
+        begin
+          CssSymbolProc;
+          SetRangeInt(4, 4, 8);
+        end else
+          DoError;
+    8:
+      AtImport_Medium(False);
+    9:
+      if CssNotWhitespace then
+        case FInstance^.FLine[FInstance^.FRun] of
+        ';':
           begin
             CssSymbolProc;
-            SetRangeInt(4, 4, 8);
-          end else
-            DoError;
-      8:
-        AtImport_Medium(False);
-      9:
-        if CssNotWhitespace then
-          case FInstance^.FLine[FInstance^.FRun] of
-            ';':
-            begin
-              CssSymbolProc;
-              CssSetRange(srsCssRuleset);
-            end;
-            ',':
-            begin
-              CssSymbolProc;
-              SetRangeInt(4, 4, 10);
-            end;
-            else
-              DoError;
+            CssSetRange(srsCssRuleset);
           end;
-      10:
-        AtImport_Medium(True);
+        ',':
+          begin
+            CssSymbolProc;
+            SetRangeInt(4, 4, 10);
+          end;
+        else // case
+          DoError;
+        end;
+    10:
+      AtImport_Medium(True);
     end;
   end;
 
@@ -4196,16 +4227,16 @@ var
       begin
         SetRangeBit(7, False);
         case FInstance^.FLine[FInstance^.FRun] of
-          ',':
-            CssSymbolProc;
-          '{':
+        ',':
+          CssSymbolProc;
+        '{':
           begin
             CssSymbolProc;
             SetRangeBit(11, True);
             CssSetRange(srsCssRuleset);
           end;
-          else
-            DoError;
+        else // case
+          DoError;
         end;
       end else
         if CssIdentStartProc then
@@ -4234,27 +4265,27 @@ var
 
   begin
     case GetRangeInt(2, 6) of
-      0:
-        if CssNotWhitespace then
-          case FInstance^.FLine[FInstance^.FRun] of
-            '{':
-              AtPage_Declaration;
-            ':':
-              // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '\']) or
-              if (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and
-                (1 shl 8) = 0) or
-                ((FInstance^.FLine[FInstance^.FRun + 1] = '\') and
-                (FInstance^.FLine[FInstance^.FRun + 2] in [#0..#31])) then
-                DoError
-              else
-              begin
-                SetRangeInt(2, 6, 1);
-                CssSymbolProc;
-              end;
-            else
-              DoError;
+    0:
+      if CssNotWhitespace then
+        case FInstance^.FLine[FInstance^.FRun] of
+        '{':
+          AtPage_Declaration;
+        ':':
+          // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '\']) or
+          if (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and
+            (1 shl 8) = 0) or
+            ((FInstance^.FLine[FInstance^.FRun + 1] = '\') and
+            (FInstance^.FLine[FInstance^.FRun + 2] in [#0..#31])) then
+            DoError
+          else
+          begin
+            SetRangeInt(2, 6, 1);
+            CssSymbolProc;
           end;
-      1:
+        else // case
+          DoError;
+        end;
+    1:
       begin
         CssIdentStartProc;
         prop := CssSpecialCheck(FInstance^.FTokenPos, FInstance^.FRun - FInstance^.FTokenPos);
@@ -4264,54 +4295,54 @@ var
           FInstance^.FTokenID := stkCssSpecial;
         SetRangeInt(2, 6, 2);
       end;
-      2:
-        if CssNotWhitespace then
-          if FInstance^.FLine[FInstance^.FRun] = '{' then
-            AtPage_Declaration
-          else
-            DoError;
+    2:
+      if CssNotWhitespace then
+        if FInstance^.FLine[FInstance^.FRun] = '{' then
+          AtPage_Declaration
+        else
+          DoError;
     end;
   end;
 
   procedure AtCharset;
   begin
     case GetRangeInt(2, 6) of
-      0:
-        if CssNotWhitespace then
-          case FInstance^.FLine[FInstance^.FRun] of
-            #39:
-            begin
-              Inc(FInstance^.FRun);
-              if CssCustomStringProc(TSynWebCssString39, False) then
-                SetRangeInt(2, 6, 3)
-              else
-                SetRangeBit(6, True);
-            end;
-            '"':
-            begin
-              Inc(FInstance^.FRun);
-              if CssCustomStringProc(TSynWebCssString34, False) then
-                SetRangeInt(2, 6, 3)
-              else
-                SetRangeBit(7, True);
-            end;
-            else
-              DoError;
-          end;
-      1:
-        if CssCustomStringProc(TSynWebCssString39) then
-          SetRangeInt(2, 6, 3);
-      2:
-        if CssCustomStringProc(TSynWebCssString34) then
-          SetRangeInt(2, 6, 3);
-      3:
-        if CssNotWhitespace then
-          if FInstance^.FLine[FInstance^.FRun] = ';' then
+    0:
+      if CssNotWhitespace then
+        case FInstance^.FLine[FInstance^.FRun] of
+        #39:
           begin
-            CssSymbolProc;
-            CssSetRange(srsCssRuleset);
-          end else
-            DoError;
+            Inc(FInstance^.FRun);
+            if CssCustomStringProc(TSynWebCssString39, False) then
+              SetRangeInt(2, 6, 3)
+            else
+              SetRangeBit(6, True);
+          end;
+        '"':
+          begin
+            Inc(FInstance^.FRun);
+            if CssCustomStringProc(TSynWebCssString34, False) then
+              SetRangeInt(2, 6, 3)
+            else
+              SetRangeBit(7, True);
+          end;
+        else // case
+          DoError;
+        end;
+    1:
+      if CssCustomStringProc(TSynWebCssString39) then
+        SetRangeInt(2, 6, 3);
+    2:
+      if CssCustomStringProc(TSynWebCssString34) then
+        SetRangeInt(2, 6, 3);
+    3:
+      if CssNotWhitespace then
+        if FInstance^.FLine[FInstance^.FRun] = ';' then
+        begin
+          CssSymbolProc;
+          CssSetRange(srsCssRuleset);
+        end else
+          DoError;
     end;
   end;
 
@@ -4329,55 +4360,55 @@ begin
       CssSetRange(srsCssRuleset);
     end else
       case CssSpecialCheck(FInstance^.FTokenPos, FInstance^.FRun - FInstance^.FTokenPos) of
-        CssSpecialID_Import:
+      CssSpecialID_Import:
         begin
           SetRangeInt(2, 8, 0);
           FInstance^.FTokenID := stkCssSpecial;
         end;
-        CssSpecialID_Media:
-          if FInstance^.FOptions.FCssVersion = scvCss1 then
-          begin
-            FInstance^.FTokenID := stkCssError;
-            CssSetRange(srsCssRuleset);
-          end else
-          begin
-            SetRangeInt(2, 8, 1);
-            FInstance^.FTokenID := stkCssSpecial;
-          end;
-        CssSpecialID_Page:
-          if FInstance^.FOptions.FCssVersion = scvCss1 then
-          begin
-            FInstance^.FTokenID := stkCssError;
-            CssSetRange(srsCssRuleset);
-          end else
-          begin
-            SetRangeInt(2, 8, 2);
-            FInstance^.FTokenID := stkCssSpecial;
-          end;
-        CssSpecialID_Charset:
-          if FInstance^.FOptions.FCssVersion = scvCss1 then
-          begin
-            FInstance^.FTokenID := stkCssError;
-            CssSetRange(srsCssRuleset);
-          end else
-          begin
-            SetRangeInt(2, 8, 3);
-            FInstance^.FTokenID := stkCssSpecial;
-          end;
-        else
+      CssSpecialID_Media:
+        if FInstance^.FOptions.FCssVersion = scvCss1 then
+        begin
           FInstance^.FTokenID := stkCssError;
           CssSetRange(srsCssRuleset);
+        end else
+        begin
+          SetRangeInt(2, 8, 1);
+          FInstance^.FTokenID := stkCssSpecial;
+        end;
+      CssSpecialID_Page:
+        if FInstance^.FOptions.FCssVersion = scvCss1 then
+        begin
+          FInstance^.FTokenID := stkCssError;
+          CssSetRange(srsCssRuleset);
+        end else
+        begin
+          SetRangeInt(2, 8, 2);
+          FInstance^.FTokenID := stkCssSpecial;
+        end;
+      CssSpecialID_Charset:
+        if FInstance^.FOptions.FCssVersion = scvCss1 then
+        begin
+          FInstance^.FTokenID := stkCssError;
+          CssSetRange(srsCssRuleset);
+        end else
+        begin
+          SetRangeInt(2, 8, 3);
+          FInstance^.FTokenID := stkCssSpecial;
+        end;
+      else // case
+        FInstance^.FTokenID := stkCssError;
+        CssSetRange(srsCssRuleset);
       end;
   end else
     case GetRangeInt(2, 8) of
-      0:
-        AtImport;
-      1:
-        AtMedia;
-      2:
-        AtPage;
-      3:
-        AtCharset;
+    0:
+      AtImport;
+    1:
+      AtMedia;
+    2:
+      AtPage;
+    3:
+      AtCharset;
     end;
 end;
 
@@ -4387,19 +4418,19 @@ begin
   begin
     if CssNotWhitespace then
       case FInstance^.FLine[FInstance^.FRun] of
-        '}':
+      '}':
         begin
           CssErrorProc;
           CssSetRange(srsCssRuleset);
         end;
-        ':':
+      ':':
         begin
           CssSymbolProc;
           CssSetRange(srsCssPropVal);
           SetRangeBit(8, False);
         end;
-        else
-          CssErrorProc;
+      else // case
+        CssErrorProc;
       end;
   end else
     if CssNotWhitespace then
@@ -4411,14 +4442,14 @@ begin
       begin
         CssSetProp(0);
         case FInstance^.FLine[FInstance^.FRun] of
-          '}':
+        '}':
           begin
             CssSetRange(srsCssRuleset);
             CssSymbolProc;
             Exit;
           end;
-          ':':
-            CssSetRange(srsCssPropVal);
+        ':':
+          CssSetRange(srsCssPropVal);
         end;
         CssErrorProc;
       end;
@@ -4439,14 +4470,14 @@ begin
         begin
           SetRangeInt(3, 8, 0);
           case FInstance^.FTokenLastID of
-            CssValID_Rgb:
-              CssSetRange(srsCssPropValRgb);
-            CssValID_Url:
-              CssSetRange(srsCssPropValUrl);
-            CssValID_Rect:
-              CssSetRange(srsCssPropValRect);
-            else
-              CssSetRange(srsCssPropValFunc);
+          CssValID_Rgb:
+            CssSetRange(srsCssPropValRgb);
+          CssValID_Url:
+            CssSetRange(srsCssPropValUrl);
+          CssValID_Rect:
+            CssSetRange(srsCssPropValRect);
+          else // case
+            CssSetRange(srsCssPropValFunc);
           end;
         end else
           FInstance^.FTokenID := stkCssValUndef;
@@ -4518,33 +4549,33 @@ begin
   begin
     if CssNotWhitespace then
       case FInstance^.FLine[FInstance^.FRun] of
-        ',':
-          if GetRangeBit(8) then
-          begin
-            SetRangeBit(8, False);
-            CssSymbolProc;
-          end else
-            CssErrorProc;
-        '0'..'9', '.', '+':
-          NumberProc;
-        '%':
-          if (FInstance^.FRun > 0) and (FInstance^.FLine[FInstance^.FRun - 1] in
-            ['0'..'9']) then
-            CssSymbolProc
-          else
-            CssErrorProc;
-        ';':
+      ',':
+        if GetRangeBit(8) then
+        begin
+          SetRangeBit(8, False);
+          CssSymbolProc;
+        end else
+          CssErrorProc;
+      '0'..'9', '.', '+':
+        NumberProc;
+      '%':
+        if (FInstance^.FRun > 0) and (FInstance^.FLine[FInstance^.FRun - 1] in
+          ['0'..'9']) then
+          CssSymbolProc
+        else
+          CssErrorProc;
+      ';':
         begin
           CssErrorProc;
           CssSetRange(srsCssProp);
           SetRangeInt(3, 8, 0);
         end;
-        '}':
+      '}':
         begin
           CssErrorProc;
           CssSetRange(srsCssRuleset);
         end;
-        ')':
+      ')':
         begin
           if GetRangeBit(8) then
             CssSymbolProc
@@ -4553,11 +4584,11 @@ begin
           CssSetRange(srsCssPropVal);
           SetRangeInt(3, 8, 0);
         end;
-        else
-          CssSetRange(srsCssPropVal);
-          SetRangeInt(3, 8, 0);
-          CssRangePropValProc;
-          FInstance^.FTokenID := stkCssError;
+      else // case
+        CssSetRange(srsCssPropVal);
+        SetRangeInt(3, 8, 0);
+        CssRangePropValProc;
+        FInstance^.FTokenID := stkCssError;
       end;
   end else
   begin
@@ -4569,54 +4600,56 @@ end;
 procedure TSynWebEngine.CssRangePropValFuncProc;
 begin
   if GetRangeBit(10) then
+  begin
     case GetRangeInt(2, 8) of
-      0:
-        if CssNotWhitespace then
-          case FInstance^.FLine[FInstance^.FRun] of
-            #39:
-            begin
-              Inc(FInstance^.FRun);
-              if not CssCustomStringProc(TSynWebCssString39, False) then
-                SetRangeBit(8, True);
-            end;
-            '"':
-            begin
-              Inc(FInstance^.FRun);
-              if not CssCustomStringProc(TSynWebCssString34, False) then
-                SetRangeBit(9, True);
-            end;
-            ',':
-              CssSymbolProc;
-            ';':
-            begin
-              CssErrorProc;
-              CssSetRange(srsCssProp);
-              SetRangeInt(3, 8, 0);
-            end;
-            '}':
-            begin
-              CssErrorProc;
-              CssSetRange(srsCssRuleset);
-            end;
-            ')':
-            begin
-              CssSymbolProc;
-              CssSetRange(srsCssPropVal);
-              SetRangeInt(3, 8, 0);
-            end;
-            else
-              if CssIdentStartProc then
-                FInstance^.FTokenID := stkCssVal
-              else
-                CssErrorProc;
+    0:
+      if CssNotWhitespace then
+        case FInstance^.FLine[FInstance^.FRun] of
+        #39:
+          begin
+            Inc(FInstance^.FRun);
+            if not CssCustomStringProc(TSynWebCssString39, False) then
+              SetRangeBit(8, True);
           end;
-      1:
-        if CssCustomStringProc(TSynWebCssString39) then
-          SetRangeBit(8, False);
-      2:
-        if CssCustomStringProc(TSynWebCssString34) then
-          SetRangeBit(9, False);
-    end else
+        '"':
+          begin
+            Inc(FInstance^.FRun);
+            if not CssCustomStringProc(TSynWebCssString34, False) then
+              SetRangeBit(9, True);
+          end;
+        ',':
+          CssSymbolProc;
+        ';':
+          begin
+            CssErrorProc;
+            CssSetRange(srsCssProp);
+            SetRangeInt(3, 8, 0);
+          end;
+        '}':
+          begin
+            CssErrorProc;
+            CssSetRange(srsCssRuleset);
+          end;
+        ')':
+          begin
+            CssSymbolProc;
+            CssSetRange(srsCssPropVal);
+            SetRangeInt(3, 8, 0);
+          end;
+        else // case
+          if CssIdentStartProc then
+            FInstance^.FTokenID := stkCssVal
+          else
+            CssErrorProc;
+        end;
+    1:
+      if CssCustomStringProc(TSynWebCssString39) then
+        SetRangeBit(8, False);
+    2:
+      if CssCustomStringProc(TSynWebCssString34) then
+        SetRangeBit(9, False);
+    end;
+  end else
   begin
     CssSymbolProc;
     SetRangeBit(10, True);
@@ -4668,132 +4701,134 @@ procedure TSynWebEngine.CssRangePropValImportantProc;
 begin
   if CssNotWhitespace then
     case FInstance^.FLine[FInstance^.FRun] of
-      ';':
+    ';':
       begin
         DoSymbol;
         CssSetRange(srsCssProp);
       end;
-      '}':
+    '}':
       begin
         DoSymbol;
         CssSetRange(srsCssRuleset);
       end;
-      else
-        if CssIdentStartProc then
+    else // case
+      if CssIdentStartProc then
+      begin
+        if GetRangeBit(8) then
+          FInstance^.FTokenID := stkCssError
+        else
         begin
-          if GetRangeBit(8) then
-            FInstance^.FTokenID := stkCssError
+          CssSpecialCheck(FInstance^.FTokenPos, FInstance^.FRun - FInstance^.FTokenPos);
+          if FInstance^.FTokenLastID = CssSpecialID_Important then
+            FInstance^.FTokenID := stkCssSpecial
           else
-          begin
-            CssSpecialCheck(FInstance^.FTokenPos, FInstance^.FRun - FInstance^.FTokenPos);
-            if FInstance^.FTokenLastID = CssSpecialID_Important then
-              FInstance^.FTokenID := stkCssSpecial
-            else
-              FInstance^.FTokenID := stkCssError;
-            SetRangeBit(8, True);
-          end;
-        end else
-          CssErrorProc;
+            FInstance^.FTokenID := stkCssError;
+          SetRangeBit(8, True);
+        end;
+      end else
+        CssErrorProc;
     end;
 end;
 
 procedure TSynWebEngine.CssRangePropValUrlProc;
 begin
   if GetRangeBit(10) then
+  begin
     case GetRangeInt(2, 8) of
-      0:
-        case FInstance^.FLine[FInstance^.FRun] of
-          #39:
-          begin
-            Inc(FInstance^.FRun);
-            if CssCustomStringProc(TSynWebCssString39, False) then
-              SetRangeInt(2, 8, 3)
-            else
-              SetRangeBit(8, True);
-          end;
-          '"':
-          begin
-            Inc(FInstance^.FRun);
-            if CssCustomStringProc(TSynWebCssString34, False) then
-              SetRangeInt(2, 8, 3)
-            else
-              SetRangeBit(9, True);
-          end;
-          #1..#32:
-            CssSpaceProc;
-          ';':
-          begin
-            CssErrorProc;
-            CssSetRange(srsCssProp);
-            SetRangeInt(3, 8, 0);
-          end;
-          '}':
-          begin
-            CssErrorProc;
-            CssSetRange(srsCssRuleset);
-          end;
-          ')':
-          begin
-            CssErrorProc;
-            CssSetRange(srsCssPropVal);
-            SetRangeInt(3, 8, 0);
-          end;
-          else
-            if (FInstance^.FLine[FInstance^.FRun] = '/') and
-              (FInstance^.FLine[FInstance^.FRun + 1] = '*') then
-              CssSlashProc
-            else
-            begin
-              if CssCheckNull or PhpCheckBegin then
-                Exit;
-              repeat
-                // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
-                while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
-                  (1 shl 14) = 0 do
-                  Inc(FInstance^.FRun);
-                case FInstance^.FLine[FInstance^.FRun] of
-                  '\':
-                  begin
-                    Inc(FInstance^.FRun);
-                    if FInstance^.FLine[FInstance^.FRun] <> #0 then
-                      Inc(FInstance^.FRun)
-                    else
-                      Break;
-                  end;
-                  '<':
-                    if CssCheckNull(False) or PhpCheckBegin(False) then
-                      Break
-                    else
-                      Inc(FInstance^.FRun);
-                  else
-                    Break;
-                end;
-              until False;
-              FInstance^.FTokenID := stkCssValString;
-              SetRangeInt(2, 8, 3);
-            end;
-        end;
-      1:
-        if CssCustomStringProc(TSynWebCssString39) then
-          SetRangeInt(2, 8, 3);
-      2:
-        if CssCustomStringProc(TSynWebCssString34) then
-          SetRangeInt(2, 8, 3);
-      3:
-        if FInstance^.FLine[FInstance^.FRun] = ')' then
+    0:
+      case FInstance^.FLine[FInstance^.FRun] of
+      #39:
         begin
-          CssSymbolProc;
+          Inc(FInstance^.FRun);
+          if CssCustomStringProc(TSynWebCssString39, False) then
+            SetRangeInt(2, 8, 3)
+          else
+            SetRangeBit(8, True);
+        end;
+      '"':
+        begin
+          Inc(FInstance^.FRun);
+          if CssCustomStringProc(TSynWebCssString34, False) then
+            SetRangeInt(2, 8, 3)
+          else
+            SetRangeBit(9, True);
+        end;
+      #1..#32:
+        CssSpaceProc;
+      ';':
+        begin
+          CssErrorProc;
+          CssSetRange(srsCssProp);
+          SetRangeInt(3, 8, 0);
+        end;
+      '}':
+        begin
+          CssErrorProc;
+          CssSetRange(srsCssRuleset);
+        end;
+      ')':
+        begin
+          CssErrorProc;
+          CssSetRange(srsCssPropVal);
+          SetRangeInt(3, 8, 0);
+        end;
+      else // case
+        if (FInstance^.FLine[FInstance^.FRun] = '/') and
+          (FInstance^.FLine[FInstance^.FRun + 1] = '*') then
+          CssSlashProc
+        else
+        begin
+          if CssCheckNull or PhpCheckBegin then
+            Exit;
+          repeat
+            // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
+            while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
+              (1 shl 14) = 0 do
+              Inc(FInstance^.FRun);
+            case FInstance^.FLine[FInstance^.FRun] of
+            '\':
+              begin
+                Inc(FInstance^.FRun);
+                if FInstance^.FLine[FInstance^.FRun] <> #0 then
+                  Inc(FInstance^.FRun)
+                else
+                  Break;
+              end;
+            '<':
+              if CssCheckNull(False) or PhpCheckBegin(False) then
+                Break
+              else
+                Inc(FInstance^.FRun);
+            else // case
+              Break;
+            end;
+          until False;
+          FInstance^.FTokenID := stkCssValString;
+          SetRangeInt(2, 8, 3);
+        end;
+      end;
+    1:
+      if CssCustomStringProc(TSynWebCssString39) then
+        SetRangeInt(2, 8, 3);
+    2:
+      if CssCustomStringProc(TSynWebCssString34) then
+        SetRangeInt(2, 8, 3);
+    3:
+      if FInstance^.FLine[FInstance^.FRun] = ')' then
+      begin
+        CssSymbolProc;
+        SetRangeInt(3, 8, 0);
+        CssSetRange(srsCssPropVal);
+      end else
+        if CssNotWhitespace then
+        begin
           SetRangeInt(3, 8, 0);
           CssSetRange(srsCssPropVal);
-        end else
-          if CssNotWhitespace then
-          begin
-            SetRangeInt(3, 8, 0);
-            CssSetRange(srsCssPropVal);
-            CssRangePropValProc;
-            FInstance^.FTokenID := stkCssError;
-          end;
-    end else
+          CssRangePropValProc;
+          FInstance^.FTokenID := stkCssError;
+        end;
+    end;
+  end else
   begin
     CssSymbolProc;
     SetRangeBit(10, True);
@@ -4879,16 +4914,16 @@ begin
     end else
       if CssNotWhitespace then
         case FInstance^.FLine[FInstance^.FRun] of
-          ',':
-            if GetRangeBit(8) then
-            begin
-              SetRangeBit(8, False);
-              CssSymbolProc;
-            end else
-              CssErrorProc;
-          '0'..'9', '.':
-            Shape_LengthProc;
-          ')':
+        ',':
+          if GetRangeBit(8) then
+          begin
+            SetRangeBit(8, False);
+            CssSymbolProc;
+          end else
+            CssErrorProc;
+        '0'..'9', '.':
+          Shape_LengthProc;
+        ')':
           begin
             if GetRangeBit(8) then
               CssSymbolProc
@@ -4897,33 +4932,33 @@ begin
             CssSetRange(srsCssPropVal);
             SetRangeInt(3, 8, 0);
           end;
-          ';':
+        ';':
           begin
             CssErrorProc;
             CssSetRange(srsCssProp);
             SetRangeInt(3, 8, 0);
           end;
-          '}':
+        '}':
           begin
             CssErrorProc;
             CssSetRange(srsCssRuleset);
             SetRangeInt(3, 8, 0);
           end;
+        else // case
+          if not CssIdentStartProc then
+            CssErrorProc
           else
-            if not CssIdentStartProc then
-              CssErrorProc
+          begin
+            if GetRangeBit(8) then
+              FInstance^.FTokenID := stkCssError
             else
-            begin
-              if GetRangeBit(8) then
-                FInstance^.FTokenID := stkCssError
+              if CssSpecialCheck(FInstance^.FTokenPos, FInstance^.FRun -
+                FInstance^.FTokenPos) = CssSpecialID_Auto then
+                FInstance^.FTokenID := stkCssVal
               else
-                if CssSpecialCheck(FInstance^.FTokenPos, FInstance^.FRun -
-                  FInstance^.FTokenPos) = CssSpecialID_Auto then
-                  FInstance^.FTokenID := stkCssVal
-                else
-                  FInstance^.FTokenID := stkCssValUndef;
-              SetRangeBit(8, True);
-            end;
+                FInstance^.FTokenID := stkCssValUndef;
+            SetRangeBit(8, True);
+          end;
         end;
 end;
 
@@ -4936,14 +4971,14 @@ begin
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 26) = 0 do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
-      #0:
-        Break;
-      '<':
-        if CssCheckNull(False) or PhpCheckBegin(False) then
-          Break
-        else
-          Inc(FInstance^.FRun);
-      '*':
+    #0:
+      Break;
+    '<':
+      if CssCheckNull(False) or PhpCheckBegin(False) then
+        Break
+      else
+        Inc(FInstance^.FRun);
+    '*':
       begin
         Inc(FInstance^.FRun);
         if FInstance^.FLine[FInstance^.FRun] = '/' then
@@ -5177,41 +5212,41 @@ var
 begin
   for c := #0 to #255 do
     case c of
-      #0:
-        FEsProcTable[c] := NullProc;
-      #1..#32:
-        FEsProcTable[c] := EsSpaceProc;
-      '/':
-        FEsProcTable[c] := EsSlashProc;
-      '<':
-        FEsProcTable[c] := EsLowerProc;
-      '=', '!':
-        FEsProcTable[c] := EsEqualNotProc;
-      '>':
-        FEsProcTable[c] := EsGreaterProc;
-      '&':
-        FEsProcTable[c] := EsAndProc;
-      '+':
-        FEsProcTable[c] := EsPlusProc;
-      '-':
-        FEsProcTable[c] := EsMinusProc;
-      '|':
-        FEsProcTable[c] := EsOrProc;
-      '*', '%', '^':
-        FEsProcTable[c] := EsMulModXorProc;
-      '0'..'9':
-        FEsProcTable[c] := EsNumberProc;
-      '"':
-        FEsProcTable[c] := EsString34Proc;
-      #39:
-        FEsProcTable[c] := EsString39Proc;
-      '{', '}', '[', ']', '(', ')', '.', ';', ',', '?', ':', '~':
-        FEsProcTable[c] :=
-          EsSymbolProc;
-      '$', 'a'..'z', 'A'..'Z', '_':
-        FEsProcTable[c] := EsIdentProc;
-      else
-        FEsProcTable[c] := EsErrorProc;
+    #0:
+      FEsProcTable[c] := NullProc;
+    #1..#32:
+      FEsProcTable[c] := EsSpaceProc;
+    '/':
+      FEsProcTable[c] := EsSlashProc;
+    '<':
+      FEsProcTable[c] := EsLowerProc;
+    '=', '!':
+      FEsProcTable[c] := EsEqualNotProc;
+    '>':
+      FEsProcTable[c] := EsGreaterProc;
+    '&':
+      FEsProcTable[c] := EsAndProc;
+    '+':
+      FEsProcTable[c] := EsPlusProc;
+    '-':
+      FEsProcTable[c] := EsMinusProc;
+    '|':
+      FEsProcTable[c] := EsOrProc;
+    '*', '%', '^':
+      FEsProcTable[c] := EsMulModXorProc;
+    '0'..'9':
+      FEsProcTable[c] := EsNumberProc;
+    '"':
+      FEsProcTable[c] := EsString34Proc;
+    #39:
+      FEsProcTable[c] := EsString39Proc;
+    '{', '}', '[', ']', '(', ')', '.', ';', ',', '?', ':', '~':
+      FEsProcTable[c] :=
+        EsSymbolProc;
+    '$', 'a'..'z', 'A'..'Z', '_':
+      FEsProcTable[c] := EsIdentProc;
+    else // case
+      FEsProcTable[c] := EsErrorProc;
     end;
 
   FEsRangeProcTable[srsEsDefault] := EsRangeDefaultProc;
@@ -5248,40 +5283,40 @@ end;
 function TSynWebEngine.EsCheckNull(ADo: Boolean = True): Boolean;
 begin
   case FInstance^.FLine[FInstance^.FRun] of
-    #0:
+  #0:
     begin
       Result := True;
       if ADo then
         NullProc;
     end;
-    '<':
-      if (FInstance^.FLine[FInstance^.FRun + 1] = '/') and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 2]] =
-        FInstance^.FHashTable['s']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 3]] =
-        FInstance^.FHashTable['c']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 4]] =
-        FInstance^.FHashTable['r']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 5]] =
-        FInstance^.FHashTable['i']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 6]] =
-        FInstance^.FHashTable['p']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 7]] =
-        FInstance^.FHashTable['t']) and
-        (TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 8]] and (1 shl 0) <> 0) and                    
-        // (FInstance^.FLine[FInstance^.FRun+8] in [#0..#32, '>']) and
-        (FInstance^.FHighlighterMode = shmML) then
+  '<':
+    if (FInstance^.FLine[FInstance^.FRun + 1] = '/') and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 2]] =
+      FInstance^.FHashTable['s']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 3]] =
+      FInstance^.FHashTable['c']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 4]] =
+      FInstance^.FHashTable['r']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 5]] =
+      FInstance^.FHashTable['i']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 6]] =
+      FInstance^.FHashTable['p']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 7]] =
+      FInstance^.FHashTable['t']) and
+      (TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 8]] and (1 shl 0) <> 0) and                    
+      // (FInstance^.FLine[FInstance^.FRun+8] in [#0..#32, '>']) and
+      (FInstance^.FHighlighterMode = shmML) then
+    begin
+      Result := True;
+      if ADo then
       begin
-        Result := True;
-        if ADo then
-        begin
-          SetHighlighterType(shtML, True, False, False);
-          Next;
-        end;
-      end else
-        Result := False;
-    else
+        SetHighlighterType(shtML, True, False, False);
+        Next;
+      end;
+    end else
       Result := False;
+  else // case
+    Result := False;
   end;
 end;
 
@@ -5297,7 +5332,7 @@ procedure TSynWebEngine.EsSlashProc;
 begin
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
-    '*':
+  '*':
     begin
       Inc(FInstance^.FRun);
       EsSetRange(srsEsCommentMulti);
@@ -5307,9 +5342,9 @@ begin
         EsRangeCommentMultiProc;
       Exit;
     end;
-    '=':
-      Inc(FInstance^.FRun);
-    '/':
+  '=':
+    Inc(FInstance^.FRun);
+  '/':
     begin
       Inc(FInstance^.FRun);
       EsSetRange(srsEsComment);
@@ -5329,9 +5364,9 @@ begin
     Exit;
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
-    '=':
-      Inc(FInstance^.FRun);
-    '<':
+  '=':
+    Inc(FInstance^.FRun);
+  '<':
     begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = '=' then
@@ -5357,15 +5392,15 @@ procedure TSynWebEngine.EsGreaterProc;
 begin
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
-    '=':
-      Inc(FInstance^.FRun);
-    '>':
+  '=':
+    Inc(FInstance^.FRun);
+  '>':
     begin
       Inc(FInstance^.FRun);
       case FInstance^.FLine[FInstance^.FRun] of
-        '=':
-          Inc(FInstance^.FRun);
-        '>':
+      '=':
+        Inc(FInstance^.FRun);
+      '>':
         begin
           Inc(FInstance^.FRun);
           if FInstance^.FLine[FInstance^.FRun] = '=' then
@@ -5529,30 +5564,30 @@ begin
           Inc(FInstance^.FRun);
         until FInstance^.FLine[FInstance^.FRun] in [#0, '<'];
         case FInstance^.FLine[FInstance^.FRun] of
-          #0:
+        #0:
           begin
             FInstance^.FTokenID := stkEsComment;
             Break;
           end;
-          '<':
-            if PhpCheckBegin(False) then
+        '<':
+          if PhpCheckBegin(False) then
+          begin
+            FInstance^.FTokenID := stkEsComment;
+            Exit;
+          end else
+            if EsCheckNull(False) then
             begin
               FInstance^.FTokenID := stkEsComment;
-              Exit;
+              Break;
             end else
-              if EsCheckNull(False) then
+            begin
+              Inc(FInstance^.FRun);
+              if FInstance^.FLine[FInstance^.FRun] = #0 then
               begin
                 FInstance^.FTokenID := stkEsComment;
                 Break;
-              end else
-              begin
-                Inc(FInstance^.FRun);
-                if FInstance^.FLine[FInstance^.FRun] = #0 then
-                begin
-                  FInstance^.FTokenID := stkEsComment;
-                  Break;
-                end;
               end;
+            end;
         end;
       until False;
   EsSetRange(srsEsDefault);
@@ -5567,14 +5602,14 @@ begin
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 26) = 0 do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
-      #0:
-        Break;
-      '<':
-        if EsCheckNull(False) or PhpCheckBegin(False) then
-          Break
-        else
-          Inc(FInstance^.FRun);
-      '*':
+    #0:
+      Break;
+    '<':
+      if EsCheckNull(False) or PhpCheckBegin(False) then
+        Break
+      else
+        Inc(FInstance^.FRun);
+    '*':
       begin
         Inc(FInstance^.FRun);
         if FInstance^.FLine[FInstance^.FRun] = '/' then
@@ -5600,25 +5635,25 @@ begin
         while TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun]] and (1 shl 3) = 0 do
           Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun] of
-          #0:
+        #0:
           begin
             FInstance^.FTokenID := stkEsError;
             Break;
           end;
-          '<':
-            if PhpCheckBegin(False) then
-            begin
-              FInstance^.FTokenID := stkEsString;
-              Exit;
-            end else
-              Inc(FInstance^.FRun);
-          #34:
+        '<':
+          if PhpCheckBegin(False) then
+          begin
+            FInstance^.FTokenID := stkEsString;
+            Exit;
+          end else
+            Inc(FInstance^.FRun);
+        #34:
           begin
             Inc(FInstance^.FRun);
             FInstance^.FTokenID := stkEsString;
             Break;
           end;
-          '\':
+        '\':
           begin
             Inc(FInstance^.FRun);
             if FInstance^.FLine[FInstance^.FRun] = #34 then
@@ -5640,25 +5675,25 @@ begin
         while TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun]] and (1 shl 4) = 0 do
           Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun] of
-          #0:
+        #0:
           begin
             FInstance^.FTokenID := stkEsError;
             Break;
           end;
-          '<':
+        '<':
             if PhpCheckBegin(False) then
             begin
               FInstance^.FTokenID := stkEsString;
               Exit;
             end else
               Inc(FInstance^.FRun);
-          #39:
+        #39:
           begin
             Inc(FInstance^.FRun);
             FInstance^.FTokenID := stkEsString;
             Break;
           end;
-          '\':
+        '\':
           begin
             Inc(FInstance^.FRun);
             if FInstance^.FLine[FInstance^.FRun] = #39 then
@@ -5733,58 +5768,77 @@ var
 begin
   for c := #0 to #255 do
     case c of
-      #0:
-        FPhpProcTable[c] := NullProc;
-      #1..#32:
-        FPhpProcTable[c] := PhpSpaceProc;
-      '?':
-        FPhpProcTable[c] := PhpQuestionProc;
-      '0'..'9':
-        FPhpProcTable[c] := PhpNumberProc;
-      '"':
-        FPhpProcTable[c] := PhpString34Proc;
-      #39:
-        FPhpProcTable[c] := PhpString39Proc;
-      '`':
-        FPhpProcTable[c] := PhpStringShellProc;
-      '&':
-        FPhpProcTable[c] := PhpAndProc;
-      '|':
-        FPhpProcTable[c] := PhpOrProc;
-      '@':
-        FPhpProcTable[c] := PhpAtSymbolProc;
-      '=':
-        FPhpProcTable[c] := PhpEqualProc;
-      '>':
-        FPhpProcTable[c] := PhpGreaterProc;
-      '<':
-        FPhpProcTable[c] := PhpLowerProc;
-      '+':
-        FPhpProcTable[c] := PhpPlusProc;
-      '-':
-        FPhpProcTable[c] := PhpMinusProc;
-      '*', '^':
-        FPhpProcTable[c] := PhpMulDivModXorProc;
-      '/':
-        FPhpProcTable[c] := PhpSlashProc;
-      '%':
-        FPhpProcTable[c] := PhpPercentProc;
-      '#':
-        FPhpProcTable[c] := PhpHashProc;
-      '!':
-        FPhpProcTable[c] := PhpNotProc;
-      '.':
-        FPhpProcTable[c] := PhpDotProc;
-      ':':
-        FPhpProcTable[c] := PhpColonProc;
-      '{', '}', '[', ']', '(', ')', '~', ',', ';':
-        FPhpProcTable[c] := PhpSymbolProc;
-      '$':
-        FPhpProcTable[c] := PhpVarProc;
-      'a'..'z', 'A'..'Z', '_', #$7F..#$FF:
-        FPhpProcTable[c] := PhpIdentProc;
-      else
-        FPhpProcTable[c] := PhpErrorProc;
+    #0:
+      FPhpProcTable[c] := NullProc;
+    #1..#32:
+      FPhpProcTable[c] := PhpSpaceProc;
+    '?':
+      FPhpProcTable[c] := PhpQuestionProc;
+    '0'..'9':
+      FPhpProcTable[c] := PhpNumberProc;
+    '"':
+      FPhpProcTable[c] := PhpString34Proc;
+    #39:
+      FPhpProcTable[c] := PhpString39Proc;
+    '`':
+      FPhpProcTable[c] := PhpStringShellProc;
+    '&':
+      FPhpProcTable[c] := PhpAndProc;
+    '|':
+      FPhpProcTable[c] := PhpOrProc;
+    '@':
+      FPhpProcTable[c] := PhpAtSymbolProc;
+    '=':
+      FPhpProcTable[c] := PhpEqualProc;
+    '>':
+      FPhpProcTable[c] := PhpGreaterProc;
+    '<':
+      FPhpProcTable[c] := PhpLowerProc;
+    '+':
+      FPhpProcTable[c] := PhpPlusProc;
+    '-':
+      FPhpProcTable[c] := PhpMinusProc;
+    '*':
+      FPhpProcTable[c] := PhpMulProc;
+    '^':
+      FPhpProcTable[c] := PhpXorProc;
+    '/':
+      FPhpProcTable[c] := PhpSlashProc;
+    '%':
+      FPhpProcTable[c] := PhpPercentProc;
+    '#':
+      FPhpProcTable[c] := PhpHashProc;
+    '!':
+      FPhpProcTable[c] := PhpNotProc;
+    '.':
+      FPhpProcTable[c] := PhpDotProc;
+    ':':
+      FPhpProcTable[c] := PhpColonProc;
+      
+    '(':
+      FPhpProcTable[c] := PhpParentheseOpenProc;
+    ')':
+      FPhpProcTable[c] := PhpParentheseCloseProc;
+    '[':
+      FPhpProcTable[c] := PhpBoxBracketOpenProc;
+    ']':
+      FPhpProcTable[c] := PhpBoxBracketCloseProc;
+    '{':
+      FPhpProcTable[c] := PhpBraceOpenProc;
+    '}':
+      FPhpProcTable[c] := PhpBraceCloseProc;
+    '~':
+      FPhpProcTable[c] := PhpTildeProc;
+    ',':
+      FPhpProcTable[c] := PhpCommaProc;
+    ';':
+      FPhpProcTable[c] := PhpSemiColonProc;
+    '$':
+      FPhpProcTable[c] := PhpVarProc;
+    'a'..'z', 'A'..'Z', '_', #$7F..#$FF:
+      FPhpProcTable[c] := PhpIdentProc;
+    else // case
+      FPhpProcTable[c] := PhpErrorProc;
     end;
 
   FPhpRangeProcTable[srsPhpSubProc] := PhpSubProcProc;
@@ -5823,13 +5877,13 @@ begin
     while not (FInstance^.FLine[FInstance^.FRun] in [#0, '<']) do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
-      #0:
-        Break;
-      '<':
-        if PhpCheckBegin(False) then
-          Break
-        else
-          Inc(FInstance^.FRun);
+    #0:
+      Break;
+    '<':
+      if PhpCheckBegin(False) then
+        Break
+      else
+        Inc(FInstance^.FRun);
     end;
   until False;
 end;
@@ -5853,36 +5907,44 @@ begin
   end;
 end;
 
+procedure TSynWebEngine.PhpSetSymbolId(ASymbolId: Integer);
+begin
+  FInstance^.FTokenID := stkPhpSymbol;
+  FInstance^.FTokenLastSymbolId := ASymbolId;
+end;
+
 function TSynWebEngine.PhpCheckBegin(ABegin: Boolean): Boolean;
 begin
   Result := False;
   if (FInstance^.FLine[FInstance^.FRun] = '<') and FInstance^.FOptions.FPhpEmbeded then
+  begin
     case FInstance^.FLine[FInstance^.FRun + 1] of
-      '?':
-        if (UpCase(FInstance^.FLine[FInstance^.FRun + 2]) = 'P') and
-          (UpCase(FInstance^.FLine[FInstance^.FRun + 3]) = 'H') and
-          (UpCase(FInstance^.FLine[FInstance^.FRun + 4]) = 'P') and
-          (FInstance^.FLine[FInstance^.FRun + 5] <= #32) then
+    '?':
+      if (UpCase(FInstance^.FLine[FInstance^.FRun + 2]) = 'P') and
+        (UpCase(FInstance^.FLine[FInstance^.FRun + 3]) = 'H') and
+        (UpCase(FInstance^.FLine[FInstance^.FRun + 4]) = 'P') and
+        (FInstance^.FLine[FInstance^.FRun + 5] <= #32) then
+      begin
+        if ABegin then
+          PhpBegin(spotPhp);
+      end else
+        if FInstance^.FOptions.FPhpShortOpenTag then
         begin
           if ABegin then
-            PhpBegin(spotPhp);
-        end else
-          if FInstance^.FOptions.FPhpShortOpenTag then
-          begin
-            if ABegin then
-              PhpBegin(spotPhpShort);
-          end else
-            Exit;
-      '%':
-        if FInstance^.FOptions.FPhpAspTags then
-        begin
-          if ABegin then
-            PhpBegin(spotASP);
+            PhpBegin(spotPhpShort);
         end else
           Exit;
-      else
+    '%':
+      if FInstance^.FOptions.FPhpAspTags then
+      begin
+        if ABegin then
+          PhpBegin(spotASP);
+      end else
         Exit;
-    end else
+    else // case
+      Exit;
+    end;
+  end else
     Exit;
   Result := True;
 end;
@@ -5938,7 +6000,7 @@ begin
     FInstance^.FTokenID := stkMLTag;
     PhpEnd(False);
   end else
-    FInstance^.FTokenID := stkPhpSymbol;
+    PhpSetSymbolId(PhpSymbolID_Question);
 end;
 
 procedure TSynWebEngine.PhpNumberProc;
@@ -6028,17 +6090,39 @@ end;
 procedure TSynWebEngine.PhpAndProc;
 begin
   Inc(FInstance^.FRun);
-  if FInstance^.FLine[FInstance^.FRun] in ['=', '&'] then
-    Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkPhpSymbol;
+  case FInstance^.FLine[FInstance^.FRun] of
+  '=':
+    begin
+      Inc(FInstance^.FRun);
+      PhpSetSymbolId(PhpSymbolID_BitwiseAndAssign);
+    end;
+  '&':
+    begin
+      Inc(FInstance^.FRun);
+      PhpSetSymbolId(PhpSymbolID_LogicAnd);
+    end;
+  else // case 
+    PhpSetSymbolId(PhpSymbolID_BitwiseAnd);
+  end;
 end;
 
 procedure TSynWebEngine.PhpOrProc;
 begin
   Inc(FInstance^.FRun);
-  if FInstance^.FLine[FInstance^.FRun] in ['=', '|'] then
-    Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkPhpSymbol;
+  case FInstance^.FLine[FInstance^.FRun] of
+  '=':
+    begin
+      Inc(FInstance^.FRun);
+      PhpSetSymbolId(PhpSymbolID_BitwiseOrAssign);
+    end;
+  '|':
+    begin
+      Inc(FInstance^.FRun);
+      PhpSetSymbolId(PhpSymbolID_LogicOr);
+    end;
+  else // case 
+    PhpSetSymbolId(PhpSymbolID_BitwiseOr);
+  end;
 end;
 
 procedure TSynWebEngine.PhpAtSymbolProc;
@@ -6058,12 +6142,20 @@ begin
     begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = '=' then
+      begin
         Inc(FInstance^.FRun);
+        PhpSetSymbolId(PhpSymbolID_Identical);
+      end else
+        PhpSetSymbolId(PhpSymbolID_Equal);
     end;
   '>':
-    Inc(FInstance^.FRun);
+    begin
+      Inc(FInstance^.FRun);
+      PhpSetSymbolId(PhpSymbolID_Arrow);
+    end;
+  else // case
+    PhpSetSymbolId(PhpSymbolID_Assign);
   end;
-  FInstance^.FTokenID := stkPhpSymbol;
 end;
 
 procedure TSynWebEngine.PhpGreaterProc;
@@ -6071,15 +6163,23 @@ begin
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
   '=':
-    Inc(FInstance^.FRun);
+    begin
+      Inc(FInstance^.FRun);
+      PhpSetSymbolId(PhpSymbolID_GreaterEqual);
+    end;
   '>':
     begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = '=' then
+      begin
         Inc(FInstance^.FRun);
+        PhpSetSymbolId(PhpSymbolID_ShiftRightAssign);
+      end else
+        PhpSetSymbolId(PhpSymbolID_ShiftRight);
     end;
+  else // case
+    PhpSetSymbolId(PhpSymbolID_Greater);
   end;
-  FInstance^.FTokenID := stkPhpSymbol;
 end;
 
 procedure TSynWebEngine.PhpLowerProc;
@@ -6088,35 +6188,42 @@ var
 begin
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
-    '/':
-      if (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 1]] =
-        FInstance^.FHashTable['s']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 2]] =
-        FInstance^.FHashTable['c']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 3]] =
-        FInstance^.FHashTable['r']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 4]] =
-        FInstance^.FHashTable['i']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 5]] =
-        FInstance^.FHashTable['p']) and
-        (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 6]] =
-        FInstance^.FHashTable['t']) and
-        (TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 7]] and (1 shl 0) <> 0) then
-        // (FInstance^.FLine[FInstance^.FRun+7] in [#0..#32, '>']) then
-      begin
-        Dec(FInstance^.FRun);
-        PhpEnd(True);
-        Exit;
-      end;
-    '=':
+  '/':
+    if (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 1]] =
+      FInstance^.FHashTable['s']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 2]] =
+      FInstance^.FHashTable['c']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 3]] =
+      FInstance^.FHashTable['r']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 4]] =
+      FInstance^.FHashTable['i']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 5]] =
+      FInstance^.FHashTable['p']) and
+      (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 6]] =
+      FInstance^.FHashTable['t']) and
+      (TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 7]] and (1 shl 0) <> 0) then
+      // (FInstance^.FLine[FInstance^.FRun+7] in [#0..#32, '>']) then
+    begin
+      Dec(FInstance^.FRun);
+      PhpEnd(True);
+      Exit;
+    end else
+      PhpSetSymbolId(PhpSymbolID_Lower);
+  '=':
+    begin
       Inc(FInstance^.FRun);
-    '<':
+      PhpSetSymbolId(PhpSymbolID_LowerEqual);
+    end;
+  '<':
     begin
       Inc(FInstance^.FRun);
       case FInstance^.FLine[FInstance^.FRun] of
-        '=':
+      '=':
+        begin
           Inc(FInstance^.FRun);
-        '<':
+          PhpSetSymbolId(PhpSymbolID_ShiftLeftAssign);
+        end;
+      '<':
         begin
           Inc(FInstance^.FRun);
           tmpRun := FInstance^.FRun;
@@ -6130,35 +6237,102 @@ begin
           end;
           PhpSetRange(srsPhpSubProc);
           SetRangeInt(3, 20, 2);
+          PhpSetSymbolId(PhpSymbolID_Heredoc);
         end;
+      else // case
+        PhpSetSymbolId(PhpSymbolID_ShiftLeft);
       end;
     end;
+  else // case
+    PhpSetSymbolId(PhpSymbolID_Lower);
   end;
-  FInstance^.FTokenID := stkPhpSymbol;
 end;
 
 procedure TSynWebEngine.PhpPlusProc;
 begin
   Inc(FInstance^.FRun);
-  if FInstance^.FLine[FInstance^.FRun] in ['+', '='] then
-    Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkPhpSymbol;
+  case FInstance^.FLine[FInstance^.FRun] of
+  '=':
+    begin
+      Inc(FInstance^.FRun);
+      PhpSetSymbolId(PhpSymbolID_AddAssign);
+    end;
+  '+':
+    begin
+      Inc(FInstance^.FRun);
+      PhpSetSymbolId(PhpSymbolID_Increment);
+    end;
+  else // case 
+    PhpSetSymbolId(PhpSymbolID_Add);
+  end;
 end;
 
 procedure TSynWebEngine.PhpMinusProc;
-begin
+begin               
   Inc(FInstance^.FRun);
-  if FInstance^.FLine[FInstance^.FRun] in ['-', '=', '>'] then
-    Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkPhpSymbol;
+  case FInstance^.FLine[FInstance^.FRun] of
+  '=':
+    begin
+      Inc(FInstance^.FRun);
+      PhpSetSymbolId(PhpSymbolID_DecAssign);
+    end;
+  '-':
+    begin
+      Inc(FInstance^.FRun);
+      PhpSetSymbolId(PhpSymbolID_Decrement);
+    end;
+  '>':
+    begin
+      Inc(FInstance^.FRun);
+      PhpSetSymbolId(PhpSymbolID_ObjectMethod);
+    end;
+  else // case 
+    PhpSetSymbolId(PhpSymbolID_Dec);
+  end;
 end;
 
-procedure TSynWebEngine.PhpMulDivModXorProc;
+procedure TSynWebEngine.PhpMulProc;
 begin
   Inc(FInstance^.FRun);
   if FInstance^.FLine[FInstance^.FRun] = '=' then
+  begin
     Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkPhpSymbol;
+    PhpSetSymbolId(PhpSymbolID_MulAssign);
+  end else
+    PhpSetSymbolId(PhpSymbolID_Mul);
+end;
+
+procedure TSynWebEngine.PhpDivProc;
+begin
+  Inc(FInstance^.FRun);
+  if FInstance^.FLine[FInstance^.FRun] = '=' then
+  begin
+    Inc(FInstance^.FRun);
+    PhpSetSymbolId(PhpSymbolID_DivAssign);
+  end else
+    PhpSetSymbolId(PhpSymbolID_Div);
+end;
+
+procedure TSynWebEngine.PhpModProc;
+begin
+  Inc(FInstance^.FRun);
+  if FInstance^.FLine[FInstance^.FRun] = '=' then
+  begin
+    Inc(FInstance^.FRun);
+    PhpSetSymbolId(PhpSymbolID_ModAssign);
+  end else
+    PhpSetSymbolId(PhpSymbolID_Mod);
+end;
+
+procedure TSynWebEngine.PhpXorProc;
+begin
+  Inc(FInstance^.FRun);
+  if FInstance^.FLine[FInstance^.FRun] = '=' then
+  begin
+    Inc(FInstance^.FRun);
+    PhpSetSymbolId(PhpSymbolID_XorAssign);
+  end else
+    PhpSetSymbolId(PhpSymbolID_Xor);
 end;
 
 procedure TSynWebEngine.PhpSlashProc;
@@ -6166,12 +6340,12 @@ var
   b: Boolean;
 begin
   case FInstance^.FLine[FInstance^.FRun + 1] of
-    '/':
+  '/':
     begin
       Inc(FInstance^.FRun);
       PhpHashProc;
     end;
-    '*':
+  '*':
     begin
       Inc(FInstance^.FRun, 2);
       PhpSetRange(srsPhpComment);
@@ -6188,8 +6362,8 @@ begin
         else
           FInstance^.FTokenID := stkPhpComment;
     end;
-    else
-      PhpMulDivModXorProc;
+  else // case
+    PhpDivProc;
   end;
 end;
 
@@ -6205,7 +6379,7 @@ begin
     end else
       FInstance^.FTokenID := stkPhpError;
   end else
-    PhpMulDivModXorProc;
+    PhpModProc;
 end;
 
 procedure TSynWebEngine.PhpHashProc;
@@ -6217,18 +6391,18 @@ begin
     until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 17) <> 0;
     // until FInstance^.FLine[FInstance^.FRun] in [#0, #10, #13, '%', '?'];
     case FInstance^.FLine[FInstance^.FRun] of
-      #0:
+    #0:
+      Exit;
+    '?':
+      if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
+        FInstance^.FOptions.FPhpEmbeded then
         Exit;
-      '?':
-        if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
-          FInstance^.FOptions.FPhpEmbeded then
-          Exit;
-      '%':
-        if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
-          FInstance^.FOptions.FPhpAspTags and FInstance^.FOptions.FPhpEmbeded then
-          Exit;
-      else
+    '%':
+      if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
+        FInstance^.FOptions.FPhpAspTags and FInstance^.FOptions.FPhpEmbeded then
         Exit;
+    else // case
+      Exit;
     end;
   until False;
 end;
@@ -6240,9 +6414,13 @@ begin
   begin
     Inc(FInstance^.FRun);
     if FInstance^.FLine[FInstance^.FRun] = '=' then
+    begin
       Inc(FInstance^.FRun);
-  end;
-  FInstance^.FTokenID := stkPhpSymbol;
+      PhpSetSymbolId(PhpSymbolID_NotIdentical)
+    end else
+      PhpSetSymbolId(PhpSymbolID_NotEqual);
+  end else
+    PhpSetSymbolId(PhpSymbolID_Not);
 end;
 
 procedure TSynWebEngine.PhpDotProc;
@@ -6251,26 +6429,77 @@ begin
   if FInstance^.FLine[FInstance^.FRun] = '=' then
   begin
     Inc(FInstance^.FRun);
-    FInstance^.FTokenID := stkPhpSymbol;
+    PhpSetSymbolId(PhpSymbolID_ConcatAssign);
   end else
     if FInstance^.FLine[FInstance^.FRun] in ['0'..'9'] then
       PhpNumberProc
     else
-      FInstance^.FTokenID := stkPhpSymbol;
+      PhpSetSymbolId(PhpSymbolID_Concat);
 end;
 
 procedure TSynWebEngine.PhpColonProc;
 begin
   Inc(FInstance^.FRun);
   if FInstance^.FLine[FInstance^.FRun] = ':' then
+  begin
     Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkPhpSymbol;
+    PhpSetSymbolId(PhpSymbolID_ClassMethod);
+  end else
+    PhpSetSymbolId(PhpSymbolID_Colon);
 end;
 
-procedure TSynWebEngine.PhpSymbolProc;
+procedure TSynWebEngine.PhpParentheseOpenProc;
+begin 
+  Inc(FInstance^.FRun);
+  PhpSetSymbolId(PhpSymbolID_ParentheseOpen);
+end;
+
+procedure TSynWebEngine.PhpParentheseCloseProc;
+begin   
+  Inc(FInstance^.FRun);
+  PhpSetSymbolId(PhpSymbolID_ParentheseClose);
+end;
+
+procedure TSynWebEngine.PhpBoxBracketOpenProc;
+begin  
+  Inc(FInstance^.FRun);
+  PhpSetSymbolId(PhpSymbolID_BoxBracketOpen);
+end;
+
+procedure TSynWebEngine.PhpBoxBracketCloseProc;
+begin   
+  Inc(FInstance^.FRun);
+  PhpSetSymbolId(PhpSymbolID_BoxBracketClose);
+end;
+
+procedure TSynWebEngine.PhpBraceOpenProc;
+begin  
+  Inc(FInstance^.FRun);
+  PhpSetSymbolId(PhpSymbolID_BraceOpen);
+end;
+
+procedure TSynWebEngine.PhpBraceCloseProc;
 begin
   Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkPhpSymbol;
+  PhpSetSymbolId(PhpSymbolID_BraceClose);
+end;
+
+procedure TSynWebEngine.PhpTildeProc;   
+begin
+  Inc(FInstance^.FRun);
+  PhpSetSymbolId(PhpSymbolID_Tilde);
+end;
+
+procedure TSynWebEngine.PhpCommaProc;   
+begin
+  Inc(FInstance^.FRun);
+  PhpSetSymbolId(PhpSymbolID_Comma);
+end;
+
+procedure TSynWebEngine.PhpSemiColonProc; 
+begin
+  Inc(FInstance^.FRun);
+  PhpSetSymbolId(PhpSymbolID_SemiColon);
 end;
 
 procedure TSynWebEngine.PhpVarProc;
@@ -6382,24 +6611,24 @@ var
     TryDoSpace;
     Result := True;
     case FInstance^.FLine[FInstance^.FRun] of
-      '-':
-        if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
-          ((not DoStringObject) or ((FInstance^.FLine[FInstance^.FRun] in ['[', '-']) and
-          not DoStringVar2)) then
-          Result := False;
-      '[':
+    '-':
+      if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
+        ((not DoStringObject) or ((FInstance^.FLine[FInstance^.FRun] in ['[', '-']) and
+        not DoStringVar2)) then
+        Result := False;
+    '[':
       begin
         Inc(FInstance^.FRun);
         TryDoSpace;
         case FInstance^.FLine[FInstance^.FRun] of
-          '$':
-            if (not DoStringVar) or ((FInstance^.FLine[FInstance^.FRun] in ['[', '-']) and
-              not DoStringVar2) then
-              Result := False;
-          '0'..'9', '.':
-            if not PhpCheckNumberProc then
-              Result := False;
-          #39:
+        '$':
+          if (not DoStringVar) or ((FInstance^.FLine[FInstance^.FRun] in ['[', '-']) and
+            not DoStringVar2) then
+            Result := False;
+        '0'..'9', '.':
+          if not PhpCheckNumberProc then
+            Result := False;
+        #39:
           begin
             Inc(FInstance^.FRun);
             if DoStringSingle then
@@ -6407,13 +6636,13 @@ var
             else
               Result := False;
           end;
-          '"':
+        '"':
           begin
             Inc(FInstance^.FRun);
             while not PhpDoStringDouble(False, False) and
               (FInstance^.FLine[FInstance^.FRun] <> #0) and (FInstance^.FTokenID <>
                 stkPhpError) do
-            ;
+              ; // Empty
             if (FInstance^.FLine[FInstance^.FRun] = '"') and
               (FInstance^.FTokenID <> stkPhpError) then
             begin
@@ -6448,17 +6677,17 @@ begin
   Result := False;
   FInstance^.FTokenID := stkPhpStringSpecial;
   case FInstance^.FLine[FInstance^.FRun] of
-    '$':
+  '$':
     begin
       Inc(FInstance^.FRun);
       if TryDoIdent then
       begin
         case FInstance^.FLine[FInstance^.FRun] of
-          '-':
-            if FInstance^.FLine[FInstance^.FRun + 1] = '>' then
-              if not DoStringObject(False) then
-                FInstance^.FTokenID := stkPhpError;
-          '[':
+        '-':
+          if FInstance^.FLine[FInstance^.FRun + 1] = '>' then
+            if not DoStringObject(False) then
+              FInstance^.FTokenID := stkPhpError;
+        '[':
           begin
             Inc(FInstance^.FRun);
             case FInstance^.FLine[FInstance^.FRun] of
@@ -6491,7 +6720,7 @@ begin
           Exit;
         end;
     end;
-    '{':
+  '{':
     begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = '$' then
@@ -6505,7 +6734,7 @@ begin
         Exit;
       end;
     end;
-    '\':
+  '\':
     begin
       Inc(FInstance^.FRun);
       // if FInstance^.FLine[FInstance^.FRun] in ['n', 'r', 't', '\', '$', #34, '0'..'7', 'x'] then
@@ -6513,7 +6742,7 @@ begin
       begin
         Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun - 1] of
-          '0'..'7':
+        '0'..'7':
           begin
             if FInstance^.FLine[FInstance^.FRun] in ['0'..'7'] then
             begin
@@ -6523,19 +6752,19 @@ begin
             end;
             Exit;
           end;
-          'x':
+        'x':
+          // if FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
+          if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 10) <> 0 then
+          begin
+            Inc(FInstance^.FRun);
             // if FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
-            if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 10) <> 0 then
-            begin
+            if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
+              (1 shl 10) <> 0 then
               Inc(FInstance^.FRun);
-              // if FInstance^.FLine[FInstance^.FRun] in ['a'..'f', 'A'..'F', '0'..'9'] then
-              if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
-                (1 shl 10) <> 0 then
-                Inc(FInstance^.FRun);
-              Exit;
-            end;
-          else
             Exit;
+          end;
+        else // case
+          Exit;
         end;
       end;
     end;
@@ -6574,13 +6803,13 @@ var
 
 begin
   case GetRangeInt(3, 20) of
-    0:
+  0:
     begin
       Inc(FInstance^.FRun, 2);
       FInstance^.FTokenID := stkMLTag;
       SetRangeInt(3, 20, 1);
     end;
-    1:
+  1:
     begin
       DoDefault;
       if GetRangeBit(19) then
@@ -6598,7 +6827,7 @@ begin
         end else
           PhpRangeDefaultProc;
     end;
-    2:
+  2:
     begin
       if FInstance^.FLine[FInstance^.FRun] in [#1..#32] then
       begin
@@ -6981,25 +7210,25 @@ end;
 procedure TSynWebEngine.SetupHighlighterType(AClearBits: Boolean);
 begin
   case FInstance^.FHighlighterType of
-    shtML:
-      if FInstance^.FHighlighterMode = shmPhpCli then
-      begin
-        if AClearBits then
-          SetRangeInt(17, 0, 0);
-        FInstance^.FSYN_ATTR_COMMENT := FPhpInlineTextAttri;
-        FInstance^.FSYN_ATTR_STRING := FPhpInlineTextAttri;
-        FInstance^.FSYN_ATTR_WHITESPACE := FPhpInlineTextAttri;
-        FInstance^.FNextProcTable := PhpCliNext;
-      end else
-      begin
-        if AClearBits then
-          SetRangeInt(17, 0, 0);
-        FInstance^.FSYN_ATTR_COMMENT := FMLCommentAttri;
-        FInstance^.FSYN_ATTR_STRING := FMLTagKeyValueQuotedAttri;
-        FInstance^.FSYN_ATTR_WHITESPACE := FMLWhitespaceAttri;
-        FInstance^.FNextProcTable := MLNext;
-      end;
-    shtCss:
+  shtML:
+    if FInstance^.FHighlighterMode = shmPhpCli then
+    begin
+      if AClearBits then
+        SetRangeInt(17, 0, 0);
+      FInstance^.FSYN_ATTR_COMMENT := FPhpInlineTextAttri;
+      FInstance^.FSYN_ATTR_STRING := FPhpInlineTextAttri;
+      FInstance^.FSYN_ATTR_WHITESPACE := FPhpInlineTextAttri;
+      FInstance^.FNextProcTable := PhpCliNext;
+    end else
+    begin
+      if AClearBits then
+        SetRangeInt(17, 0, 0);
+      FInstance^.FSYN_ATTR_COMMENT := FMLCommentAttri;
+      FInstance^.FSYN_ATTR_STRING := FMLTagKeyValueQuotedAttri;
+      FInstance^.FSYN_ATTR_WHITESPACE := FMLWhitespaceAttri;
+      FInstance^.FNextProcTable := MLNext;
+    end;
+  shtCss:
     begin
       if AClearBits then
         SetRangeInt(17, 0, 0);
@@ -7008,7 +7237,7 @@ begin
       CssUpdateBg;
       FInstance^.FNextProcTable := CssNext;
     end;
-    shtEs:
+  shtEs:
     begin
       if AClearBits then
         SetRangeInt(17, 0, 0);
@@ -7017,13 +7246,13 @@ begin
       FInstance^.FSYN_ATTR_WHITESPACE := FEsWhitespaceAttri;
       FInstance^.FNextProcTable := EsNext;
     end;
-    else
-      if AClearBits then
-        SetRangeInt(12, 17, 0);
-      FInstance^.FSYN_ATTR_COMMENT := FPhpCommentAttri;
-      FInstance^.FSYN_ATTR_STRING := FPhpStringAttri;
-      FInstance^.FSYN_ATTR_WHITESPACE := FPhpWhitespaceAttri;
-      FInstance^.FNextProcTable := PhpNext;
+  else // case
+    if AClearBits then
+      SetRangeInt(12, 17, 0);
+    FInstance^.FSYN_ATTR_COMMENT := FPhpCommentAttri;
+    FInstance^.FSYN_ATTR_STRING := FPhpStringAttri;
+    FInstance^.FSYN_ATTR_WHITESPACE := FPhpWhitespaceAttri;
+    FInstance^.FNextProcTable := PhpNext;
   end;
 end;
 
