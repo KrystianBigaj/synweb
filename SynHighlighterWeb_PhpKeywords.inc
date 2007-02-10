@@ -75,6 +75,7 @@
   PhpKeyID_var = 72;
   PhpKeyID_while = 73;
   PhpKeyID_xor = 74;
+  PhpFuncID_define = 776;
 
   TSynWeb_PhpKeywords:array[0..5169] of String=(
     '__CLASS__', '__FILE__', '__FUNCTION__', '__LINE__', '__METHOD__', 'abstract', 

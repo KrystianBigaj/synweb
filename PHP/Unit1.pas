@@ -477,6 +477,10 @@ begin
   s1.Insert(0, '');
 
   for i := s.Count - 1 downto 0 do
+    if (Longword(s.Objects[i]) and $0F) = $08 then
+      if s[i] = 'define' then
+        s1.Insert(0, Format('  PhpFuncID_%s = %d;', [s[i], i]));
+  for i := s.Count - 1 downto 0 do
     if (Longword(s.Objects[i]) and $0F) = $01 then
       s1.Insert(0, Format('  PhpKeyID_%s = %d;', [s[i], i]));
 
@@ -1041,8 +1045,8 @@ const
 var
   sl: TStringList;
   f: TStringList;
-  s, lf: string;
-  i, j, xx, tf: Integer;
+  lf: string;
+  i, xx, tf: Integer;
   lt, lx: Longword;
   ds, dn: TDateTime;
   hl: TSynCppSyn;
