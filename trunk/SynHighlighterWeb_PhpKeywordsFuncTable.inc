@@ -403,6 +403,7 @@
   FPhpIdentFuncTable[426]:=PhpKeywordFunc426;
   FPhpIdentFuncTable[427]:=PhpKeywordFunc427;
   FPhpIdentFuncTable[428]:=PhpKeywordFunc428;
+  FPhpIdentFuncTable[430]:=PhpKeywordFunc430;
   FPhpIdentFuncTable[431]:=PhpKeywordFunc431;
   FPhpIdentFuncTable[433]:=PhpKeywordFunc433;
   FPhpIdentFuncTable[434]:=PhpKeywordFunc434;
@@ -431,8 +432,10 @@
   FPhpIdentFuncTable[470]:=PhpKeywordFunc470;
   FPhpIdentFuncTable[472]:=PhpKeywordFunc472;
   FPhpIdentFuncTable[474]:=PhpKeywordFunc474;
+  FPhpIdentFuncTable[477]:=PhpKeywordFunc477;
   FPhpIdentFuncTable[478]:=PhpKeywordFunc478;
   FPhpIdentFuncTable[479]:=PhpKeywordFunc479;
+  FPhpIdentFuncTable[480]:=PhpKeywordFunc480;
   FPhpIdentFuncTable[483]:=PhpKeywordFunc483;
   FPhpIdentFuncTable[487]:=PhpKeywordFunc487;
   FPhpIdentFuncTable[503]:=PhpKeywordFunc503;

@@ -404,6 +404,7 @@
     function PhpKeywordFunc426: TSynWebTokenKind;
     function PhpKeywordFunc427: TSynWebTokenKind;
     function PhpKeywordFunc428: TSynWebTokenKind;
+    function PhpKeywordFunc430: TSynWebTokenKind;
     function PhpKeywordFunc431: TSynWebTokenKind;
     function PhpKeywordFunc433: TSynWebTokenKind;
     function PhpKeywordFunc434: TSynWebTokenKind;
@@ -432,8 +433,10 @@
     function PhpKeywordFunc470: TSynWebTokenKind;
     function PhpKeywordFunc472: TSynWebTokenKind;
     function PhpKeywordFunc474: TSynWebTokenKind;
+    function PhpKeywordFunc477: TSynWebTokenKind;
     function PhpKeywordFunc478: TSynWebTokenKind;
     function PhpKeywordFunc479: TSynWebTokenKind;
+    function PhpKeywordFunc480: TSynWebTokenKind;
     function PhpKeywordFunc483: TSynWebTokenKind;
     function PhpKeywordFunc487: TSynWebTokenKind;
     function PhpKeywordFunc503: TSynWebTokenKind;
