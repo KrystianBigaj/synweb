@@ -265,12 +265,10 @@ type
     FInstance: TSynWebInstance;
     FEngine: TSynWebEngine;
     FActiveHighlighter: Boolean;
-    FActiveHighlighters, FCurrentHighlighters: TSynWebHighlighterTypes;	
+    FActiveHighlighters: TSynWebHighlighterTypes;
     FOptions: TSynWebOptionsBase;
     procedure SetupActiveHighlighter; virtual; abstract;
     procedure SetActiveHighlighter(const Value: Boolean);
-    function GetActiveHighlighters: TSynWebHighlighterTypes;
-    function GetCurrentHighlighters: TSynWebHighlighterTypes;
     procedure SetEngine(const Value: TSynWebEngine);
   protected
 {$IFDEF UNISYNEDIT}
@@ -320,14 +318,14 @@ type
 {$ENDIF}
     procedure Next; override;       
 {$IFDEF UNISYNEDIT}       
-    function UpdateActiveHighlighter(ARange: Pointer; ALine: WideString;
-      ACaretX, ACaretY: Integer): Boolean;
+    function GetActiveHighlighter(ARange: Pointer; ALine: WideString;
+      ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
 {$ELSE}    
-    function UpdateActiveHighlighter(ARange: Pointer; ALine: String;
-      ACaretX, ACaretY: Integer): Boolean;
+    function GetActiveHighlighter(ARange: Pointer; ALine: String;
+      ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
 {$ENDIF}
-    property ActiveHighlighters: TSynWebHighlighterTypes read GetActiveHighlighters;
-    property CurrentHighlighters: TSynWebHighlighterTypes read GetCurrentHighlighters;
+    property ActiveHighlighters: TSynWebHighlighterTypes read FActiveHighlighters
+      write FActiveHighlighters;
   published
     property ActiveHighlighterSwitch: Boolean
       read FActiveHighlighter write SetActiveHighlighter;
@@ -1161,16 +1159,6 @@ begin
   DefHighlightChange(Self);
 end;
 
-function TSynWebBase.GetActiveHighlighters: TSynWebHighlighterTypes;
-begin
-  Result := FActiveHighlighters;
-end;
-
-function TSynWebBase.GetCurrentHighlighters: TSynWebHighlighterTypes;
-begin
-  Result := FCurrentHighlighters;
-end;
-
 procedure TSynWebBase.SetEngine(const Value: TSynWebEngine);
 begin
   if FEngine <> nil then
@@ -1397,18 +1385,16 @@ begin
 end;
 
 {$IFDEF UNISYNEDIT}
-function TSynWebBase.UpdateActiveHighlighter(ARange: Pointer;
-  ALine: WideString; ACaretX, ACaretY: Integer): Boolean;
+function TSynWebBase.GetActiveHighlighter(ARange: Pointer;
+  ALine: WideString; ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
 {$ELSE}
-function TSynWebBase.UpdateActiveHighlighter(ARange: Pointer;
-  ALine: String; ACaretX, ACaretY: Integer): Boolean;
+function TSynWebBase.GetActiveHighlighter(ARange: Pointer;
+  ALine: String; ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
 {$ENDIF}
 var
-  f: TSynWebHighlighterTypes;
   lPos, lLen: Integer;
-  lHinghlighter, ActiveHL: TSynWebHighlighterType;
+  lHinghlighter, fActiveHL: TSynWebHighlighterType;
 begin
-  f := FActiveHighlighters;
   Dec(ACaretX);
   SetRange(ARange);
   lHinghlighter := TSynWebHighlighterType((FInstance.FRange shr 29) and not ($FFFFFFFF shl 3));
@@ -1423,19 +1409,16 @@ begin
     Next;
   end;
   if FInstance.FUseNextAH and (ACaretX >= lPos + lLen) then
-    ActiveHL := FInstance.FHighlighterType
+    fActiveHL := FInstance.FHighlighterType
   else
     if FInstance.FHighlighterSW and (ACaretX >= lPos + lLen) then
-      ActiveHL := FInstance.FPrevHighlighterType
+      fActiveHL := FInstance.FPrevHighlighterType
     else
-      ActiveHL := lHinghlighter;
-  if ActiveHL >= shtPhpInML then
-    FCurrentHighlighters := [shtPhpInML, shtPhpInCss, shtPhpInEs]
+      fActiveHL := lHinghlighter;
+  if fActiveHL >= shtPhpInML then
+    Result := [shtPhpInML, shtPhpInCss, shtPhpInEs]
   else
-    FCurrentHighlighters := [ActiveHL];
-  Result := f <> FCurrentHighlighters;
-  if FActiveHighlighter then
-    FActiveHighlighters := FCurrentHighlighters;
+    Result := [fActiveHL];
 end;
 
 { TSynWebMLSyn }
