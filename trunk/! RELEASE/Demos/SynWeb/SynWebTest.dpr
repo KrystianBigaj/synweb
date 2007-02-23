@@ -1,7 +1,6 @@
 program SynWebTest;
 
 {%ToDo 'SynWebTest.todo'}
-{%File '..\!Docs\SynHighlighterHtmlMulti-Range.txt'}
 
 uses
   Forms,
