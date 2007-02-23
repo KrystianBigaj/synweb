@@ -3116,6 +3116,11 @@ var
   Temp: PChar;
   aKey: String;
 begin
+  if TSynWeb_SpecialData[ID] and (1 shl Longword(FInstance^.FOptions.FMLVersion)) = 0 then
+  begin
+    Result := False;
+    Exit;
+  end;
   aKey := TSynWeb_Special[ID];
   Temp := FInstance^.FToIdent;
   if Length(aKey) = FInstance^.FStringLen then
