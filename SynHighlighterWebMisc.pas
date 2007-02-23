@@ -90,6 +90,12 @@ function SynEditGetMatchingTag(ASynEdit: TCustomSynEdit; APoint: TBufferCoord;
 function SynEditGetMatchingTagEx(ASynEdit: TCustomSynEdit; APoint: TBufferCoord;
   var AMatch: TSynTokenMatched): Integer;
 
+function SynWebGetHighlighterTypeAt(ASynEdit: TCustomSynEdit;
+  ASynWeb: TSynWebBase; APos: TBufferCoord): TSynWebHighlighterTypes;
+
+function SynWebGetHighlighterTypeAtCursor(ASynEdit: TCustomSynEdit;
+  ASynWeb: TSynWebBase): TSynWebHighlighterTypes;
+  
 function SynWebUpdateActiveHighlighter(ASynEdit: TCustomSynEdit;
   ASynWeb: TSynWebBase): TSynWebHighlighterTypes;
   
@@ -344,16 +350,37 @@ begin
   end;
 end;
 
+function SynWebGetHighlighterTypeAt(ASynEdit: TCustomSynEdit;
+  ASynWeb: TSynWebBase; APos: TBufferCoord): TSynWebHighlighterTypes;
+begin
+  with ASynEdit,ASynWeb do
+  begin
+    if APos.Line = 1 then
+      ResetRange
+    else
+      SetRange(TSynEditStringList(Lines).Ranges[CaretY-2]);
+    Result := GetActiveHighlighter(GetRange, Lines[CaretY-1], APos.Char, APos.Line);
+  end;
+end;
+
+function SynWebGetHighlighterTypeAtCursor(ASynEdit: TCustomSynEdit;
+  ASynWeb: TSynWebBase): TSynWebHighlighterTypes;
+begin
+  Result := SynWebGetHighlighterTypeAt(ASynEdit, ASynWeb, ASynEdit.CaretXY);
+end;
+
 function SynWebUpdateActiveHighlighter(ASynEdit: TCustomSynEdit;
   ASynWeb: TSynWebBase): TSynWebHighlighterTypes;
 begin
   with ASynEdit,ASynWeb do
   begin
-    if UpdateActiveHighlighter(TSynEditStringList(Lines).Ranges[CaretY-2],
-       Lines[CaretY-1], CaretX, CaretY) then
+    Result := SynWebGetHighlighterTypeAtCursor(ASynEdit, ASynWeb);
+    if Result <> ActiveHighlighters then
       if ActiveHighlighterSwitch then
+      begin
+        ActiveHighlighters := Result;
         Repaint;
-    Result := ASynWeb.ActiveHighlighters;
+      end;
   end;
 end;
 

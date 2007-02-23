@@ -182,8 +182,7 @@ var
 begin
   if Changes-[scCaretX, scCaretY]<>Changes then
   begin
-    SynWebUpdateActiveHighlighter(SynEdit1, TSynWebBase(SynEdit1.Highlighter));
-    t := TSynWebBase(SynEdit1.Highlighter).CurrentHighlighters;
+    t := SynWebUpdateActiveHighlighter(SynEdit1, TSynWebBase(SynEdit1.Highlighter));
     Label5.Caption:='';
     if shtML in t then
       Label5.Caption:=Label5.Caption+'HTML/WML,';
