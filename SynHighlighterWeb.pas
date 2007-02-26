@@ -393,7 +393,7 @@ type
     procedure SetupActiveHighlighter; override;
     function GetOptions: TSynWebCssOptions;
     procedure SetOptions(const AValue: TSynWebCssOptions);
-  public        
+  public
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
     class function SynWebSample: WideString; override;
@@ -403,6 +403,8 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
+
+    function GetCssRange: TSynWebCssRangeState;
   published
     property Options: TSynWebCssOptions read GetOptions write SetOptions;
   end;
@@ -1685,6 +1687,14 @@ begin
   FInstance.FRange := $00000000 or (Longword(shtCss) shl 29);
 end;
 
+function TSynWebCssSyn.GetCssRange: TSynWebCssRangeState;
+begin
+  if FEngine = nil then
+    Result := srsCssRuleset
+  else
+    Result := FEngine.CssGetRange;
+end;
+
 { TSynWebEsSyn }
 
 constructor TSynWebEsSyn.Create(AOwner: TComponent);
@@ -2387,7 +2397,10 @@ begin
     FInstance^.FTokenID := stkMLTag;
     MLSetRange(srsMLTag);
   end else
+  begin
     FInstance^.FTokenID := stkMLError;
+    SetRangeBit(12, False);
+  end;
 end;
 
 procedure TSynWebEngine.MLErrorProc;
