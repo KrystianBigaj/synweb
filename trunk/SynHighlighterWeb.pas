@@ -55,7 +55,7 @@ Known limitations:
 -------------------------------------------------------------------------------}
 {
 @abstract(Provides an web-files (Multi Html/XHtml/Wml/Css/ECMAScript/Php) highlighter for SynEdit
-@author(FlatDev <krystian.bigaj@gmail.com>)
+@author(Krystian Bigaj <krystian.bigaj@gmail.com>)
 @created(2005-05-21)
 @lastmod(2006-12-05)
 The SynHighlighterWeb unit provides SynEdit with a Multi Html/XHtml/Wml/Css/ECMAScript/Php highlighter.
@@ -109,7 +109,7 @@ type
   PSynWebInstance = ^TSynWebInstance;
 
   TSynWebInstance = record
-    FRun: longint;
+    FRun: Longint;
     FRange: Longword;
     FLine: PChar;
     FLineRef: String;
@@ -124,7 +124,8 @@ type
     FNextClearBits: Boolean;
     FNextUseNextAH: Boolean;
     FUseNextAH: Boolean;
-    FHighlighterType, FPrevHighlighterType, FNextHighlighterType: TSynWebHighlighterType;
+    FHighlighterType: TSynWebHighlighterType;
+    FPrevHighlighterType, FNextHighlighterType: TSynWebHighlighterType;
     FHighlighterSW: Boolean;
     FHighlighterMode: TSynWebHighlighterMode;
     FCssMask: Longword;
@@ -284,7 +285,7 @@ type
     function GetSampleSource: WideString; override;
 {$ELSE}
     function GetSampleSource: String; override;
-{$ENDIF}
+{$ENDIF}      
   public
 {$IFDEF UNISYNEDIT}
     class function GetFriendlyLanguageName: WideString; override;
@@ -307,11 +308,13 @@ type
     function GetTokenKind: Integer; override;
     function GetRange: Pointer; override;
     function GetEol: Boolean; override;
-    function GetHighlighterType: TSynWebHighlighterType;  
+    function GetHighlighterType: TSynWebHighlighterType;
+
     function PhpGetKeywordId: Integer;
     function PhpGetFunctionId: Integer;
     function PhpGetSymbolId: Integer;
     function PhpGetRange: TSynWebPhpRangeState;
+
     procedure SetRange(Value: Pointer); override;
 {$IFNDEF UNISYNEDIT}
     procedure SetLine(NewValue: String; LineNumber: Integer); override;
@@ -324,6 +327,7 @@ type
     function GetActiveHighlighter(ARange: Pointer; ALine: String;
       ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
 {$ENDIF}
+    property InternalInstanceData: TSynWebInstance read FInstance;
     property ActiveHighlighters: TSynWebHighlighterTypes read FActiveHighlighters
       write FActiveHighlighters;
   published
@@ -341,6 +345,7 @@ type
 
     function GetTagID: Integer;
     function GetTagKind: Integer;
+    function GetMLRange: TSynWebMLRangeState;
   end;
 
   TSynWebHtmlSynClass = class of TSynWebHtmlSyn;
@@ -1379,7 +1384,7 @@ begin
 {$IFDEF UNISYNEDIT}
     Run := FInstance.FRun;
     fTokenPos := FInstance.FTokenPos;
-    inherited;          
+    inherited Next;
 {$ENDIF}
   end;
 end;
@@ -1458,6 +1463,14 @@ begin
       Result := -1
     else
       Result := 1;
+end;
+
+function TSynWebMLSyn.GetMLRange: TSynWebMLRangeState;
+begin
+  if FEngine = nil then
+    Result := srsMLText
+  else
+    Result := FEngine.MLGetRange;
 end;
 
 { TSynWebHtmlSyn }

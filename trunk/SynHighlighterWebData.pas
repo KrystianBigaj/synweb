@@ -119,7 +119,7 @@ type
 
   TSynWebMLVersion = (smlhvHtml401Strict, smlhvHtml401Transitional, smlhvHtml401Frameset,
     smlhvXHtml10Strict, smlhvXHtml10Transitional, smlhvXHtml10Frameset,
-    smlwvWml11, smlwvWml12, smlwvWml13, smlwvWml20);
+    smlwvWml11, smlwvWml12, smlwvWml13);
 
   TSynWebMLRangeState = (srsMLText, srsMLComment, srsMLCommentClose, srsMLTag,
     srsMLTagClose, srsMLTagDOCTYPE, srsMLTagCDATA, srsMLTagKey,
@@ -269,7 +269,7 @@ const
 const
 {$I SynHighlighterWeb_Tables.inc}
 
-  TCrc8Table: array[$00..$FF] of byte = (
+  TCrc8Table: array[$00..$FF] of Byte = (
     $00, $07, $0e, $09, $1c, $1b, $12, $15,
     $38, $3f, $36, $31, $24, $23, $2a, $2d,
     $70, $77, $7e, $79, $6c, $6b, $62, $65,
