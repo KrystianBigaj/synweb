@@ -1,5 +1,12 @@
   PhpKeywordsMaxKeyHash = 644;
 
+  PhpKeyID_Special_HeredocEnd = -7;
+  PhpKeyID_Special_HeredocBegin = -6;
+  PhpKeyID_Special_PhpTagEcho = -5;
+  PhpKeyID_Special_PhpTag = -4;
+  PhpKeyID_Special_At = -3;
+  PhpKeyID_Special_Variable = -2;
+
   PhpKeyID___CLASS__ = 0;
   PhpKeyID___FILE__ = 1;
   PhpKeyID___FUNCTION__ = 2;
