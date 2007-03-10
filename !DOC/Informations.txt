@@ -1,4 +1,4 @@
-Known Issues:
+Known limitations:
 - TSynWeb support only single line SetLine (don't use more than one line).
   This shouldn't be ANY problem, as the function name is SetLine (not SetText)
 

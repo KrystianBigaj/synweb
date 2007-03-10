@@ -318,7 +318,7 @@ object Form1: TForm1
     Width = 369
     Height = 21
     Anchors = [akLeft, akRight, akBottom]
-    ItemHeight = 13
+    ItemHeight = 0
     TabOrder = 19
     OnDropDown = ComboBox1DropDown
   end

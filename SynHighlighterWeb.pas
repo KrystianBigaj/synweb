@@ -315,6 +315,8 @@ type
     function PhpGetSymbolId: Integer;
     function PhpGetRange: TSynWebPhpRangeState;
 
+    function CssGetPropertyId: Integer;
+
     procedure SetRange(Value: Pointer); override;
 {$IFNDEF UNISYNEDIT}
     procedure SetLine(NewValue: String; LineNumber: Integer); override;
@@ -1358,6 +1360,17 @@ begin
     Result := srsPhpDefault
   else
     Result := FEngine.PhpGetRange;
+end;
+
+function TSynWebBase.CssGetPropertyId: Integer;
+begin
+  if (FEngine <> nil) and (FInstance.FHighlighterType = shtCss) and
+    (FEngine.CssGetRange in [srsCssPropVal, srsCssPropValImportant,
+    srsCssPropValStr, srsCssPropValRgb, srsCssPropValFunc, srsCssPropValSpecial,
+    srsCssPropValUrl, srsCssPropValRect]) then
+    Result := FEngine.CssGetProp - 1
+  else
+    Result := -1;
 end;
 
 procedure TSynWebBase.SetRange(Value: Pointer);
@@ -6145,7 +6158,7 @@ begin
   if FInstance^.FLine[FInstance^.FRun] = '@' then
     Inc(FInstance^.FRun);
   FInstance^.FTokenID := stkPhpKeyword;
-  FInstance^.FTokenLastID := -1;
+  FInstance^.FTokenLastID := PhpKeyID_Special_At;
 end;
 
 procedure TSynWebEngine.PhpEqualProc;
@@ -6527,7 +6540,7 @@ begin
     FInstance^.FTokenID := stkPhpKeyword
   else
     FInstance^.FTokenID := stkPhpError;
-  FInstance^.FTokenLastID := -1;
+  FInstance^.FTokenLastID := PhpKeyID_Special_Variable;
 end;
 
 procedure TSynWebEngine.PhpIdentProc;
@@ -6831,13 +6844,13 @@ begin
         SetRangeBit(19, False);
         Inc(FInstance^.FRun, 3);
         FInstance^.FTokenID := stkPhpKeyword;
-        FInstance^.FTokenLastID := -1;
+        FInstance^.FTokenLastID := PhpKeyID_Special_PhpTag;
       end else
         if (FInstance^.FLine[FInstance^.FRun] = '=') and (FInstance^.FOptions.FPhpShortOpenTag) then
         begin
           Inc(FInstance^.FRun);
           FInstance^.FTokenID := stkPhpKeyword;
-          FInstance^.FTokenLastID := -1;
+          FInstance^.FTokenLastID := PhpKeyID_Special_PhpTagEcho;
         end else
           PhpRangeDefaultProc;
     end;
@@ -6862,7 +6875,7 @@ begin
         Exit;
       end;
       FInstance^.FTokenID := stkPhpKeyword;
-      FInstance^.FTokenLastID := -1;
+      FInstance^.FTokenLastID := PhpKeyID_Special_HeredocBegin;
       PhpSetRange(srsPhpHeredoc);
       s := GetToken;
       i := FPhpHereDocList.IndexOf(s);
@@ -6971,7 +6984,7 @@ begin
         (not GetRangeBit(25) and (GetRangeInt(8, 17) = GetCrc8String(GetToken))) then
       begin
         FInstance^.FTokenID := stkPhpKeyword;
-        FInstance^.FTokenLastID := -1;
+        FInstance^.FTokenLastID := PhpKeyID_Special_HeredocEnd;
         PhpSetRange(srsPhpDefault);
         Exit;
       end;

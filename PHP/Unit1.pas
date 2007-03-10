@@ -485,6 +485,14 @@ begin
       s1.Insert(0, Format('  PhpKeyID_%s = %d;', [s[i], i]));
 
   s1.Insert(0, '');
+  s1.Insert(0, '  PhpKeyID_Special_Variable = -2;');
+  s1.Insert(0, '  PhpKeyID_Special_At = -3;');
+  s1.Insert(0, '  PhpKeyID_Special_PhpTag = -4;');
+  s1.Insert(0, '  PhpKeyID_Special_PhpTagEcho = -5;');
+  s1.Insert(0, '  PhpKeyID_Special_HeredocBegin = -6;');
+  s1.Insert(0, '  PhpKeyID_Special_HeredocEnd = -7;');
+
+  s1.Insert(0, '');
 
   s1.Insert(0, Format('  PhpKeywordsMaxKeyHash = %d;', [x]));
 
