@@ -539,6 +539,7 @@ type
     FPhpStringSpecialAttri: TSynHighlighterAttributes;
     FPhpCommentAttri: TSynHighlighterAttributes;
     FPhpDocCommentAttri: TSynHighlighterAttributes;
+    FPhpDocCommentTagAttri: TSynHighlighterAttributes;
     FPhpSymbolAttri: TSynHighlighterAttributes;
     FPhpNumberAttri: TSynHighlighterAttributes;
     FPhpErrorAttri: TSynHighlighterAttributes;
@@ -735,6 +736,7 @@ type
     procedure PhpSubProcProc;
     procedure PhpRangeDefaultProc;
     procedure PhpRangeCommentProc;
+    procedure PhpRangeDocCommentProc;
     procedure PhpRangeString34Proc;
     procedure PhpRangeString39Proc;
     procedure PhpRangeStringShellProc;
@@ -881,6 +883,8 @@ type
       read FPhpCommentAttri write FPhpCommentAttri;
     property PhpDocCommentAttri: TSynHighlighterAttributes
       read FPhpDocCommentAttri write FPhpDocCommentAttri;
+    property PhpDocCommentTagAttri: TSynHighlighterAttributes
+      read FPhpDocCommentTagAttri write FPhpDocCommentTagAttri;
     property PhpSymbolAttri: TSynHighlighterAttributes
       read FPhpSymbolAttri write FPhpSymbolAttri;
     property PhpNumberAttri: TSynHighlighterAttributes
@@ -2140,10 +2144,15 @@ begin
   FPhpCommentAttri.Style := [fsItalic];
   AddAttribute(FPhpCommentAttri);
 
-  FPhpDocCommentAttri := CreateAttrib('Php: DocComment'); 
+  FPhpDocCommentAttri := CreateAttrib('Php: DocComment');
   FPhpDocCommentAttri.Foreground := clGreen;
   FPhpDocCommentAttri.Style := [fsBold, fsItalic];
   AddAttribute(FPhpDocCommentAttri);
+
+  FPhpDocCommentTagAttri := CreateAttrib('Php: DocComment Tag');
+  FPhpDocCommentTagAttri.Foreground := clBlue;
+  FPhpDocCommentTagAttri.Style := [fsBold, fsItalic];
+  AddAttribute(FPhpDocCommentTagAttri);
 
   FPhpSymbolAttri := CreateAttrib('Php: Symbol');
   AddAttribute(FPhpSymbolAttri);
@@ -2167,6 +2176,7 @@ begin
   FTokenAttributeTable[stkPhpStringSpecial] := FPhpStringSpecialAttri;
   FTokenAttributeTable[stkPhpComment] := FPhpCommentAttri;
   FTokenAttributeTable[stkPhpDocComment] := FPhpDocCommentAttri;
+  FTokenAttributeTable[stkPhpDocCommentTag] := FPhpDocCommentTagAttri;
   FTokenAttributeTable[stkPhpSymbol] := FPhpSymbolAttri;
   FTokenAttributeTable[stkPhpNumber] := FPhpNumberAttri;
   FTokenAttributeTable[stkPhpError] := FPhpErrorAttri;
@@ -5871,6 +5881,7 @@ begin
   FPhpRangeProcTable[srsPhpSubProc] := PhpSubProcProc;
   FPhpRangeProcTable[srsPhpDefault] := PhpRangeDefaultProc;
   FPhpRangeProcTable[srsPhpComment] := PhpRangeCommentProc;
+  FPhpRangeProcTable[srsPhpDocComment] := PhpRangeDocCommentProc;
   FPhpRangeProcTable[srsPhpString34] := PhpRangeString34Proc;
   FPhpRangeProcTable[srsPhpString39] := PhpRangeString39Proc;
   FPhpRangeProcTable[srsPhpStringShell] := PhpRangeStringShellProc;
@@ -6363,8 +6374,6 @@ begin
 end;
 
 procedure TSynWebEngine.PhpSlashProc;
-var
-  b: Boolean;
 begin
   case FInstance^.FLine[FInstance^.FRun + 1] of
   '/':
@@ -6375,19 +6384,24 @@ begin
   '*':
     begin
       Inc(FInstance^.FRun, 2);
-      PhpSetRange(srsPhpComment);
-      b := (FInstance^.FLine[FInstance^.FRun] = '*') and
-        (FInstance^.FLine[FInstance^.FRun + 1] <= #32);
-      if b then
-        Inc(FInstance^.FRun);
-      SetRangeBit(19, b);
-      if FInstance^.FLine[FInstance^.FRun] <> #0 then
-        PhpRangeCommentProc
-      else
-        if b then
-          FInstance^.FTokenID := stkPhpDocComment
+      if (FInstance^.FLine[FInstance^.FRun] = '*') and
+        (FInstance^.FLine[FInstance^.FRun + 1] <= #32) then
+      begin
+        Inc(FInstance^.FRun);    
+        PhpSetRange(srsPhpDocComment);
+        SetRangeBit(19, False);
+        if FInstance^.FLine[FInstance^.FRun] <> #0 then
+          PhpRangeDocCommentProc
         else
-          FInstance^.FTokenID := stkPhpComment;
+          FInstance^.FTokenID := stkPhpDocComment;
+      end else
+      begin
+        PhpSetRange(srsPhpComment);
+        if FInstance^.FLine[FInstance^.FRun] <> #0 then
+          PhpRangeCommentProc
+        else
+          FInstance^.FTokenID := stkPhpComment;        
+      end;
     end;
   else // case
     PhpDivProc;
@@ -6909,10 +6923,142 @@ begin
     end;
     Inc(FInstance^.FRun);
   until FInstance^.FLine[FInstance^.FRun] = #0;
+  FInstance^.FTokenID := stkPhpComment;
+end;
+
+procedure TSynWebEngine.PhpRangeDocCommentProc;
+
+  function CheckDoc: Integer;
+  var
+    i: Integer;
+  begin
+    i := 0;
+    while FInstance^.FLine[i] in [' ', #9] do
+      Inc(i);
+    if FInstance^.FLine[i] <> '*' then
+    begin
+      Result := 0;
+      Exit;
+    end;
+    Inc(i);
+    while FInstance^.FLine[i] in [' ', #9] do
+      Inc(i);
+    if i = FInstance^.FTokenPos then
+      Result := 1
+    else
+      Result := 2;
+  end;
+
+begin
   if GetRangeBit(19) then
-    FInstance^.FTokenID := stkPhpDocComment
-  else
-    FInstance^.FTokenID := stkPhpComment;
+  begin
+    if (FInstance^.FLine[FInstance^.FRun] = '*') and
+      (FInstance^.FLine[FInstance^.FRun + 1] = '/') then
+      begin
+        Inc(FInstance^.FRun, 2);
+        PhpSetRange(srsPhpDefault);
+        FInstance^.FTokenID := stkPhpDocComment;
+        Exit;
+      end;
+
+    while not (FInstance^.FLine[FInstance^.FRun] in [#0, '}']) do
+    begin
+      if (FInstance^.FLine[FInstance^.FRun] = '*') and
+        (FInstance^.FLine[FInstance^.FRun + 1] = '/') then
+        Break;
+      Inc(FInstance^.FRun);
+    end;
+
+    FInstance^.FTokenID := stkPhpDocCommentTag;
+    case FInstance^.FLine[FInstance^.FRun] of
+    '}':
+      begin
+        Inc(FInstance^.FRun);
+        SetRangeBit(19, False);
+        Exit;
+      end;
+    #0:
+      ; // Nothing
+    else // case
+      SetRangeBit(19, False);
+      Exit;
+    end;         
+  end else
+  begin
+    case FInstance^.FLine[FInstance^.FRun] of
+    '{':
+      if (FInstance^.FLine[FInstance^.FRun + 1] = '@') and
+        // (FInstance^.FLine[FInstance^.FRun + 2] in ['a'..'z', 'A'..'Z']) then
+        (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 2]] and (1 shl 0) <> 0) then
+      begin
+        Inc(FInstance^.FRun, 3);
+        while not (FInstance^.FLine[FInstance^.FRun] in [#0, '}']) do
+        begin
+          if (FInstance^.FLine[FInstance^.FRun] = '*') and
+            (FInstance^.FLine[FInstance^.FRun + 1] = '/') then
+            Break;
+          Inc(FInstance^.FRun);
+        end;
+        case FInstance^.FLine[FInstance^.FRun] of
+        '}':
+          Inc(FInstance^.FRun);
+        #0:
+          SetRangeBit(19, True);
+        end;
+        if CheckDoc <> 0 then
+        begin
+          FInstance^.FTokenID := stkPhpDocCommentTag;
+          Exit;
+        end else
+        begin
+          SetRangeBit(19, False);
+          Dec(FInstance^.FRun);
+        end;
+      end;
+    '@':
+      // if FInstance^.FLine[FInstance^.FRun + 1] in ['a'..'z', 'A'..'Z'] then
+      if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and (1 shl 0) <> 0 then
+      begin
+        Inc(FInstance^.FRun, 2);
+        while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) <> 0 do
+        begin
+          if (FInstance^.FLine[FInstance^.FRun] = '*') and
+            (FInstance^.FLine[FInstance^.FRun + 1] = '/') then
+            Break;
+          Inc(FInstance^.FRun);
+        end;
+        if CheckDoc = 1 then
+        begin
+          FInstance^.FTokenID := stkPhpDocCommentTag;
+          Exit;
+        end else
+          Dec(FInstance^.FRun);
+      end;
+    end;
+  end;
+
+  repeat
+    case FInstance^.FLine[FInstance^.FRun] of
+    '*':
+      if FInstance^.FLine[FInstance^.FRun + 1] = '/' then
+      begin
+        Inc(FInstance^.FRun, 2);
+        PhpSetRange(srsPhpDefault);
+        Break;
+      end;
+    '{':
+      if (FInstance^.FLine[FInstance^.FRun + 1] = '@') and
+      // (FInstance^.FLine[FInstance^.FRun + 2] in ['a'..'z', 'A'..'Z'] then
+        (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 2]] and (1 shl 0) <> 0) then
+        Break;
+    '@':
+      // if FInstance^.FLine[FInstance^.FRun + 1] in ['a'..'z', 'A'..'Z'] then
+      if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and (1 shl 0) <> 0 then
+        Break;
+    end;
+    Inc(FInstance^.FRun);
+  until FInstance^.FLine[FInstance^.FRun] = #0;
+  FInstance^.FTokenID := stkPhpDocComment;
 end;
 
 procedure TSynWebEngine.PhpRangeString34Proc;

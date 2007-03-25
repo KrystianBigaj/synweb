@@ -94,7 +94,7 @@ type
     // Php
     stkPhpSpace, stkPhpInlineText, stkPhpIdentifier, stkPhpKeyword, stkPhpFunction,
     stkPhpVariable, stkPhpConst, stkPhpString, stkPhpStringSpecial, stkPhpComment,
-    stkPhpDocComment, stkPhpSymbol, stkPhpNumber, stkPhpError,
+    stkPhpDocComment, stkPhpDocCommentTag, stkPhpSymbol, stkPhpNumber, stkPhpError,
     // Other
     stkNull);
 
@@ -178,8 +178,8 @@ type
     );
 
   TSynWebPhpRangeState = (
-    srsPhpSubProc, srsPhpDefault, srsPhpComment, srsPhpString34, srsPhpString39,
-    srsPhpStringShell, srsPhpHeredoc
+    srsPhpSubProc, srsPhpDefault, srsPhpComment, srsPhpDocComment,
+    srsPhpString34, srsPhpString39, srsPhpStringShell, srsPhpHeredoc
     );
 
   TSynWebPhpOpenTag = (spotPhp, spotPhpShort, spotML, spotASP);
