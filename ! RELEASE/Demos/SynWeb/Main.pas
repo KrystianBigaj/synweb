@@ -39,6 +39,7 @@ type
     SynWebWmlSyn1: TSynWebWmlSyn;
     Label6: TLabel;
     ComboBox5: TComboBox;
+    SynWebXmlSyn1: TSynWebXmlSyn;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -150,7 +151,7 @@ begin
 end;
 
 procedure TForm1.ComboBox4Change(Sender: TObject);
-begin
+begin              
   case ComboBox4.ItemIndex of
   0:
     SynEdit1.Highlighter:=SynWebHtmlSyn1;
@@ -162,6 +163,8 @@ begin
     SynEdit1.Highlighter:=SynWebPHPCliSyn1;
   4:
     SynEdit1.Highlighter:=SynWebWmlSyn1;
+  5:
+    SynEdit1.Highlighter:=SynWebXmlSyn1;
   end;
 end;
 
