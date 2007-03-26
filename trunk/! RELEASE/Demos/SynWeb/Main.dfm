@@ -182,7 +182,8 @@ object Form1: TForm1
         'CSS'
         'JS'
         'PHP-Cli'
-        'WML (+PHP)')
+        'WML (+PHP)'
+        'XML (+PHP)')
     end
     object CheckBox3: TCheckBox
       Left = 296
@@ -266,7 +267,7 @@ object Form1: TForm1
     Options.PhpAspTags = False
     Options.PhpEmbeded = True
     Options.UseEngineOptions = True
-    Left = 112
+    Left = 144
     Top = 260
   end
   object SynWebESSyn1: TSynWebEsSyn
@@ -277,7 +278,7 @@ object Form1: TForm1
     Options.PhpAspTags = False
     Options.PhpEmbeded = True
     Options.UseEngineOptions = True
-    Left = 144
+    Left = 176
     Top = 260
   end
   object SynWebPHPCliSyn1: TSynWebPhpCliSyn
@@ -287,7 +288,7 @@ object Form1: TForm1
     Options.PhpShortOpenTag = True
     Options.PhpAspTags = False
     Options.UseEngineOptions = True
-    Left = 176
+    Left = 208
     Top = 260
   end
   object SynExporterHTML1: TSynExporterHTML
@@ -319,6 +320,17 @@ object Form1: TForm1
     Options.PhpEmbeded = True
     Options.UseEngineOptions = True
     Left = 80
+    Top = 260
+  end
+  object SynWebXmlSyn1: TSynWebXmlSyn
+    ActiveHighlighterSwitch = False
+    Engine = SynWebEngine1
+    Options.PhpVersion = spvPhp5
+    Options.PhpShortOpenTag = False
+    Options.PhpAspTags = False
+    Options.PhpEmbeded = True
+    Options.UseEngineOptions = False
+    Left = 112
     Top = 260
   end
 end

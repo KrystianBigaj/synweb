@@ -54,11 +54,11 @@ Known limitations:
   eg. "somestring {$a["some array{$b['key'].... <- only single line encapsuled values
 -------------------------------------------------------------------------------}
 {
-@abstract(Provides an web-files (Multi Html/XHtml/Wml/Css/ECMAScript/Php) highlighter for SynEdit
+@abstract(Provides an web-files (Multi Html/XHtml/Wml/Xml/Css/ECMAScript/Php) highlighter for SynEdit
 @author(Krystian Bigaj <krystian.bigaj@gmail.com>)
 @created(2005-05-21)
 @lastmod(2006-12-05)
-The SynHighlighterWeb unit provides SynEdit with a Multi Html/XHtml/Wml/Css/ECMAScript/Php highlighter.
+The SynHighlighterWeb unit provides SynEdit with a Multi Html/XHtml/Wml/Xml/Css/ECMAScript/Php highlighter.
 }
 
 {$IFNDEF QSYNHIGHLIGHTERWEB}
@@ -212,6 +212,19 @@ type
     constructor Create(AOptions: PSynWebOptions);
   published
     property WmlVersion;
+    property PhpVersion;
+    property PhpShortOpenTag;
+    property PhpAspTags;
+    property PhpEmbeded;
+    property UseEngineOptions;
+  end;
+
+  TSynWebXmlOptions = class(TSynWebOptionsBase)
+  protected
+    procedure UpdateMLOption; override;
+  public
+    constructor Create(AOptions: PSynWebOptions);
+  published
     property PhpVersion;
     property PhpShortOpenTag;
     property PhpAspTags;
@@ -386,6 +399,25 @@ type
     constructor Create(AOwner: TComponent); override;
   published
     property Options: TSynWebWmlOptions read GetOptions write SetOptions;
+  end;
+
+  TSynWebXmlSynClass = class of TSynWebXmlSyn;
+
+  TSynWebXmlSyn = class(TSynWebMLSyn)
+  private
+    function GetOptions: TSynWebXmlOptions;
+    procedure SetOptions(const AValue: TSynWebXmlOptions);
+  public
+    class function GetLanguageName: string; override;
+{$IFDEF UNISYNEDIT}
+    class function SynWebSample: WideString; override;
+{$ELSE}
+    class function SynWebSample: String; override;
+{$ENDIF}
+  public
+    constructor Create(AOwner: TComponent); override;
+  published
+    property Options: TSynWebXmlOptions read GetOptions write SetOptions;
   end;
 
   TSynWebCssSynClass = class of TSynWebCssSyn;
@@ -1131,6 +1163,19 @@ begin
   FOptions^.FMLVersion := TSynWebMLVersion(Integer(smlwvWml11) + Integer(FOptions^.FWmlVersion));
 end;
 
+{ TSynWebXmlOptions }
+
+constructor TSynWebXmlOptions.Create(AOptions: PSynWebOptions);
+begin
+  inherited Create(AOptions);
+  UpdateMLOption;
+end;
+
+procedure TSynWebXmlOptions.UpdateMLOption;
+begin
+  FOptions^.FMLVersion := smlwvXML;
+end;
+
 { TSynWebEngineOptions }
 
 constructor TSynWebEngineOptions.Create(AOptions: PSynWebOptions);
@@ -1641,6 +1686,43 @@ begin
     '   </p>'#13#10 +
     '  </card>'#13#10 +
     '</wml>'#13#10;
+end;
+
+{ TSynWebXmlSyn }
+
+constructor TSynWebXmlSyn.Create(AOwner: TComponent);
+begin
+  FOptions := TSynWebXmlOptions.Create(@FInstance.FOptions);
+  inherited Create(AOwner);
+  FOptions.PhpShortOpenTag := False;
+  FOptions.PhpEmbeded := True;
+  FOptions.CssEmbeded := False;
+  FOptions.EsEmbeded := False;
+  FOptions.UseEngineOptions := False;
+end;
+
+function TSynWebXmlSyn.GetOptions: TSynWebXmlOptions;
+begin
+  Result := TSynWebXmlOptions(FOptions);
+end;
+
+procedure TSynWebXmlSyn.SetOptions(const AValue: TSynWebXmlOptions);
+begin
+  FOptions := AValue;
+end;
+
+class function TSynWebXmlSyn.GetLanguageName: String;
+begin
+  Result := 'TSynWeb: XML (+PHP)';
+end;
+
+{$IFDEF UNISYNEDIT}
+class function TSynWebXmlSyn.SynWebSample: WideString;
+{$ELSE}
+class function TSynWebXmlSyn.SynWebSample: String;
+{$ENDIF}
+begin
+  Result := ''; // todo: XML Sample
 end;
 
 { TSynWebCssSyn }
@@ -2702,20 +2784,39 @@ begin
   repeat
     Inc(FInstance^.FRun);
   until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 16) = 0;
-  // until not (FInstance^.FLine[FInstance^.FRun] In ['a'..'z', 'A'..'Z', '_', '0'..'9']);
-  FInstance^.FTokenID := MLTagCheck;
-  ID := MLGetTag - 1;
-  if GetRangeBit(12) then
+  // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', '0'..'9']);
+
+  if FInstance^.FLine[FInstance^.FRun] = ':' then
+    Inc(FInstance^.FRun);
+
+  // while FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', '0'..'9'] do
+  while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 16) <> 0 do
+    Inc(FInstance^.FRun);
+
+  if FInstance^.FOptions.FMLVersion = smlwvXML then
   begin
-    if (ID <> -1) and (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) then
-      FInstance^.FTokenID := stkMLError;
-    MLSetRange(srsMLTagClose);
+    FInstance^.FTokenID := stkMLTagName;
+    FInstance^.FTokenLastID := -1;    
+    if GetRangeBit(12) then
+      MLSetRange(srsMLTagClose)
+    else           
+      MLSetRange(srsMLTagKey);
   end else
   begin
-    if (ID <> -1) and ((FInstance^.FLine[FInstance^.FTokenPos - 1] = '?') xor
-      (TSynWeb_TagsData[ID] and (1 shl 29) <> 0)) then
-      FInstance^.FTokenID := stkMLError;
-    MLSetRange(srsMLTagKey);
+    FInstance^.FTokenID := MLTagCheck;
+    ID := MLGetTag - 1;
+    if GetRangeBit(12) then
+    begin
+      if (ID <> -1) and (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) then
+        FInstance^.FTokenID := stkMLError;
+      MLSetRange(srsMLTagClose);
+    end else
+    begin
+      if (ID <> -1) and ((FInstance^.FLine[FInstance^.FTokenPos - 1] = '?') xor
+        (TSynWeb_TagsData[ID] and (1 shl 29) <> 0)) then
+        FInstance^.FTokenID := stkMLError;
+      MLSetRange(srsMLTagKey);
+    end;
   end;
 end;
 
@@ -2753,8 +2854,9 @@ var
 begin
   if MLCheckNull or PhpCheckBegin then
     Exit;
-  ID := MLGetTag - 1;
-  if (ID <> -1) and (TSynWeb_TagsData[ID] and (1 shl 29) <> 0) then
+
+  if FInstance^.FOptions.FMLVersion = smlwvXML then
+  begin
     if (FInstance^.FLine[FInstance^.FRun] = '?') and
       (FInstance^.FLine[FInstance^.FRun + 1] = '>') then
     begin
@@ -2762,79 +2864,128 @@ begin
       FInstance^.FTokenID := stkMLTag;
       MLSetRange(srsMLText);
       Exit;
-    end else
-      if FInstance^.FLine[FInstance^.FRun] = '>' then
+    end;
+
+    case FInstance^.FLine[FInstance^.FRun] of
+    #1..#32:
+      MLSpaceProc;
+    '/':
+      if not GetRangeBit(12) and (FInstance^.FLine[FInstance^.FRun + 1] = '>') then
+      begin
+        Inc(FInstance^.FRun, 2);
+        FInstance^.FTokenID := stkMLTag;
+        MLSetRange(srsMLText);
+      end else
       begin
         Inc(FInstance^.FRun);
         FInstance^.FTokenID := stkMLError;
-        MLSetRange(srsMLText);
-        Exit;
       end;
-  case FInstance^.FLine[FInstance^.FRun] of
-  #1..#32:
-    MLSpaceProc;
-  '/':
-    if not GetRangeBit(12) and (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
-      (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) and
-      (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) then
-    begin
-      Inc(FInstance^.FRun, 2);
-      FInstance^.FTokenID := stkMLTag;
-      MLSetRange(srsMLText);
-    end else
-    begin
-      Inc(FInstance^.FRun);
-      FInstance^.FTokenID := stkMLError;
-    end;
-  '>':
-    begin
-      Inc(FInstance^.FRun);
-      FInstance^.FTokenID := stkMLTag;
-      if (ID <> -1) and (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) and
-        (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) then
-        FInstance^.FTokenID := stkMLError
-      else
-        if not GetRangeBit(12) and ((FInstance^.FRun < 2) or
-          (FInstance^.FLine[FInstance^.FRun - 2] <> '/')) then
-          if (ID = MLTagID_Style) and FInstance^.FOptions.FCssEmbeded then
-          begin
-            SetHighlighterType(shtCss, True, True, True);
-            Exit;
-          end else
-            if (ID = MLTagID_Script) then
-              if GetRangeBit(28) and FInstance^.FOptions.FPhpEmbeded then
-              begin
-                SetRangeInt(17, 0, 0);
-                PhpBegin(spotML);
-                Exit;
-              end else
-                if FInstance^.FOptions.FEsEmbeded then
-                begin
-                  SetHighlighterType(shtEs, True, True, True);
-                  Exit;
-                end;
-      MLSetRange(srsMLText);
-    end;
-  else // case
-    // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']) then
-    if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
-      MLErrorProc
-    else
-    begin
-      repeat
+    '>':
+      begin
         Inc(FInstance^.FRun);
-      until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) = 0;
-      // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', ':', '-']);
-      if ID = -1 then
-        FInstance^.FTokenID := stkMLTagKeyUndef
+        FInstance^.FTokenID := stkMLTag;
+        MLSetRange(srsMLText);
+      end;
+    else // case
+      // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']) then
+      if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
+        MLErrorProc
       else
       begin
-        FInstance^.FTokenID := MLAttrCheck;
-        if ID = MLTagID_Script then
-          SetRangeBit(27, FInstance^.FTokenLastID = MLAttrID_Language);
+        repeat
+          Inc(FInstance^.FRun);
+        until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) = 0;
+        // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', ':', '-']);
+        FInstance^.FTokenID := stkMLTagKey;
+        FInstance^.FTokenLastID := -1;
       end;
+      MLSetRange(srsMLTagKeyEq);
     end;
-    MLSetRange(srsMLTagKeyEq);
+  end else
+  begin
+    ID := MLGetTag - 1;
+    if (ID <> -1) and (TSynWeb_TagsData[ID] and (1 shl 29) <> 0) then
+      if (FInstance^.FLine[FInstance^.FRun] = '?') and
+        (FInstance^.FLine[FInstance^.FRun + 1] = '>') then
+      begin
+        Inc(FInstance^.FRun, 2);
+        FInstance^.FTokenID := stkMLTag;
+        MLSetRange(srsMLText);
+        Exit;
+      end else
+        if FInstance^.FLine[FInstance^.FRun] = '>' then
+        begin
+          Inc(FInstance^.FRun);
+          FInstance^.FTokenID := stkMLError;
+          MLSetRange(srsMLText);
+          Exit;
+        end;
+    case FInstance^.FLine[FInstance^.FRun] of
+    #1..#32:
+      MLSpaceProc;
+    '/':
+      if not GetRangeBit(12) and (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
+        (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) and
+        (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) then
+      begin
+        Inc(FInstance^.FRun, 2);
+        FInstance^.FTokenID := stkMLTag;
+        MLSetRange(srsMLText);
+      end else
+      begin
+        Inc(FInstance^.FRun);
+        FInstance^.FTokenID := stkMLError;
+      end;
+    '>':
+      begin
+        Inc(FInstance^.FRun);
+        FInstance^.FTokenID := stkMLTag;
+        if (ID <> -1) and (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) and
+          (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) then
+          FInstance^.FTokenID := stkMLError
+        else
+          if not GetRangeBit(12) and ((FInstance^.FRun < 2) or
+            (FInstance^.FLine[FInstance^.FRun - 2] <> '/')) then
+            if (ID = MLTagID_Style) and FInstance^.FOptions.FCssEmbeded then
+            begin
+              SetHighlighterType(shtCss, True, True, True);
+              Exit;
+            end else
+              if (ID = MLTagID_Script) then
+                if GetRangeBit(28) and FInstance^.FOptions.FPhpEmbeded then
+                begin
+                  SetRangeInt(17, 0, 0);
+                  PhpBegin(spotML);
+                  Exit;
+                end else
+                  if FInstance^.FOptions.FEsEmbeded then
+                  begin
+                    SetHighlighterType(shtEs, True, True, True);
+                    Exit;
+                  end;
+        MLSetRange(srsMLText);
+      end;
+    else // case
+      // if not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z']) then
+      if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) = 0 then
+        MLErrorProc
+      else
+      begin
+        repeat
+          Inc(FInstance^.FRun);
+        until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) = 0;
+        // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', ':', '-']);
+        if ID = -1 then
+          FInstance^.FTokenID := stkMLTagKeyUndef
+        else
+        begin
+          FInstance^.FTokenID := MLAttrCheck;
+          if ID = MLTagID_Script then
+            SetRangeBit(27, FInstance^.FTokenLastID = MLAttrID_Language);
+        end;
+      end;
+      MLSetRange(srsMLTagKeyEq);
+    end;
   end;
 end;
 
@@ -3206,7 +3357,13 @@ var
     end;
   end;
 
-begin
+begin              
+  if FInstance^.FOptions.FMLVersion = smlwvXML then
+  begin
+    Result := 0;
+    FInstance^.FTokenLastID := -1;
+    Exit;
+  end;
   FInstance^.FToIdent := @FInstance^.FLine[AStart];
   KeyHash(FInstance^.FToIdent);
   if (HashKey > MLSpecialMaxKeyHash) or not FMLSpecialIdentFuncTable[HashKey] then
@@ -7481,6 +7638,7 @@ initialization
 {$IFNDEF SYN_CPPB_1}
   RegisterPlaceableHighlighter(TSynWebHtmlSyn);
   RegisterPlaceableHighlighter(TSynWebWmlSyn);
+  RegisterPlaceableHighlighter(TSynWebXmlSyn);
   RegisterPlaceableHighlighter(TSynWebPhpCliSyn);
   RegisterPlaceableHighlighter(TSynWebCssSyn);
   RegisterPlaceableHighlighter(TSynWebEsSyn);

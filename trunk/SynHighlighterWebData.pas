@@ -119,7 +119,7 @@ type
 
   TSynWebMLVersion = (smlhvHtml401Strict, smlhvHtml401Transitional, smlhvHtml401Frameset,
     smlhvXHtml10Strict, smlhvXHtml10Transitional, smlhvXHtml10Frameset,
-    smlwvWml11, smlwvWml12, smlwvWml13);
+    smlwvWml11, smlwvWml12, smlwvWml13, smlwvXML);
 
   TSynWebMLRangeState = (srsMLText, srsMLComment, srsMLCommentClose, srsMLTag,
     srsMLTagClose, srsMLTagDOCTYPE, srsMLTagCDATA, srsMLTagKey,

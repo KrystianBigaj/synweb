@@ -86,6 +86,7 @@ begin
     TSynWebEngine,
     TSynWebHtmlSyn,
     TSynWebWmlSyn,
+    TSynWebXmlSyn,
     TSynWebCssSyn,
     TSynWebEsSyn,
     TSynWebPhpCliSyn
