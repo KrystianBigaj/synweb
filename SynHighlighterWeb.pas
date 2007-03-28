@@ -567,6 +567,7 @@ type
     FPhpFunctionAttri: TSynHighlighterAttributes;
     FPhpVariableAttri: TSynHighlighterAttributes;
     FPhpConstAttri: TSynHighlighterAttributes;
+    FPhpMethodAttri: TSynHighlighterAttributes;
     FPhpStringAttri: TSynHighlighterAttributes;
     FPhpStringSpecialAttri: TSynHighlighterAttributes;
     FPhpCommentAttri: TSynHighlighterAttributes;
@@ -907,6 +908,8 @@ type
       read FPhpVariableAttri write FPhpVariableAttri;
     property PhpConstAttri: TSynHighlighterAttributes
       read FPhpConstAttri write FPhpConstAttri;
+    property PhpMethodAttri: TSynHighlighterAttributes
+      read FPhpMethodAttri write FPhpMethodAttri;
     property PhpStringAttri: TSynHighlighterAttributes
       read FPhpStringAttri write FPhpStringAttri;
     property PhpStringSpecialAttri: TSynHighlighterAttributes
@@ -2234,6 +2237,10 @@ begin
   FPhpConstAttri.Foreground := $0080FF;
   AddAttribute(FPhpConstAttri);
 
+  FPhpMethodAttri := CreateAttrib('Php: Method');
+  FPhpMethodAttri.Foreground := $00FF8000;
+  AddAttribute(FPhpMethodAttri);
+
   FPhpStringAttri := CreateAttrib('Php: String'); 
   FPhpStringAttri.Foreground := clFuchsia;
   AddAttribute(FPhpStringAttri);
@@ -2279,6 +2286,7 @@ begin
   FTokenAttributeTable[stkPhpString] := FPhpStringAttri;
   FTokenAttributeTable[stkPhpStringSpecial] := FPhpStringSpecialAttri;
   FTokenAttributeTable[stkPhpComment] := FPhpCommentAttri;
+  FTokenAttributeTable[stkPhpMethod] := FPhpMethodAttri;
   FTokenAttributeTable[stkPhpDocComment] := FPhpDocCommentAttri;
   FTokenAttributeTable[stkPhpDocCommentTag] := FPhpDocCommentTagAttri;
   FTokenAttributeTable[stkPhpSymbol] := FPhpSymbolAttri;
@@ -6120,6 +6128,7 @@ begin
   else
   begin
     SetRangeBit(26, False);
+    SetRangeBit(17, False);
     SetRangeInt(3, 23, Longword(ARange));
   end;
 end;
@@ -6502,6 +6511,7 @@ begin
     begin
       Inc(FInstance^.FRun);
       PhpSetSymbolId(PhpSymbolID_ObjectMethod);
+      SetRangeBit(17, True);
     end;
   else // case 
     PhpSetSymbolId(PhpSymbolID_Dec);
@@ -6579,7 +6589,7 @@ begin
         if FInstance^.FLine[FInstance^.FRun] <> #0 then
           PhpRangeCommentProc
         else
-          FInstance^.FTokenID := stkPhpComment;        
+          FInstance^.FTokenID := stkPhpComment;
       end;
     end;
   else // case
@@ -6664,6 +6674,7 @@ begin
   begin
     Inc(FInstance^.FRun);
     PhpSetSymbolId(PhpSymbolID_ClassMethod);
+    SetRangeBit(17, True);
   end else
     PhpSetSymbolId(PhpSymbolID_Colon);
 end;
@@ -7425,9 +7436,15 @@ var
   end;
 
 begin
+  FInstance^.FTokenLastID := -1;
+  if GetRangeBit(17) then
+  begin
+    Result := stkPhpMethod;
+    SetRangeBit(17, False);
+    Exit;
+  end;
   FInstance^.FToIdent := @FInstance^.FLine[FInstance^.FTokenPos];
   KeyHash(FInstance^.FToIdent);
-  FInstance^.FTokenLastID := -1;
   if HashKey <= PhpKeywordsMaxKeyHash then
     Result := FPhpIdentFuncTable[HashKey]
   else
