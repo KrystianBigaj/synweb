@@ -94,7 +94,8 @@ type
     // Php
     stkPhpSpace, stkPhpInlineText, stkPhpIdentifier, stkPhpKeyword, stkPhpFunction,
     stkPhpVariable, stkPhpConst, stkPhpString, stkPhpStringSpecial, stkPhpComment,
-    stkPhpDocComment, stkPhpDocCommentTag, stkPhpSymbol, stkPhpNumber, stkPhpError,
+    stkPhpMethod, stkPhpDocComment, stkPhpDocCommentTag, stkPhpSymbol, stkPhpNumber,
+    stkPhpError,
     // Other
     stkNull);
 

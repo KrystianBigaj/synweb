@@ -115,7 +115,7 @@ object Form1: TForm1
       Width = 145
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 1
       OnChange = ComboBox1Change
     end
@@ -125,7 +125,7 @@ object Form1: TForm1
       Width = 77
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 2
       OnChange = ComboBox2Change
     end
@@ -163,7 +163,7 @@ object Form1: TForm1
       Width = 77
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 6
       OnChange = ComboBox3Change
     end
@@ -227,7 +227,7 @@ object Form1: TForm1
       Width = 77
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 11
       OnChange = ComboBox5Change
     end
