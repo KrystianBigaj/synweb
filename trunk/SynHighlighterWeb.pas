@@ -1233,12 +1233,34 @@ end;
 
 {$IFDEF UNISYNEDIT}
 procedure TSynWebBase.DoSetLine(const Value: WideString; LineNumber: Integer);
+var
+  s: String;
+  p: PChar;
+  w: PWideChar;
+  j, i: Integer;
 begin
   inherited DoSetLine(Value, LineNumber);
   if FEngine = nil then
     Exit;
   FEngine.FInstance := @FInstance;
-  FEngine.SetLine(Value, LineNumber);
+  j := Length(Value);
+  if j > 0 then
+  begin
+    SetLength(S, j);
+    p := @s[1];
+    w := @Value[1];
+    for i := 1 to j do
+    begin
+      if Word(w^) > 255 then
+        p^ := '?'
+      else
+        p^ := Char(w^);
+      Inc(p);
+      Inc(w);
+    end;
+  end else
+    s := '';
+  FEngine.SetLine(s, LineNumber);
 end;
 {$ENDIF}
 
