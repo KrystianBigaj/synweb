@@ -6745,6 +6745,7 @@ begin
   else
     FInstance^.FTokenID := stkPhpError;
   FInstance^.FTokenLastID := PhpKeyID_Special_Variable;
+  SetRangeBit(17, False);
 end;
 
 procedure TSynWebEngine.PhpIdentProc;
