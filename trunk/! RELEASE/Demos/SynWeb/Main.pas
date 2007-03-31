@@ -7,7 +7,7 @@ uses
   Dialogs, SynEdit, SynHighlighterWeb, StdCtrls, SynEditHighlighter,
   ExtCtrls, SynEditOptionsDialog, SynEditExport, SynExportHTML, SynTokenMatch,
   SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes,
-  SynEditTextBuffer, SynCompletionProposal, StrUtils;
+  SynEditTextBuffer, SynCompletionProposal, StrUtils, Menus;
 
 type
   TForm1 = class(TForm)
@@ -41,6 +41,10 @@ type
     ComboBox5: TComboBox;
     SynWebXmlSyn1: TSynWebXmlSyn;
     scpDemo: TSynCompletionProposal;
+    SynWebErrorTimer: TTimer;
+    SynWebErrorList: TListBox;
+    PopupMenu1: TPopupMenu;
+    Reload1: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -63,6 +67,10 @@ type
       var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
     procedure scpDemoCodeCompletion(Sender: TObject; var Value: WideString;
       Shift: TShiftState; Index: Integer; EndToken: WideChar);
+    procedure SynEdit1Change(Sender: TObject);
+    procedure SynWebErrorTimerTimer(Sender: TObject);
+    procedure SynWebErrorListDblClick(Sender: TObject);
+    procedure Reload1Click(Sender: TObject);
   private
     FPaintUpdating: Boolean;
   public
@@ -114,6 +122,11 @@ end;
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
   SynEdit1.Lines.SaveToFile(ChangeFileExt(Application.ExeName,'_sample.txt'));
+end;
+
+procedure TForm1.Reload1Click(Sender: TObject);
+begin
+  SynWebErrorTimerTimer(nil);
 end;
 
 procedure TForm1.scpDemoCodeCompletion(Sender: TObject; var Value: WideString;
@@ -224,6 +237,109 @@ begin
     Caption := Format('%.8x, %s, %d, %d', [Integer(GetRange),
       GetToken, GetTagID, GetTagKind]);
   end;
+end;
+
+procedure TForm1.SynWebErrorListDblClick(Sender: TObject);
+var
+  i: Integer;
+  pos: Longword;
+  caret: TBufferCoord;
+begin
+  if SynWebErrorTimer.Enabled then
+    SynWebErrorTimerTimer(nil);
+  i := SynWebErrorList.ItemIndex;
+  if i = -1 then
+    Exit;
+
+  pos := Longword(SynWebErrorList.Items.Objects[i]);
+  caret.Char := pos and $00000FFF;
+  caret.Line := pos shr 12;
+  SynEdit1.CaretXY := caret;
+  SynEdit1.SetFocus;
+end;
+
+procedure TForm1.SynWebErrorTimerTimer(Sender: TObject);
+var
+  i, idx, idxtop: Integer;
+  hl: TSynWebBase;
+  e: TCustomSynEdit;
+
+  procedure AddError(S: WideString);
+  var
+    pos: Longword;
+  begin
+    s := Format(s, [hl.GetToken]);
+    pos := hl.GetTokenPos + 1;
+    if pos > $00000FFF then
+      pos := $00000FFF;
+      
+    pos := pos or Longword((i + 1) shl 12);
+
+    SynWebErrorList.AddItem(Format('[%4.d, %4.d] - %s',
+      [i + 1 , hl.GetTokenPos + 1, s]),
+      TObject(pos));
+  end;
+
+begin
+  SynWebErrorTimer.Enabled := False;
+  e := SynEdit1;
+  SynWebErrorList.Items.BeginUpdate;
+  idx := SynWebErrorList.ItemIndex;
+  idxtop := SynWebErrorList.TopIndex;
+  SynWebErrorList.Clear;
+
+  if e.Highlighter is TSynWebBase then
+  begin
+    hl := TSynWebBase(e.Highlighter);
+    hl.ResetRange;
+    i := 0;
+    while i < e.Lines.Count do
+    begin
+      hl.SetLine(e.Lines[i], i + 1);
+      while not hl.GetEol do
+      begin
+        case hl.GetTokenID of
+        stkMLTagNameUndef:
+          AddError('HTML: Invalid tag "%s"');
+        stkMLTagKeyUndef:
+          AddError('HTML: Invalid attribute "%s"');
+        stkMLError:
+          AddError('HTML: Invalid token "%s"');
+
+        stkCssSelectorUndef:
+          AddError('CSS: Invalid selector "%s"');
+        stkCssPropUndef:
+          AddError('CSS: Invalid property "%s"');
+        stkCssValUndef:
+          AddError('CSS: Invalid value "%s"');
+        stkCssError:
+          AddError('CSS: Invalid token "%s"');
+
+        stkEsError:
+          AddError('JS: Invalid token "%s"');
+
+        stkPhpError:
+          AddError('PHP: Invalid token "%s"');
+        end;
+        hl.Next;
+      end;
+      Inc(i);
+    end;
+  end;
+  SynWebErrorList.Visible := SynWebErrorList.Items.Count > 0;
+  if idx < SynWebErrorList.Count then
+  begin
+    SynWebErrorList.ItemIndex := idx;
+    SynWebErrorList.TopIndex := idxtop;
+  end;
+
+  SynWebErrorList.Items.EndUpdate;
+end;
+
+procedure TForm1.SynEdit1Change(Sender: TObject);
+begin
+  SynWebErrorTimer.Enabled := False;
+  SynWebErrorTimer.Enabled := True;
 end;
 
 procedure TForm1.SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;

@@ -19,7 +19,7 @@ object Form1: TForm1
     Left = 0
     Top = 45
     Width = 900
-    Height = 427
+    Height = 307
     Align = alClient
     ActiveLineColor = 16448250
     Font.Charset = DEFAULT_CHARSET
@@ -35,6 +35,7 @@ object Form1: TForm1
     Gutter.Font.Style = []
     Highlighter = SynWebHtmlSyn1
     Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoDropFiles, eoEnhanceEndKey, eoGroupUndo, eoRightMouseMovesCursor, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabIndent, eoTabsToSpaces, eoTrimTrailingSpaces]
+    OnChange = SynEdit1Change
     OnStatusChange = SynEdit1StatusChange
     OnPaintTransient = SynEdit1PaintTransient
   end
@@ -232,6 +233,24 @@ object Form1: TForm1
       OnChange = ComboBox5Change
     end
   end
+  object SynWebErrorList: TListBox
+    Left = 0
+    Top = 352
+    Width = 900
+    Height = 120
+    Align = alBottom
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Courier New'
+    Font.Style = []
+    ItemHeight = 14
+    ParentFont = False
+    PopupMenu = PopupMenu1
+    TabOrder = 2
+    Visible = False
+    OnDblClick = SynWebErrorListDblClick
+  end
   object SynWebEngine1: TSynWebEngine
     Options.HtmlVersion = shvXHtml10Transitional
     Options.WmlVersion = swvWml13
@@ -359,5 +378,18 @@ object Form1: TForm1
     Left = 52
     Top = 96
     EndOfTokenChrW = ';>()[]. '
+  end
+  object SynWebErrorTimer: TTimer
+    OnTimer = SynWebErrorTimerTimer
+    Left = 36
+    Top = 304
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 512
+    Top = 404
+    object Reload1: TMenuItem
+      Caption = 'Reload'
+      OnClick = Reload1Click
+    end
   end
 end
