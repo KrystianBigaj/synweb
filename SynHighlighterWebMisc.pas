@@ -62,14 +62,19 @@ uses
   QSynEditTextBuffer,
   QSynEditHighlighter,
   QSynEditTypes,
+  QSynCompletionProposal,
   QSynHighlighterWeb,
   QSynHighlighterWebData,
   QSynTokenMatch;
 {$ELSE}
+  SysUtils,
+  StrUtils,
+  Graphics,
   SynEdit,
   SynEditTextBuffer,
   SynEditHighlighter,
   SynEditTypes,
+  SynCompletionProposal,
   SynHighlighterWeb,
   SynHighlighterWebData,
   SynTokenMatch;
@@ -95,14 +100,17 @@ function SynWebGetHighlighterTypeAt(ASynEdit: TCustomSynEdit;
 
 function SynWebGetHighlighterTypeAtCursor(ASynEdit: TCustomSynEdit;
   ASynWeb: TSynWebBase): TSynWebHighlighterTypes;
-  
+
 function SynWebUpdateActiveHighlighter(ASynEdit: TCustomSynEdit;
   ASynWeb: TSynWebBase): TSynWebHighlighterTypes;
+
+function SynWebFillCompletionProposal(ASynEdit: TCustomSynEdit;
+  ASynWeb: TSynWebHtmlSyn; ACompletion: TSynCompletionProposal;
+  var CurrentInput: WideString): TSynWebHighlighterTypes;
   
 implementation
 
-uses
-  SysUtils;
+
 
 type
   TSynTokenBuf = record
@@ -382,6 +390,307 @@ begin
         Repaint;
       end;
   end;
+end;
+
+function SynWebFillCompletionProposal(ASynEdit: TCustomSynEdit;
+  ASynWeb: TSynWebHtmlSyn; ACompletion: TSynCompletionProposal;
+  var CurrentInput: WideString): TSynWebHighlighterTypes;
+var
+  ct: WideString;
+  ctk: TSynWebTokenKind;
+
+  procedure ScanTo(APos: TBufferCoord);
+  begin
+    Dec(APos.Line);
+    Dec(APos.Char);
+    with ASynEdit, ASynWeb do
+    begin
+      if APos.Line = 0 then
+        ResetRange
+      else
+        SetRange(TSynEditStringList(Lines).Ranges[APos.Line - 1]);
+
+      SetLine(Lines[APos.Line], APos.Line + 1);
+
+      while not GetEol and (GetTokenPos + GetTokenLen < APos.Char) do
+        Next;
+    end;
+  end;
+
+  procedure AddSimple(AInsert: String; AKind: String = ''; AKindColor: TColor = clBlack);
+  var
+    c: String;
+  begin
+    c := ColorToString(AKindColor);
+    if AKind <> '' then
+      ACompletion.ItemList.Add(Format('\color{%s}%s\column{}\color{clBlack}\style{+B}%s',[c, AKind, AInsert]))
+    else
+      ACompletion.ItemList.Add(AInsert);
+    ACompletion.InsertList.Add(AInsert);
+  end;
+
+  function HtmlGetTagKind(AID: Integer): Integer;
+  begin
+    if TSynWeb_TagsData[AID] and
+      (1 shl 31) = 0 then
+      Result := 1
+    else
+      if ASynWeb.InternalInstanceData.FOptions.FMLVersion >= smlhvXHtml10Strict then
+        Result := 0
+      else
+        Result := -1;
+  end;
+
+  procedure HtmlLoadTags(AClose: Boolean);
+  var
+    i: Integer;
+    ver: Longword;
+  begin
+    ver := 1 shl Longword(ASynWeb.InternalInstanceData.FOptions.FMLVersion);
+    for i := 0 to High(TSynWeb_TagsData) do
+      if ((TSynWeb_TagsData[i] and ver) <> 0) and (not AClose or
+        (AClose and (TSynWeb_TagsData[i] and (1 shl 31) = 0))) and
+        (TSynWeb_TagsData[i] and (1 shl 29) = 0) then
+      begin
+        if AClose then
+          AddSimple('</' + TSynWeb_Tags[i] + '>', 'tag',
+            ASynWeb.Engine.MLTagNameAttri.Foreground)
+        else
+          case HtmlGetTagKind(i) of
+          -1:
+            AddSimple('<' + TSynWeb_Tags[i] + '>', 'tag',
+              ASynWeb.Engine.MLTagNameAttri.Foreground);
+          0:
+            AddSimple('<' + TSynWeb_Tags[i] + ' />', 'tag',
+              ASynWeb.Engine.MLTagNameAttri.Foreground);
+          1:
+            AddSimple('<' + TSynWeb_Tags[i] + '></' + TSynWeb_Tags[i] + '>', 'tag',
+               ASynWeb.Engine.MLTagNameAttri.Foreground);
+          end;
+      end;
+  end;
+
+  procedure HtmlLoadSpecailEntity;
+  var
+    i: Integer;
+    ver: Longword;
+  begin
+    ver := 1 shl Longword(ASynWeb.InternalInstanceData.FOptions.FMLVersion);
+    for i := 0 to High(TSynWeb_SpecialData) do
+      if (TSynWeb_SpecialData[i] and ver) <> 0 then
+        AddSimple('&' + TSynWeb_Special[i] + ';', 'entity', ASynWeb.Engine.MLEscapeAttri.Foreground);
+  end;
+
+
+  procedure HtmlLoad;
+  begin
+    HtmlLoadTags(False);
+    HtmlLoadTags(True);
+    HtmlLoadSpecailEntity;
+    AddSimple('<?php ; ?>', 'template');
+    AddSimple('<?= ; ?>', 'template');
+    AddSimple('<script language="php"></script>', 'template');
+    AddSimple('<script language="javascript" type="text/javascript"></script>', 'template');
+    AddSimple('<style type="text/css"></style>', 'template');
+    AddSimple('<!-- -->', 'template');
+  end;
+
+  procedure HtmlLoadAttrs(ATag: Integer);
+  var
+    i: Integer;
+    ver, ver2: Longword;
+  begin
+    if ATag = -1 then
+      Exit;
+
+    ver := Longword(ASynWeb.InternalInstanceData.FOptions.FMLVersion);
+    ver2 := 1 shl (ATag mod 32);
+    ATag := ATag div 32;
+
+    for i := 0 to High(TSynWeb_AttrsData) do
+      if (TSynWeb_AttrsData[i][ver][ATag] and ver2) <> 0 then
+        AddSimple(TSynWeb_Attrs[i] + '=""', 'attribute', ASynWeb.Engine.MLTagAttri.Foreground);
+  end;
+
+  procedure Html;
+  begin
+    with ASynEdit, ASynWeb do
+    begin
+    
+      case ctk of
+      stkMLTagName, stkMLTagNameUndef:
+        begin       
+          HtmlLoad;
+          case GetTagKind of
+          -1:
+            CurrentInput := '</' + Copy(ct, 1, CaretX - 1 - GetTokenPos);
+          1:
+            CurrentInput := '<' + Copy(ct, 1, CaretX - 1 - GetTokenPos);
+          end;
+        end;
+      stkMLTag:
+        begin       
+          HtmlLoad;
+          case GetTagKind of
+          -1:
+            CurrentInput := '</';
+          1:
+            CurrentInput := '<';
+          end;
+        end;
+      stkMLTagKey, stkMLTagKeyUndef:
+        begin
+          HtmlLoadAttrs(GetTagID);
+          CurrentInput := Copy(ct, 1, CaretX - 1 - GetTokenPos);
+        end;
+      else // case
+        case GetMLRange of
+        srsMLText:
+          HtmlLoad;
+        srsMLTagKey, srsMLTagKeyEq:
+          HtmlLoadAttrs(GetTagID);
+        end; 
+      end;   
+    end;    
+  end;
+
+  procedure CssLoadTags;
+  var
+    i: Integer;
+    ver: Longword;
+  begin
+    ver := 1 shl Longword(ASynWeb.InternalInstanceData.FOptions.FMLVersion);
+
+    for i := 0 to High(TSynWeb_TagsData) do
+      if ((TSynWeb_TagsData[i] and ver) <> 0) and
+        (TSynWeb_TagsData[i] and (1 shl 30) = 0) and
+        (TSynWeb_TagsData[i] and (1 shl 29) = 0) then
+        AddSimple(TSynWeb_Tags[i], 'tag', ASynWeb.Engine.MLTagNameAttri.Foreground);
+  end;
+
+  procedure CssLoadProp;
+  var
+    i: Integer;
+    ver: Longword;
+  begin
+    ver := 1 shl Longword(ASynWeb.InternalInstanceData.FOptions.FCssVersion);
+
+    for i := 0 to High(TSynWeb_CssPropsData) do
+      if (TSynWeb_CssPropsData[i] and ver) <> 0  then
+        AddSimple(TSynWeb_CssProps[i] + ':', 'property', ASynWeb.Engine.CssPropAttri.Foreground);
+  end;
+
+  procedure CssLoadVal(AProp: Integer);
+  var
+    i: Integer;
+    ver, prop: Longword;
+  begin
+    if AProp = -1 then
+      Exit;
+
+    ver := Longword(ASynWeb.InternalInstanceData.FOptions.FCssVersion);
+    prop := 1 shl (AProp mod 32);
+    AProp := AProp div 32;
+
+    for i := 0 to High(TSynWeb_CssValsData) do
+      if (TSynWeb_CssValsData[i][ver][AProp] and prop) <> 0 then
+        AddSimple(TSynWeb_CssVals[i], 'value', ASynWeb.Engine.CssValAttri.Foreground);
+  end;
+
+  procedure Css;
+  begin
+    with ASynEdit, ASynWeb do
+      case ctk of
+      stkCssSelector, stkCssSelectorUndef:
+        begin
+          CssLoadTags;
+          CurrentInput := Copy(ct, 1, CaretX - 1 - GetTokenPos);
+        end;
+      stkCssProp, stkCssPropUndef:
+        begin
+          CssLoadProp;
+          CurrentInput := Copy(ct, 1, CaretX - 1 - GetTokenPos);
+        end;
+      stkCssVal, stkCssValUndef:
+        begin
+          CssLoadVal(CssGetPropertyId);
+          CurrentInput := Copy(ct, 1, CaretX - 1 - GetTokenPos);
+        end
+      else // case
+        case CssGetRange of
+        srsCssRuleset:
+          begin
+            CssLoadTags;
+            CurrentInput := '';
+          end;
+        srsCssProp:
+          begin
+            CssLoadProp;
+            CurrentInput := '';
+          end;
+        srsCssPropVal:
+          begin
+            CssLoadVal(CssGetPropertyId);
+            CurrentInput := '';
+          end;
+        end;
+      end;
+  end;
+
+  procedure Php;
+  var
+    i: Integer;
+    v: Longword;
+    data: Longword;
+  begin
+    v := 1 shl Longword(ASynWeb.Options.PhpVersion);
+    for i := 0 to High(TSynWeb_PhpKeywords) do // functions
+    begin
+      data := TSynWeb_PhpKeywordsData[i];
+      if (Data and $0F = $08) and ((Data shr 16) and v <> 0) then
+        AddSimple(TSynWeb_PhpKeywords[i] + '()', 'function', ASynWeb.Engine.PhpFunctionAttri.Foreground);
+    end;
+
+    for i := 0 to High(TSynWeb_PhpKeywords) do // keywords
+    begin
+      data := TSynWeb_PhpKeywordsData[i];
+      if (Data and $0F = $01) and ((Data shr 16) and v <> 0) then
+        AddSimple(TSynWeb_PhpKeywords[i], 'keyword', ASynWeb.Engine.PhpKeyAttri.Foreground);
+    end;
+    CurrentInput := ct;
+  end;
+
+begin
+  Result := SynWebGetHighlighterTypeAtCursor(ASynEdit, ASynWeb);
+  
+  ACompletion.InsertList.Clear;
+  ACompletion.ItemList.Clear;
+
+  if ASynWeb.Engine = nil then
+    Exit;
+
+  with ASynEdit, ASynWeb do
+  begin
+    ScanTo(CaretXY);
+
+    if (GetTokenPos = 0) and (CaretX = 1) then
+    begin
+      ct := '';
+      ctk := stkNull;
+    end else
+    begin
+      ct := GetToken;
+      ctk := GetTokenID;
+    end;
+  end;
+
+  if shtML in Result then
+    Html
+  else
+    if shtCss in Result then
+      Css
+    else
+      Php;
 end;
 
 end.

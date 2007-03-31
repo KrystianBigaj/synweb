@@ -329,6 +329,7 @@ type
     function PhpGetRange: TSynWebPhpRangeState;
 
     function CssGetPropertyId: Integer;
+    function CssGetRange: TSynWebCssRangeState;
 
     procedure SetRange(Value: Pointer); override;
 {$IFNDEF UNISYNEDIT}
@@ -437,8 +438,6 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
-
-    function GetCssRange: TSynWebCssRangeState;
   published
     property Options: TSynWebCssOptions read GetOptions write SetOptions;
   end;
@@ -880,7 +879,8 @@ type
       read FEsWhitespaceAttri write FEsWhitespaceAttri;
     property EsIdentifierAttri: TSynHighlighterAttributes
       read FEsIdentifierAttri write FEsIdentifierAttri;
-    property EsKeyAttri: TSynHighlighterAttributes read FEsKeyAttri write FEsKeyAttri;
+    property EsKeyAttri: TSynHighlighterAttributes
+      read FEsKeyAttri write FEsKeyAttri;
     property EsCommentAttri: TSynHighlighterAttributes
       read FEsCommentAttri write FEsCommentAttri;
     property EsStringAttri: TSynHighlighterAttributes
@@ -1447,6 +1447,14 @@ begin
     Result := -1;
 end;
 
+function TSynWebBase.CssGetRange: TSynWebCssRangeState;
+begin
+  if FEngine = nil then
+    Result := srsCssRuleset
+  else
+    Result := FEngine.CssGetRange;
+end;
+
 procedure TSynWebBase.SetRange(Value: Pointer);
 begin
   FInstance.FRange := Longword(Value);
@@ -1809,14 +1817,6 @@ end;
 procedure TSynWebCssSyn.ResetRange;
 begin
   FInstance.FRange := $00000000 or (Longword(shtCss) shl 29);
-end;
-
-function TSynWebCssSyn.GetCssRange: TSynWebCssRangeState;
-begin
-  if FEngine = nil then
-    Result := srsCssRuleset
-  else
-    Result := FEngine.CssGetRange;
 end;
 
 { TSynWebEsSyn }

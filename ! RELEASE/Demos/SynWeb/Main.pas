@@ -7,7 +7,7 @@ uses
   Dialogs, SynEdit, SynHighlighterWeb, StdCtrls, SynEditHighlighter,
   ExtCtrls, SynEditOptionsDialog, SynEditExport, SynExportHTML, SynTokenMatch,
   SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes,
-  SynEditTextBuffer;
+  SynEditTextBuffer, SynCompletionProposal, StrUtils;
 
 type
   TForm1 = class(TForm)
@@ -40,6 +40,7 @@ type
     Label6: TLabel;
     ComboBox5: TComboBox;
     SynWebXmlSyn1: TSynWebXmlSyn;
+    scpDemo: TSynCompletionProposal;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -58,6 +59,10 @@ type
     procedure CheckBox2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure ComboBox5Change(Sender: TObject);
+    procedure scpDemoExecute(Kind: SynCompletionType; Sender: TObject;
+      var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
+    procedure scpDemoCodeCompletion(Sender: TObject; var Value: WideString;
+      Shift: TShiftState; Index: Integer; EndToken: WideChar);
   private
     FPaintUpdating: Boolean;
   public
@@ -109,6 +114,17 @@ end;
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
   SynEdit1.Lines.SaveToFile(ChangeFileExt(Application.ExeName,'_sample.txt'));
+end;
+
+procedure TForm1.scpDemoCodeCompletion(Sender: TObject; var Value: WideString;
+  Shift: TShiftState; Index: Integer; EndToken: WideChar);
+begin; 
+end;
+
+procedure TForm1.scpDemoExecute(Kind: SynCompletionType; Sender: TObject;
+  var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
+begin
+  SynWebFillCompletionProposal(SynEdit1, SynWebHtmlSyn1, scpDemo, CurrentInput);
 end;
 
 procedure TForm1.CheckBox1Click(Sender: TObject);
