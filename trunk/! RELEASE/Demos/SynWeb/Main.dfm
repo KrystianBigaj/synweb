@@ -115,7 +115,7 @@ object Form1: TForm1
       Width = 145
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 1
       OnChange = ComboBox1Change
     end
@@ -125,7 +125,7 @@ object Form1: TForm1
       Width = 77
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 2
       OnChange = ComboBox2Change
     end
@@ -163,7 +163,7 @@ object Form1: TForm1
       Width = 77
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 6
       OnChange = ComboBox3Change
     end
@@ -227,7 +227,7 @@ object Form1: TForm1
       Width = 77
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 11
       OnChange = ComboBox5Change
     end
@@ -332,5 +332,32 @@ object Form1: TForm1
     Options.UseEngineOptions = False
     Left = 112
     Top = 260
+  end
+  object scpDemo: TSynCompletionProposal
+    Options = [scoLimitToMatchedText, scoUseInsertList, scoUsePrettyText, scoUseBuiltInTimer, scoEndCharCompletion, scoCompleteWithTab, scoCompleteWithEnter]
+    Width = 340
+    EndOfTokenChr = ';>()[]. '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clBtnText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = [fsBold]
+    Columns = <
+      item
+        BiggestWord = 'constructor'
+        BiggestWordW = 'constructor'
+      end>
+    OnExecute = scpDemoExecute
+    ShortCut = 16416
+    Editor = SynEdit1
+    OnCodeCompletion = scpDemoCodeCompletion
+    Left = 52
+    Top = 96
+    EndOfTokenChrW = ';>()[]. '
   end
 end
