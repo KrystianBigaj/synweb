@@ -1,0 +1,6 @@
+..\PHP\PHP.exe ..\Config\PHP-keywords-FULL.ini
+..\HTML\HTML.exe ..\Config\HTML.ini
+..\HTML\HTML.exe ..\Config\HTML-Special.ini
+..\CSS\CSS.exe ..\Config\CSS.ini
+..\CSS\CSS.exe ..\Config\CSS-Special.ini
+..\ES\ES.exe ..\Config\ES.ini
