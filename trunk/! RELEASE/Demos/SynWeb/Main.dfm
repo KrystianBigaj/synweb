@@ -355,7 +355,8 @@ object Form1: TForm1
   object scpDemo: TSynCompletionProposal
     Options = [scoLimitToMatchedText, scoUseInsertList, scoUsePrettyText, scoUseBuiltInTimer, scoEndCharCompletion, scoCompleteWithTab, scoCompleteWithEnter]
     Width = 340
-    EndOfTokenChr = ';>()[]. '
+    EndOfTokenChr = ';>()[] .'
+    TriggerChars = '.'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -374,10 +375,11 @@ object Form1: TForm1
     OnExecute = scpDemoExecute
     ShortCut = 16416
     Editor = SynEdit1
-    OnCodeCompletion = scpDemoCodeCompletion
+    OnAfterCodeCompletion = scpDemoAfterCodeCompletion
     Left = 52
     Top = 96
-    EndOfTokenChrW = ';>()[]. '
+    EndOfTokenChrW = ';>()[] .'
+    TriggerCharsW = '.'
   end
   object SynWebErrorTimer: TTimer
     OnTimer = SynWebErrorTimerTimer

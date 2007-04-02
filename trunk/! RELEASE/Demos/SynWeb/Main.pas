@@ -65,12 +65,13 @@ type
     procedure ComboBox5Change(Sender: TObject);
     procedure scpDemoExecute(Kind: SynCompletionType; Sender: TObject;
       var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
-    procedure scpDemoCodeCompletion(Sender: TObject; var Value: WideString;
-      Shift: TShiftState; Index: Integer; EndToken: WideChar);
     procedure SynEdit1Change(Sender: TObject);
     procedure SynWebErrorTimerTimer(Sender: TObject);
     procedure SynWebErrorListDblClick(Sender: TObject);
     procedure Reload1Click(Sender: TObject);
+    procedure scpDemoAfterCodeCompletion(Sender: TObject;
+      const Value: WideString; Shift: TShiftState; Index: Integer;
+      EndToken: WideChar);
   private
     FPaintUpdating: Boolean;
   public
@@ -129,9 +130,22 @@ begin
   SynWebErrorTimerTimer(nil);
 end;
 
-procedure TForm1.scpDemoCodeCompletion(Sender: TObject; var Value: WideString;
-  Shift: TShiftState; Index: Integer; EndToken: WideChar);
-begin; 
+procedure TForm1.scpDemoAfterCodeCompletion(Sender: TObject;
+  const Value: WideString; Shift: TShiftState; Index: Integer;
+  EndToken: WideChar);
+
+  function CaretBetween(AStr: String): Boolean;
+  var
+    i: Integer;
+  begin
+    i := Pos(AStr, Value);
+    Result := i > 0;
+    if Result then
+      SynEdit1.CaretX := SynEdit1.CaretX - (Length(Value) - i);
+  end;
+
+begin
+  CaretBetween('()') or CaretBetween('><') or CaretBetween('""') or CaretBetween(' ;');
 end;
 
 procedure TForm1.scpDemoExecute(Kind: SynCompletionType; Sender: TObject;
