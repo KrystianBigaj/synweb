@@ -110,8 +110,6 @@ function SynWebFillCompletionProposal(ASynEdit: TCustomSynEdit;
   
 implementation
 
-
-
 type
   TSynTokenBuf = record
     Pos: TBufferCoord;
@@ -481,7 +479,6 @@ var
         AddSimple('&' + TSynWeb_Special[i] + ';', 'entity', ASynWeb.Engine.MLEscapeAttri.Foreground);
   end;
 
-
   procedure HtmlLoad;
   begin
     HtmlLoadTags(False);
@@ -683,6 +680,8 @@ begin
       ctk := GetTokenID;
     end;
   end;
+
+  ct := Trim(ct);
 
   if shtML in Result then
     Html
