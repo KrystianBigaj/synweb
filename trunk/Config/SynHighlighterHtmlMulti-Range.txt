@@ -99,3 +99,4 @@ XX XX                               - PHP OPEN-TAG
    XX                               - HTML PREV ATTRIB WAS 'LANGUAGE' ?
 XX                                  - HTML LANGUAGE=php?
                                  XX - Next ident is PhpMethodAttrib?
+                              XX    - Next ident is PhpIdentAttrib?

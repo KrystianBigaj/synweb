@@ -1,5 +1,5 @@
 ----------------------------------------
-- TSynWeb v1.4.140 Unicode/ANSI
+- TSynWeb v1.4.x Unicode/ANSI
 ----------------------------------------
 
 Features:
@@ -47,7 +47,7 @@ Features:
 4. Open "SynWeb_RXXX.dpk" (where "XXX" is your version of Delphi) and Compile runtime package.
    Open "SynWeb_DXXX.dpk" and then Compile and Install design-time package.
    You should get message of installed five components:
-     TSynWebEngine, TSynWebHtmlSyn, TSynWebCssSyn, TSynWebEsSyn, TSynWebPhpCliSyn
+     TSynWebEngine, TSynWebHtmlSyn, TSynWebCssSyn, TSynWebEsSyn, TSynWebPhpCliSyn, TSynWebWmlSyn, TSynWebXmlSyn
 
 All SynWeb components will be avaiable at "SynEdit Highlighters" component tab.
 
@@ -58,6 +58,8 @@ All SynWeb components will be avaiable at "SynEdit Highlighters" component tab.
 
 Before using TSynWebXXXSyn in TSynEdit add TSynWebEngine on form and set Engine property for TSynWebXXXSyn to that TSynWebEngine
 TSynWebEngine is not highlighter but SynWeb highlighters uses it (it's main parsing component for SynWeb highlighters).
+
+
 
 TSynMultiSyn notice:
   TSynWeb will NOT work properly with TSynMultiSyn.
