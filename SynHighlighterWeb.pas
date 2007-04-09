@@ -6129,6 +6129,7 @@ begin
   begin
     SetRangeBit(26, False);
     SetRangeBit(17, False);
+    SetRangeBit(18, False);
     SetRangeInt(3, 23, Longword(ARange));
   end;
 end;
@@ -7363,6 +7364,8 @@ begin
       Inc(Temp);
     end;
     FInstance^.FTokenLastID := ID;
+    if ID = PhpKeyID_function then
+      SetRangeBit(18, True);
     Result := True;
   end else
     Result := False;
@@ -7438,6 +7441,12 @@ var
 
 begin
   FInstance^.FTokenLastID := -1;
+  if GetRangeBit(18) then
+  begin
+    Result := stkPhpMethod;
+    SetRangeBit(18, False);
+    Exit;
+  end;
   if GetRangeBit(17) then
   begin
     Result := stkPhpMethod;
