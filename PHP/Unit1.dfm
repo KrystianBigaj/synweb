@@ -318,7 +318,7 @@ object Form1: TForm1
     Width = 369
     Height = 21
     Anchors = [akLeft, akRight, akBottom]
-    ItemHeight = 0
+    ItemHeight = 13
     TabOrder = 19
     OnDropDown = ComboBox1DropDown
   end
@@ -457,13 +457,28 @@ object Form1: TForm1
     object N3: TMenuItem
       Caption = '-'
     end
+    object Nextisident1: TMenuItem
+      Tag = 30
+      Caption = 'Next is ident'
+      OnClick = php4Click
+    end
+    object Nextafterisident1: TMenuItem
+      Tag = 31
+      Caption = 'Next after '#39','#39' is ident'
+      OnClick = php4Click
+    end
+    object N4: TMenuItem
+      Caption = '-'
+    end
     object pecl: TMenuItem
       Tag = 18
       Caption = 'PECL'
+      Visible = False
     end
     object alias: TMenuItem
       Tag = 19
       Caption = 'ALIAS'
+      Visible = False
     end
   end
 end
