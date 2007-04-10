@@ -6734,6 +6734,7 @@ procedure TSynWebEngine.PhpSemiColonProc;
 begin
   Inc(FInstance^.FRun);
   PhpSetSymbolId(PhpSymbolID_SemiColon);
+  SetRangeInt(3, 17, 0);
 end;
 
 procedure TSynWebEngine.PhpVarProc;
