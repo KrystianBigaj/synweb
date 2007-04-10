@@ -6128,8 +6128,7 @@ begin
   else
   begin
     SetRangeBit(26, False);
-    SetRangeBit(17, False);
-    SetRangeBit(18, False);
+    SetRangeInt(3, 17, 0);
     SetRangeInt(3, 23, Longword(ARange));
   end;
 end;
@@ -6708,6 +6707,7 @@ procedure TSynWebEngine.PhpBraceOpenProc;
 begin  
   Inc(FInstance^.FRun);
   PhpSetSymbolId(PhpSymbolID_BraceOpen);
+  SetRangeInt(3, 17, 0);
 end;
 
 procedure TSynWebEngine.PhpBraceCloseProc;
@@ -6726,6 +6726,8 @@ procedure TSynWebEngine.PhpCommaProc;
 begin
   Inc(FInstance^.FRun);
   PhpSetSymbolId(PhpSymbolID_Comma);
+  if GetRangeBit(19) then
+    SetRangeBit(18, True);
 end;
 
 procedure TSynWebEngine.PhpSemiColonProc; 
@@ -6746,7 +6748,7 @@ begin
   else
     FInstance^.FTokenID := stkPhpError;
   FInstance^.FTokenLastID := PhpKeyID_Special_Variable;
-  SetRangeBit(17, False);
+  SetRangeInt(3, 17, 0);
 end;
 
 procedure TSynWebEngine.PhpIdentProc;
@@ -7364,8 +7366,7 @@ begin
       Inc(Temp);
     end;
     FInstance^.FTokenLastID := ID;
-    if ID = PhpKeyID_function then
-      SetRangeBit(18, True);
+    SetRangeInt(2, 18, Data shr 30);
     Result := True;
   end else
     Result := False;
@@ -7443,7 +7444,7 @@ begin
   FInstance^.FTokenLastID := -1;
   if GetRangeBit(18) then
   begin
-    Result := stkPhpMethod;
+    Result := stkPhpIdentifier;
     SetRangeBit(18, False);
     Exit;
   end;

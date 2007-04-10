@@ -73,6 +73,9 @@ type
     Memo3: TMemo;
     Memo4: TMemo;
     Label6: TLabel;
+    N4: TMenuItem;
+    Nextisident1: TMenuItem;
+    Nextafterisident1: TMenuItem;
     procedure TreeView1Compare(Sender: TObject; Node1, Node2: TTreeNode;
       Data: Integer; var Compare: Integer);
     procedure Button4Click(Sender: TObject);
@@ -106,10 +109,10 @@ type
     function KeyHash(ToHash: string): Integer;
     procedure GenerateInc(AKeys: TStringList; AFileFunc, AFileFuncList,
       AFileFuncTable: string);
-    function nGetBit(n: TTreeNode; b: Integer): Boolean;
-    procedure nSetBit(n: TTreeNode; b: Integer);
-    procedure nClearBit(n: TTreeNode; b: Integer);
-    procedure nSwitchBit(n: TTreeNode; b: Integer);
+    function nGetBit(n: TTreeNode; b: Longword): Boolean;
+    procedure nSetBit(n: TTreeNode; b: Longword);
+    procedure nClearBit(n: TTreeNode; b: Longword);
+    procedure nSwitchBit(n: TTreeNode; b: Longword);
     procedure AddAtrib(n: TTreeNode; s: string);
     function AddTag(s: string; b: Integer): TTreeNode;
     procedure nSetType(n: TTreeNode; b: Integer);
@@ -316,6 +319,9 @@ begin
   php4.Enabled := pn <> nil;
   php5.Enabled := pn <> nil;
 
+  Nextisident1.Enabled := pn <> nil;
+  Nextafterisident1.Enabled := pn <> nil;
+
   keyword1.Checked := nGetBit(pn, keyword1.Tag);
   const1.Checked := nGetBit(pn, const1.Tag);
   function1.Checked := nGetBit(pn, function1.Tag);
@@ -326,6 +332,9 @@ begin
 
   pecl.Checked := nGetBit(pn, pecl.Tag);
   alias.Checked := nGetBit(pn, alias.Tag);
+
+  Nextisident1.Checked := nGetBit(pn, Nextisident1.Tag);
+  Nextafterisident1.Checked := nGetBit(pn, Nextafterisident1.Tag);
 end;
 
 procedure TForm1.Html401Strict1Click(Sender: TObject);
@@ -334,30 +343,30 @@ begin
   TreeView1.Selected := pn;
 end;
 
-procedure TForm1.nClearBit(n: TTreeNode; b: Integer);
+procedure TForm1.nClearBit(n: TTreeNode; b: Longword);
 begin
   if n <> nil then
-    n.Data := Pointer(Longword(n.Data) and (not (1 shl b)));
+    n.Data := Pointer(Longword(n.Data) and (not Longword(1 shl b)));
 end;
 
-function TForm1.nGetBit(n: TTreeNode; b: Integer): Boolean;
+function TForm1.nGetBit(n: TTreeNode; b: Longword): Boolean;
 begin
   if n <> nil then
-    Result := Longword(n.Data) and (1 shl b) > 0
+    Result := Longword(n.Data) and Longword(1 shl b) > 0
   else
     Result := False;
 end;
 
-procedure TForm1.nSetBit(n: TTreeNode; b: Integer);
+procedure TForm1.nSetBit(n: TTreeNode; b: Longword);
 begin
   if n <> nil then
-    n.Data := Pointer(Integer(n.Data) or (1 shl b));
+    n.Data := Pointer(Longword(n.Data) or Longword(1 shl b));
 end;
 
-procedure TForm1.nSwitchBit(n: TTreeNode; b: Integer);
+procedure TForm1.nSwitchBit(n: TTreeNode; b: Longword);
 begin
   if n <> nil then
-    n.Data := Pointer(Integer(n.Data) xor (1 shl b));
+    n.Data := Pointer(Longword(n.Data) xor Longword(1 shl b));
 end;
 
 procedure TForm1.AddAtrib(n: TTreeNode; s: string);
@@ -531,7 +540,7 @@ end;
 
 procedure TForm1.php4Click(Sender: TObject);
 begin
-  nSetBit(TreeView1.Selected, TMenuItem(Sender).Tag);
+  nSwitchBit(TreeView1.Selected, TMenuItem(Sender).Tag);
 end;
 
 procedure TForm1.nSetType(n: TTreeNode; b: Integer);

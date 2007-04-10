@@ -98,5 +98,6 @@ XX XX                               - PHP OPEN-TAG
             XX XX XX XX XX XX XX XX - HERERDOC CRC
    XX                               - HTML PREV ATTRIB WAS 'LANGUAGE' ?
 XX                                  - HTML LANGUAGE=php?
-                                 XX - Next ident is PhpMethodAttrib?
-                              XX    - Next ident is PhpIdentAttrib?
+                                 XX - Next ident is PhpMethodAttrib
+                              XX    - Next ident is PhpIdentAttrib
+			  XX	    - Next after ',' is PhpIdentAttrib 
