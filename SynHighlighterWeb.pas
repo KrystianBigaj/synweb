@@ -7047,21 +7047,25 @@ begin
     end;
   1:
     begin
-      DoDefault;
       if GetRangeBit(19) then
       begin
+        DoDefault;
         SetRangeBit(19, False);
         Inc(FInstance^.FRun, 3);
         FInstance^.FTokenID := stkPhpKeyword;
         FInstance^.FTokenLastID := PhpKeyID_Special_PhpTag;
       end else
+      begin
+        DoDefault;
         if (FInstance^.FLine[FInstance^.FRun] = '=') and (FInstance^.FOptions.FPhpShortOpenTag) then
         begin
+          DoDefault;
           Inc(FInstance^.FRun);
           FInstance^.FTokenID := stkPhpKeyword;
           FInstance^.FTokenLastID := PhpKeyID_Special_PhpTagEcho;
         end else
           PhpRangeDefaultProc;
+      end;
     end;
   2:
     begin
