@@ -45,7 +45,7 @@ You may retrieve the latest version of this file at the SynWeb home page,
 located at http://sourceforge.net/projects/synweb
 
 Contact: krystian.bigaj@gmail.com
-Homepage: http://flatdev.ovh.org      
+Homepage: http://flatdev.ovh.org
 -------------------------------------------------------------------------------}
 
 {$IFNDEF QSYNHIGHLIGHTERWEBDATA}
@@ -249,20 +249,21 @@ const
   PhpSymbolID_XorAssign                 = 34;         // ^=
   PhpSymbolID_Not                       = 35;         // !
   PhpSymbolID_NotEqual                  = 36;         // !=
-  PhpSymbolID_NotIdentical              = 37;         // !==
-  PhpSymbolID_Concat                    = 38;         // .
-  PhpSymbolID_ConcatAssign              = 39;         // .=
-  PhpSymbolID_Colon                     = 40;         // :
-  PhpSymbolID_ClassMethod               = 41;         // ::
-  PhpSymbolID_ParentheseOpen            = 42;         // (
-  PhpSymbolID_ParentheseClose           = 43;         // )
-  PhpSymbolID_BoxBracketOpen            = 44;         // [
-  PhpSymbolID_BoxBracketClose           = 45;         // ]
-  PhpSymbolID_BraceOpen                 = 46;         // {
-  PhpSymbolID_BraceClose                = 47;         // }
-  PhpSymbolID_Tilde                     = 48;         // ~
-  PhpSymbolID_Comma                     = 49;         // ,
-  PhpSymbolID_SemiColon                 = 50;         // ;
+  PhpSymbolID_NotEqual2                 = 37;         // <>
+  PhpSymbolID_NotIdentical              = 38;         // !==
+  PhpSymbolID_Concat                    = 39;         // .
+  PhpSymbolID_ConcatAssign              = 40;         // .=
+  PhpSymbolID_Colon                     = 41;         // :
+  PhpSymbolID_ClassMethod               = 42;         // ::
+  PhpSymbolID_ParentheseOpen            = 43;         // (
+  PhpSymbolID_ParentheseClose           = 44;         // )
+  PhpSymbolID_BoxBracketOpen            = 45;         // [
+  PhpSymbolID_BoxBracketClose           = 46;         // ]
+  PhpSymbolID_BraceOpen                 = 47;         // {
+  PhpSymbolID_BraceClose                = 48;         // }
+  PhpSymbolID_Tilde                     = 49;         // ~
+  PhpSymbolID_Comma                     = 50;         // ,
+  PhpSymbolID_SemiColon                 = 51;         // ;
 
 {$I SynHighlighterWeb_PhpKeywords.inc}
 

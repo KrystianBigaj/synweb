@@ -73,12 +73,12 @@ uses
 {$IFDEF SYN_CLX}
   QGraphics,
   QSynEditTypes,
-  QSynEditHighlighter,  
+  QSynEditHighlighter,
   QSynHighlighterWebData,
 {$ELSE}
   Graphics,
-  SynEditTypes,                 
-  SynEditHighlighter, 
+  SynEditTypes,
+  SynEditHighlighter,
   SynHighlighterWebData,
 {$ENDIF}
   Classes,
@@ -205,7 +205,7 @@ type
     property UseEngineOptions;
   end;
 
-  TSynWebWmlOptions = class(TSynWebOptionsBase)  
+  TSynWebWmlOptions = class(TSynWebOptionsBase)
   protected
     procedure UpdateMLOption; override;
   public
@@ -271,7 +271,7 @@ type
     property PhpShortOpenTag;
     property PhpAspTags;
   end;
-              
+
   TSynWebBaseClass = class of TSynWebBase;
 
   TSynWebBase = class(TSynCustomHighlighter)
@@ -298,7 +298,7 @@ type
     function GetSampleSource: WideString; override;
 {$ELSE}
     function GetSampleSource: String; override;
-{$ENDIF}      
+{$ENDIF}
   public
 {$IFDEF UNISYNEDIT}
     class function GetFriendlyLanguageName: WideString; override;
@@ -335,11 +335,11 @@ type
 {$IFNDEF UNISYNEDIT}
     procedure SetLine(NewValue: String; LineNumber: Integer); override;
 {$ENDIF}
-    procedure Next; override;       
-{$IFDEF UNISYNEDIT}       
+    procedure Next; override;
+{$IFDEF UNISYNEDIT}
     function GetActiveHighlighter(ARange: Pointer; ALine: WideString;
       ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
-{$ELSE}    
+{$ELSE}
     function GetActiveHighlighter(ARange: Pointer; ALine: String;
       ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
 {$ENDIF}
@@ -471,7 +471,7 @@ type
     function GetOptions: TSynWebPhpCliOptions;
     procedure SetOptions(const AValue: TSynWebPhpCliOptions);
   public
-    class function GetLanguageName: string; override;  
+    class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
     class function SynWebSample: WideString; override;
 {$ELSE}
@@ -1085,7 +1085,7 @@ begin
   if AEngine = FEngineOptions then
     Exit;
   FEngineOptions := AEngine;
-  if CanUseEngineOptions then 
+  if CanUseEngineOptions then
   begin
     UpdateOptions;
     DoOnChange;
@@ -1191,7 +1191,7 @@ end;
 
 constructor TSynWebBase.Create(AOwner: TComponent);
 begin
-  inherited Create(AOwner); 
+  inherited Create(AOwner);
   FOptions.FOnChange := DefHighlightChange;
   FEngine := nil;
   FDefaultFilter := '';
@@ -1312,7 +1312,7 @@ end;
 class function TSynWebBase.GetFriendlyLanguageName: WideString;
 begin
   Result := GetLanguageName;
-end;    
+end;
 {$ENDIF}
 
 function TSynWebBase.GetDefaultAttribute(Index: Integer): TSynHighlighterAttributes;
@@ -1526,13 +1526,13 @@ end;
 { TSynWebMLSyn }
 
 constructor TSynWebMLSyn.Create(AOwner: TComponent);
-begin          
+begin
   FInstance.FHighlighterMode := shmML;
   inherited Create(AOwner);
 end;
 
 procedure TSynWebMLSyn.SetupActiveHighlighter;
-begin       
+begin
   FActiveHighlighters := [shtML];
 end;
 
@@ -1700,7 +1700,7 @@ class function TSynWebWmlSyn.SynWebSample: WideString;
 class function TSynWebWmlSyn.SynWebSample: String;
 {$ENDIF}
 begin
-  Result := 
+  Result :=
     '<?xml version="1.0"?>'#13#10 +
     '<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.3//EN"'#13#10 +
     '  "http://www.wapforum.org/DTD/wml13.dtd">'#13#10 +
@@ -1883,7 +1883,7 @@ begin
   FOptions.PhpEmbeded := True;
   FOptions.CssEmbeded := False;
   FOptions.EsEmbeded := False;
-end;      
+end;
 
 procedure TSynWebPhpCliSyn.SetupActiveHighlighter;
 begin
@@ -1960,7 +1960,7 @@ constructor TSynWebEngine.Create(AOwner: TComponent);
   begin
 {$IFDEF UNISYNEDIT}
     Result := TSynHighlighterAttributes.Create(AName, AName);
-{$ELSE}                                                      
+{$ELSE}
     Result := TSynHighlighterAttributes.Create(AName);
 {$ENDIF}
   end;
@@ -2019,7 +2019,7 @@ begin
   FMLEscapeAttri.Foreground := clTeal;
   AddAttribute(FMLEscapeAttri);
 
-  FMLSymbolAttri := CreateAttrib('ML: Symbol'); 
+  FMLSymbolAttri := CreateAttrib('ML: Symbol');
   FMLSymbolAttri.Foreground := clBlack;
   AddAttribute(FMLSymbolAttri);
 
@@ -2027,7 +2027,7 @@ begin
   FMLTagAttri.Foreground := clNavy;
   AddAttribute(FMLTagAttri);
 
-  FMLTagNameAttri := CreateAttrib('ML: Tag name');  
+  FMLTagNameAttri := CreateAttrib('ML: Tag name');
   FMLTagNameAttri.Foreground := clBlue;
   AddAttribute(FMLTagNameAttri);
 
@@ -2036,20 +2036,20 @@ begin
   FMLTagNameUndefAttri.Style := [fsUnderline];
   AddAttribute(FMLTagNameUndefAttri);
 
-  FMLTagKeyAttri := CreateAttrib('ML: Key'); 
+  FMLTagKeyAttri := CreateAttrib('ML: Key');
   FMLTagKeyAttri.Foreground := clRed;
   AddAttribute(FMLTagKeyAttri);
 
-  FMLTagKeyUndefAttri := CreateAttrib('ML: Undefined key');  
+  FMLTagKeyUndefAttri := CreateAttrib('ML: Undefined key');
   FMLTagKeyUndefAttri.Foreground := clRed;
   FMLTagKeyUndefAttri.Style := [fsUnderline];
   AddAttribute(FMLTagKeyUndefAttri);
 
-  FMLTagKeyValueAttri := CreateAttrib('ML: Value'); 
+  FMLTagKeyValueAttri := CreateAttrib('ML: Value');
   FMLTagKeyValueAttri.Foreground := clFuchsia;
   AddAttribute(FMLTagKeyValueAttri);
 
-  FMLTagKeyValueQuotedAttri := CreateAttrib('ML: Quoted value'); 
+  FMLTagKeyValueQuotedAttri := CreateAttrib('ML: Quoted value');
   FMLTagKeyValueQuotedAttri.Foreground := clFuchsia;
   AddAttribute(FMLTagKeyValueQuotedAttri);
 
@@ -2075,30 +2075,30 @@ begin
   // Css
   CssMakeMethodTables;
 
-  FCssWhitespaceAttri := CreateAttrib('Css: Whitespace');    
+  FCssWhitespaceAttri := CreateAttrib('Css: Whitespace');
   FCssWhitespaceAttri.Background := $F0FFFF;
   AddAttribute(FCssWhitespaceAttri);
 
-  FCssRulesetWhitespaceAttri := CreateAttrib('Css: Ruleset whitespace'); 
+  FCssRulesetWhitespaceAttri := CreateAttrib('Css: Ruleset whitespace');
   FCssRulesetWhitespaceAttri.Background := clInfoBk;
   AddAttribute(FCssRulesetWhitespaceAttri);
 
-  FCssSelectorAttri := CreateAttrib('Css: Selector'); 
+  FCssSelectorAttri := CreateAttrib('Css: Selector');
   FCssSelectorAttri.Foreground := clBlue;
   FCssSelectorAttri.Style := [fsBold];
   AddAttribute(FCssSelectorAttri);
 
-  FCssSelectorUndefAttri := CreateAttrib('Css: Undefined selector');   
+  FCssSelectorUndefAttri := CreateAttrib('Css: Undefined selector');
   FCssSelectorUndefAttri.Foreground := clBlue;
   FCssSelectorUndefAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FCssSelectorUndefAttri);
 
-  FCssSelectorClassAttri := CreateAttrib('Css: Class selector');   
+  FCssSelectorClassAttri := CreateAttrib('Css: Class selector');
   FCssSelectorClassAttri.Foreground := $C08000;
   FCssSelectorClassAttri.Style := [fsBold];
   AddAttribute(FCssSelectorClassAttri);
 
-  FCssSelectorIdAttri := CreateAttrib('Css: Id selector'); 
+  FCssSelectorIdAttri := CreateAttrib('Css: Id selector');
   FCssSelectorIdAttri.Foreground := clGreen;
   FCssSelectorIdAttri.Style := [fsBold];
   AddAttribute(FCssSelectorIdAttri);
@@ -2112,20 +2112,20 @@ begin
   FCssCommentAttri.Style := [fsItalic];
   AddAttribute(FCssCommentAttri);
 
-  FCssPropAttri := CreateAttrib('Css: Property'); 
+  FCssPropAttri := CreateAttrib('Css: Property');
   FCssPropAttri.Foreground := clBlue;
   AddAttribute(FCssPropAttri);
 
-  FCssPropUndefAttri := CreateAttrib('Css: Undefined property'); 
+  FCssPropUndefAttri := CreateAttrib('Css: Undefined property');
   FCssPropUndefAttri.Foreground := clBlue;
   FCssPropUndefAttri.Style := [fsUnderline];
   AddAttribute(FCssPropUndefAttri);
 
-  FCssValAttri := CreateAttrib('Css: Value');   
+  FCssValAttri := CreateAttrib('Css: Value');
   FCssValAttri.Foreground := clRed;
   AddAttribute(FCssValAttri);
 
-  FCssValUndefAttri := CreateAttrib('Css: Undefined value'); 
+  FCssValUndefAttri := CreateAttrib('Css: Undefined value');
   FCssValUndefAttri.Foreground := clRed;
   FCssValUndefAttri.Style := [fsUnderline];
   AddAttribute(FCssValUndefAttri);
@@ -2134,15 +2134,15 @@ begin
   FCssValStringAttri.Foreground := clFuchsia ;
   AddAttribute(FCssValStringAttri);
 
-  FCssValNumberAttri := CreateAttrib('Css: Number value');   
+  FCssValNumberAttri := CreateAttrib('Css: Number value');
   FCssValNumberAttri.Foreground := clGreen;
   AddAttribute(FCssValNumberAttri);
 
-  FCssSymbolAttri := CreateAttrib('Css: Symbol');   
+  FCssSymbolAttri := CreateAttrib('Css: Symbol');
   FCssSymbolAttri.Foreground := clBlack;
   AddAttribute(FCssSymbolAttri);
 
-  FCssErrorAttri := CreateAttrib('Css: Error');    
+  FCssErrorAttri := CreateAttrib('Css: Error');
   FCssErrorAttri.Foreground := clRed;
   FCssErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FCssErrorAttri);
@@ -2166,7 +2166,7 @@ begin
   // ECMAScript
   EsMakeMethodTables;
 
-  FEsWhitespaceAttri := CreateAttrib('Es: Whitespace'); 
+  FEsWhitespaceAttri := CreateAttrib('Es: Whitespace');
   FEsWhitespaceAttri.Background := $FFF0F0;
   AddAttribute(FEsWhitespaceAttri);
 
@@ -2174,11 +2174,11 @@ begin
   FEsIdentifierAttri.Foreground := clBlue;
   AddAttribute(FEsIdentifierAttri);
 
-  FEsKeyAttri := CreateAttrib('Es: Key'); 
+  FEsKeyAttri := CreateAttrib('Es: Key');
   FEsKeyAttri.Style := [fsBold];
   AddAttribute(FEsKeyAttri);
 
-  FEsCommentAttri := CreateAttrib('Es: Comment');    
+  FEsCommentAttri := CreateAttrib('Es: Comment');
   FEsCommentAttri.Foreground := clGreen;
   AddAttribute(FEsCommentAttri);
 
@@ -2193,7 +2193,7 @@ begin
   FEsSymbolAttri := CreateAttrib('Es: Symbol');
   AddAttribute(FEsSymbolAttri);
 
-  FEsErrorAttri := CreateAttrib('Es: Error');  
+  FEsErrorAttri := CreateAttrib('Es: Error');
   FEsErrorAttri.Foreground := clRed;
   FEsErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FEsErrorAttri);
@@ -2210,30 +2210,30 @@ begin
   // Php
   PhpMakeMethodTables;
 
-  FPhpWhitespaceAttri := CreateAttrib('Php: Whitespace');   
+  FPhpWhitespaceAttri := CreateAttrib('Php: Whitespace');
   FPhpWhitespaceAttri.Background := $F5F5F5;
   AddAttribute(FPhpWhitespaceAttri);
 
   FPhpInlineTextAttri := CreateAttrib('PhpCli: Inline text');
   AddAttribute(FPhpInlineTextAttri);
 
-  FPhpIdentifierAttri := CreateAttrib('Php: Identifier');  
+  FPhpIdentifierAttri := CreateAttrib('Php: Identifier');
   FPhpIdentifierAttri.Foreground := clMaroon;
   AddAttribute(FPhpIdentifierAttri);
 
-  FPhpKeyAttri := CreateAttrib('Php: Keyword'); 
+  FPhpKeyAttri := CreateAttrib('Php: Keyword');
   FPhpKeyAttri.Foreground := clBlue;
   AddAttribute(FPhpKeyAttri);
 
-  FPhpFunctionAttri := CreateAttrib('Php: Function');  
+  FPhpFunctionAttri := CreateAttrib('Php: Function');
   FPhpFunctionAttri.Foreground := clRed;
   AddAttribute(FPhpFunctionAttri);
 
-  FPhpVariableAttri := CreateAttrib('Php: Variable'); 
+  FPhpVariableAttri := CreateAttrib('Php: Variable');
   FPhpVariableAttri.Foreground := clTeal;
   AddAttribute(FPhpVariableAttri);
 
-  FPhpConstAttri := CreateAttrib('Php: Constant');  
+  FPhpConstAttri := CreateAttrib('Php: Constant');
   FPhpConstAttri.Foreground := $0080FF;
   AddAttribute(FPhpConstAttri);
 
@@ -2241,7 +2241,7 @@ begin
   FPhpMethodAttri.Foreground := $00FF8000;
   AddAttribute(FPhpMethodAttri);
 
-  FPhpStringAttri := CreateAttrib('Php: String'); 
+  FPhpStringAttri := CreateAttrib('Php: String');
   FPhpStringAttri.Foreground := clFuchsia;
   AddAttribute(FPhpStringAttri);
 
@@ -2250,7 +2250,7 @@ begin
   FPhpStringSpecialAttri.Foreground := clFuchsia;
   AddAttribute(FPhpStringSpecialAttri);
 
-  FPhpCommentAttri := CreateAttrib('Php: Comment');  
+  FPhpCommentAttri := CreateAttrib('Php: Comment');
   FPhpCommentAttri.Foreground := clGreen;
   FPhpCommentAttri.Style := [fsItalic];
   AddAttribute(FPhpCommentAttri);
@@ -2268,11 +2268,11 @@ begin
   FPhpSymbolAttri := CreateAttrib('Php: Symbol');
   AddAttribute(FPhpSymbolAttri);
 
-  FPhpNumberAttri := CreateAttrib('Php: Number'); 
+  FPhpNumberAttri := CreateAttrib('Php: Number');
   FPhpNumberAttri.Foreground := clPurple;
   AddAttribute(FPhpNumberAttri);
 
-  FPhpErrorAttri := CreateAttrib('Php: Error'); 
+  FPhpErrorAttri := CreateAttrib('Php: Error');
   FPhpErrorAttri.Foreground := clRed;
   FPhpErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FPhpErrorAttri);
@@ -2312,7 +2312,7 @@ begin
   for i := FNotifyList.Count - 1 downto 0 do
     TSynWebBase(FNotifyList[i]).Engine := nil;
   for i := FAttributes.Count - 1 downto 0 do
-    TSynHighlighterAttributes(FAttributes.Objects[i]).Free;                                        
+    TSynHighlighterAttributes(FAttributes.Objects[i]).Free;
   FAttributes.Free;
   FOptions.Free;
   FNotifyList.Free;
@@ -2826,10 +2826,10 @@ begin
   if FInstance^.FOptions.FMLVersion = smlwvXML then
   begin
     FInstance^.FTokenID := stkMLTagName;
-    FInstance^.FTokenLastID := -1;    
+    FInstance^.FTokenLastID := -1;
     if GetRangeBit(12) then
       MLSetRange(srsMLTagClose)
-    else           
+    else
       MLSetRange(srsMLTagKey);
   end else
   begin
@@ -3387,7 +3387,7 @@ var
     end;
   end;
 
-begin              
+begin
   if FInstance^.FOptions.FMLVersion = smlwvXML then
   begin
     Result := 0;
@@ -5527,7 +5527,7 @@ begin
       FInstance^.FHashTable['p']) and
       (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 7]] =
       FInstance^.FHashTable['t']) and
-      (TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 8]] and (1 shl 0) <> 0) and                    
+      (TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 8]] and (1 shl 0) <> 0) and
       // (FInstance^.FLine[FInstance^.FRun+8] in [#0..#32, '>']) and
       (FInstance^.FHighlighterMode = shmML) then
     begin
@@ -6038,7 +6038,7 @@ begin
       FPhpProcTable[c] := PhpDotProc;
     ':':
       FPhpProcTable[c] := PhpColonProc;
-      
+
     '(':
       FPhpProcTable[c] := PhpParentheseOpenProc;
     ')':
@@ -6327,7 +6327,7 @@ begin
       Inc(FInstance^.FRun);
       PhpSetSymbolId(PhpSymbolID_LogicAnd);
     end;
-  else // case 
+  else // case
     PhpSetSymbolId(PhpSymbolID_BitwiseAnd);
   end;
 end;
@@ -6346,7 +6346,7 @@ begin
       Inc(FInstance^.FRun);
       PhpSetSymbolId(PhpSymbolID_LogicOr);
     end;
-  else // case 
+  else // case
     PhpSetSymbolId(PhpSymbolID_BitwiseOr);
   end;
 end;
@@ -6469,6 +6469,11 @@ begin
         PhpSetSymbolId(PhpSymbolID_ShiftLeft);
       end;
     end;
+  '>':
+    begin
+      Inc(FInstance^.FRun);
+      PhpSetSymbolId(PhpSymbolID_NotEqual2);
+    end;
   else // case
     PhpSetSymbolId(PhpSymbolID_Lower);
   end;
@@ -6488,13 +6493,13 @@ begin
       Inc(FInstance^.FRun);
       PhpSetSymbolId(PhpSymbolID_Increment);
     end;
-  else // case 
+  else // case
     PhpSetSymbolId(PhpSymbolID_Add);
   end;
 end;
 
 procedure TSynWebEngine.PhpMinusProc;
-begin               
+begin
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
   '=':
@@ -6513,7 +6518,7 @@ begin
       PhpSetSymbolId(PhpSymbolID_ObjectMethod);
       SetRangeBit(17, True);
     end;
-  else // case 
+  else // case
     PhpSetSymbolId(PhpSymbolID_Dec);
   end;
 end;
@@ -6576,7 +6581,7 @@ begin
       if (FInstance^.FLine[FInstance^.FRun] = '*') and
         (FInstance^.FLine[FInstance^.FRun + 1] <= #32) then
       begin
-        Inc(FInstance^.FRun);    
+        Inc(FInstance^.FRun);
         PhpSetRange(srsPhpDocComment);
         SetRangeBit(19, False);
         if FInstance^.FLine[FInstance^.FRun] <> #0 then
@@ -6680,31 +6685,31 @@ begin
 end;
 
 procedure TSynWebEngine.PhpParentheseOpenProc;
-begin 
+begin
   Inc(FInstance^.FRun);
   PhpSetSymbolId(PhpSymbolID_ParentheseOpen);
 end;
 
 procedure TSynWebEngine.PhpParentheseCloseProc;
-begin   
+begin
   Inc(FInstance^.FRun);
   PhpSetSymbolId(PhpSymbolID_ParentheseClose);
 end;
 
 procedure TSynWebEngine.PhpBoxBracketOpenProc;
-begin  
+begin
   Inc(FInstance^.FRun);
   PhpSetSymbolId(PhpSymbolID_BoxBracketOpen);
 end;
 
 procedure TSynWebEngine.PhpBoxBracketCloseProc;
-begin   
+begin
   Inc(FInstance^.FRun);
   PhpSetSymbolId(PhpSymbolID_BoxBracketClose);
 end;
 
 procedure TSynWebEngine.PhpBraceOpenProc;
-begin  
+begin
   Inc(FInstance^.FRun);
   PhpSetSymbolId(PhpSymbolID_BraceOpen);
   SetRangeInt(3, 17, 0);
@@ -6716,13 +6721,13 @@ begin
   PhpSetSymbolId(PhpSymbolID_BraceClose);
 end;
 
-procedure TSynWebEngine.PhpTildeProc;   
+procedure TSynWebEngine.PhpTildeProc;
 begin
   Inc(FInstance^.FRun);
   PhpSetSymbolId(PhpSymbolID_Tilde);
 end;
 
-procedure TSynWebEngine.PhpCommaProc;   
+procedure TSynWebEngine.PhpCommaProc;
 begin
   Inc(FInstance^.FRun);
   PhpSetSymbolId(PhpSymbolID_Comma);
@@ -6730,7 +6735,7 @@ begin
     SetRangeBit(18, True);
 end;
 
-procedure TSynWebEngine.PhpSemiColonProc; 
+procedure TSynWebEngine.PhpSemiColonProc;
 begin
   Inc(FInstance^.FRun);
   PhpSetSymbolId(PhpSymbolID_SemiColon);
@@ -7181,7 +7186,7 @@ begin
     else // case
       SetRangeBit(19, False);
       Exit;
-    end;         
+    end;
   end else
   begin
     case FInstance^.FLine[FInstance^.FRun] of
