@@ -5464,7 +5464,7 @@ begin
       FEsProcTable[c] := EsString34Proc;
     #39:
       FEsProcTable[c] := EsString39Proc;
-    '{', '}', '[', ']', '(', ')', '.', ';', ',', '?', ':', '~':
+    '{', '}', '[', ']', '(', ')', '.', ';', ',', '?', ':', '~', '\':
       FEsProcTable[c] :=
         EsSymbolProc;
     '$', 'a'..'z', 'A'..'Z', '_':
