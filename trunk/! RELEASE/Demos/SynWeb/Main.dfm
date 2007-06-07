@@ -55,6 +55,7 @@ object Form1: TForm1
       Top = 24
       Width = 65
       Height = 13
+      Margins.Bottom = 0
       Caption = 'HTMLVersion:'
     end
     object Label2: TLabel
@@ -62,6 +63,7 @@ object Form1: TForm1
       Top = 24
       Width = 54
       Height = 13
+      Margins.Bottom = 0
       Caption = 'CSSVersion'
     end
     object Label3: TLabel
@@ -69,6 +71,7 @@ object Form1: TForm1
       Top = 24
       Width = 54
       Height = 13
+      Margins.Bottom = 0
       Caption = 'PHPVersion'
     end
     object Label4: TLabel
@@ -76,6 +79,7 @@ object Form1: TForm1
       Top = 4
       Width = 83
       Height = 13
+      Margins.Bottom = 0
       Anchors = [akTop, akRight]
       Caption = 'Highlighter MODE'
     end
@@ -84,6 +88,7 @@ object Form1: TForm1
       Top = 3
       Width = 5
       Height = 13
+      Margins.Bottom = 0
       Caption = '-'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -97,6 +102,7 @@ object Form1: TForm1
       Top = 24
       Width = 58
       Height = 13
+      Margins.Bottom = 0
       Caption = 'WMLVersion'
     end
     object CheckBox1: TCheckBox
@@ -116,7 +122,7 @@ object Form1: TForm1
       Width = 145
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 1
       OnChange = ComboBox1Change
     end
@@ -126,7 +132,7 @@ object Form1: TForm1
       Width = 77
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 2
       OnChange = ComboBox2Change
     end
@@ -164,7 +170,7 @@ object Form1: TForm1
       Width = 77
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 6
       OnChange = ComboBox3Change
     end
@@ -183,6 +189,7 @@ object Form1: TForm1
         'CSS'
         'JS'
         'PHP-Cli'
+        'PHP (Plain)'
         'WML (+PHP)'
         'XML (+PHP)')
     end
@@ -228,7 +235,7 @@ object Form1: TForm1
       Width = 77
       Height = 21
       Style = csDropDownList
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 11
       OnChange = ComboBox5Change
     end
@@ -259,7 +266,7 @@ object Form1: TForm1
     Options.PhpShortOpenTag = True
     Options.PhpAspTags = False
     Left = 48
-    Top = 228
+    Top = 232
   end
   object SynWebHtmlSyn1: TSynWebHtmlSyn
     ActiveHighlighterSwitch = False
@@ -274,7 +281,7 @@ object Form1: TForm1
     Options.EsEmbeded = True
     Options.UseEngineOptions = True
     Left = 48
-    Top = 260
+    Top = 264
   end
   object SynWebCSSSyn1: TSynWebCssSyn
     ActiveHighlighterSwitch = False
@@ -287,7 +294,7 @@ object Form1: TForm1
     Options.PhpEmbeded = True
     Options.UseEngineOptions = True
     Left = 144
-    Top = 260
+    Top = 264
   end
   object SynWebESSyn1: TSynWebEsSyn
     ActiveHighlighterSwitch = False
@@ -298,7 +305,7 @@ object Form1: TForm1
     Options.PhpEmbeded = True
     Options.UseEngineOptions = True
     Left = 176
-    Top = 260
+    Top = 264
   end
   object SynWebPHPCliSyn1: TSynWebPhpCliSyn
     ActiveHighlighterSwitch = False
@@ -308,7 +315,7 @@ object Form1: TForm1
     Options.PhpAspTags = False
     Options.UseEngineOptions = True
     Left = 208
-    Top = 260
+    Top = 264
   end
   object SynExporterHTML1: TSynExporterHTML
     Color = clWindow
@@ -339,7 +346,7 @@ object Form1: TForm1
     Options.PhpEmbeded = True
     Options.UseEngineOptions = True
     Left = 80
-    Top = 260
+    Top = 264
   end
   object SynWebXmlSyn1: TSynWebXmlSyn
     ActiveHighlighterSwitch = False
@@ -350,7 +357,7 @@ object Form1: TForm1
     Options.PhpEmbeded = True
     Options.UseEngineOptions = False
     Left = 112
-    Top = 260
+    Top = 264
   end
   object scpDemo: TSynCompletionProposal
     Options = [scoLimitToMatchedText, scoUseInsertList, scoUsePrettyText, scoUseBuiltInTimer, scoEndCharCompletion, scoCompleteWithTab, scoCompleteWithEnter]
@@ -393,5 +400,13 @@ object Form1: TForm1
       Caption = 'Reload'
       OnClick = Reload1Click
     end
+  end
+  object SynWebPhpPlainSyn1: TSynWebPhpPlainSyn
+    ActiveHighlighterSwitch = False
+    Engine = SynWebEngine1
+    Options.PhpVersion = spvPhp5
+    Options.UseEngineOptions = True
+    Left = 240
+    Top = 264
   end
 end

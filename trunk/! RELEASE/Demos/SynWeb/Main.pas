@@ -45,6 +45,7 @@ type
     SynWebErrorList: TListBox;
     PopupMenu1: TPopupMenu;
     Reload1: TMenuItem;
+    SynWebPhpPlainSyn1: TSynWebPhpPlainSyn;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -205,8 +206,10 @@ begin
   3:
     SynEdit1.Highlighter:=SynWebPHPCliSyn1;
   4:
-    SynEdit1.Highlighter:=SynWebWmlSyn1;
+    SynEdit1.Highlighter:=SynWebPHPPlainSyn1;
   5:
+    SynEdit1.Highlighter:=SynWebWmlSyn1;
+  6:
     SynEdit1.Highlighter:=SynWebXmlSyn1;
   end;
 end;
