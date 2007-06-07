@@ -89,7 +89,8 @@ begin
     TSynWebXmlSyn,
     TSynWebCssSyn,
     TSynWebEsSyn,
-    TSynWebPhpCliSyn
+    TSynWebPhpCliSyn,
+    TSynWebPhpPlainSyn
   ]);
 end;
 

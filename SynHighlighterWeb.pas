@@ -260,6 +260,12 @@ type
     property UseEngineOptions;
   end;
 
+  TSynWebPhpPlainOptions = class(TSynWebOptionsBase)
+  published
+    property PhpVersion;
+    property UseEngineOptions;
+  end;
+
   TSynWebEngineOptions = class(TSynWebOptionsBase)
   public
     constructor Create(AOptions: PSynWebOptions);
@@ -482,6 +488,27 @@ type
     procedure ResetRange; override;
   published
     property Options: TSynWebPhpCliOptions read GetOptions write SetOptions;
+  end;
+
+  TSynWebPhpPlainSynClass = class of TSynWebPhpPlainSyn;
+
+  TSynWebPhpPlainSyn = class(TSynWebBase)
+  private
+    procedure SetupActiveHighlighter; override;
+    function GetOptions: TSynWebPhpPlainOptions;
+    procedure SetOptions(const AValue: TSynWebPhpPlainOptions);
+  public
+    class function GetLanguageName: string; override;
+{$IFDEF UNISYNEDIT}
+    class function SynWebSample: WideString; override;
+{$ELSE}
+    class function SynWebSample: String; override;
+{$ENDIF}
+  public
+    constructor Create(AOwner: TComponent); override;
+    procedure ResetRange; override;
+  published
+    property Options: TSynWebPhpPlainOptions read GetOptions write SetOptions;
   end;
 
   TSynWebEngine = class(TComponent)
@@ -1913,6 +1940,55 @@ class function TSynWebPhpCliSyn.SynWebSample: String;
 begin
   Result := '<?php'#13#10 +
     ''#13#10 +
+    TSynWebPhpPlainSyn.SynWebSample +
+    ''#13#10 +
+    '?>'#13#10;
+end;
+
+procedure TSynWebPhpCliSyn.ResetRange;
+begin
+  FInstance.FRange := $00000000;
+end;
+
+{ TSynWebPhpPlainSyn }
+
+constructor TSynWebPhpPlainSyn.Create(AOwner: TComponent);
+begin
+  FOptions := TSynWebPhpPlainOptions.Create(@FInstance.FOptions);
+  FInstance.FHighlighterMode := shmML;
+  inherited Create(AOwner);
+  FOptions.PhpEmbeded := False;
+  FOptions.CssEmbeded := False;
+  FOptions.EsEmbeded := False;
+end;
+
+procedure TSynWebPhpPlainSyn.SetupActiveHighlighter;
+begin
+  FActiveHighlighters := [shtPhpInML];
+end;
+
+function TSynWebPhpPlainSyn.GetOptions: TSynWebPhpPlainOptions;
+begin
+  Result := TSynWebPhpPlainOptions(FOptions);
+end;
+
+procedure TSynWebPhpPlainSyn.SetOptions(const AValue: TSynWebPhpPlainOptions);
+begin
+  FOptions := AValue;
+end;
+
+class function TSynWebPhpPlainSyn.GetLanguageName: String;
+begin
+  Result := 'TSynWeb: PHP (Plain)';
+end;
+
+{$IFDEF UNISYNEDIT}
+class function TSynWebPhpPlainSyn.SynWebSample: WideString;
+{$ELSE}
+class function TSynWebPhpPlainSyn.SynWebSample: String;
+{$ENDIF}
+begin
+  Result :=
     'echo ''<?xml version="1.0" encoding="iso-8859-2"?>'';'#13#10 +
     ''#13#10 +
     '// single line comment 1'#13#10 +
@@ -1942,14 +2018,12 @@ begin
     'while( my_function($arg) && mysql_query($query) )'#13#10 +
     '{'#13#10 +
     '/// do sth'#13#10 +
-    '}'#13#10 +
-    ''#13#10 +
-    '?>'#13#10;
+    '}'#13#10;
 end;
 
-procedure TSynWebPhpCliSyn.ResetRange;
-begin
-  FInstance.FRange := $00000000;
+procedure TSynWebPhpPlainSyn.ResetRange;
+begin                                                               // srsPhpDefault
+  FInstance.FRange := $00000000 or (Longword(shtPhpInML) shl 29) or (1 shl 23);
 end;
 
 { TSynWebEngine }
@@ -7697,11 +7771,12 @@ initialization
 
 {$IFNDEF SYN_CPPB_1}
   RegisterPlaceableHighlighter(TSynWebHtmlSyn);
+  RegisterPlaceableHighlighter(TSynWebCssSyn);
+  RegisterPlaceableHighlighter(TSynWebEsSyn);
   RegisterPlaceableHighlighter(TSynWebWmlSyn);
   RegisterPlaceableHighlighter(TSynWebXmlSyn);
   RegisterPlaceableHighlighter(TSynWebPhpCliSyn);
-  RegisterPlaceableHighlighter(TSynWebCssSyn);
-  RegisterPlaceableHighlighter(TSynWebEsSyn);
+  RegisterPlaceableHighlighter(TSynWebPhpPlainSyn);
 {$ENDIF}
 
 end.
