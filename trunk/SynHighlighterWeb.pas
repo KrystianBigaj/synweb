@@ -1255,7 +1255,7 @@ begin
     for i := 1 to j do
     begin
       if Word(w^) > 255 then
-        p^ := '?'
+        p^ := 'a' // convert all 'high' Unicode charaters to 'a' to pass it as Identifier character
       else
         p^ := Char(w^);
       Inc(p);
