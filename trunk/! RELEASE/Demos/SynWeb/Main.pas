@@ -146,7 +146,10 @@ procedure TForm1.scpDemoAfterCodeCompletion(Sender: TObject;
   end;
 
 begin
-  CaretBetween('()') or CaretBetween('><') or CaretBetween('""') or CaretBetween(' ;');
+  if not CaretBetween('()') then
+    if not CaretBetween('><') then
+      if not CaretBetween('""') then
+        CaretBetween(' ;');
 end;
 
 procedure TForm1.scpDemoExecute(Kind: SynCompletionType; Sender: TObject;
@@ -175,7 +178,7 @@ begin
 end;
 
 procedure TForm1.CheckBox4Click(Sender: TObject);
-begin                    
+begin
   SynWebEngine1.Options.PhpShortOpenTag:=CheckBox4.Checked;
 end;
 
@@ -195,7 +198,7 @@ begin
 end;
 
 procedure TForm1.ComboBox4Change(Sender: TObject);
-begin              
+begin
   case ComboBox4.ItemIndex of
   0:
     SynEdit1.Highlighter:=SynWebHtmlSyn1;
@@ -289,7 +292,7 @@ var
     pos := hl.GetTokenPos + 1;
     if pos > $00000FFF then
       pos := $00000FFF;
-      
+
     pos := pos or Longword((i + 1) shl 12);
 
     SynWebErrorList.AddItem(Format('[%4.d, %4.d] - %s',
@@ -380,8 +383,8 @@ const
     (OpenToken: '<?'; CloseToken: '?>'; TokenKind: Integer(stkMLTag)),
     (OpenToken: '<%'; CloseToken: '%>'; TokenKind: Integer(stkMLTag)));
 var
-  Editor : TSynEdit;  
-  Pix: TPoint;      
+  Editor : TSynEdit;
+  Pix: TPoint;
   Match: TSynTokenMatched;
   I: Integer;
 
@@ -419,7 +422,7 @@ begin
   I := TryMatch;
   if I = 0 then
     Exit;
-  Canvas.Brush.Style := bsSolid;                           
+  Canvas.Brush.Style := bsSolid;
   if Abs(I) = 2 then
     Canvas.Brush.Color := clAqua // matched color
   else
@@ -433,9 +436,9 @@ begin
   end;
   if I <> 1 then
   begin
-    Pix := CharToPixels(Match.CloseTokenPos);    
+    Pix := CharToPixels(Match.CloseTokenPos);
     Canvas.Font.Color := Editor.Font.Color;
-    Canvas.Font.Style := Match.TokenAttri.Style;  
+    Canvas.Font.Style := Match.TokenAttri.Style;
     Canvas.TextOut(Pix.X, Pix.Y, Match.CloseToken);
   end;
 end;
