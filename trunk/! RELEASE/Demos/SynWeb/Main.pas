@@ -365,7 +365,7 @@ end;
 procedure TForm1.SynEdit1PaintTransient(Sender: TObject; Canvas: TCanvas;
   TransientType: TTransientType);
 const
-  Tokens:array[0..15] of TSynTokenMatch=(
+  Tokens:array[0..16] of TSynTokenMatch=(
     (OpenToken: '('; CloseToken: ')'; TokenKind: Integer(stkCssSymbol)),
     (OpenToken: '{'; CloseToken: '}'; TokenKind: Integer(stkCssSymbol)),
     (OpenToken: '['; CloseToken: ']'; TokenKind: Integer(stkCssSymbol)),
@@ -381,12 +381,29 @@ const
     (OpenToken: '<!'; CloseToken: '>'; TokenKind: Integer(stkMLTag)),
     (OpenToken: '<![cdata['; CloseToken: ']]>'; TokenKind: Integer(stkMLTag)),
     (OpenToken: '<?'; CloseToken: '?>'; TokenKind: Integer(stkMLTag)),
-    (OpenToken: '<%'; CloseToken: '%>'; TokenKind: Integer(stkMLTag)));
+    (OpenToken: '<%'; CloseToken: '%>'; TokenKind: Integer(stkMLTag)),
+    (OpenToken: 'try'; CloseToken: 'catch'; TokenKind: Integer(stkPhpKeyword)));
+
+  Tokens2:array[0..7] of TSynTokenMatch=(
+    (OpenToken: 'if'; CloseToken: 'else'; TokenKind: Integer(stkPhpKeyword)),
+//    (OpenToken: 'if'; CloseToken: 'elseif'; TokenKind: Integer(stkPhpKeyword)),
+    (OpenToken: 'if'; CloseToken: 'endif'; TokenKind: Integer(stkPhpKeyword)),
+//    (OpenToken: 'elseif'; CloseToken: 'else'; TokenKind: Integer(stkPhpKeyword)),
+//    (OpenToken: 'elseif'; CloseToken: 'elseif'; TokenKind: Integer(stkPhpKeyword)),
+//    (OpenToken: 'elseif'; CloseToken: 'endif'; TokenKind: Integer(stkPhpKeyword)),
+    (OpenToken: 'for'; CloseToken: 'endfor'; TokenKind: Integer(stkPhpKeyword)),
+    (OpenToken: 'foreach'; CloseToken: 'endforeach'; TokenKind: Integer(stkPhpKeyword)),
+    (OpenToken: 'while'; CloseToken: 'endforeach'; TokenKind: Integer(stkPhpKeyword)),
+    (OpenToken: 'foreach'; CloseToken: 'endforeach'; TokenKind: Integer(stkPhpKeyword)),
+    (OpenToken: 'switch'; CloseToken: 'endswitch'; TokenKind: Integer(stkPhpKeyword)),
+    (OpenToken: 'declare'; CloseToken: 'enddeclare'; TokenKind: Integer(stkPhpKeyword)));
+
 var
   Editor : TSynEdit;
   Pix: TPoint;
   Match: TSynTokenMatched;
   I: Integer;
+  bSingle: Boolean;
 
   function CharToPixels(P: TBufferCoord): TPoint;
   begin
@@ -395,38 +412,61 @@ var
 
   function TryMatch: Integer;
   begin
+    bSingle := False;
     Result := SynEditGetMatchingTagEx(Editor, Editor.CaretXY, Match);
     if Result = 0 then
+    begin
       Result := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, Tokens, Match);
+      if Result = 0 then
+      begin
+        bSingle := True;
+        Result := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, Tokens2, Match);
+      end;
+    end;
   end;
 
 begin
   if FPaintUpdating then
     Exit;
+
   Editor := TSynEdit(Sender);
+
   if TransientType = ttBefore then
   begin
     I := TryMatch;
     if I = 0 then
       Exit;
+
     FPaintUpdating := True;
+
     if I <> -1 then
       Editor.InvalidateLines(Match.OpenTokenPos.Line, Match.OpenTokenPos.Line);
+
     if I <> 1 then
       Editor.InvalidateLines(Match.CloseTokenPos.Line, Match.CloseTokenPos.Line);
+
     FPaintUpdating := False;
     Exit;
   end;
+
   if Editor.SelAvail then
     Exit;
+
   I := TryMatch;
+
   if I = 0 then
     Exit;
+
   Canvas.Brush.Style := bsSolid;
+
   if Abs(I) = 2 then
     Canvas.Brush.Color := clAqua // matched color
   else
-    Canvas.Brush.Color := clYellow; // unmatched color
+    if bSingle then
+      Exit
+    else
+      Canvas.Brush.Color := clYellow; // unmatched color
+      
   if I <> -1 then
   begin
     Pix := CharToPixels(Match.OpenTokenPos);
@@ -434,6 +474,7 @@ begin
     Canvas.Font.Style := Match.TokenAttri.Style;
     Canvas.TextOut(Pix.X, Pix.Y, Match.OpenToken);
   end;
+  
   if I <> 1 then
   begin
     Pix := CharToPixels(Match.CloseTokenPos);
