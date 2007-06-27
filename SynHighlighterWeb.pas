@@ -2351,7 +2351,7 @@ begin
   FPhpErrorAttri.Style := [fsBold, fsUnderline];
   AddAttribute(FPhpErrorAttri);
 
-  FTokenAttributeTable[stkPhpSpace] := FMLWhitespaceAttri;
+  FTokenAttributeTable[stkPhpSpace] := FPhpWhitespaceAttri;
   FTokenAttributeTable[stkPhpIdentifier] := FPhpIdentifierAttri;
   FTokenAttributeTable[stkPhpKeyword] := FPhpKeyAttri;
   FTokenAttributeTable[stkPhpFunction] := FPhpFunctionAttri;
