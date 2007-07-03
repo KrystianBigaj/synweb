@@ -5078,7 +5078,14 @@ begin
         begin
           if CssCheckNull or PhpCheckBegin then
             Exit;
-          repeat
+          repeat     
+            if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
+              (1 shl 14) <> 0 then
+            begin
+              DoError;
+              Exit;
+            end;
+
             // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
             while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
               (1 shl 14) = 0 do
