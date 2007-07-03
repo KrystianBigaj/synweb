@@ -55,7 +55,6 @@ object Form1: TForm1
       Top = 24
       Width = 65
       Height = 13
-      Margins.Bottom = 0
       Caption = 'HTMLVersion:'
     end
     object Label2: TLabel
@@ -63,7 +62,6 @@ object Form1: TForm1
       Top = 24
       Width = 54
       Height = 13
-      Margins.Bottom = 0
       Caption = 'CSSVersion'
     end
     object Label3: TLabel
@@ -71,7 +69,6 @@ object Form1: TForm1
       Top = 24
       Width = 54
       Height = 13
-      Margins.Bottom = 0
       Caption = 'PHPVersion'
     end
     object Label4: TLabel
@@ -79,7 +76,6 @@ object Form1: TForm1
       Top = 4
       Width = 83
       Height = 13
-      Margins.Bottom = 0
       Anchors = [akTop, akRight]
       Caption = 'Highlighter MODE'
     end
@@ -88,7 +84,6 @@ object Form1: TForm1
       Top = 3
       Width = 5
       Height = 13
-      Margins.Bottom = 0
       Caption = '-'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -102,7 +97,6 @@ object Form1: TForm1
       Top = 24
       Width = 58
       Height = 13
-      Margins.Bottom = 0
       Caption = 'WMLVersion'
     end
     object CheckBox1: TCheckBox
