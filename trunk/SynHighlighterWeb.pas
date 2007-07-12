@@ -4453,6 +4453,13 @@ var
           if CssCheckNull or PhpCheckBegin then
             Exit;
           repeat
+            if not TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
+              (1 shl 14) = 0 then
+            begin
+              DoError;
+              Exit;
+            end;
+
             // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
             while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
               (1 shl 14) = 0 do
@@ -5029,6 +5036,14 @@ begin
 end;
 
 procedure TSynWebEngine.CssRangePropValUrlProc;
+
+  procedure DoError;
+  begin
+    CssSetRange(srsCssRuleset);
+    FCssProcTable[FInstance^.FLine[FInstance^.FRun]];
+    FInstance^.FTokenID := stkCssError;
+  end;
+
 begin
   if GetRangeBit(10) then
   begin
