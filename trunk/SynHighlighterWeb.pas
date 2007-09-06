@@ -2887,14 +2887,14 @@ var
 begin
   repeat
     Inc(FInstance^.FRun);
-  until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 16) = 0;
-  // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', '0'..'9']);
+  until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) = 0;
+  // until not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '0'..'9', ':', '-', '_']);
 
   if FInstance^.FLine[FInstance^.FRun] = ':' then
     Inc(FInstance^.FRun);
 
-  // while FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', '0'..'9'] do
-  while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 16) <> 0 do
+  // while FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '0'..'9', ':', '-', '_'] do
+  while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) <> 0 do
     Inc(FInstance^.FRun);
 
   if FInstance^.FOptions.FMLVersion = smlwvXML then
@@ -2999,7 +2999,7 @@ begin
         repeat
           Inc(FInstance^.FRun);
         until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) = 0;
-        // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', ':', '-']);
+        // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '0'..'9', ':', '-', '_']);
         FInstance^.FTokenID := stkMLTagKey;
         FInstance^.FTokenLastID := -1;
       end;
@@ -3078,7 +3078,7 @@ begin
         repeat
           Inc(FInstance^.FRun);
         until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) = 0;
-        // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', ':', '-']);
+        // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '0'..'9', ':', '-', '_']);
         if ID = -1 then
           FInstance^.FTokenID := stkMLTagKeyUndef
         else

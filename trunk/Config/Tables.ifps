@@ -45,7 +45,7 @@ begin
     if check(j, '0-32 [<] [>] [&]') then
       fIdentTable[I]:=fIdentTable[I] or (1 shl 6);
 
-    if check(j, '[a]-[z] [A]-[Z] [:] [-]') then
+    if check(j, '[a]-[z] [A]-[Z] [0]-[9] [:] [-] [_]') then
       fIdentTable[I]:=fIdentTable[I] or (1 shl 7);
 
     if check(j, '[a]-[z] [A]-[Z] [\] [_] [-]') then 
