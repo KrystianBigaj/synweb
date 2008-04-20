@@ -1,5 +1,5 @@
 ----------------------------------------
-- TSynWeb v1.4.x Unicode/ANSI
+- TSynWeb v1.5 Unicode/ANSI
 ----------------------------------------
 
 Features:
@@ -8,6 +8,7 @@ Features:
           o PHP in CSS (.css), JS (.js), WML, XML
     * support for ANSI and Unicode version of SynEdit
     * faster about 2-10 times than using TSynMultiSyn
+    * support for Smarty
     * full validation for tags (also checks for valid '/>' or '/') and its attributes for HTML across difference versions (for XHTML - case sensitive)
     * values in tags without quotation are also highlighted as ValueAttrib (only in HTML, in XHTML is highlighted as error because, XHTML doesn't allow for unquoted values)
     * support for WML 1.1/1.2/1.3
@@ -76,6 +77,10 @@ TSynMultiSyn notice:
   So for example if you want use HTML (with optional CSS, ES/JS, but PHP switched off),
   then you can use # (17..28: 12 bits) bits for other highlighters in SynMultiSyn.
 
+
+TSynWebSmartySyn limitations:
+  - Options.SmartyLDelim MUST begin with '{' and Options.SmartyRDelim MUST begin with '}'.
+  - Smarty highlighter doesn't support {literal} ... {/literal}
 
 ----------------------------------------
 - Donations
