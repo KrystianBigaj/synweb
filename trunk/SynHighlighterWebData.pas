@@ -1,6 +1,6 @@
 {-------------------------------------------------------------------------------
 SynWeb
-Copyright (C) 2006  Krystian Bigaj
+Copyright (C) 2008  Krystian Bigaj
 
 *** MPL
 The contents of this file are subject to the Mozilla Public License

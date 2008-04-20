@@ -1,6 +1,6 @@
 {-------------------------------------------------------------------------------
 SynWeb
-Copyright (C) 2006  Krystian Bigaj
+Copyright (C) 2008  Krystian Bigaj
 
 *** MPL
 The contents of this file are subject to the Mozilla Public License
@@ -45,7 +45,7 @@ You may retrieve the latest version of this file at the SynWeb home page,
 located at http://sourceforge.net/projects/synweb
 
 Contact: krystian.bigaj@gmail.com
-Homepage: http://flatdev.ovh.org      
+Homepage: http://flatdev.ovh.org
 -------------------------------------------------------------------------------}
 
 {$IFNDEF QSYNTOKENMATCH}

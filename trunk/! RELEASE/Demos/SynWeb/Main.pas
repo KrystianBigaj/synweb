@@ -46,6 +46,7 @@ type
     PopupMenu1: TPopupMenu;
     Reload1: TMenuItem;
     SynWebPhpPlainSyn1: TSynWebPhpPlainSyn;
+    mar: TSynWebSmartySyn;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -206,7 +207,7 @@ begin
     SynEdit1.Highlighter:=SynWebCSSSyn1;
   2:
     SynEdit1.Highlighter:=SynWebESSyn1;
-  3:
+  3:               
     SynEdit1.Highlighter:=SynWebPHPCliSyn1;
   4:
     SynEdit1.Highlighter:=SynWebPHPPlainSyn1;
@@ -214,7 +215,10 @@ begin
     SynEdit1.Highlighter:=SynWebWmlSyn1;
   6:
     SynEdit1.Highlighter:=SynWebXmlSyn1;
+  7:
+    SynEdit1.Highlighter:=SynWebSmartySyn1;
   end;
+  TSynWebBase(SynEdit1.Highlighter).ActiveHighlighterSwitch := CheckBox2.Checked;
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -505,7 +509,13 @@ begin
   3:
     SynEdit1.Text := TSynWebPhpCliSyn.SynWebSample;
   4:
+    SynEdit1.Text := TSynWebPhpPlainSyn.SynWebSample;
+  5:                              
     SynEdit1.Text := TSynWebWmlSyn.SynWebSample;
+  6:
+    SynEdit1.Text := TSynWebXmlSyn.SynWebSample;
+  7:                
+    SynEdit1.Text := TSynWebSmartySyn.SynWebSample;
   end;
 end;
 

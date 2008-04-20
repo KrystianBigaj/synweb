@@ -1,6 +1,6 @@
 {-------------------------------------------------------------------------------
 SynWeb
-Copyright (C) 2006  Krystian Bigaj
+Copyright (C) 2008  Krystian Bigaj
 
 *** MPL
 The contents of this file are subject to the Mozilla Public License
@@ -46,18 +46,24 @@ located at http://sourceforge.net/projects/synweb
 
 Contact: krystian.bigaj@gmail.com
 Homepage: http://flatdev.ovh.org
+-------------------------------------------------------------------------------}
 
+(*
 Known limitations:
 - SynWeb highlighters support only single line SetLine (don't use more than one line).
 - Doesn't support #13#10, #10 or #13 as new line. Always use #0 as line break.
 - Php: Doesn't support multi-line encapsuled strings in String, only single line:
   eg. "somestring {$a["some array{$b['key'].... <- only single line encapsuled values
--------------------------------------------------------------------------------}
+- TSynWebSmartySyn limitations:
+  - Options.SmartyLDelim MUST begin with '{' and Options.SmartyRDelim MUST begin with '}'.
+  - Smarty highlighter doesn't support {literal} ... {/literal}
+*)
+
 {
-@abstract(Provides an web-files (Multi Html/XHtml/Wml/Xml/Css/ECMAScript/Php) highlighter for SynEdit
+@abstract(Provides an web-files (Multi Html/XHtml/Wml/Xml/Css/ECMAScript/Php/Smarty) highlighter for SynEdit
 @author(Krystian Bigaj <krystian.bigaj@gmail.com>)
 @created(2005-05-21)
-@lastmod(2006-12-05)
+@lastmod(2008-04-20)
 The SynHighlighterWeb unit provides SynEdit with a Multi Html/XHtml/Wml/Xml/Css/ECMAScript/Php highlighter.
 }
 
@@ -104,6 +110,9 @@ type
     FPhpEmbeded: Boolean;
     FCssEmbeded: Boolean;
     FEsEmbeded: Boolean;
+
+    FSmartyLDelim: String;
+    FSmartyRDelim: String;
   end;
 
   PSynWebInstance = ^TSynWebInstance;
@@ -134,6 +143,7 @@ type
     FSYN_ATTR_STRING: TSynHighlighterAttributes;
     FSYN_ATTR_WHITESPACE: TSynHighlighterAttributes;
     FOptions: TSynWebOptions;
+    FHighlither: TSynWebBase;
   end;
 
   TSynWebOptionsBase = class(TPersistent)
@@ -201,6 +211,27 @@ type
     property PhpAspTags;
     property CssEmbeded;
     property PhpEmbeded;
+    property EsEmbeded;
+    property UseEngineOptions;
+  end;
+
+  TSynWebSmartyOptions = class(TSynWebOptionsBase)
+  private
+    function GetSmartyLDelim: String;
+    procedure SetSmartyLDelim(const Value: String);
+    function GetSmartyRDelim: String;  protected
+    procedure SetSmartyRDelim(const Value: String);
+
+    procedure UpdateMLOption; override;
+  public
+    constructor Create(AOptions: PSynWebOptions);
+  published
+    property SmartyLDelim: String read GetSmartyLDelim write SetSmartyLDelim;
+    property SmartyRDelim: String read GetSmartyRDelim write SetSmartyRDelim;
+    property HtmlVersion;
+    property CssVersion;
+    property PhpVersion;
+    property CssEmbeded;
     property EsEmbeded;
     property UseEngineOptions;
   end;
@@ -387,6 +418,25 @@ type
     constructor Create(AOwner: TComponent); override;
   published
     property Options: TSynWebHtmlOptions read GetOptions write SetOptions;
+  end;
+
+  TSynWebSmartySynClass = class of TSynWebSmartySyn;
+
+  TSynWebSmartySyn = class(TSynWebMLSyn)
+  private
+    function GetOptions: TSynWebSmartyOptions;
+    procedure SetOptions(const AValue: TSynWebSmartyOptions);
+  public
+    class function GetLanguageName: string; override;
+{$IFDEF UNISYNEDIT}
+    class function SynWebSample: WideString; override;
+{$ELSE}
+    class function SynWebSample: String; override;
+{$ENDIF}
+  public
+    constructor Create(AOwner: TComponent); override;
+  published
+    property Options: TSynWebSmartyOptions read GetOptions write SetOptions;
   end;
 
   TSynWebWmlSynClass = class of TSynWebWmlSyn;
@@ -616,6 +666,7 @@ type
     procedure MLAmpersandProc;
     procedure MLBraceOpenProc;
     procedure MLErrorProc;
+    procedure MLBraces;
 
     procedure MLRangeTextProc;
     procedure MLRangeCommentProc;
@@ -727,6 +778,7 @@ type
     procedure EsString34Proc;
     procedure EsString39Proc;
     procedure EsSymbolProc;
+    procedure EsCurlyBraceOpenProc;
     procedure EsIdentProc;
     procedure EsErrorProc;
 
@@ -752,6 +804,8 @@ type
     procedure PhpBegin(ATagKind: TSynWebPhpOpenTag);
     procedure PhpEnd(AMLTag: Boolean);
 
+    function CheckSmartyBegin: Boolean;
+    function CheckSmartyEnd: Boolean;
     procedure PhpSpaceProc;
     procedure PhpQuestionProc;
     procedure PhpNumberProc;
@@ -961,7 +1015,7 @@ uses
 {$IFDEF SYN_CLX}
   QSynEditStrConst, StrUtils;
 {$ELSE}
-  SynEditStrConst, Controls;
+  SynEditStrConst, StrUtils, Controls;
 {$ENDIF}
 
 { TSynWebOptionsBase }
@@ -1180,6 +1234,45 @@ begin
   FOptions^.FMLVersion := TSynWebMLVersion(FOptions^.FHtmlVersion);
 end;
 
+{ TSynWebSmartyOptions }
+
+constructor TSynWebSmartyOptions.Create(AOptions: PSynWebOptions);
+begin
+  inherited Create(AOptions);
+  FOptions^.FSmartyLDelim := '{';
+  FOptions^.FSmartyRDelim := '}';
+  UpdateMLOption;
+end;
+
+function TSynWebSmartyOptions.GetSmartyLDelim: String;
+begin
+  Result := FOptions^.FSmartyLDelim;
+end;
+
+function TSynWebSmartyOptions.GetSmartyRDelim: String;
+begin
+  Result := FOptions^.FSmartyRDelim;
+end;
+
+procedure TSynWebSmartyOptions.SetSmartyLDelim(const Value: String);
+begin
+  FOptions^.FSmartyLDelim := Value;
+  if LeftStr(FOptions^.FSmartyLDelim, 1) <> '{' then
+    FOptions^.FSmartyLDelim := '{' + FOptions^.FSmartyLDelim;
+end;
+
+procedure TSynWebSmartyOptions.SetSmartyRDelim(const Value: String);
+begin
+  FOptions^.FSmartyRDelim := Value;
+  if LeftStr(FOptions^.FSmartyRDelim, 1) <> '}' then
+    FOptions^.FSmartyRDelim := '}' + FOptions^.FSmartyRDelim;
+end;
+
+procedure TSynWebSmartyOptions.UpdateMLOption;
+begin
+  FOptions^.FMLVersion := TSynWebMLVersion(FOptions^.FHtmlVersion);
+end;
+
 { TSynWebWmlOptions }
 
 constructor TSynWebWmlOptions.Create(AOptions: PSynWebOptions);
@@ -1218,6 +1311,7 @@ end;
 
 constructor TSynWebBase.Create(AOwner: TComponent);
 begin
+  FInstance.FHighlither := Self;
   inherited Create(AOwner);
   FOptions.FOnChange := DefHighlightChange;
   FEngine := nil;
@@ -1691,6 +1785,51 @@ begin
     #13#10 +
     '</script>'#13#10 +
     #13#10 +
+    '</body>'#13#10 +
+    '</html>'#13#10;
+end;
+
+{ TSynWebSmartySyn }
+
+constructor TSynWebSmartySyn.Create(AOwner: TComponent);
+begin
+  FOptions := TSynWebSmartyOptions.Create(@FInstance.FOptions);
+  inherited Create(AOwner);
+  FOptions.PhpEmbeded := False;
+  FOptions.CssEmbeded := True;
+  FOptions.EsEmbeded := True;
+end;
+
+function TSynWebSmartySyn.GetOptions: TSynWebSmartyOptions;
+begin
+  Result := TSynWebSmartyOptions(FOptions);
+end;
+
+procedure TSynWebSmartySyn.SetOptions(const AValue: TSynWebSmartyOptions);
+begin
+  FOptions := AValue;
+end;
+
+class function TSynWebSmartySyn.GetLanguageName: String;
+begin
+  Result := 'TSynWeb: Smarty (+CSS, +ES)';
+end;
+
+{$IFDEF UNISYNEDIT}
+class function TSynWebSmartySyn.SynWebSample: WideString;
+{$ELSE}
+class function TSynWebSmartySyn.SynWebSample: String;
+{$ENDIF}
+begin
+  Result := '<!DOCTYPE html public "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'#13#10 +
+    '<html xmlns="http://www.w3.org/1999/xhtml">'#13#10 +
+    '<head>'#13#10 +
+    '  <title>{$title}</title>'#13#10 +
+    '</head>'#13#10 +
+    #13#10 +
+    '<body>'#13#10 +
+    '{* My location here *}'#13#10 +
+    '  <a href="{$location}">My location</a>'#13#10 +
     '</body>'#13#10 +
     '</html>'#13#10;
 end;
@@ -2618,6 +2757,14 @@ begin
   FInstance^.FTokenID := stkMLError;
 end;
 
+procedure TSynWebEngine.MLBraces;
+begin
+  if PhpCheckBegin then
+    Exit;
+  Inc(FInstance^.FRun);
+  FInstance^.FTokenID := stkMLText;
+end;
+
 procedure TSynWebEngine.MLRangeTextProc;
 begin
   case FInstance^.FLine[FInstance^.FRun] of
@@ -2629,13 +2776,15 @@ begin
     MLBraceOpenProc;
   '>':
     MLErrorProc;
+  '{':
+    MLBraces;
   '&':
     MLAmpersandProc;
   else // case
     repeat
       Inc(FInstance^.FRun);
     until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 6) <> 0;
-    // until FInstance^.FLine[FInstance^.FRun] In [#0..#32, '<', '>', '&'];
+    // until FInstance^.FLine[FInstance^.FRun] In [#0..#32, '<', '>', '&', '{'];
     FInstance^.FTokenID := stkMLText;
   end;
 end;
@@ -2645,7 +2794,7 @@ begin
   if MLCheckNull or PhpCheckBegin then
     Exit;
   repeat
-    // while not (FInstance^.FLine[FInstance^.FRun) in [#0, '-', '<']) do
+    // while not (FInstance^.FLine[FInstance^.FRun) in [#0, '-', '<', '{']) do
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 19) = 0 do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
@@ -2673,7 +2822,7 @@ begin
           Break;
         end;
       end;
-    '<':
+    '<', '{':
       if PhpCheckBegin(False) then
         Break
       else
@@ -2688,7 +2837,7 @@ begin
   if MLCheckNull or PhpCheckBegin then
     Exit;
   repeat
-    // while not (FInstance^.FLine[FInstance^.FRun) in [#0, '<', '>']) do
+    // while not (FInstance^.FLine[FInstance^.FRun) in [#0, '<', '>', '{']) do
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 20) = 0 do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
@@ -2700,7 +2849,7 @@ begin
         MLSetRange(srsMLText);
         Break;
       end;
-    '<':
+    '<', '{':
       if PhpCheckBegin(False) then
         Break
       else
@@ -2784,7 +2933,7 @@ begin
           Exit
         else
           repeat
-            // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<']) do
+            // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<', '{']) do
             while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 21) = 0 do
               Inc(FInstance^.FRun);
             case FInstance^.FLine[FInstance^.FRun] of
@@ -2793,7 +2942,7 @@ begin
                 FInstance^.FTokenID := stkMLError;
                 Break;
               end;
-            '<':
+            '<', '{':
               if PhpCheckBegin(False) then
               begin
                 FInstance^.FTokenID := stkMLTagKeyValueQuoted;
@@ -2817,7 +2966,7 @@ begin
           Exit
         else
           repeat
-            // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '"', '<']) do
+            // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '"', '<', '{']) do
             while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 22) = 0 do
               Inc(FInstance^.FRun);
             case FInstance^.FLine[FInstance^.FRun] of
@@ -2826,7 +2975,7 @@ begin
                 FInstance^.FTokenID := stkMLError;
                 Break;
               end;
-            '<':
+            '<', '{':
               if PhpCheckBegin(False) then
               begin
                 FInstance^.FTokenID := stkMLTagKeyValueQuoted;
@@ -2868,11 +3017,11 @@ begin
         repeat
           Inc(FInstance^.FRun);
         until TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun]] and (1 shl 1) <> 0;
-        // until FInstance^.FLine[FInstance^.FRun] in [#0..#32, '<', ']'];
+        // until FInstance^.FLine[FInstance^.FRun] in [#0..#32, '<', ']', '{'];
         case FInstance^.FLine[FInstance^.FRun] of
         #0..#32, ']':
           Break;
-        '<':
+        '<', '{':
           if PhpCheckBegin(False) then
             Break;
         end;
@@ -2943,8 +3092,8 @@ begin
       repeat
         Inc(FInstance^.FRun);
       until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 1) <> 0;
-      // until not (FInstance^.FLine[FInstance^.FRun] In [#0..#32, '<', '>']) do
-      if (FInstance^.FLine[FInstance^.FRun] = '<') and not PhpCheckBegin(False) then
+      // until not (FInstance^.FLine[FInstance^.FRun] In [#0..#32, '<', '>', '{']) do
+      if (FInstance^.FLine[FInstance^.FRun] in ['<', '{']) and not PhpCheckBegin(False) then
         Continue
       else
         Break;
@@ -3195,13 +3344,13 @@ begin
         repeat
           Inc(FInstance^.FRun);
         until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 23) <> 0;
-        // until FInstance^.FLine[FInstance^.FRun] in [#0..#32, '<', '>', '/'];
+        // until FInstance^.FLine[FInstance^.FRun] in [#0..#32, '<', '>', '/', '{'];
         case FInstance^.FLine[FInstance^.FRun] of
         '/':
           if (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
             (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) then
             Break;
-        '<':
+        '<', '{':
           if PhpCheckBegin(False) then
             Break
           else
@@ -3228,7 +3377,7 @@ begin
       Exit
     else
       repeat
-        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<']) do
+        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<', '{']) do
         while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 21) = 0 do
           Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun] of
@@ -3237,7 +3386,7 @@ begin
             FInstance^.FTokenID := stkMLError;
             Break;
           end;
-        '<':
+        '<', '{':
           if PhpCheckBegin(False) then
           begin
             FInstance^.FTokenID := stkMLTagKeyValueQuoted;
@@ -3264,7 +3413,7 @@ begin
       Exit
     else
       repeat
-        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '"', '<']) do
+        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '"', '<', '{']) do
         while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 22) = 0 do
           Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun] of
@@ -3273,7 +3422,7 @@ begin
             FInstance^.FTokenID := stkMLError;
             Break;
           end;
-        '<':
+        '<', '{':
           if PhpCheckBegin(False) then
           begin
             FInstance^.FTokenID := stkMLTagKeyValueQuoted;
@@ -3729,6 +3878,8 @@ end;
 
 procedure TSynWebEngine.CssCurlyBraceOpenProc;
 begin
+  if PhpCheckBegin then
+    Exit;
   CssSymbolProc;
   CssSetRange(srsCssProp);
 end;
@@ -4091,7 +4242,7 @@ begin
   Result := True;
   AShl := 1 shl AShl;
   repeat
-    // while not (FInstance^.FLine[FInstance^.FRun] in [#0, AChar, '\', '<']) do
+    // while not (FInstance^.FLine[FInstance^.FRun] in [#0, AChar, '\', '<', '{']) do
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and AShl = 0 do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
@@ -4460,7 +4611,7 @@ var
               Exit;
             end;
 
-            // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
+            // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<', '{']) do
             while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
               (1 shl 14) = 0 do
               Inc(FInstance^.FRun);
@@ -4473,7 +4624,7 @@ var
                 else
                   Break;
               end;
-            '<':
+            '<', '{':
               if CssCheckNull(False) or PhpCheckBegin(False) then
                 Break
               else
@@ -5093,7 +5244,7 @@ begin
         begin
           if CssCheckNull or PhpCheckBegin then
             Exit;
-          repeat     
+          repeat
             if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
               (1 shl 14) <> 0 then
             begin
@@ -5101,7 +5252,7 @@ begin
               Exit;
             end;
 
-            // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<']) do
+            // while not (FInstance^.FLine[FInstance^.FRun] in [#0..#32, '(', ')', ',', '\', '<', '{']) do
             while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and
               (1 shl 14) = 0 do
               Inc(FInstance^.FRun);
@@ -5114,7 +5265,7 @@ begin
                 else
                   Break;
               end;
-            '<':
+            '<', '{':
               if CssCheckNull(False) or PhpCheckBegin(False) then
                 Break
               else
@@ -5287,13 +5438,13 @@ begin
   if CssCheckNull or PhpCheckBegin then
     Exit;
   repeat
-    // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '*', '<']) do
+    // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '*', '<', '{']) do
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 26) = 0 do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
     #0:
       Break;
-    '<':
+    '<', '{':
       if CssCheckNull(False) or PhpCheckBegin(False) then
         Break
       else
@@ -5560,9 +5711,10 @@ begin
       FEsProcTable[c] := EsString34Proc;
     #39:
       FEsProcTable[c] := EsString39Proc;
-    '{', '}', '[', ']', '(', ')', '.', ';', ',', '?', ':', '~', '\':
-      FEsProcTable[c] :=
-        EsSymbolProc;
+    '}', '[', ']', '(', ')', '.', ';', ',', '?', ':', '~', '\':
+      FEsProcTable[c] := EsSymbolProc;
+    '{':
+      FEsProcTable[c] := EsCurlyBraceOpenProc;
     '$', 'a'..'z', 'A'..'Z', '_':
       FEsProcTable[c] := EsIdentProc;
     else // case
@@ -5687,6 +5839,7 @@ begin
   '=':
     Inc(FInstance^.FRun);
   '<':
+    if not PhpCheckBegin(False) then
     begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = '=' then
@@ -5853,6 +6006,14 @@ begin
   FInstance^.FTokenID := stkEsSymbol;
 end;
 
+procedure TSynWebEngine.EsCurlyBraceOpenProc;
+begin
+  if PhpCheckBegin then
+    Exit;
+  Inc(FInstance^.FRun);
+  FInstance^.FTokenID := stkEsSymbol;
+end;
+
 procedure TSynWebEngine.EsIdentProc;
 begin
   repeat
@@ -5882,14 +6043,14 @@ begin
       repeat
         repeat
           Inc(FInstance^.FRun);
-        until FInstance^.FLine[FInstance^.FRun] in [#0, '<'];
+        until FInstance^.FLine[FInstance^.FRun] in [#0, '<', '{'];
         case FInstance^.FLine[FInstance^.FRun] of
         #0:
           begin
             FInstance^.FTokenID := stkEsComment;
             Break;
           end;
-        '<':
+        '<', '{':
           if PhpCheckBegin(False) then
           begin
             FInstance^.FTokenID := stkEsComment;
@@ -5918,13 +6079,13 @@ begin
   if EsCheckNull or PhpCheckBegin then
     Exit;
   repeat
-    // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '*', '<']) do
+    // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '*', '<', '{']) do
     while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 26) = 0 do
       Inc(FInstance^.FRun);
     case FInstance^.FLine[FInstance^.FRun] of
     #0:
       Break;
-    '<':
+    '<', '{':
       if EsCheckNull(False) or PhpCheckBegin(False) then
         Break
       else
@@ -5951,7 +6112,7 @@ begin
       Exit
     else
       repeat
-        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #34, '<', '\']) do
+        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #34, '<', '\', '{']) do
         while TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun]] and (1 shl 3) = 0 do
           Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun] of
@@ -5960,7 +6121,7 @@ begin
             FInstance^.FTokenID := stkEsError;
             Break;
           end;
-        '<':
+        '<', '{':
           if PhpCheckBegin(False) then
           begin
             FInstance^.FTokenID := stkEsString;
@@ -5991,7 +6152,7 @@ begin
       Exit
     else
       repeat
-        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<', '\']) do
+        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<', '\', '{']) do
         while TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun]] and (1 shl 4) = 0 do
           Inc(FInstance^.FRun);
         case FInstance^.FLine[FInstance^.FRun] of
@@ -6000,7 +6161,7 @@ begin
             FInstance^.FTokenID := stkEsError;
             Break;
           end;
-        '<':
+        '<', '{':
             if PhpCheckBegin(False) then
             begin
               FInstance^.FTokenID := stkEsString;
@@ -6238,36 +6399,49 @@ end;
 function TSynWebEngine.PhpCheckBegin(ABegin: Boolean): Boolean;
 begin
   Result := False;
-  if (FInstance^.FLine[FInstance^.FRun] = '<') and FInstance^.FOptions.FPhpEmbeded then
-  begin
-    case FInstance^.FLine[FInstance^.FRun + 1] of
-    '?':
-      if (UpCase(FInstance^.FLine[FInstance^.FRun + 2]) = 'P') and
-        (UpCase(FInstance^.FLine[FInstance^.FRun + 3]) = 'H') and
-        (UpCase(FInstance^.FLine[FInstance^.FRun + 4]) = 'P') and
-        (FInstance^.FLine[FInstance^.FRun + 5] <= #32) then
-      begin
-        if ABegin then
-          PhpBegin(spotPhp);
-      end else
-        if FInstance^.FOptions.FPhpShortOpenTag then
+  case FInstance^.FLine[FInstance^.FRun] of
+  '{':
+    if (FInstance^.FHighlither is TSynWebSmartySyn) and CheckSmartyBegin then
+    begin
+      if ABegin then
+        PhpBegin(spotPhpShort);
+    end else
+      Exit;
+  '<':
+    if FInstance^.FOptions.FPhpEmbeded then
+    begin
+      case FInstance^.FLine[FInstance^.FRun + 1] of
+      '?':
+        if (UpCase(FInstance^.FLine[FInstance^.FRun + 2]) = 'P') and
+          (UpCase(FInstance^.FLine[FInstance^.FRun + 3]) = 'H') and
+          (UpCase(FInstance^.FLine[FInstance^.FRun + 4]) = 'P') and
+          (FInstance^.FLine[FInstance^.FRun + 5] <= #32) then
         begin
           if ABegin then
-            PhpBegin(spotPhpShort);
+            PhpBegin(spotPhp);
+        end else
+          if FInstance^.FOptions.FPhpShortOpenTag then
+          begin
+            if ABegin then
+              PhpBegin(spotPhpShort);
+          end else
+            Exit;
+      '%':
+        if FInstance^.FOptions.FPhpAspTags then
+        begin
+          if ABegin then
+            PhpBegin(spotASP);
         end else
           Exit;
-    '%':
-      if FInstance^.FOptions.FPhpAspTags then
-      begin
-        if ABegin then
-          PhpBegin(spotASP);
-      end else
+      else // case
         Exit;
-    else // case
+      end;
+    end else
       Exit;
-    end;
-  end else
+  else // case
     Exit;
+  end;
+
   Result := True;
 end;
 
@@ -6279,6 +6453,7 @@ begin
     True,
     ATagKind = spotML);
   SetRangeInt(12, 17, 0);
+
   if ATagKind = spotML then
     PhpSetRange(srsPhpDefault)
   else
@@ -6303,6 +6478,46 @@ begin
     if AMLTag then
       Next;
   end;
+end;
+
+function TSynWebEngine.CheckSmartyBegin: Boolean;
+var
+  i: Integer;
+  s: String;
+  p: PChar;
+begin
+  s := FInstance^.FOptions.FSmartyLDelim;
+  p := @FInstance^.FLine[FInstance^.FRun];
+  for i := 1 to Length(s) do
+    if p^ = s[i] then
+      Inc(p)
+    else
+    begin
+      Result := False;
+      Exit;
+    end;
+
+  Result := True;
+end;
+
+function TSynWebEngine.CheckSmartyEnd: Boolean;
+var
+  i: Integer;
+  s: String;
+  p: PChar;
+begin
+  s := FInstance^.FOptions.FSmartyRDelim;
+  p := @FInstance^.FLine[FInstance^.FRun];
+  for i := 1 to Length(s) do
+    if p^ = s[i] then
+      Inc(p)
+    else
+    begin
+      Result := False;
+      Exit;
+    end;
+
+  Result := True;
 end;
 
 procedure TSynWebEngine.PhpSpaceProc;
@@ -6665,37 +6880,40 @@ end;
 
 procedure TSynWebEngine.PhpSlashProc;
 begin
-  case FInstance^.FLine[FInstance^.FRun + 1] of
-  '/':
-    begin
-      Inc(FInstance^.FRun);
-      PhpHashProc;
-    end;
-  '*':
-    begin
-      Inc(FInstance^.FRun, 2);
-      if (FInstance^.FLine[FInstance^.FRun] = '*') and
-        (FInstance^.FLine[FInstance^.FRun + 1] <= #32) then
+  if FInstance^.FHighlither is TSynWebSmartySyn then
+    PhpDivProc
+  else
+    case FInstance^.FLine[FInstance^.FRun + 1] of
+    '/':
       begin
         Inc(FInstance^.FRun);
-        PhpSetRange(srsPhpDocComment);
-        SetRangeBit(19, False);
-        if FInstance^.FLine[FInstance^.FRun] <> #0 then
-          PhpRangeDocCommentProc
-        else
-          FInstance^.FTokenID := stkPhpDocComment;
-      end else
-      begin
-        PhpSetRange(srsPhpComment);
-        if FInstance^.FLine[FInstance^.FRun] <> #0 then
-          PhpRangeCommentProc
-        else
-          FInstance^.FTokenID := stkPhpComment;
+        PhpHashProc;
       end;
+    '*':
+      begin
+        Inc(FInstance^.FRun, 2);
+        if (FInstance^.FLine[FInstance^.FRun] = '*') and
+          (FInstance^.FLine[FInstance^.FRun + 1] <= #32) then
+        begin
+          Inc(FInstance^.FRun);
+          PhpSetRange(srsPhpDocComment);
+          SetRangeBit(19, False);
+          if FInstance^.FLine[FInstance^.FRun] <> #0 then
+            PhpRangeDocCommentProc
+          else
+            FInstance^.FTokenID := stkPhpDocComment;
+        end else
+        begin
+          PhpSetRange(srsPhpComment);
+          if FInstance^.FLine[FInstance^.FRun] <> #0 then
+            PhpRangeCommentProc
+          else
+            FInstance^.FTokenID := stkPhpComment;
+        end;
+      end;
+    else // case
+      PhpDivProc;
     end;
-  else // case
-    PhpDivProc;
-  end;
 end;
 
 procedure TSynWebEngine.PhpPercentProc;
@@ -6715,6 +6933,12 @@ end;
 
 procedure TSynWebEngine.PhpHashProc;
 begin
+  if FInstance^.FHighlither is TSynWebSmartySyn then
+  begin
+    Inc(FInstance^.FRun);
+    FInstance^.FTokenID := stkPhpSymbol;
+    Exit;
+  end;
   FInstance^.FTokenID := stkPhpComment;
   repeat
     repeat
@@ -6813,8 +7037,16 @@ end;
 
 procedure TSynWebEngine.PhpBraceCloseProc;
 begin
-  Inc(FInstance^.FRun);
-  PhpSetSymbolId(PhpSymbolID_BraceClose);
+  if (FInstance^.FHighlither is TSynWebSmartySyn) and CheckSmartyEnd then
+  begin
+    Inc(FInstance^.FRun, Length(FInstance^.FOptions.FSmartyRDelim));
+    FInstance^.FTokenID := stkMLTag;
+    PhpEnd(False);
+  end else
+  begin
+    Inc(FInstance^.FRun);
+    PhpSetSymbolId(PhpSymbolID_BraceClose);
+  end;
 end;
 
 procedure TSynWebEngine.PhpTildeProc;
@@ -7132,19 +7364,33 @@ var
   s: String;
   i: Integer;
 
-  procedure DoDefault;
+  procedure DoDefault(ARange: TSynWebPhpRangeState = srsPhpDefault);
   begin
     SetRangeInt(3, 20, 0);
-    PhpSetRange(srsPhpDefault);
+    PhpSetRange(ARange);
   end;
 
 begin
   case GetRangeInt(3, 20) of
   0:
     begin
-      Inc(FInstance^.FRun, 2);
+      if FInstance^.FHighlither is TSynWebSmartySyn then
+      begin
+        Inc(FInstance^.FRun, Length(FInstance^.FOptions.FSmartyLDelim));
+        if FInstance^.FLine[FInstance^.FRun] = '*' then
+        begin
+          Inc(FInstance^.FRun);
+          FInstance^.FTokenID := stkPhpComment;
+          DoDefault(srsPhpComment);
+          Exit;
+        end else
+          DoDefault;
+      end else
+      begin
+        Inc(FInstance^.FRun, 2);
+        SetRangeInt(3, 20, 1);
+      end;
       FInstance^.FTokenID := stkMLTag;
-      SetRangeInt(3, 20, 1);
     end;
   1:
     begin
@@ -7160,7 +7406,6 @@ begin
         DoDefault;
         if (FInstance^.FLine[FInstance^.FRun] = '=') and (FInstance^.FOptions.FPhpShortOpenTag) then
         begin
-          DoDefault;
           Inc(FInstance^.FRun);
           FInstance^.FTokenID := stkPhpKeyword;
           FInstance^.FTokenLastID := PhpKeyID_Special_PhpTagEcho;
@@ -7213,16 +7458,38 @@ end;
 
 procedure TSynWebEngine.PhpRangeCommentProc;
 begin
-  repeat
-    if (FInstance^.FLine[FInstance^.FRun] = '*') and
-      (FInstance^.FLine[FInstance^.FRun + 1] = '/') then
-    begin
-      Inc(FInstance^.FRun, 2);
-      PhpSetRange(srsPhpDefault);
-      Break;
-    end;
-    Inc(FInstance^.FRun);
-  until FInstance^.FLine[FInstance^.FRun] = #0;
+  if FInstance^.FHighlither is TSynWebSmartySyn then
+  begin
+    repeat
+      while not (FInstance^.FLine[FInstance^.FRun] in [#0, '*'])  do
+        Inc(FInstance^.FRun);
+      case FInstance^.FLine[FInstance^.FRun] of
+      #0:
+        Break;
+      '*':
+        begin
+          Inc(FInstance^.FRun);
+          if CheckSmartyEnd then
+          begin
+            Inc(FInstance^.FRun, Length(FInstance^.FOptions.FSmartyRDelim));
+            PhpEnd(False);
+            Break;
+          end else
+            Inc(FInstance^.FRun);
+        end;
+      end;
+    until False;
+  end else
+    repeat
+      if (FInstance^.FLine[FInstance^.FRun] = '*') and
+        (FInstance^.FLine[FInstance^.FRun + 1] = '/') then
+      begin
+        Inc(FInstance^.FRun, 2);
+        PhpSetRange(srsPhpDefault);
+        Break;
+      end;
+      Inc(FInstance^.FRun);
+    until FInstance^.FLine[FInstance^.FRun] = #0;
   FInstance^.FTokenID := stkPhpComment;
 end;
 

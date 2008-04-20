@@ -27,7 +27,7 @@ begin
     if check(j,'[a]-[z] [A]-[Z]') then
       fIdentTable[I]:=fIdentTable[I] or (1 shl 0);
 
-    if check(j,'0-32 [<] [>]') then
+    if check(j,'0-32 [<] [>] [{]') then
       fIdentTable[I]:=fIdentTable[I] or (1 shl 1);
     
     if check(j,'0-32 [/] [>]') then
@@ -36,13 +36,13 @@ begin
     if check(j,'0-32 [/] [>] [=]') then
       fIdentTable[I]:=fIdentTable[I] or (1 shl 3);
 
-    if check(j,'0 39 [\] [<]') then
+    if check(j,'0 39 [\] [<] [{]') then
       fIdentTable[I]:=fIdentTable[I] or (1 shl 4);
 
-    if check(j,'0 ["] [\] [<]') then
+    if check(j,'0 ["] [\] [<] [{]') then
       fIdentTable[I]:=fIdentTable[I] or (1 shl 5);
 
-    if check(j, '0-32 [<] [>] [&]') then
+    if check(j, '0-32 [<] [>] [&] [{]') then
       fIdentTable[I]:=fIdentTable[I] or (1 shl 6);
 
     if check(j, '[a]-[z] [A]-[Z] [0]-[9] [:] [-] [_]') then
@@ -66,7 +66,7 @@ begin
     if check(j, '[0]-[9] [.]') then
       fIdentTable[I]:=fIdentTable[I] or (1 shl 13);
 
-    if check(j, '0-32 [(] [)] [,] [\] [<]') then
+    if check(j, '0-32 [(] [)] [,] [\] [<] [{]') then
       fIdentTable[I]:=fIdentTable[I] or (1 shl 14);
 
     if check(j, '[a]-[z] [A]-[Z] [_]') then
@@ -81,19 +81,19 @@ begin
     if check(j, '[n] [r] [t] [\] [$] 34 [0]-[7] [x]') then 
       fIdentTable[I]:=fIdentTable[I] or (1 shl 18);
 
-    if check(j, '0 [-] [<]') then 
+    if check(j, '0 [-] [<] [{]') then 
       fIdentTable[I]:=fIdentTable[I] or (1 shl 19);
 
-    if check(j, '0 [<] [>]') then 
+    if check(j, '0 [<] [>] [{]') then 
       fIdentTable[I]:=fIdentTable[I] or (1 shl 20);
 
-    if check(j, '0 39 [<]') then 
+    if check(j, '0 39 [<] [{]') then 
       fIdentTable[I]:=fIdentTable[I] or (1 shl 21);
 
-    if check(j, '0 ["] [<]') then 
+    if check(j, '0 ["] [<] [{]') then 
       fIdentTable[I]:=fIdentTable[I] or (1 shl 22);
 
-    if check(j, '0-32 [<] [>] [/]') then 
+    if check(j, '0-32 [<] [>] [/] [{]') then 
       fIdentTable[I]:=fIdentTable[I] or (1 shl 23);
 
     if check(j, '0 39 [\]') then 
@@ -102,7 +102,7 @@ begin
     if check(j, '0 ["] [\] [{] [$]') then 
       fIdentTable[I]:=fIdentTable[I] or (1 shl 25);
       
-    if check(j, '0 [*] [<]') then 
+    if check(j, '0 [*] [<] [{]') then 
       fIdentTable[I]:=fIdentTable[I] or (1 shl 26);
 
     if check(j, '0 [`] [\]') then 
@@ -125,16 +125,16 @@ begin
     if check(j, '0-32 [>]') then 
       fIdentTable2[I]:=fIdentTable2[I] or (1 shl 0);
 
-    if check(j, '0-32 [<] []]') then 
+    if check(j, '0-32 [<] []] [{]') then 
       fIdentTable2[I]:=fIdentTable2[I] or (1 shl 1);
 
     if check(j, '[$] [_] [a]-[z] [A]-[Z] [0]-[9]') then 
       fIdentTable2[I]:=fIdentTable2[I] or (1 shl 2);
 
-    if check(j, '0 34 [<] [\]') then 
+    if check(j, '0 34 [<] [\] [{]') then 
       fIdentTable2[I]:=fIdentTable2[I] or (1 shl 3);
 
-    if check(j, '0 39 [<] [\]') then 
+    if check(j, '0 39 [<] [\] [{]') then 
       fIdentTable2[I]:=fIdentTable2[I] or (1 shl 4);
 
     if check(j, '0 [`] [\] [{] [$]') then 

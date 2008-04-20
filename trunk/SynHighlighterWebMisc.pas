@@ -1,6 +1,6 @@
 {-------------------------------------------------------------------------------
 SynWeb
-Copyright (C) 2006  Krystian Bigaj
+Copyright (C) 2008  Krystian Bigaj
 
 *** MPL
 The contents of this file are subject to the Mozilla Public License
@@ -45,13 +45,13 @@ You may retrieve the latest version of this file at the SynWeb home page,
 located at http://sourceforge.net/projects/synweb
 
 Contact: krystian.bigaj@gmail.com
-Homepage: http://flatdev.ovh.org      
+Homepage: http://flatdev.ovh.org
 -------------------------------------------------------------------------------}
 
 {$IFNDEF QSYNHIGHLIGHTERWEBMISC}
 unit SynHighlighterWebMisc;
 {$ENDIF}
-  
+
 {$I SynWeb.inc}
 
 interface
@@ -107,7 +107,7 @@ function SynWebUpdateActiveHighlighter(ASynEdit: TCustomSynEdit;
 function SynWebFillCompletionProposal(ASynEdit: TCustomSynEdit;
   ASynWeb: TSynWebHtmlSyn; ACompletion: TSynCompletionProposal;
   var CurrentInput: WideString): TSynWebHighlighterTypes;
-  
+
 implementation
 
 type
@@ -127,7 +127,7 @@ function SynEditGetMatchingTag(ASynEdit: TCustomSynEdit; APoint: TBufferCoord;
   var AMatch: TSynTokenMatched): Integer;
 var
   TagID: Integer;
-  Level, DeltaLevel, FMatchStackID: Integer;   
+  Level, DeltaLevel, FMatchStackID: Integer;
   H: TSynWebMLSyn;
   bSpecial: Boolean;
 
@@ -205,7 +205,7 @@ var
               Dec(FMatchStackID);
           end;
         1:
-          begin                   
+          begin
             Inc(FMatchStackID);
             if FMatchStackID >= Length(FMatchStack) then
               SetLength(FMatchStack, Length(FMatchStack) + 32);
@@ -226,7 +226,7 @@ var
                 end else
                   Next;
                 Exit;
-              end;  
+              end;
               if OldLine <> APoint.Line then
               begin
                 APoint.Line := OldLine;
@@ -248,9 +248,9 @@ begin
     Exit;
   H := TSynWebMLSyn(ASynEdit.Highlighter);
   with ASynEdit, H do
-  begin       
+  begin
     if Engine = nil then
-      Exit;         
+      Exit;
     Dec(APoint.Line);
     Dec(APoint.Char);
     if APoint.Line = 0 then
@@ -259,12 +259,12 @@ begin
       SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
     SetLine(Lines[APoint.Line], APoint.Line);
     while not GetEol and (APoint.Char >= GetTokenPos + Length(GetToken)) do
-      Next;         
+      Next;
     TagID := GetTagID;
     if GetEol or (TagID = -1) or (GetTokenID <> stkMLTagName) or
       (TSynWeb_TagsData[TagID] and (1 shl 31) <> 0) then
       Exit;
-    bSpecial := TagID in [MLTagID_Script, MLTagID_Style]; 
+    bSpecial := TagID in [MLTagID_Script, MLTagID_Style];
     case GetTagKind of
     1:
       begin
@@ -284,7 +284,7 @@ begin
     AMatch.TokenKind := GetTokenKind;
     AMatch.TokenAttri := GetTokenAttribute;
     if Result = 1 then
-    begin          
+    begin
       if bSpecial and ScanToEndOfSpecialTag then
       begin
         Result := 0;
@@ -513,10 +513,10 @@ var
   begin
     with ASynEdit, ASynWeb do
     begin
-    
+
       case ctk of
       stkMLTagName, stkMLTagNameUndef:
-        begin       
+        begin
           HtmlLoad;
           case GetTagKind of
           -1:
@@ -526,7 +526,7 @@ var
           end;
         end;
       stkMLTag:
-        begin       
+        begin
           HtmlLoad;
           case GetTagKind of
           -1:
@@ -546,9 +546,9 @@ var
           HtmlLoad;
         srsMLTagKey, srsMLTagKeyEq:
           HtmlLoadAttrs(GetTagID);
-        end; 
-      end;   
-    end;    
+        end;
+      end;
+    end;
   end;
 
   procedure CssLoadTags;
@@ -659,7 +659,7 @@ var
 
 begin
   Result := SynWebGetHighlighterTypeAtCursor(ASynEdit, ASynWeb);
-  
+
   ACompletion.InsertList.Clear;
   ACompletion.ItemList.Clear;
 

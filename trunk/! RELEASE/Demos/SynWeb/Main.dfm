@@ -1,6 +1,7 @@
 object Form1: TForm1
   Left = 291
   Top = 172
+  ActiveControl = CheckBox1
   Caption = 'Form1'
   ClientHeight = 472
   ClientWidth = 900
@@ -116,7 +117,7 @@ object Form1: TForm1
       Width = 145
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 1
       OnChange = ComboBox1Change
     end
@@ -126,7 +127,7 @@ object Form1: TForm1
       Width = 77
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 2
       OnChange = ComboBox2Change
     end
@@ -164,7 +165,7 @@ object Form1: TForm1
       Width = 77
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 6
       OnChange = ComboBox3Change
     end
@@ -185,7 +186,8 @@ object Form1: TForm1
         'PHP-Cli'
         'PHP (Plain)'
         'WML (+PHP)'
-        'XML (+PHP)')
+        'XML (+PHP)'
+        'Smarty (+CSS, +ES)')
     end
     object CheckBox3: TCheckBox
       Left = 296
@@ -229,7 +231,7 @@ object Form1: TForm1
       Width = 77
       Height = 21
       Style = csDropDownList
-      ItemHeight = 0
+      ItemHeight = 13
       TabOrder = 11
       OnChange = ComboBox5Change
     end
@@ -253,6 +255,7 @@ object Form1: TForm1
     OnDblClick = SynWebErrorListDblClick
   end
   object SynWebEngine1: TSynWebEngine
+    InactiveAttri.Foreground = clSilver
     Options.HtmlVersion = shvXHtml10Transitional
     Options.WmlVersion = swvWml13
     Options.CssVersion = scvCss21
@@ -401,6 +404,20 @@ object Form1: TForm1
     Options.PhpVersion = spvPhp5
     Options.UseEngineOptions = True
     Left = 240
+    Top = 264
+  end
+  object mar: TSynWebSmartySyn
+    ActiveHighlighterSwitch = False
+    Engine = SynWebEngine1
+    Options.SmartyLDelim = '{'
+    Options.SmartyRDelim = '}'
+    Options.HtmlVersion = shvXHtml10Transitional
+    Options.CssVersion = scvCss21
+    Options.PhpVersion = spvPhp5
+    Options.CssEmbeded = True
+    Options.EsEmbeded = True
+    Options.UseEngineOptions = False
+    Left = 280
     Top = 264
   end
 end
