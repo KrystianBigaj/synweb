@@ -787,6 +787,7 @@ type
     procedure EsRangeCommentMultiProc;
     procedure EsRangeString34Proc;
     procedure EsRangeString39Proc;
+    procedure EsRangeRegExpProc;
 
     function EsKeywordComp(const ID: Integer): Boolean;
     function EsIdentCheck: TSynWebTokenKind;
@@ -5738,6 +5739,7 @@ begin
   FEsRangeProcTable[srsEsCommentMulti] := EsRangeCommentMultiProc;
   FEsRangeProcTable[srsEsString34] := EsRangeString34Proc;
   FEsRangeProcTable[srsEsString39] := EsRangeString39Proc;
+  FEsRangeProcTable[srsEsRegExp] := EsRangeRegExpProc;
 
   pF := PSynWebIdentFuncTableFunc(@FEsIdentFuncTable);
   for I := Low(FEsIdentFuncTable) to High(FEsIdentFuncTable) do
@@ -5752,6 +5754,15 @@ procedure TSynWebEngine.EsNext;
 begin
   FInstance^.FTokenPos := FInstance^.FRun;
   FEsRangeProcTable[EsGetRange];
+
+  case FInstance^.FTokenID of
+  stkEsIdentifier, stkEsNumber, stkEsString:
+    SetRangeBit(13, False);
+  stkEsKeyword, stkEsError:
+    SetRangeBit(13, True);
+  stkEsSymbol:
+    SetRangeBit(13, GetToken <> ')');
+  end;
 end;
 
 function TSynWebEngine.EsGetRange: TSynWebEsRangeState;
@@ -5815,6 +5826,7 @@ end;
 procedure TSynWebEngine.EsSlashProc;
 begin
   Inc(FInstance^.FRun);
+  
   case FInstance^.FLine[FInstance^.FRun] of
   '*':
     begin
@@ -5836,6 +5848,14 @@ begin
         FInstance^.FTokenID := stkEsComment
       else
         EsRangeCommentProc;
+      Exit;
+    end;
+  else
+    if GetRangeBit(13) then // Allow regExpr
+    begin
+      FInstance^.FTokenID := stkEsSymbol;
+      SetRangeInt(2, 11, 0);
+      EsSetRange(srsEsRegExp);
       Exit;
     end;
   end;
@@ -6149,7 +6169,7 @@ begin
         '\':
           begin
             Inc(FInstance^.FRun);
-            if FInstance^.FLine[FInstance^.FRun] = #34 then
+            if FInstance^.FLine[FInstance^.FRun] in [#34, '\'] then
               Inc(FInstance^.FRun);
           end;
         end;
@@ -6188,13 +6208,212 @@ begin
           end;
         '\':
           begin
-            Inc(FInstance^.FRun);
-            if FInstance^.FLine[FInstance^.FRun] = #39 then
+            Inc(FInstance^.FRun);                      
+            if FInstance^.FLine[FInstance^.FRun] in [#39, '\'] then
               Inc(FInstance^.FRun);
           end;
         end;
       until False;
   EsSetRange(srsEsDefault);
+end;
+
+procedure TSynWebEngine.EsRangeRegExpProc;
+var
+  lBrace: Integer;
+
+  procedure SkipSpace;
+  begin
+    while FInstance^.FLine[FInstance^.FRun] in [#1..#32] do
+      Inc(FInstance^.FRun);
+  end;
+
+  procedure RegExpInvalid;
+  begin
+    FInstance^.FTokenID := stkEsError;
+  end;
+
+  function ScanNumber: Boolean;
+  begin
+    Result := FInstance^.FLine[FInstance^.FRun] in ['0'..'9'];
+    if Result then
+      repeat
+        Inc(FInstance^.FRun);
+      until not (FInstance^.FLine[FInstance^.FRun] in ['0'..'9']);
+  end;
+
+  procedure BraceDelta(ADelta: Integer);
+  begin                
+    Inc(FInstance^.FRun);
+    Inc(lBrace, ADelta);
+    if lBrace < 0 then
+      RegExpInvalid;
+  end;
+
+  procedure ScanBackslash;
+
+    function IsHex(const AChar: Char): Boolean;
+    begin
+      Result := AChar in ['0'..'9', 'a'..'f', 'A'..'F'];
+    end;
+
+  begin
+    Inc(FInstance^.FRun);
+
+    case FInstance^.FLine[FInstance^.FRun] of
+    #0:
+      RegExpInvalid;
+      
+    'c':
+      begin
+        Inc(FInstance^.FRun);
+        if FInstance^.FLine[FInstance^.FRun] in ['A'..'Z'] then
+          Inc(FInstance^.FRun);
+      end;
+
+    'x':
+      begin
+        Inc(FInstance^.FRun);
+        if IsHex(FInstance^.FLine[FInstance^.FRun]) and
+          IsHex(FInstance^.FLine[FInstance^.FRun + 1])
+        then
+          Inc(FInstance^.FRun, 2)
+        else
+          RegExpInvalid;
+      end;
+
+    'u':
+      begin
+        Inc(FInstance^.FRun);
+        if IsHex(FInstance^.FLine[FInstance^.FRun]) and
+          IsHex(FInstance^.FLine[FInstance^.FRun + 1]) and
+          IsHex(FInstance^.FLine[FInstance^.FRun + 2]) and
+          IsHex(FInstance^.FLine[FInstance^.FRun + 3])
+        then
+          Inc(FInstance^.FRun, 4);
+      end;
+
+    else
+      Inc(FInstance^.FRun);
+    end;
+  end;
+
+begin    
+  SetRangeBit(13, False);
+
+  case GetRangeInt(2, 11) of
+  1:     
+    begin
+      Inc(FInstance^.FRun); 
+      FInstance^.FTokenID := stkEsSymbol;
+
+      if FInstance^.FLine[FInstance^.FRun] in ['i', 'g', 'm'] then
+        SetRangeInt(2, 11, 2)
+      else
+      begin
+        EsSetRange(srsEsDefault);
+        SetRangeInt(2, 11, 1);
+      end;
+
+      Exit;
+    end;
+
+  2:    
+    begin
+      repeat
+        Inc(FInstance^.FRun);
+      until not (FInstance^.FLine[FInstance^.FRun] in ['i', 'g', 'm']);
+
+      FInstance^.FTokenID := stkEsString;
+      EsSetRange(srsEsDefault);
+      SetRangeInt(2, 11, 0);
+      Exit;
+    end;
+  end;
+
+
+  lBrace := 0;
+  FInstance^.FTokenID := stkEsString;
+
+  while True do
+  begin
+    SkipSpace;
+    
+    case FInstance^.FLine[FInstance^.FRun] of
+    '/', #0:
+      Break;
+
+    '(':
+      BraceDelta(1);
+
+    ')':
+      BraceDelta(-1);
+
+    '\':
+      ScanBackslash;
+
+    '{':
+      begin
+        Inc(FInstance^.FRun);
+        SkipSpace;
+
+        if ScanNumber then
+        begin
+          SkipSpace;
+          if FInstance^.FLine[FInstance^.FRun] = ',' then
+          begin
+            Inc(FInstance^.FRun);
+            SkipSpace;
+            if ScanNumber then
+              SkipSpace;
+          end;
+        end else
+        begin
+          RegExpInvalid;
+          while not (FInstance^.FLine[FInstance^.FRun] in [#0, '}', '/']) do
+            Inc(FInstance^.FRun);
+        end;
+
+        if FInstance^.FLine[FInstance^.FRun] = '}' then
+          Inc(FInstance^.FRun)
+        else
+          RegExpInvalid;
+      end;
+
+    '[':
+      begin
+        Inc(FInstance^.FRun);
+        while True do
+          case FInstance^.FLine[FInstance^.FRun] of
+          '\':
+            ScanBackslash;
+          #0, ']':
+            Break;
+          else
+            Inc(FInstance^.FRun);
+          end;
+
+        if FInstance^.FLine[FInstance^.FRun] = ']' then
+          Inc(FInstance^.FRun)
+        else
+          RegExpInvalid;
+      end;
+    else // case
+      Inc(FInstance^.FRun);
+    end;
+  end;
+
+  if lBrace <> 0 then
+    RegExpInvalid;
+
+  if FInstance^.FLine[FInstance^.FRun] = '/' then
+  begin
+    SetRangeInt(2, 11, 1);
+    Exit;
+  end else
+  begin
+    RegExpInvalid;
+    EsSetRange(srsEsDefault);
+  end;
 end;
 
 function TSynWebEngine.EsKeywordComp(const ID: Integer): Boolean;

@@ -170,7 +170,7 @@ const
 // ECMAScript ------------------------------------------------------------------
 type
   TSynWebEsRangeState = (srsEsDefault, srsEsComment, srsEsCommentMulti, srsEsString34,
-    srsEsString39);
+    srsEsString39, srsEsRegExp);
 
 // Php -------------------------------------------------------------------------
 type
