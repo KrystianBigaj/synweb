@@ -5757,11 +5757,11 @@ begin
 
   case FInstance^.FTokenID of
   stkEsIdentifier, stkEsNumber, stkEsString:
-    SetRangeBit(13, False);
-  stkEsKeyword, stkEsError:
     SetRangeBit(13, True);
+  stkEsKeyword, stkEsError:
+    SetRangeBit(13, False);
   stkEsSymbol:
-    SetRangeBit(13, GetToken <> ')');
+    SetRangeBit(13, GetToken = ')');
   end;
 end;
 
@@ -5851,7 +5851,7 @@ begin
       Exit;
     end;
   else
-    if GetRangeBit(13) then // Allow regExpr
+    if not GetRangeBit(13) then // Allow regExpr
     begin
       FInstance^.FTokenID := stkEsSymbol;
       SetRangeInt(2, 11, 0);
@@ -6298,7 +6298,7 @@ var
   end;
 
 begin    
-  SetRangeBit(13, False);
+  SetRangeBit(13, True);
 
   case GetRangeInt(2, 11) of
   1:     
