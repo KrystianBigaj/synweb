@@ -70,9 +70,12 @@ shmJS:
 --- ES range (0..16: 17 bits) -----
 -----------------------------------
 
-******** *******% %??????? ????????
-                  |  
-                  |- [ Range (15..16: 2 bits) - Type: values from 0 to 3 ]
+******** *******% %%#%???? ????????
+                   ||- [ RegExp (11..12: 2 bits) - regexpr state ]
+                   ||
+                   ||- [ RegExp (13: 1 bit) - regExp on next '/' ]
+                   |
+                   |- [ Range (14..16: 3 bits) - Type: values from 0 to 3 ]
 
 -----------------------------------
 --- PHP range (17..28: 12 bits ----
