@@ -46,7 +46,7 @@ type
     PopupMenu1: TPopupMenu;
     Reload1: TMenuItem;
     SynWebPhpPlainSyn1: TSynWebPhpPlainSyn;
-    mar: TSynWebSmartySyn;
+    SynWebSmartySyn1: TSynWebSmartySyn;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);

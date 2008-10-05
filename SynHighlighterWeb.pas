@@ -4099,7 +4099,7 @@ procedure TSynWebEngine.CssNumberProc;
 begin
   if CssGetRange = srsCssPropVal then
   begin
-    FInstance^.FCssMask := $F5400000;
+    FInstance^.FCssMask := $F5420000;
     CssNumberDefProc;
   end else
     CssErrorProc;
@@ -4115,10 +4115,18 @@ var
       (FInstance^.FLine[FInstance^.FRun - 1] = '0') then
       FInstance^.FCssMask := FInstance^.FCssMask and $F5400000
     else
-      FInstance^.FCssMask := FInstance^.FCssMask and $01E00000;
+      FInstance^.FCssMask := FInstance^.FCssMask and $1E20000;
     if (FInstance^.FTokenPos > 1) and ((FInstance^.FLine[FInstance^.FTokenPos - 1] = '/') and
       (FInstance^.FLine[FInstance^.FTokenPos - 2] <> '*')) then
       FInstance^.FCssMask := FInstance^.FCssMask or $18000000;
+  end;
+
+  function Check100_900: Boolean;
+  begin
+    Result := (FInstance^.FRun - FInstance^.FTokenPos = 3) and
+      (FInstance^.FLine[FInstance^.FRun - 3] in ['1'..'9']) and
+      (FInstance^.FLine[FInstance^.FRun - 2] = '0') and
+      (FInstance^.FLine[FInstance^.FRun - 1] = '0');
   end;
 
 begin
@@ -4170,6 +4178,10 @@ begin
       CheckOther;
   end;
   prop := CssGetProp - 1;
+
+  if (FInstance^.FCssMask and (1 shl 17) <> 0) and not Check100_900 then
+    FInstance^.FCssMask := FInstance^.FCssMask and not (1 shl 17);
+    
   if (prop = -1) or (TSynWeb_CssPropsData[prop] and FInstance^.FCssMask = 0) then
     FInstance^.FTokenID := stkCssValUndef
   else
