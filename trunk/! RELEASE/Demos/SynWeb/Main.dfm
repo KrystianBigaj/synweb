@@ -406,7 +406,7 @@ object Form1: TForm1
     Left = 240
     Top = 264
   end
-  object mar: TSynWebSmartySyn
+  object SynWebSmartySyn1: TSynWebSmartySyn
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
     Options.SmartyLDelim = '{'

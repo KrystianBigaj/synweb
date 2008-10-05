@@ -313,7 +313,7 @@ begin
       else
         SetRange(TSynEditStringList(Lines).Ranges[APoint.Line - 1]);
       SetLine(Lines[APoint.Line], APoint.Line);
-      while not GetEol and (GetTokenPos < AMatch.CloseTokenPos.Char -1) do
+      while not GetEol and (GetTokenPos < AMatch.CloseTokenPos.Char - 1) do
         CheckTokenBack;
       if FMatchStackID > -1 then
       begin
