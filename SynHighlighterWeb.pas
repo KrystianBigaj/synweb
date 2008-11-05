@@ -561,6 +561,32 @@ type
     property Options: TSynWebPhpPlainOptions read GetOptions write SetOptions;
   end;
 
+  TSynWebSpecialAttriute = (swsaPhpVarPrefix, swsaPhpMarker, swsaTagScript, swsaTagStyle);
+  TSynWebSpecialAttriutes = set of TSynWebSpecialAttriute;
+
+  TSynWebEngineSpecialAttributes = class(TPersistent)
+  private
+    FEngine: TSynWebEngine;
+    FOptions: TSynWebSpecialAttriutes;
+    FInactiveOptions: TSynWebSpecialAttriutes;
+    FAttributes: array[TSynWebSpecialAttriute] of TSynHighlighterAttributes;
+
+    procedure SetOptions(AOptions: TSynWebSpecialAttriutes);
+    procedure SetInactiveOptions(AOptions: TSynWebSpecialAttriutes);
+    procedure SetAttribute(AIndex: Integer; const AAttribute: TSynHighlighterAttributes);
+    function GetAttribute(AIndex: Integer): TSynHighlighterAttributes;
+  public
+    constructor Create(AOwner: TSynWebEngine);
+  published
+    property Options: TSynWebSpecialAttriutes read FOptions write SetOptions default [swsaPhpMarker];
+    property InactiveOptions: TSynWebSpecialAttriutes read FInactiveOptions write SetInactiveOptions default [swsaPhpMarker];
+
+    property PhpVarPrefix: TSynHighlighterAttributes index 0 read GetAttribute write SetAttribute;
+    property PhpMarker: TSynHighlighterAttributes index 1 read GetAttribute write SetAttribute;
+    property TagScript: TSynHighlighterAttributes index 2 read GetAttribute write SetAttribute;
+    property TagStyle: TSynHighlighterAttributes index 3 read GetAttribute write SetAttribute;
+  end;
+
   TSynWebEngine = class(TComponent)
   private
     // Global ------------------------------------------------------------------
@@ -572,6 +598,9 @@ type
     FPhpHereDocList: TStringList;
     FEngineOptions: TSynWebOptions;
     FOptions: TSynWebEngineOptions;
+    FSpecialAttri: TSynWebEngineSpecialAttributes;
+    FIsSpecialAttribute: Boolean;
+    FSpecialAttribute: TSynWebSpecialAttriute;
 
     // Markup Language ---------------------------------------------------------
     FMLTagIdentFuncTable: array[0..MLTagMaxKeyHash] of TSynWebIdentFuncTableFunc;
@@ -877,6 +906,8 @@ type
     function GetRangeInt(ALen, APos: Longword): Longword;
     procedure SetRangeInt(ALen, APos, AVal: Longword);
 
+    procedure SetSpecialAttribute(AType: TSynWebSpecialAttriute);
+
     procedure NullProc;
     procedure NextSetHighlighterType;
     procedure SetHighlighterType(const AHighlighterType: TSynWebHighlighterType;
@@ -893,6 +924,7 @@ type
     property InactiveAttri: TSynHighlighterAttributes
       read FInactiveAttri write FInactiveAttri;
     property Options: TSynWebEngineOptions read FOptions write FOptions;
+    property SpecialAttri: TSynWebEngineSpecialAttributes read FSpecialAttri write FSpecialAttri;
 
     // ML
     property MLWhitespaceAttri: TSynHighlighterAttributes
@@ -1475,10 +1507,18 @@ begin
   if FEngine = nil then
     Result := nil
   else
-    if (FInstance.FHighlighterType in FActiveHighlighters) then
-      Result := FEngine.FTokenAttributeTable[FInstance.FTokenID]
-    else
-      Result := FEngine.FInactiveAttri;
+    with FEngine do
+      if (FInstance.FHighlighterType in FActiveHighlighters) then
+      begin
+        if FIsSpecialAttribute and (FSpecialAttribute in FSpecialAttri.Options) then
+          Result := FSpecialAttri.FAttributes[FSpecialAttribute]
+        else
+          Result := FTokenAttributeTable[FInstance.FTokenID];
+      end else     
+        if FIsSpecialAttribute and (FSpecialAttribute in FSpecialAttri.InactiveOptions) then
+          Result := FSpecialAttri.FAttributes[FSpecialAttribute]
+        else
+          Result := FInactiveAttri;
 end;
 
 {$IFNDEF UNISYNEDIT}
@@ -2166,6 +2206,72 @@ begin                                                               // srsPhpDef
   FInstance.FRange := $00000000 or (Longword(shtPhpInML) shl 29) or (1 shl 23);
 end;
 
+{ TSynWebEngineSpecialAttributes }
+
+constructor TSynWebEngineSpecialAttributes.Create(AOwner: TSynWebEngine);
+
+  function CreateAttrib(const AName:String): TSynHighlighterAttributes;
+  begin
+{$IFDEF UNISYNEDIT}
+    Result := TSynHighlighterAttributes.Create(AName, AName);
+{$ELSE}
+    Result := TSynHighlighterAttributes.Create(AName);
+{$ENDIF}
+  end;
+
+begin
+  FEngine := AOwner;
+
+  FOptions := [swsaPhpMarker];
+  FInactiveOptions := [swsaPhpMarker]; 
+  
+  FAttributes[swsaPhpVarPrefix] := CreateAttrib('Special: Php Variable prefix');
+  FEngine.AddAttribute(FAttributes[swsaPhpVarPrefix]);
+
+  FAttributes[swsaPhpMarker] := CreateAttrib('Special: Php marker');
+  FAttributes[swsaPhpMarker].Style := [fsBold];
+  FAttributes[swsaPhpMarker].Foreground := clNavy;
+  FEngine.AddAttribute(FAttributes[swsaPhpMarker]);
+
+  FAttributes[swsaTagScript] := CreateAttrib('Special: Script tag');
+  FEngine.AddAttribute(FAttributes[swsaTagScript]);
+
+  FAttributes[swsaTagStyle] := CreateAttrib('Special: Style tag');
+  FEngine.AddAttribute(FAttributes[swsaTagStyle]);
+end;
+
+procedure TSynWebEngineSpecialAttributes.SetOptions(AOptions: TSynWebSpecialAttriutes);
+begin
+  FOptions := AOptions;
+
+  FEngine.DefHighlightChange(Self);
+end;
+
+procedure TSynWebEngineSpecialAttributes.SetInactiveOptions(AOptions: TSynWebSpecialAttriutes);
+begin
+  FInactiveOptions := AOptions;
+
+  FEngine.DefHighlightChange(Self);
+end;
+
+procedure TSynWebEngineSpecialAttributes.SetAttribute(AIndex: Integer; const AAttribute: TSynHighlighterAttributes);
+begin
+  if (AIndex >= Integer(Low(TSynWebSpecialAttriute))) and
+    (AIndex <= Integer(High(TSynWebSpecialAttriute)))
+  then
+    FAttributes[TSynWebSpecialAttriute(AIndex)] := AAttribute;
+end;
+
+function TSynWebEngineSpecialAttributes.GetAttribute(AIndex: Integer): TSynHighlighterAttributes;
+begin
+  if (AIndex >= Integer(Low(TSynWebSpecialAttriute))) and
+    (AIndex <= Integer(High(TSynWebSpecialAttriute)))
+  then
+    Result := FAttributes[TSynWebSpecialAttriute(AIndex)]
+  else
+    Result := nil;
+end;
+
 { TSynWebEngine }
 
 constructor TSynWebEngine.Create(AOwner: TComponent);
@@ -2516,6 +2622,10 @@ begin
   AddAttribute(FInactiveAttri);
 
   FTokenAttributeTable[stkNull] := nil;
+
+  // Special
+  FSpecialAttri := TSynWebEngineSpecialAttributes.Create(Self);
+
   SetAttributesOnChange(DefHighlightChange);
 end;
 
@@ -2523,6 +2633,7 @@ destructor TSynWebEngine.Destroy;
 var
   i: Integer;
 begin
+  FSpecialAttri.Free;
   for i := FNotifyList.Count - 1 downto 0 do
     TSynWebBase(FNotifyList[i]).Engine := nil;
   for i := FAttributes.Count - 1 downto 0 do
@@ -3059,6 +3170,15 @@ begin
   begin
     FInstance^.FTokenID := MLTagCheck;
     ID := MLGetTag - 1;
+
+    case ID of
+    MLTagID_Script:
+      SetSpecialAttribute(swsaTagScript);
+
+    MLTagID_Style:
+      SetSpecialAttribute(swsaTagStyle);
+    end;
+
     if GetRangeBit(12) then
     begin
       if (ID <> -1) and (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) then
@@ -6330,7 +6450,6 @@ begin
     end;
   end;
 
-
   lBrace := 0;
   FInstance^.FTokenID := stkEsString;
 
@@ -6406,10 +6525,8 @@ begin
     RegExpInvalid;
 
   if FInstance^.FLine[FInstance^.FRun] = '/' then
-  begin
-    SetRangeInt(2, 11, 1);
-    Exit;
-  end else
+    SetRangeInt(2, 11, 1)
+  else
   begin
     RegExpInvalid;
     EsSetRange(srsEsDefault);
@@ -6766,6 +6883,7 @@ begin
   begin
     Inc(FInstance^.FRun);
     FInstance^.FTokenID := stkMLTag;
+    SetSpecialAttribute(swsaPhpMarker);
     PhpEnd(False);
   end else
     PhpSetSymbolId(PhpSymbolID_Question);
@@ -7154,7 +7272,8 @@ begin
     Inc(FInstance^.FRun, 2);
     if FInstance^.FOptions.FPhpAspTags then
     begin
-      FInstance^.FTokenID := stkMLTag;
+      FInstance^.FTokenID := stkMLTag; 
+      SetSpecialAttribute(swsaPhpMarker);
       PhpEnd(False);
     end else
       FInstance^.FTokenID := stkPhpError;
@@ -7271,7 +7390,8 @@ begin
   if (FInstance^.FHighlither is TSynWebSmartySyn) and CheckSmartyEnd then
   begin
     Inc(FInstance^.FRun, Length(FInstance^.FOptions.FSmartyRDelim));
-    FInstance^.FTokenID := stkMLTag;
+    FInstance^.FTokenID := stkMLTag; 
+    SetSpecialAttribute(swsaPhpMarker);
     PhpEnd(False);
   end else
   begin
@@ -7309,8 +7429,10 @@ begin
   // if FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', #$7F..#$FF] then
   if (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 28) <> 0)
     or (FInstance^.FLine[FInstance^.FRun] = '{') then
-    FInstance^.FTokenID := stkPhpKeyword
-  else
+  begin
+    SetSpecialAttribute(swsaPhpVarPrefix);
+    FInstance^.FTokenID := stkPhpKeyword;
+  end else
     FInstance^.FTokenID := stkPhpError;
   FInstance^.FTokenLastID := PhpKeyID_Special_Variable;
   SetRangeInt(3, 17, 0);
@@ -7620,7 +7742,8 @@ begin
       begin
         Inc(FInstance^.FRun, 2);
         SetRangeInt(3, 20, 1);
-      end;
+      end;                            
+      SetSpecialAttribute(swsaPhpMarker);
       FInstance^.FTokenID := stkMLTag;
     end;
   1:
@@ -7630,6 +7753,7 @@ begin
         DoDefault;
         SetRangeBit(19, False);
         Inc(FInstance^.FRun, 3);
+        SetSpecialAttribute(swsaPhpMarker);
         FInstance^.FTokenID := stkPhpKeyword;
         FInstance^.FTokenLastID := PhpKeyID_Special_PhpTag;
       end else
@@ -7637,7 +7761,8 @@ begin
         DoDefault;
         if (FInstance^.FLine[FInstance^.FRun] = '=') and (FInstance^.FOptions.FPhpShortOpenTag) then
         begin
-          Inc(FInstance^.FRun);
+          Inc(FInstance^.FRun);         
+          SetSpecialAttribute(swsaPhpMarker);
           FInstance^.FTokenID := stkPhpKeyword;
           FInstance^.FTokenLastID := PhpKeyID_Special_PhpTagEcho;
         end else
@@ -8152,6 +8277,12 @@ begin
   FInstance^.FRange := (FInstance^.FRange and i) or ((AVal shl APos) and not i);
 end;
 
+procedure TSynWebEngine.SetSpecialAttribute(AType: TSynWebSpecialAttriute);
+begin
+  FIsSpecialAttribute := True;
+  FSpecialAttribute := AType;
+end;
+
 procedure TSynWebEngine.NullProc;
 begin
   FInstance^.FTokenID := stkNull;
@@ -8168,7 +8299,6 @@ begin
   if OldRun = FInstance^.FRun then
     Next;
   FInstance^.FHighlighterSW := True;
-
 end;
 
 procedure TSynWebEngine.SetHighlighterType(const AHighlighterType: TSynWebHighlighterType;
@@ -8275,6 +8405,7 @@ end;
 
 procedure TSynWebEngine.Next;
 begin
+  FIsSpecialAttribute := False;
   FInstance^.FHighlighterSW := False;
   FInstance^.FNextProcTable;
 end;
