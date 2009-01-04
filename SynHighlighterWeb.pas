@@ -1700,7 +1700,7 @@ end;
 
 procedure TSynWebMLSyn.ResetRange;
 begin
-  FInstance.FRange := $00000000;
+  FInstance.FRange := CSYNWEB_RANGE_HTML;
 end;
 
 function TSynWebMLSyn.GetTagID: Integer;
@@ -2023,7 +2023,7 @@ end;
 
 procedure TSynWebCssSyn.ResetRange;
 begin
-  FInstance.FRange := $00000000 or (Longword(shtCss) shl 29);
+  FInstance.FRange := CSYNWEB_RANGE_CSS;
 end;
 
 { TSynWebEsSyn }
@@ -2077,7 +2077,7 @@ end;
 
 procedure TSynWebEsSyn.ResetRange;
 begin
-  FInstance.FRange := $00000000 or (Longword(shtEs) shl 29);
+  FInstance.FRange := CSYNWEB_RANGE_ES;
 end;
 
 { TSynWebPhpCliSyn }
@@ -2127,7 +2127,7 @@ end;
 
 procedure TSynWebPhpCliSyn.ResetRange;
 begin
-  FInstance.FRange := $00000000;
+  FInstance.FRange := CSYNWEB_RANGE_HTML; // Same as ML/HTML
 end;
 
 { TSynWebPhpPlainSyn }
@@ -2202,8 +2202,8 @@ begin
 end;
 
 procedure TSynWebPhpPlainSyn.ResetRange;
-begin                                                               // srsPhpDefault
-  FInstance.FRange := $00000000 or (Longword(shtPhpInML) shl 29) or (1 shl 23);
+begin
+  FInstance.FRange := CSYNWEB_RANGE_PHPPLAIN;
 end;
 
 { TSynWebEngineSpecialAttributes }
