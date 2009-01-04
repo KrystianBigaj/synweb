@@ -6385,32 +6385,32 @@ var
       
     'c':
       begin
-        Inc(FInstance^.FRun);
-        if FInstance^.FLine[FInstance^.FRun] in ['A'..'Z'] then
+        Inc(FInstance^.FRun);
+        if FInstance^.FLine[FInstance^.FRun] in ['A'..'Z'] then
           Inc(FInstance^.FRun);
-      end;
+      end;
 
     'x':
       begin
-        Inc(FInstance^.FRun);
-        if IsHex(FInstance^.FLine[FInstance^.FRun]) and
+        Inc(FInstance^.FRun);
+        if IsHex(FInstance^.FLine[FInstance^.FRun]) and
           IsHex(FInstance^.FLine[FInstance^.FRun + 1])
         then
           Inc(FInstance^.FRun, 2)
-        else
-          RegExpInvalid;
-      end;
+        else
+          RegExpInvalid;
+      end;
 
     'u':
       begin
-        Inc(FInstance^.FRun);
-        if IsHex(FInstance^.FLine[FInstance^.FRun]) and
+        Inc(FInstance^.FRun);
+        if IsHex(FInstance^.FLine[FInstance^.FRun]) and
           IsHex(FInstance^.FLine[FInstance^.FRun + 1]) and
           IsHex(FInstance^.FLine[FInstance^.FRun + 2]) and
           IsHex(FInstance^.FLine[FInstance^.FRun + 3])
         then
           Inc(FInstance^.FRun, 4);
-      end;
+      end;
 
     else
       Inc(FInstance^.FRun);
