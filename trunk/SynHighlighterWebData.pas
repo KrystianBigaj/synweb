@@ -111,6 +111,12 @@ type
   TSynWebTokenAttributeTable = array[Low(TSynWebTokenKind)..High(TSynWebTokenKind)] of
     TSynHighlighterAttributes;
 
+const
+  CSYNWEB_RANGE_HTML = $00000000;
+  CSYNWEB_RANGE_CSS = Longword(shtCss) shl 29;
+  CSYNWEB_RANGE_ES = Longword(shtEs) shl 29;
+  CSYNWEB_RANGE_PHPPLAIN = (Longword(shtPhpInML) shl 29) or (1 shl 23); // srsPhpDefault
+
 // ML --------------------------------------------------------------------------
 type
   TSynWebHtmlVersion = (shvHtml401Strict, shvHtml401Transitional, shvHtml401Frameset,
