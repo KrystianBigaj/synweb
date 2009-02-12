@@ -155,7 +155,7 @@ var
             if (GetTokenID in [stkMLTag, stkMLError]) and (GetToken = '>') then
             begin
               Next;
-              if GetTagID = -1 then
+              if MLGetTagID = -1 then
                 Exit;
               Continue;
             end;
@@ -173,8 +173,8 @@ var
   begin
     with H do
     begin
-      if (GetTokenId = stkMLTagName) and (TagID = GetTagID) then
-        Inc(Level, GetTagKind);
+      if (GetTokenId = stkMLTagName) and (TagID = MLGetTagID) then
+        Inc(Level, MLGetTagKind);
       if Level = 0 then
       begin
         SynEditGetMatchingTag := 2;
@@ -196,8 +196,8 @@ var
   begin
     with H do
     begin
-      if (GetTokenId = stkMLTagName) and (TagID = GetTagID) then
-        case GetTagKind of
+      if (GetTokenId = stkMLTagName) and (TagID = MLGetTagID) then
+        case MLGetTagKind of
         -1:
           begin
             Dec(Level);
@@ -260,12 +260,12 @@ begin
     SetLine(Lines[APoint.Line], APoint.Line);
     while not GetEol and (APoint.Char >= GetTokenPos + Length(GetToken)) do
       Next;
-    TagID := GetTagID;
+    TagID := MLGetTagID;
     if GetEol or (TagID = -1) or (GetTokenID <> stkMLTagName) or
       (TSynWeb_TagsData[TagID] and (1 shl 31) <> 0) then
       Exit;
     bSpecial := TagID in [MLTagID_Script, MLTagID_Style];
-    case GetTagKind of
+    case MLGetTagKind of
     1:
       begin
         Result := 1;
@@ -518,7 +518,7 @@ var
       stkMLTagName, stkMLTagNameUndef:
         begin
           HtmlLoad;
-          case GetTagKind of
+          case MLGetTagKind of
           -1:
             CurrentInput := '</' + Copy(ct, 1, CaretX - 1 - GetTokenPos);
           1:
@@ -528,7 +528,7 @@ var
       stkMLTag:
         begin
           HtmlLoad;
-          case GetTagKind of
+          case MLGetTagKind of
           -1:
             CurrentInput := '</';
           1:
@@ -537,15 +537,15 @@ var
         end;
       stkMLTagKey, stkMLTagKeyUndef:
         begin
-          HtmlLoadAttrs(GetTagID);
+          HtmlLoadAttrs(MLGetTagID);
           CurrentInput := Copy(ct, 1, CaretX - 1 - GetTokenPos);
         end;
       else // case
-        case GetMLRange of
+        case MLGetRange of
         srsMLText:
           HtmlLoad;
         srsMLTagKey, srsMLTagKeyEq:
-          HtmlLoadAttrs(GetTagID);
+          HtmlLoadAttrs(MLGetTagID);
         end;
       end;
     end;
