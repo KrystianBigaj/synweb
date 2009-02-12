@@ -365,8 +365,14 @@ type
     function PhpGetSymbolId: Integer;
     function PhpGetRange: TSynWebPhpRangeState;
 
+    function MLGetTagID: Integer;
+    function MLGetTagKind: Integer;
+    function MLGetRange: TSynWebMLRangeState;
+
     function CssGetPropertyId: Integer;
     function CssGetRange: TSynWebCssRangeState;
+    
+    function EsGetRange: TSynWebEsRangeState;
 
     procedure SetRange(Value: Pointer); override;
 {$IFNDEF UNISYNEDIT}
@@ -395,10 +401,6 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
-
-    function GetTagID: Integer;
-    function GetTagKind: Integer;
-    function GetMLRange: TSynWebMLRangeState;
   end;
 
   TSynWebHtmlSynClass = class of TSynWebHtmlSyn;
@@ -1598,6 +1600,35 @@ begin
     Result := FEngine.PhpGetRange;
 end;
 
+function TSynWebBase.MLGetTagID: Integer;
+begin
+  if (FEngine <> nil) and (FInstance.FHighlighterType = shtML) and
+    (FEngine.MLGetRange in [srsMLTag, srsMLTagClose, srsMLTagKey, srsMLTagKeyEq,
+    srsMLTagKeyValue, srsMLTagKeyValueQuoted1, srsMLTagKeyValueQuoted2]) then
+    Result := FEngine.MLGetTag - 1
+  else
+    Result := -1;
+end;
+
+function TSynWebBase.MLGetTagKind: Integer;
+begin
+  if (FEngine = nil) or (FInstance.FHighlighterType <> shtML) then
+    Result := 0
+  else
+    if FEngine.MLGetRange = srsMLTagClose then
+      Result := -1
+    else
+      Result := 1;
+end;
+
+function TSynWebBase.MLGetRange: TSynWebMLRangeState;
+begin
+  if FEngine = nil then
+    Result := srsMLText
+  else
+    Result := FEngine.MLGetRange;
+end;
+
 function TSynWebBase.CssGetPropertyId: Integer;
 begin
   if (FEngine <> nil) and (FInstance.FHighlighterType = shtCss) and
@@ -1615,6 +1646,14 @@ begin
     Result := srsCssRuleset
   else
     Result := FEngine.CssGetRange;
+end;
+
+function TSynWebBase.EsGetRange: TSynWebEsRangeState;
+begin
+  if FEngine = nil then
+    Result := srsEsDefault
+  else
+    Result := FEngine.EsGetRange;
 end;
 
 procedure TSynWebBase.SetRange(Value: Pointer);
@@ -1701,35 +1740,6 @@ end;
 procedure TSynWebMLSyn.ResetRange;
 begin
   FInstance.FRange := CSYNWEB_RANGE_HTML;
-end;
-
-function TSynWebMLSyn.GetTagID: Integer;
-begin
-  if (FEngine <> nil) and (FInstance.FHighlighterType = shtML) and
-    (FEngine.MLGetRange in [srsMLTag, srsMLTagClose, srsMLTagKey, srsMLTagKeyEq,
-    srsMLTagKeyValue, srsMLTagKeyValueQuoted1, srsMLTagKeyValueQuoted2]) then
-    Result := FEngine.MLGetTag - 1
-  else
-    Result := -1;
-end;
-
-function TSynWebMLSyn.GetTagKind: Integer;
-begin
-  if (FEngine = nil) or (FInstance.FHighlighterType <> shtML) then
-    Result := 0
-  else
-    if FEngine.MLGetRange = srsMLTagClose then
-      Result := -1
-    else
-      Result := 1;
-end;
-
-function TSynWebMLSyn.GetMLRange: TSynWebMLRangeState;
-begin
-  if FEngine = nil then
-    Result := srsMLText
-  else
-    Result := FEngine.MLGetRange;
 end;
 
 { TSynWebHtmlSyn }
