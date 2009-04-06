@@ -371,7 +371,8 @@ type
 
     function CssGetPropertyId: Integer;
     function CssGetRange: TSynWebCssRangeState;
-    
+
+    function EsGetSymbolId: Integer;
     function EsGetRange: TSynWebEsRangeState;
 
     procedure SetRange(Value: Pointer); override;
@@ -793,23 +794,38 @@ type
     procedure EsNext;
     function EsGetRange: TSynWebEsRangeState;
     procedure EsSetRange(const ARange: TSynWebEsRangeState);
-    function EsCheckNull(ADo: Boolean = True): Boolean;
+    function EsCheckNull(ADo: Boolean = True): Boolean;    
+    procedure EsSetSymbolId(ASymbolId: Integer);
 
     procedure EsSpaceProc;
     procedure EsSlashProc;
     procedure EsLowerProc;
-    procedure EsEqualNotProc;
+    procedure EsEqualProc;
+    procedure EsNotProc;
     procedure EsGreaterProc;
     procedure EsAndProc;
     procedure EsPlusProc;
     procedure EsMinusProc;
     procedure EsOrProc;
-    procedure EsMulModXorProc;
+    procedure EsMulProc;
+    procedure EsModProc;
+    procedure EsXorProc;
+    procedure EsCurlyBraceOpenProc;
+    procedure EsCurlyBraceCloseProc;
+    procedure EsBoxBracketOpenProc;
+    procedure EsBoxBracketCloseProc;
+    procedure EsParentheseOpenProc;
+    procedure EsParentheseCloseProc;
+    procedure EsObjAccessProc;
+    procedure EsSemiColonProc;
+    procedure EsCommaProc;
+    procedure EsQuestionProc;
+    procedure EsColonProc;
+    procedure EsTildeProc;
+    procedure EsBackSlashProc;
     procedure EsNumberProc;
     procedure EsString34Proc;
     procedure EsString39Proc;
-    procedure EsSymbolProc;
-    procedure EsCurlyBraceOpenProc;
     procedure EsIdentProc;
     procedure EsErrorProc;
 
@@ -1646,6 +1662,14 @@ begin
     Result := srsCssRuleset
   else
     Result := FEngine.CssGetRange;
+end;
+
+function TSynWebBase.EsGetSymbolId: Integer;
+begin
+  if FInstance.FTokenID <> stkEsSymbol then
+    Result := -1
+  else
+    Result := FInstance.FTokenLastSymbolId;
 end;
 
 function TSynWebBase.EsGetRange: TSynWebEsRangeState;
@@ -5834,8 +5858,10 @@ begin
       FEsProcTable[c] := EsSlashProc;
     '<':
       FEsProcTable[c] := EsLowerProc;
-    '=', '!':
-      FEsProcTable[c] := EsEqualNotProc;
+    '=':
+      FEsProcTable[c] := EsEqualProc;
+    '!':
+      FEsProcTable[c] := EsNotProc;
     '>':
       FEsProcTable[c] := EsGreaterProc;
     '&':
@@ -5846,18 +5872,44 @@ begin
       FEsProcTable[c] := EsMinusProc;
     '|':
       FEsProcTable[c] := EsOrProc;
-    '*', '%', '^':
-      FEsProcTable[c] := EsMulModXorProc;
+    '*':
+      FEsProcTable[c] := EsMulProc;
+    '%':
+      FEsProcTable[c] := EsModProc;
+    '^':
+      FEsProcTable[c] := EsXorProc;
     '0'..'9':
       FEsProcTable[c] := EsNumberProc;
     '"':
       FEsProcTable[c] := EsString34Proc;
     #39:
-      FEsProcTable[c] := EsString39Proc;
-    '}', '[', ']', '(', ')', '.', ';', ',', '?', ':', '~', '\':
-      FEsProcTable[c] := EsSymbolProc;
+      FEsProcTable[c] := EsString39Proc;  
     '{':
       FEsProcTable[c] := EsCurlyBraceOpenProc;
+    '}':
+      FEsProcTable[c] := EsCurlyBraceCloseProc;
+    '[':
+      FEsProcTable[c] := EsBoxBracketOpenProc;
+    ']':
+      FEsProcTable[c] := EsBoxBracketCloseProc;
+    '(':
+      FEsProcTable[c] := EsParentheseOpenProc;
+    ')':
+      FEsProcTable[c] := EsParentheseCloseProc;
+    '.':
+      FEsProcTable[c] := EsObjAccessProc;
+    ';':
+      FEsProcTable[c] := EsSemiColonProc;
+    ',':
+      FEsProcTable[c] := EsCommaProc;
+    '?':
+      FEsProcTable[c] := EsQuestionProc;
+    ':':
+      FEsProcTable[c] := EsColonProc;
+    '~':
+      FEsProcTable[c] := EsTildeProc;
+    '\':
+      FEsProcTable[c] := EsBackSlashProc;
     '$', 'a'..'z', 'A'..'Z', '_':
       FEsProcTable[c] := EsIdentProc;
     else // case
@@ -5903,6 +5955,12 @@ end;
 procedure TSynWebEngine.EsSetRange(const ARange: TSynWebEsRangeState);
 begin
   SetRangeInt(3, 14, Longword(ARange));
+end;
+
+procedure TSynWebEngine.EsSetSymbolId(ASymbolId: Integer);
+begin
+  FInstance^.FTokenID := stkEsSymbol;
+  FInstance^.FTokenLastSymbolId := ASymbolId;
 end;
 
 function TSynWebEngine.EsCheckNull(ADo: Boolean = True): Boolean;
@@ -5966,10 +6024,12 @@ begin
         FInstance^.FTokenID := stkEsComment
       else
         EsRangeCommentMultiProc;
-      Exit;
     end;
   '=':
-    Inc(FInstance^.FRun);
+    begin
+      EsSetSymbolId(EsSymbolID_DivAssign);
+      Inc(FInstance^.FRun);
+    end;
   '/':
     begin
       Inc(FInstance^.FRun);
@@ -5978,49 +6038,77 @@ begin
         FInstance^.FTokenID := stkEsComment
       else
         EsRangeCommentProc;
-      Exit;
     end;
   else
     if not GetRangeBit(13) then // Allow regExpr
     begin
-      FInstance^.FTokenID := stkEsSymbol;
+      EsSetSymbolId(EsSymbolID_RegExprInlineStart);
       SetRangeInt(2, 11, 0);
       EsSetRange(srsEsRegExp);
-      Exit;
-    end;
+    end else
+      EsSetSymbolId(EsSymbolID_Div);
   end;
-  FInstance^.FTokenID := stkEsSymbol;
 end;
 
 procedure TSynWebEngine.EsLowerProc;
 begin
   if EsCheckNull or PhpCheckBegin then
     Exit;
+
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
   '=':
-    Inc(FInstance^.FRun);
+    begin
+      EsSetSymbolId(EsSymbolID_LowerEqual);
+      Inc(FInstance^.FRun);
+    end;
   '<':
     if not PhpCheckBegin(False) then
     begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = '=' then
+      begin
+        EsSetSymbolId(EsSymbolID_ShiftLeftAssign);
         Inc(FInstance^.FRun);
-    end;
+      end else
+        EsSetSymbolId(EsSymbolID_ShiftLeft);
+    end else
+      EsSetSymbolId(EsSymbolID_Lower);
+  else
+    EsSetSymbolId(EsSymbolID_Lower);
   end;
-  FInstance^.FTokenID := stkEsSymbol;
 end;
 
-procedure TSynWebEngine.EsEqualNotProc;
+procedure TSynWebEngine.EsEqualProc;
 begin
   Inc(FInstance^.FRun);
   if FInstance^.FLine[FInstance^.FRun] = '=' then
   begin
     Inc(FInstance^.FRun);
     if FInstance^.FLine[FInstance^.FRun] = '=' then
+    begin
+      EsSetSymbolId(EsSymbolID_Identical);
       Inc(FInstance^.FRun);
-  end;
-  FInstance^.FTokenID := stkEsSymbol;
+    end else
+      EsSetSymbolId(EsSymbolID_Equal);
+  end else
+    EsSetSymbolId(EsSymbolID_Assign);
+end;
+
+procedure TSynWebEngine.EsNotProc;
+begin
+  Inc(FInstance^.FRun);
+  if FInstance^.FLine[FInstance^.FRun] = '=' then
+  begin
+    Inc(FInstance^.FRun);
+    if FInstance^.FLine[FInstance^.FRun] = '=' then
+    begin
+      Inc(FInstance^.FRun);
+      EsSetSymbolId(EsSymbolID_NotIdentical)
+    end else
+      EsSetSymbolId(EsSymbolID_NotEqual);
+  end else
+    EsSetSymbolId(EsSymbolID_Not);
 end;
 
 procedure TSynWebEngine.EsGreaterProc;
@@ -6028,63 +6116,132 @@ begin
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
   '=':
-    Inc(FInstance^.FRun);
+    begin
+      EsSetSymbolId(EsSymbolID_GreaterEqual);
+      Inc(FInstance^.FRun);
+    end;
   '>':
     begin
       Inc(FInstance^.FRun);
-      case FInstance^.FLine[FInstance^.FRun] of
-      '=':
+      if FInstance^.FLine[FInstance^.FRun] = '=' then
+      begin
+        EsSetSymbolId(EsSymbolID_ShiftRightAssign);
         Inc(FInstance^.FRun);
-      '>':
-        begin
-          Inc(FInstance^.FRun);
-          if FInstance^.FLine[FInstance^.FRun] = '=' then
-            Inc(FInstance^.FRun);
-        end;
-      end;
+      end else
+        EsSetSymbolId(EsSymbolID_ShiftRight);
     end;
+  else
+    EsSetSymbolId(EsSymbolID_Greater);
   end;
-  FInstance^.FTokenID := stkEsSymbol;
 end;
 
 procedure TSynWebEngine.EsAndProc;
 begin
   Inc(FInstance^.FRun);
-  if FInstance^.FLine[FInstance^.FRun] in ['=', '&'] then
-    Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkEsSymbol;
+  case FInstance^.FLine[FInstance^.FRun] of
+  '=':
+    begin
+      EsSetSymbolId(EsSymbolID_BitwiseAndAssign);
+      Inc(FInstance^.FRun);
+    end;
+  '&':
+    begin
+      EsSetSymbolId(EsSymbolID_LogicAnd);
+      Inc(FInstance^.FRun);
+    end;
+  else
+    EsSetSymbolId(EsSymbolID_BitwiseAnd);
+  end;
 end;
 
 procedure TSynWebEngine.EsPlusProc;
 begin
   Inc(FInstance^.FRun);
-  if FInstance^.FLine[FInstance^.FRun] in ['=', '+'] then
-    Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkEsSymbol;
+  case FInstance^.FLine[FInstance^.FRun] of
+  '=':
+    begin
+      EsSetSymbolId(EsSymbolID_AddAssign);
+      Inc(FInstance^.FRun);
+    end;
+  '+':
+    begin
+      EsSetSymbolId(EsSymbolID_Increment);
+      Inc(FInstance^.FRun);
+    end;
+  else
+    EsSetSymbolId(EsSymbolID_Add);
+  end;
 end;
 
 procedure TSynWebEngine.EsMinusProc;
-begin
+begin          
   Inc(FInstance^.FRun);
-  if FInstance^.FLine[FInstance^.FRun] in ['=', '-'] then
-    Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkEsSymbol;
+  case FInstance^.FLine[FInstance^.FRun] of
+  '=':
+    begin
+      EsSetSymbolId(EsSymbolID_DecAssign);
+      Inc(FInstance^.FRun);
+    end;
+  '-':
+    begin
+      EsSetSymbolId(EsSymbolID_Decrement);
+      Inc(FInstance^.FRun);
+    end;
+  else
+    EsSetSymbolId(EsSymbolID_Dec);
+  end;
 end;
 
 procedure TSynWebEngine.EsOrProc;
-begin
+begin          
   Inc(FInstance^.FRun);
-  if FInstance^.FLine[FInstance^.FRun] in ['=', '|'] then
-    Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkEsSymbol;
+  case FInstance^.FLine[FInstance^.FRun] of
+  '=':
+    begin
+      EsSetSymbolId(EsSymbolID_BitwiseOrAssign);
+      Inc(FInstance^.FRun);
+    end;
+  '|':
+    begin
+      EsSetSymbolId(EsSymbolID_LogicOr);
+      Inc(FInstance^.FRun);
+    end;
+  else
+    EsSetSymbolId(EsSymbolID_BitwiseOR);
+  end;
 end;
 
-procedure TSynWebEngine.EsMulModXorProc;
+procedure TSynWebEngine.EsMulProc;
 begin
   Inc(FInstance^.FRun);
   if FInstance^.FLine[FInstance^.FRun] = '=' then
+  begin
     Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkEsSymbol;
+    EsSetSymbolId(EsSymbolID_MulAssign);
+  end else
+    EsSetSymbolId(EsSymbolID_Mul);
+end;
+
+procedure TSynWebEngine.EsModProc;
+begin
+  Inc(FInstance^.FRun);
+  if FInstance^.FLine[FInstance^.FRun] = '=' then
+  begin
+    Inc(FInstance^.FRun);
+    EsSetSymbolId(EsSymbolID_ModAssign);
+  end else
+    EsSetSymbolId(EsSymbolID_Mod);
+end;
+
+procedure TSynWebEngine.EsXorProc;
+begin
+  Inc(FInstance^.FRun);
+  if FInstance^.FLine[FInstance^.FRun] = '=' then
+  begin
+    Inc(FInstance^.FRun);
+    EsSetSymbolId(EsSymbolID_XorAssign);
+  end else
+    EsSetSymbolId(EsSymbolID_Xor);
 end;
 
 procedure TSynWebEngine.EsNumberProc;
@@ -6162,18 +6319,84 @@ begin
   end;
 end;
 
-procedure TSynWebEngine.EsSymbolProc;
-begin
-  Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkEsSymbol;
-end;
-
 procedure TSynWebEngine.EsCurlyBraceOpenProc;
 begin
   if PhpCheckBegin then
     Exit;
   Inc(FInstance^.FRun);
-  FInstance^.FTokenID := stkEsSymbol;
+  EsSetSymbolId(EsSymbolID_BraceOpen);
+end;
+
+procedure TSynWebEngine.EsCurlyBraceCloseProc;
+begin
+  Inc(FInstance^.FRun);
+  EsSetSymbolId(EsSymbolID_BraceClose);
+end;
+
+procedure TSynWebEngine.EsBoxBracketOpenProc;
+begin
+  Inc(FInstance^.FRun);
+  EsSetSymbolId(EsSymbolID_BoxBracketOpen);
+end;
+
+procedure TSynWebEngine.EsBoxBracketCloseProc;
+begin
+  Inc(FInstance^.FRun);
+  EsSetSymbolId(EsSymbolID_BoxBracketClose);
+end;
+
+procedure TSynWebEngine.EsParentheseOpenProc;
+begin
+  Inc(FInstance^.FRun);
+  EsSetSymbolId(EsSymbolID_ParentheseOpen);
+end;
+
+procedure TSynWebEngine.EsParentheseCloseProc;
+begin
+  Inc(FInstance^.FRun);
+  EsSetSymbolId(EsSymbolID_ParentheseClose);
+end;
+
+procedure TSynWebEngine.EsObjAccessProc;
+begin
+  Inc(FInstance^.FRun);
+  EsSetSymbolId(EsSymbolID_ObjAccess);
+end;
+
+procedure TSynWebEngine.EsSemiColonProc;
+begin
+  Inc(FInstance^.FRun);
+  EsSetSymbolId(EsSymbolID_SemiColon);
+end;
+
+procedure TSynWebEngine.EsCommaProc;
+begin
+  Inc(FInstance^.FRun);
+  EsSetSymbolId(EsSymbolID_Comma);
+end;
+
+procedure TSynWebEngine.EsQuestionProc;
+begin
+  Inc(FInstance^.FRun);
+  EsSetSymbolId(EsSymbolID_Question);
+end;
+
+procedure TSynWebEngine.EsColonProc;
+begin
+  Inc(FInstance^.FRun);
+  EsSetSymbolId(EsSymbolID_Colon);
+end;
+
+procedure TSynWebEngine.EsTildeProc;
+begin
+  Inc(FInstance^.FRun);
+  EsSetSymbolId(EsSymbolID_Tilde);
+end;
+
+procedure TSynWebEngine.EsBackSlashProc;
+begin
+  Inc(FInstance^.FRun);
+  EsSetSymbolId(EsSymbolID_BackSlash);
 end;
 
 procedure TSynWebEngine.EsIdentProc;
@@ -6431,7 +6654,7 @@ begin
   SetRangeBit(13, True);
 
   case GetRangeInt(2, 11) of
-  1:     
+  1:
     begin
       Inc(FInstance^.FRun); 
       FInstance^.FTokenID := stkEsSymbol;

@@ -214,6 +214,58 @@ const
 
 // ECAMScript ------------------------------------------------------------------
 const
+  EsSymbolID_RegExprInlineStart        = 0;          // /
+  EsSymbolID_RegExprInlineEnd          = 1;          // /
+  EsSymbolID_Div                       = 2;          // /
+  EsSymbolID_DivAssign                 = 3;          // /=
+  EsSymbolID_Lower                     = 4;          // <
+  EsSymbolID_LowerEqual                = 5;          // <=
+  EsSymbolID_ShiftLeft                 = 6;          // <<
+  EsSymbolID_ShiftLeftAssign           = 7;          // <<=
+  EsSymbolID_Assign                    = 8;          // =
+  EsSymbolID_Equal                     = 9;          // ==
+  EsSymbolID_Identical                 = 10;         // ===
+  EsSymbolID_Greater                   = 11;         // >
+  EsSymbolID_GreaterEqual              = 12;         // >=
+  EsSymbolID_ShiftRight                = 13;         // >>
+  EsSymbolID_ShiftRightAssign          = 14;         // >>=
+  EsSymbolID_BitwiseAnd                = 15;         // &
+  EsSymbolID_BitwiseAndAssign          = 16;         // &=
+  EsSymbolID_LogicAnd                  = 17;         // &&
+  EsSymbolID_Add                       = 18;         // +
+  EsSymbolID_AddAssign                 = 19;         // +=
+  EsSymbolID_Increment                 = 20;         // ++
+  EsSymbolID_Dec                       = 21;         // -
+  EsSymbolID_DecAssign                 = 22;         // -=
+  EsSymbolID_Decrement                 = 23;         // --
+  EsSymbolID_BitwiseOR                 = 24;         // |
+  EsSymbolID_BitwiseOrAssign           = 25;         // |=
+  EsSymbolID_LogicOr                   = 26;         // ||
+  EsSymbolID_Mul                       = 27;         // *
+  EsSymbolID_MulAssign                 = 28;         // *=
+  EsSymbolID_Mod                       = 29;         // %
+  EsSymbolID_ModAssign                 = 30;         // %=
+  EsSymbolID_Xor                       = 31;         // ^
+  EsSymbolID_XorAssign                 = 32;         // ^=
+  EsSymbolID_BraceOpen                 = 33;         // {
+  EsSymbolID_BraceClose                = 34;         // }
+  EsSymbolID_BoxBracketOpen            = 35;         // [
+  EsSymbolID_BoxBracketClose           = 36;         // ]
+  EsSymbolID_ParentheseOpen            = 37;         // (
+  EsSymbolID_ParentheseClose           = 38;         // )
+  EsSymbolID_ObjAccess                 = 39;         // .
+  EsSymbolID_SemiColon                 = 40;         // ;
+  EsSymbolID_Comma                     = 41;         // ,
+  EsSymbolID_Question                  = 42;         // ?
+  EsSymbolID_Colon                     = 43;         // :
+  EsSymbolID_Tilde                     = 44;         // ~
+  EsSymbolID_BackSlash                 = 45;         // \    
+  EsSymbolID_Not                       = 46;         // !
+  EsSymbolID_NotEqual                  = 47;         // !=
+  EsSymbolID_NotIdentical              = 48;         // !==
+
+//  EsSymbolID_NotEqual2                 = 37;         // <>  ????
+
   {$I SynHighlighterWeb_EsKeywords.inc}
 
 // Php -------------------------------------------------------------------------
