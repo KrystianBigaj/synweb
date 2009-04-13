@@ -6656,8 +6656,8 @@ begin
   case GetRangeInt(2, 11) of
   1:
     begin
-      Inc(FInstance^.FRun); 
-      FInstance^.FTokenID := stkEsSymbol;
+      Inc(FInstance^.FRun);
+      EsSetSymbolId(EsSymbolID_RegExprInlineEnd);
 
       if FInstance^.FLine[FInstance^.FRun] in ['i', 'g', 'm'] then
         SetRangeInt(2, 11, 2)
