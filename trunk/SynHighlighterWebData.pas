@@ -99,6 +99,8 @@ type
     // Other
     stkNull);
 
+  TSynWebTokenKinds = set of TSynWebTokenKind;
+
   TSynWebProcTableProc = procedure of object;
 
   PSynWebIdentFuncTableFunc = ^TSynWebIdentFuncTableFunc;
