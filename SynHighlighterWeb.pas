@@ -3438,8 +3438,8 @@ begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = #0 then
       begin
-        MLSetRange(srsMLTagKey);
-        FInstance^.FTokenID := stkMLError;
+        MLSetRange(srsMLTagKeyValueQuoted1);
+        FInstance^.FTokenID := stkMLTagKeyValueQuoted;
       end else
       begin
         MLSetRange(srsMLTagKeyValueQuoted1);
@@ -3454,8 +3454,8 @@ begin
       Inc(FInstance^.FRun);
       if FInstance^.FLine[FInstance^.FRun] = #0 then
       begin
-        MLSetRange(srsMLTagKey);
-        FInstance^.FTokenID := stkMLError;
+        MLSetRange(srsMLTagKeyValueQuoted2);
+        FInstance^.FTokenID := stkMLTagKeyValueQuoted;
       end else
       begin
         MLSetRange(srsMLTagKeyValueQuoted2);
@@ -3533,73 +3533,76 @@ end;
 
 procedure TSynWebEngine.MLRangeTagKeyValueQuoted1Proc;
 begin
-  if not MLCheckNull then
-    if PhpCheckBegin then
-      Exit
-    else
-      repeat
-        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<', '{']) do
-        while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 21) = 0 do
-          Inc(FInstance^.FRun);
-        case FInstance^.FLine[FInstance^.FRun] of
-        #0:
-          begin
-            FInstance^.FTokenID := stkMLError;
-            Break;
-          end;
-        '<', '{':
-          if PhpCheckBegin(False) then
-          begin
-            FInstance^.FTokenID := stkMLTagKeyValueQuoted;
-            Exit;
-          end else
-            Inc(FInstance^.FRun);
-        #39:
-          begin
-            Inc(FInstance^.FRun);
-            FInstance^.FTokenID := stkMLTagKeyValueQuoted;
-            if GetRangeBit(27) then
-              SetRangeBit(28, UpperCase(GetToken) = #39'PHP'#39);
-            Break;
-          end;
-        end;
-      until False;
+  if MLCheckNull or PhpCheckBegin then
+    Exit;
+
+  repeat
+    // while not (FInstance^.FLine[FInstance^.FRun] in [#0, #39, '<', '{']) do
+    while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 21) = 0 do
+      Inc(FInstance^.FRun);
+    case FInstance^.FLine[FInstance^.FRun] of
+    #0:
+      begin
+        FInstance^.FTokenID := stkMLTagKeyValueQuoted;
+        Exit;
+      end;
+    '<', '{':
+      if PhpCheckBegin(False) then
+      begin
+        FInstance^.FTokenID := stkMLTagKeyValueQuoted;
+        Exit;
+      end else
+        Inc(FInstance^.FRun);
+
+    #39:
+      begin
+        Inc(FInstance^.FRun);
+        FInstance^.FTokenID := stkMLTagKeyValueQuoted;
+        if GetRangeBit(27) then
+          SetRangeBit(28, UpperCase(GetToken) = #39'PHP'#39);
+        Break;
+      end;
+    end;
+  until False;
+
   MLSetRange(srsMLTagKey);
 end;
 
 procedure TSynWebEngine.MLRangeTagKeyValueQuoted2Proc;
 begin
-  if not MLCheckNull then
-    if PhpCheckBegin then
-      Exit
-    else
-      repeat
-        // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '"', '<', '{']) do
-        while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 22) = 0 do
-          Inc(FInstance^.FRun);
-        case FInstance^.FLine[FInstance^.FRun] of
-        #0:
-          begin
-            FInstance^.FTokenID := stkMLError;
-            Break;
-          end;
-        '<', '{':
-          if PhpCheckBegin(False) then
-          begin
-            FInstance^.FTokenID := stkMLTagKeyValueQuoted;
-            Exit;
-          end else
-            Inc(FInstance^.FRun);
-        '"':
-          begin
-            Inc(FInstance^.FRun);
-            FInstance^.FTokenID := stkMLTagKeyValueQuoted;
-            if GetRangeBit(27) then
-              SetRangeBit(28, UpperCase(GetToken) = '"PHP"');
-            Break;
-          end;
-        end;
-      until False;
+  if MLCheckNull or PhpCheckBegin then
+    Exit;
+
+  repeat
+    // while not (FInstance^.FLine[FInstance^.FRun] in [#0, '"', '<', '{']) do
+    while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 22) = 0 do
+      Inc(FInstance^.FRun);
+    case FInstance^.FLine[FInstance^.FRun] of
+    #0:
+      begin
+        FInstance^.FTokenID := stkMLTagKeyValueQuoted;
+        Exit;
+      end;
+
+    '<', '{':
+      if PhpCheckBegin(False) then
+      begin
+        FInstance^.FTokenID := stkMLTagKeyValueQuoted;
+        Exit;
+      end else
+        Inc(FInstance^.FRun);
+
+    '"':
+      begin
+        Inc(FInstance^.FRun);
+        FInstance^.FTokenID := stkMLTagKeyValueQuoted;
+        if GetRangeBit(27) then
+          SetRangeBit(28, UpperCase(GetToken) = '"PHP"');
+        Break;
+      end;
+    end;
+  until False;
+
   MLSetRange(srsMLTagKey);
 end;
 
