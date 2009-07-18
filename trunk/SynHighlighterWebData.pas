@@ -1,6 +1,6 @@
 {-------------------------------------------------------------------------------
 SynWeb
-Copyright (C) 2008  Krystian Bigaj
+Copyright (C) 2005-2009  Krystian Bigaj
 
 *** MPL
 The contents of this file are subject to the Mozilla Public License
@@ -66,7 +66,7 @@ uses
 
 // Global ----------------------------------------------------------------------
 type
-  TSynWebHashTable = array[#0..#255] of Longword;
+  TSynWebHashTable = array[AnsiChar] of Longword;
 
   TSynWebHighlighterType = (
     shtML, shtCss, shtEs, shtPhpInML, shtPhpInCss, shtPhpInEs

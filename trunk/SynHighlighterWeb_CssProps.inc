@@ -1,6 +1,6 @@
   CssPropMaxKeyHash = 334;
 
-  TSynWeb_CssProps:array[0..114] of String=(
+  TSynWeb_CssProps:array[0..114] of AnsiString=(
     'azimuth', 'background', 'background-attachment', 'background-color', 
     'background-image', 'background-position', 'background-repeat', 'border', 
     'border-bottom', 'border-bottom-color', 'border-bottom-style', 

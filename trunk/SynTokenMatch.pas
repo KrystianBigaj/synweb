@@ -1,6 +1,6 @@
 {-------------------------------------------------------------------------------
 SynWeb
-Copyright (C) 2008  Krystian Bigaj
+Copyright (C) 2005-2009  Krystian Bigaj
 
 *** MPL
 The contents of this file are subject to the Mozilla Public License
@@ -73,8 +73,8 @@ type
   PSynTokenMatch = ^TSynTokenMatch;
   TSynTokenMatch = record
 {$IFDEF UNISYNEDIT}
-    OpenToken: WideString;
-    CloseToken: WideString;
+    OpenToken: UnicodeString;
+    CloseToken: UnicodeString;
 {$ELSE}
     OpenToken: String;
     CloseToken: String;
@@ -84,8 +84,8 @@ type
 
   TSynTokenMatched = record
 {$IFDEF UNISYNEDIT}
-    OpenToken: WideString;
-    CloseToken: WideString;
+    OpenToken: UnicodeString;
+    CloseToken: UnicodeString;
 {$ELSE}
     OpenToken: String;
     CloseToken: String;
@@ -120,7 +120,7 @@ type
   TSynTokenBuf = record
     Pos: TBufferCoord;
 {$IFDEF UNISYNEDIT}
-    Token: WideString;
+    Token: UnicodeString;
 {$ELSE}
     Token: String;
 {$ENDIF}
@@ -135,7 +135,7 @@ function SynEditGetMatchingToken(ASynEdit: TCustomSynEdit; APoint: TBufferCoord;
 var
   TokenMatch: PSynTokenMatch;
 {$IFDEF UNISYNEDIT}
-  Token: WideString;
+  Token: UnicodeString;
 {$ELSE}
   Token: String;
 {$ENDIF}

@@ -1,6 +1,6 @@
   EsKeywordsMaxKeyHash = 160;
 
-  TSynWeb_EsKeywords:array[0..57] of String=(
+  TSynWeb_EsKeywords:array[0..57] of AnsiString=(
     'break', 'case', 'catch', 'continue', 'default', 'delete', 'do', 'else', 
     'false', 'finally', 'for', 'function', 'if', 'in', 'instanceof', 'new', 
     'return', 'switch', 'this', 'throw', 'true', 'try', 'typeof', 'var', 'void', 

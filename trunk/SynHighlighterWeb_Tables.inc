@@ -1,4 +1,4 @@
-  TSynWebIdentTable: array[#$00..#$FF] of Longword=(
+  TSynWebIdentTable: array[AnsiChar] of Longword=(
     $4FFA587E, $0080584E, $0080584E, $0080584E,
     $0080584E, $0080584E, $0080584E, $0080584E,
     $0080584E, $0080584E, $0080584E, $0080584E,
@@ -64,7 +64,7 @@
     $30000000, $30000000, $30000000, $30000000,
     $30000000, $30000000, $30000000, $30000000);
 
-  TSynWebIdentTable2: array[#$00..#$FF] of Longword=(
+  TSynWebIdentTable2: array[AnsiChar] of Longword=(
     $0000003B, $00000003, $00000003, $00000003,
     $00000003, $00000003, $00000003, $00000003,
     $00000003, $00000003, $00000003, $00000003,

@@ -3,7 +3,7 @@
   CssValID_Url = 183;
   CssValID_Rect = 124;
 
-  TSynWeb_CssVals:array[0..198] of String=(
+  TSynWeb_CssVals:array[0..198] of AnsiString=(
     'above', 'absolute', 'always', 'aqua', 'armenian', 'attr', 'auto', 'avoid', 
     'baseline', 'behind', 'below', 'bidi-override', 'black', 'blink', 'block', 
     'blue', 'bold', 'bolder', 'both', 'bottom', 'capitalize', 'caption', 'center', 
