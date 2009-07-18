@@ -8,7 +8,7 @@
   CssSpecialID_Url = 45;
   CssSpecialID_Auto = 3;
 
-  TSynWeb_CssSpecial:array[0..46] of String=(
+  TSynWeb_CssSpecial:array[0..46] of AnsiString=(
     'active', 'after', 'all', 'auto', 'before', 'braille', 'charset', 'cm', 'deg', 
     'em', 'embossed', 'ex', 'first', 'first-child', 'first-letter', 'first-line', 
     'focus', 'font-face', 'grad', 'handheld', 'hover', 'hz', 'import', 'important', 

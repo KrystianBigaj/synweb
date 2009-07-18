@@ -1,4 +1,4 @@
-Notice: This file wasn't updated form some time, so it could be DEPRECATED!
+Notice: This file wasn't updated from some time, so it could be DEPRECATED!
 
 -------------------
 --- Highlighter ---

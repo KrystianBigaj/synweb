@@ -1,6 +1,6 @@
   MLSpecialMaxKeyHash = 111;
 
-  TSynWeb_Special:array[0..252] of String=(
+  TSynWeb_Special:array[0..252] of AnsiString=(
     'aacute', 'Aacute', 'acirc', 'Acirc', 'acute', 'aelig', 'AElig', 'agrave', 
     'Agrave', 'alefsym', 'alpha', 'Alpha', 'amp', 'and', 'ang', 'apos', 'aring', 
     'Aring', 'asymp', 'atilde', 'Atilde', 'auml', 'Auml', 'bdquo', 'beta', 'Beta', 

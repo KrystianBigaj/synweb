@@ -1,6 +1,6 @@
 {-------------------------------------------------------------------------------
 SynWeb
-Copyright (C) 2008  Krystian Bigaj
+Copyright (C) 2005-2009  Krystian Bigaj
 
 *** MPL
 The contents of this file are subject to the Mozilla Public License
@@ -106,7 +106,7 @@ function SynWebUpdateActiveHighlighter(ASynEdit: TCustomSynEdit;
 
 function SynWebFillCompletionProposal(ASynEdit: TCustomSynEdit;
   ASynWeb: TSynWebHtmlSyn; ACompletion: TSynCompletionProposal;
-  var CurrentInput: WideString): TSynWebHighlighterTypes;
+  var CurrentInput: UnicodeString): TSynWebHighlighterTypes;
 
 implementation
 
@@ -114,7 +114,7 @@ type
   TSynTokenBuf = record
     Pos: TBufferCoord;
 {$IFDEF UNISYNEDIT}
-    Token: WideString;
+    Token: UnicodeString;
 {$ELSE}
     Token: String;
 {$ENDIF}
@@ -392,9 +392,9 @@ end;
 
 function SynWebFillCompletionProposal(ASynEdit: TCustomSynEdit;
   ASynWeb: TSynWebHtmlSyn; ACompletion: TSynCompletionProposal;
-  var CurrentInput: WideString): TSynWebHighlighterTypes;
+  var CurrentInput: UnicodeString): TSynWebHighlighterTypes;
 var
-  ct: WideString;
+  ct: UnicodeString;
   ctk: TSynWebTokenKind;
 
   procedure ScanTo(APos: TBufferCoord);
@@ -451,18 +451,18 @@ var
         (TSynWeb_TagsData[i] and (1 shl 29) = 0) then
       begin
         if AClose then
-          AddSimple('</' + TSynWeb_Tags[i] + '>', 'tag',
+          AddSimple('</' + String(TSynWeb_Tags[i]) + '>', 'tag',
             ASynWeb.Engine.MLTagNameAttri.Foreground)
         else
           case HtmlGetTagKind(i) of
           -1:
-            AddSimple('<' + TSynWeb_Tags[i] + '>', 'tag',
+            AddSimple('<' + String(TSynWeb_Tags[i]) + '>', 'tag',
               ASynWeb.Engine.MLTagNameAttri.Foreground);
           0:
-            AddSimple('<' + TSynWeb_Tags[i] + ' />', 'tag',
+            AddSimple('<' + String(TSynWeb_Tags[i]) + ' />', 'tag',
               ASynWeb.Engine.MLTagNameAttri.Foreground);
           1:
-            AddSimple('<' + TSynWeb_Tags[i] + '></' + TSynWeb_Tags[i] + '>', 'tag',
+            AddSimple('<' + String(TSynWeb_Tags[i]) + '></' + String(TSynWeb_Tags[i]) + '>', 'tag',
                ASynWeb.Engine.MLTagNameAttri.Foreground);
           end;
       end;
@@ -476,7 +476,7 @@ var
     ver := 1 shl Longword(ASynWeb.InternalInstanceData.FOptions.FMLVersion);
     for i := 0 to High(TSynWeb_SpecialData) do
       if (TSynWeb_SpecialData[i] and ver) <> 0 then
-        AddSimple('&' + TSynWeb_Special[i] + ';', 'entity', ASynWeb.Engine.MLEscapeAttri.Foreground);
+        AddSimple('&' + String(TSynWeb_Special[i]) + ';', 'entity', ASynWeb.Engine.MLEscapeAttri.Foreground);
   end;
 
   procedure HtmlLoad;
@@ -506,7 +506,7 @@ var
 
     for i := 0 to High(TSynWeb_AttrsData) do
       if (TSynWeb_AttrsData[i][ver][ATag] and ver2) <> 0 then
-        AddSimple(TSynWeb_Attrs[i] + '=""', 'attribute', ASynWeb.Engine.MLTagAttri.Foreground);
+        AddSimple(String(TSynWeb_Attrs[i]) + '=""', 'attribute', ASynWeb.Engine.MLTagAttri.Foreground);
   end;
 
   procedure Html;
@@ -562,7 +562,7 @@ var
       if ((TSynWeb_TagsData[i] and ver) <> 0) and
         (TSynWeb_TagsData[i] and (1 shl 30) = 0) and
         (TSynWeb_TagsData[i] and (1 shl 29) = 0) then
-        AddSimple(TSynWeb_Tags[i], 'tag', ASynWeb.Engine.MLTagNameAttri.Foreground);
+        AddSimple(String(TSynWeb_Tags[i]), 'tag', ASynWeb.Engine.MLTagNameAttri.Foreground);
   end;
 
   procedure CssLoadProp;
@@ -574,7 +574,7 @@ var
 
     for i := 0 to High(TSynWeb_CssPropsData) do
       if (TSynWeb_CssPropsData[i] and ver) <> 0  then
-        AddSimple(TSynWeb_CssProps[i] + ':', 'property', ASynWeb.Engine.CssPropAttri.Foreground);
+        AddSimple(String(TSynWeb_CssProps[i]) + ':', 'property', ASynWeb.Engine.CssPropAttri.Foreground);
   end;
 
   procedure CssLoadVal(AProp: Integer);
@@ -591,7 +591,7 @@ var
 
     for i := 0 to High(TSynWeb_CssValsData) do
       if (TSynWeb_CssValsData[i][ver][AProp] and prop) <> 0 then
-        AddSimple(TSynWeb_CssVals[i], 'value', ASynWeb.Engine.CssValAttri.Foreground);
+        AddSimple(String(TSynWeb_CssVals[i]), 'value', ASynWeb.Engine.CssValAttri.Foreground);
   end;
 
   procedure Css;
@@ -645,14 +645,14 @@ var
     begin
       data := TSynWeb_PhpKeywordsData[i];
       if (Data and $0F = $08) and ((Data shr 16) and v <> 0) then
-        AddSimple(TSynWeb_PhpKeywords[i] + '()', 'function', ASynWeb.Engine.PhpFunctionAttri.Foreground);
+        AddSimple(String(TSynWeb_PhpKeywords[i]) + '()', 'function', ASynWeb.Engine.PhpFunctionAttri.Foreground);
     end;
 
     for i := 0 to High(TSynWeb_PhpKeywords) do // keywords
     begin
       data := TSynWeb_PhpKeywordsData[i];
       if (Data and $0F = $01) and ((Data shr 16) and v <> 0) then
-        AddSimple(TSynWeb_PhpKeywords[i], 'keyword', ASynWeb.Engine.PhpKeyAttri.Foreground);
+        AddSimple(String(TSynWeb_PhpKeywords[i]), 'keyword', ASynWeb.Engine.PhpKeyAttri.Foreground);
     end;
     CurrentInput := ct;
   end;
@@ -689,7 +689,8 @@ begin
     if shtCss in Result then
       Css
     else
-      Php;
+      if [shtPhpInML, shtPhpInCss, shtPhpInEs] * Result <> [] then
+        Php;
 end;
 
 end.

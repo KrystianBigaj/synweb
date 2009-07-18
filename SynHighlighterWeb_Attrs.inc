@@ -1,7 +1,7 @@
   MLAttrID_Language = 67;
   MLAttrMaxKeyHash = 176;
 
-  TSynWeb_Attrs:array[0..146] of String=(
+  TSynWeb_Attrs:array[0..146] of AnsiString=(
     'abbr', 'accept', 'accept-charset', 'accesskey', 'action', 'align', 'alink', 
     'alt', 'archive', 'axis', 'background', 'bgcolor', 'border', 'cache-control', 
     'cellpadding', 'cellspacing', 'char', 'charoff', 'charset', 'checked', 'cite', 

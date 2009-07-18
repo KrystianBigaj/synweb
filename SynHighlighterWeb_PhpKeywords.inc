@@ -89,7 +89,7 @@
   PhpKeyID_xor = 79;
   PhpFuncID_define = 601;
 
-  TSynWeb_PhpKeywords:array[0..4397] of String=(
+  TSynWeb_PhpKeywords:array[0..4397] of AnsiString=(
     '__CLASS__', '__FILE__', '__FUNCTION__', '__LINE__', '__METHOD__', 'abstract', 
     'and', 'array', 'as', 'bool', 'boolean', 'break', 'case', 'catch', 
     'cfunction', 'class', 'clone', 'const', 'continue', 'declare', 'default', 

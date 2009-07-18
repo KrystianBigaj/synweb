@@ -2,7 +2,7 @@
   MLTagID_Style = 86;
   MLTagMaxKeyHash = 128;
 
-  TSynWeb_Tags:array[0..105] of String=(
+  TSynWeb_Tags:array[0..105] of AnsiString=(
     'a', 'abbr', 'access', 'acronym', 'address', 'anchor', 'applet', 'area', 'b', 
     'base', 'basefont', 'bdo', 'big', 'blockquote', 'body', 'br', 'button', 
     'caption', 'card', 'center', 'cite', 'code', 'col', 'colgroup', 'dd', 'del', 

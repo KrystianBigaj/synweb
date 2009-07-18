@@ -1,6 +1,6 @@
 {-------------------------------------------------------------------------------
 SynWeb
-Copyright (C) 2008  Krystian Bigaj
+Copyright (C) 2005-2009  Krystian Bigaj
 
 *** MPL
 The contents of this file are subject to the Mozilla Public License
@@ -63,7 +63,7 @@ Known limitations:
 @abstract(Provides an web-files (Multi Html/XHtml/Wml/Xml/Css/ECMAScript/Php/Smarty) highlighter for SynEdit
 @author(Krystian Bigaj <krystian.bigaj@gmail.com>)
 @created(2005-05-21)
-@lastmod(2008-04-20)
+@lastmod(2009-07-18)
 The SynHighlighterWeb unit provides SynEdit with a Multi Html/XHtml/Wml/Xml/Css/ECMAScript/Php highlighter.
 }
 
@@ -111,8 +111,8 @@ type
     FCssEmbeded: Boolean;
     FEsEmbeded: Boolean;
 
-    FSmartyLDelim: String;
-    FSmartyRDelim: String;
+    FSmartyLDelim: AnsiString;
+    FSmartyRDelim: AnsiString;
   end;
 
   PSynWebInstance = ^TSynWebInstance;
@@ -120,15 +120,15 @@ type
   TSynWebInstance = record
     FRun: Longint;
     FRange: Longword;
-    FLine: PChar;
-    FLineRef: String;
+    FLine: PAnsiChar;
+    FLineRef: AnsiString;
     FLineNumber: Integer;
     FTokenLastID: Integer;
     FTokenPos: Integer;
     FTokenID: TSynWebTokenKind;
     FStringLen, FStringLenClean: Integer;
     FTokenLastSymbolId: Integer;
-    FToIdent: PChar;
+    FToIdent: PAnsiChar;
     FHashTable: TSynWebHashTable;
     FNextClearBits: Boolean;
     FNextUseNextAH: Boolean;
@@ -323,7 +323,7 @@ type
     procedure SetEngine(const Value: TSynWebEngine);
   protected
 {$IFDEF UNISYNEDIT}
-    procedure DoSetLine(const Value: WideString; LineNumber: Integer); override;
+    procedure DoSetLine(const Value: UnicodeString; LineNumber: Integer); override;
 {$ENDIF}
     procedure DoDefHighlightChange;
     function GetAttribCount: Integer; override;
@@ -332,14 +332,14 @@ type
     function GetIdentChars: TSynIdentChars; override;
 {$ENDIF}
 {$IFDEF UNISYNEDIT}
-    function GetSampleSource: WideString; override;
+    function GetSampleSource: UnicodeString; override;
 {$ELSE}
     function GetSampleSource: String; override;
 {$ENDIF}
   public
 {$IFDEF UNISYNEDIT}
-    class function GetFriendlyLanguageName: WideString; override;
-    class function SynWebSample: WideString; virtual; abstract;
+    class function GetFriendlyLanguageName: UnicodeString; override;
+    class function SynWebSample: UnicodeString; virtual; abstract;
 {$ELSE}
     class function SynWebSample: String; virtual; abstract;
 {$ENDIF}
@@ -381,10 +381,10 @@ type
 {$ENDIF}
     procedure Next; override;
 {$IFDEF UNISYNEDIT}
-    function GetActiveHighlighter(ARange: Pointer; ALine: WideString;
+    function GetActiveHighlighter(ARange: Pointer; const ALine: UnicodeString;
       ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
 {$ELSE}
-    function GetActiveHighlighter(ARange: Pointer; ALine: String;
+    function GetActiveHighlighter(ARange: Pointer; const ALine: String;
       ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
 {$ENDIF}
     property InternalInstanceData: TSynWebInstance read FInstance;
@@ -413,7 +413,7 @@ type
   public
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
-    class function SynWebSample: WideString; override;
+    class function SynWebSample: UnicodeString; override;
 {$ELSE}
     class function SynWebSample: String; override;
 {$ENDIF}
@@ -432,7 +432,7 @@ type
   public
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
-    class function SynWebSample: WideString; override;
+    class function SynWebSample: UnicodeString; override;
 {$ELSE}
     class function SynWebSample: String; override;
 {$ENDIF}
@@ -451,7 +451,7 @@ type
   public
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
-    class function SynWebSample: WideString; override;
+    class function SynWebSample: UnicodeString; override;
 {$ELSE}
     class function SynWebSample: String; override;
 {$ENDIF}
@@ -470,7 +470,7 @@ type
   public
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
-    class function SynWebSample: WideString; override;
+    class function SynWebSample: UnicodeString; override;
 {$ELSE}
     class function SynWebSample: String; override;
 {$ENDIF}
@@ -490,7 +490,7 @@ type
   public
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
-    class function SynWebSample: WideString; override;
+    class function SynWebSample: UnicodeString; override;
 {$ELSE}
     class function SynWebSample: String; override;
 {$ENDIF}
@@ -511,7 +511,7 @@ type
   public
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
-    class function SynWebSample: WideString; override;
+    class function SynWebSample: UnicodeString; override;
 {$ELSE}
     class function SynWebSample: String; override;
 {$ENDIF}
@@ -532,7 +532,7 @@ type
   public
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
-    class function SynWebSample: WideString; override;
+    class function SynWebSample: UnicodeString; override;
 {$ELSE}
     class function SynWebSample: String; override;
 {$ENDIF}
@@ -553,7 +553,7 @@ type
   public
     class function GetLanguageName: string; override;
 {$IFDEF UNISYNEDIT}
-    class function SynWebSample: WideString; override;
+    class function SynWebSample: UnicodeString; override;
 {$ELSE}
     class function SynWebSample: String; override;
 {$ENDIF}
@@ -626,7 +626,7 @@ type
     FMLErrorAttri: TSynHighlighterAttributes;
 
     // Css ---------------------------------------------------------------------
-    FCssProcTable: array[#0..#255] of TSynWebProcTableProc;
+    FCssProcTable: array[AnsiChar] of TSynWebProcTableProc;
     FCssPropIdentFuncTable: array[0..CssPropMaxKeyHash] of TSynWebIdentFuncTableFunc;
     FCssValIdentFuncTable: array[0..CssValMaxKeyHash] of TSynWebIdentFuncTableFunc;
     FCssSpecialIdentFuncTable: array[0..CssSpecialMaxKeyHash] of TSynWebIdent2FuncTableFunc;
@@ -650,7 +650,7 @@ type
     FCssErrorAttri: TSynHighlighterAttributes;
 
     // ECMAScript --------------------------------------------------------------
-    FEsProcTable: array[#0..#255] of TSynWebProcTableProc;
+    FEsProcTable: array[AnsiChar] of TSynWebProcTableProc;
     FEsIdentFuncTable: array[0..EsKeywordsMaxKeyHash] of TSynWebIdentFuncTableFunc;
     FEsRangeProcTable: array[Low(TSynWebEsRangeState)..High(TSynWebEsRangeState)] of TSynWebProcTableProc;
 
@@ -664,7 +664,7 @@ type
     FEsErrorAttri: TSynHighlighterAttributes;
 
     // Php ---------------------------------------------------------------------
-    FPhpProcTable: array[#0..#255] of TSynWebProcTableProc;
+    FPhpProcTable: array[AnsiChar] of TSynWebProcTableProc;
     FPhpIdentFuncTable: array[0..PhpKeywordsMaxKeyHash] of TSynWebIdentFuncTableFunc;
     FPhpRangeProcTable: array[Low(TSynWebPhpRangeState)..High(TSynWebPhpRangeState)] of TSynWebProcTableProc;
 
@@ -918,7 +918,7 @@ type
     procedure SetAttributesOnChange(AEvent: TNotifyEvent);
     procedure DefHighlightChange(Sender: TObject);
 
-    function GetCrc8String(AString: String): byte;
+    function GetCrc8String(const AString: AnsiString): Byte;
     function GetRangeBit(ABit: Longword): Boolean;
     procedure SetRangeBit(ABit: Longword; AVal: Boolean);
     function GetRangeInt(ALen, APos: Longword): Longword;
@@ -931,9 +931,9 @@ type
     procedure SetHighlighterType(const AHighlighterType: TSynWebHighlighterType;
       AClearBits: Boolean; ASetAtNextToken: Boolean; AUseNextAH: Boolean);
     procedure SetupHighlighterType(AClearBits: Boolean = False);
-    procedure SetLine(NewValue: String; LineNumber: Integer);
+    procedure SetLine(const NewValue: AnsiString; LineNumber: Integer);
     procedure Next;
-    function GetToken: String;
+    function GetToken: AnsiString;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -1063,6 +1063,10 @@ type
 implementation
 
 uses
+{$IFDEF SYN_DELPHI_2009_UP}
+  AnsiStrings,
+{$ENDIF}
+
 {$IFDEF SYN_CLX}
   QSynEditStrConst, StrUtils;
 {$ELSE}
@@ -1297,26 +1301,28 @@ end;
 
 function TSynWebSmartyOptions.GetSmartyLDelim: String;
 begin
-  Result := FOptions^.FSmartyLDelim;
+  Result := String(FOptions^.FSmartyLDelim);
 end;
 
 function TSynWebSmartyOptions.GetSmartyRDelim: String;
 begin
-  Result := FOptions^.FSmartyRDelim;
+  Result := String(FOptions^.FSmartyRDelim);
 end;
 
 procedure TSynWebSmartyOptions.SetSmartyLDelim(const Value: String);
 begin
-  FOptions^.FSmartyLDelim := Value;
-  if LeftStr(FOptions^.FSmartyLDelim, 1) <> '{' then
-    FOptions^.FSmartyLDelim := '{' + FOptions^.FSmartyLDelim;
+  if LeftStr(Value, 1) <> '{' then
+    FOptions^.FSmartyLDelim := '{' + AnsiString(Value)
+  else
+    FOptions^.FSmartyLDelim := AnsiString(Value);
 end;
 
 procedure TSynWebSmartyOptions.SetSmartyRDelim(const Value: String);
 begin
-  FOptions^.FSmartyRDelim := Value;
-  if LeftStr(FOptions^.FSmartyRDelim, 1) <> '}' then
-    FOptions^.FSmartyRDelim := '}' + FOptions^.FSmartyRDelim;
+  if LeftStr(Value, 1) <> '}' then
+    FOptions^.FSmartyRDelim := '}' + AnsiString(Value)
+  else
+    FOptions^.FSmartyRDelim := AnsiString(Value);
 end;
 
 procedure TSynWebSmartyOptions.UpdateMLOption;
@@ -1407,10 +1413,10 @@ begin
 end;
 
 {$IFDEF UNISYNEDIT}
-procedure TSynWebBase.DoSetLine(const Value: WideString; LineNumber: Integer);
+procedure TSynWebBase.DoSetLine(const Value: UnicodeString; LineNumber: Integer);
 var
-  s: String;
-  p: PChar;
+  s: AnsiString;
+  p: PAnsiChar;
   w: PWideChar;
   j, i: Integer;
 begin
@@ -1422,14 +1428,14 @@ begin
   if j > 0 then
   begin
     SetLength(S, j);
-    p := @s[1];
-    w := @Value[1];
+    p := PAnsiChar(s);
+    w := PWideChar(Value);
     for i := 1 to j do
     begin
-      if Word(w^) > 255 then
+      if Word(w^) > 127 then
         p^ := 'a' // convert all 'high' Unicode charaters to 'a' to pass it as Identifier character
       else
-        p^ := Char(w^);
+        p^ := AnsiChar(w^);
       Inc(p);
       Inc(w);
     end;
@@ -1472,7 +1478,7 @@ end;
 {$ENDIF}
 
 {$IFDEF UNISYNEDIT}
-function TSynWebBase.GetSampleSource: WideString;
+function TSynWebBase.GetSampleSource: UnicodeString;
 {$ELSE}
 function TSynWebBase.GetSampleSource: String;
 {$ENDIF}
@@ -1481,7 +1487,7 @@ begin
 end;
 
 {$IFDEF UNISYNEDIT}
-class function TSynWebBase.GetFriendlyLanguageName: WideString;
+class function TSynWebBase.GetFriendlyLanguageName: UnicodeString;
 begin
   Result := GetLanguageName;
 end;
@@ -1713,10 +1719,10 @@ end;
 
 {$IFDEF UNISYNEDIT}
 function TSynWebBase.GetActiveHighlighter(ARange: Pointer;
-  ALine: WideString; ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
+  const ALine: UnicodeString; ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
 {$ELSE}
 function TSynWebBase.GetActiveHighlighter(ARange: Pointer;
-  ALine: String; ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
+  const ALine: String; ACaretX, ACaretY: Integer): TSynWebHighlighterTypes;
 {$ENDIF}
 var
   lPos, lLen: Integer;
@@ -1793,7 +1799,7 @@ begin
 end;
 
 {$IFDEF UNISYNEDIT}
-class function TSynWebHtmlSyn.SynWebSample: WideString;
+class function TSynWebHtmlSyn.SynWebSample: UnicodeString;
 {$ELSE}
 class function TSynWebHtmlSyn.SynWebSample: String;
 {$ENDIF}
@@ -1891,7 +1897,7 @@ begin
 end;
 
 {$IFDEF UNISYNEDIT}
-class function TSynWebSmartySyn.SynWebSample: WideString;
+class function TSynWebSmartySyn.SynWebSample: UnicodeString;
 {$ELSE}
 class function TSynWebSmartySyn.SynWebSample: String;
 {$ENDIF}
@@ -1936,7 +1942,7 @@ begin
 end;
 
 {$IFDEF UNISYNEDIT}
-class function TSynWebWmlSyn.SynWebSample: WideString;
+class function TSynWebWmlSyn.SynWebSample: UnicodeString;
 {$ELSE}
 class function TSynWebWmlSyn.SynWebSample: String;
 {$ENDIF}
@@ -1991,7 +1997,7 @@ begin
 end;
 
 {$IFDEF UNISYNEDIT}
-class function TSynWebXmlSyn.SynWebSample: WideString;
+class function TSynWebXmlSyn.SynWebSample: UnicodeString;
 {$ELSE}
 class function TSynWebXmlSyn.SynWebSample: String;
 {$ENDIF}
@@ -2032,7 +2038,7 @@ begin
 end;
 
 {$IFDEF UNISYNEDIT}
-class function TSynWebCssSyn.SynWebSample: WideString;
+class function TSynWebCssSyn.SynWebSample: UnicodeString;
 {$ELSE}
 class function TSynWebCssSyn.SynWebSample: String;
 {$ENDIF}
@@ -2093,7 +2099,7 @@ begin
 end;
 
 {$IFDEF UNISYNEDIT}
-class function TSynWebEsSyn.SynWebSample: WideString;
+class function TSynWebEsSyn.SynWebSample: UnicodeString;
 {$ELSE}
 class function TSynWebEsSyn.SynWebSample: String;
 {$ENDIF}
@@ -2147,7 +2153,7 @@ begin
 end;
 
 {$IFDEF UNISYNEDIT}
-class function TSynWebPhpCliSyn.SynWebSample: WideString;
+class function TSynWebPhpCliSyn.SynWebSample: UnicodeString;
 {$ELSE}
 class function TSynWebPhpCliSyn.SynWebSample: String;
 {$ENDIF}
@@ -2197,7 +2203,7 @@ begin
 end;
 
 {$IFDEF UNISYNEDIT}
-class function TSynWebPhpPlainSyn.SynWebSample: WideString;
+class function TSynWebPhpPlainSyn.SynWebSample: UnicodeString;
 {$ELSE}
 class function TSynWebPhpPlainSyn.SynWebSample: String;
 {$ENDIF}
@@ -3600,8 +3606,8 @@ end;
 function TSynWebEngine.MLTagKeyComp(const ID: Integer): Boolean;
 var
   I: Integer;
-  Temp: PChar;
-  aKey: String;
+  Temp: PAnsiChar;
+  aKey: AnsiString;
 begin
   if TSynWeb_TagsData[ID] and (1 shl Longword(FInstance^.FOptions.FMLVersion)) = 0 then
   begin
@@ -3631,7 +3637,7 @@ function TSynWebEngine.MLTagCheck: TSynWebTokenKind;
 var
   HashKey: Longword;
 
-  procedure KeyHash(ToHash: PChar);
+  procedure KeyHash(ToHash: PAnsiChar);
   var
     i: Integer;
   begin
@@ -3660,8 +3666,8 @@ end;
 function TSynWebEngine.MLAttrKeyComp(const ID: Integer): Boolean;
 var
   I, tag: Integer;
-  Temp: PChar;
-  aKey: String;
+  Temp: PAnsiChar;
+  aKey: AnsiString;
 begin
   tag := MLGetTag - 1;
   if (tag = -1) or (TSynWeb_AttrsData[ID][Longword(FInstance^.FOptions.FMLVersion)]
@@ -3693,7 +3699,7 @@ function TSynWebEngine.MLAttrCheck: TSynWebTokenKind;
 var
   HashKey: Longword;
 
-  procedure KeyHash(ToHash: PChar);
+  procedure KeyHash(ToHash: PAnsiChar);
   var
     i: Integer;
   begin
@@ -3721,8 +3727,8 @@ end;
 function TSynWebEngine.MLSpecialKeyComp(const ID: Integer): Boolean;
 var
   I: Integer;
-  Temp: PChar;
-  aKey: String;
+  Temp: PAnsiChar;
+  aKey: AnsiString;
 begin
   if TSynWeb_SpecialData[ID] and (1 shl Longword(FInstance^.FOptions.FMLVersion)) = 0 then
   begin
@@ -3752,7 +3758,7 @@ function TSynWebEngine.MLSpecialCheck(AStart, ALen: Integer): Integer;
 var
   HashKey: Longword;
 
-  procedure KeyHash(ToHash: PChar);
+  procedure KeyHash(ToHash: PAnsiChar);
   var
     i: Integer;
   begin
@@ -3785,7 +3791,7 @@ end;
 
 procedure TSynWebEngine.CssMakeMethodTables;
 var
-  c: char;
+  c: AnsiChar;
   i: Integer;
   pF: PSynWebIdentFuncTableFunc;
   pF2: PSynWebIdent2FuncTableFunc;
@@ -5634,8 +5640,8 @@ end;
 function TSynWebEngine.CssPropKeyComp(const ID: Integer): Boolean;
 var
   I: Integer;
-  Temp: PChar;
-  aKey: String;
+  Temp: PAnsiChar;
+  aKey: AnsiString;
 begin
   aKey := TSynWeb_CssProps[ID];
   Temp := FInstance^.FToIdent;
@@ -5674,7 +5680,7 @@ function TSynWebEngine.CssPropCheck: TSynWebTokenKind;
 var
   HashKey: Longword;
 
-  procedure KeyHash(ToHash: PChar);
+  procedure KeyHash(ToHash: PAnsiChar);
   var
     i: Integer;
   begin
@@ -5708,8 +5714,8 @@ end;
 function TSynWebEngine.CssValKeyComp(const ID: Integer): Boolean;
 var
   I: Integer;
-  Temp: PChar;
-  aKey: String;
+  Temp: PAnsiChar;
+  aKey: AnsiString;
 begin
   aKey := TSynWeb_CssVals[ID];
   Temp := FInstance^.FToIdent;
@@ -5749,7 +5755,7 @@ var
   HashKey: Longword;
   prop: Integer;
 
-  procedure KeyHash(ToHash: PChar);
+  procedure KeyHash(ToHash: PAnsiChar);
   var
     i: Integer;
   begin
@@ -5791,8 +5797,8 @@ end;
 function TSynWebEngine.CssSpecialKeyComp(const ID: Integer): Boolean;
 var
   I: Integer;
-  Temp: PChar;
-  aKey: String;
+  Temp: PAnsiChar;
+  aKey: AnsiString;
 begin
   aKey := TSynWeb_CssSpecial[ID];
   Temp := FInstance^.FToIdent;
@@ -5817,7 +5823,7 @@ function TSynWebEngine.CssSpecialCheck(AStart, ALen: Integer): Integer;
 var
   HashKey: Longword;
 
-  procedure KeyHash(ToHash: PChar);
+  procedure KeyHash(ToHash: PAnsiChar);
   var
     i: Integer;
   begin
@@ -5844,7 +5850,7 @@ end;
 
 procedure TSynWebEngine.EsMakeMethodTables;
 var
-  c: char;
+  c: AnsiChar;
   i: Integer;
   pF: PSynWebIdentFuncTableFunc;
 begin
@@ -6604,7 +6610,7 @@ var
 
   procedure ScanBackslash;
 
-    function IsHex(const AChar: Char): Boolean;
+    function IsHex(const AChar: AnsiChar): Boolean;
     begin
       Result := AChar in ['0'..'9', 'a'..'f', 'A'..'F'];
     end;
@@ -6769,8 +6775,8 @@ end;
 function TSynWebEngine.EsKeywordComp(const ID: Integer): Boolean;
 var
   I: Integer;
-  Temp: PChar;
-  aKey: String;
+  Temp: PAnsiChar;
+  aKey: AnsiString;
 begin
   aKey := TSynWeb_EsKeywords[ID];
   Temp := FInstance^.FToIdent;
@@ -6795,7 +6801,7 @@ function TSynWebEngine.EsIdentCheck: TSynWebTokenKind;
 var
   HashKey: Longword;
 
-  procedure KeyHash(ToHash: PChar);
+  procedure KeyHash(ToHash: PAnsiChar);
   var
     i: Integer;
   begin
@@ -6824,7 +6830,7 @@ end;
 
 procedure TSynWebEngine.PhpMakeMethodTables;
 var
-  c: char;
+  c: AnsiChar;
   i: Integer;
   pF: PSynWebIdentFuncTableFunc;
 begin
@@ -7064,8 +7070,8 @@ end;
 function TSynWebEngine.CheckSmartyBegin: Boolean;
 var
   i: Integer;
-  s: String;
-  p: PChar;
+  s: AnsiString;
+  p: PAnsiChar;
 begin
   s := FInstance^.FOptions.FSmartyLDelim;
   p := @FInstance^.FLine[FInstance^.FRun];
@@ -7084,8 +7090,8 @@ end;
 function TSynWebEngine.CheckSmartyEnd: Boolean;
 var
   i: Integer;
-  s: String;
-  p: PChar;
+  s: AnsiString;
+  p: PAnsiChar;
 begin
   s := FInstance^.FOptions.FSmartyRDelim;
   p := @FInstance^.FLine[FInstance^.FRun];
@@ -7692,7 +7698,7 @@ end;
 function TSynWebEngine.PhpDoStringDouble(AIsHeredoc: Boolean;
   ARangeChar: Boolean): Boolean;
 var
-  StringChar: char;
+  StringChar: AnsiChar;
 
   procedure TryDoSpace;
   begin
@@ -7947,7 +7953,7 @@ end;
 
 procedure TSynWebEngine.PhpSubProcProc;
 var
-  s: String;
+  s: AnsiString;
   i: Integer;
 
   procedure DoDefault(ARange: TSynWebPhpRangeState = srsPhpDefault);
@@ -8026,7 +8032,7 @@ begin
       FInstance^.FTokenLastID := PhpKeyID_Special_HeredocBegin;
       PhpSetRange(srsPhpHeredoc);
       s := GetToken;
-      i := FPhpHereDocList.IndexOf(s);
+      i := FPhpHereDocList.IndexOf(String(s));
       if i in [0..255] then
       begin
         SetRangeInt(8, 17, i);
@@ -8267,7 +8273,7 @@ end;
 procedure TSynWebEngine.PhpRangeHeredocProc;
 var
   OldRun: longint;
-  s: String;
+  s: AnsiString;
 begin
   // if FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '_', #$7F..#$FF] then
   if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 28) <> 0 then
@@ -8282,7 +8288,7 @@ begin
       (FInstance^.FLine[FInstance^.FRun] = #0) then
     begin
       s := GetToken;
-      if (GetRangeBit(25) and (s = FPhpHereDocList[GetRangeInt(8, 17)])) or
+      if (GetRangeBit(25) and (String(s) = FPhpHereDocList[GetRangeInt(8, 17)])) or
         (not GetRangeBit(25) and (GetRangeInt(8, 17) = GetCrc8String(GetToken))) then
       begin
         FInstance^.FTokenID := stkPhpKeyword;
@@ -8303,8 +8309,8 @@ end;
 function TSynWebEngine.PhpKeywordComp(const ID: Integer): Boolean;
 var
   I: Integer;
-  Temp: PChar;
-  aKey: String;
+  Temp: PAnsiChar;
+  aKey: AnsiString;
   Data: Longword;
 begin
   Data := TSynWeb_PhpKeywordsData[ID];
@@ -8337,7 +8343,7 @@ end;
 function TSynWebEngine.PhpConstComp: Boolean;
 var
   I: Integer;
-  Temp: PChar;
+  Temp: PAnsiChar;
 begin
   Temp := FInstance^.FToIdent;
   for i := 1 to FInstance^.FStringLen do
@@ -8355,8 +8361,8 @@ end;
 function TSynWebEngine.PhpFunctionComp(const ID: Integer): Boolean;
 var
   I: Integer;
-  Temp: PChar;
-  aKey: String;
+  Temp: PAnsiChar;
+  aKey: AnsiString;
   Data: Longword;
 begin
   Data := TSynWeb_PhpKeywordsData[ID];
@@ -8389,7 +8395,7 @@ function TSynWebEngine.PhpIdentCheck: TSynWebTokenKind;
 var
   HashKey: Longword;
 
-  procedure KeyHash(ToHash: PChar);
+  procedure KeyHash(ToHash: PAnsiChar);
   var
     i: Integer;
   begin
@@ -8470,7 +8476,7 @@ begin
     TSynWebBase(FNotifyList[i]).DoDefHighlightChange;
 end;
 
-function TSynWebEngine.GetCrc8String(AString: String): byte;
+function TSynWebEngine.GetCrc8String(const AString: AnsiString): Byte;
 var
   i: Integer;
 begin
@@ -8603,10 +8609,10 @@ begin
   end;
 end;
 
-procedure TSynWebEngine.SetLine(NewValue: String; LineNumber: Integer);
+procedure TSynWebEngine.SetLine(const NewValue: AnsiString; LineNumber: Integer);
 {$IFDEF SYNWEB_FIXNULL}
 var
-  s, e: PChar;
+  s, e: PAnsiChar;
   i:Integer;
 {$ENDIF}
 begin
@@ -8615,7 +8621,7 @@ begin
   i := Length(FInstance^.FLineRef);
   if i > 0  then
   begin
-    s := @FInstance^.FLineRef[1];
+    s := PAnsiChar(FInstance^.FLineRef);
     e := s + i;
     repeat
       if s^ = #0 then
@@ -8624,7 +8630,7 @@ begin
     until s = e;
   end;
 {$ENDIF}
-  FInstance^.FLine := PChar(FInstance^.FLineRef);
+  FInstance^.FLine := PAnsiChar(FInstance^.FLineRef);
   FInstance^.FRun := 0;
   FInstance^.FLineNumber := LineNumber;
   FInstance^.FHighlighterType := TSynWebHighlighterType(GetRangeInt(3, 29));
@@ -8643,7 +8649,7 @@ begin
   FInstance^.FNextProcTable;
 end;
 
-function TSynWebEngine.GetToken: String;
+function TSynWebEngine.GetToken: AnsiString;
 var
   Len: longint;
 begin
