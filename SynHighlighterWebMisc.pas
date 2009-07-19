@@ -57,8 +57,15 @@ unit SynHighlighterWebMisc;
 interface
 
 uses
+  SysUtils,
+  StrUtils,
+  Graphics,
+  Classes,
 {$IFDEF SYN_CLX}
   QSynEdit,
+{$IFDEF UNISYNEDIT}  
+  QSynUnicode,
+{$ENDIF}
   QSynEditTextBuffer,
   QSynEditHighlighter,
   QSynEditTypes,
@@ -67,10 +74,10 @@ uses
   QSynHighlighterWebData,
   QSynTokenMatch;
 {$ELSE}
-  SysUtils,
-  StrUtils,
-  Graphics,
-  SynEdit,
+  SynEdit, 
+{$IFDEF UNISYNEDIT}  
+  SynUnicode,
+{$ENDIF}
   SynEditTextBuffer,
   SynEditHighlighter,
   SynEditTypes,
@@ -79,6 +86,103 @@ uses
   SynHighlighterWebData,
   SynTokenMatch;
 {$ENDIF}
+
+const
+  TSynWebTokenizedStartScanBefore = 20; { 20 lines before }
+
+  TBufferCoordStart: TBufferCoord = (Char: 1; Line: 1);
+  TSynWebTokenizerPhpWhitespaces = [stkPhpSpace, stkPhpComment, stkPhpDocComment, stkPhpDocCommentTag, stkNull];
+
+type
+  TSynWebTokenizerSet = set of TSynWebTokenKind;
+  TSynWebTokenizerMarker = (stlBefore, stlBegin, stlInside, stlEnd, stlAfter);
+
+  TSynWebTokenizerInfo = record
+    Kind: TSynWebTokenKind;
+    Token: TSynWebString;
+    Len: Integer;
+    Marker: TSynWebTokenizerMarker;
+    Range: Longword;
+    PhpKeyId: Integer;
+    PhpSymbolId: Integer;
+    EsSymbolId: Integer;
+    MLTagId: Integer;
+    MLTagKind: Integer;
+    case Boolean of
+    False: (
+      Char: Integer;
+      Line: Integer;
+    );
+
+    True: (
+      Pos: TBufferCoord;
+    )
+    end;
+
+{ ISynWebTokenizer }
+
+  ISynWebTokenizer = interface(IInterface)
+  // protected
+    function GetMarkerPos: TBufferCoord;
+    procedure SetMarkerPos(const AMarkerPos: TBufferCoord);
+
+  // public
+    function Next: Boolean;
+    function NextAndSkip(const ASkip: TSynWebTokenizerSet = TSynWebTokenizerPhpWhitespaces): Boolean;
+    function Skip(const ASkip: TSynWebTokenizerSet = TSynWebTokenizerPhpWhitespaces): Boolean;
+
+    function IsEol: Boolean;
+    function IsEof: Boolean;
+
+    function HL: TSynWebBase;
+
+    function PreviousToken: TSynWebTokenizerInfo;
+    function CurrentToken: TSynWebTokenizerInfo;
+
+    property MarkerPos: TBufferCoord read GetMarkerPos write SetMarkerPos;
+  end;
+
+{ TSynWebTokenizer }
+
+  TSynWebTokenizer = class(TInterfacedObject, ISynWebTokenizer)
+  protected
+    FLines: TSynWebStrings;
+    FLine: Integer;
+    FMarkerPos: TBufferCoord;
+    FHL: TSynWebBase;
+
+    FCurrentToken: TSynWebTokenizerInfo;
+    FLastToken: TSynWebTokenizerInfo;
+
+    procedure UpdateMaker(var ATokenInfo: TSynWebTokenizerInfo);
+    procedure GetCurrentTokenInfo(var ATokenInfo: TSynWebTokenizerInfo);
+
+    function GetMarkerPos: TBufferCoord;
+    procedure SetMarkerPos(const AMarkerPos: TBufferCoord);
+  public
+    constructor Create(ALines: TSynWebStrings; AHighlighter: TSynWebBase;
+      APos: TBufferCoord); overload;
+    constructor Create(ALines: TSynWebStrings; AHighlighter: TSynWebBase;
+      ALine: Integer = 1); overload;
+
+    constructor Create(AEditor: TCustomSynEdit; ALine: Integer = 1); overload;
+    constructor Create(AEditor: TCustomSynEdit; APos: TBufferCoord); overload;
+
+    class function GetTokenCompletionAtCaret(AEditor: TCustomSynEdit): TSynWebString;
+
+    function Next: Boolean;
+    function NextAndSkip(const ASkip: TSynWebTokenizerSet): Boolean;
+    function Skip(const ASkip: TSynWebTokenizerSet): Boolean;
+
+    function IsEof: Boolean;
+    function IsEol: Boolean;  
+
+    function HL: TSynWebBase;
+    function CurrentToken: TSynWebTokenizerInfo;
+    function PreviousToken: TSynWebTokenizerInfo;
+  end;
+
+//
 
 {
   SynEditGetMatchingToken(Ex) returns:
@@ -105,19 +209,30 @@ function SynWebUpdateActiveHighlighter(ASynEdit: TCustomSynEdit;
   ASynWeb: TSynWebBase): TSynWebHighlighterTypes;
 
 function SynWebFillCompletionProposal(ASynEdit: TCustomSynEdit;
-  ASynWeb: TSynWebHtmlSyn; ACompletion: TSynCompletionProposal;
-  var CurrentInput: UnicodeString): TSynWebHighlighterTypes;
+  ASynWeb: TSynWebBase; ACompletion: TSynCompletionProposal;
+  var CurrentInput: TSynWebString): TSynWebHighlighterTypes;
+
+type
+  PSynWebUnmatchedTag = ^TSynWebUnmatchedTag;
+  TSynWebUnmatchedTag = record
+    Pos: TBufferCoord;
+    Tag: TSynWebString;
+  end;
+
+  TSynWebTagUnmatchedArray = array of TSynWebUnmatchedTag;
+
+function SynWebGetUnmatchedTags(ASynEdit: TCustomSynEdit;
+  var AUnmatchedTags: TSynWebTagUnmatchedArray; AAllowDuplicates: Boolean): Boolean; overload;
+
+function SynWebGetUnmatchedTags(ALines: TSynWebStrings; APos: TBufferCoord;
+  ASynWeb: TSynWebMLSyn; var AUnmatchedTags: TSynWebTagUnmatchedArray; AAllowDuplicates: Boolean): Boolean; overload;
 
 implementation
 
 type
   TSynTokenBuf = record
     Pos: TBufferCoord;
-{$IFDEF UNISYNEDIT}
-    Token: UnicodeString;
-{$ELSE}
-    Token: String;
-{$ENDIF}
+    Token: TSynWebString;
   end;
 
 var
@@ -391,10 +506,10 @@ begin
 end;
 
 function SynWebFillCompletionProposal(ASynEdit: TCustomSynEdit;
-  ASynWeb: TSynWebHtmlSyn; ACompletion: TSynCompletionProposal;
-  var CurrentInput: UnicodeString): TSynWebHighlighterTypes;
+  ASynWeb: TSynWebBase; ACompletion: TSynCompletionProposal;
+  var CurrentInput: TSynWebString): TSynWebHighlighterTypes;
 var
-  ct: UnicodeString;
+  ct: TSynWebString;
   ctk: TSynWebTokenKind;
 
   procedure ScanTo(APos: TBufferCoord);
@@ -443,7 +558,17 @@ var
   var
     i: Integer;
     ver: Longword;
+    lUnmatchedTag: TSynWebTagUnmatchedArray;
   begin
+    if not AClose then
+    begin
+      if ASynWeb is TSynWebMLSyn then
+        if SynWebGetUnmatchedTags(ASynEdit.Lines, ASynEdit.CaretXY, TSynWebMLSyn(ASynWeb), lUnmatchedTag, True) then
+          for i := 0 to Length(lUnmatchedTag) - 1 do
+            AddSimple('</' + String(lUnmatchedTag[i].Tag) + '>', 'tag*',
+              ASynWeb.Engine.MLTagNameAttri.Foreground);
+    end;
+
     ver := 1 shl Longword(ASynWeb.InternalInstanceData.FOptions.FMLVersion);
     for i := 0 to High(TSynWeb_TagsData) do
       if ((TSynWeb_TagsData[i] and ver) <> 0) and (not AClose or
@@ -640,7 +765,8 @@ var
     v: Longword;
     data: Longword;
   begin
-    v := 1 shl Longword(ASynWeb.Options.PhpVersion);
+    v := 1 shl Longword(ASynWeb.InternalInstanceData.FOptions.FPhpVersion);
+
     for i := 0 to High(TSynWeb_PhpKeywords) do // functions
     begin
       data := TSynWeb_PhpKeywordsData[i];
@@ -691,6 +817,450 @@ begin
     else
       if [shtPhpInML, shtPhpInCss, shtPhpInEs] * Result <> [] then
         Php;
+end;
+
+type
+  PSynWebTagItem = ^TSynWebTagItem;
+  TSynWebTagItem = record
+    Pos: TBufferCoord;
+    Marker: TSynWebTokenizerMarker;
+    Prev: PSynWebTagItem;
+  end;
+
+function SynWebSortUnmatched(T1, T2: Pointer): Integer;
+var
+  l1, l2: TBufferCoord;
+begin
+  l1 := PSynWebUnmatchedTag(T2).Pos;
+  l2 := PSynWebUnmatchedTag(T1).Pos;
+
+  if l1.Line < l2.Line then
+    Result := -1
+  else
+    if l1.Line > l2.Line then
+      Result := 1
+    else
+      if l1.Char < l2.Char then
+        Result := -1
+      else
+        if l1.Char > l2.Char then
+          Result := 1
+        else
+          Result := 0;
+end;
+
+function SynWebGetUnmatchedTags(ASynEdit: TCustomSynEdit;
+  var AUnmatchedTags: TSynWebTagUnmatchedArray; AAllowDuplicates: Boolean): Boolean;
+begin
+  Result := (ASynEdit.Highlighter is TSynWebMLSyn) and
+    SynWebGetUnmatchedTags(
+      ASynEdit.Lines,
+      ASynEdit.CaretXY,
+      TSynWebMLSyn(ASynEdit.Highlighter),
+      AUnmatchedTags,
+      AAllowDuplicates
+    );
+end;
+
+function SynWebGetUnmatchedTags(ALines: TSynWebStrings; APos: TBufferCoord;
+  ASynWeb: TSynWebMLSyn; var AUnmatchedTags: TSynWebTagUnmatchedArray; AAllowDuplicates: Boolean): Boolean;
+var
+  lT: ISynWebTokenizer;
+  lTags: TSynWebStringList;
+  lTagLastIdx: Integer;
+
+  procedure OpenTag;
+  var
+    lTagItem: PSynWebTagItem;
+    lTagId: Integer;
+  begin
+    // If this is a HTML tag which doesn't need close tag, then simply don't open it
+    if ASynWeb.InternalInstanceData.FOptions.FMLVersion <= smlhvHtml401Frameset then
+    begin
+      lTagId := TSynWebHtmlSyn(ASynWeb).MLGetTagID;
+      if lTagId > -1 then
+        // If HTML_TAG(lTagId) IS EMPTY then
+        if TSynWeb_TagsData[lTagId] and (1 shl 31) <> 0 then
+          Exit;
+    end;
+
+    New(lTagItem);
+    lTagItem^.Marker := lT.CurrentToken.Marker;
+    lTagItem^.Pos := lT.CurrentToken.Pos;
+
+    if lTags.Find(lT.CurrentToken.Token, lTagLastIdx) then
+    begin
+      lTagItem^.Prev := PSynWebTagItem(lTags.Objects[lTagLastIdx]);
+
+      lTags.Objects[lTagLastIdx] := TObject(lTagItem);
+    end else
+    begin
+      lTagItem^.Prev := nil;
+
+      lTags.InsertObject(lTagLastIdx, lT.CurrentToken.Token, TObject(lTagItem));
+    end;
+  end;
+
+  procedure CloseLastTag;
+  var
+    lTagItem: PSynWebTagItem;
+  begin
+    if lTagLastIdx = -1 then
+      Exit;
+
+    lTagItem := PSynWebTagItem(lTags.Objects[lTagLastIdx]);
+
+    if lTagItem^.Prev = nil then
+      lTags.Delete(lTagLastIdx)
+    else
+      lTags.Objects[lTagLastIdx] := TObject(lTagItem^.Prev);
+
+    lTagLastIdx := -1;
+
+    Dispose(lTagItem);
+  end;
+
+  procedure CloseTag;
+  begin
+    if lTags.Find(lT.CurrentToken.Token, lTagLastIdx) then
+      CloseLastTag
+    else
+      lTagLastIdx := -1;
+  end;
+
+  procedure FillUnmatched;
+  var
+    lTagIdx: Integer;       
+    lTagItem, lTagItemDel: PSynWebTagItem;
+    lAdded: Boolean;
+    lUnmatched: TList;
+    lUnmatchedTag: PSynWebUnmatchedTag;
+  begin
+    lUnmatched := TList.Create;
+    try
+      for lTagIdx := 0 to lTags.Count - 1 do
+      begin
+        lTagItem := PSynWebTagItem(lTags.Objects[lTagIdx]);
+
+        lAdded := False;
+
+        while lTagItem <> nil do
+        begin
+          // Add only tags which was opened before caret pos, so marker must be after token pos
+          if not lAdded and (lTagItem^.Marker = stlAfter) then
+          begin
+            lAdded := not AAllowDuplicates;
+
+            New(lUnmatchedTag);
+            lUnmatchedTag^.Pos := lTagItem^.Pos;
+            lUnmatchedTag^.Tag := lTags[lTagIdx];
+
+            lUnmatched.Add(lUnmatchedTag);
+          end;
+
+          lTagItemDel := lTagItem;
+          lTagItem := lTagItem^.Prev;
+          Dispose(lTagItemDel);
+        end;
+      end;
+
+      lUnmatched.Sort(SynWebSortUnmatched);
+
+      SetLength(AUnmatchedTags, lUnmatched.Count);
+      for lTagIdx := 0 to lUnmatched.Count - 1 do
+      begin
+        lUnmatchedTag := lUnmatched[lTagIdx];
+
+        AUnmatchedTags[lTagIdx] := lUnmatchedTag^;
+
+        Dispose(lUnmatchedTag);
+      end;
+
+    finally
+      lUnmatched.Free;
+    end;
+  end;
+
+begin
+  lT := TSynWebTokenizer.Create(ALines, ASynWeb);
+  lT.MarkerPos := APos;
+
+  lTags := TSynWebStringList.Create;
+  try
+    lTagLastIdx := -1;
+
+    while not lT.IsEof do
+    begin
+      case lT.CurrentToken.Kind of
+      stkMLTag:
+        if lT.CurrentToken.Token = '<' then
+        begin
+
+          if lT.Next and (lT.CurrentToken.Kind in [stkMLTagName, stkMLTagNameUndef]) then
+            OpenTag
+          else
+            lTagLastIdx := -1;
+
+        end else
+          if lT.CurrentToken.Token = '</' then
+          begin
+
+            if lT.Next and (lT.CurrentToken.Kind in [stkMLTagName, stkMLTagNameUndef]) then
+              CloseTag;
+
+          end else
+            if lT.CurrentToken.Token = '>' then
+              lTagLastIdx := -1
+            else
+              if lT.CurrentToken.Token = '/>' then
+                CloseLastTag;
+
+      stkMLError:
+        if lT.CurrentToken.Token = '/' then
+          CloseLastTag;
+      end;
+
+      lT.Next;
+    end;
+
+  finally
+    FillUnmatched;
+
+    lTags.Free;
+  end;
+
+  Result := Length(AUnmatchedTags) > 0;
+end;
+
+{ TSynWebTokenizer }
+
+constructor TSynWebTokenizer.Create(ALines: TSynWebStrings;
+  AHighlighter: TSynWebBase; APos: TBufferCoord);
+begin
+  inherited Create;
+
+  FLines := ALines;
+  FHL := AHighlighter;
+
+  FLine := APos.Line - 1;
+  if FLine < 0 then
+    FLine := 0;
+
+  Dec(APos.Char);
+  if APos.Char < 0 then
+    APos.Char := 0;
+
+  if not IsEof then
+    with FHL do
+    begin
+      if FLine = 0 then
+        ResetRange
+      else
+        SetRange(TSynEditStringList(FLines).Ranges[FLine - 1]);
+
+      SetLine(FLines[FLine], FLine + 1);
+                     
+      GetCurrentTokenInfo(FCurrentToken);
+
+      while not GetEol and (GetTokenPos + GetTokenLen <= APos.Char) do
+        Self.Next;
+
+    end;
+end;
+
+constructor TSynWebTokenizer.Create(AEditor: TCustomSynEdit;
+  APos: TBufferCoord);
+begin
+  Create(AEditor.Lines, AEditor.Highlighter as TSynWebBase, APos);
+end;
+
+function TSynWebTokenizer.CurrentToken: TSynWebTokenizerInfo;
+begin
+  Result := FCurrentToken;
+end;
+
+constructor TSynWebTokenizer.Create(ALines: TSynWebStrings;
+  AHighlighter: TSynWebBase; ALine: Integer);
+var
+  lPos: TBufferCoord;
+begin
+  lPos.Line := ALine;
+  lPos.Char := 1;
+  Create(ALines, AHighlighter, lPos);
+end;
+
+constructor TSynWebTokenizer.Create(AEditor: TCustomSynEdit; ALine: Integer);
+var
+  lPos: TBufferCoord;
+begin
+  lPos.Line := ALine;
+  lPos.Char := 1;
+
+  Create(AEditor, lPos);
+end;
+
+procedure TSynWebTokenizer.GetCurrentTokenInfo(
+  var ATokenInfo: TSynWebTokenizerInfo);
+begin
+  with ATokenInfo do
+  begin
+    Kind := FHL.GetTokenID;
+    Token := FHL.GetToken;
+    Len := FHL.GetTokenLen;
+    if Len = 0 then
+      Len := 32768;
+
+    Range := Longword(FHL.GetRange);
+
+    Char := FHL.GetTokenPos + 1;
+    Line := FLine + 1;
+
+    PhpKeyId := FHL.PhpGetKeywordId;
+    PhpSymbolId := FHL.PhpGetSymbolId;
+    EsSymbolId := FHL.EsGetSymbolId;
+    MLTagId := FHL.MLGetTagID;
+    MLTagKind := FHL.MLGetTagKind;
+  end;
+  UpdateMaker(ATokenInfo);
+end;
+
+function TSynWebTokenizer.GetMarkerPos: TBufferCoord;
+begin
+  Result := FMarkerPos;
+end;
+
+class function TSynWebTokenizer.GetTokenCompletionAtCaret(
+  AEditor: TCustomSynEdit): TSynWebString;
+const
+  cSTK_IDENTS = [stkEsIdentifier, stkEsKeyword, stkPhpIdentifier, stkPhpMethod, stkPhpConst, stkPhpFunction, stkPhpVariable];
+var
+  lT: ISynWebTokenizer;
+
+  function IsIdentToken(const ATokenInfo: TSynWebTokenizerInfo): Boolean;
+  begin
+    Result := (ATokenInfo.Kind in cSTK_IDENTS) or
+      (
+        (ATokenInfo.Kind in [stkPhpError, stkPhpKeyword]) and
+        ((ATokenInfo.Token = '$') or (ATokenInfo.Token = '$$'))
+      );
+  end;
+
+begin
+  lT := TSynWebTokenizer.Create(AEditor, AEditor.CaretXY);
+  lT.MarkerPos := AEditor.CaretXY;
+
+  if (lT.PreviousToken.Marker = stlEnd) and IsIdentToken(lT.PreviousToken) then
+  begin
+    Result := lT.PreviousToken.Token;
+
+    if lT.PreviousToken.Kind = stkPhpVariable then
+      Result := '$' + Result;
+
+  end else
+    if IsIdentToken(lT.CurrentToken) then
+    begin
+      Result := Copy(lT.CurrentToken.Token, 1, AEditor.CaretX - lT.CurrentToken.Char);
+
+      if lT.CurrentToken.Kind = stkPhpVariable then
+        Result := '$' + Result;
+    end else
+      Result := '';
+
+  if Trim(Result) = '' then
+    Result := '';
+end;
+
+function TSynWebTokenizer.HL: TSynWebBase;
+begin
+  Result := FHL;
+end;
+
+function TSynWebTokenizer.IsEof: Boolean;
+begin
+  Result := FLine >= FLines.Count;
+end;
+
+function TSynWebTokenizer.IsEol: Boolean;
+begin
+  Result := FHL.GetEol;
+end;
+
+function TSynWebTokenizer.PreviousToken: TSynWebTokenizerInfo;
+begin
+  Result := FLastToken;
+end;
+
+function TSynWebTokenizer.NextAndSkip(const ASkip: TSynWebTokenizerSet): Boolean;
+begin
+  Next;
+  Skip(ASkip);
+  Result := not IsEof;
+end;
+
+function TSynWebTokenizer.Next: Boolean;
+begin
+  Result := False;
+
+  if IsEof then
+    Exit;
+
+  if IsEol then
+  begin
+    Inc(FLine);
+    if IsEof then
+      Exit;
+
+    FLastToken := FCurrentToken;
+    FHL.SetLine(FLines[FLine], FLine + 1);
+    GetCurrentTokenInfo(FCurrentToken);
+  end else
+  begin
+    FLastToken := FCurrentToken;
+    FHL.Next;                          
+    GetCurrentTokenInfo(FCurrentToken);
+  end;
+
+  Result := True;
+end;
+
+procedure TSynWebTokenizer.SetMarkerPos(const AMarkerPos: TBufferCoord);
+begin
+  FMarkerPos := AMarkerPos;
+
+  UpdateMaker(FLastToken);
+  UpdateMaker(FCurrentToken);
+end;
+
+function TSynWebTokenizer.Skip(const ASkip: TSynWebTokenizerSet): Boolean;
+begin
+  Result := False;
+
+  while (CurrentToken.Kind in ASkip) and Next do
+    Result := True;
+end;
+
+procedure TSynWebTokenizer.UpdateMaker(var ATokenInfo: TSynWebTokenizerInfo);
+begin
+  with ATokenInfo do
+    if FMarkerPos.Line < Line then
+      Marker := stlBefore
+    else
+      if FMarkerPos.Line > Line then
+        Marker := stlAfter
+      else
+        if FMarkerPos.Char < Char then
+          Marker := stlBefore
+        else
+          if FMarkerPos.Char = Char then
+            Marker := stlBegin
+          else
+            if FMarkerPos.Char < Char + Len then
+              Marker := stlInside
+            else
+              if FMarkerPos.Char = Char + Len then
+                Marker := stlEnd
+              else
+                Marker := stlAfter;
 end;
 
 end.

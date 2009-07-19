@@ -60,11 +60,11 @@ Known limitations:
 *)
 
 {
-@abstract(Provides an web-files (Multi Html/XHtml/Wml/Xml/Css/ECMAScript/Php/Smarty) highlighter for SynEdit
+@abstract(Provides an web-files (Multi Html/XHtml/Wml/Xml/Xslt/Css/ECMAScript/Php/Smarty) highlighter for SynEdit
 @author(Krystian Bigaj <krystian.bigaj@gmail.com>)
 @created(2005-05-21)
-@lastmod(2009-07-18)
-The SynHighlighterWeb unit provides SynEdit with a Multi Html/XHtml/Wml/Xml/Css/ECMAScript/Php highlighter.
+@lastmod(2009-07-19)
+The SynHighlighterWeb unit provides SynEdit with a Multi Html/XHtml/Wml/Xml/Xslt/Css/ECMAScript/Php highlighter.
 }
 
 {$IFNDEF QSYNHIGHLIGHTERWEB}
@@ -78,11 +78,17 @@ interface
 uses
 {$IFDEF SYN_CLX}
   QGraphics,
+{$IFDEF UNISYNEDIT}
+  QSynUnicode,    
+{$ENDIF}
   QSynEditTypes,
   QSynEditHighlighter,
   QSynHighlighterWebData,
 {$ELSE}
   Graphics,
+{$IFDEF UNISYNEDIT}
+  SynUnicode,    
+{$ENDIF}
   SynEditTypes,
   SynEditHighlighter,
   SynHighlighterWebData,
@@ -102,6 +108,7 @@ type
     FMLVersion: TSynWebMLVersion;
     FHtmlVersion: TSynWebHtmlVersion;
     FWmlVersion: TSynWebWmlVersion;
+    FXsltVersion: TSynWebXSLTVersion;
     FCssVersion: TSynWebCssVersion;
     FPhpVersion: TSynWebPhpVersion;
     FPhpShortOpenTag: Boolean;
@@ -129,7 +136,7 @@ type
     FStringLen, FStringLenClean: Integer;
     FTokenLastSymbolId: Integer;
     FToIdent: PAnsiChar;
-    FHashTable: TSynWebHashTable;
+    FHashTable: PSynWebHashTable;
     FNextClearBits: Boolean;
     FNextUseNextAH: Boolean;
     FUseNextAH: Boolean;
@@ -146,6 +153,8 @@ type
     FHighlither: TSynWebBase;
   end;
 
+{ TSynWebOptionsBase }
+
   TSynWebOptionsBase = class(TPersistent)
   private
     FOptions: PSynWebOptions;
@@ -156,6 +165,8 @@ type
     procedure SetHtmlVersion(const Value: TSynWebHtmlVersion);
     function GetWmlVersion: TSynWebWmlVersion;
     procedure SetWmlVersion(const Value: TSynWebWmlVersion);
+    function GetXsltVersion: TSynWebXSLTVersion;
+    procedure SetXsltVersion(const Value: TSynWebXSLTVersion);
     function GetCssVersion: TSynWebCssVersion;
     procedure SetCssVersion(const Value: TSynWebCssVersion);
     function GetPhpVersion: TSynWebPhpVersion;
@@ -183,6 +194,7 @@ type
 
     property HtmlVersion: TSynWebHtmlVersion read GetHtmlVersion write SetHtmlVersion;
     property WmlVersion: TSynWebWmlVersion read GetWmlVersion write SetWmlVersion;
+    property XsltVersion: TSynWebXSLTVersion read GetXsltVersion write SetXsltVersion;
     property CssVersion: TSynWebCssVersion read GetCssVersion write SetCssVersion;
     property PhpVersion: TSynWebPhpVersion read GetPhpVersion write SetPhpVersion;
     property PhpShortOpenTag: Boolean read GetPhpShortOpenTag write SetPhpShortOpenTag;
@@ -197,6 +209,8 @@ type
     constructor Create(AOptions: PSynWebOptions);
     property OnChange: TNotifyEvent read FOnChange write FOnChange;
   end;
+
+{ TSynWebHtmlOptions }
 
   TSynWebHtmlOptions = class(TSynWebOptionsBase)
   protected
@@ -214,6 +228,8 @@ type
     property EsEmbeded;
     property UseEngineOptions;
   end;
+
+{ TSynWebSmartyOptions }
 
   TSynWebSmartyOptions = class(TSynWebOptionsBase)
   private
@@ -236,6 +252,8 @@ type
     property UseEngineOptions;
   end;
 
+{ TSynWebWmlOptions }
+
   TSynWebWmlOptions = class(TSynWebOptionsBase)
   protected
     procedure UpdateMLOption; override;
@@ -250,6 +268,24 @@ type
     property UseEngineOptions;
   end;
 
+{ TSynWebXsltOptions }
+
+  TSynWebXsltOptions = class(TSynWebOptionsBase)
+  protected
+    procedure UpdateMLOption; override;
+  public
+    constructor Create(AOptions: PSynWebOptions);
+  published
+    property XsltVersion;
+    property PhpVersion;
+    property PhpShortOpenTag;
+    property PhpAspTags;
+    property PhpEmbeded;
+    property UseEngineOptions;
+  end;
+
+{ TSynWebXmlOptions }
+
   TSynWebXmlOptions = class(TSynWebOptionsBase)
   protected
     procedure UpdateMLOption; override;
@@ -263,6 +299,8 @@ type
     property UseEngineOptions;
   end;
 
+{ TSynWebCssOptions }
+
   TSynWebCssOptions = class(TSynWebOptionsBase)
   published
     property HtmlVersion;
@@ -274,6 +312,8 @@ type
     property UseEngineOptions;
   end;
 
+{ TSynWebEsOptions }
+
   TSynWebEsOptions = class(TSynWebOptionsBase)
   published
     property PhpVersion;
@@ -283,6 +323,8 @@ type
     property UseEngineOptions;
   end;
 
+{ TSynWebPhpCliOptions }
+
   TSynWebPhpCliOptions = class(TSynWebOptionsBase)
   published
     property PhpVersion;
@@ -291,11 +333,15 @@ type
     property UseEngineOptions;
   end;
 
+{ TSynWebPhpPlainOptions }
+
   TSynWebPhpPlainOptions = class(TSynWebOptionsBase)
   published
     property PhpVersion;
     property UseEngineOptions;
   end;
+
+{ TSynWebEngineOptions }
 
   TSynWebEngineOptions = class(TSynWebOptionsBase)
   public
@@ -303,11 +349,14 @@ type
   published
     property HtmlVersion;
     property WmlVersion;
+    property XsltVersion;
     property CssVersion;
     property PhpVersion;
     property PhpShortOpenTag;
     property PhpAspTags;
   end;
+
+{ TSynWebBase }
 
   TSynWebBaseClass = class of TSynWebBase;
 
@@ -396,6 +445,8 @@ type
     property Engine: TSynWebEngine read FEngine write SetEngine;
   end;
 
+{ TSynWebMLSyn }
+
   TSynWebMLSyn = class(TSynWebBase)
   private
     procedure SetupActiveHighlighter; override;
@@ -403,6 +454,8 @@ type
     constructor Create(AOwner: TComponent); override;
     procedure ResetRange; override;
   end;
+
+{ TSynWebHtmlSyn }
 
   TSynWebHtmlSynClass = class of TSynWebHtmlSyn;
 
@@ -423,6 +476,8 @@ type
     property Options: TSynWebHtmlOptions read GetOptions write SetOptions;
   end;
 
+{ TSynWebSmartySyn }
+
   TSynWebSmartySynClass = class of TSynWebSmartySyn;
 
   TSynWebSmartySyn = class(TSynWebMLSyn)
@@ -441,6 +496,8 @@ type
   published
     property Options: TSynWebSmartyOptions read GetOptions write SetOptions;
   end;
+
+{ TSynWebWmlSyn }
 
   TSynWebWmlSynClass = class of TSynWebWmlSyn;
 
@@ -461,6 +518,29 @@ type
     property Options: TSynWebWmlOptions read GetOptions write SetOptions;
   end;
 
+{ TSynWebXsltSyn }
+
+  TSynWebXsltSynClass = class of TSynWebXsltSyn;
+
+  TSynWebXsltSyn = class(TSynWebMLSyn)
+  private
+    function GetOptions: TSynWebXsltOptions;
+    procedure SetOptions(const AValue: TSynWebXsltOptions);
+  public
+    class function GetLanguageName: string; override;
+{$IFDEF UNISYNEDIT}
+    class function SynWebSample: UnicodeString; override;
+{$ELSE}
+    class function SynWebSample: String; override;
+{$ENDIF}
+  public
+    constructor Create(AOwner: TComponent); override;
+  published
+    property Options: TSynWebXsltOptions read GetOptions write SetOptions;
+  end;
+
+{ TSynWebXmlSyn }
+
   TSynWebXmlSynClass = class of TSynWebXmlSyn;
 
   TSynWebXmlSyn = class(TSynWebMLSyn)
@@ -479,6 +559,8 @@ type
   published
     property Options: TSynWebXmlOptions read GetOptions write SetOptions;
   end;
+
+{ TSynWebCssSyn }
 
   TSynWebCssSynClass = class of TSynWebCssSyn;
 
@@ -501,6 +583,8 @@ type
     property Options: TSynWebCssOptions read GetOptions write SetOptions;
   end;
 
+{ TSynWebEsSyn }
+
   TSynWebEsSynClass = class of TSynWebEsSyn;
 
   TSynWebEsSyn = class(TSynWebBase)
@@ -521,6 +605,8 @@ type
   published
     property Options: TSynWebEsOptions read GetOptions write SetOptions;
   end;
+
+{ TSynWebPhpCliSyn }
 
   TSynWebPhpCliSynClass = class of TSynWebPhpCliSyn;
 
@@ -543,6 +629,8 @@ type
     property Options: TSynWebPhpCliOptions read GetOptions write SetOptions;
   end;
 
+{ TSynWebPhpPlainSyn }
+
   TSynWebPhpPlainSynClass = class of TSynWebPhpPlainSyn;
 
   TSynWebPhpPlainSyn = class(TSynWebBase)
@@ -563,6 +651,8 @@ type
   published
     property Options: TSynWebPhpPlainOptions read GetOptions write SetOptions;
   end;
+
+{ TSynWebEngineSpecialAttributes }
 
   TSynWebSpecialAttriute = (swsaPhpVarPrefix, swsaPhpMarker, swsaTagScript, swsaTagStyle);
   TSynWebSpecialAttriutes = set of TSynWebSpecialAttriute;
@@ -589,6 +679,8 @@ type
     property TagScript: TSynHighlighterAttributes index 2 read GetAttribute write SetAttribute;
     property TagStyle: TSynHighlighterAttributes index 3 read GetAttribute write SetAttribute;
   end;
+
+{ TSynWebEngine }
 
   TSynWebEngine = class(TComponent)
   private
@@ -1063,7 +1155,7 @@ type
 implementation
 
 uses
-{$IFDEF SYN_DELPHI_2009_UP}
+{$IFDEF SYN_COMPILER_12_UP}
   AnsiStrings,
 {$ENDIF}
 
@@ -1084,6 +1176,7 @@ begin
 
   FOptions^.FHtmlVersion := shvXHtml10Transitional;
   FOptions^.FWmlVersion := swvWml13;
+  FOptions^.FXsltVersion := swvXslt20;
   FOptions^.FCssVersion := scvCss21;
   FOptions^.FPhpVersion := spvPhp5;
   FOptions^.FPhpShortOpenTag := True;
@@ -1118,6 +1211,20 @@ begin
   if CanUseEngineOptions then
     Exit;
   FOptions^.FWmlVersion := Value;
+  UpdateMLOption;
+  DoOnChange;
+end;
+
+function TSynWebOptionsBase.GetXsltVersion: TSynWebXsltVersion;
+begin
+  Result := FOptions^.FXsltVersion;
+end;
+
+procedure TSynWebOptionsBase.SetXsltVersion(const Value: TSynWebXsltVersion);
+begin
+  if CanUseEngineOptions then
+    Exit;
+  FOptions^.FXsltVersion := Value;
   UpdateMLOption;
   DoOnChange;
 end;
@@ -1240,6 +1347,7 @@ begin
   begin
     FOptions^.FHtmlVersion := FEngineOptions^.FHtmlVersion;
     FOptions^.FWmlVersion := FEngineOptions^.FWmlVersion;
+    FOptions^.FXsltVersion := FEngineOptions^.FXsltVersion;
     UpdateMLOption;
     FOptions^.FCssVersion := FEngineOptions^.FCssVersion;
     FOptions^.FPhpVersion := FEngineOptions^.FPhpVersion;
@@ -1265,6 +1373,7 @@ begin
     begin
       HtmlVersion := Self.HtmlVersion;
       WmlVersion := Self.WmlVersion;
+      XsltVersion := Self.XsltVersion;
       CssVersion := Self.CssVersion;
       PhpVersion := Self.PhpVersion;
       PhpShortOpenTag := Self.PhpShortOpenTag;
@@ -1341,6 +1450,19 @@ end;
 procedure TSynWebWmlOptions.UpdateMLOption;
 begin
   FOptions^.FMLVersion := TSynWebMLVersion(Integer(smlwvWml11) + Integer(FOptions^.FWmlVersion));
+end;
+
+{ TSynWebXsltOptions }
+
+constructor TSynWebXsltOptions.Create(AOptions: PSynWebOptions);
+begin
+  inherited Create(AOptions);
+  UpdateMLOption;
+end;
+
+procedure TSynWebXsltOptions.UpdateMLOption;
+begin
+  FOptions^.FMLVersion := TSynWebMLVersion(Integer(smlwvXslt10) + Integer(FOptions^.FXsltVersion));
 end;
 
 { TSynWebXmlOptions }
@@ -1449,9 +1571,9 @@ procedure TSynWebBase.DoDefHighlightChange;
 begin
   FOptions.UpdateOptions;
   if FInstance.FOptions.FMLVersion >= smlhvXHtml10Strict then
-    FInstance.FHashTable := TSynWebSensitiveHashTable
+    FInstance.FHashTable := @TSynWebSensitiveHashTable
   else
-    FInstance.FHashTable := TSynWebInsensitiveHashTable;
+    FInstance.FHashTable := @TSynWebInsensitiveHashTable;
   DefHighlightChange(Self);
 end;
 
@@ -1966,6 +2088,55 @@ begin
     '   </p>'#13#10 +
     '  </card>'#13#10 +
     '</wml>'#13#10;
+end;
+
+{ TSynWebXsltSyn }
+
+constructor TSynWebXsltSyn.Create(AOwner: TComponent);
+begin
+  FOptions := TSynWebXsltOptions.Create(@FInstance.FOptions);
+  inherited Create(AOwner);
+  FOptions.PhpEmbeded := True;
+  FOptions.CssEmbeded := False;
+  FOptions.EsEmbeded := False;
+end;
+
+function TSynWebXsltSyn.GetOptions: TSynWebXsltOptions;
+begin
+  Result := TSynWebXsltOptions(FOptions);
+end;
+
+procedure TSynWebXsltSyn.SetOptions(const AValue: TSynWebXsltOptions);
+begin
+  FOptions := AValue;
+end;
+
+class function TSynWebXsltSyn.GetLanguageName: String;
+begin
+  Result := 'TSynWeb: XSLT (+PHP)';
+end;
+
+{$IFDEF UNISYNEDIT}
+class function TSynWebXsltSyn.SynWebSample: UnicodeString;
+{$ELSE}
+class function TSynWebXsltSyn.SynWebSample: String;
+{$ENDIF}
+begin
+  Result :=
+    '<xsl:stylesheet version="2.0"'#13#10 +
+    '                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">'#13#10 +
+    #13#10 +
+    '<xsl:template name="expand">'#13#10 +
+    '  <xsl:element name="xsl:stylesheet">'#13#10 +
+    '    <xsl:attribute name="version" select="@xsl:version"/>'#13#10 +
+    '    <xsl:element name="xsl:template">'#13#10 +
+    '      <xsl:attribute name="match">/</xsl:attribute>'#13#10 +
+    '      <xsl:copy-of select="."/>'#13#10 +
+    '    </xsl:element>'#13#10 +
+    '  </xsl:element>'#13#10 +
+    '</xsl:template>'#13#10 +
+    #13#10 +
+    '</xsl:stylesheet>';
 end;
 
 { TSynWebXmlSyn }
@@ -8667,6 +8838,7 @@ initialization
   RegisterPlaceableHighlighter(TSynWebCssSyn);
   RegisterPlaceableHighlighter(TSynWebEsSyn);
   RegisterPlaceableHighlighter(TSynWebWmlSyn);
+  RegisterPlaceableHighlighter(TSynWebXsltSyn);
   RegisterPlaceableHighlighter(TSynWebXmlSyn);
   RegisterPlaceableHighlighter(TSynWebPhpCliSyn);
   RegisterPlaceableHighlighter(TSynWebPhpPlainSyn);

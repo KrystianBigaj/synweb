@@ -592,17 +592,17 @@ object Form1: TForm1
       Caption = '-'
     end
     object Html401Strict1: TMenuItem
-      Caption = 'Html 4.01 Strict'
+      Caption = '0 - Html 4.01 Strict'
       OnClick = Html401Strict1Click
     end
     object Html401Transitional1: TMenuItem
       Tag = 1
-      Caption = 'Html 4.01 Transitional'
+      Caption = '1 - Html 4.01 Transitional'
       OnClick = Html401Strict1Click
     end
     object Html401Frameset1: TMenuItem
       Tag = 2
-      Caption = 'Html 4.01 Frameset'
+      Caption = '2 - Html 4.01 Frameset'
       OnClick = Html401Strict1Click
     end
     object N2: TMenuItem
@@ -610,17 +610,17 @@ object Form1: TForm1
     end
     object XHtml10Strict1: TMenuItem
       Tag = 3
-      Caption = 'XHtml 1.0 Strict'
+      Caption = '3 - XHtml 1.0 Strict'
       OnClick = Html401Strict1Click
     end
     object XHtml10Transitional1: TMenuItem
       Tag = 4
-      Caption = 'XHtml 1.0 Transitional'
+      Caption = '4 - XHtml 1.0 Transitional'
       OnClick = Html401Strict1Click
     end
     object XHtml10Frameset1: TMenuItem
       Tag = 5
-      Caption = 'XHtml 1.0 Frameset'
+      Caption = '5 - XHtml 1.0 Frameset'
       OnClick = Html401Strict1Click
     end
     object N3: TMenuItem
@@ -628,17 +628,29 @@ object Form1: TForm1
     end
     object Wml111: TMenuItem
       Tag = 6
-      Caption = 'Wml 1.1'
+      Caption = '6 - Wml 1.1'
       OnClick = Html401Strict1Click
     end
     object Wml121: TMenuItem
       Tag = 7
-      Caption = 'Wml 1.2'
+      Caption = '7 - Wml 1.2'
       OnClick = Html401Strict1Click
     end
     object Wml131: TMenuItem
       Tag = 8
-      Caption = 'Wml 1.3'
+      Caption = '8 - Wml 1.3'
+      OnClick = Html401Strict1Click
+    end
+    object N6: TMenuItem
+      Caption = '-'
+    end
+    object XSLT101: TMenuItem
+      Tag = 9
+      Caption = '9 - XSLT 1.0'
+    end
+    object XSLT201: TMenuItem
+      Tag = 10
+      Caption = '10 -XSLT 2.0'
       OnClick = Html401Strict1Click
     end
     object N4: TMenuItem
@@ -650,12 +662,12 @@ object Form1: TForm1
     end
     object XHtml10TransitionalDEPRECATED1: TMenuItem
       Tag = 16
-      Caption = 'XHtml 1.0 Transitional DEPRECATED'
+      Caption = '16 - XHtml 1.0 Transitional DEPRECATED'
       OnClick = Html401Strict1Click
     end
     object XHtml10FramesetlDEPRECATED1: TMenuItem
       Tag = 17
-      Caption = 'XHtml 1.0 Frameset DEPRECATED'
+      Caption = '17 - XHtml 1.0 Frameset DEPRECATED'
     end
     object N5: TMenuItem
       Caption = '-'

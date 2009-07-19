@@ -57,15 +57,34 @@ unit SynHighlighterWebData;
 interface
 
 uses
+  Classes,
 {$IFDEF SYN_CLX}
-  QSynEditHighlighter;
+  QSynEditHighlighter
+{$IFDEF UNISYNEDIT}
+  ,QSynUnicode
+{$ENDIF}
+  ;
 {$ELSE}
-  SynEditHighlighter;
-
+  SynEditHighlighter
+{$IFDEF UNISYNEDIT}
+  ,SynUnicode
+{$ENDIF}
+  ;
 {$ENDIF}
 
 // Global ----------------------------------------------------------------------
 type
+{$IFDEF UNISYNEDIT}
+  TSynWebString = UnicodeString;
+  TSynWebStrings = TUnicodeStrings;
+  TSynWebStringList = TUnicodeStringList;
+{$ELSE}
+  TSynWebString = String;
+  TSynWebStrings = TStrings;
+  TSynWebStringList = TStringList;
+{$ENDIF}
+
+  PSynWebHashTable = ^TSynWebHashTable;
   TSynWebHashTable = array[AnsiChar] of Longword;
 
   TSynWebHighlighterType = (
@@ -126,9 +145,11 @@ type
 
   TSynWebWmlVersion = (swvWml11, swvWml12, swvWml13);
 
+  TSynWebXsltVersion = (swvXslt10, swvXslt20);
+
   TSynWebMLVersion = (smlhvHtml401Strict, smlhvHtml401Transitional, smlhvHtml401Frameset,
     smlhvXHtml10Strict, smlhvXHtml10Transitional, smlhvXHtml10Frameset,
-    smlwvWml11, smlwvWml12, smlwvWml13, smlwvXML);
+    smlwvWml11, smlwvWml12, smlwvWml13, smlwvXslt10, smlwvXslt20, smlwvXML);
 
   TSynWebMLRangeState = (srsMLText, srsMLComment, srsMLCommentClose, srsMLTag,
     srsMLTagClose, srsMLTagDOCTYPE, srsMLTagCDATA, srsMLTagKey,
@@ -149,6 +170,11 @@ const
     'Wml 1.1',
     'Wml 1.2',
     'Wml 1.3'
+    );
+
+  TSynWebXSLTVersionStr: array[Low(TSynWebXsltVersion)..High(TSynWebXsltVersion)] of String = (
+    'Xslt 1.0',
+    'Xslt 2.0'
     );
 
 // Css -------------------------------------------------------------------------
