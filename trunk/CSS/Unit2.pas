@@ -42,7 +42,7 @@ type
     appdir:String;
     procedure ClearLists;
   public
-    function KeyHash(ToHash: String): Integer;
+    function KeyHash(ToHash: AnsiString): Integer;
     procedure GenerateInc(AKeys:TStringList; AResType, AResTrue, AResFalse, AFunc, AFuncUndef, AFuncTable,
       ACompFunc, AFileFunc, AFileFuncList, AFileFuncTable: String);
   end;
@@ -156,7 +156,7 @@ var
   n:TTreeNode;
   i, x, t:Integer;
   s, s1,s2:TStringList; 
-  ss1,ss2:String;
+  ss1,ss2:AnsiString;
 begin
   s:=TStringList.Create;
   s1:=TStringList.Create;
@@ -195,9 +195,9 @@ begin
     s2.Add(ss2);
   s1[s1.Count-1]:=Copy(s1[s1.Count-1],1,Length(s1[s1.Count-1])-2);
   if form1.iss.Checked then
-    s1.Insert(0,format('  TSynWeb_CssSpecial:array[0..%d] of String=(',[t-1]))
+    s1.Insert(0,format('  TSynWeb_CssSpecial:array[0..%d] of AnsiString=(',[t-1]))
   else
-    s1.Insert(0,format('  TSynWeb_CssProps:array[0..%d] of String=(',[t-1]));
+    s1.Insert(0,format('  TSynWeb_CssProps:array[0..%d] of AnsiString=(',[t-1]));
   s1.Add('    );');
 
   x:=KeyHash(s[0]);
@@ -357,7 +357,7 @@ begin
   if ss1<>'' then
     s1.Add(ss1);
   s1[s1.Count-1]:=Copy(s1[s1.Count-1],1,Length(s1[s1.Count-1])-2);
-  s1.Insert(0,format('  TSynWeb_CssVals:array[0..%d] of String=(',[sl.Count-1]));
+  s1.Insert(0,format('  TSynWeb_CssVals:array[0..%d] of AnsiString=(',[sl.Count-1]));
   s1.Add('    );');
 
   x:=KeyHash(sl[0]);
@@ -392,11 +392,11 @@ begin
 end;
 
 type
-  TSynWebHashTable = array[#0..#255] of Longword;
+  TSynWebHashTable = array[AnsiChar] of Longword;
 const
 {$I ../SynHighlighterWeb_Tables.inc}
 
-function TForm2.KeyHash(ToHash: String): Integer;
+function TForm2.KeyHash(ToHash: AnsiString): Integer;
 var
   I: Integer;
 begin

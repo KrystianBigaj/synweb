@@ -2,12 +2,18 @@ unit Main;
 
 interface
 
+{$I SynWeb.inc}
+
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, SynEdit, SynHighlighterWeb, StdCtrls, SynEditHighlighter,
   ExtCtrls, SynEditOptionsDialog, SynEditExport, SynExportHTML, SynTokenMatch,
   SynHighlighterWebData, SynHighlighterWebMisc, SynEditTypes,
-  SynEditTextBuffer, SynCompletionProposal, StrUtils, Menus;
+  SynEditTextBuffer, SynCompletionProposal, StrUtils, Menus
+{$IFDEF UNISYNEDIT}
+  , SynUnicode
+{$ENDIF}
+  ;
 
 type
   TForm1 = class(TForm)
@@ -65,15 +71,28 @@ type
     procedure CheckBox2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure ComboBox5Change(Sender: TObject);
-    procedure scpDemoExecute(Kind: SynCompletionType; Sender: TObject;
-      var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
     procedure SynEdit1Change(Sender: TObject);
     procedure SynWebErrorTimerTimer(Sender: TObject);
     procedure SynWebErrorListDblClick(Sender: TObject);
     procedure Reload1Click(Sender: TObject);
+{$IFDEF UNISYNEDIT}
     procedure scpDemoAfterCodeCompletion(Sender: TObject;
-      const Value: WideString; Shift: TShiftState; Index: Integer;
+      const Value: UnicodeString; Shift: TShiftState; Index: Integer;
       EndToken: WideChar);
+{$ELSE}
+    procedure scpDemoAfterCodeCompletion(Sender: TObject;
+      const Value: String; Shift: TShiftState; Index: Integer;
+      EndToken: Char);
+{$ENDIF}
+
+{$IFDEF UNISYNEDIT}
+    procedure scpDemoExecute(Kind: SynCompletionType; Sender: TObject;
+      var CurrentInput: UnicodeString; var x, y: Integer; var CanExecute: Boolean);
+{$ELSE}
+    procedure scpDemoExecute(Kind: SynCompletionType; Sender: TObject;
+      var CurrentInput: String; var x, y: Integer; var CanExecute: Boolean);
+{$ENDIF}
+
   private
     FPaintUpdating: Boolean;
   public
@@ -95,6 +114,9 @@ var
   k: TSynWebPhpVersion;
   w: TSynWebWmlVersion;
 begin
+  scpDemo.OnExecute := scpDemoExecute;
+  scpDemo.OnAfterCodeCompletion := scpDemoAfterCodeCompletion;
+
   FPaintUpdating := False;
   for i:=Low(TSynWebHtmlVersion) to High(TSynWebHtmlVersion) do
     ComboBox1.Items.Add(TSynWebHtmlVersionStr[i]);
@@ -120,6 +142,8 @@ begin
   else
     Button3.Click;
   CheckBox2Click(nil);
+
+  Caption := IntToStr(sizeof(TSynWebInstance))
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -132,10 +156,15 @@ begin
   SynWebErrorTimerTimer(nil);
 end;
 
+{$IFDEF UNISYNEDIT} 
 procedure TForm1.scpDemoAfterCodeCompletion(Sender: TObject;
-  const Value: WideString; Shift: TShiftState; Index: Integer;
+  const Value: UnicodeString; Shift: TShiftState; Index: Integer;
   EndToken: WideChar);
-
+{$ELSE}
+procedure TForm1.scpDemoAfterCodeCompletion(Sender: TObject;
+  const Value: string; Shift: TShiftState; Index: Integer;
+  EndToken: Char);
+{$ENDIF}
   function CaretBetween(AStr: String): Boolean;
   var
     i: Integer;
@@ -153,10 +182,16 @@ begin
         CaretBetween(' ;');
 end;
 
+{$IFDEF UNISYNEDIT}
 procedure TForm1.scpDemoExecute(Kind: SynCompletionType; Sender: TObject;
-  var CurrentInput: WideString; var x, y: Integer; var CanExecute: Boolean);
+  var CurrentInput: UnicodeString; var x, y: Integer; var CanExecute: Boolean);
+{$ELSE}
+procedure TForm1.scpDemoExecute(Kind: SynCompletionType; Sender: TObject;
+  var CurrentInput: String; var x, y: Integer; var CanExecute: Boolean);
+{$ENDIF}
 begin
-  SynWebFillCompletionProposal(SynEdit1, SynWebHtmlSyn1, scpDemo, CurrentInput);
+  if SynEdit1.Highlighter is TSynWebBase then
+    SynWebFillCompletionProposal(SynEdit1, TSynWebBase(SynEdit1.Highlighter), scpDemo, CurrentInput);
 end;
 
 procedure TForm1.CheckBox1Click(Sender: TObject);
@@ -259,7 +294,7 @@ begin
     while not GetEol and (CaretX-1 >= GetTokenPos + Length(GetToken)) do
       Next;
     Caption := Format('%.8x, %s, %d, %d', [Integer(GetRange),
-      GetToken, GetTagID, GetTagKind]);
+      GetToken, MLGetTagID, MLGetTagKind]);
   end;
 end;
 
@@ -288,7 +323,7 @@ var
   hl: TSynWebBase;
   e: TCustomSynEdit;
 
-  procedure AddError(S: WideString);
+  procedure AddError(S: String);
   var
     pos: Longword;
   begin
@@ -308,56 +343,58 @@ begin
   SynWebErrorTimer.Enabled := False;
   e := SynEdit1;
   SynWebErrorList.Items.BeginUpdate;
-  idx := SynWebErrorList.ItemIndex;
-  idxtop := SynWebErrorList.TopIndex;
-  SynWebErrorList.Clear;
+  try
+    idx := SynWebErrorList.ItemIndex;
+    idxtop := SynWebErrorList.TopIndex;
+    SynWebErrorList.Clear;
 
-  if e.Highlighter is TSynWebBase then
-  begin
-    hl := TSynWebBase(e.Highlighter);
-    hl.ResetRange;
-    i := 0;
-    while i < e.Lines.Count do
+    if e.Highlighter is TSynWebBase then
     begin
-      hl.SetLine(e.Lines[i], i + 1);
-      while not hl.GetEol do
+      hl := TSynWebBase(e.Highlighter);
+      hl.ResetRange;
+      i := 0;
+      while i < e.Lines.Count do
       begin
-        case hl.GetTokenID of
-        stkMLTagNameUndef:
-          AddError('HTML: Invalid tag "%s"');
-        stkMLTagKeyUndef:
-          AddError('HTML: Invalid attribute "%s"');
-        stkMLError:
-          AddError('HTML: Invalid token "%s"');
+        hl.SetLine(e.Lines[i], i + 1);
+        while not hl.GetEol do
+        begin
+          case hl.GetTokenID of
+          stkMLTagNameUndef:
+            AddError('HTML: Invalid tag "%s"');
+          stkMLTagKeyUndef:
+            AddError('HTML: Invalid attribute "%s"');
+          stkMLError:
+            AddError('HTML: Invalid token "%s"');
 
-        stkCssSelectorUndef:
-          AddError('CSS: Invalid selector "%s"');
-        stkCssPropUndef:
-          AddError('CSS: Invalid property "%s"');
-        stkCssValUndef:
-          AddError('CSS: Invalid value "%s"');
-        stkCssError:
-          AddError('CSS: Invalid token "%s"');
+          stkCssSelectorUndef:
+            AddError('CSS: Invalid selector "%s"');
+          stkCssPropUndef:
+            AddError('CSS: Invalid property "%s"');
+          stkCssValUndef:
+            AddError('CSS: Invalid value "%s"');
+          stkCssError:
+            AddError('CSS: Invalid token "%s"');
 
-        stkEsError:
-          AddError('JS: Invalid token "%s"');
+          stkEsError:
+            AddError('JS: Invalid token "%s"');
 
-        stkPhpError:
-          AddError('PHP: Invalid token "%s"');
+          stkPhpError:
+            AddError('PHP: Invalid token "%s"');
+          end;
+          hl.Next;
         end;
-        hl.Next;
+        Inc(i);
       end;
-      Inc(i);
     end;
+    SynWebErrorList.Visible := SynWebErrorList.Items.Count > 0;
+    if idx < SynWebErrorList.Count then
+    begin
+      SynWebErrorList.ItemIndex := idx;
+      SynWebErrorList.TopIndex := idxtop;
+    end;
+  finally
+    SynWebErrorList.Items.EndUpdate;
   end;
-  SynWebErrorList.Visible := SynWebErrorList.Items.Count > 0;
-  if idx < SynWebErrorList.Count then
-  begin
-    SynWebErrorList.ItemIndex := idx;
-    SynWebErrorList.TopIndex := idxtop;
-  end;
-
-  SynWebErrorList.Items.EndUpdate;
 end;
 
 procedure TForm1.SynEdit1Change(Sender: TObject);

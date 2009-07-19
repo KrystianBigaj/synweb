@@ -54,7 +54,7 @@ type
     appdir:String;
     procedure ClearLists;
   public
-    function KeyHash(ToHash: String): Integer;
+    function KeyHash(ToHash: AnsiString): Integer;
     procedure GenerateInc(AKeys:TStringList; AResType, AResTrue, AResFalse, AFunc, AFuncUndef, AFuncTable,
       ACompFunc, AFileFunc, AFileFuncList, AFileFuncTable: String);
   end;
@@ -223,9 +223,9 @@ begin
     s2.Add(ss2);
   s1[s1.Count-1]:=Copy(s1[s1.Count-1],1,Length(s1[s1.Count-1])-2);
   if Form1.CheckBox3.Checked then
-    s1.Insert(0,format('  TSynWeb_Special:array[0..%d] of String=(',[t-1]))
+    s1.Insert(0,format('  TSynWeb_Special:array[0..%d] of AnsiString=(',[t-1]))
   else
-    s1.Insert(0,format('  TSynWeb_Tags:array[0..%d] of String=(',[t-1]));
+    s1.Insert(0,format('  TSynWeb_Tags:array[0..%d] of AnsiString=(',[t-1]));
   s1.Add('    );');
 
   x:=KeyHash(s[0]);
@@ -293,10 +293,10 @@ var
   s1,s2:TStringList;    
   ss1:String;
 
-  function si(C:Char):String;
-  begin
-    result:=Inttohex(Byte(c),2);
-  end;
+//  function si(C:Char):String;
+//  begin
+//    result:=Inttohex(Byte(c),2);
+//  end;
 
 begin     
   if Form1.CheckBox3.Checked then
@@ -374,7 +374,7 @@ begin
   if ss1<>'' then
     s1.Add(ss1);
   s1[s1.Count-1]:=Copy(s1[s1.Count-1],1,Length(s1[s1.Count-1])-2);
-  s1.Insert(0,format('  TSynWeb_Attrs:array[0..%d] of String=(',[sl.Count-1]));
+  s1.Insert(0,format('  TSynWeb_Attrs:array[0..%d] of AnsiString=(',[sl.Count-1]));
   s1.Add('    );');
 
   x:=KeyHash(sl[0]);
@@ -421,11 +421,11 @@ begin
 end;
 
 type
-  TSynWebHashTable = array[#0..#255] of Longword;
+  TSynWebHashTable = array[AnsiChar] of Longword;
 const
 {$I ../SynHighlighterWeb_Tables.inc}
 
-function TForm2.KeyHash(ToHash: String): Integer;
+function TForm2.KeyHash(ToHash: AnsiString): Integer;
 var
   I: Integer;
 begin

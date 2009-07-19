@@ -58,12 +58,18 @@ interface
 
 uses
 {$IFDEF SYN_CLX}
-  QSynEdit,
+  QSynEdit,    
+{$IFDEF UNISYNEDIT}  
+  QSynUnicode,
+{$ENDIF}
   QSynEditTextBuffer,
   QSynEditTypes,
   QSynEditHighlighter;
 {$ELSE}
   SynEdit,
+{$IFDEF UNISYNEDIT} 
+  SynUnicode,
+{$ENDIF}
   SynEditTextBuffer,
   SynEditTypes,
   SynEditHighlighter;

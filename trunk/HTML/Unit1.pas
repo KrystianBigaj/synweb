@@ -79,6 +79,9 @@ type
     ComboBox2: TComboBox;
     Label4: TLabel;
     Label5: TLabel;
+    N6: TMenuItem;
+    XSLT101: TMenuItem;
+    XSLT201: TMenuItem;
     procedure Button9Click(Sender: TObject);
     procedure Button10Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);

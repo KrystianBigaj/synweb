@@ -36,6 +36,7 @@ object Form1: TForm1
     Gutter.Font.Style = []
     Highlighter = SynWebHtmlSyn1
     Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoDropFiles, eoEnhanceEndKey, eoGroupUndo, eoRightMouseMovesCursor, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabIndent, eoTabsToSpaces, eoTrimTrailingSpaces]
+    WordWrap = True
     OnChange = SynEdit1Change
     OnStatusChange = SynEdit1StatusChange
     OnPaintTransient = SynEdit1PaintTransient
@@ -258,11 +259,13 @@ object Form1: TForm1
     InactiveAttri.Foreground = clSilver
     Options.HtmlVersion = shvXHtml10Transitional
     Options.WmlVersion = swvWml13
+    Options.XsltVersion = swvXslt20
     Options.CssVersion = scvCss21
     Options.PhpVersion = spvPhp5
     Options.PhpShortOpenTag = True
     Options.PhpAspTags = False
-    Left = 48
+    SpecialAttri.InactiveOptions = []
+    Left = 40
     Top = 232
   end
   object SynWebHtmlSyn1: TSynWebHtmlSyn
@@ -349,10 +352,10 @@ object Form1: TForm1
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
     Options.PhpVersion = spvPhp5
-    Options.PhpShortOpenTag = False
+    Options.PhpShortOpenTag = True
     Options.PhpAspTags = False
     Options.PhpEmbeded = True
-    Options.UseEngineOptions = False
+    Options.UseEngineOptions = True
     Left = 112
     Top = 264
   end
@@ -376,10 +379,8 @@ object Form1: TForm1
         BiggestWord = 'constructor'
         BiggestWordW = 'constructor'
       end>
-    OnExecute = scpDemoExecute
     ShortCut = 16416
     Editor = SynEdit1
-    OnAfterCodeCompletion = scpDemoAfterCodeCompletion
     Left = 52
     Top = 96
     EndOfTokenChrW = ';>()[] .'
@@ -416,8 +417,8 @@ object Form1: TForm1
     Options.PhpVersion = spvPhp5
     Options.CssEmbeded = True
     Options.EsEmbeded = True
-    Options.UseEngineOptions = False
-    Left = 280
+    Options.UseEngineOptions = True
+    Left = 272
     Top = 264
   end
 end

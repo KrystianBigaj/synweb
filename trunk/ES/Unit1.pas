@@ -69,7 +69,7 @@ type
     appdir:String;
     procedure ClearLists;
   public
-    function KeyHash(ToHash: String): Integer;
+    function KeyHash(ToHash: AnsiString): Integer;
     procedure GenerateInc(AKeys:TStringList; AFileFunc, AFileFuncList, AFileFuncTable: String);
     function nGetBit(n:TTreeNode; b:Integer):Boolean;
     procedure nSetBit(n:TTreeNode; b:Integer);
@@ -403,7 +403,7 @@ begin
   if ss2<>'' then
     s2.Add(ss2);
   s1[s1.Count-1]:=Copy(s1[s1.Count-1],1,Length(s1[s1.Count-1])-2);
-  s1.Insert(0,format('  TSynWeb_EsKeywords:array[0..%d] of String=(',[t-1]));
+  s1.Insert(0,format('  TSynWeb_EsKeywords:array[0..%d] of AnsiString=(',[t-1]));
   s1.Add('    );');
 
   x:=KeyHash(s[0]);
@@ -680,11 +680,11 @@ begin
 end;
 
 type
-  TSynWebHashTable = array[#0..#255] of Longword;
+  TSynWebHashTable = array[AnsiChar] of Longword;
 const
 {$I ../SynHighlighterWeb_Tables.inc}
 
-function TForm1.KeyHash(ToHash: String): Integer;
+function TForm1.KeyHash(ToHash: AnsiString): Integer;
 var
   I: Integer;
 begin
