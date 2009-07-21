@@ -161,7 +161,7 @@ type
     procedure SetMarkerPos(const AMarkerPos: TBufferCoord);
   public
     constructor Create(ALines: TSynWebStrings; AHighlighter: TSynWebBase;
-      APos: TBufferCoord); overload;
+      APos: TBufferCoord; ACustomRange: Pointer = nil); overload;
     constructor Create(ALines: TSynWebStrings; AHighlighter: TSynWebBase;
       ALine: Integer = 1); overload;
 
@@ -219,13 +219,13 @@ type
     Tag: TSynWebString;
   end;
 
-  TSynWebTagUnmatchedArray = array of TSynWebUnmatchedTag;
+  TSynWebUnmatchedTagArray = array of TSynWebUnmatchedTag;
 
 function SynWebGetUnmatchedTags(ASynEdit: TCustomSynEdit;
-  var AUnmatchedTags: TSynWebTagUnmatchedArray; AAllowDuplicates: Boolean): Boolean; overload;
+  var AUnmatchedTags: TSynWebUnmatchedTagArray; AAllowDuplicates: Boolean): Boolean; overload;
 
 function SynWebGetUnmatchedTags(ALines: TSynWebStrings; APos: TBufferCoord;
-  ASynWeb: TSynWebMLSyn; var AUnmatchedTags: TSynWebTagUnmatchedArray; AAllowDuplicates: Boolean): Boolean; overload;
+  ASynWeb: TSynWebMLSyn; var AUnmatchedTags: TSynWebUnmatchedTagArray; AAllowDuplicates: Boolean): Boolean; overload;
 
 implementation
 
@@ -558,7 +558,7 @@ var
   var
     i: Integer;
     ver: Longword;
-    lUnmatchedTag: TSynWebTagUnmatchedArray;
+    lUnmatchedTag: TSynWebUnmatchedTagArray;
   begin
     if not AClose then
     begin
@@ -850,7 +850,7 @@ begin
 end;
 
 function SynWebGetUnmatchedTags(ASynEdit: TCustomSynEdit;
-  var AUnmatchedTags: TSynWebTagUnmatchedArray; AAllowDuplicates: Boolean): Boolean;
+  var AUnmatchedTags: TSynWebUnmatchedTagArray; AAllowDuplicates: Boolean): Boolean;
 begin
   Result := (ASynEdit.Highlighter is TSynWebMLSyn) and
     SynWebGetUnmatchedTags(
@@ -863,7 +863,7 @@ begin
 end;
 
 function SynWebGetUnmatchedTags(ALines: TSynWebStrings; APos: TBufferCoord;
-  ASynWeb: TSynWebMLSyn; var AUnmatchedTags: TSynWebTagUnmatchedArray; AAllowDuplicates: Boolean): Boolean;
+  ASynWeb: TSynWebMLSyn; var AUnmatchedTags: TSynWebUnmatchedTagArray; AAllowDuplicates: Boolean): Boolean;
 var
   lT: ISynWebTokenizer;
   lTags: TSynWebStringList;
@@ -1035,7 +1035,7 @@ end;
 { TSynWebTokenizer }
 
 constructor TSynWebTokenizer.Create(ALines: TSynWebStrings;
-  AHighlighter: TSynWebBase; APos: TBufferCoord);
+  AHighlighter: TSynWebBase; APos: TBufferCoord; ACustomRange: Pointer);
 begin
   inherited Create;
 
@@ -1053,18 +1053,20 @@ begin
   if not IsEof then
     with FHL do
     begin
-      if FLine = 0 then
-        ResetRange
+      if ACustomRange <> nil then
+        SetRange(ACustomRange)
       else
-        SetRange(TSynEditStringList(FLines).Ranges[FLine - 1]);
+        if FLine = 0 then
+          ResetRange
+        else
+          SetRange(TSynEditStringList(FLines).Ranges[FLine - 1]);
 
       SetLine(FLines[FLine], FLine + 1);
-                     
+
       GetCurrentTokenInfo(FCurrentToken);
 
       while not GetEol and (GetTokenPos + GetTokenLen <= APos.Char) do
         Self.Next;
-
     end;
 end;
 
