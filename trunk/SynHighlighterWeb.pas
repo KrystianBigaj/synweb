@@ -4093,8 +4093,7 @@ begin
     SetRangeBit(12, True)
   else
   begin
-    if not (ARange in [TSynWebCssRangeStateRulesetBegin..
-      TSynWebCssRangeStateRulesetEnd]) and
+    if not (ARange in [TSynWebCssRangeStateRulesetBegin..TSynWebCssRangeStateRulesetEnd]) and
       (TSynWebCssRangeState(GetRangeInt(4, 13)) in
       [TSynWebCssRangeStateRulesetBegin..TSynWebCssRangeStateRulesetEnd]) then
     begin
