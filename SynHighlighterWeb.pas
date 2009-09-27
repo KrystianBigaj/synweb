@@ -113,6 +113,7 @@ type
     FPhpVersion: TSynWebPhpVersion;
     FPhpShortOpenTag: Boolean;
     FPhpAspTags: Boolean;
+    FAllowASPTags: Boolean;
 
     FPhpEmbeded: Boolean;
     FCssEmbeded: Boolean;
@@ -175,6 +176,8 @@ type
     procedure SetPhpAspTags(const Value: Boolean);
     function GetPhpShortOpenTag: Boolean;
     procedure SetPhpShortOpenTag(const Value: Boolean);
+    function GetAllowASPTags: Boolean;
+    procedure SetAllowASPTags(const Value: Boolean);
 
     function GetCssEmbeded: Boolean;
     procedure SetCssEmbeded(const Value: Boolean);
@@ -199,6 +202,7 @@ type
     property PhpVersion: TSynWebPhpVersion read GetPhpVersion write SetPhpVersion;
     property PhpShortOpenTag: Boolean read GetPhpShortOpenTag write SetPhpShortOpenTag;
     property PhpAspTags: Boolean read GetPhpAspTags write SetPhpAspTags;
+    property AllowASPTags: Boolean read GetAllowASPTags write SetAllowASPTags;
 
     property CssEmbeded: Boolean read GetCssEmbeded write SetCssEmbeded;
     property PhpEmbeded: Boolean read GetPhpEmbeded write SetPhpEmbeded;
@@ -223,6 +227,7 @@ type
     property PhpVersion;
     property PhpShortOpenTag;
     property PhpAspTags;
+    property AllowASPTags;
     property CssEmbeded;
     property PhpEmbeded;
     property EsEmbeded;
@@ -265,6 +270,7 @@ type
     property PhpVersion;
     property PhpShortOpenTag;
     property PhpAspTags;
+    property AllowASPTags;
     property PhpEmbeded;
     property UseEngineOptions;
   end;
@@ -281,6 +287,7 @@ type
     property PhpVersion;
     property PhpShortOpenTag;
     property PhpAspTags;
+    property AllowASPTags;
     property PhpEmbeded;
     property UseEngineOptions;
   end;
@@ -1176,6 +1183,7 @@ begin
   FUseEngineOptions := False;
 
   FOptions^.FHtmlVersion := shvXHtml10Transitional;
+  FOptions^.FAllowASPTags := True;
   FOptions^.FWmlVersion := swvWml13;
   FOptions^.FXsltVersion := swvXslt20;
   FOptions^.FCssVersion := scvCss21;
@@ -1266,6 +1274,19 @@ begin
   if CanUseEngineOptions then
     Exit;
   FOptions^.FPhpAspTags := Value;
+  DoOnChange;
+end;
+
+function TSynWebOptionsBase.GetAllowASPTags: Boolean;
+begin
+  Result := FOptions^.FAllowASPTags;
+end;
+
+procedure TSynWebOptionsBase.SetAllowASPTags(const Value: Boolean);
+begin
+  if CanUseEngineOptions then
+    Exit;
+  FOptions^.FAllowASPTags := Value;
   DoOnChange;
 end;
 
@@ -3833,6 +3854,15 @@ begin
     Result := FMLTagIdentFuncTable[HashKey]
   else
     Result := stkMLTagNameUndef;
+
+  if (Result = stkMLTagNameUndef) and FInstance^.FOptions.FAllowASPTags then
+    if (FInstance^.FStringLen > 4) and (FInstance^.FLine[FInstance^.FTokenPos + 3] = ':') then
+      if (FInstance^.FHashTable[FInstance^.FToIdent[0]] = FInstance^.FHashTable['a']) and
+         (FInstance^.FHashTable[FInstance^.FToIdent[1]] = FInstance^.FHashTable['s']) and
+         (FInstance^.FHashTable[FInstance^.FToIdent[2]] = FInstance^.FHashTable['p'])
+      then
+        Result := stkMLTagName;
+
   MLSetTag(FInstance^.FTokenLastID + 1);
 end;
 
