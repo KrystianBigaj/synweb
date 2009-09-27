@@ -104,3 +104,11 @@ XX                                  - HTML LANGUAGE=php?
                                  XX - Next ident is PhpMethodAttrib
                               XX    - Next ident is PhpIdentAttrib
 			  XX	    - Next after ',' is PhpIdentAttrib 
+
+
+2009-07-24: ExamplecRanges for TSynMultiSyn with 3 schemes and default highlighter as SynWeb-HL
+NOTE: SynWeb-HL MUST be with Options.PhpEmbedded=FALSE !!!
+
+      XX XX                         - 25-26: $0 = SynWeb, $1 = First scheme, $2 = Second scheme, $3 = Third scheme
+
+            XX XX XX XX XX XX XX XX - 17-24: 8 bits: Scheme range
