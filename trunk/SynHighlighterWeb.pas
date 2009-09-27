@@ -3533,7 +3533,7 @@ begin
     '/':
       if not GetRangeBit(12) and (FInstance^.FLine[FInstance^.FRun + 1] = '>') and
         (FInstance^.FOptions.FMLVersion >= smlhvXHtml10Strict) and
-        (TSynWeb_TagsData[ID] and (1 shl 31) <> 0) then
+        ((ID = -1) or (TSynWeb_TagsData[ID] and (1 shl 31) <> 0)) then
       begin
         Inc(FInstance^.FRun, 2);
         FInstance^.FTokenID := stkMLTag;
@@ -3583,7 +3583,7 @@ begin
         until TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 7) = 0;
         // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '0'..'9', ':', '-', '_']);
         if ID = -1 then
-          FInstance^.FTokenID := stkMLTagKeyUndef
+          FInstance^.FTokenID := stkMLTagKey{Undef} // Rethink?
         else
         begin
           FInstance^.FTokenID := MLAttrCheck;
@@ -3925,6 +3925,16 @@ begin
     Result := FMLAttrIdentFuncTable[HashKey]
   else
     Result := stkMLTagKeyUndef;
+
+  if (Result = stkMLTagKeyUndef) and FInstance^.FOptions.FAllowASPTags then
+    if FInstance^.FStringLen = 5 then
+      if (FInstance^.FHashTable[FInstance^.FToIdent[0]] = FInstance^.FHashTable['r']) and
+         (FInstance^.FHashTable[FInstance^.FToIdent[1]] = FInstance^.FHashTable['u']) and
+         (FInstance^.FHashTable[FInstance^.FToIdent[2]] = FInstance^.FHashTable['n']) and
+         (FInstance^.FHashTable[FInstance^.FToIdent[3]] = FInstance^.FHashTable['a']) and
+         (FInstance^.FHashTable[FInstance^.FToIdent[4]] = FInstance^.FHashTable['t'])
+      then
+        Result := stkMLTagKey;
 end;
 
 {$I SynHighlighterWeb_AttrsFunc.inc}
