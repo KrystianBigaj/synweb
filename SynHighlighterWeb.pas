@@ -238,6 +238,7 @@ type
     function GetSmartyRDelim: String;  protected
     procedure SetSmartyRDelim(const Value: String);
 
+  protected
     procedure UpdateMLOption; override;
   public
     constructor Create(AOptions: PSynWebOptions);

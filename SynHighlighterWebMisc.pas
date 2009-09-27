@@ -182,6 +182,23 @@ type
     function PreviousToken: TSynWebTokenizerInfo;
   end;
 
+{ TSynWebSimpleTokenizer }
+
+  TSynWebSimpleTokenizer = class(TObject)
+  protected
+    FHL: TSynWebBase;
+    FLines: TSynWebStrings;
+    FLine: Integer;
+  public
+    constructor Create(AHighlighter: TSynWebBase; ALines: TSynWebStrings);
+
+    procedure Next;
+    function IsEof: Boolean;
+    function IsEol: Boolean;
+
+    property HL: TSynWebBase read FHL;
+  end;
+
 //
 
 {
@@ -1263,6 +1280,45 @@ begin
                 Marker := stlEnd
               else
                 Marker := stlAfter;
+end;
+
+{ TSynWebSimpleTokenizer }
+
+constructor TSynWebSimpleTokenizer.Create(AHighlighter: TSynWebBase;
+  ALines: TSynWebStrings);
+begin
+  FHL := AHighlighter;
+  FLines := ALines;
+
+  FHL.ResetRange;
+  if not IsEof then
+    FHL.SetLine(FLines[FLine], FLine + 1);
+end;
+
+function TSynWebSimpleTokenizer.IsEof: Boolean;
+begin
+  Result := FLine >= FLines.Count;
+end;
+
+function TSynWebSimpleTokenizer.IsEol: Boolean;
+begin
+  Result := FHL.GetTokenID = stkNull;
+end;
+
+procedure TSynWebSimpleTokenizer.Next;
+begin
+  if IsEof then
+    Exit;
+
+  if IsEol then
+  begin
+    Inc(FLine);
+    if IsEof then
+      Exit;
+
+    FHL.SetLine(FLines[FLine], FLine + 1);
+  end else
+    FHL.Next;
 end;
 
 end.
