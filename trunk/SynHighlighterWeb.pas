@@ -6998,7 +6998,7 @@ begin
   begin
     for i := 1 to FInstance^.FStringLen do
     begin
-      if TSynWebInsensitiveHashTable[Temp^] <> TSynWebInsensitiveHashTable[aKey[i]] then
+      if TSynWebSensitiveHashTable[Temp^] <> TSynWebSensitiveHashTable[aKey[i]] then
       begin
         Result := False;
         Exit;
