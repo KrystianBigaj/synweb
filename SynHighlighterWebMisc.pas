@@ -1151,7 +1151,7 @@ end;
 class function TSynWebTokenizer.GetTokenCompletionAtCaret(
   AEditor: TCustomSynEdit): TSynWebString;
 const
-  cSTK_IDENTS = [stkEsIdentifier, stkEsKeyword, stkPhpIdentifier, stkPhpMethod, stkPhpConst, stkPhpFunction, stkPhpVariable];
+  cSTK_IDENTS = [stkEsIdentifier, stkEsKeyword, stkPhpIdentifier, stkPhpMethod, stkPhpConst, stkPhpFunction, stkPhpVariable, stkPhpKeyword];
 var
   lT: ISynWebTokenizer;
 
