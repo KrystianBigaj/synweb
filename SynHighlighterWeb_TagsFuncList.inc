@@ -68,13 +68,12 @@
     function MLTagFunc93: TSynWebTokenKind;
     function MLTagFunc94: TSynWebTokenKind;
     function MLTagFunc95: TSynWebTokenKind;
-    function MLTagFunc98: TSynWebTokenKind;
+    function MLTagFunc100: TSynWebTokenKind;
     function MLTagFunc106: TSynWebTokenKind;
     function MLTagFunc107: TSynWebTokenKind;
     function MLTagFunc110: TSynWebTokenKind;
-    function MLTagFunc112: TSynWebTokenKind;
     function MLTagFunc113: TSynWebTokenKind;
     function MLTagFunc114: TSynWebTokenKind;
-    function MLTagFunc116: TSynWebTokenKind;
+    function MLTagFunc117: TSynWebTokenKind;
     function MLTagFunc121: TSynWebTokenKind;
     function MLTagFunc128: TSynWebTokenKind;
