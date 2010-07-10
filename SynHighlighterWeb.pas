@@ -3104,20 +3104,20 @@ begin
           FInstance^.FTokenID := stkMLTag;
           MLSetRange(srsMLTagCDATA);
         end else
-          if (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun]] =
-            FInstance^.FHashTable['D']) and
-            (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 1]] =
-            FInstance^.FHashTable['O']) and
-            (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 2]] =
-            FInstance^.FHashTable['C']) and
-            (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 3]] =
-            FInstance^.FHashTable['T']) and
-            (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 4]] =
-            FInstance^.FHashTable['Y']) and
-            (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 5]] =
-            FInstance^.FHashTable['P']) and
-            (FInstance^.FHashTable[FInstance^.FLine[FInstance^.FRun + 6]] =
-            FInstance^.FHashTable['E']) and
+          if (TSynWebInsensitiveHashTable[FInstance^.FLine[FInstance^.FRun]] =
+            TSynWebInsensitiveHashTable['D']) and
+            (TSynWebInsensitiveHashTable[FInstance^.FLine[FInstance^.FRun + 1]] =
+            TSynWebInsensitiveHashTable['O']) and
+            (TSynWebInsensitiveHashTable[FInstance^.FLine[FInstance^.FRun + 2]] =
+            TSynWebInsensitiveHashTable['C']) and
+            (TSynWebInsensitiveHashTable[FInstance^.FLine[FInstance^.FRun + 3]] =
+            TSynWebInsensitiveHashTable['T']) and
+            (TSynWebInsensitiveHashTable[FInstance^.FLine[FInstance^.FRun + 4]] =
+            TSynWebInsensitiveHashTable['Y']) and
+            (TSynWebInsensitiveHashTable[FInstance^.FLine[FInstance^.FRun + 5]] =
+            TSynWebInsensitiveHashTable['P']) and
+            (TSynWebInsensitiveHashTable[FInstance^.FLine[FInstance^.FRun + 6]] =
+            TSynWebInsensitiveHashTable['E']) and
             // (not (FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z'])) then
             (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 7]] and (1 shl 0) = 0) then
           begin
