@@ -82,6 +82,9 @@ type
     N6: TMenuItem;
     XSLT101: TMenuItem;
     XSLT201: TMenuItem;
+    Html5pop: TMenuItem;
+    magicHtml5button: TButton;
+    Button25: TButton;
     procedure Button9Click(Sender: TObject);
     procedure Button10Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
@@ -112,6 +115,8 @@ type
     procedure Button24Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Button23Click(Sender: TObject);
+    procedure magicHtml5buttonClick(Sender: TObject);
+    procedure Button25Click(Sender: TObject);
   private
     pn:TTreeNode;
   public
@@ -352,11 +357,14 @@ begin
   Html401Strict1.Enabled:=pn<>nil;
   Html401Transitional1.Enabled:=pn<>nil;
   Html401Frameset1.Enabled:=pn<>nil;
+  Html5pop.Enabled:=pn<>nil;
   XHtml10Strict1.Enabled:=pn<>nil;
   XHtml10Transitional1.Enabled:=pn<>nil;
   XHtml10Frameset1.Enabled:=pn<>nil;
   XHtml10TransitionalDEPRECATED1.Enabled:=pn<>nil;
   XHtml10FramesetlDEPRECATED1.Enabled:=pn<>nil;
+  XSLT101.Enabled:=pn<>nil;
+  XSLT201.Enabled:=pn<>nil;
 
   Wml111.Enabled := pn <> nil;
   Wml121.Enabled := pn <> nil;
@@ -380,12 +388,15 @@ begin
   Html401Strict1.Checked:=nGetBit(pn,0);
   Html401Transitional1.Checked:=nGetBit(pn,1);
   Html401Frameset1.Checked:=nGetBit(pn,2);
-  XHtml10Strict1.Checked:=nGetBit(pn,3);
-  XHtml10Transitional1.Checked:=nGetBit(pn,4);
-  XHtml10Frameset1.Checked:=nGetBit(pn,5);
-  Wml111.Checked:=nGetBit(pn,6);
-  Wml121.Checked:=nGetBit(pn,7);
-  Wml131.Checked:=nGetBit(pn,8);
+  Html5pop.Checked:=nGetBit(pn,3);
+  XHtml10Strict1.Checked:=nGetBit(pn,4);
+  XHtml10Transitional1.Checked:=nGetBit(pn,5);
+  XHtml10Frameset1.Checked:=nGetBit(pn,6);
+  Wml111.Checked:=nGetBit(pn,7);
+  Wml121.Checked:=nGetBit(pn,8);
+  Wml131.Checked:=nGetBit(pn,9);
+  XSLT101.Checked:=nGetBit(pn,10);
+  XSLT201.Checked:=nGetBit(pn,11);
   XHtml10TransitionalDEPRECATED1.Checked:=nGetBit(pn,16);
   XHtml10FramesetlDEPRECATED1.Checked:=nGetBit(pn,17);
   isEXT.Checked:=nGetBit(pn, 29);
@@ -397,6 +408,151 @@ procedure TForm1.Html401Strict1Click(Sender: TObject);
 begin
   nSwitchBit(pn,TMenuItem(Sender).Tag);
   TreeView1.Selected:=pn;
+end;
+
+procedure TForm1.magicHtml5buttonClick(Sender: TObject);
+const
+  // http://dev.w3.org/html5/spec/elements.html#global-attributes as of 08-07-2010
+  cHtml5Globals: array[0..66] of String = (
+    'accesskey',
+    'class',
+    'contenteditable',
+    'contextmenu',
+    'dir',
+    'draggable',
+    'hidden',
+    'id',
+    'lang',
+    'spellcheck',
+    'style',
+    'tabindex',
+    'title',
+    'onabort',
+    'onblur',
+    'oncanplay',
+    'oncanplaythrough',
+    'onchange',
+    'onclick',
+    'oncontextmenu',
+    'ondblclick',
+    'ondrag',
+    'ondragend',
+    'ondragenter',
+    'ondragleave',
+    'ondragover',
+    'ondragstart',
+    'ondrop',
+    'ondurationchange',
+    'onemptied',
+    'onended',
+    'onerror',
+    'onfocus',
+    'onformchange',
+    'onforminput',
+    'oninput',
+    'oninvalid',
+    'onkeydown',
+    'onkeypress',
+    'onkeyup',
+    'onload',
+    'onloadeddata',
+    'onloadedmetadata',
+    'onloadstart',
+    'onmousedown',
+    'onmousemove',
+    'onmouseout',
+    'onmouseover',
+    'onmouseup',
+    'onmousewheel',
+    'onpause',
+    'onplay',
+    'onplaying',
+    'onprogress',
+    'onratechange',
+    'onreadystatechange',
+    'onscroll',
+    'onseeked',
+    'onseeking',
+    'onselect',
+    'onshow',
+    'onstalled',
+    'onsubmit',
+    'onsuspend',
+    'ontimeupdate',
+    'onvolumechange',
+    'onwaiting');
+
+var
+  i:Integer;
+  n:TTreeNode;
+  lIni: TIniFile32;
+  tags:TStringList;
+  attrs: TStringList;
+  lTag: String;
+  lAttr: String;
+
+  procedure moveBitNext(x:Integer);
+  begin
+    if nGetBit(n,x) then
+      nSetBit(n,x+1)
+    else
+      nClearBit(n,x+1);
+
+    nClearBit(n,x);
+  end;
+
+begin
+  magicHtml5button.Enabled:=false;
+
+  if MessageDlg('insert html5 after html4?', mtConfirmation, mbYesNo, 0) = mrYes then
+    for i:=0 to TreeView1.Items.Count-1 do
+    begin
+      n :=TreeView1.Items[i];
+      moveBitNext(10);
+      moveBitNext(9);
+      moveBitNext(8);
+      moveBitNext(7);
+      moveBitNext(6);
+      moveBitNext(5);
+      moveBitNext(4);
+      moveBitNext(3);
+    end;
+
+  ComboBox1.ItemIndex := 3{html5};
+  if OpenDialog1.Execute then
+  begin
+    lIni := nil;
+    tags := nil;
+    attrs := nil;
+    try
+      lIni := TIniFile32.Create(OpenDialog1.FileName);
+      tags := TStringList.Create;
+      attrs := TStringList.Create;
+      lIni.ReadSection('html5', tags);
+      for lTag in tags do
+      begin
+        AddTag(lTag);
+        attrs.DelimitedText := lIni.ReadString('html5', lTag, '');
+        for lAttr in attrs do
+          if not SameText(lAttr, 'globals') then
+            AddAtrib(TreeView1.Selected, lAttr)
+          else
+          begin
+            i := 0;
+            while i < Length(cHtml5Globals) do
+            begin
+              AddAtrib(TreeView1.Selected, cHtml5Globals[i]);
+              Inc(i);
+            end;
+          end;
+
+      end;
+    finally
+      attrs.Free;
+      tags.Free;
+      lIni.Free;
+    end;
+  end;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -616,6 +772,31 @@ begin
     Memo7.Lines.Delete(0);
   end;
   r.Free;
+end;
+
+procedure TForm1.Button25Click(Sender: TObject);
+var
+  lSL: TStringList;
+  lTagSpecial: String;
+begin
+  ComboBox1.ItemIndex := 3;
+  if not OpenDialog1.Execute then
+    Exit;
+
+  lSL := TStringList.Create;
+  try
+    lSL.LoadFromFile(OpenDialog1.FileName);
+
+    TreeView1.Items.BeginUpdate;
+    try
+      for lTagSpecial in lSL do
+        AddTag(lTagSpecial);
+    finally
+      TreeView1.Items.EndUpdate;
+    end;
+  finally
+    lSL.Free;
+  end;
 end;
 
 procedure TForm1.FormShow(Sender: TObject);

@@ -2,8 +2,8 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'SynWeb + TSynMultiSyn Example'
-  ClientHeight = 216
-  ClientWidth = 426
+  ClientHeight = 545
+  ClientWidth = 668
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,8 +16,8 @@ object frmMain: TfrmMain
   object SynEditTest: TSynEdit
     Left = 0
     Top = 0
-    Width = 426
-    Height = 216
+    Width = 668
+    Height = 545
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -31,71 +31,36 @@ object frmMain: TfrmMain
     Gutter.Font.Name = 'Courier New'
     Gutter.Font.Style = []
     Highlighter = SynMultiSyn
-    Lines.Strings = (
-      '<a href="te'
-      '<%'
-      ''
-      '/*'
-      ''
-      'comment'
-      ''
-      '*/'
-      '%>'
-      ''
-      'st">'
-      ''
-      '<style>'
-      ''
-      '<%'
-      ''
-      '/*'
-      ''
-      'comment'
-      ''
-      '*/'
-      '%>'
-      ''
-      ''
-      '</style>'
-      ''
-      '<script>'
-      '        '#39'asd'#39
-      '        /* <% '
-      '           // C# code           '
-      '           /*           '
-      '             C# multiline comment'
-      '           */'
-      '         %>'
-      '          */'
-      '</script>')
   end
   object SynWebEngine: TSynWebEngine
     Options.HtmlVersion = shvXHtml10Transitional
     Options.WmlVersion = swvWml13
+    Options.XsltVersion = swvXslt20
     Options.CssVersion = scvCss21
     Options.PhpVersion = spvPhp5
     Options.PhpShortOpenTag = True
     Options.PhpAspTags = False
-    Left = 48
-    Top = 64
+    Left = 40
+    Top = 80
   end
   object SynWebHtmlSyn: TSynWebHtmlSyn
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine
-    Options.HtmlVersion = shvXHtml10Transitional
+    Options.HtmlVersion = shvHtml401Transitional
     Options.CssVersion = scvCss21
     Options.PhpVersion = spvPhp5
     Options.PhpShortOpenTag = True
     Options.PhpAspTags = False
+    Options.AllowASPTags = True
     Options.CssEmbeded = True
     Options.PhpEmbeded = False
     Options.EsEmbeded = True
-    Options.UseEngineOptions = True
-    Left = 80
-    Top = 64
+    Options.UseEngineOptions = False
+    Left = 88
+    Top = 80
   end
   object SynCSSyn: TSynCSSyn
-    Left = 80
+    Left = 120
     Top = 32
   end
   object SynMultiSyn: TSynMultiSyn

@@ -3,7 +3,7 @@ object Form2: TForm2
   Top = 132
   BorderStyle = bsDialog
   Caption = 'Export'
-  ClientHeight = 226
+  ClientHeight = 271
   ClientWidth = 247
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,14 +18,14 @@ object Form2: TForm2
   OnShow = FormShow
   DesignSize = (
     247
-    226)
+    271)
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
     Left = 4
     Top = 0
     Width = 239
-    Height = 222
+    Height = 267
     Anchors = [akLeft, akTop, akRight, akBottom]
     Caption = 'Export'
     TabOrder = 0
@@ -58,7 +58,7 @@ object Form2: TForm2
     end
     object Label5: TLabel
       Left = 8
-      Top = 88
+      Top = 104
       Width = 117
       Height = 17
       AutoSize = False
@@ -67,7 +67,7 @@ object Form2: TForm2
     end
     object Label8: TLabel
       Left = 8
-      Top = 108
+      Top = 124
       Width = 117
       Height = 17
       AutoSize = False
@@ -76,7 +76,7 @@ object Form2: TForm2
     end
     object Label9: TLabel
       Left = 8
-      Top = 128
+      Top = 144
       Width = 117
       Height = 17
       AutoSize = False
@@ -85,21 +85,31 @@ object Form2: TForm2
     end
     object Bevel1: TBevel
       Left = 8
-      Top = 80
+      Top = 96
       Width = 221
       Height = 5
     end
     object Bevel2: TBevel
       Left = 8
-      Top = 148
+      Top = 164
       Width = 221
       Height = 5
     end
     object Bevel3: TBevel
       Left = 8
-      Top = 184
+      Top = 200
       Width = 221
       Height = 5
+    end
+    object Label3: TLabel
+      Left = 8
+      Top = 79
+      Width = 117
+      Height = 17
+      AutoSize = False
+      Caption = 'HTML 5'
+      Enabled = False
+      Layout = tlCenter
     end
     object ht2: TCheckBox
       Left = 132
@@ -151,7 +161,7 @@ object Form2: TForm2
     end
     object xt1: TCheckBox
       Left = 132
-      Top = 88
+      Top = 104
       Width = 45
       Height = 17
       Caption = 'Tags'
@@ -159,7 +169,7 @@ object Form2: TForm2
     end
     object xa1: TCheckBox
       Left = 184
-      Top = 88
+      Top = 104
       Width = 45
       Height = 17
       Caption = 'Attrs'
@@ -167,7 +177,7 @@ object Form2: TForm2
     end
     object xt2: TCheckBox
       Left = 132
-      Top = 108
+      Top = 124
       Width = 45
       Height = 17
       Caption = 'Tags'
@@ -175,7 +185,7 @@ object Form2: TForm2
     end
     object xa2: TCheckBox
       Left = 184
-      Top = 108
+      Top = 124
       Width = 45
       Height = 17
       Caption = 'Attrs'
@@ -183,7 +193,7 @@ object Form2: TForm2
     end
     object xt3: TCheckBox
       Left = 132
-      Top = 128
+      Top = 144
       Width = 45
       Height = 17
       Caption = 'Tags'
@@ -191,7 +201,7 @@ object Form2: TForm2
     end
     object xa3: TCheckBox
       Left = 184
-      Top = 128
+      Top = 144
       Width = 45
       Height = 17
       Caption = 'Attrs'
@@ -199,7 +209,7 @@ object Form2: TForm2
     end
     object Button1: TButton
       Left = 108
-      Top = 156
+      Top = 172
       Width = 61
       Height = 25
       Caption = 'Tags as list'
@@ -208,7 +218,7 @@ object Form2: TForm2
     end
     object Button2: TButton
       Left = 8
-      Top = 156
+      Top = 172
       Width = 97
       Height = 25
       Caption = 'Tree'
@@ -217,7 +227,7 @@ object Form2: TForm2
     end
     object Button3: TButton
       Left = 172
-      Top = 156
+      Top = 172
       Width = 57
       Height = 25
       Caption = 'Attrs as list'
@@ -226,12 +236,30 @@ object Form2: TForm2
     end
     object Button4: TButton
       Left = 8
-      Top = 192
+      Top = 208
       Width = 221
       Height = 25
       Caption = 'Export *.inc'
       TabOrder = 15
       OnClick = Button4Click
+    end
+    object ht5: TCheckBox
+      Left = 132
+      Top = 75
+      Width = 45
+      Height = 17
+      Caption = 'Tags'
+      Enabled = False
+      TabOrder = 16
+    end
+    object ha5: TCheckBox
+      Left = 184
+      Top = 75
+      Width = 45
+      Height = 17
+      Caption = 'Attrs'
+      Enabled = False
+      TabOrder = 17
     end
   end
   object SaveDialog1: TSaveDialog

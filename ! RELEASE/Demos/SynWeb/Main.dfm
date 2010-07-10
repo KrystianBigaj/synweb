@@ -36,6 +36,7 @@ object Form1: TForm1
     Gutter.Font.Style = []
     Highlighter = SynWebHtmlSyn1
     Options = [eoAltSetsColumnMode, eoAutoIndent, eoDragDropEditing, eoDropFiles, eoEnhanceEndKey, eoGroupUndo, eoRightMouseMovesCursor, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabIndent, eoTabsToSpaces, eoTrimTrailingSpaces]
+    WantTabs = True
     WordWrap = True
     OnChange = SynEdit1Change
     OnStatusChange = SynEdit1StatusChange
@@ -255,30 +256,25 @@ object Form1: TForm1
     Visible = False
     OnDblClick = SynWebErrorListDblClick
   end
+  object CheckBox5: TCheckBox
+    Left = 559
+    Top = 1
+    Width = 97
+    Height = 17
+    Caption = 'Html5 XmlMode'
+    TabOrder = 3
+    OnClick = CheckBox5Click
+  end
   object SynWebEngine1: TSynWebEngine
     InactiveAttri.Foreground = clSilver
-    Options.HtmlVersion = shvXHtml10Transitional
-    Options.WmlVersion = swvWml13
-    Options.XsltVersion = swvXslt20
-    Options.CssVersion = scvCss21
-    Options.PhpVersion = spvPhp5
-    Options.PhpShortOpenTag = True
-    Options.PhpAspTags = False
-    SpecialAttri.InactiveOptions = []
+    SpecialAttri.PhpMarker.Style = [fsBold, fsUnderline]
+    SpecialAttri.TagScript.Background = clRed
     Left = 40
     Top = 232
   end
   object SynWebHtmlSyn1: TSynWebHtmlSyn
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
-    Options.HtmlVersion = shvXHtml10Transitional
-    Options.CssVersion = scvCss21
-    Options.PhpVersion = spvPhp5
-    Options.PhpShortOpenTag = True
-    Options.PhpAspTags = False
-    Options.CssEmbeded = True
-    Options.PhpEmbeded = True
-    Options.EsEmbeded = True
     Options.UseEngineOptions = True
     Left = 48
     Top = 264
@@ -286,11 +282,6 @@ object Form1: TForm1
   object SynWebCSSSyn1: TSynWebCssSyn
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
-    Options.HtmlVersion = shvXHtml10Transitional
-    Options.CssVersion = scvCss21
-    Options.PhpVersion = spvPhp5
-    Options.PhpShortOpenTag = True
-    Options.PhpAspTags = False
     Options.PhpEmbeded = True
     Options.UseEngineOptions = True
     Left = 144
@@ -299,9 +290,6 @@ object Form1: TForm1
   object SynWebESSyn1: TSynWebEsSyn
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
-    Options.PhpVersion = spvPhp5
-    Options.PhpShortOpenTag = True
-    Options.PhpAspTags = False
     Options.PhpEmbeded = True
     Options.UseEngineOptions = True
     Left = 176
@@ -310,9 +298,6 @@ object Form1: TForm1
   object SynWebPHPCliSyn1: TSynWebPhpCliSyn
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
-    Options.PhpVersion = spvPhp5
-    Options.PhpShortOpenTag = True
-    Options.PhpAspTags = False
     Options.UseEngineOptions = True
     Left = 208
     Top = 264
@@ -329,7 +314,6 @@ object Form1: TForm1
     UseBackground = False
     Left = 20
     Top = 96
-    TitleW = 'Untitled'
   end
   object SynEditOptionsDialog1: TSynEditOptionsDialog
     UseExtendedStrings = False
@@ -339,11 +323,6 @@ object Form1: TForm1
   object SynWebWmlSyn1: TSynWebWmlSyn
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
-    Options.WmlVersion = swvWml13
-    Options.PhpVersion = spvPhp5
-    Options.PhpShortOpenTag = True
-    Options.PhpAspTags = False
-    Options.PhpEmbeded = True
     Options.UseEngineOptions = True
     Left = 80
     Top = 264
@@ -351,11 +330,7 @@ object Form1: TForm1
   object SynWebXmlSyn1: TSynWebXmlSyn
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
-    Options.PhpVersion = spvPhp5
     Options.PhpShortOpenTag = True
-    Options.PhpAspTags = False
-    Options.PhpEmbeded = True
-    Options.UseEngineOptions = True
     Left = 112
     Top = 264
   end
@@ -377,14 +352,11 @@ object Form1: TForm1
     Columns = <
       item
         BiggestWord = 'constructor'
-        BiggestWordW = 'constructor'
       end>
     ShortCut = 16416
     Editor = SynEdit1
-    Left = 52
+    Left = 76
     Top = 96
-    EndOfTokenChrW = ';>()[] .'
-    TriggerCharsW = '.'
   end
   object SynWebErrorTimer: TTimer
     OnTimer = SynWebErrorTimerTimer
@@ -402,7 +374,6 @@ object Form1: TForm1
   object SynWebPhpPlainSyn1: TSynWebPhpPlainSyn
     ActiveHighlighterSwitch = False
     Engine = SynWebEngine1
-    Options.PhpVersion = spvPhp5
     Options.UseEngineOptions = True
     Left = 240
     Top = 264
@@ -412,11 +383,6 @@ object Form1: TForm1
     Engine = SynWebEngine1
     Options.SmartyLDelim = '{'
     Options.SmartyRDelim = '}'
-    Options.HtmlVersion = shvXHtml10Transitional
-    Options.CssVersion = scvCss21
-    Options.PhpVersion = spvPhp5
-    Options.CssEmbeded = True
-    Options.EsEmbeded = True
     Options.UseEngineOptions = True
     Left = 272
     Top = 264
