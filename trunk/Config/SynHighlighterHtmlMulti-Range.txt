@@ -1,4 +1,4 @@
-Notice: This file wasn't updated from some time, so it could be DEPRECATED!
+Note: This file wasn't updated from some time, so it could be DEPRECATED!
 
 -------------------
 --- Highlighter ---
@@ -42,9 +42,9 @@ shmJS:
 
 ******** *******% %%%#%%%% %#######
                     ||     |      |
-                    ||     |      |- [ Tag ID (0..6: 7 bits) - Type: values from 0 to 127 ]
+                    ||     |      |- [ Tag ID (0..7: 8 bits) - Type: values from 0 to 255 ]
                     ||     |
-                    ||     |- [ Status (7..11: 5 bits) - Type: custom ]
+                    ||     |- [ Status (8..11: 4 bits) - Type: custom ]
                     ||
                     ||- [ Is tag closed? (12: 1 bit) - Type: values from 0 to 1 ]
                     |  

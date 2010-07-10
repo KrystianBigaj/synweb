@@ -53,6 +53,7 @@ type
     Reload1: TMenuItem;
     SynWebPhpPlainSyn1: TSynWebPhpPlainSyn;
     SynWebSmartySyn1: TSynWebSmartySyn;
+    CheckBox5: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -92,6 +93,8 @@ type
     procedure scpDemoExecute(Kind: SynCompletionType; Sender: TObject;
       var CurrentInput: String; var x, y: Integer; var CanExecute: Boolean);
 {$ENDIF}
+
+    procedure CheckBox5Click(Sender: TObject);
 
   private
     FPaintUpdating: Boolean;
@@ -216,6 +219,11 @@ end;
 procedure TForm1.CheckBox4Click(Sender: TObject);
 begin
   SynWebEngine1.Options.PhpShortOpenTag:=CheckBox4.Checked;
+end;
+
+procedure TForm1.CheckBox5Click(Sender: TObject);
+begin
+  SynWebEngine1.Options.Html5XmlMode:=CheckBox5.Checked;
 end;
 
 procedure TForm1.ComboBox1Change(Sender: TObject);

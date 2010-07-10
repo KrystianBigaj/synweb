@@ -565,7 +565,7 @@ var
       (1 shl 31) = 0 then
       Result := 1
     else
-      if ASynWeb.InternalInstanceData.FOptions.FMLVersion >= smlhvXHtml10Strict then
+      if ASynWeb.InternalInstanceData.FOptions.FXmlMode then
         Result := 0
       else
         Result := -1;

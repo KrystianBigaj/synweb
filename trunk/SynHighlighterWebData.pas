@@ -141,6 +141,7 @@ const
 // ML --------------------------------------------------------------------------
 type
   TSynWebHtmlVersion = (shvHtml401Strict, shvHtml401Transitional, shvHtml401Frameset,
+    shvHtml5,
     shvXHtml10Strict, shvXHtml10Transitional, shvXHtml10Frameset);
 
   TSynWebWmlVersion = (swvWml11, swvWml12, swvWml13);
@@ -148,6 +149,7 @@ type
   TSynWebXsltVersion = (swvXslt10, swvXslt20);
 
   TSynWebMLVersion = (smlhvHtml401Strict, smlhvHtml401Transitional, smlhvHtml401Frameset,
+    smlhvHtml5,
     smlhvXHtml10Strict, smlhvXHtml10Transitional, smlhvXHtml10Frameset,
     smlwvWml11, smlwvWml12, smlwvWml13, smlwvXslt10, smlwvXslt20, smlwvXML);
 
@@ -158,23 +160,24 @@ type
 
 const
   TSynWebHtmlVersionStr: array[Low(TSynWebHtmlVersion)..High(TSynWebHtmlVersion)] of String = (
-    'Html 4.01 Strict',
-    'Html 4.01 Transitional',
-    'Html 4.01 Frameset',
-    'XHtml 1.0 Strict',
-    'XHtml 1.0 Transitional',
-    'XHtml 1.0 Frameset'
+    'HTML 4.01 Strict',
+    'HTML 4.01 Transitional',
+    'HTML 4.01 Frameset',
+    'HTML 5',
+    'XHTML 1.0 Strict',
+    'XHTML 1.0 Transitional',
+    'XHTML 1.0 Frameset'
     );
 
   TSynWebWMLVersionStr: array[Low(TSynWebWMLVersion)..High(TSynWebWMLVersion)] of String = (
-    'Wml 1.1',
-    'Wml 1.2',
-    'Wml 1.3'
+    'WML 1.1',
+    'WML 1.2',
+    'WML 1.3'
     );
 
   TSynWebXSLTVersionStr: array[Low(TSynWebXsltVersion)..High(TSynWebXsltVersion)] of String = (
-    'Xslt 1.0',
-    'Xslt 2.0'
+    'XSLT 1.0',
+    'XSLT 2.0'
     );
 
 // Css -------------------------------------------------------------------------

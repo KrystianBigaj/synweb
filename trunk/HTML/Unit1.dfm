@@ -352,6 +352,7 @@ object Form1: TForm1
       'Html 4.01 Strict'
       'Html 4.01 Transitional'
       'Html 4.01 Frameset'
+      'HTML5'
       'XHtml 1.0 Strict'
       'XHtml 1.0 Transitional'
       'XHtml 1.0 Frameset'
@@ -514,8 +515,8 @@ object Form1: TForm1
     TabOrder = 35
   end
   object Button24: TButton
-    Left = 280
-    Top = 172
+    Left = 277
+    Top = 169
     Width = 53
     Height = 25
     Anchors = [akTop, akRight]
@@ -571,6 +572,24 @@ object Form1: TForm1
       'unset'
       'set')
   end
+  object magicHtml5button: TButton
+    Left = 327
+    Top = 683
+    Width = 93
+    Height = 14
+    Caption = 'magicHtml5button'
+    TabOrder = 42
+    OnClick = magicHtml5buttonClick
+  end
+  object Button25: TButton
+    Left = 426
+    Top = 683
+    Width = 93
+    Height = 14
+    Caption = 'magicHtml5specials'
+    TabOrder = 43
+    OnClick = Button25Click
+  end
   object OpenDialog1: TOpenDialog
     Left = 360
     Top = 304
@@ -605,52 +624,57 @@ object Form1: TForm1
       Caption = '2 - Html 4.01 Frameset'
       OnClick = Html401Strict1Click
     end
+    object Html5pop: TMenuItem
+      Tag = 3
+      Caption = '3 - HTML5'
+      OnClick = Html401Strict1Click
+    end
     object N2: TMenuItem
       Caption = '-'
     end
     object XHtml10Strict1: TMenuItem
-      Tag = 3
-      Caption = '3 - XHtml 1.0 Strict'
+      Tag = 4
+      Caption = '4 - XHtml 1.0 Strict'
       OnClick = Html401Strict1Click
     end
     object XHtml10Transitional1: TMenuItem
-      Tag = 4
-      Caption = '4 - XHtml 1.0 Transitional'
+      Tag = 5
+      Caption = '5 - XHtml 1.0 Transitional'
       OnClick = Html401Strict1Click
     end
     object XHtml10Frameset1: TMenuItem
-      Tag = 5
-      Caption = '5 - XHtml 1.0 Frameset'
+      Tag = 6
+      Caption = '6 - XHtml 1.0 Frameset'
       OnClick = Html401Strict1Click
     end
     object N3: TMenuItem
       Caption = '-'
     end
     object Wml111: TMenuItem
-      Tag = 6
-      Caption = '6 - Wml 1.1'
+      Tag = 7
+      Caption = '7 - Wml 1.1'
       OnClick = Html401Strict1Click
     end
     object Wml121: TMenuItem
-      Tag = 7
-      Caption = '7 - Wml 1.2'
+      Tag = 8
+      Caption = '8 - Wml 1.2'
       OnClick = Html401Strict1Click
     end
     object Wml131: TMenuItem
-      Tag = 8
-      Caption = '8 - Wml 1.3'
+      Tag = 9
+      Caption = '9 - Wml 1.3'
       OnClick = Html401Strict1Click
     end
     object N6: TMenuItem
       Caption = '-'
     end
     object XSLT101: TMenuItem
-      Tag = 9
-      Caption = '9 - XSLT 1.0'
+      Tag = 10
+      Caption = '10 - XSLT 1.0'
     end
     object XSLT201: TMenuItem
-      Tag = 10
-      Caption = '10 -XSLT 2.0'
+      Tag = 11
+      Caption = '11 - XSLT 2.0'
       OnClick = Html401Strict1Click
     end
     object N4: TMenuItem

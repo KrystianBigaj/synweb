@@ -41,6 +41,9 @@ type
     SaveDialog1: TSaveDialog;
     Bevel3: TBevel;
     Button4: TButton;
+    Label3: TLabel;
+    ht5: TCheckBox;
+    ha5: TCheckBox;
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
