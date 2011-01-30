@@ -4436,6 +4436,7 @@ procedure TSynWebEngine.CssSemiColonProc;
 begin
   if CssGetRange = srsCssPropVal then
   begin
+    SetRangeBit(8, False);
     CssSymbolProc;
     CssSetRange(srsCssProp);
   end else
