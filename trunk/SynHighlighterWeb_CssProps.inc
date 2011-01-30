@@ -1,4 +1,5 @@
   CssPropMaxKeyHash = 334;
+  CssPropID_Font = 46;
 
   TSynWeb_CssProps:array[0..114] of AnsiString=(
     'azimuth', 'background', 'background-attachment', 'background-color', 

@@ -4276,7 +4276,18 @@ begin
     else
       CssRangeCommentProc;
   end else
-    if (CssGetRange = srsCssPropVal) {and GetRangeBit(8) - WORKAROUND on issue #76 CSS <font-size>/<line-height>} then
+    if (CssGetRange = srsCssPropVal) and (CssGetProp - 1 = CssPropID_Font) and
+      (GetRangeBit(8) or (FInstance^.FTokenLastID in [
+        CssValID_Smaller,
+        CssValID_Larger,
+        CssValID_XX_Large,
+        CssValID_X_Large,
+        CssValID_Large,
+        CssValID_Medium,
+        CssValID_Small,
+        CssValID_X_Small,
+        CssValID_XX_Small
+      ])) then
     begin
       SetRangeBit(8, False);
       CssSymbolProc;
@@ -4572,6 +4583,8 @@ begin
   begin
     FInstance^.FCssMask := FInstance^.FCssMask and $06000000;
     CssSetRange(srsCssPropValSpecial);
+    if CssGetProp - 1 = CssPropID_Font then
+      SetRangeBit(8, True); // allow next slash char in -> font: <'font-size as percent'> [ / <'line-height'> ]?
   end else
   begin
     OldRun := FInstance^.FRun;
@@ -5354,23 +5367,28 @@ begin
     if CssIdentStartProc then
     begin
       FInstance^.FTokenID := CssValCheck;
-      if TSynWeb_CssValsData[FInstance^.FTokenLastID][Longword(FInstance^.FOptions.FCssVersion)]
-        [3] and (1 shl 31) <> 0 then
-        if FInstance^.FLine[FInstance^.FRun] = '(' then
+      if FInstance^.FTokenLastID > -1 then
+      begin
+        if TSynWeb_CssValsData[FInstance^.FTokenLastID][Longword(FInstance^.FOptions.FCssVersion)]
+          [3] and (1 shl 31) <> 0 then
         begin
-          SetRangeInt(3, 8, 0);
-          case FInstance^.FTokenLastID of
-          CssValID_Rgb:
-            CssSetRange(srsCssPropValRgb);
-          CssValID_Url:
-            CssSetRange(srsCssPropValUrl);
-          CssValID_Rect:
-            CssSetRange(srsCssPropValRect);
-          else // case
-            CssSetRange(srsCssPropValFunc);
-          end;
-        end else
-          FInstance^.FTokenID := stkCssValUndef;
+          if FInstance^.FLine[FInstance^.FRun] = '(' then
+          begin
+            SetRangeInt(3, 8, 0);
+            case FInstance^.FTokenLastID of
+            CssValID_Rgb:
+              CssSetRange(srsCssPropValRgb);
+            CssValID_Url:
+              CssSetRange(srsCssPropValUrl);
+            CssValID_Rect:
+              CssSetRange(srsCssPropValRect);
+            else // case
+              CssSetRange(srsCssPropValFunc);
+            end;
+          end else
+            FInstance^.FTokenID := stkCssValUndef;
+        end;
+      end;
     end else
       CssErrorProc;
 end;

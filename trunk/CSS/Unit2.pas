@@ -218,7 +218,10 @@ begin
     s1.Insert(0,Format('  CssSpecialID_Import = %d;',[s.IndexOf('import')]));
     s1.Insert(0,Format('  CssSpecialMaxKeyHash = %d;',[x]));
   end else
+  begin
+    s1.Insert(0,Format('  CssPropID_Font = %d;',[s.IndexOf('font')]));
     s1.Insert(0,Format('  CssPropMaxKeyHash = %d;',[x]));
+  end;
 
   s2[s2.Count-1]:=Copy(s2[s2.Count-1],1,Length(s2[s2.Count-1])-2);
   if form1.iss.Checked then
@@ -368,6 +371,15 @@ begin
   s1.Insert(0,Format('  CssValID_Rect = %d;',[sl.IndexOf('rect')]));
   s1.Insert(0,Format('  CssValID_Url = %d;',[sl.IndexOf('url')]));
   s1.Insert(0,Format('  CssValID_Rgb = %d;',[sl.IndexOf('rgb')]));
+  s1.Insert(0,Format('  CssValID_XX_Small = %d;',[sl.IndexOf('xx-small')]));
+  s1.Insert(0,Format('  CssValID_X_Small = %d;',[sl.IndexOf('x-small')]));
+  s1.Insert(0,Format('  CssValID_Small = %d;',[sl.IndexOf('small')]));
+  s1.Insert(0,Format('  CssValID_Medium = %d;',[sl.IndexOf('medium')]));
+  s1.Insert(0,Format('  CssValID_Large = %d;',[sl.IndexOf('large')]));
+  s1.Insert(0,Format('  CssValID_X_Large = %d;',[sl.IndexOf('x-large')]));
+  s1.Insert(0,Format('  CssValID_XX_Large = %d;',[sl.IndexOf('xx-large')]));
+  s1.Insert(0,Format('  CssValID_Larger = %d;',[sl.IndexOf('larger')]));
+  s1.Insert(0,Format('  CssValID_Smaller = %d;',[sl.IndexOf('smaller')]));
   s1.Insert(0,Format('  CssValMaxKeyHash = %d;',[x]));
 
 //  Form3.Memo2.Lines[Form3.Memo2.Lines.Count-1]:=Copy(Form3.Memo2.Lines[Form3.Memo2.Lines.Count-1],1,Length(Form3.Memo2.Lines[Form3.Memo2.Lines.Count-1])-1);
