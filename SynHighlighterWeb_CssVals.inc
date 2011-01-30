@@ -1,4 +1,13 @@
   CssValMaxKeyHash = 272;
+  CssValID_Smaller = 150;
+  CssValID_Larger = 73;
+  CssValID_XX_Large = 196;
+  CssValID_X_Large = 190;
+  CssValID_Large = 72;
+  CssValID_Medium = 93;
+  CssValID_Small = 147;
+  CssValID_X_Small = 194;
+  CssValID_XX_Small = 197;
   CssValID_Rgb = 130;
   CssValID_Url = 183;
   CssValID_Rect = 124;
