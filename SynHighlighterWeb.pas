@@ -79,7 +79,7 @@ uses
 {$IFDEF SYN_CLX}
   QGraphics,
 {$IFDEF UNISYNEDIT}
-  QSynUnicode,    
+  QSynUnicode,
 {$ENDIF}
   QSynEditTypes,
   QSynEditHighlighter,
@@ -87,7 +87,7 @@ uses
 {$ELSE}
   Graphics,
 {$IFDEF UNISYNEDIT}
-  SynUnicode,    
+  SynUnicode,
 {$ENDIF}
   SynEditTypes,
   SynEditHighlighter,
@@ -906,7 +906,7 @@ type
     procedure EsNext;
     function EsGetRange: TSynWebEsRangeState;
     procedure EsSetRange(const ARange: TSynWebEsRangeState);
-    function EsCheckNull(ADo: Boolean = True): Boolean;    
+    function EsCheckNull(ADo: Boolean = True): Boolean;
     procedure EsSetSymbolId(ASymbolId: Integer);
 
     procedure EsSpaceProc;
@@ -1729,7 +1729,7 @@ begin
           Result := FSpecialAttri.FAttributes[FSpecialAttribute]
         else
           Result := FTokenAttributeTable[FInstance.FTokenID];
-      end else     
+      end else
         if FIsSpecialAttribute and (FSpecialAttribute in FSpecialAttri.InactiveOptions) then
           Result := FSpecialAttri.FAttributes[FSpecialAttribute]
         else
@@ -2503,8 +2503,8 @@ begin
   FEngine := AOwner;
 
   FOptions := [swsaPhpMarker];
-  FInactiveOptions := [swsaPhpMarker]; 
-  
+  FInactiveOptions := [swsaPhpMarker];
+
   FAttributes[swsaPhpVarPrefix] := CreateAttrib('Special: Php Variable prefix');
   FEngine.AddAttribute(FAttributes[swsaPhpVarPrefix]);
 
@@ -4276,7 +4276,7 @@ begin
     else
       CssRangeCommentProc;
   end else
-    if (CssGetRange = srsCssPropVal) and GetRangeBit(8) then
+    if (CssGetRange = srsCssPropVal) {and GetRangeBit(8) - WORKAROUND on issue #76 CSS <font-size>/<line-height>} then
     begin
       SetRangeBit(8, False);
       CssSymbolProc;
@@ -4603,7 +4603,7 @@ begin
 
   if (FInstance^.FCssMask and (1 shl 17) <> 0) and not Check100_900 then
     FInstance^.FCssMask := FInstance^.FCssMask and not (1 shl 17);
-    
+
   if (prop = -1) or (TSynWeb_CssPropsData[prop] and FInstance^.FCssMask = 0) then
     FInstance^.FTokenID := stkCssValUndef
   else
@@ -6150,7 +6150,7 @@ begin
     '"':
       FEsProcTable[c] := EsString34Proc;
     #39:
-      FEsProcTable[c] := EsString39Proc;  
+      FEsProcTable[c] := EsString39Proc;
     '{':
       FEsProcTable[c] := EsCurlyBraceOpenProc;
     '}':
@@ -6281,7 +6281,7 @@ end;
 procedure TSynWebEngine.EsSlashProc;
 begin
   Inc(FInstance^.FRun);
-  
+
   case FInstance^.FLine[FInstance^.FRun] of
   '*':
     begin
@@ -6441,7 +6441,7 @@ begin
 end;
 
 procedure TSynWebEngine.EsMinusProc;
-begin          
+begin
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
   '=':
@@ -6460,7 +6460,7 @@ begin
 end;
 
 procedure TSynWebEngine.EsOrProc;
-begin          
+begin
   Inc(FInstance^.FRun);
   case FInstance^.FLine[FInstance^.FRun] of
   '=':
@@ -6828,7 +6828,7 @@ begin
           end;
         '\':
           begin
-            Inc(FInstance^.FRun);                      
+            Inc(FInstance^.FRun);
             if FInstance^.FLine[FInstance^.FRun] in [#39, '\'] then
               Inc(FInstance^.FRun);
           end;
@@ -6862,7 +6862,7 @@ var
   end;
 
   procedure BraceDelta(ADelta: Integer);
-  begin                
+  begin
     Inc(FInstance^.FRun);
     Inc(lBrace, ADelta);
     if lBrace < 0 then
@@ -6882,7 +6882,7 @@ var
     case FInstance^.FLine[FInstance^.FRun] of
     #0:
       RegExpInvalid;
-      
+
     'c':
       begin
         Inc(FInstance^.FRun);
@@ -6917,7 +6917,7 @@ var
     end;
   end;
 
-begin    
+begin
   SetRangeBit(13, True);
 
   case GetRangeInt(2, 11) of
@@ -6937,7 +6937,7 @@ begin
       Exit;
     end;
 
-  2:    
+  2:
     begin
       repeat
         Inc(FInstance^.FRun);
@@ -6956,7 +6956,7 @@ begin
   while True do
   begin
     SkipSpace;
-    
+
     case FInstance^.FLine[FInstance^.FRun] of
     '/', #0:
       Break;
@@ -7772,7 +7772,7 @@ begin
     Inc(FInstance^.FRun, 2);
     if FInstance^.FOptions.FPhpAspTags then
     begin
-      FInstance^.FTokenID := stkMLTag; 
+      FInstance^.FTokenID := stkMLTag;
       SetSpecialAttribute(swsaPhpMarker);
       PhpEnd(False);
     end else
@@ -7890,7 +7890,7 @@ begin
   if (FInstance^.FHighlither is TSynWebSmartySyn) and CheckSmartyEnd then
   begin
     Inc(FInstance^.FRun, Length(FInstance^.FOptions.FSmartyRDelim));
-    FInstance^.FTokenID := stkMLTag; 
+    FInstance^.FTokenID := stkMLTag;
     SetSpecialAttribute(swsaPhpMarker);
     PhpEnd(False);
   end else
@@ -8242,7 +8242,7 @@ begin
       begin
         Inc(FInstance^.FRun, 2);
         SetRangeInt(3, 20, 1);
-      end;                            
+      end;
       SetSpecialAttribute(swsaPhpMarker);
       FInstance^.FTokenID := stkMLTag;
     end;
@@ -8261,7 +8261,7 @@ begin
         DoDefault;
         if (FInstance^.FLine[FInstance^.FRun] = '=') and (FInstance^.FOptions.FPhpShortOpenTag) then
         begin
-          Inc(FInstance^.FRun);         
+          Inc(FInstance^.FRun);
           SetSpecialAttribute(swsaPhpMarker);
           FInstance^.FTokenID := stkPhpKeyword;
           FInstance^.FTokenLastID := PhpKeyID_Special_PhpTagEcho;
