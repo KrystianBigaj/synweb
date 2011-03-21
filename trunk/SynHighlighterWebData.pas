@@ -204,6 +204,8 @@ const
   TSynWebCssString39 = 4;
   TSynWebCssString34 = 5;
 
+  TSynWebCssPropVendor = $FF;
+
 // ECMAScript ------------------------------------------------------------------
 type
   TSynWebEsRangeState = (srsEsDefault, srsEsComment, srsEsCommentMulti, srsEsString34,
