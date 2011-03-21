@@ -4523,6 +4523,14 @@ begin
   if CssGetRange = srsCssPropVal then
   begin
     Inc(FInstance^.FRun);
+
+    // Vendor specific value like -moz-pre-wrap
+    if CssIdentStartProc then
+    begin
+      FInstance^.FTokenID := stkCssVal;
+      Exit;
+    end;
+
     // if FInstance^.FLine[FInstance^.FRun] in ['0'..'9', '.'] then
     if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 13) <> 0 then
     begin
@@ -5407,7 +5415,10 @@ begin
         end;
       end;
     end else
-      CssErrorProc;
+      if CssIsPropVendor and (FInstance^.FLine[FInstance^.FRun] in ['(', ')', '=']) then
+        CssSymbolProc
+      else
+        CssErrorProc;
 end;
 
 procedure TSynWebEngine.CssRangePropValStrProc;
@@ -6087,7 +6098,7 @@ begin
     end;
   end else
     Result := stkCssValUndef;
-    
+
   if (Result = stkCssValUndef) and CssCheckPropData(20{identifier}) then
     Result := stkCssSymbol;
 end;
