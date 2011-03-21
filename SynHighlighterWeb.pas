@@ -845,7 +845,9 @@ type
     function CssGetRange: TSynWebCssRangeState;
     procedure CssSetRange(const ARange: TSynWebCssRangeState);
     function CssGetProp: Integer;
+    function CssIsPropVendor: Boolean;
     procedure CssSetProp(const AProp: Integer);
+    function CssCheckPropData(ABit: Byte): Boolean;
     function CssCheckNull(ADo: Boolean = True): Boolean;
 
     procedure CssSpaceProc;
@@ -4200,6 +4202,13 @@ end;
 function TSynWebEngine.CssGetProp: Integer;
 begin
   Result := GetRangeInt(8, 0);
+  if Result = TSynWebCssPropVendor then
+    Result := 0;
+end;
+
+function TSynWebEngine.CssIsPropVendor: Boolean;
+begin
+  Result := GetRangeInt(8, 0) = TSynWebCssPropVendor;
 end;
 
 procedure TSynWebEngine.CssSetProp(const AProp: Integer);
@@ -4207,7 +4216,21 @@ begin
   SetRangeInt(8, 0, Longword(AProp));
 end;
 
-function TSynWebEngine.CssCheckNull(ADo: Boolean = True): Boolean;
+function TSynWebEngine.CssCheckPropData(ABit: Byte): Boolean;
+var
+  lProp: Integer;
+begin
+  lProp := GetRangeInt(8, 0); // CssGetProp without vendor check
+  if lProp = TSynWebCssPropVendor then
+    Result := True
+  else
+    if lProp = 0 then
+      Result := False
+    else
+      Result := TSynWeb_CssPropsData[lProp - 1] and (1 shl ABit) <> 0;
+end;
+
+function TSynWebEngine.CssCheckNull(ADo: Boolean): Boolean;
 begin
   case FInstance^.FLine[FInstance^.FRun] of
   #0:
@@ -4276,7 +4299,9 @@ begin
     else
       CssRangeCommentProc;
   end else
-    if (CssGetRange = srsCssPropVal) and (CssGetProp - 1 = CssPropID_Font) and
+    if (CssGetRange = srsCssPropVal) and
+      (CssIsPropVendor or (
+      (CssGetProp - 1 = CssPropID_Font) and
       (GetRangeBit(8) or (FInstance^.FTokenLastID in [
         CssValID_Smaller,
         CssValID_Larger,
@@ -4287,7 +4312,7 @@ begin
         CssValID_Small,
         CssValID_X_Small,
         CssValID_XX_Small
-      ])) then
+      ])))) then
     begin
       SetRangeBit(8, False);
       CssSymbolProc;
@@ -4324,7 +4349,7 @@ begin
     CssSymbolProc;
     CssSetRange(srsCssRuleset);
   end else
-    if GetRangeBit(11) then
+    if GetRangeBit(11) then // Media range
     begin
       SetRangeBit(11, False);
       CssSymbolProc;
@@ -4405,19 +4430,11 @@ begin
 end;
 
 procedure TSynWebEngine.CssCommaProc;
-var
-  prop: Integer;
 begin
-  if CssGetRange = srsCssPropVal then
-  begin
-    prop := CssGetProp - 1;
-    if (prop = -1) or (TSynWeb_CssPropsData[prop] and (1 shl 16) = 0) then
-    begin
-      CssErrorProc;
-      Exit;
-    end;
-  end;
-  CssSymbolProc;
+  if (CssGetRange = srsCssPropVal) and not CssCheckPropData(16{,}) then
+    CssErrorProc
+  else
+    CssSymbolProc;
 end;
 
 procedure TSynWebEngine.CssColonProc;
@@ -4455,8 +4472,6 @@ begin
 end;
 
 procedure TSynWebEngine.CssStringProc;
-var
-  prop: Integer;
 begin
   if CssGetRange = srsCssPropVal then
   begin
@@ -4478,12 +4493,8 @@ begin
         SetRangeBit(9, True);
       end;
     end;
-    if FInstance^.FTokenID = stkCssValString then
-    begin
-      prop := CssGetProp - 1;
-      if (prop = -1) or (TSynWeb_CssPropsData[prop] and (1 shl 19) = 0) then
-        FInstance^.FTokenID := stkCssValUndef;
-    end;
+    if (FInstance^.FTokenID = stkCssValString) and not CssCheckPropData(19{String}) then
+      FInstance^.FTokenID := stkCssValUndef;
   end else
     CssErrorProc;
 end;
@@ -4613,15 +4624,20 @@ begin
     end else
       CheckOther;
   end;
-  prop := CssGetProp - 1;
 
   if (FInstance^.FCssMask and (1 shl 17) <> 0) and not Check100_900 then
     FInstance^.FCssMask := FInstance^.FCssMask and not (1 shl 17);
 
-  if (prop = -1) or (TSynWeb_CssPropsData[prop] and FInstance^.FCssMask = 0) then
-    FInstance^.FTokenID := stkCssValUndef
+  if CssIsPropVendor then
+    FInstance^.FTokenID := stkCssValNumber
   else
-    FInstance^.FTokenID := stkCssValNumber;
+  begin
+    prop := CssGetProp - 1;
+    if (prop = -1) or (TSynWeb_CssPropsData[prop] and FInstance^.FCssMask = 0) then
+      FInstance^.FTokenID := stkCssValUndef
+    else
+      FInstance^.FTokenID := stkCssValNumber;
+  end;
 end;
 
 procedure TSynWebEngine.CssIdentProc;
@@ -5395,8 +5411,6 @@ begin
 end;
 
 procedure TSynWebEngine.CssRangePropValStrProc;
-var
-  prop: Integer;
 begin
   if GetRangeBit(8) then
   begin
@@ -5411,12 +5425,8 @@ begin
       CssSetRange(srsCssPropVal);
       SetRangeBit(9, False);
     end;
-  if FInstance^.FTokenID = stkCssValString then
-  begin
-    prop := CssGetProp - 1;
-    if (prop = -1) or (TSynWeb_CssPropsData[prop] and (1 shl 19) = 0) then
-      FInstance^.FTokenID := stkCssValUndef;
-  end;
+  if (FInstance^.FTokenID = stkCssValString) and not CssCheckPropData(19{String}) then
+    FInstance^.FTokenID := stkCssValUndef;
 end;
 
 procedure TSynWebEngine.CssRangePropValRgbProc;
@@ -5566,8 +5576,6 @@ begin
 end;
 
 procedure TSynWebEngine.CssRangePropValSpecialProc;
-var
-  prop: Integer;
 begin
   if FInstance^.FLine[FInstance^.FRun] = '%' then
     CssSymbolProc
@@ -5582,11 +5590,11 @@ begin
         // if (FInstance^.FLine[FInstance^.FRun+2] in ['a'..'f', 'A'..'F', '0'..'9']) then
         (TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 2]] and (1 shl 10) <> 0) then
         Inc(FInstance^.FRun, 3);
-      prop := CssGetProp - 1;
-      if (prop = -1) or (TSynWeb_CssPropsData[prop] and (1 shl 18) = 0) then
-        FInstance^.FTokenID := stkCssValUndef
+
+      if CssCheckPropData(18{Color}) then
+        FInstance^.FTokenID := stkCssValNumber
       else
-        FInstance^.FTokenID := stkCssValNumber;
+        FInstance^.FTokenID := stkCssValUndef;
     end else
     begin
       CssIdentStartProc;
@@ -5980,12 +5988,27 @@ begin
   if HashKey <= CssPropMaxKeyHash then
   begin
     Result := FCssPropIdentFuncTable[HashKey];
-    if (FInstance^.FTokenLastID <> -1) and
+    if (FInstance^.FTokenLastID > -1) and
       (TSynWeb_CssPropsData[FInstance^.FTokenLastID] and
-      (1 shl Longword(FInstance^.FOptions.FCssVersion)) = 0) then
+      (1 shl Longword(FInstance^.FOptions.FCssVersion)) = 0)
+    then
       Result := stkCssPropUndef;
   end else
     Result := stkCssPropUndef;
+
+  // Vendor specific tags
+  if Result = stkCssPropUndef then
+    if (FInstance^.FLine[FInstance^.FTokenPos] = '-') or (
+      (FInstance^.FLine[FInstance^.FTokenPos] = 'm') and
+      (FInstance^.FLine[FInstance^.FTokenPos + 1] = 's') and
+      (FInstance^.FLine[FInstance^.FTokenPos + 2] = 'o') and
+      (FInstance^.FLine[FInstance^.FTokenPos + 3] = '-')
+    ) then
+    begin
+      Result := stkCssProp;
+      FInstance^.FTokenLastID := TSynWebCssPropVendor - 1;
+    end;
+
   CssSetProp(FInstance^.FTokenLastID + 1);
 end;
 
@@ -6055,7 +6078,7 @@ begin
   if HashKey <= CssValMaxKeyHash then
   begin
     Result := FCssValIdentFuncTable[HashKey];
-    if Result = stkCssVal then
+    if (Result = stkCssVal) and not CssIsPropVendor then
     begin
       prop := CssGetProp - 1;
       if (prop = -1) or (TSynWeb_CssValsData[FInstance^.FTokenLastID]
@@ -6064,12 +6087,9 @@ begin
     end;
   end else
     Result := stkCssValUndef;
-  if Result = stkCssValUndef then
-  begin
-    prop := CssGetProp - 1;
-    if (prop <> -1) and (TSynWeb_CssPropsData[prop] and (1 shl 20) <> 0) then
-      Result := stkCssSymbol;
-  end;
+    
+  if (Result = stkCssValUndef) and CssCheckPropData(20{identifier}) then
+    Result := stkCssSymbol;
 end;
 
 {$I SynHighlighterWeb_CssValsFunc.inc}
