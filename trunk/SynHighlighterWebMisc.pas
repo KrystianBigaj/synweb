@@ -1240,13 +1240,13 @@ begin
     begin
       if not (FMode in [swwmSelectedWord, swwmCustomWord]) or (
         ((lPos = 1) or Editor.IsWordBreakChar(lLineText[lPos - 1])) and
-        ((lPos + Length(lText) = Length(lLineText)) or Editor.IsWordBreakChar(lLineText[lPos + Length(lText)]))
+        ((lPos - 1 + Length(lText) = Length(lLineText)) or Editor.IsWordBreakChar(lLineText[lPos + Length(lText)]))
       ) then
       begin
         lBuffer.Char := lPos;
         lDisplay := Editor.BufferToDisplayPos(lBuffer);
         lXY := Editor.RowColumnToPixels(lDisplay);
-        if not IsSameDisplay(lSelStartDisplay, lDisplay) then
+        if not Editor.SelAvail or not IsSameDisplay(lSelStartDisplay, lDisplay) then
         begin
           lRect := Rect(lXY.X, lXY.Y,
             lXY.X + (Editor.CharWidth * Length(lText)),
