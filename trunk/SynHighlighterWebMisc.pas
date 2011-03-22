@@ -104,6 +104,7 @@ type
   TSynWebWordMarker = class(TSynEditPlugin)
   protected
     FIsWordSelected: Boolean;
+    FIsMultiLineSelection: Boolean;
     FEnabled: Boolean;
     FBGColor: TColor;
     FMode: TSynWebWordMarkerMode;   
@@ -1285,22 +1286,28 @@ end;
 procedure TSynWebWordMarker.NotifySelChanged;
 var
   lIsWordSelected: Boolean;
+  lIsMultiLineSelection: Boolean;
 begin
-  case FMode of
-  swwmSelectedWord:
-    begin
-      lIsWordSelected := IsWordSelected;
+  lIsMultiLineSelection := Editor.BlockBegin.Line <> Editor.BlockEnd.Line;
 
-      if lIsWordSelected = FIsWordSelected then
-        Exit;
+  if not lIsMultiLineSelection or not FIsMultiLineSelection then
+    case FMode of
+    swwmSelectedWord:
+      begin
+        lIsWordSelected := IsWordSelected;
 
-      FIsWordSelected := lIsWordSelected;
+        if lIsWordSelected = FIsWordSelected then
+          Exit;
+
+        FIsWordSelected := lIsWordSelected;
+        DoInvalidate;
+      end;
+
+    swwmSelectedText:
       DoInvalidate;
     end;
 
-  swwmSelectedText:
-    DoInvalidate;
-  end;
+  FIsMultiLineSelection := lIsMultiLineSelection;
 end;
 
 { TSynWebTokenizer }
