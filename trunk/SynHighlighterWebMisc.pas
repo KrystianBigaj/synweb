@@ -98,15 +98,25 @@ type
 
 { TSynWebWordMarker }
 
+  TSynWebWordMarkerMode = (swwmSelectedWord, swwmSelectedText,
+    swwmCustomWord, swwmCustomText);
+
   TSynWebWordMarker = class(TSynEditPlugin)
   protected
     FIsWordSelected: Boolean;
     FEnabled: Boolean;
     FBGColor: TColor;
-                                         
+    FMode: TSynWebWordMarkerMode;   
+    FCustomText: TSynWebString;
+
     function IsWordSelected: Boolean;
+    function GetHighlightText: TSynWebString;
+
     procedure SetEnabled(const Value: Boolean);   
-    procedure SetBGColor(const Value: TColor);
+    procedure SetBGColor(const Value: TColor);   
+    procedure SetMode(const Value: TSynWebWordMarkerMode);
+    procedure SetCustomText(const Value: TSynWebString);
+    procedure DoInvalidate;
 
     procedure AfterPaint(ACanvas: TCanvas; const AClip: TRect;
       FirstLine: Integer; LastLine: Integer); override;
@@ -120,6 +130,8 @@ type
 
     property Enabled: Boolean read FEnabled write SetEnabled;
     property BGColor: TColor read FBGColor write SetBGColor;
+    property Mode: TSynWebWordMarkerMode read FMode write SetMode;
+    property CustomText: TSynWebString read FCustomText write SetCustomText;
   end;
 
 { TSynWebTokenizerInfo }
@@ -1110,14 +1122,31 @@ begin
   Editor.Invalidate;
 end;
 
+procedure TSynWebWordMarker.SetCustomText(const Value: TSynWebString);
+begin
+  if FCustomText = Value then
+    Exit;
+
+  FCustomText := Value;
+  DoInvalidate;
+end;
+
+procedure TSynWebWordMarker.SetMode(const Value: TSynWebWordMarkerMode);
+begin
+  if FMode = Value then
+    Exit;
+
+  FMode := Value;
+  DoInvalidate;
+end;
+
 procedure TSynWebWordMarker.SetBGColor(const Value: TColor);
 begin
   if FBGColor = Value then
     Exit;
 
   FBGColor := Value;
-  if Enabled then
-    Editor.Invalidate;
+  DoInvalidate;
 end;
 
 procedure TSynWebWordMarker.AfterPaint(ACanvas: TCanvas; const AClip: TRect;
@@ -1130,8 +1159,8 @@ var
   lLineRow: Integer;
   lPrevLine: Integer;
 
-  lLineText: UnicodeString;
-  lSel: UnicodeString;
+  lLineText: TSynWebString;
+  lText: TSynWebString;
   lXY: TPoint;
   lPos: Integer;
 
@@ -1144,11 +1173,25 @@ var
   end;
 
 begin
-  if not Enabled or not IsWordSelected then
+  if not Enabled then
     Exit;
 
-  lSel := Editor.SelText;
-  if lSel = '' then
+  case FMode of
+  swwmSelectedWord:
+    if not IsWordSelected then
+      Exit;
+
+  swwmSelectedText:
+    if not Editor.SelAvail or (Editor.BlockBegin.Line <> Editor.BlockEnd.Line) then
+      Exit;
+
+  swwmCustomWord, swwmCustomText:
+    if FCustomText = '' then
+      Exit;
+  end;
+
+  lText := GetHighlightText;
+  if lText = '' then
     Exit;
 
   ACanvas.Brush.Color := FBGColor;
@@ -1178,11 +1221,13 @@ begin
     lPrevLine := lBuffer.Line;
     lLineText := Editor.Lines[lPrevLine - 1];
 
-    lPos := Pos(lSel, lLineText);
+    lPos := Pos(lText, lLineText);
     while lPos > 0 do
     begin
-      if ((lPos = 1) or Editor.IsWordBreakChar(lLineText[lPos - 1])) and
-        ((lPos + Length(lSel) = Length(lLineText)) or Editor.IsWordBreakChar(lLineText[lPos + Length(lSel)])) then
+      if not (FMode in [swwmSelectedWord, swwmCustomWord]) or (
+        ((lPos = 1) or Editor.IsWordBreakChar(lLineText[lPos - 1])) and
+        ((lPos + Length(lText) = Length(lLineText)) or Editor.IsWordBreakChar(lLineText[lPos + Length(lText)]))
+      ) then
       begin
         lBuffer.Char := lPos;
         lDisplay := Editor.BufferToDisplayPos(lBuffer);
@@ -1191,19 +1236,38 @@ begin
         if not IsSameDisplay(lSelStartDisplay, lDisplay) then
         begin
           lRect := Rect(lXY.X, lXY.Y,
-            lXY.X + (Editor.CharWidth * Length(lSel)),
+            lXY.X + (Editor.CharWidth * Length(lText)),
             lXY.Y + Editor.LineHeight);
 
           if lRect.Left < lMarginLeft then
             lRect.Left := lMarginLeft;
 
           if IntersectRect(lRect, lRect, AClip) then
-            ACanvas.TextRect(lRect, lXY.X, lXY.Y, lSel);
+            ACanvas.TextRect(lRect, lXY.X, lXY.Y, lText);
         end;
       end;
 
-      lPos := PosEx(lSel, lLineText, lPos + 1);
+      lPos := PosEx(lText, lLineText, lPos + 1);
     end;
+  end;
+end;
+
+procedure TSynWebWordMarker.DoInvalidate;
+begin
+  if Enabled then
+    Editor.Invalidate;
+end;
+
+function TSynWebWordMarker.GetHighlightText: TSynWebString;
+begin
+  case FMode of
+  swwmSelectedWord, swwmSelectedText:
+    Result := Editor.SelText;
+
+  swwmCustomWord, swwmCustomText:
+    Result := FCustomText;
+  else
+    Result := '';
   end;
 end;
 
@@ -1221,14 +1285,21 @@ procedure TSynWebWordMarker.NotifySelChanged;
 var
   lIsWordSelected: Boolean;
 begin
-  lIsWordSelected := IsWordSelected;
+  case FMode of
+  swwmSelectedWord:
+    begin
+      lIsWordSelected := IsWordSelected;
 
-  if lIsWordSelected = FIsWordSelected then
-    Exit;
+      if lIsWordSelected = FIsWordSelected then
+        Exit;
 
-  FIsWordSelected := lIsWordSelected;
-  if Enabled then
-    Editor.Invalidate;
+      FIsWordSelected := lIsWordSelected;
+      DoInvalidate;
+    end;
+
+  swwmSelectedText:
+    DoInvalidate;
+  end;
 end;
 
 { TSynWebTokenizer }

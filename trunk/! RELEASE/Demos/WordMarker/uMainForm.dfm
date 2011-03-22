@@ -2,8 +2,8 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'SynWebWordMarker demo'
-  ClientHeight = 343
-  ClientWidth = 690
+  ClientHeight = 510
+  ClientWidth = 778
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,13 +14,13 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignSize = (
-    690
-    343)
+    778
+    510)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 8
-    Top = 322
+    Top = 489
     Width = 387
     Height = 13
     Anchors = [akLeft, akBottom]
@@ -29,11 +29,27 @@ object frmMain: TfrmMain
       'ouble-click on word.'
     ExplicitTop = 233
   end
+  object Label3: TLabel
+    Left = 638
+    Top = 8
+    Width = 132
+    Height = 13
+    Alignment = taCenter
+    Anchors = [akLeft, akTop, akRight]
+    AutoSize = False
+    Caption = 'Markers config'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object syn: TSynEdit
     Left = 8
     Top = 8
-    Width = 564
-    Height = 308
+    Width = 626
+    Height = 475
     Anchors = [akLeft, akTop, akRight, akBottom]
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -109,48 +125,88 @@ object frmMain: TfrmMain
     WantTabs = True
     OnStatusChange = synStatusChange
   end
-  object chkWordMarker: TCheckBox
-    Left = 585
-    Top = 8
-    Width = 97
-    Height = 17
-    Anchors = [akTop, akRight]
-    Caption = 'Word marker'
-    Checked = True
-    State = cbChecked
-    TabOrder = 1
-    OnClick = chkWordMarkerClick
-  end
   object chkWordWrap: TCheckBox
-    Left = 585
-    Top = 31
+    Left = 640
+    Top = 466
     Width = 97
     Height = 17
-    Anchors = [akTop, akRight]
+    Anchors = [akRight, akBottom]
     Caption = 'Word wrap'
-    TabOrder = 2
+    TabOrder = 1
     OnClick = chkWordWrapClick
   end
-  object cbColor: TColorBox
-    Left = 578
-    Top = 54
-    Width = 104
-    Height = 22
-    Anchors = [akTop, akRight]
-    ItemHeight = 16
-    TabOrder = 3
-    OnChange = cbColorChange
-  end
   object chkGutter: TCheckBox
-    Left = 585
-    Top = 82
+    Left = 640
+    Top = 443
     Width = 97
     Height = 17
-    Anchors = [akTop, akRight]
+    Anchors = [akRight, akBottom]
     Caption = 'Gutter'
     Checked = True
     State = cbChecked
-    TabOrder = 4
+    TabOrder = 2
     OnClick = chkGutterClick
+  end
+  object gbConfig: TGroupBox
+    Left = 640
+    Top = 40
+    Width = 137
+    Height = 134
+    Anchors = [akTop, akRight]
+    TabOrder = 3
+    object lblCustomText: TLabel
+      Left = 22
+      Top = 75
+      Width = 59
+      Height = 13
+      Caption = 'Custom text'
+    end
+    object edtCustomText: TEdit
+      Left = 17
+      Top = 94
+      Width = 104
+      Height = 21
+      TabOrder = 0
+      Text = 'Syn'
+      OnChange = edtCustomTextChange
+    end
+    object cbColor: TColorBox
+      Left = 17
+      Top = 47
+      Width = 104
+      Height = 22
+      ItemHeight = 16
+      TabOrder = 1
+      OnChange = cbColorChange
+    end
+    object chkWordMarker: TCheckBox
+      Left = 19
+      Top = 24
+      Width = 97
+      Height = 17
+      Caption = 'Enabled'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
+      OnClick = chkWordMarkerClick
+    end
+  end
+  object cbMode: TComboBox
+    Left = 652
+    Top = 32
+    Width = 109
+    Height = 21
+    Style = csDropDownList
+    Anchors = [akTop, akRight]
+    ItemHeight = 13
+    ItemIndex = 0
+    TabOrder = 4
+    Text = 'Selected word'
+    OnChange = cbModeChange
+    Items.Strings = (
+      'Selected word'
+      'Selected text'
+      'Custom word'
+      'Custom text')
   end
 end
