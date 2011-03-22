@@ -35,7 +35,8 @@ type
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
-  public      
+  public
+    FMatchPainted: Boolean;
     FPaintUpdating: Boolean;
   end;
 
@@ -67,7 +68,11 @@ begin
   begin
     I := SynEditGetMatchingTokenEx(Editor, Editor.CaretXY, PasTokens, Match);
     if I = 0 then
+    begin
+      if FMatchPainted then
+        Editor.Invalidate;
       Exit;
+    end;
     FPaintUpdating := True;
     if I <> -1 then
       Editor.InvalidateLines(Match.OpenTokenPos.Line, Match.OpenTokenPos.Line);
@@ -86,19 +91,22 @@ begin
     Canvas.Brush.Color := clAqua // matched color
   else
     Canvas.Brush.Color := clYellow; // unmatched color
+  FMatchPainted := False;
   if I <> -1 then
   begin
     Pix := CharToPixels(Match.OpenTokenPos);
     Canvas.Font.Color := Editor.Font.Color;
     Canvas.Font.Style := Match.TokenAttri.Style;
     Canvas.TextOut(Pix.X, Pix.Y, Match.OpenToken);
+    FMatchPainted := True;
   end;
   if I <> 1 then
   begin
-    Pix := CharToPixels(Match.CloseTokenPos);    
+    Pix := CharToPixels(Match.CloseTokenPos);
     Canvas.Font.Color := Editor.Font.Color;
-    Canvas.Font.Style := Match.TokenAttri.Style;  
+    Canvas.Font.Style := Match.TokenAttri.Style;
     Canvas.TextOut(Pix.X, Pix.Y, Match.CloseToken);
+    FMatchPainted := True;
   end;
 end;
 
