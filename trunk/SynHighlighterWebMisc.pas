@@ -1125,18 +1125,24 @@ procedure TSynWebWordMarker.AfterPaint(ACanvas: TCanvas; const AClip: TRect;
 var
   lDisplay: TDisplayCoord;
   lBuffer: TBufferCoord;      
-  lSelStartDisp: TDisplayCoord;
+  lSelStartDisplay: TDisplayCoord;
 
   lLineRow: Integer;
   lPrevLine: Integer;
 
-  lLineText, lLineTextWrap: UnicodeString;
+  lLineText: UnicodeString;
   lSel: UnicodeString;
-  lX, lY: Integer;
+  lXY: TPoint;
   lPos: Integer;
 
   lRect: TRect;
   lMarginLeft: Integer;
+
+  function IsSameDisplay(const A, B: TDisplayCoord): Boolean;
+  begin
+    Result := (A.Row = B.Row) and (A.Column = B.Column);
+  end;
+
 begin
   if not Enabled or not IsWordSelected then
     Exit;
@@ -1150,11 +1156,15 @@ begin
 
   lPrevLine := -1;
   lLineText := '';
-  lSelStartDisp := Editor.BufferToDisplayPos(Editor.BlockBegin);
-                                         
+  lSelStartDisplay := Editor.BufferToDisplayPos(Editor.BlockBegin);
+
   lDisplay.Column := 1;
   lDisplay.Row := FirstLine;
-  lMarginLeft := Editor.RowColumnToPixels(lDisplay).X;
+
+  if Editor.Gutter.Visible then
+    lMarginLeft := Editor.Gutter.RealGutterWidth(8) - 2
+  else
+    lMarginLeft := 2;
 
   for lLineRow := FirstLine to LastLine do
   begin
@@ -1162,45 +1172,37 @@ begin
     lDisplay.Row := lLineRow;
 
     lBuffer := Editor.DisplayToBufferPos(lDisplay);
-    if lPrevLine <> lBuffer.Line then
-      lLineText := Editor.Lines[lBuffer.Line - 1];
+    if lPrevLine = lBuffer.Line then
+      Continue;
 
-    if lBuffer.Char = 1 then
-      lLineTextWrap := lLineText
-    else                        
-      lLineTextWrap := Copy(lLineText, lBuffer.Char, MaxInt);
+    lPrevLine := lBuffer.Line;
+    lLineText := Editor.Lines[lPrevLine - 1];
 
-    lPos := Pos(lSel, lLineTextWrap);
+    lPos := Pos(lSel, lLineText);
     while lPos > 0 do
     begin
-      if ((lPos = 1) or Editor.IsWordBreakChar(lLineTextWrap[lPos - 1])) and
-        ((lPos + Length(lSel) = Length(lLineTextWrap)) or Editor.IsWordBreakChar(lLineTextWrap[lPos + Length(lSel)])) then
+      if ((lPos = 1) or Editor.IsWordBreakChar(lLineText[lPos - 1])) and
+        ((lPos + Length(lSel) = Length(lLineText)) or Editor.IsWordBreakChar(lLineText[lPos + Length(lSel)])) then
       begin
-        lX := lMarginLeft + (Editor.CharWidth * (lPos - 1));
+        lBuffer.Char := lPos;
+        lDisplay := Editor.BufferToDisplayPos(lBuffer);
+        lXY := Editor.RowColumnToPixels(lDisplay);
 
-        if lX > AClip.Right then
-          Break;
-
-        lY := (lLineRow - Editor.TopLine) * Editor.LineHeight;
-
-        if (lSelStartDisp.Row <> lLineRow) or (lSelStartDisp.Column <> lPos) then
+        if not IsSameDisplay(lSelStartDisplay, lDisplay) then
         begin
-          lRect := Rect(lX, lY,
-            lX + (Editor.CharWidth * Length(lSel)),
-            lY + Editor.LineHeight);
+          lRect := Rect(lXY.X, lXY.Y,
+            lXY.X + (Editor.CharWidth * Length(lSel)),
+            lXY.Y + Editor.LineHeight);
 
-          if not Editor.WordWrap or (lRect.Right <= Editor.ClientRect.Right) then
-          begin
-            if lRect.Left < lMarginLeft then
-              lRect.Left := lMarginLeft;
+          if lRect.Left < lMarginLeft then
+            lRect.Left := lMarginLeft;
 
-            if IntersectRect(lRect, lRect, AClip) then
-              ACanvas.TextRect(lRect, lX, lY, lSel);
-          end;
+          if IntersectRect(lRect, lRect, AClip) then
+            ACanvas.TextRect(lRect, lXY.X, lXY.Y, lSel);
         end;
       end;
 
-      lPos := PosEx(lSel, lLineTextWrap, lPos + 1);
+      lPos := PosEx(lSel, lLineText, lPos + 1);
     end;
   end;
 end;
