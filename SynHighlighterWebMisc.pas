@@ -1151,10 +1151,10 @@ begin
   lPrevLine := -1;
   lLineText := '';
   lSelStartDisp := Editor.BufferToDisplayPos(Editor.BlockBegin);
-                            
-  lMarginLeft := Editor.Gutter.RightOffset;
-  if Editor.Gutter.Visible then
-    Inc(lMarginLeft, Editor.Gutter.Width);
+                                         
+  lDisplay.Column := 1;
+  lDisplay.Row := FirstLine;
+  lMarginLeft := Editor.RowColumnToPixels(lDisplay).X;
 
   for lLineRow := FirstLine to LastLine do
   begin
@@ -1176,7 +1176,7 @@ begin
       if ((lPos = 1) or Editor.IsWordBreakChar(lLineTextWrap[lPos - 1])) and
         ((lPos + Length(lSel) = Length(lLineTextWrap)) or Editor.IsWordBreakChar(lLineTextWrap[lPos + Length(lSel)])) then
       begin
-        lX := lMarginLeft + (Editor.CharWidth * (lPos - Editor.LeftChar));
+        lX := lMarginLeft + (Editor.CharWidth * (lPos - 1));
 
         if lX > AClip.Right then
           Break;
