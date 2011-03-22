@@ -98,8 +98,8 @@ type
 
 { TSynWebWordMarker }
 
-  TSynWebWordMarkerMode = (swwmSelectedWord, swwmSelectedText,
-    swwmCustomWord, swwmCustomText);
+  TSynWebWordMarkerMode = (swwmSelectedText, swwmSelectedWord,
+    swwmCustomText, swwmCustomWord);
 
   TSynWebWordMarker = class(TSynEditPlugin)
   protected
@@ -1097,6 +1097,7 @@ procedure TSynWebWordMarker.AfterConstruction;
 begin
   inherited AfterConstruction;
 
+  FMode := swwmSelectedWord;
   FEnabled := True;
   FBGColor := clYellow;
 end;
