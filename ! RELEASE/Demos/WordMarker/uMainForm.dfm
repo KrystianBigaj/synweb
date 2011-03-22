@@ -46,6 +46,7 @@ object frmMain: TfrmMain
     Gutter.Font.Height = -11
     Gutter.Font.Name = 'Courier New'
     Gutter.Font.Style = []
+    Gutter.ShowLineNumbers = True
     Lines.UnicodeStrings = 
       '{ TSynWebWordMarker }'#13#10#13#10'procedure TSynWebWordMarker.AfterConstr' +
       'uction;'#13#10'begin'#13#10'  inherited AfterConstruction;'#13#10#13#10'  FEnabled := ' +
@@ -63,49 +64,50 @@ object frmMain: TfrmMain
       'ditor.Invalidate;'#13#10'end;'#13#10#13#10'procedure TSynWebWordMarker.AfterPain' +
       't(ACanvas: TCanvas; const AClip: TRect;'#13#10'  FirstLine, LastLine: ' +
       'Integer);'#13#10'var'#13#10'  lDisplay: TDisplayCoord;'#13#10'  lBuffer: TBufferCo' +
-      'ord;      '#13#10'  lSelStartDisp: TDisplayCoord;'#13#10#13#10'  lLineRow: Integ' +
-      'er;'#13#10'  lPrevLine: Integer;'#13#10#13#10'  lLineText, lLineTextWrap: Unicod' +
-      'eString;'#13#10'  lSel: UnicodeString;'#13#10'  lX, lY: Integer;'#13#10'  lPos: In' +
-      'teger;'#13#10#13#10'  lRect: TRect;'#13#10'begin'#13#10'  if not Enabled or not IsWord' +
-      'Selected then'#13#10'    Exit;'#13#10#13#10'  lSel := Editor.SelText;'#13#10'  if lSel' +
-      ' = '#39#39' then'#13#10'    Exit;'#13#10#13#10'  ACanvas.Brush.Color := FBGColor;'#13#10'// ' +
-      ' ACanvas.Font.Color := FFGColor;  <- not working with TextRect, ' +
-      'why?'#13#10#13#10'  lPrevLine := -1;'#13#10'  lLineText := '#39#39';'#13#10'  lSelStartDisp ' +
-      ':= Editor.BufferToDisplayPos(Editor.BlockBegin);'#13#10'  for lLineRow' +
-      ' := FirstLine to LastLine do'#13#10'  begin'#13#10'    lDisplay.Column := 1;' +
-      #13#10'    lDisplay.Row := lLineRow;'#13#10#13#10'    lBuffer := Editor.Display' +
-      'ToBufferPos(lDisplay);'#13#10'    if lPrevLine <> lBuffer.Line then'#13#10' ' +
-      '     lLineText := Editor.Lines[lBuffer.Line - 1];'#13#10#13#10'    if lBuf' +
-      'fer.Char = 1 then'#13#10'      lLineTextWrap := lLineText'#13#10'    else   ' +
-      '                     '#13#10'      lLineTextWrap := Copy(lLineText, lB' +
-      'uffer.Char, MaxInt);'#13#10#13#10'    lPos := Pos(lSel, lLineTextWrap);'#13#10' ' +
-      '   while lPos > 0 do'#13#10'    begin'#13#10'      if ((lPos = 1) or Editor.' +
-      'IsWordBreakChar(lLineTextWrap[lPos - 1])) and'#13#10'        ((lPos + ' +
-      'Length(lSel) = Length(lLineTextWrap)) or Editor.IsWordBreakChar(' +
-      'lLineTextWrap[lPos + Length(lSel)])) then'#13#10'      begin'#13#10'        ' +
-      'lX := Editor.Gutter.Width + Editor.Gutter.RightOffset +'#13#10'       ' +
-      '   (Editor.CharWidth * (lPos - Editor.LeftChar));'#13#10#13#10'        if ' +
-      'lX > AClip.Right then'#13#10'          Break;'#13#10#13#10'        lY := (lLineR' +
-      'ow - Editor.TopLine) * Editor.LineHeight;'#13#10#13#10'        if (lSelSta' +
-      'rtDisp.Row <> lLineRow) or (lSelStartDisp.Column <> lPos) then'#13#10 +
-      '        begin'#13#10'          lRect := Rect(lX, lY,'#13#10'            lX +' +
-      ' (Editor.CharWidth * Length(lSel)),'#13#10'            lY + Editor.Lin' +
-      'eHeight);'#13#10#13#10'          if not Editor.WordWrap or (lRect.Right <=' +
-      ' Editor.ClientRect.Right) then'#13#10'            if IntersectRect(lRe' +
-      'ct, lRect, AClip) then'#13#10'              ACanvas.TextRect(lRect, lX' +
-      ', lY, lSel);'#13#10'        end;'#13#10'      end;'#13#10#13#10'      lPos := PosEx(lS' +
-      'el, lLineTextWrap, lPos + 1);'#13#10'    end;'#13#10'  end;'#13#10'end;'#13#10#13#10'procedu' +
-      're TSynWebWordMarker.LinesInserted(FirstLine, Count: Integer);'#13#10 +
-      'begin'#13#10'  // nothing'#13#10'end;'#13#10#13#10'procedure TSynWebWordMarker.LinesDe' +
-      'leted(FirstLine, Count: Integer);'#13#10'begin'#13#10'  // nothing'#13#10'end;'#13#10#13#10 +
-      'procedure TSynWebWordMarker.NotifySelChanged;'#13#10'var'#13#10'  lIsWordSel' +
-      'ected: Boolean;'#13#10'begin'#13#10'  lIsWordSelected := IsWordSelected;'#13#10#13#10 +
-      '  if lIsWordSelected = FIsWordSelected then'#13#10'    Exit;'#13#10#13#10'  FIsW' +
-      'ordSelected := lIsWordSelected;'#13#10'  if Enabled then'#13#10'    Editor.I' +
-      'nvalidate;'#13#10'end;'
+      'ord;      '#13#10'  lSelStartDisplay: TDisplayCoord;'#13#10#13#10'  lLineRow: In' +
+      'teger;'#13#10'  lPrevLine: Integer;'#13#10#13#10'  lLineText: UnicodeString;'#13#10'  ' +
+      'lSel: UnicodeString;'#13#10'  lXY: TPoint;'#13#10'  lPos: Integer;'#13#10#13#10'  lRec' +
+      't: TRect;'#13#10'  lMarginLeft: Integer;'#13#10#13#10'  function IsSameDisplay(c' +
+      'onst A, B: TDisplayCoord): Boolean;'#13#10'  begin'#13#10'    Result := (A.R' +
+      'ow = B.Row) and (A.Column = B.Column);'#13#10'  end;'#13#10#13#10'begin'#13#10'  if no' +
+      't Enabled or not IsWordSelected then'#13#10'    Exit;'#13#10#13#10'  lSel := Edi' +
+      'tor.SelText;'#13#10'  if lSel = '#39#39' then'#13#10'    Exit;'#13#10#13#10'  ACanvas.Brush.' +
+      'Color := FBGColor;'#13#10'//  ACanvas.Font.Color := FFGColor;  <- not ' +
+      'working with TextRect, why?'#13#10#13#10'  lPrevLine := -1;'#13#10'  lLineText :' +
+      '= '#39#39';'#13#10'  lSelStartDisplay := Editor.BufferToDisplayPos(Editor.Bl' +
+      'ockBegin);'#13#10#13#10'  lDisplay.Column := 1;'#13#10'  lDisplay.Row := FirstLi' +
+      'ne;'#13#10#13#10'  if Editor.Gutter.Visible then'#13#10'    lMarginLeft := Edito' +
+      'r.Gutter.RealGutterWidth(8) - 2'#13#10'  else'#13#10'    lMarginLeft := 2;'#13#10 +
+      #13#10'  for lLineRow := FirstLine to LastLine do'#13#10'  begin'#13#10'    lDisp' +
+      'lay.Column := 1;'#13#10'    lDisplay.Row := lLineRow;'#13#10#13#10'    lBuffer :' +
+      '= Editor.DisplayToBufferPos(lDisplay);'#13#10'    if lPrevLine = lBuff' +
+      'er.Line then'#13#10'      Continue;'#13#10#13#10'    lPrevLine := lBuffer.Line;'#13 +
+      #10'    lLineText := Editor.Lines[lPrevLine - 1];'#13#10#13#10'    lPos := Po' +
+      's(lSel, lLineText);'#13#10'    while lPos > 0 do'#13#10'    begin'#13#10'      if ' +
+      '((lPos = 1) or Editor.IsWordBreakChar(lLineText[lPos - 1])) and'#13 +
+      #10'        ((lPos + Length(lSel) = Length(lLineText)) or Editor.Is' +
+      'WordBreakChar(lLineText[lPos + Length(lSel)])) then'#13#10'      begin' +
+      #13#10'        lBuffer.Char := lPos;'#13#10'        lDisplay := Editor.Buff' +
+      'erToDisplayPos(lBuffer);'#13#10'        lXY := Editor.RowColumnToPixel' +
+      's(lDisplay);'#13#10#13#10'        if not IsSameDisplay(lSelStartDisplay, l' +
+      'Display) then'#13#10'        begin'#13#10'          lRect := Rect(lXY.X, lXY' +
+      '.Y,'#13#10'            lXY.X + (Editor.CharWidth * Length(lSel)),'#13#10'   ' +
+      '         lXY.Y + Editor.LineHeight);'#13#10#13#10'          if lRect.Left ' +
+      '< lMarginLeft then'#13#10'            lRect.Left := lMarginLeft;'#13#10#13#10'  ' +
+      '        if IntersectRect(lRect, lRect, AClip) then'#13#10'            ' +
+      'ACanvas.TextRect(lRect, lXY.X, lXY.Y, lSel);'#13#10'        end;'#13#10'    ' +
+      '  end;'#13#10#13#10'      lPos := PosEx(lSel, lLineText, lPos + 1);'#13#10'    e' +
+      'nd;'#13#10'  end;'#13#10'end;'#13#10#13#10'procedure TSynWebWordMarker.LinesInserted(F' +
+      'irstLine, Count: Integer);'#13#10'begin'#13#10'  // nothing'#13#10'end;'#13#10#13#10'procedu' +
+      're TSynWebWordMarker.LinesDeleted(FirstLine, Count: Integer);'#13#10'b' +
+      'egin'#13#10'  // nothing'#13#10'end;'#13#10#13#10'procedure TSynWebWordMarker.NotifySe' +
+      'lChanged;'#13#10'var'#13#10'  lIsWordSelected: Boolean;'#13#10'begin'#13#10'  lIsWordSel' +
+      'ected := IsWordSelected;'#13#10#13#10'  if lIsWordSelected = FIsWordSelect' +
+      'ed then'#13#10'    Exit;'#13#10#13#10'  FIsWordSelected := lIsWordSelected;'#13#10'  i' +
+      'f Enabled then'#13#10'    Editor.Invalidate;'#13#10'end;'
+    Options = [eoAutoIndent, eoDragDropEditing, eoEnhanceEndKey, eoGroupUndo, eoScrollPastEol, eoShowScrollHint, eoSmartTabDelete, eoSmartTabs, eoTabIndent]
+    WantTabs = True
     OnStatusChange = synStatusChange
-    ExplicitWidth = 409
-    ExplicitHeight = 219
   end
   object chkWordMarker: TCheckBox
     Left = 585
@@ -118,7 +120,6 @@ object frmMain: TfrmMain
     State = cbChecked
     TabOrder = 1
     OnClick = chkWordMarkerClick
-    ExplicitLeft = 430
   end
   object chkWordWrap: TCheckBox
     Left = 585
@@ -129,7 +130,6 @@ object frmMain: TfrmMain
     Caption = 'Word wrap'
     TabOrder = 2
     OnClick = chkWordWrapClick
-    ExplicitLeft = 430
   end
   object cbColor: TColorBox
     Left = 578
