@@ -107,6 +107,7 @@ type
     FIsMultiLineSelection: Boolean;
     FEnabled: Boolean;
     FBGColor: TColor;
+    FFGColor: TColor;
     FMode: TSynWebWordMarkerMode;   
     FCustomText: TSynWebString;
 
@@ -115,6 +116,7 @@ type
 
     procedure SetEnabled(const Value: Boolean);   
     procedure SetBGColor(const Value: TColor);   
+    procedure SetFGColor(const Value: TColor);
     procedure SetMode(const Value: TSynWebWordMarkerMode);
     procedure SetCustomText(const Value: TSynWebString);
     procedure DoInvalidate;
@@ -131,6 +133,7 @@ type
 
     property Enabled: Boolean read FEnabled write SetEnabled;
     property BGColor: TColor read FBGColor write SetBGColor;
+    property FGColor: TColor read FFGColor write SetFGColor;
     property Mode: TSynWebWordMarkerMode read FMode write SetMode;
     property CustomText: TSynWebString read FCustomText write SetCustomText;
   end;
@@ -1101,6 +1104,7 @@ begin
   FMode := swwmSelectedWord;
   FEnabled := True;
   FBGColor := clYellow;
+  FFGColor := clBlack;
 end;
 
 function TSynWebWordMarker.IsWordSelected: Boolean;
@@ -1151,6 +1155,15 @@ begin
   DoInvalidate;
 end;
 
+procedure TSynWebWordMarker.SetFGColor(const Value: TColor);
+begin
+  if FFGColor = Value then
+    Exit;
+
+  FFGColor := Value;
+  DoInvalidate;
+end;
+
 procedure TSynWebWordMarker.AfterPaint(ACanvas: TCanvas; const AClip: TRect;
   FirstLine, LastLine: Integer);
 var
@@ -1196,8 +1209,7 @@ begin
   if lText = '' then
     Exit;
 
-  ACanvas.Brush.Color := FBGColor;
-//  ACanvas.Font.Color := FFGColor;  <- not working with TextRect, why?
+  ACanvas.Brush.Color := FBGColor;   
 
   lPrevLine := -1;
   lLineText := '';
@@ -1234,7 +1246,6 @@ begin
         lBuffer.Char := lPos;
         lDisplay := Editor.BufferToDisplayPos(lBuffer);
         lXY := Editor.RowColumnToPixels(lDisplay);
-
         if not IsSameDisplay(lSelStartDisplay, lDisplay) then
         begin
           lRect := Rect(lXY.X, lXY.Y,
@@ -1245,7 +1256,10 @@ begin
             lRect.Left := lMarginLeft;
 
           if IntersectRect(lRect, lRect, AClip) then
+          begin
+            ACanvas.Font.Color := FFGColor;  // DisplayToBufferPos overwrites Canvas.Font, so it must be set here
             ACanvas.TextRect(lRect, lXY.X, lXY.Y, lText);
+          end;
         end;
       end;
 
