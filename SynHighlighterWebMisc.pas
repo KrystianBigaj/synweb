@@ -1,6 +1,6 @@
 {-------------------------------------------------------------------------------
 SynWeb
-Copyright (C) 2005-2009  Krystian Bigaj
+Copyright (C) 2005-2011  Krystian Bigaj
 
 *** MPL
 The contents of this file are subject to the Mozilla Public License
@@ -61,6 +61,7 @@ uses
   StrUtils,
   Graphics,
   Classes,
+  Types,
 {$IFDEF SYN_CLX}
   QSynEdit,
 {$IFDEF UNISYNEDIT}  
@@ -94,6 +95,35 @@ const
   TSynWebTokenizerPhpWhitespaces = [stkPhpSpace, stkPhpComment, stkPhpDocComment, stkPhpDocCommentTag, stkNull];
 
 type
+
+{ TSynWebWordMarker }
+
+  TSynWebWordMarker = class(TSynEditPlugin)
+  protected
+    FIsWordSelected: Boolean;
+    FEnabled: Boolean;
+    FBGColor: TColor;
+                                         
+    function IsWordSelected: Boolean;
+    procedure SetEnabled(const Value: Boolean);   
+    procedure SetBGColor(const Value: TColor);
+
+    procedure AfterPaint(ACanvas: TCanvas; const AClip: TRect;
+      FirstLine: Integer; LastLine: Integer); override;
+    procedure LinesInserted(FirstLine: Integer; Count: Integer); override;
+    procedure LinesDeleted(FirstLine: Integer; Count: Integer); override;
+
+  public        
+    procedure AfterConstruction; override;
+
+    procedure NotifySelChanged;
+
+    property Enabled: Boolean read FEnabled write SetEnabled;
+    property BGColor: TColor read FBGColor write SetBGColor;
+  end;
+
+{ TSynWebTokenizerInfo }
+
   TSynWebTokenizerSet = set of TSynWebTokenKind;
   TSynWebTokenizerMarker = (stlBefore, stlBegin, stlInside, stlEnd, stlAfter);
 
@@ -1047,6 +1077,156 @@ begin
   end;
 
   Result := Length(AUnmatchedTags) > 0;
+end;
+
+{ TSynWebWordMarker }
+
+procedure TSynWebWordMarker.AfterConstruction;
+begin
+  inherited AfterConstruction;
+
+  FEnabled := True;
+  FBGColor := clYellow;
+end;
+
+function TSynWebWordMarker.IsWordSelected: Boolean;
+
+  function IsSameBuffer(const A, B: TBufferCoord): Boolean;
+  begin
+    Result := (A.Line = B.Line) and (A.Char = B.Char);
+  end;
+
+begin
+  Result := Editor.SelAvail and IsSameBuffer(Editor.BlockBegin, Editor.WordStart) and
+    IsSameBuffer(Editor.BlockEnd, Editor.WordEnd);
+end;
+
+procedure TSynWebWordMarker.SetEnabled(const Value: Boolean);
+begin
+  if Value = FEnabled then
+    Exit;
+
+  FEnabled := Value;
+  Editor.Invalidate;
+end;
+
+procedure TSynWebWordMarker.SetBGColor(const Value: TColor);
+begin
+  if FBGColor = Value then
+    Exit;
+
+  FBGColor := Value;
+  if Enabled then
+    Editor.Invalidate;
+end;
+
+procedure TSynWebWordMarker.AfterPaint(ACanvas: TCanvas; const AClip: TRect;
+  FirstLine, LastLine: Integer);
+var
+  lDisplay: TDisplayCoord;
+  lBuffer: TBufferCoord;      
+  lSelStartDisp: TDisplayCoord;
+
+  lLineRow: Integer;
+  lPrevLine: Integer;
+
+  lLineText, lLineTextWrap: UnicodeString;
+  lSel: UnicodeString;
+  lX, lY: Integer;
+  lPos: Integer;
+
+  lRect: TRect;
+  lMarginLeft: Integer;
+begin
+  if not Enabled or not IsWordSelected then
+    Exit;
+
+  lSel := Editor.SelText;
+  if lSel = '' then
+    Exit;
+
+  ACanvas.Brush.Color := FBGColor;
+//  ACanvas.Font.Color := FFGColor;  <- not working with TextRect, why?
+
+  lPrevLine := -1;
+  lLineText := '';
+  lSelStartDisp := Editor.BufferToDisplayPos(Editor.BlockBegin);
+                            
+  lMarginLeft := Editor.Gutter.RightOffset;
+  if Editor.Gutter.Visible then
+    Inc(lMarginLeft, Editor.Gutter.Width);
+
+  for lLineRow := FirstLine to LastLine do
+  begin
+    lDisplay.Column := 1;
+    lDisplay.Row := lLineRow;
+
+    lBuffer := Editor.DisplayToBufferPos(lDisplay);
+    if lPrevLine <> lBuffer.Line then
+      lLineText := Editor.Lines[lBuffer.Line - 1];
+
+    if lBuffer.Char = 1 then
+      lLineTextWrap := lLineText
+    else                        
+      lLineTextWrap := Copy(lLineText, lBuffer.Char, MaxInt);
+
+    lPos := Pos(lSel, lLineTextWrap);
+    while lPos > 0 do
+    begin
+      if ((lPos = 1) or Editor.IsWordBreakChar(lLineTextWrap[lPos - 1])) and
+        ((lPos + Length(lSel) = Length(lLineTextWrap)) or Editor.IsWordBreakChar(lLineTextWrap[lPos + Length(lSel)])) then
+      begin
+        lX := lMarginLeft + (Editor.CharWidth * (lPos - Editor.LeftChar));
+
+        if lX > AClip.Right then
+          Break;
+
+        lY := (lLineRow - Editor.TopLine) * Editor.LineHeight;
+
+        if (lSelStartDisp.Row <> lLineRow) or (lSelStartDisp.Column <> lPos) then
+        begin
+          lRect := Rect(lX, lY,
+            lX + (Editor.CharWidth * Length(lSel)),
+            lY + Editor.LineHeight);
+
+          if not Editor.WordWrap or (lRect.Right <= Editor.ClientRect.Right) then
+          begin
+            if lRect.Left < lMarginLeft then
+              lRect.Left := lMarginLeft;
+
+            if IntersectRect(lRect, lRect, AClip) then
+              ACanvas.TextRect(lRect, lX, lY, lSel);
+          end;
+        end;
+      end;
+
+      lPos := PosEx(lSel, lLineTextWrap, lPos + 1);
+    end;
+  end;
+end;
+
+procedure TSynWebWordMarker.LinesInserted(FirstLine, Count: Integer);
+begin
+  // nothing
+end;
+
+procedure TSynWebWordMarker.LinesDeleted(FirstLine, Count: Integer);
+begin
+  // nothing
+end;
+
+procedure TSynWebWordMarker.NotifySelChanged;
+var
+  lIsWordSelected: Boolean;
+begin
+  lIsWordSelected := IsWordSelected;
+
+  if lIsWordSelected = FIsWordSelected then
+    Exit;
+
+  FIsWordSelected := lIsWordSelected;
+  if Enabled then
+    Editor.Invalidate;
 end;
 
 { TSynWebTokenizer }
