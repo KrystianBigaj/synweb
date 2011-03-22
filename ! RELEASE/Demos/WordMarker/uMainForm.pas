@@ -68,19 +68,21 @@ type
     gbConfig: TGroupBox;
     edtCustomText: TEdit;
     lblCustomText: TLabel;
-    cbColor: TColorBox;
+    cbBGColor: TColorBox;
     chkWordMarker: TCheckBox;
     cbMode: TComboBox;
     Label3: TLabel;
+    cbFGColor: TColorBox;
     procedure chkWordMarkerClick(Sender: TObject);
     procedure chkWordWrapClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure synStatusChange(Sender: TObject; Changes: TSynStatusChanges);
     procedure FormDestroy(Sender: TObject);
-    procedure cbColorChange(Sender: TObject);
+    procedure cbBGColorChange(Sender: TObject);
     procedure chkGutterClick(Sender: TObject);
     procedure cbModeChange(Sender: TObject);
     procedure edtCustomTextChange(Sender: TObject);
+    procedure cbFGColorChange(Sender: TObject);
   private
     FConfigMode: TSynWebWordMarkerMode;
     FWordMarkers: array[TSynWebWordMarkerMode] of TSynWebWordMarker;
@@ -95,24 +97,31 @@ var
 
 implementation
 
+uses SynEditMiscClasses;
+
 {$R *.dfm}
 
-procedure TfrmMain.cbColorChange(Sender: TObject);
+procedure TfrmMain.cbBGColorChange(Sender: TObject);
 begin
-  FWordMarkers[FConfigMode].BGColor := cbColor.Selected;
+  FWordMarkers[FConfigMode].BGColor := cbBGColor.Selected;
+end;
+
+procedure TfrmMain.cbFGColorChange(Sender: TObject);
+begin
+  FWordMarkers[FConfigMode].FGColor := cbFGColor.Selected;
 end;
 
 procedure TfrmMain.cbModeChange(Sender: TObject);
 begin
   case cbMode.ItemIndex of
   0:
-    FConfigMode := swwmSelectedWord;
-  1:
     FConfigMode := swwmSelectedText;
-  2:
-    FConfigMode := swwmCustomWord;
-  3:
+  1:         
+    FConfigMode := swwmSelectedWord;
+  2:                      
     FConfigMode := swwmCustomText;
+  3:                            
+    FConfigMode := swwmCustomWord;
   end;
 
   DoUILoadConfigMode;
@@ -136,7 +145,8 @@ end;
 procedure TfrmMain.DoUILoadConfigMode;
 begin
   chkWordMarker.Checked := FWordMarkers[FConfigMode].Enabled;
-  cbColor.Selected := FWordMarkers[FConfigMode].BGColor;
+  cbBGColor.Selected := FWordMarkers[FConfigMode].BGColor;
+  cbFGColor.Selected := FWordMarkers[FConfigMode].FGColor;
   edtCustomText.Text := FWordMarkers[FConfigMode].CustomText;
 
   edtCustomText.Visible := FConfigMode in [swwmCustomWord, swwmCustomText];
@@ -158,7 +168,10 @@ begin
     FWordMarkers[lMode].Mode := lMode;
   end;
 
-  FWordMarkers[swwmSelectedText].BGColor := clLtGray;
+  FWordMarkers[swwmSelectedWord].BGColor := syn.SelectedColor.Background;
+  FWordMarkers[swwmSelectedWord].FGColor := syn.SelectedColor.Foreground;
+
+  FWordMarkers[swwmSelectedText].BGColor := clMoneyGreen;
 
   FWordMarkers[swwmCustomWord].BGColor := clAqua;
   FWordMarkers[swwmCustomWord].CustomText := 'const';
@@ -166,7 +179,7 @@ begin
   FWordMarkers[swwmCustomText].BGColor := clSkyBlue;
   FWordMarkers[swwmCustomText].CustomText := 'T';
 
-  DoUILoadConfigMode;
+  cbModeChange(Sender);
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);

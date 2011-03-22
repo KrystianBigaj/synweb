@@ -35,7 +35,7 @@ object frmMain: TfrmMain
     Width = 132
     Height = 13
     Alignment = taCenter
-    Anchors = [akLeft, akTop, akRight]
+    Anchors = [akTop, akRight]
     AutoSize = False
     Caption = 'Markers config'
     Font.Charset = DEFAULT_CHARSET
@@ -151,33 +151,33 @@ object frmMain: TfrmMain
     Left = 640
     Top = 40
     Width = 137
-    Height = 134
+    Height = 161
     Anchors = [akTop, akRight]
     TabOrder = 3
     object lblCustomText: TLabel
       Left = 22
-      Top = 75
+      Top = 107
       Width = 59
       Height = 13
       Caption = 'Custom text'
     end
     object edtCustomText: TEdit
       Left = 17
-      Top = 94
+      Top = 126
       Width = 104
       Height = 21
       TabOrder = 0
       Text = 'Syn'
       OnChange = edtCustomTextChange
     end
-    object cbColor: TColorBox
+    object cbBGColor: TColorBox
       Left = 17
       Top = 47
       Width = 104
       Height = 22
       ItemHeight = 16
       TabOrder = 1
-      OnChange = cbColorChange
+      OnChange = cbBGColorChange
     end
     object chkWordMarker: TCheckBox
       Left = 19
@@ -190,6 +190,15 @@ object frmMain: TfrmMain
       TabOrder = 2
       OnClick = chkWordMarkerClick
     end
+    object cbFGColor: TColorBox
+      Left = 17
+      Top = 75
+      Width = 104
+      Height = 22
+      ItemHeight = 16
+      TabOrder = 3
+      OnChange = cbFGColorChange
+    end
   end
   object cbMode: TComboBox
     Left = 652
@@ -201,12 +210,12 @@ object frmMain: TfrmMain
     ItemHeight = 13
     ItemIndex = 0
     TabOrder = 4
-    Text = 'Selected word'
+    Text = 'Selected text'
     OnChange = cbModeChange
     Items.Strings = (
-      'Selected word'
       'Selected text'
-      'Custom word'
-      'Custom text')
+      'Selected word'
+      'Custom text'
+      'Custom word')
   end
 end
