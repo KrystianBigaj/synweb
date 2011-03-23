@@ -74,6 +74,7 @@ type
     Label3: TLabel;
     cbFGColor: TColorBox;
     chkCaseSensitive: TCheckBox;
+    cbPaintMode: TComboBox;
     procedure chkWordMarkerClick(Sender: TObject);
     procedure chkWordWrapClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -85,6 +86,7 @@ type
     procedure edtCustomTextChange(Sender: TObject);
     procedure cbFGColorChange(Sender: TObject);
     procedure chkCaseSensitiveClick(Sender: TObject);
+    procedure cbPaintModeChange(Sender: TObject);
   private
     FConfigMode: TSynWebWordMarkerMode;
     FWordMarkers: array[TSynWebWordMarkerMode] of TSynWebWordMarker;
@@ -118,15 +120,32 @@ begin
   case cbMode.ItemIndex of
   0:
     FConfigMode := swwmSelectedText;
+
   1:         
     FConfigMode := swwmSelectedWord;
+
   2:                      
     FConfigMode := swwmCustomText;
+
   3:                            
     FConfigMode := swwmCustomWord;
   end;
 
   DoUILoadConfigMode;
+end;
+
+procedure TfrmMain.cbPaintModeChange(Sender: TObject);
+begin
+  case cbPaintMode.ItemIndex of
+  0:
+    FWordMarkers[FConfigMode].PaintMode := swwpFillRect;
+
+  1:
+    FWordMarkers[FConfigMode].PaintMode := swwpFrameRect;
+
+  2:
+    FWordMarkers[FConfigMode].PaintMode := swwpUnderline;
+  end;
 end;
 
 procedure TfrmMain.chkCaseSensitiveClick(Sender: TObject);
@@ -156,6 +175,17 @@ begin
   cbFGColor.Selected := FWordMarkers[FConfigMode].FGColor;
   edtCustomText.Text := FWordMarkers[FConfigMode].CustomText;
   chkCaseSensitive.Checked := FWordMarkers[FConfigMode].CaseSensitive;
+  
+  case FWordMarkers[FConfigMode].PaintMode of
+  swwpFillRect:
+    cbPaintMode.ItemIndex := 0;
+
+  swwpFrameRect:
+    cbPaintMode.ItemIndex := 1;
+    
+  swwpUnderline:
+    cbPaintMode.ItemIndex := 2;
+  end;
 
   edtCustomText.Visible := FConfigMode in [swwmCustomWord, swwmCustomText];
   lblCustomText.Visible := FConfigMode in [swwmCustomWord, swwmCustomText];
@@ -179,13 +209,16 @@ begin
   FWordMarkers[swwmSelectedWord].BGColor := syn.SelectedColor.Background;
   FWordMarkers[swwmSelectedWord].FGColor := syn.SelectedColor.Foreground;
 
-  FWordMarkers[swwmSelectedText].BGColor := clMoneyGreen;
+  FWordMarkers[swwmSelectedText].BGColor := clGreen;
+  FWordMarkers[swwmSelectedText].PaintMode := swwpFrameRect;
 
-  FWordMarkers[swwmCustomWord].BGColor := clAqua;
+  FWordMarkers[swwmCustomWord].BGColor := clRed;
   FWordMarkers[swwmCustomWord].CustomText := 'const';
+  FWordMarkers[swwmCustomWord].PaintMode := swwpFrameRect;
   
-  FWordMarkers[swwmCustomText].BGColor := clSkyBlue;
+  FWordMarkers[swwmCustomText].BGColor := clBlue;
   FWordMarkers[swwmCustomText].CustomText := 'T';
+  FWordMarkers[swwmCustomText].PaintMode := swwpUnderline;
 
   cbModeChange(Sender);
 end;

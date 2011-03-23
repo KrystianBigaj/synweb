@@ -62,6 +62,7 @@ uses
   Graphics,
   Classes,
   Types,
+  Windows,
 {$IFDEF SYN_CLX}
   QSynEdit,
 {$IFDEF UNISYNEDIT}
@@ -101,6 +102,8 @@ type
   TSynWebWordMarkerMode = (swwmSelectedText, swwmSelectedWord,
     swwmCustomText, swwmCustomWord);
 
+  TSynWebWordMarkerPaintMode = (swwpFillRect, swwpFrameRect, swwpUnderline);
+
   TSynWebWordMarker = class(TSynEditPlugin)
   protected
     FIsWordSelected: Boolean;
@@ -109,6 +112,7 @@ type
     FBGColor: TColor;
     FFGColor: TColor;
     FMode: TSynWebWordMarkerMode;
+    FPaintMode: TSynWebWordMarkerPaintMode;
     FCustomText: TSynWebString;
     FCaseSensitive: Boolean;
 
@@ -119,14 +123,15 @@ type
     procedure SetBGColor(const Value: TColor);   
     procedure SetFGColor(const Value: TColor);
     procedure SetMode(const Value: TSynWebWordMarkerMode);
+    procedure SetPaintMode(const Value: TSynWebWordMarkerPaintMode);
     procedure SetCustomText(const Value: TSynWebString);
     procedure SetCaseSensitive(const Value: Boolean);
     procedure DoInvalidate;
 
-    procedure AfterPaint(ACanvas: TCanvas; const AClip: TRect;
-      FirstLine: Integer; LastLine: Integer); override;
     procedure LinesInserted(FirstLine: Integer; Count: Integer); override;
     procedure LinesDeleted(FirstLine: Integer; Count: Integer); override;
+    procedure AfterPaint(ACanvas: TCanvas; const AClip: TRect;
+      FirstLine: Integer; LastLine: Integer); override;
 
   public        
     procedure AfterConstruction; override;
@@ -137,6 +142,7 @@ type
     property BGColor: TColor read FBGColor write SetBGColor;
     property FGColor: TColor read FFGColor write SetFGColor;
     property Mode: TSynWebWordMarkerMode read FMode write SetMode;
+    property PaintMode: TSynWebWordMarkerPaintMode read FPaintMode write SetPaintMode;
     property CustomText: TSynWebString read FCustomText write SetCustomText;
     property CaseSensitive: Boolean read FCaseSensitive write SetCaseSensitive;
   end;
@@ -1122,6 +1128,19 @@ begin
     IsSameBuffer(Editor.BlockEnd, Editor.WordEnd);
 end;
 
+function TSynWebWordMarker.GetHighlightText: TSynWebString;
+begin
+  case FMode of
+  swwmSelectedWord, swwmSelectedText:
+    Result := Editor.SelText;
+
+  swwmCustomWord, swwmCustomText:
+    Result := FCustomText;
+  else
+    Result := '';
+  end;
+end;
+
 procedure TSynWebWordMarker.SetEnabled(const Value: Boolean);
 begin
   if Value = FEnabled then
@@ -1129,33 +1148,6 @@ begin
 
   FEnabled := Value;
   Editor.Invalidate;
-end;
-
-procedure TSynWebWordMarker.SetCustomText(const Value: TSynWebString);
-begin
-  if FCustomText = Value then
-    Exit;
-
-  FCustomText := Value;
-  DoInvalidate;
-end;
-
-procedure TSynWebWordMarker.SetCaseSensitive(const Value: Boolean);
-begin
-  if FCaseSensitive = Value then
-    Exit;
-
-  FCaseSensitive := Value;
-  DoInvalidate;
-end;
-
-procedure TSynWebWordMarker.SetMode(const Value: TSynWebWordMarkerMode);
-begin
-  if FMode = Value then
-    Exit;
-
-  FMode := Value;
-  DoInvalidate;
 end;
 
 procedure TSynWebWordMarker.SetBGColor(const Value: TColor);
@@ -1176,6 +1168,58 @@ begin
   DoInvalidate;
 end;
 
+procedure TSynWebWordMarker.SetMode(const Value: TSynWebWordMarkerMode);
+begin
+  if FMode = Value then
+    Exit;
+
+  FMode := Value;
+  DoInvalidate;
+end;
+
+procedure TSynWebWordMarker.SetPaintMode(const Value: TSynWebWordMarkerPaintMode);
+begin
+  if FPaintMode = Value then
+    Exit;
+
+  FPaintMode := Value;
+  DoInvalidate;
+end;
+
+procedure TSynWebWordMarker.SetCustomText(const Value: TSynWebString);
+begin
+  if FCustomText = Value then
+    Exit;
+
+  FCustomText := Value;
+  DoInvalidate;
+end;
+
+procedure TSynWebWordMarker.SetCaseSensitive(const Value: Boolean);
+begin
+  if FCaseSensitive = Value then
+    Exit;
+
+  FCaseSensitive := Value;
+  DoInvalidate;
+end;
+
+procedure TSynWebWordMarker.DoInvalidate;
+begin
+  if Enabled then
+    Editor.Invalidate;
+end;
+
+procedure TSynWebWordMarker.LinesInserted(FirstLine, Count: Integer);
+begin
+  // nothing
+end;
+
+procedure TSynWebWordMarker.LinesDeleted(FirstLine, Count: Integer);
+begin
+  // nothing
+end;
+
 procedure TSynWebWordMarker.AfterPaint(ACanvas: TCanvas; const AClip: TRect;
   FirstLine, LastLine: Integer);
 var
@@ -1190,6 +1234,7 @@ var
   lPos: Integer;
 
   lRect: TRect;
+  lRectClip: TRect;
   lMarginLeft: Integer;
 
   function IsSameDisplay(const A, B: TDisplayCoord): Boolean;
@@ -1234,6 +1279,35 @@ var
       Exit;
 
     Result := False;
+  end;
+
+  function DoGetPaintMode: TSynWebWordMarkerPaintMode;
+  begin
+    case FPaintMode of
+    swwpFillRect:
+      if IsSelOverlap then
+        Result := swwpFrameRect
+      else
+        Result := swwpFillRect;
+    else
+      Result := FPaintMode;
+    end;
+  end;
+
+  function DoIntersectRect(var ARect: TRect; const AClip: TRect): Boolean;
+  var
+    lClipH: HRGN;
+  begin
+    Result := IntersectRect(ARect, ARect, AClip);
+    if not Result then
+      Exit;
+
+    lClipH := CreateRectRgn(ARect.Left, ARect.Top, ARect.Right, ARect.Bottom);
+    if lClipH <> 0 then
+    begin
+      SelectClipRgn(ACanvas.Handle, lClipH);
+      DeleteObject(lClipH);
+    end;
   end;
 
 begin
@@ -1302,24 +1376,35 @@ begin
       begin
         lBuffer.Char := lPos;
         lDisplay := Editor.BufferToDisplayPos(lBuffer);
+        
         lRect.TopLeft := Editor.RowColumnToPixels(lDisplay);
-
         lRect.Right := lRect.Left + (Editor.CharWidth * Length(lText));
         lRect.Bottom := lRect.Top + Editor.LineHeight;
 
-        if lRect.Left < lMarginLeft then
-          lRect.Left := lMarginLeft;
+        lRectClip := lRect;
 
-        if IntersectRect(lRect, lRect, AClip) then
-          if IsSelOverlap then
-            ACanvas.FrameRect(lRect)
-          else
-          begin
-            ACanvas.Font.Color := FFGColor;  // DisplayToBufferPos overwrites Canvas.Font, so it must be set here
-            if FCaseSensitive then
-              ACanvas.TextRect(lRect, lRect.Left, lRect.Top, lText)
-            else
-              ACanvas.TextRect(lRect, lRect.Left, lRect.Top, Copy(lLineText, lPos, Length(lText)));
+        if lRectClip.Left < lMarginLeft then
+          lRectClip.Left := lMarginLeft;
+
+        if DoIntersectRect(lRectClip, AClip) then
+          case DoGetPaintMode of
+          swwpFillRect:
+            begin
+              ACanvas.Font.Color := FFGColor;  // DisplayToBufferPos overwrites Canvas.Font, so it must be set here
+              if FCaseSensitive then
+                ACanvas.TextRect(lRectClip, lRect.Left, lRect.Top, lText)
+              else
+                ACanvas.TextRect(lRectClip, lRect.Left, lRect.Top, Copy(lLineText, lPos, Length(lText)));
+            end;
+
+          swwpFrameRect:                                      
+            ACanvas.FrameRect(lRect);
+
+          swwpUnderline:
+            begin
+              lRect.Top := lRect.Bottom - 2;
+              ACanvas.FillRect(lRect);
+            end;
           end;
       end;
 
@@ -1328,36 +1413,10 @@ begin
       else
         lPos := PosEx(lText, lLineTextLower, lPos + 1);
     end;
-  end;
-end;
+  end;     
 
-procedure TSynWebWordMarker.DoInvalidate;
-begin
-  if Enabled then
-    Editor.Invalidate;
-end;
-
-function TSynWebWordMarker.GetHighlightText: TSynWebString;
-begin
-  case FMode of
-  swwmSelectedWord, swwmSelectedText:
-    Result := Editor.SelText;
-
-  swwmCustomWord, swwmCustomText:
-    Result := FCustomText;
-  else
-    Result := '';
-  end;
-end;
-
-procedure TSynWebWordMarker.LinesInserted(FirstLine, Count: Integer);
-begin
-  // nothing
-end;
-
-procedure TSynWebWordMarker.LinesDeleted(FirstLine, Count: Integer);
-begin
-  // nothing
+  // Clear clip region for canvas
+  SelectClipRgn(ACanvas.Handle, 0);
 end;
 
 procedure TSynWebWordMarker.NotifySelChanged;
