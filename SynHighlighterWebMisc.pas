@@ -1349,7 +1349,7 @@ begin
       begin
         lBufferStart.Char := lPos;
         lBufferEnd.Line := lBufferStart.Line;
-        lBufferEnd.Char := lBufferStart.Char + Length(lText);
+        lBufferEnd.Char := lBufferStart.Char + Length(lText) - 1;
 
         lDisplay := Editor.BufferToDisplayPos(lBufferStart);
 
@@ -1469,7 +1469,7 @@ begin
   case DoGetPaintMode of
   swwpFillRect:
     begin
-      ACanvas.Font.Color := FFGColor;  // DisplayToBufferPos overwrites Canvas.Font, so it must be set here
+      ACanvas.Font.Color := FFGColor;
       ACanvas.TextRect(ARect, ARect.Left, ARect.Top, AText)
     end;
 
