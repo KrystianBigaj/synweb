@@ -73,6 +73,7 @@ type
     cbMode: TComboBox;
     Label3: TLabel;
     cbFGColor: TColorBox;
+    chkCaseSensitive: TCheckBox;
     procedure chkWordMarkerClick(Sender: TObject);
     procedure chkWordWrapClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -83,6 +84,7 @@ type
     procedure cbModeChange(Sender: TObject);
     procedure edtCustomTextChange(Sender: TObject);
     procedure cbFGColorChange(Sender: TObject);
+    procedure chkCaseSensitiveClick(Sender: TObject);
   private
     FConfigMode: TSynWebWordMarkerMode;
     FWordMarkers: array[TSynWebWordMarkerMode] of TSynWebWordMarker;
@@ -127,6 +129,11 @@ begin
   DoUILoadConfigMode;
 end;
 
+procedure TfrmMain.chkCaseSensitiveClick(Sender: TObject);
+begin
+  FWordMarkers[FConfigMode].CaseSensitive := chkCaseSensitive.Checked;
+end;
+
 procedure TfrmMain.chkGutterClick(Sender: TObject);
 begin
   syn.Gutter.Visible := chkGutter.Checked;
@@ -148,6 +155,7 @@ begin
   cbBGColor.Selected := FWordMarkers[FConfigMode].BGColor;
   cbFGColor.Selected := FWordMarkers[FConfigMode].FGColor;
   edtCustomText.Text := FWordMarkers[FConfigMode].CustomText;
+  chkCaseSensitive.Checked := FWordMarkers[FConfigMode].CaseSensitive;
 
   edtCustomText.Visible := FConfigMode in [swwmCustomWord, swwmCustomText];
   lblCustomText.Visible := FConfigMode in [swwmCustomWord, swwmCustomText];
