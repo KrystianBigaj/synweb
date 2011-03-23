@@ -1274,7 +1274,7 @@ var
     then
       Exit;
 
-    Inc(lBuffer.Char, lTextLen);
+    Inc(lBuffer.Char, lTextLen - 1);
     if Editor.IsPointInSelection(lBuffer) then
       Exit;
 
@@ -1376,7 +1376,7 @@ begin
       begin
         lBuffer.Char := lPos;
         lDisplay := Editor.BufferToDisplayPos(lBuffer);
-        
+
         lRect.TopLeft := Editor.RowColumnToPixels(lDisplay);
         lRect.Right := lRect.Left + (Editor.CharWidth * Length(lText));
         lRect.Bottom := lRect.Top + Editor.LineHeight;
@@ -1409,9 +1409,9 @@ begin
       end;
 
       if FCaseSensitive then
-        lPos := PosEx(lText, lLineText, lPos + 1)
+        lPos := PosEx(lText, lLineText, lPos + Length(lText))
       else
-        lPos := PosEx(lText, lLineTextLower, lPos + 1);
+        lPos := PosEx(lText, lLineTextLower, lPos + Length(lText));
     end;
   end;     
 
