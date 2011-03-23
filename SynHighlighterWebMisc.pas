@@ -64,7 +64,7 @@ uses
   Types,
 {$IFDEF SYN_CLX}
   QSynEdit,
-{$IFDEF UNISYNEDIT}  
+{$IFDEF UNISYNEDIT}
   QSynUnicode,
 {$ENDIF}
   QSynEditTextBuffer,
@@ -108,8 +108,9 @@ type
     FEnabled: Boolean;
     FBGColor: TColor;
     FFGColor: TColor;
-    FMode: TSynWebWordMarkerMode;   
+    FMode: TSynWebWordMarkerMode;
     FCustomText: TSynWebString;
+    FCaseSensitive: Boolean;
 
     function IsWordSelected: Boolean;
     function GetHighlightText: TSynWebString;
@@ -119,6 +120,7 @@ type
     procedure SetFGColor(const Value: TColor);
     procedure SetMode(const Value: TSynWebWordMarkerMode);
     procedure SetCustomText(const Value: TSynWebString);
+    procedure SetCaseSensitive(const Value: Boolean);
     procedure DoInvalidate;
 
     procedure AfterPaint(ACanvas: TCanvas; const AClip: TRect;
@@ -136,6 +138,7 @@ type
     property FGColor: TColor read FFGColor write SetFGColor;
     property Mode: TSynWebWordMarkerMode read FMode write SetMode;
     property CustomText: TSynWebString read FCustomText write SetCustomText;
+    property CaseSensitive: Boolean read FCaseSensitive write SetCaseSensitive;
   end;
 
 { TSynWebTokenizerInfo }
@@ -1137,6 +1140,15 @@ begin
   DoInvalidate;
 end;
 
+procedure TSynWebWordMarker.SetCaseSensitive(const Value: Boolean);
+begin
+  if FCaseSensitive = Value then
+    Exit;
+
+  FCaseSensitive := Value;
+  DoInvalidate;
+end;
+
 procedure TSynWebWordMarker.SetMode(const Value: TSynWebWordMarkerMode);
 begin
   if FMode = Value then
@@ -1174,7 +1186,7 @@ var
   lLineRow: Integer;
   lPrevLine: Integer;
 
-  lLineText: TSynWebString;
+  lLineText, lLineTextLower: TSynWebString;
   lText: TSynWebString;
   lXY: TPoint;
   lPos: Integer;
@@ -1185,6 +1197,15 @@ var
   function IsSameDisplay(const A, B: TDisplayCoord): Boolean;
   begin
     Result := (A.Row = B.Row) and (A.Column = B.Column);
+  end;
+
+  function DoLowerStr(const AStr: TSynWebString): TSynWebString;
+  begin
+    {$IFDEF UNISYNEDIT}
+    Result := SynUnicode.SynWideLowerCase(AStr);
+    {$ELSE}
+    Result := LowerCase(AStr);
+    {$ENDIF}
   end;
 
 begin
@@ -1209,10 +1230,14 @@ begin
   if lText = '' then
     Exit;
 
-  ACanvas.Brush.Color := FBGColor;   
+  if not FCaseSensitive then
+    lText := DoLowerStr(lText);
+
+  ACanvas.Brush.Color := FBGColor;
 
   lPrevLine := -1;
   lLineText := '';
+  lLineTextLower := '';
   lSelStartDisplay := Editor.BufferToDisplayPos(Editor.BlockBegin);
 
   lDisplay.Column := 1;
@@ -1234,8 +1259,13 @@ begin
 
     lPrevLine := lBuffer.Line;
     lLineText := Editor.Lines[lPrevLine - 1];
+    if not FCaseSensitive then
+      lLineTextLower := DoLowerStr(lLineText);
 
-    lPos := Pos(lText, lLineText);
+    if FCaseSensitive then
+      lPos := Pos(lText, lLineText)
+    else
+      lPos := Pos(lText, lLineTextLower);
     while lPos > 0 do
     begin
       if not (FMode in [swwmSelectedWord, swwmCustomWord]) or (
@@ -1258,12 +1288,18 @@ begin
           if IntersectRect(lRect, lRect, AClip) then
           begin
             ACanvas.Font.Color := FFGColor;  // DisplayToBufferPos overwrites Canvas.Font, so it must be set here
-            ACanvas.TextRect(lRect, lXY.X, lXY.Y, lText);
+            if FCaseSensitive then
+              ACanvas.TextRect(lRect, lXY.X, lXY.Y, lText)
+            else
+              ACanvas.TextRect(lRect, lXY.X, lXY.Y, Copy(lLineText, lPos, Length(lText)));
           end;
         end;
       end;
 
-      lPos := PosEx(lText, lLineText, lPos + 1);
+      if FCaseSensitive then
+        lPos := PosEx(lText, lLineText, lPos + 1)
+      else
+        lPos := PosEx(lText, lLineTextLower, lPos + 1);
     end;
   end;
 end;
