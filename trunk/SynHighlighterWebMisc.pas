@@ -75,8 +75,8 @@ uses
   QSynHighlighterWebData,
   QSynTokenMatch;
 {$ELSE}
-  SynEdit, 
-{$IFDEF UNISYNEDIT}  
+  SynEdit,
+{$IFDEF UNISYNEDIT}
   SynUnicode,
 {$ENDIF}
   SynEditTextBuffer,
@@ -1181,14 +1181,12 @@ procedure TSynWebWordMarker.AfterPaint(ACanvas: TCanvas; const AClip: TRect;
 var
   lDisplay: TDisplayCoord;
   lBuffer: TBufferCoord;      
-  lSelStartDisplay: TDisplayCoord;
 
   lLineRow: Integer;
   lPrevLine: Integer;
 
   lLineText, lLineTextLower: TSynWebString;
   lText: TSynWebString;
-  lXY: TPoint;
   lPos: Integer;
 
   lRect: TRect;
@@ -1206,6 +1204,36 @@ var
     {$ELSE}
     Result := LowerCase(AStr);
     {$ENDIF}
+  end;
+
+  function IsSelOverlap: Boolean;
+  var
+    lBegin, lEnd: TBufferCoord;
+    lTextLen: Integer;
+  begin
+    Result := False;
+    if not Editor.SelAvail then
+      Exit;
+      
+    Result := True;
+    if Editor.IsPointInSelection(lBuffer) then
+      Exit;
+
+    lBegin := Editor.BlockBegin;
+    lEnd := Editor.BlockEnd;
+
+    lTextLen := Length(lText);
+
+    if (lBegin.Line = lEnd.Line) and (lBegin.Line = lBuffer.Line) and 
+      (lBegin.Char >= lBuffer.Char) and (lEnd.Char <= lBuffer.Char + lTextLen)
+    then
+      Exit;
+
+    Inc(lBuffer.Char, lTextLen);
+    if Editor.IsPointInSelection(lBuffer) then
+      Exit;
+
+    Result := False;
   end;
 
 begin
@@ -1238,7 +1266,6 @@ begin
   lPrevLine := -1;
   lLineText := '';
   lLineTextLower := '';
-  lSelStartDisplay := Editor.BufferToDisplayPos(Editor.BlockBegin);
 
   lDisplay.Column := 1;
   lDisplay.Row := FirstLine;
@@ -1275,25 +1302,25 @@ begin
       begin
         lBuffer.Char := lPos;
         lDisplay := Editor.BufferToDisplayPos(lBuffer);
-        lXY := Editor.RowColumnToPixels(lDisplay);
-        if not Editor.SelAvail or not IsSameDisplay(lSelStartDisplay, lDisplay) then
-        begin
-          lRect := Rect(lXY.X, lXY.Y,
-            lXY.X + (Editor.CharWidth * Length(lText)),
-            lXY.Y + Editor.LineHeight);
+        lRect.TopLeft := Editor.RowColumnToPixels(lDisplay);
 
-          if lRect.Left < lMarginLeft then
-            lRect.Left := lMarginLeft;
+        lRect.Right := lRect.Left + (Editor.CharWidth * Length(lText));
+        lRect.Bottom := lRect.Top + Editor.LineHeight;
 
-          if IntersectRect(lRect, lRect, AClip) then
+        if lRect.Left < lMarginLeft then
+          lRect.Left := lMarginLeft;
+
+        if IntersectRect(lRect, lRect, AClip) then
+          if IsSelOverlap then
+            ACanvas.FrameRect(lRect)
+          else
           begin
             ACanvas.Font.Color := FFGColor;  // DisplayToBufferPos overwrites Canvas.Font, so it must be set here
             if FCaseSensitive then
-              ACanvas.TextRect(lRect, lXY.X, lXY.Y, lText)
+              ACanvas.TextRect(lRect, lRect.Left, lRect.Top, lText)
             else
-              ACanvas.TextRect(lRect, lXY.X, lXY.Y, Copy(lLineText, lPos, Length(lText)));
+              ACanvas.TextRect(lRect, lRect.Left, lRect.Top, Copy(lLineText, lPos, Length(lText)));
           end;
-        end;
       end;
 
       if FCaseSensitive then
