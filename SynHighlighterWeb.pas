@@ -1,6 +1,6 @@
 {-------------------------------------------------------------------------------
 SynWeb
-Copyright (C) 2005-2009  Krystian Bigaj
+Copyright (C) 2005-2011  Krystian Bigaj
 
 *** MPL
 The contents of this file are subject to the Mozilla Public License
@@ -63,7 +63,6 @@ Known limitations:
 @abstract(Provides an web-files (Multi Html/XHtml/Wml/Xml/Xslt/Css/ECMAScript/Php/Smarty) highlighter for SynEdit
 @author(Krystian Bigaj <krystian.bigaj@gmail.com>)
 @created(2005-05-21)
-@lastmod(2009-07-19)
 The SynHighlighterWeb unit provides SynEdit with a Multi Html/XHtml/Wml/Xml/Xslt/Css/ECMAScript/Php highlighter.
 }
 
@@ -154,6 +153,7 @@ type
     FSYN_ATTR_WHITESPACE: TSynHighlighterAttributes;
     FOptions: TSynWebOptions;
     FHighlither: TSynWebBase;
+    FCssVendorPropertyId: Integer;
   end;
 
 { TSynWebOptionsBase }
@@ -760,6 +760,8 @@ type
     FCssValNumberAttri: TSynHighlighterAttributes;
     FCssSymbolAttri: TSynHighlighterAttributes;
     FCssErrorAttri: TSynHighlighterAttributes;
+    
+    FOnCssCheckVendorProperty: TSynWebCssCheckVendorPropertyEvent;
 
     // ECMAScript --------------------------------------------------------------
     FEsProcTable: array[AnsiChar] of TSynWebProcTableProc;
@@ -849,6 +851,7 @@ type
     procedure CssSetProp(const AProp: Integer);
     function CssCheckPropData(ABit: Byte): Boolean;
     function CssCheckNull(ADo: Boolean = True): Boolean;
+    procedure CssCheckVendor(var AIsVendor: Boolean);
 
     procedure CssSpaceProc;
     procedure CssAtKeywordProc;
@@ -988,6 +991,7 @@ type
     procedure PhpModProc;
     procedure PhpXorProc;
     procedure PhpSlashProc;
+    procedure PhpBackslashProc;
     procedure PhpPercentProc;
     procedure PhpHashProc;
     procedure PhpNotProc;
@@ -1119,6 +1123,9 @@ type
       read FCssSymbolAttri write FCssSymbolAttri;
     property CssErrorAttri: TSynHighlighterAttributes
       read FCssErrorAttri write FCssErrorAttri;
+      
+    property OnCssCheckVendorProperty: TSynWebCssCheckVendorPropertyEvent
+      read FOnCssCheckVendorProperty write FOnCssCheckVendorProperty;
 
     // ECMAScript
     property EsWhitespaceAttri: TSynHighlighterAttributes
@@ -4268,6 +4275,18 @@ begin
   end;
 end;
 
+procedure TSynWebEngine.CssCheckVendor(var AIsVendor: Boolean);
+var
+  lProperty: AnsiString;
+begin
+  lProperty := Copy(FInstance^.FLineRef, FInstance^.FTokenPos + 1, FInstance^.FStringLen);
+  FInstance^.FCssVendorPropertyId := -1;
+
+  FOnCssCheckVendorProperty(lProperty, AIsVendor, FInstance^.FCssVendorPropertyId);
+  if not AIsVendor then
+    FInstance^.FCssVendorPropertyId := -1;
+end;
+
 procedure TSynWebEngine.CssSpaceProc;
 begin
   repeat
@@ -5978,6 +5997,7 @@ end;
 function TSynWebEngine.CssPropCheck: TSynWebTokenKind;
 var
   HashKey: Longword;
+  lIsVendor: Boolean;
 
   procedure KeyHash(ToHash: PAnsiChar);
   var
@@ -6009,16 +6029,22 @@ begin
 
   // Vendor specific tags
   if Result = stkCssPropUndef then
-    if (FInstance^.FLine[FInstance^.FTokenPos] = '-') or (
+  begin
+    lIsVendor := (FInstance^.FLine[FInstance^.FTokenPos] = '-') or (
       (FInstance^.FLine[FInstance^.FTokenPos] = 'm') and
       (FInstance^.FLine[FInstance^.FTokenPos + 1] = 's') and
       (FInstance^.FLine[FInstance^.FTokenPos + 2] = 'o') and
       (FInstance^.FLine[FInstance^.FTokenPos + 3] = '-')
-    ) then
+    );
+    if Assigned(FOnCssCheckVendorProperty) then
+      CssCheckVendor(lIsVendor);
+
+    if lIsVendor then
     begin
       Result := stkCssProp;
       FInstance^.FTokenLastID := TSynWebCssPropVendor - 1;
     end;
+  end;
 
   CssSetProp(FInstance^.FTokenLastID + 1);
 end;
@@ -7183,6 +7209,8 @@ begin
       FPhpProcTable[c] := PhpXorProc;
     '/':
       FPhpProcTable[c] := PhpSlashProc;
+    '\':
+      FPhpProcTable[c] := PhpBackslashProc;
     '%':
       FPhpProcTable[c] := PhpPercentProc;
     '#':
@@ -7813,6 +7841,14 @@ begin
     else // case
       PhpDivProc;
     end;
+end;
+
+procedure TSynWebEngine.PhpBackslashProc;
+begin
+  Inc(FInstance^.FRun);
+  PhpSetSymbolId(PhpSymbolID_Backslash);
+
+  SetRangeBit(18, True); // Next token str is identifier
 end;
 
 procedure TSynWebEngine.PhpPercentProc;
