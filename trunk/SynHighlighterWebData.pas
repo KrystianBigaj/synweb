@@ -1,6 +1,6 @@
 {-------------------------------------------------------------------------------
 SynWeb
-Copyright (C) 2005-2009  Krystian Bigaj
+Copyright (C) 2005-2011  Krystian Bigaj
 
 *** MPL
 The contents of this file are subject to the Mozilla Public License
@@ -192,6 +192,9 @@ type
     srsCssPropValUrl, srsCssPropValRect,
     srsCssComment);
 
+  TSynWebCssCheckVendorPropertyEvent = procedure(const AProperty: AnsiString;
+    var AIsVendor: Boolean; var APropertyId: Integer) of object;
+
 const
   TSynWebCssRangeStateRulesetBegin = srsCssProp;
   TSynWebCssRangeStateRulesetEnd = srsCssPropValRect;
@@ -355,6 +358,7 @@ const
   PhpSymbolID_Tilde                     = 49;         // ~
   PhpSymbolID_Comma                     = 50;         // ,
   PhpSymbolID_SemiColon                 = 51;         // ;
+  PhpSymbolID_Backslash                 = 52;         // \
 
 {$I SynHighlighterWeb_PhpKeywords.inc}
 
