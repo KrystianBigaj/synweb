@@ -263,16 +263,20 @@ type
   TSynWebSimpleTokenizer = class(TObject)
   protected
     FHL: TSynWebBase;
+    FOwnHL: Boolean;
     FLines: TSynWebStrings;
     FLine: Integer;
   public
-    constructor Create(AHighlighter: TSynWebBase; ALines: TSynWebStrings);
+    constructor Create(AHighlighter: TSynWebBase; ALines: TSynWebStrings;
+      AOwnHighlighter: Boolean = False; ALine: Integer = 0; ARange: Pointer = nil);
+    destructor Destroy; override;
 
     procedure Next;
     function IsEof: Boolean;
     function IsEol: Boolean;
 
     property HL: TSynWebBase read FHL;
+    property Line: Integer read FLine;
   end;
 
 //
@@ -1362,6 +1366,13 @@ begin
         if lRectClip.Left < lMarginLeft then
           lRectClip.Left := lMarginLeft;
 
+        if Editor.WordWrap then
+          if lRectClip.Right > Editor.ClientRect.Right then
+          begin
+            lRectClip.Right := Editor.ClientRect.Right;
+            lRectClip.Right := lRectClip.Right - ((lRectClip.Right - lRectClip.Left) mod Editor.CharWidth);
+          end;
+
         if DoIntersectRect(lRectClip, AClip) then
           if FCaseSensitive then          
             DoPaintMarker(ACanvas, lRect, lText, lBufferStart, lBufferEnd)
@@ -1721,14 +1732,29 @@ end;
 { TSynWebSimpleTokenizer }
 
 constructor TSynWebSimpleTokenizer.Create(AHighlighter: TSynWebBase;
-  ALines: TSynWebStrings);
+  ALines: TSynWebStrings; AOwnHighlighter: Boolean;
+  ALine: Integer; ARange: Pointer);
 begin
   FHL := AHighlighter;
+  FOwnHL := AOwnHighlighter;
   FLines := ALines;
+  FLine := ALine;
 
-  FHL.ResetRange;
+  if FLine = 0 then
+    FHL.ResetRange
+  else
+    FHL.SetRange(ARange);
+
   if not IsEof then
     FHL.SetLine(FLines[FLine], FLine + 1);
+end;
+
+destructor TSynWebSimpleTokenizer.Destroy;
+begin
+  if FOwnHL then
+    FHL.Free;
+
+  inherited Destroy;
 end;
 
 function TSynWebSimpleTokenizer.IsEof: Boolean;
