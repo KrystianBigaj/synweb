@@ -762,6 +762,8 @@ type
     FCssErrorAttri: TSynHighlighterAttributes;
     
     FOnCssCheckVendorProperty: TSynWebCssCheckVendorPropertyEvent;
+    FOnCssCheckVendorValue: TSynWebCssCheckVendorValueEvent;
+    FOnCssGetVendorPropertyFlags: TSynWebCssGetVendorPropertyFlagsEvent;
 
     // ECMAScript --------------------------------------------------------------
     FEsProcTable: array[AnsiChar] of TSynWebProcTableProc;
@@ -1123,9 +1125,15 @@ type
       read FCssSymbolAttri write FCssSymbolAttri;
     property CssErrorAttri: TSynHighlighterAttributes
       read FCssErrorAttri write FCssErrorAttri;
-      
+
     property OnCssCheckVendorProperty: TSynWebCssCheckVendorPropertyEvent
       read FOnCssCheckVendorProperty write FOnCssCheckVendorProperty;
+
+    property OnCssCheckVendorValue: TSynWebCssCheckVendorValueEvent
+      read FOnCssCheckVendorValue write FOnCssCheckVendorValue;
+
+    property OnCssGetVendorPropertyFlags: TSynWebCssGetVendorPropertyFlagsEvent
+      read FOnCssGetVendorPropertyFlags write FOnCssGetVendorPropertyFlags;
 
     // ECMAScript
     property EsWhitespaceAttri: TSynHighlighterAttributes
@@ -4226,13 +4234,23 @@ end;
 function TSynWebEngine.CssCheckPropData(ABit: Byte): Boolean;
 var
   lProp: Integer;
+  lFlags: Cardinal;
 begin
   lProp := GetRangeInt(8, 0); // CssGetProp without vendor check
   if lProp = TSynWebCssPropVendor then
-    Result := True
-  else
+  begin
+    lFlags := $FFFFFFFF;
+
+    if Assigned(FOnCssGetVendorPropertyFlags) then
+    begin
+      FOnCssGetVendorPropertyFlags(FInstance^.FCssVendorPropertyId, lFlags);
+      lFlags := lFlags or $03; // Force set two first bits (CSS1, CSS2.1)
+    end;
+
+    Result := lFlags and (1 shl ABit) <> 0;
+  end else
     if lProp = 0 then
-      Result := False
+      Result := True // dont mark values for unknown properties as errors
     else
       Result := TSynWeb_CssPropsData[lProp - 1] and (1 shl ABit) <> 0;
 end;
@@ -4580,6 +4598,7 @@ end;
 procedure TSynWebEngine.CssNumberDefProc;
 var
   prop, OldRun: Integer;
+  lFlags: Cardinal;
 
   procedure CheckOther;
   begin
@@ -4655,16 +4674,26 @@ begin
   if (FInstance^.FCssMask and (1 shl 17) <> 0) and not Check100_900 then
     FInstance^.FCssMask := FInstance^.FCssMask and not (1 shl 17);
 
+  lFlags := $FFFFFFFF;
   if CssIsPropVendor then
-    FInstance^.FTokenID := stkCssValNumber
-  else
+  begin
+
+    if Assigned(FOnCssGetVendorPropertyFlags) then
+    begin
+      FOnCssGetVendorPropertyFlags(FInstance^.FCssVendorPropertyId, lFlags);
+      lFlags := lFlags or $03; // Set two first bits (CSS1, CSS2.1)
+    end;
+  end else
   begin
     prop := CssGetProp - 1;
-    if (prop = -1) or (TSynWeb_CssPropsData[prop] and FInstance^.FCssMask = 0) then
-      FInstance^.FTokenID := stkCssValUndef
-    else
-      FInstance^.FTokenID := stkCssValNumber;
+    if prop > -1 then
+      lFlags := TSynWeb_CssPropsData[prop];
   end;
+
+  if lFlags and FInstance^.FCssMask = 0 then
+    FInstance^.FTokenID := stkCssValUndef
+  else
+    FInstance^.FTokenID := stkCssValNumber;
 end;
 
 procedure TSynWebEngine.CssIdentProc;
@@ -6108,22 +6137,40 @@ var
     end;
   end;
 
-begin
-  FInstance^.FToIdent := @FInstance^.FLine[FInstance^.FTokenPos];
-  KeyHash(FInstance^.FToIdent);
-  FInstance^.FTokenLastID := -1;
-  if HashKey <= CssValMaxKeyHash then
+  function CheckVendorPropValue: Boolean;
   begin
-    Result := FCssValIdentFuncTable[HashKey];
-    if (Result = stkCssVal) and not CssIsPropVendor then
-    begin
-      prop := CssGetProp - 1;
-      if (prop = -1) or (TSynWeb_CssValsData[FInstance^.FTokenLastID]
-        [Longword(FInstance^.FOptions.FCssVersion)][prop div 32] and (1 shl (prop mod 32)) = 0) then
-        Result := stkCssValUndef;
-    end;
+    Result := True;
+    if Assigned(FOnCssCheckVendorValue) then
+      FOnCssCheckVendorValue(FInstance^.FCssVendorPropertyId, GetToken, Result);
+  end;
+
+begin
+  if CssIsPropVendor then
+  begin
+    if CheckVendorPropValue then
+      Result := stkCssVal
+    else
+      Result := stkCssValUndef;
   end else
-    Result := stkCssValUndef;
+  begin
+    FInstance^.FToIdent := @FInstance^.FLine[FInstance^.FTokenPos];
+    KeyHash(FInstance^.FToIdent);
+    FInstance^.FTokenLastID := -1;
+    if HashKey <= CssValMaxKeyHash then
+    begin
+      Result := FCssValIdentFuncTable[HashKey];
+      if Result = stkCssVal then
+      begin
+        prop := CssGetProp - 1;
+        if prop > -1 then
+          if (TSynWeb_CssValsData[FInstance^.FTokenLastID]
+            [Longword(FInstance^.FOptions.FCssVersion)][prop div 32] and (1 shl (prop mod 32)) = 0)
+          then
+            Result := stkCssValUndef;
+      end;
+    end else
+      Result := stkCssValUndef;
+  end;
 
   if (Result = stkCssValUndef) and CssCheckPropData(20{identifier}) then
     Result := stkCssSymbol;
@@ -9005,6 +9052,7 @@ begin
   FInstance^.FHighlighterType := TSynWebHighlighterType(GetRangeInt(3, 29));
   FInstance^.FPrevHighlighterType := FInstance^.FHighlighterType;
   FInstance^.FHighlighterSW := False;
+  FInstance^.FCssVendorPropertyId := -1;
   SetupHighlighterType;
 {$IFNDEF UNISYNEDIT}
   FInstance^.FNextProcTable;

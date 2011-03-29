@@ -56,16 +56,15 @@ type
     destructor Destroy; override;
 
     function GetPropertyIndex(const APropertyName: String): Integer;
-    function GetPropertyFlags(APropertyIndex: Integer): Cardinal;
+    function GetPropertyFlags(APropertyIndex: Integer; var AFlags: Cardinal): Boolean;
 
-    function IsValidPropertyValue(APropertyIndex: Integer; const AValue: String): Boolean;
+    function GetValidPropertyValue(APropertyIndex: Integer; const AValue: String;
+      var AIsValid: Boolean): Boolean;
 
     property List: TSynWebCssPropertiesList read FProperties;
   end;
 
 implementation
-
-uses XMLIntf;
 
 { TSynWebCssPropertyValues }
 
@@ -129,9 +128,11 @@ begin
 end;
 
 function TSynWebCssProperties.GetPropertyFlags(
-  APropertyIndex: Integer): Cardinal;
+  APropertyIndex: Integer; var AFlags: Cardinal): Boolean;
 begin
-  Result := List.Values[APropertyIndex].Flags;
+  Result := (APropertyIndex >= 0) and (APropertyIndex < List.Count);
+  if Result then
+    AFlags := List.Values[APropertyIndex].Flags;
 end;
 
 function TSynWebCssProperties.GetPropertyIndex(const APropertyName: String): Integer;
@@ -139,10 +140,12 @@ begin
   Result := FProperties.IndexOf(APropertyName);
 end;
 
-function TSynWebCssProperties.IsValidPropertyValue(APropertyIndex: Integer;
-  const AValue: String): Boolean;
+function TSynWebCssProperties.GetValidPropertyValue(APropertyIndex: Integer;
+  const AValue: String; var AIsValid: Boolean): Boolean;
 begin
-  Result := TSynWebCssPropertyValues(FProperties[APropertyIndex]).IndexOf(AValue) > -1;
+  Result := (APropertyIndex >= 0) and (APropertyIndex < List.Count);
+  if Result then
+    AIsValid := TSynWebCssPropertyValues(FProperties.Objects[APropertyIndex]).IndexOf(AValue) > -1;
 end;
 
 procedure TSynWebCssProperties.DoLoadFrom(AXml: IXMLCssType);

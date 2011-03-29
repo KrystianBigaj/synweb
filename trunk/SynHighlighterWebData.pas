@@ -195,6 +195,12 @@ type
   TSynWebCssCheckVendorPropertyEvent = procedure(const AProperty: AnsiString;
     var AIsVendor: Boolean; var APropertyId: Integer) of object;
 
+  TSynWebCssCheckVendorValueEvent = procedure(APropertyId: Integer;
+    const AValue: AnsiString; var AIsValid: Boolean) of object;
+
+  TSynWebCssGetVendorPropertyFlagsEvent = procedure(APropertyId: Integer;
+    var AFlags: Cardinal) of object;
+
 const
   TSynWebCssRangeStateRulesetBegin = srsCssProp;
   TSynWebCssRangeStateRulesetEnd = srsCssPropValRect;
