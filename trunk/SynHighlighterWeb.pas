@@ -6837,7 +6837,7 @@ procedure TSynWebEngine.EsRangeString34Proc;
 begin
   if MLCheckNull then
   begin
-    if EsGetRange = srsEsString34 then
+    if (FInstance^.FRun > 0) and (EsGetRange = srsEsString34) then
       Exit;
   end else
     if PhpCheckBegin then
@@ -6888,7 +6888,7 @@ procedure TSynWebEngine.EsRangeString39Proc;
 begin
   if  MLCheckNull then
   begin
-    if EsGetRange = srsEsString39 then
+    if (FInstance^.FRun > 0) and (EsGetRange = srsEsString39) then
       Exit;
   end else
     if PhpCheckBegin then
