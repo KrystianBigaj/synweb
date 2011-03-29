@@ -69,6 +69,10 @@ type
     procedure pcMainChange(Sender: TObject);
     procedure SynWebEngineCssCheckVendorProperty(const AProperty: string;
       var AIsVendor: Boolean; var APropertyId: Integer);
+    procedure SynWebEngineCssGetVendorPropertyFlags(APropertyId: Integer;
+      var AFlags: Cardinal);
+    procedure SynWebEngineCssCheckVendorValue(APropertyId: Integer;
+      const AValue: string; var AIsValid: Boolean);
   private
     FXml: IXMLSynWebType;
     FXmlFile: String;
@@ -340,7 +344,26 @@ begin
     Exit;
 
   APropertyId := FSynWebCss.GetPropertyIndex(AProperty);
-  AIsVendor := APropertyId > -1;
+  if APropertyId > -1 then
+    AIsVendor := True;
+end;
+
+procedure TfrmMain.SynWebEngineCssCheckVendorValue(APropertyId: Integer;
+  const AValue: string; var AIsValid: Boolean);
+begin
+  if FSynWebCss = nil then
+    Exit;
+
+  FSynWebCss.GetValidPropertyValue(APropertyId, AValue, AIsValid);
+end;
+
+procedure TfrmMain.SynWebEngineCssGetVendorPropertyFlags(APropertyId: Integer;
+  var AFlags: Cardinal);
+begin
+  if FSynWebCss = nil then
+    Exit;
+
+  FSynWebCss.GetPropertyFlags(APropertyId, AFlags);
 end;
 
 procedure TfrmMain.UpdateValues(AValues: IXMLCssValuesType);

@@ -350,6 +350,8 @@ object frmMain: TfrmMain
   end
   object SynWebEngine: TSynWebEngine
     OnCssCheckVendorProperty = SynWebEngineCssCheckVendorProperty
+    OnCssCheckVendorValue = SynWebEngineCssCheckVendorValue
+    OnCssGetVendorPropertyFlags = SynWebEngineCssGetVendorPropertyFlags
     Left = 48
     Top = 96
   end
