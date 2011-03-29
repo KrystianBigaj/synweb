@@ -29,6 +29,7 @@ object frmMain: TfrmMain
     ActivePage = tsEditor
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 0
+    OnChange = pcMainChange
     object tsEditor: TTabSheet
       Caption = 'Editor'
       object gbProperties: TGroupBox
@@ -60,7 +61,7 @@ object frmMain: TfrmMain
           Height = 126
           Align = alBottom
           Caption = 'Add multiple properties'
-          TabOrder = 1
+          TabOrder = 2
           object btnAddProperties: TButton
             AlignWithMargins = True
             Left = 5
@@ -69,7 +70,7 @@ object frmMain: TfrmMain
             Height = 25
             Align = alBottom
             Caption = 'Add properites with current values'
-            TabOrder = 0
+            TabOrder = 1
             WordWrap = True
             OnClick = btnAddPropertiesClick
           end
@@ -80,7 +81,7 @@ object frmMain: TfrmMain
             Width = 186
             Height = 72
             Align = alClient
-            TabOrder = 1
+            TabOrder = 0
           end
         end
         object btnRemoveProperty: TButton
@@ -91,7 +92,7 @@ object frmMain: TfrmMain
           Height = 24
           Align = alBottom
           Caption = 'Remove selected proeprty'
-          TabOrder = 2
+          TabOrder = 1
           WordWrap = True
           OnClick = btnRemovePropertyClick
         end
@@ -112,7 +113,7 @@ object frmMain: TfrmMain
           Height = 207
           Align = alClient
           Caption = 'Allowed identifier values (each value in separate line)'
-          TabOrder = 0
+          TabOrder = 1
           object mValues: TMemo
             AlignWithMargins = True
             Left = 5
@@ -132,7 +133,7 @@ object frmMain: TfrmMain
           Height = 190
           Align = alTop
           Caption = 'SynWeb Css property flags'
-          TabOrder = 1
+          TabOrder = 0
           object panFlags: TPanel
             Left = 2
             Top = 15
@@ -326,6 +327,36 @@ object frmMain: TfrmMain
     object tsPreview: TTabSheet
       Caption = 'Preview'
       ImageIndex = 1
+      object syn: TSynEdit
+        Left = 0
+        Top = 0
+        Width = 608
+        Height = 409
+        Align = alClient
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Courier New'
+        Font.Style = []
+        TabOrder = 0
+        Gutter.Font.Charset = DEFAULT_CHARSET
+        Gutter.Font.Color = clWindowText
+        Gutter.Font.Height = -11
+        Gutter.Font.Name = 'Courier New'
+        Gutter.Font.Style = []
+        Highlighter = SynWebHtmlSyn
+      end
     end
+  end
+  object SynWebEngine: TSynWebEngine
+    OnCssCheckVendorProperty = SynWebEngineCssCheckVendorProperty
+    Left = 48
+    Top = 96
+  end
+  object SynWebHtmlSyn: TSynWebHtmlSyn
+    ActiveHighlighterSwitch = False
+    Engine = SynWebEngine
+    Left = 48
+    Top = 128
   end
 end

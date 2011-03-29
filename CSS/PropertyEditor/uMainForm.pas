@@ -12,7 +12,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ComCtrls, ExtCtrls, xmlSynWeb;
+  Dialogs, StdCtrls, ComCtrls, ExtCtrls, xmlSynWeb, SynEdit, SynEditHighlighter,
+  SynHighlighterWeb, uSynWebCss;
 
 const
   cXmlDefaultFilename = 'xmlSynWeb.xml';
@@ -54,6 +55,9 @@ type
     lblFlags: TLabel;
     cbFlag25: TCheckBox;
     btnRemoveProperty: TButton;
+    syn: TSynEdit;
+    SynWebEngine: TSynWebEngine;
+    SynWebHtmlSyn: TSynWebHtmlSyn;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnAddPropertiesClick(Sender: TObject);
@@ -62,9 +66,16 @@ type
     procedure edtFlagsChange(Sender: TObject);
     procedure mValuesChange(Sender: TObject);
     procedure btnRemovePropertyClick(Sender: TObject);
+    procedure pcMainChange(Sender: TObject);
+    procedure SynWebEngineCssCheckVendorProperty(const AProperty: string;
+      var AIsVendor: Boolean; var APropertyId: Integer);
   private
     FXml: IXMLSynWebType;
     FXmlFile: String;
+
+    FSampleFile: String;
+
+    FSynWebCss: TSynWebCssProperties;
 
     function GetCurrentProperty(out AIdx: Integer): Boolean;
 
@@ -94,6 +105,7 @@ uses XMLIntf;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
+  FSampleFile := ChangeFileExt(Application.ExeName, '.htm');
   FXmlFile := ExtractFilePath(Application.ExeName) + cXmlDefaultFilename;
 
   if FileExists(FXmlFile) then
@@ -102,11 +114,16 @@ begin
     FXml := xmlSynWeb.NewsynWeb;
 
   ReloadXml;
+
+  if FileExists(FSampleFile) then
+    syn.Lines.LoadFromFile(FSampleFile);
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
   SaveXml;
+
+  syn.Lines.SaveToFile(FSampleFile);
 end;
 
 function TfrmMain.GetCurrentProperty(out AIdx: Integer): Boolean;
@@ -241,6 +258,15 @@ begin
   end;
 end;
 
+procedure TfrmMain.pcMainChange(Sender: TObject);
+begin
+  syn.Lines.SaveToFile(FSampleFile);
+
+  FreeAndNil(FSynWebCss);
+
+  FSynWebCss := TSynWebCssProperties.Create(FXml.Css);
+end;
+
 function TfrmMain.CurrentProperty: IXMLCssPropertyType;
 var
   lIdx: Integer;
@@ -305,6 +331,16 @@ end;
 procedure TfrmMain.SetFlags(AValue: Cardinal);
 begin
   edtFlags.Text := '$' + IntToHex(Int64(AValue), 8);
+end;
+
+procedure TfrmMain.SynWebEngineCssCheckVendorProperty(const AProperty: string;
+  var AIsVendor: Boolean; var APropertyId: Integer);
+begin
+  if FSynWebCss = nil then
+    Exit;
+
+  APropertyId := FSynWebCss.GetPropertyIndex(AProperty);
+  AIsVendor := APropertyId > -1;
 end;
 
 procedure TfrmMain.UpdateValues(AValues: IXMLCssValuesType);
