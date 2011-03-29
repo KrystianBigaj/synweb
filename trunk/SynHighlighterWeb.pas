@@ -6835,7 +6835,11 @@ end;
 
 procedure TSynWebEngine.EsRangeString34Proc;
 begin
-  if not MLCheckNull then
+  if MLCheckNull then
+  begin
+    if EsGetRange = srsEsString34 then
+      Exit;
+  end else
     if PhpCheckBegin then
       Exit
     else
@@ -6866,7 +6870,14 @@ begin
           begin
             Inc(FInstance^.FRun);
             if FInstance^.FLine[FInstance^.FRun] in [#34, '\'] then
-              Inc(FInstance^.FRun);
+              Inc(FInstance^.FRun)
+            else
+              if FInstance^.FLine[FInstance^.FRun] = #0 then
+              begin
+                FInstance^.FTokenID := stkEsString;
+                EsSetRange(srsEsString34);
+                Exit;
+              end;
           end;
         end;
       until False;
@@ -6875,7 +6886,11 @@ end;
 
 procedure TSynWebEngine.EsRangeString39Proc;
 begin
-  if not MLCheckNull then
+  if  MLCheckNull then
+  begin
+    if EsGetRange = srsEsString39 then
+      Exit;
+  end else
     if PhpCheckBegin then
       Exit
     else
@@ -6906,7 +6921,14 @@ begin
           begin
             Inc(FInstance^.FRun);
             if FInstance^.FLine[FInstance^.FRun] in [#39, '\'] then
-              Inc(FInstance^.FRun);
+              Inc(FInstance^.FRun)
+            else
+              if FInstance^.FLine[FInstance^.FRun] = #0 then
+              begin
+                FInstance^.FTokenID := stkEsString;
+                EsSetRange(srsEsString39);
+                Exit;
+              end;
           end;
         end;
       until False;
