@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+  <xs:element name="synWeb" type="synWebType"/>
+  <xs:complexType name="synWebType"><xs:annotation>
+      <xs:appinfo xdb:docElement="synWeb"/>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="css" type="cssType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cssType">
+    <xs:sequence>
+      <xs:element name="cssProperties" type="cssPropertiesType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cssPropertiesType">
+    <xs:sequence>
+      <xs:element name="cssProperty" type="cssPropertyType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cssPropertyType">
+    <xs:sequence>
+      <xs:element name="cssValues" type="cssValuesType"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="flags" type="xs:integer"><xs:annotation>
+        <xs:appinfo xdb:dataType="Cardinal"/>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="customFlags" type="xs:integer"><xs:annotation>
+        <xs:appinfo xdb:dataType="Cardinal"/>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="cssValuesType">
+    <xs:sequence>
+      <xs:element name="cssValue" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
