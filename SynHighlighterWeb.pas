@@ -429,6 +429,9 @@ type
     function GetEol: Boolean; override;
     function GetHighlighterType: TSynWebHighlighterType;
 
+    function GetCharBeforeToken: AnsiChar;
+    function GetCharAfterToken: AnsiChar;
+
     function PhpGetKeywordId: Integer;
     function PhpGetFunctionId: Integer;
     function PhpGetSymbolId: Integer;
@@ -1796,6 +1799,28 @@ end;
 function TSynWebBase.GetHighlighterType: TSynWebHighlighterType;
 begin
   Result := FInstance.FHighlighterType;
+end;
+
+function TSynWebBase.GetCharAfterToken: AnsiChar;
+var
+  lNextPos: Integer;
+begin
+  lNextPos := GetTokenPos + GetTokenLen + 1;
+  if lNextPos < Length(FInstance.FLineRef) then
+    Result := FInstance.FLineRef[lNextPos]
+  else
+    Result := #0;
+end;
+
+function TSynWebBase.GetCharBeforeToken: AnsiChar;
+var
+  lPrevPos: Integer;
+begin
+  lPrevPos := GetTokenPos;
+  if lPrevPos >= 1 then
+    Result := FInstance.FLineRef[lPrevPos]
+  else
+    Result := #0;
 end;
 
 function TSynWebBase.PhpGetKeywordId: Integer;
