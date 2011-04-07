@@ -60,6 +60,28 @@ var
     Result:=Editor.RowColumnToPixels(Editor.BufferToDisplayPos(P));
   end;
 
+  procedure ClipViewRect;
+  var
+    lView: TRect;
+    lMarginLeft: Integer;   
+    lClipH: HRGN;
+  begin          
+    if Editor.Gutter.Visible then
+      lMarginLeft := Editor.Gutter.RealGutterWidth(Editor.CharWidth) + 2
+    else
+      lMarginLeft := 2;
+
+    lView := Editor.ClientRect;
+    lView.Left := lMarginLeft;
+
+    lClipH := CreateRectRgn(lView.Left, lView.Top, lView.Right, lView.Bottom);
+    if lClipH <> 0 then
+    begin
+      SelectClipRgn(Editor.Canvas.Handle, lClipH);
+      DeleteObject(lClipH);
+    end;
+  end;
+
 begin
   if FPaintUpdating then
     Exit;
@@ -92,21 +114,29 @@ begin
   else
     Canvas.Brush.Color := clYellow; // unmatched color
   FMatchPainted := False;
-  if I <> -1 then
-  begin
-    Pix := CharToPixels(Match.OpenTokenPos);
-    Canvas.Font.Color := Editor.Font.Color;
-    Canvas.Font.Style := Match.TokenAttri.Style;
-    Canvas.TextOut(Pix.X, Pix.Y, Match.OpenToken);
-    FMatchPainted := True;
-  end;
-  if I <> 1 then
-  begin
-    Pix := CharToPixels(Match.CloseTokenPos);
-    Canvas.Font.Color := Editor.Font.Color;
-    Canvas.Font.Style := Match.TokenAttri.Style;
-    Canvas.TextOut(Pix.X, Pix.Y, Match.CloseToken);
-    FMatchPainted := True;
+  try
+    if I <> -1 then
+    begin
+      ClipViewRect;
+      Pix := CharToPixels(Match.OpenTokenPos);
+      Canvas.Font.Color := Editor.Font.Color;
+      Canvas.Font.Style := Match.TokenAttri.Style;
+      Canvas.TextOut(Pix.X, Pix.Y, Match.OpenToken);
+      FMatchPainted := True;
+    end;
+    if I <> 1 then
+    begin
+      ClipViewRect;
+      Pix := CharToPixels(Match.CloseTokenPos);
+      Canvas.Font.Color := Editor.Font.Color;
+      Canvas.Font.Style := Match.TokenAttri.Style;
+      Canvas.TextOut(Pix.X, Pix.Y, Match.CloseToken);
+      FMatchPainted := True;
+    end;
+  finally
+    // Clear clip region for canvas
+    if FMatchPainted then
+      SelectClipRgn(Editor.Canvas.Handle, 0);
   end;
 end;
 
