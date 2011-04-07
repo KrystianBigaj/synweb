@@ -1322,7 +1322,7 @@ begin
   lDisplay.Row := FirstLine;
 
   if Editor.Gutter.Visible then
-    lMarginLeft := Editor.Gutter.RealGutterWidth(8) - 2
+    lMarginLeft := Editor.Gutter.RealGutterWidth(Editor.CharWidth) - 2
   else
     lMarginLeft := 2;
 
