@@ -70,6 +70,7 @@ type
     pseudo1: TMenuItem;
     atkeyword1: TMenuItem;
     page1: TMenuItem;
+    Values1: TMenuItem;
     procedure Button5Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -417,7 +418,7 @@ end;
 procedure TForm1.Button18Click(Sender: TObject);
 begin     
   Button12Click(nil);
-  form2.showmodal;
+  form2.Button4Click(nil);
 end;
 
 procedure TForm1.Button6Click(Sender: TObject);

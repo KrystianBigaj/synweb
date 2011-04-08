@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 665
   Top = 10
-  Width = 350
-  Height = 730
   Caption = 'SynHighlighterWeb - Css Data/Export v1.0b '#169'2005 FlatDev'
+  ClientHeight = 703
+  ClientWidth = 342
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -174,9 +174,9 @@ object Form1: TForm1
     Style = csDropDownList
     Anchors = [akLeft, akBottom]
     ItemHeight = 13
-    ItemIndex = 1
+    ItemIndex = 2
     TabOrder = 12
-    Text = 'Css 2.1'
+    Text = 'Css3'
     Items.Strings = (
       'Css 1'
       'Css 2.1'
@@ -247,7 +247,9 @@ object Form1: TForm1
     Height = 25
     Anchors = [akTop, akRight]
     Caption = 'Css: Convert'
+    Enabled = False
     TabOrder = 17
+    Visible = False
     OnClick = Button7Click
   end
   object Button8: TButton
@@ -267,7 +269,9 @@ object Form1: TForm1
     Height = 25
     Anchors = [akTop, akRight]
     Caption = 'Css: Add other (Css2)'
+    Enabled = False
     TabOrder = 19
+    Visible = False
     OnClick = Button9Click
   end
   object Button10: TButton
@@ -314,6 +318,7 @@ object Form1: TForm1
     Height = 25
     Anchors = [akTop, akRight]
     Caption = 'Button15'
+    Enabled = False
     TabOrder = 24
     Visible = False
     OnClick = Button15Click
@@ -359,8 +364,7 @@ object Form1: TForm1
     end
     object Html401Frameset1: TMenuItem
       Tag = 2
-      Caption = '2 - Css 3 ??'
-      Visible = False
+      Caption = '2 - Css 3'
       OnClick = Html401Strict1Click
     end
     object CLOSEPOPUP1: TMenuItem
@@ -368,6 +372,11 @@ object Form1: TForm1
     end
     object N2: TMenuItem
       Caption = '-'
+    end
+    object Values1: TMenuItem
+      Tag = -1
+      Caption = '<VALUES>'
+      Enabled = False
     end
     object IDENT1: TMenuItem
       Tag = 31
@@ -454,6 +463,15 @@ object Form1: TForm1
       Caption = '[,]'
       OnClick = Html401Strict1Click
     end
+    object N3: TMenuItem
+      Tag = -1
+      Caption = '-'
+    end
+    object SPECIAL1: TMenuItem
+      Tag = -1
+      Caption = '<SPECIAL>'
+      Enabled = False
+    end
     object pseudo1: TMenuItem
       Tag = 15
       Caption = '[css1: pseudo]'
@@ -478,15 +496,6 @@ object Form1: TForm1
       Tag = 11
       Caption = '[page]'
       OnClick = Html401Strict1Click
-    end
-    object N3: TMenuItem
-      Tag = -1
-      Caption = '-'
-    end
-    object SPECIAL1: TMenuItem
-      Tag = -1
-      Caption = '<SPECIAL>'
-      Enabled = False
     end
   end
   object Timer1: TTimer
