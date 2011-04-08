@@ -14,26 +14,9 @@ type
   end;
 
   TForm2 = class(TForm)
-    GroupBox1: TGroupBox;
-    Label1: TLabel;
-    Label2: TLabel;
-    ht2: TCheckBox;
-    ha2: TCheckBox;
-    ht1: TCheckBox;
-    ha1: TCheckBox;
-    Bevel2: TBevel;
-    Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
-    SaveDialog1: TSaveDialog;
-    Bevel3: TBevel;
-    CheckBox3: TCheckBox;
-    Button6: TButton;
+    Button4: TButton;
     procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -71,84 +54,6 @@ begin
           Result := 1
         else
           Result := 0;
-end;
-
-procedure TForm2.Button1Click(Sender: TObject);
-var
-  attr:TStringList;
-  n:TTreeNode;
-begin
-  if not SaveDialog1.Execute then
-    exit;
-  attr:=TStringList.Create;
-  n:=form1.TreeView1.Items.GetFirstNode;
-  while n<>nil do
-  begin
-    if CheckBox3.Checked or (ht1.Checked and Form1.nGetBit(n,0))or
-       (ht2.Checked and Form1.nGetBit(n,1)) then
-      attr.Add(n.Text);
-    n:=n.GetNextChild(n);
-  end;
-  attr.Sort;
-  attr.SaveToFile(SaveDialog1.FileName);
-  attr.Free;
-end;
-
-procedure TForm2.Button3Click(Sender: TObject);
-var
-  attr:TStringList;
-  n1,n2:TTreeNode;
-begin
-  if not SaveDialog1.Execute then
-    exit;
-  attr:=TStringList.Create;
-  n1:=form1.TreeView1.Items.GetFirstNode;
-  while n1<>nil do
-  begin
-    n2:=n1.getFirstChild;
-    while n2<>nil do
-    begin
-      if (CheckBox3.Checked or (ha1.Checked and Form1.nGetBit(n2,0))or
-         (ha2.Checked and Form1.nGetBit(n2,1)))and
-         (attr.IndexOf(n2.Text)=-1) then
-        attr.Add(n2.Text);
-      n2:=n2.GetNextChild(n2);
-    end;
-    n1:=n1.GetNextChild(n1);
-  end;
-  attr.Sort;
-  attr.SaveToFile(SaveDialog1.FileName);
-  attr.Free;
-end;
-
-procedure TForm2.Button2Click(Sender: TObject);
-var
-  attr:TStringList;
-  n1,n2:TTreeNode;
-begin
-  if not SaveDialog1.Execute then
-    exit;
-  attr:=TStringList.Create;
-  n1:=form1.TreeView1.Items.GetFirstNode;
-  while n1<>nil do
-  begin
-    if (ht1.Checked and Form1.nGetBit(n1,0))or
-       (ht2.Checked and Form1.nGetBit(n1,1))then
-    begin
-      attr.Add(n1.Text);
-      n2:=n1.getFirstChild;
-      while n2<>nil do
-      begin       
-        if CheckBox3.Checked or (ha1.Checked and Form1.nGetBit(n2,0))or
-           (ha2.Checked and Form1.nGetBit(n2,1)) then
-          attr.Add(#9+n2.Text);
-        n2:=n2.GetNextChild(n2);
-      end;
-    end;
-    n1:=n1.GetNextChild(n1);
-  end;
-  attr.SaveToFile(SaveDialog1.FileName);
-  attr.Free;
 end;
 
 procedure TForm2.Button4Click(Sender: TObject);
@@ -264,10 +169,13 @@ begin
 end;
 
 procedure TForm2.Button5Click(Sender: TObject);
+const
+  cCssVersions = 3;
+  cCssProperty32bitsCount = 4; // 4*32 = 128properties, in case of more, increse this to fit more
 var
   sl:TStringList;
   n1,n2:TTreeNode;
-  p:array[0..300] of array[0..1] of array[0..3] of Longword;
+  p:array[0..300] of array[0..cCssVersions-1] of array[0..cCssProperty32bitsCount-1] of Longword;
   i,j,k,l:Longword;
   x:Integer;
   s:String;    
@@ -310,10 +218,11 @@ begin
       x:=sl.IndexOf(n2.Text);
       j:=(n1.Index div 32);
       l:=1 shl (n1.Index mod 32);
-      for i:=0 to 1 do
+      for i:=0 to cCssVersions-1 do
       begin
         if Form1.nGetBit(n2, 31) then
-          p[x][i][3]:=p[x][i][3] or (1 shl 31); // isFUNCTION
+          p[x][i][cCssProperty32bitsCount-1]:=p[x][i][cCssProperty32bitsCount-1] or (1 shl 31); // isFUNCTION
+          
         if Form1.nGetBit(n1,i) and Form1.nGetBit(n2,i) then
           p[x][i][j]:=p[x][i][j] or l;
       end;
@@ -334,19 +243,19 @@ begin
     ss1:=Format('%s''%s'', ',[ss1,sl[i]]);
 
     //s2.Add(Format('    //%4.d: %s',[i,sl[i]]));
-    for j:=0 to 1 do
+    for j:=0 to cCssVersions-1 do
     begin
       if j=0 then
         s:='  (('
       else
         s:='   (';
-      for k:=0 to 4-1 do
+      for k:=0 to cCssProperty32bitsCount-1 do
       begin        
         s:=s+Format('$%s',[IntToHex(p[i][j][k],8)]);
-        if k<>3 then
+        if k<>cCssProperty32bitsCount-1 then
           s:=s+', ';
       end;
-      if j=1 then
+      if j=cCssVersions-1 then
       begin
         if Integer(i)=sl.Count-1 then
           s:=s+'))'
@@ -383,7 +292,8 @@ begin
   s1.Insert(0,Format('  CssValMaxKeyHash = %d;',[x]));
 
 //  Form3.Memo2.Lines[Form3.Memo2.Lines.Count-1]:=Copy(Form3.Memo2.Lines[Form3.Memo2.Lines.Count-1],1,Length(Form3.Memo2.Lines[Form3.Memo2.Lines.Count-1])-1);
-  s2.Insert(0,format('  TSynWeb_CssValsData:array[0..%d] of array[0..%d] of array[0..%d] of Longword=(',[sl.Count-1,2-1,4-1]));
+  s2.Insert(0,format('  TSynWeb_CssValsData:array[0..%d] of array[0..%d] of array[0..%d] of Longword=(',
+    [sl.Count-1,cCssVersions-1,cCssProperty32bitsCount-1]));
   s2.Add('    );');
 
   s1.Add('');

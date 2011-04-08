@@ -183,7 +183,7 @@ const
 // Css -------------------------------------------------------------------------
 type
   TSynWebCssVersion = (
-    scvCss1, scvCss21
+    scvCss1, scvCss21, scvCss3
     );
 
   TSynWebCssRangeState = (srsCssRuleset, srsCssSelectorAttrib, srsCssSelectorPseudo,
@@ -207,7 +207,8 @@ const
 
   TSynWebCssVersionStr: array[Low(TSynWebCssVersion)..High(TSynWebCssVersion)] of String = (
     'Css 1',
-    'Css 2.1'
+    'Css 2.1',
+    'Css 3'
     );
 
   TSynWebCssString39 = 4;
