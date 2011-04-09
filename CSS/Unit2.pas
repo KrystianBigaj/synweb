@@ -171,7 +171,7 @@ end;
 procedure TForm2.Button5Click(Sender: TObject);
 const
   cCssVersions = 3;
-  cCssProperty32bitsCount = 4; // 4*32 = 128properties, in case of more, increse this to fit more
+  cCssProperty32bitsCount = 5; // 5*32 = 160properties, in case of more, increse this to fit more
 var
   sl:TStringList;
   n1,n2:TTreeNode;
