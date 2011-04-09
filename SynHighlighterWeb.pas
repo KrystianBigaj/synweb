@@ -4679,27 +4679,32 @@ begin
   end else
   begin
     OldRun := FInstance^.FRun;
-    if CssIdentStartProc then
+
+    if (FInstance^.FOptions.FCssVersion = scvCss3) and not APropValue and (FInstance^.FLine[FInstance^.FRun] = 'n') then
     begin
-      prop := CssSpecialCheck(OldRun, FInstance^.FRun - OldRun);
-      if prop <> -1 then
+      Inc(FInstance^.FRun);
+    end else
+      if CssIdentStartProc then
       begin
-        FInstance^.FCssMask := FInstance^.FCssMask and TSynWeb_CssSpecialData[prop];
-        CssSetRange(srsCssPropValSpecial);
-        if (FInstance^.FLine[FInstance^.FRun] = '/') and
-          (FInstance^.FLine[FInstance^.FRun + 1] <> '*') then
-          SetRangeBit(8, True);
-        FInstance^.FRun := OldRun;
-      end else
-        if FInstance^.FOptions.FCssVersion = scvCss1 then
+        prop := CssSpecialCheck(OldRun, FInstance^.FRun - OldRun);
+        if prop <> -1 then
         begin
+          FInstance^.FCssMask := FInstance^.FCssMask and TSynWeb_CssSpecialData[prop];
+          CssSetRange(srsCssPropValSpecial);
+          if (FInstance^.FLine[FInstance^.FRun] = '/') and
+            (FInstance^.FLine[FInstance^.FRun + 1] <> '*') then
+            SetRangeBit(8, True);
           FInstance^.FRun := OldRun;
-          CheckOther;
         end else
-        begin
-          FInstance^.FTokenID := stkCssError;
-          Exit;
-        end;
+          if FInstance^.FOptions.FCssVersion = scvCss1 then
+          begin
+            FInstance^.FRun := OldRun;
+            CheckOther;
+          end else
+          begin
+            FInstance^.FTokenID := stkCssError;
+            Exit;
+          end;
     end else
       CheckOther;
   end;
@@ -4711,7 +4716,6 @@ begin
   if APropValue then
     if CssIsPropVendor then
     begin
-
       if Assigned(FOnCssGetVendorPropertyFlags) then
       begin
         FOnCssGetVendorPropertyFlags(FInstance^.FCssVendorPropertyId, lFlags);
@@ -5032,6 +5036,13 @@ begin
             CssSymbolProc;
           end else
             CssErrorProc;
+        '+', '-':
+          if FInstance^.FOptions.FCssVersion = scvCss3 then
+          begin
+            CssSymbolProc;  
+            SetRangeBit(8, False);
+          end else
+            CssErrorProc;
         '0'..'9':
           if not GetRangeBit(8) then
           begin
@@ -5049,19 +5060,26 @@ begin
             CssSetRange(srsCssRuleset);
           end;
         else // case
-          if CssIdentStartProc then
-            if GetRangeBit(8) then
-              FInstance^.FTokenID := stkCssError
-            else
-            begin
-              FInstance^.FTokenID := stkCssVal;
-              SetRangeBit(8, True);
-            end else
+          if (FInstance^.FOptions.FCssVersion = scvCss3) and (FInstance^.FLine[FInstance^.FRun] = 'n') then
           begin
-            CssSetRange(srsCssRuleset);
-            FCssProcTable[FInstance^.FLine[FInstance^.FRun]];
-            FInstance^.FTokenID := stkCssError;
-          end;
+            Inc(FInstance^.FRun);
+            FInstance^.FTokenID := stkCssValNumber;
+          end else
+            if CssIdentStartProc then
+            begin
+              if GetRangeBit(8) then
+                FInstance^.FTokenID := stkCssError
+              else
+              begin
+                FInstance^.FTokenID := stkCssVal;
+                SetRangeBit(8, True);
+              end;
+            end else
+            begin
+              CssSetRange(srsCssRuleset);
+              FCssProcTable[FInstance^.FLine[FInstance^.FRun]];
+              FInstance^.FTokenID := stkCssError;
+            end;
         end;
 end;
 
