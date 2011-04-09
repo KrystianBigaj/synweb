@@ -333,6 +333,17 @@ object Form1: TForm1
     TabOrder = 25
     OnClick = CheckBox3Click
   end
+  object Button16: TButton
+    Left = 200
+    Top = 611
+    Width = 75
+    Height = 25
+    Caption = 'rol bits'
+    Enabled = False
+    TabOrder = 26
+    Visible = False
+    OnClick = Button16Click
+  end
   object OpenDialog1: TOpenDialog
     Left = 28
     Top = 280
@@ -463,6 +474,10 @@ object Form1: TForm1
       Caption = '[,]'
       OnClick = Html401Strict1Click
     end
+    object css21pseudo1: TMenuItem
+      Tag = 15
+      Caption = '--- unused ---'
+    end
     object N3: TMenuItem
       Tag = -1
       Caption = '-'
@@ -473,13 +488,8 @@ object Form1: TForm1
       Enabled = False
     end
     object pseudo1: TMenuItem
-      Tag = 15
-      Caption = '[css1: pseudo]'
-      OnClick = Html401Strict1Click
-    end
-    object media2: TMenuItem
       Tag = 14
-      Caption = '[css21: pseudo]'
+      Caption = '[pseudo]'
       OnClick = Html401Strict1Click
     end
     object media1: TMenuItem
@@ -492,9 +502,13 @@ object Form1: TForm1
       Caption = '[at-keyword]'
       OnClick = Html401Strict1Click
     end
-    object page1: TMenuItem
+    object page2: TMenuItem
       Tag = 11
       Caption = '[page]'
+    end
+    object page1: TMenuItem
+      Tag = 10
+      Caption = '[pseudo with param]'
       OnClick = Html401Strict1Click
     end
   end

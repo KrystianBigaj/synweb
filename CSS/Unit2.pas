@@ -115,7 +115,7 @@ begin
   begin
     s1.Insert(0,Format('  CssSpecialID_Auto = %d;',[s.IndexOf('auto')]));
     s1.Insert(0,Format('  CssSpecialID_Url = %d;',[s.IndexOf('url')]));
-    s1.Insert(0,Format('  CssSpecialID_Lang = %d;',[s.IndexOf('lang')]));
+//    s1.Insert(0,Format('  CssSpecialID_Lang = %d;',[s.IndexOf('lang')]));
     s1.Insert(0,Format('  CssSpecialID_Important = %d;',[s.IndexOf('important')]));
     s1.Insert(0,Format('  CssSpecialID_Charset = %d;',[s.IndexOf('charset')]));
     s1.Insert(0,Format('  CssSpecialID_Page = %d;',[s.IndexOf('page')]));

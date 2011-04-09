@@ -66,11 +66,13 @@ type
     Button15: TButton;
     CheckBox3: TCheckBox;
     media1: TMenuItem;
-    media2: TMenuItem;
     pseudo1: TMenuItem;
     atkeyword1: TMenuItem;
     page1: TMenuItem;
     Values1: TMenuItem;
+    css21pseudo1: TMenuItem;
+    Button16: TButton;
+    page2: TMenuItem;
     procedure Button5Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -94,6 +96,7 @@ type
     procedure Button15Click(Sender: TObject);
     procedure CheckBox3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure Button16Click(Sender: TObject);
   private
     pn:TTreeNode;
   public
@@ -146,6 +149,9 @@ procedure TForm1.Button5Click(Sender: TObject);
 var
   i:Integer;
 begin
+  if Edit1.Text <> '' then
+    Button3.Click;
+
   for i:=0 to Memo5.Lines.Count-1 do
     AddAtrib(TreeView1.Selected,Memo5.Lines[i]);
   Memo5.Clear;
@@ -966,6 +972,40 @@ begin
     if TreeView1.Items[i].Level=1 then
       if (TreeView1.Items[i].Text='url') or (TreeView1.Items[i].Text='rgb') then
         nSetBit(TreeView1.Items[i],31);
+end;
+
+procedure TForm1.Button16Click(Sender: TObject);
+var
+  i:Integer;
+  n: TTreeNode;
+  lBit: Integer;
+  lPseudo: Boolean;
+begin
+  for i:=0 to TreeView1.Items.Count-1 do
+  begin
+    n := TreeView1.Items[i];
+
+    if n.Level<>0 then
+      Continue;
+
+    lPseudo := False;
+    if nGetBit(n, 15) then // css1
+    begin
+      nSetBit(n, 0);
+      lPseudo := True;
+    end;
+    if nGetBit(n, 14) then // css2
+    begin
+      nSetBit(n, 1);
+      lPseudo := True;
+    end;
+
+    nClearBit(n, 15);
+    if lPseudo then
+      nSetBit(n, 14)
+    else
+      nClearBit(n, 14);
+  end;
 end;
 
 procedure TForm1.CheckBox3Click(Sender: TObject);
