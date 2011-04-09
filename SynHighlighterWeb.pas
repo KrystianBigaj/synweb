@@ -5064,6 +5064,7 @@ begin
           begin
             Inc(FInstance^.FRun);
             FInstance^.FTokenID := stkCssValNumber;
+            SetRangeBit(8, True);
           end else
             if CssIdentStartProc then
             begin
