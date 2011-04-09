@@ -864,7 +864,7 @@ type
     procedure CssBraceOpenProc;
     procedure CssCurlyBraceOpenProc;
     procedure CssCurlyBraceCloseProc;
-    procedure CssChildAnySelectorProc;
+    procedure CssSelectorsProc;
     procedure CssAttribProc;
     procedure CssHashProc;
     procedure CssDotProc;
@@ -876,7 +876,7 @@ type
     procedure CssPlusProc;
     procedure CssMinusProc;
     procedure CssNumberProc;
-    procedure CssNumberDefProc;
+    procedure CssNumberDefProc(APropValue: Boolean = True);
     procedure CssIdentProc;
     function CssIdentStartProc: Boolean;
     function CssCustomStringProc(AShl: Longword; ADo: Boolean = True): Boolean;
@@ -4116,8 +4116,8 @@ begin
       FCssProcTable[c] := CssCurlyBraceOpenProc;
     '}':
       FCssProcTable[c] := CssCurlyBraceCloseProc;
-    '*', '>':
-      FCssProcTable[c] := CssChildAnySelectorProc;
+    '*', '>', '~':
+      FCssProcTable[c] := CssSelectorsProc;
     '[':
       FCssProcTable[c] := CssAttribProc;
     '#':
@@ -4419,12 +4419,20 @@ begin
       CssErrorProc;
 end;
 
-procedure TSynWebEngine.CssChildAnySelectorProc;
+procedure TSynWebEngine.CssSelectorsProc;
 begin
-  if FInstance^.FOptions.FCssVersion = scvCss21 then
-    CssSymbolProc
-  else
+  case FInstance^.FOptions.FCssVersion of
+  scvCss1:
     CssErrorProc;
+
+  scvCss21:
+    if FInstance^.FLine[FInstance^.FRun] = '~' then
+      CssErrorProc
+    else
+      CssSymbolProc;
+  else
+    CssSymbolProc;
+  end;
 end;
 
 procedure TSynWebEngine.CssAttribProc;
@@ -4574,10 +4582,10 @@ begin
     end else
       FInstance^.FTokenID := stkCssError;
   end else
-    if FInstance^.FOptions.FCssVersion = scvCss21 then
-      CssSymbolProc
+    if FInstance^.FOptions.FCssVersion = scvCss1 then
+      CssErrorProc
     else
-      CssErrorProc;
+      CssSymbolProc;
 end;
 
 procedure TSynWebEngine.CssMinusProc;
@@ -4620,7 +4628,7 @@ begin
     CssErrorProc;
 end;
 
-procedure TSynWebEngine.CssNumberDefProc;
+procedure TSynWebEngine.CssNumberDefProc(APropValue: Boolean);
 var
   prop, OldRun: Integer;
   lFlags: Cardinal;
@@ -4700,20 +4708,21 @@ begin
     FInstance^.FCssMask := FInstance^.FCssMask and not (1 shl 17);
 
   lFlags := $FFFFFFFF;
-  if CssIsPropVendor then
-  begin
-
-    if Assigned(FOnCssGetVendorPropertyFlags) then
+  if APropValue then
+    if CssIsPropVendor then
     begin
-      FOnCssGetVendorPropertyFlags(FInstance^.FCssVendorPropertyId, lFlags);
-      lFlags := lFlags or $03; // Set two first bits (CSS1, CSS2.1)
+
+      if Assigned(FOnCssGetVendorPropertyFlags) then
+      begin
+        FOnCssGetVendorPropertyFlags(FInstance^.FCssVendorPropertyId, lFlags);
+        lFlags := lFlags or $03; // Set two first bits (CSS1, CSS2.1)
+      end;
+    end else
+    begin
+      prop := CssGetProp - 1;
+      if prop > -1 then
+        lFlags := TSynWeb_CssPropsData[prop];
     end;
-  end else
-  begin
-    prop := CssGetProp - 1;
-    if prop > -1 then
-      lFlags := TSynWeb_CssPropsData[prop];
-  end;
 
   if lFlags and FInstance^.FCssMask = 0 then
     FInstance^.FTokenID := stkCssValUndef
@@ -4917,6 +4926,19 @@ begin
           end else
             CssErrorProc;
         end;
+      '^', '$', '*':
+        begin
+          SetRangeInt(3, 8, 2);
+          if FInstance^.FLine[FInstance^.FRun + 1] = '=' then
+          begin
+            Inc(FInstance^.FRun, 2);
+            if FInstance^.FOptions.FCssVersion = scvCss3 then
+              FInstance^.FTokenID := stkCssSymbol
+            else
+              FInstance^.FTokenID := stkCssError;
+          end else
+            CssErrorProc;
+        end;
       ']':
           DoEndAttrib;
       else // case
@@ -4975,13 +4997,13 @@ begin
     until TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun]] and (1 shl 6) = 0;
     // until not(FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '-']);
     prop := CssSpecialCheck(FInstance^.FTokenPos, FInstance^.FRun - FInstance^.FTokenPos);
-    if (prop = -1) or (TSynWeb_CssSpecialData[prop] and
-      (1 shl (15 - Longword(FInstance^.FOptions.FCssVersion))) = 0) then
+    if (prop = -1) or (TSynWeb_CssSpecialData[prop] and (1 shl 14{css pseudo}) = 0) or
+      (TSynWeb_CssSpecialData[prop] and (1 shl Byte(FInstance^.FOptions.FCssVersion)) = 0) then
     begin
       FInstance^.FTokenID := stkCssError;
       CssSetRange(srsCssRuleset);
     end else
-      if (prop <> CssSpecialID_Lang) then
+      if TSynWeb_CssSpecialData[prop] and (1 shl 10{pseudo with param}) = 0 then
       begin
         FInstance^.FTokenID := stkCssSpecial;
         CssSetRange(srsCssRuleset);
@@ -5008,6 +5030,14 @@ begin
           begin
             SetRangeBit(8, False);
             CssSymbolProc;
+          end else
+            CssErrorProc;
+        '0'..'9':
+          if not GetRangeBit(8) then
+          begin
+            FInstance^.FCssMask := 1 shl 22{Integer};
+            CssNumberDefProc(False);   
+            SetRangeBit(8, True);
           end else
             CssErrorProc;
         ')':
