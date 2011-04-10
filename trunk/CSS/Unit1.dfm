@@ -334,15 +334,24 @@ object Form1: TForm1
     OnClick = CheckBox3Click
   end
   object Button16: TButton
-    Left = 200
-    Top = 611
+    Left = 259
+    Top = 559
     Width = 75
     Height = 25
-    Caption = 'rol bits'
+    Caption = 'css2->css3'
     Enabled = False
     TabOrder = 26
     Visible = False
     OnClick = Button16Click
+  end
+  object Button17: TButton
+    Left = 259
+    Top = 590
+    Width = 75
+    Height = 25
+    Caption = 'add colors'
+    TabOrder = 27
+    OnClick = Button17Click
   end
   object OpenDialog1: TOpenDialog
     Left = 28
@@ -474,9 +483,15 @@ object Form1: TForm1
       Caption = '[,]'
       OnClick = Html401Strict1Click
     end
-    object css21pseudo1: TMenuItem
+    object dpi1: TMenuItem
       Tag = 15
-      Caption = '--- unused ---'
+      Caption = '[dpi]'
+      OnClick = Html401Strict1Click
+    end
+    object css21pseudo1: TMenuItem
+      Tag = 14
+      Caption = '[uri]'
+      OnClick = Html401Strict1Click
     end
     object N3: TMenuItem
       Tag = -1

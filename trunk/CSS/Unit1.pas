@@ -73,6 +73,8 @@ type
     css21pseudo1: TMenuItem;
     Button16: TButton;
     page2: TMenuItem;
+    dpi1: TMenuItem;
+    Button17: TButton;
     procedure Button5Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -97,6 +99,7 @@ type
     procedure CheckBox3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Button16Click(Sender: TObject);
+    procedure Button17Click(Sender: TObject);
   private
     pn:TTreeNode;
   public
@@ -117,6 +120,55 @@ implementation
 uses Unit2, StrUtils, Math;
 
 {$R *.dfm}
+
+procedure ParseLine(ALine: String; ADst: TStrings);
+const
+  cAlphaNum = ['a'..'z', 'A'..'Z', '0'..'9', '-'];
+var
+  lPos: Integer;
+  lParam: String;
+begin
+  ALine := Trim(ALine);
+
+  while ALine <> '' do
+  begin
+    if not (ALine[1] in cAlphaNum) then
+    begin
+      lPos := 1;
+
+      while (lPos <= Length(ALine)) and not (ALine[lPos] in cAlphaNum) do
+        Inc(lPos);
+
+      Delete(ALine, 1, lPos - 1);
+      Continue;
+    end;
+
+    lPos := 1;
+    while (lPos <= Length(ALine)) and (ALine[lPos] in cAlphaNum) do
+      Inc(lPos);
+
+    lParam := Copy(ALine, 1, lPos - 1);
+    Delete(ALine, 1, lPos - 1);
+    if lParam <> '' then
+      ADst.Add(lParam);
+  end;
+end;
+
+function ParseFirstIdent(S: String): String;
+var
+  lList: TStringList;
+begin
+  lList := TStringList.Create;
+  try
+    ParseLine(S, lList);
+    if lList.Count = 0 then
+      Result := ''
+    else
+      Result := lList[0];
+  finally
+    lList.Free;
+  end;
+end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
@@ -148,12 +200,48 @@ end;
 procedure TForm1.Button5Click(Sender: TObject);
 var
   i:Integer;
-begin
-  if Edit1.Text <> '' then
-    Button3.Click;
+  lTagIdx: Integer;
+  lTags, lList: TStringList;
 
-  for i:=0 to Memo5.Lines.Count-1 do
-    AddAtrib(TreeView1.Selected,Memo5.Lines[i]);
+  procedure ParseParams(ASrc, ADst: TStrings);
+  var
+    lIdx: Integer;
+  begin
+    for lIdx := 0 to ASrc.Count - 1 do
+      ParseLine(ASrc[lIdx], ADst);
+  end;
+
+begin
+  lTags := nil;
+  lList := nil;
+  try
+    lList := TStringList.Create;
+    lTags := TStringList.Create;
+
+    ParseLine(Edit1.Text, lTags);
+    ParseParams(Memo5.Lines, lList);
+
+    if lTags.Count = 0 then
+    begin
+      for i:=0 to lList.Count-1 do
+        AddAtrib(TreeView1.Selected, lList[i]);
+    end else
+    begin
+      for lTagIdx := 0 to lTags.Count - 1 do
+      begin
+        Edit1.Text := lTags[lTagIdx];
+        Button3.Click;
+
+        for i:=0 to lList.Count-1 do
+          AddAtrib(TreeView1.Selected, lList[i]);
+      end;
+    
+    end;
+  finally
+    lList.Free;
+    lTags.Free;
+  end;
+  edit1.Text:='';
   Memo5.Clear;
 end;
 
@@ -407,7 +495,10 @@ procedure TForm1.AddTag(s: String);
 var
   n:TTreeNode;
 begin
-  s:=LowerCase(Trim(s));
+  s:=LowerCase(Trim(ParseFirstIdent(s)));
+  if s = '' then
+    Exit;
+    
   n:=TreeView1.Items.GetFirstNode;
   while n<>nil do
     if s=n.Text then
@@ -685,7 +776,7 @@ begin
     t:=TreeView1.Items[i];
     if t.Level<>1 then
       continue
-    else         
+    else
       if t.Text='[absolute-size]' then
       begin
         if nGetBit(t.Parent,0) then
@@ -978,33 +1069,43 @@ procedure TForm1.Button16Click(Sender: TObject);
 var
   i:Integer;
   n: TTreeNode;
-  lBit: Integer;
-  lPseudo: Boolean;
 begin
   for i:=0 to TreeView1.Items.Count-1 do
   begin
     n := TreeView1.Items[i];
+    if nGetBit(n, 1) then // css2
+      nSetBit(n, 2);   // css3
+  end;
+end;
 
-    if n.Level<>0 then
-      Continue;
+procedure TForm1.Button17Click(Sender: TObject);
+var
+  i:Integer;
+  n: TTreeNode;
+  lPseudo: Boolean;
+  lList: TStringList;
+begin
+  Edit1.Text := '';
+  lList := TStringList.Create;
+  try
+    lList.LoadFromFile('css3colors.txt');
 
-    lPseudo := False;
-    if nGetBit(n, 15) then // css1
+    for i:=0 to TreeView1.Items.Count-1 do
     begin
-      nSetBit(n, 0);
-      lPseudo := True;
-    end;
-    if nGetBit(n, 14) then // css2
-    begin
-      nSetBit(n, 1);
-      lPseudo := True;
-    end;
+      n := TreeView1.Items[i];
 
-    nClearBit(n, 15);
-    if lPseudo then
-      nSetBit(n, 14)
-    else
-      nClearBit(n, 14);
+      if n.Level<>0 then
+        Continue;
+
+      if nGetBit(n, 18) then // [color]
+      begin
+        TreeView1.Selected := n;
+        Memo5.Lines.Assign(lList);
+        Button5.Click;
+      end;
+    end;
+  finally
+    lList.Free;
   end;
 end;
 
