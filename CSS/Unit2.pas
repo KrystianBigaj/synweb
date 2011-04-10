@@ -171,11 +171,11 @@ end;
 procedure TForm2.Button5Click(Sender: TObject);
 const
   cCssVersions = 3;
-  cCssProperty32bitsCount = 5; // 5*32 = 160properties, in case of more, increse this to fit more
+  cCssProperty32bitsCount = 10; // 10*32 = 320properties, in case of more, increse this to fit more
 var
   sl:TStringList;
   n1,n2:TTreeNode;
-  p:array[0..300] of array[0..cCssVersions-1] of array[0..cCssProperty32bitsCount-1] of Longword;
+  p:array[0..2000] of array[0..cCssVersions-1] of array[0..cCssProperty32bitsCount-1] of DWORD;
   i,j,k,l:Longword;
   x:Integer;
   s:String;    
@@ -215,14 +215,18 @@ begin
     n2:=n1.getFirstChild;
     while n2<>nil do
     begin
+      if n1.Index >= cCssProperty32bitsCount*32 then
+        raise Exception.Create('Increse cCssProperty32bitsCount!!!');
+
       x:=sl.IndexOf(n2.Text);
       j:=(n1.Index div 32);
       l:=1 shl (n1.Index mod 32);
       for i:=0 to cCssVersions-1 do
       begin
         if Form1.nGetBit(n2, 31) then
-          p[x][i][cCssProperty32bitsCount-1]:=p[x][i][cCssProperty32bitsCount-1] or (1 shl 31); // isFUNCTION
-          
+          p[x][i][cCssProperty32bitsCount-1]:=
+            p[x][i][cCssProperty32bitsCount-1] or DWORD(1 shl 31); // isFUNCTION;
+
         if Form1.nGetBit(n1,i) and Form1.nGetBit(n2,i) then
           p[x][i][j]:=p[x][i][j] or l;
       end;
