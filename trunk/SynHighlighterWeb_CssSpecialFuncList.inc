@@ -1,4 +1,5 @@
     function CssSpecialUndef: Boolean;
+    function CssSpecialFunc11: Boolean;
     function CssSpecialFunc16: Boolean;
     function CssSpecialFunc18: Boolean;
     function CssSpecialFunc19: Boolean;
@@ -9,6 +10,7 @@
     function CssSpecialFunc30: Boolean;
     function CssSpecialFunc32: Boolean;
     function CssSpecialFunc34: Boolean;
+    function CssSpecialFunc35: Boolean;
     function CssSpecialFunc36: Boolean;
     function CssSpecialFunc39: Boolean;
     function CssSpecialFunc40: Boolean;
@@ -29,6 +31,7 @@
     function CssSpecialFunc68: Boolean;
     function CssSpecialFunc71: Boolean;
     function CssSpecialFunc72: Boolean;
+    function CssSpecialFunc73: Boolean;
     function CssSpecialFunc74: Boolean;
     function CssSpecialFunc77: Boolean;
     function CssSpecialFunc79: Boolean;
