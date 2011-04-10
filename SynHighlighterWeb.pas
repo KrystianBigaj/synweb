@@ -154,6 +154,7 @@ type
     FOptions: TSynWebOptions;
     FHighlither: TSynWebBase;
     FCssVendorPropertyId: Integer;
+    FCssInstancePropertyId: Integer;
   end;
 
 { TSynWebOptionsBase }
@@ -854,6 +855,7 @@ type
     function CssGetProp: Integer;
     function CssIsPropVendor: Boolean;
     procedure CssSetProp(const AProp: Integer);
+    procedure CssSetPropVendor;
     function CssCheckPropData(ABit: Byte): Boolean;
     function CssCheckNull(ADo: Boolean = True): Boolean;
     procedure CssCheckVendor(var AIsVendor: Boolean);
@@ -4242,8 +4244,13 @@ end;
 function TSynWebEngine.CssGetProp: Integer;
 begin
   Result := GetRangeInt(8, 0);
-  if Result = TSynWebCssPropVendor then
+  case Result of
+  TSynWebCssPropVendor:
     Result := 0;
+
+  TSynWebCssPropInstance:
+    Result := FInstance^.FCssInstancePropertyId;
+  end;
 end;
 
 function TSynWebEngine.CssIsPropVendor: Boolean;
@@ -4253,7 +4260,17 @@ end;
 
 procedure TSynWebEngine.CssSetProp(const AProp: Integer);
 begin
-  SetRangeInt(8, 0, Longword(AProp));
+  FInstance^.FCssInstancePropertyId := AProp;
+
+  if AProp >= TSynWebCssPropInstance then
+    SetRangeInt(8, 0, TSynWebCssPropInstance)
+  else
+    SetRangeInt(8, 0, Longword(AProp));
+end;
+
+procedure TSynWebEngine.CssSetPropVendor;
+begin
+  SetRangeInt(8, 0, TSynWebCssPropVendor);
 end;
 
 function TSynWebEngine.CssCheckPropData(ABit: Byte): Boolean;
@@ -4261,23 +4278,26 @@ var
   lProp: Integer;
   lFlags: Cardinal;
 begin
-  lProp := GetRangeInt(8, 0); // CssGetProp without vendor check
-  if lProp = TSynWebCssPropVendor then
+  if CssIsPropVendor then
   begin
     lFlags := $FFFFFFFF;
 
     if Assigned(FOnCssGetVendorPropertyFlags) then
     begin
       FOnCssGetVendorPropertyFlags(FInstance^.FCssVendorPropertyId, lFlags);
-      lFlags := lFlags or $03; // Force set two first bits (CSS1, CSS2.1)
+      lFlags := lFlags or $07; // Set first three bits (CSS1, CSS2.1, CSS3)
     end;
 
     Result := lFlags and (1 shl ABit) <> 0;
   end else
+  begin
+    lProp := CssGetProp;
+    
     if lProp = 0 then
       Result := True // dont mark values for unknown properties as errors
     else
       Result := TSynWeb_CssPropsData[lProp - 1] and (1 shl ABit) <> 0;
+  end;
 end;
 
 function TSynWebEngine.CssCheckNull(ADo: Boolean): Boolean;
@@ -4361,20 +4381,29 @@ begin
     else
       CssRangeCommentProc;
   end else
-    if (CssGetRange = srsCssPropVal) and
-      (CssIsPropVendor or (
-      (CssGetProp - 1 = CssPropID_Font) and
-      (GetRangeBit(8) or (FInstance^.FTokenLastID in [
-        CssValID_Smaller,
-        CssValID_Larger,
-        CssValID_XX_Large,
-        CssValID_X_Large,
-        CssValID_Large,
-        CssValID_Medium,
-        CssValID_Small,
-        CssValID_X_Small,
-        CssValID_XX_Small
-      ])))) then
+    if
+      (CssGetRange = srsCssPropVal)
+      and
+      (
+        CssIsPropVendor
+        or
+        (
+          (CssGetProp - 1 = CssPropID_Font)
+          and
+          (
+            GetRangeBit(8) or
+            (FInstance^.FTokenLastID = CssValID_Smaller) or
+            (FInstance^.FTokenLastID = CssValID_Larger) or
+            (FInstance^.FTokenLastID = CssValID_XX_Large) or
+            (FInstance^.FTokenLastID = CssValID_X_Large) or
+            (FInstance^.FTokenLastID = CssValID_Large) or
+            (FInstance^.FTokenLastID = CssValID_Medium) or
+            (FInstance^.FTokenLastID = CssValID_Small) or
+            (FInstance^.FTokenLastID = CssValID_X_Small) or
+            (FInstance^.FTokenLastID = CssValID_XX_Small)
+          )
+        )
+      ) then
     begin
       SetRangeBit(8, False);
       CssSymbolProc;
@@ -4509,6 +4538,9 @@ end;
 
 procedure TSynWebEngine.CssColonProc;
 begin
+  if (FInstance^.FOptions.FCssVersion = scvCss3) and (FInstance^.FLine[FInstance^.FRun + 1] = ':') then
+    Inc(FInstance^.FRun);
+    
   // if not (FInstance^.FLine[FInstance^.FRun+1] in ['a'..'z', 'A'..'Z']) then
   if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and (1 shl 0) = 0 then
     CssErrorProc
@@ -4673,32 +4705,41 @@ begin
   if (FInstance^.FLine[FInstance^.FRun] = '%') then
   begin
     FInstance^.FCssMask := FInstance^.FCssMask and $06000000;
-    CssSetRange(srsCssPropValSpecial);
-    if CssGetProp - 1 = CssPropID_Font then
-      SetRangeBit(8, True); // allow next slash char in -> font: <'font-size as percent'> [ / <'line-height'> ]?
+    if APropValue then
+    begin
+      CssSetRange(srsCssPropValSpecial);
+      if CssGetProp - 1 = CssPropID_Font then
+        SetRangeBit(8, True); // allow next slash char in -> font: <'font-size as percent'> [ / <'line-height'> ]?
+    end else
+      Inc(FInstance^.FRun);
   end else
   begin
     OldRun := FInstance^.FRun;
 
     if (FInstance^.FOptions.FCssVersion = scvCss3) and not APropValue and (FInstance^.FLine[FInstance^.FRun] = 'n') then
-    begin
-      Inc(FInstance^.FRun);
-    end else
+      Inc(FInstance^.FRun)
+    else
       if CssIdentStartProc then
       begin
         prop := CssSpecialCheck(OldRun, FInstance^.FRun - OldRun);
         if prop <> -1 then
         begin
           FInstance^.FCssMask := FInstance^.FCssMask and TSynWeb_CssSpecialData[prop];
-          CssSetRange(srsCssPropValSpecial);
-          if (FInstance^.FLine[FInstance^.FRun] = '/') and
-            (FInstance^.FLine[FInstance^.FRun + 1] <> '*') then
+          if APropValue then
+            CssSetRange(srsCssPropValSpecial);
+
+          if APropValue and (FInstance^.FLine[FInstance^.FRun] = '/') and
+            (FInstance^.FLine[FInstance^.FRun + 1] <> '*')
+          then
             SetRangeBit(8, True);
-          FInstance^.FRun := OldRun;
+
+          if APropValue then
+            FInstance^.FRun := OldRun;
         end else
           if FInstance^.FOptions.FCssVersion = scvCss1 then
-          begin
-            FInstance^.FRun := OldRun;
+          begin             
+            if APropValue then
+              FInstance^.FRun := OldRun;
             CheckOther;
           end else
           begin
@@ -4719,7 +4760,7 @@ begin
       if Assigned(FOnCssGetVendorPropertyFlags) then
       begin
         FOnCssGetVendorPropertyFlags(FInstance^.FCssVendorPropertyId, lFlags);
-        lFlags := lFlags or $03; // Set two first bits (CSS1, CSS2.1)
+        lFlags := lFlags or $07; // Set first three bits (CSS1, CSS2.1, CSS3)
       end;
     end else
     begin
@@ -5517,7 +5558,7 @@ begin
       if FInstance^.FTokenLastID > -1 then
       begin
         if TSynWeb_CssValsData[FInstance^.FTokenLastID][Longword(FInstance^.FOptions.FCssVersion)]
-          [3] and (1 shl 31) <> 0 then
+          [9{TODO: must be last byte of array}] and (1 shl 31) <> 0 then
         begin
           if FInstance^.FLine[FInstance^.FRun] = '(' then
           begin
@@ -5688,6 +5729,11 @@ begin
             CssSetRange(srsCssPropVal);
             SetRangeInt(3, 8, 0);
           end;
+        '0'..'9', '-', '+':
+          begin
+            FInstance^.FCssMask := $FFFFFFFF;
+            CssNumberDefProc(False);
+          end
         else // case
           if CssIdentStartProc then
             FInstance^.FTokenID := stkCssVal
@@ -6145,7 +6191,9 @@ begin
     if lIsVendor then
     begin
       Result := stkCssProp;
-      FInstance^.FTokenLastID := TSynWebCssPropVendor - 1;
+      FInstance^.FTokenLastID := -1;
+      CssSetPropVendor;
+      Exit;
     end;
   end;
 

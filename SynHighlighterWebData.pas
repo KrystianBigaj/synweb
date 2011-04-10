@@ -215,6 +215,7 @@ const
   TSynWebCssString34 = 5;
 
   TSynWebCssPropVendor = $FF;
+  TSynWebCssPropInstance = $FE;
 
 // ECMAScript ------------------------------------------------------------------
 type
