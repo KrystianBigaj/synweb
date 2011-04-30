@@ -8716,11 +8716,12 @@ begin
         end;
       end;
     '@':
-      // if FInstance^.FLine[FInstance^.FRun + 1] in ['a'..'z', 'A'..'Z'] then
-      if TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun + 1]] and (1 shl 0) <> 0 then
+      // if FInstance^.FLine[FInstance^.FRun + 1] in ['a'..'z', 'A'..'Z', '-'] then
+      if TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun + 1]] and (1 shl 6) <> 0 then
       begin
         Inc(FInstance^.FRun, 2);
-        while TSynWebIdentTable[FInstance^.FLine[FInstance^.FRun]] and (1 shl 0) <> 0 do
+        // while FInstance^.FLine[FInstance^.FRun] in ['a'..'z', 'A'..'Z', '-'] do
+        while TSynWebIdentTable2[FInstance^.FLine[FInstance^.FRun]] and (1 shl 6) <> 0 do
         begin
           if (FInstance^.FLine[FInstance^.FRun] = '*') and
             (FInstance^.FLine[FInstance^.FRun + 1] = '/') then
