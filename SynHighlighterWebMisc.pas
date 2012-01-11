@@ -1481,7 +1481,12 @@ begin
   swwpFillRect:
     begin
       ACanvas.Font.Color := FFGColor;
-      ACanvas.TextRect(ARect, ARect.Left, ARect.Top, AText)
+
+{$IFDEF UNISYNEDIT}
+      ExtTextOutW(ACanvas.Handle, ARect.Left, ARect.Top, 0, @ARect, PWideChar(AText), Length(AText), nil);
+{$ELSE} 
+      ACanvas.TextRect(ARect, ARect.Left, ARect.Top, AText);
+{$ENDIF}
     end;
 
   swwpFrameRect:
