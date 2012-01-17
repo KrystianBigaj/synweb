@@ -5564,7 +5564,7 @@ begin
           begin
             SetRangeInt(3, 8, 0);
             case FInstance^.FTokenLastID of
-            CssValID_Rgb:
+            CssValID_Rgb, CssValID_Rgba:
               CssSetRange(srsCssPropValRgb);
             CssValID_Url:
               CssSetRange(srsCssPropValUrl);
@@ -5633,7 +5633,10 @@ procedure TSynWebEngine.CssRangePropValRgbProc;
         if FInstance^.FLine[FInstance^.FRun] = '%' then
           Exit;
       end;
-      FInstance^.FTokenID := stkCssError;
+      if FInstance^.FOptions.FCssVersion = scvCss3 then
+        FInstance^.FTokenID := stkCssValNumber
+      else
+        FInstance^.FTokenID := stkCssError;
     end;
   end;
 
