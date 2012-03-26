@@ -283,6 +283,9 @@ begin
   s1.Insert(0,'');
   s1.Insert(0,Format('  CssValID_Rect = %d;',[sl.IndexOf('rect')]));
   s1.Insert(0,Format('  CssValID_Url = %d;',[sl.IndexOf('url')]));
+  s1.Insert(0,Format('  CssValID_Hsla = %d;',[sl.IndexOf('hsla')]));
+  s1.Insert(0,Format('  CssValID_Hsl = %d;',[sl.IndexOf('hsl')]));
+  s1.Insert(0,Format('  CssValID_Rgba = %d;',[sl.IndexOf('rgba')]));
   s1.Insert(0,Format('  CssValID_Rgb = %d;',[sl.IndexOf('rgb')]));
   s1.Insert(0,Format('  CssValID_XX_Small = %d;',[sl.IndexOf('xx-small')]));
   s1.Insert(0,Format('  CssValID_X_Small = %d;',[sl.IndexOf('x-small')]));

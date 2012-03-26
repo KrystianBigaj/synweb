@@ -5564,7 +5564,7 @@ begin
           begin
             SetRangeInt(3, 8, 0);
             case FInstance^.FTokenLastID of
-            CssValID_Rgb, CssValID_Rgba:
+            CssValID_Rgb, CssValID_Rgba, CssValID_Hsl, CssValID_Hsla:
               CssSetRange(srsCssPropValRgb);
             CssValID_Url:
               CssSetRange(srsCssPropValUrl);

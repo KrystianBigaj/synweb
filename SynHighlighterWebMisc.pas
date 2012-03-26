@@ -1181,7 +1181,7 @@ function TSynWebWordMarkerCustom.GetHighlightText: TSynWebString;
 begin
   case FMode of
   swwmSelectedWord, swwmSelectedText:
-    Result := Editor.SelText;
+    Result := Trim(Editor.SelText);
 
   swwmCustomWord, swwmCustomText:
     Result := FCustomText;

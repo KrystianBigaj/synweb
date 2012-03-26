@@ -1,19 +1,21 @@
   CssValMaxKeyHash = 348;
-  CssValID_Smaller = 640;
-  CssValID_Larger = 342;
-  CssValID_XX_Large = 768;
-  CssValID_X_Large = 760;
-  CssValID_Large = 340;
-  CssValID_Medium = 419;
-  CssValID_Small = 637;
-  CssValID_X_Small = 764;
-  CssValID_XX_Small = 769;
-  CssValID_Rgb = 566;
-  CssValID_Rgba = 567;
-  CssValID_Url = 735;
-  CssValID_Rect = 557;
+  CssValID_Smaller = 642;
+  CssValID_Larger = 344;
+  CssValID_XX_Large = 770;
+  CssValID_X_Large = 762;
+  CssValID_Large = 342;
+  CssValID_Medium = 421;
+  CssValID_Small = 639;
+  CssValID_X_Small = 766;
+  CssValID_XX_Small = 771;
+  CssValID_Rgb = 568;
+  CssValID_Rgba = 569;
+  CssValID_Hsl = 290;
+  CssValID_Hsla = 291;
+  CssValID_Url = 737;
+  CssValID_Rect = 559;
 
-  TSynWeb_CssVals:array[0..774] of AnsiString=(
+  TSynWeb_CssVals:array[0..776] of AnsiString=(
     'a3', 'a4', 'a5', 'above', 'absolute', 'additional-ligatures', 'afar', 'after', 
     'after-edge', 'alias', 'aliceblue', 'all', 'allow-end', 'all-petite-caps', 
     'all-scroll', 'all-small-caps', 'alphabetic', 'alternate', 'always', 'amharic', 
@@ -68,8 +70,8 @@
     'hanging', 'hangul', 'hangul-consonant', 'hebrew', 'height', 'help', 'here', 
     'hidden', 'hide', 'high', 'higher', 'hiragana', 'hiragana-iroha', 
     'historical-forms', 'historical-ligatures', 'hojo-kanji', 'honeydew', 
-    'horizontal', 'horizontal-tb', 'hotpink', 'hyperlink', 'hyphen', 'icon', 
-    'ideograph-alpha', 'ideographic', 'ideograph-numeric', 'include-ruby', 
+    'horizontal', 'horizontal-tb', 'hotpink', 'hsl', 'hsla', 'hyperlink', 'hyphen', 
+    'icon', 'ideograph-alpha', 'ideographic', 'ideograph-numeric', 'include-ruby', 
     'increment', 'indianred', 'indigo', 'infinite', 'inherit', 'inhibit', 
     'initial', 'ink', 'inline', 'inline-block', 'inline-flexbox', 'inline-grid', 
     'inline-line-height', 'inline-reverse', 'inline-table', 'inset', 'inset-rect', 
@@ -157,7 +159,7 @@
     'yellowgreen', 'young', 'z-index', 'zoom'
     );
 
-  TSynWeb_CssValsData:array[0..774] of array[0..2] of array[0..9] of Longword=(
+  TSynWeb_CssValsData:array[0..776] of array[0..2] of array[0..9] of Longword=(
   (($00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000),
    ($00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000),
    ($00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00020000, $00000000, $00000000)),
@@ -1028,6 +1030,12 @@
   (($00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000),
    ($00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000),
    ($70012000, $80C31810, $00001880, $00000000, $00000000, $00000000, $000000C0, $00000000, $00060630, $00000000)),
+  (($00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $80000000),
+   ($00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $80000000),
+   ($70012000, $80C31810, $00001880, $00000000, $00000000, $00000000, $000000C0, $00000000, $00060630, $80000000)),
+  (($00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $80000000),
+   ($00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $80000000),
+   ($70012000, $80C31810, $00001880, $00000000, $00000000, $00000000, $000000C0, $00000000, $00060630, $80000000)),
   (($00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000),
    ($00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000),
    ($00000400, $00000000, $00000000, $00002000, $00000000, $00000000, $00000000, $00000000, $00000000, $00000000)),

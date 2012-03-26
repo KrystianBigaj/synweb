@@ -487,6 +487,7 @@ begin
   if nn=nil then
     nn:=TreeView1.Items.AddChild(n,s);
   nSetBit(nn,ComboBox1.ItemIndex);
+  //nSetBit(nn,31); - used only for rgb/rgba/hsl/hsla
   nn.MakeVisible;
   TreeView1.SetFocus;
 end;
@@ -1061,7 +1062,7 @@ var
 begin
   for i:=0 to TreeView1.Items.Count-1 do
     if TreeView1.Items[i].Level=1 then
-      if (TreeView1.Items[i].Text='url') or (TreeView1.Items[i].Text='rgb') then
+      if (TreeView1.Items[i].Text='url') or (TreeView1.Items[i].Text='rgb') or (TreeView1.Items[i].Text='rgba') or (TreeView1.Items[i].Text='hsl') or (TreeView1.Items[i].Text='hsla') then
         nSetBit(TreeView1.Items[i],31);
 end;
 
